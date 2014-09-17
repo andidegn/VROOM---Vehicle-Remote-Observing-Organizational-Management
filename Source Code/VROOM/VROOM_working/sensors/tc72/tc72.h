@@ -1,0 +1,51 @@
+/********************************************//**
+@file tc72.h
+@author: Kenneth René Jensen
+@Version: 0.3
+@defgroup tc72 TC72_driver
+@{
+	This is the driver for the temperature sensor tc72
+	on the ATMEGA family processors.
+@}
+@note Complies MISRO 2004 standards
+************************************************/
+
+#ifndef TC72_H_
+#define TC72_H_
+
+#include "../../data_comm/spi/spi.h"
+
+/* @define Defines the pin for chip select */
+#define TEMP_CS_PIN PB4
+
+/********************************************************************************************************************//**
+ @ingroup tc72
+ @brief Initiates tc72 using SPI
+ @return void
+************************************************************************************************************************/
+void init_tc72(void);
+
+/********************************************************************************************************************//**
+ @ingroup tc72
+ @brief Function to read the last measured temperature from the tc72 sensor.
+ @return Temperature as floating point value
+ @note TC72 Operation Range: -55°C to 125°C
+************************************************************************************************************************/
+float get_temperature(void);
+
+/********************************************************************************************************************//**
+ @ingroup tc72
+ @brief Function which starts measuring the temperature.
+ @return void
+************************************************************************************************************************/
+void measure_temperature(void);
+
+/********************************************************************************************************************//**
+ @ingroup tc72
+ @brief Function to calculate the temperature 
+ @return Temperature as floating point value
+ @note Should only be used in Unit Testing
+************************************************************************************************************************/
+float calculate_temperature(uint8_t MSB, uint8_t LSB);
+
+#endif /* TC72_H_ */

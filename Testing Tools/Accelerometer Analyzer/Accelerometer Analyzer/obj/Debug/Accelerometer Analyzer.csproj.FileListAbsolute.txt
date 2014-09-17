@@ -1,0 +1,14 @@
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\bin\Debug\Accelerometer Analyzer.exe.config
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\obj\Debug\Accelerometer Analyzer.csprojResolveAssemblyReference.cache
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\obj\Debug\Accelerometer_Analyzer.Form1.resources
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\obj\Debug\Accelerometer_Analyzer.Properties.Resources.resources
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\obj\Debug\Accelerometer Analyzer.csproj.GenerateResource.Cache
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\bin\Debug\Accelerometer Analyzer.exe
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\bin\Debug\Accelerometer Analyzer.pdb
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\obj\Debug\Accelerometer Analyzer.exe
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\obj\Debug\Accelerometer Analyzer.pdb
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\bin\Debug\MyClasses.dll
+D:\Dropbox\Skole Opgaver\ICT Engineering\7th Semester\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\bin\Debug\MyClasses.pdb
+C:\Users\Kenneth\Dropbox\ICT Engineering\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\bin\Debug\Accelerometer Analyzer.exe.config
+C:\Users\Kenneth\Dropbox\ICT Engineering\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\obj\Debug\Accelerometer Analyzer.exe
+C:\Users\Kenneth\Dropbox\ICT Engineering\Bachelor Project\Accelerometer test program\Accelerometer Analyzer\Accelerometer Analyzer\obj\Debug\Accelerometer Analyzer.pdb

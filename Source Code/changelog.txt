@@ -1,0 +1,174 @@
+============================================
+Version 0.06b - 2014/09/17 by Andi & Kenneth
+============================================
+New Features, Improvements
+--------------------------
+- Improved sensor_scheduler to work autonomously from the main program using a timer and a 
+  state-machine
+
+Fixed Bugs, Changes
+-------------------
+- fixed minor errors
+
+ToDo
+----	
+- Updated main to work properly with analysis tool by sending accelerometer data at a working
+  rate for analysis to be conducted in real-time without any latency. Test was conducted at 
+  ~110Hz
+
+
+
+=================================
+Version 0.06 - 2014/09/16 by Andi
+=================================
+New Features, Improvements
+--------------------------
+- Improvements in usart0-1:
+	- USART_CHAR_SIZE enum changed and switch-case added in usartN_setup_async(...) function
+	  as the identifier in USART_8_BIT and USART_9_BIT was the same
+	- Added "+0.5F" to the CALC_UBRRn macro to make sure it rounds off rather than truncating
+	- Changed sending functionality to use an ISR instead of waiting for empty transmition
+	  register
+	- Added a local buffer for transmit data to accommodate transmission of strings. It is 
+	  possible to keep adding to this buffer witout loss of data if the buffer is not empty at
+	  the time of transmission
+	- "operational_mode" bit(s) are no longer being written to UCSRnC register as synchronous		  
+	  and master SPI modes are not implemented
+	- Name changed to UART as only the asynchronous modes are implemented
+
+Fixed Bugs, Changes
+-------------------
+- fixed minor errors
+
+ToDo
+----	
+- Updated main to work properly with analysis tool
+
+
+
+=================================
+Version 0.05 - 2014/09/15 by Andi
+=================================
+New Features, Improvements
+--------------------------
+- added usart driver for USART0 and USART1
+- re-added state machine in accelerometer and tc72 to avoid return of garbage data in the callback    
+  routine
+- setup usart transmission for testing with pc. it sends the accelerometer data
+- re-written the accelerometer driver to be able to take setup parameters
+- added LED driver for LEDs on aircraft on PORTB
+- added LED and switch driver for the LCD board on PORTK (no available ISR for rotary encoder)
+- added memory map file with port/pin information from all drivers
+- completed doxygen documentation in usart0-1 and accelerometer
+- updated main to include tests
+
+Fixed Bugs, Changes
+-------------------
+- fixed minor errors
+
+ToDo
+----	
+- MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane
+- missing commenting in btn_led_lcd and led_on_plane
+
+
+
+====================================
+Version 0.04 - 2014/09/11 by Kenneth
+====================================
+New Features, Improvements
+--------------------------
+- Added a structure with doxygen documentation of the accident report 
+   according to eCall and EN 15722 standards for MSD.
+
+Fixed Bugs, Changes
+-------------------
+- Clean up in multiple files (mostly in comments)
+
+ToDo
+----	
+ 
+ 
+
+=====================================
+Version 0.031 - 2014/09/08 by Kenneth
+=====================================
+New Features, Improvements
+--------------------------
+- Added the Unit Test, which was missing in v0.03 and added the test in main
+
+Fixed Bugs, Changes
+-------------------
+- Fixed comments style in SPI and Accelerometer driver (*/ instead of //)
+
+ToDo
+----	
+- Add state machine for call back in acc and tc72 
+
+Note
+----
+- sprintf and printf have a huge overhead and are not recommended in embedded systems.
+ 
+ 
+
+=================================
+Version 0.03 - 2014/09/05 by Andi
+=================================
+New Features, Improvements
+--------------------------
+- Completed doxygen documentation in spi and acc driver
+- Added sensors_init() function in sensor_scheduler 
+- Updated sensor_scheduler to work with current content
+- Added scheduler_release() call in the tc72 and acc callback driver to accomodate for the
+   sequential sensors read structure
+- Defined scheduler delay for control of the reading period
+ 
+Fixed Bugs, Changes
+-------------------
+- Changed the structure of the SPI driver to make it work properly
+- Assembled everything in a fresh project to fix unknown accelerometer data error
+- Fixed error where array went out of scope in tc72 driver under setup (moved array
+   decleration out of the function). Was causing corrupt memory
+- Renamed collect_sensors_sata to sensor_scheduler
+- Renamed function read_sensors() to scheduler_release() as it's not being called from the
+   drivers callback functions when they are done reading
+- Cleaned up drivers in general
+ 
+ToDo
+----	
+- Minor ajustments might still be needed in multiple files
+- Missing documentation in some files
+
+
+
+====================================
+Version 0.02 - 2014/09/05 by Kenneth
+====================================
+New Features, Improvements
+--------------------------
+- unit test included for tc72 (use #define UNIT_TEST to run test)
+- tc72 pass MISRA standards, except violation on some rules when calculating temperature
+ 
+Fixed Bugs, Changes
+-------------------
+- Fixed temperature conversion so that negative values is represented correctly 
+
+ToDo
+----	
+- MISRA not testet for SPI and timer
+
+ 
+ 
+====================================
+Version 0.01 - 2014/09/03 by Kenneth
+====================================
+New Features, Improvements
+--------------------------
+- First working version of tc72 driver with shared SPI and timer
+ 
+Fixed Bugs, Changes
+-------------------
+
+ToDo
+----	
+- Needs to be checked for MISRA standards

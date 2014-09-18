@@ -158,7 +158,7 @@ int main(void) {
         }
 #endif // SEND_TO_UART
 
-        _delay_ms(0);
+        _delay_ms(20);
     }
 #endif // UNIT_TEST
 #endif // ANALYSIS

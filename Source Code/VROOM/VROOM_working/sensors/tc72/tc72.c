@@ -40,9 +40,10 @@ static void _tc72_callback(uint8_t data[]);
 /********************************************************************************************************************//**
  @ingroup tc72
  @brief Initiates tc72 using SPI
+ @param uint8_t cs_pin - chip select pin
  @return void
 ************************************************************************************************************************/
-void init_tc72(void) {
+void init_tc72(uint8_t cs_pin) {
     _send_setup[0] = SDI_Write;
     _send_setup[1] = 0U;
 
@@ -54,7 +55,7 @@ void init_tc72(void) {
     _handle_ID = spi_master_setup(SPI_MODE_1,
                                   SPI_MSB_FIRST,
                                   SPI_DIVIDER_128,
-                                  TEMP_CS_PIN,
+                                  cs_pin,
                                   SPI_CS_ACTIVE_HIGH,
                                   _tc72_callback);
 

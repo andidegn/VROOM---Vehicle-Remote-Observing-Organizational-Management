@@ -52,7 +52,7 @@ static void _acc_read_from_reg(uint8_t reg, uint8_t no_of_dummy_bytes);
  * @ingroup acc_pub
  * Sets up the SPI and writes the setup parameters to the accelerometer chip
  **************************************************************************/
-void acc_init(ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE output_data_rate, ACC_FULL_SCALE full_scale) {
+void acc_init(uint8_t cs_pin, ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE output_data_rate, ACC_FULL_SCALE full_scale) {
 
 	/* Disable interrupt */
 	uint8_t SREG_cpy = SREG;
@@ -62,7 +62,7 @@ void acc_init(ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE output_data_rate, 
 	_handle = spi_master_setup(SPI_MODE_3,
 							   SPI_MSB_FIRST,
 							   SPI_DIVIDER_128,
-							   ACC_CS_PIN,
+							   cs_pin,
 							   SPI_CS_ACTIVE_LOW,
 							   _acc_callback);
 
@@ -86,9 +86,9 @@ void acc_init(ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE output_data_rate, 
 	_send_setup[0] = ACC_CTRL_REG1 | _BV(ACC_MULTI_BIT);
 	_send_setup[1] = power_mode | output_data_rate | _BV(ACC_Xen) | _BV(ACC_Yen) | _BV(ACC_Zen);
 	_send_setup[3] = full_scale;
-	
+
 	spi_send(_handle, _send_setup, 6U);
-	
+
 	_state = INIT;
 }
 

@@ -15,15 +15,13 @@
 
 #include "../../data_comm/spi/spi.h"
 
-/* @define Defines the pin for chip select */
-#define TEMP_CS_PIN PB4
-
 /********************************************************************************************************************//**
  @ingroup tc72
  @brief Initiates tc72 using SPI
+ @param uint8_t cs_pin - chip select pin
  @return void
 ************************************************************************************************************************/
-void init_tc72(void);
+void init_tc72(uint8_t cs_pin);
 
 /********************************************************************************************************************//**
  @ingroup tc72
@@ -42,7 +40,7 @@ void measure_temperature(void);
 
 /********************************************************************************************************************//**
  @ingroup tc72
- @brief Function to calculate the temperature 
+ @brief Function to calculate the temperature
  @return Temperature as floating point value
  @note Should only be used in Unit Testing
 ************************************************************************************************************************/

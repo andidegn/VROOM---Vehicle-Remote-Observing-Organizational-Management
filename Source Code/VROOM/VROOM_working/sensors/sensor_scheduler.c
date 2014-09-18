@@ -7,7 +7,7 @@
 #include <util/delay.h>
 #include "sensor_scheduler.h"
 
-//#define ANALYSIS
+#define ANALYSIS 0
 
 typedef enum {state_uart_init,
 			  state_tc72_init,
@@ -20,7 +20,7 @@ typedef enum {state_uart_init,
 } SENSOR_STATE;
 static SENSOR_STATE _state;
 
-#ifdef ANALYSIS
+#if ANALYSIS
 #define DELAY_BETWEEN_CHARS 1
 static int16_t x_axis = 0;
 static int16_t y_axis = 0;
@@ -28,10 +28,9 @@ static int16_t z_axis = 0;
 #endif // ANALYSIS
 
 void scheduler_start(void) {
-#ifdef ANALYSIS
+#if ANALYSIS
 	_state = state_uart_init;
-#endif // ANALYSIS
-#ifndef ANALYSIS
+#else // ANALYSIS
 	_state = state_tc72_init;
 #endif // ANALYSIS
 	scheduler_release();
@@ -47,12 +46,12 @@ void scheduler_release(void) {
 
 		case state_tc72_init :
 			_state = state_acc_init;
-			init_tc72();
+			init_tc72(PB4);
 		break;
 
 		case state_acc_init :
 			_state = state_timer_init;
-			acc_init(ACC_NORMAL_MODE, ACC_ODR_400, ACC_24G);
+			acc_init(PB0, ACC_NORMAL_MODE, ACC_ODR_400, ACC_24G);
 		break;
 
 		case state_timer_init :
@@ -74,7 +73,7 @@ void scheduler_release(void) {
 			_state = state_uart_send;
 			acc_measure();
 		break;
-#ifdef ANALYSIS
+#if ANALYSIS
 		case state_uart_send :
 			_state = state_idle;
 			x_axis = (int)(acc_get_x_axis() * 1000);
@@ -90,16 +89,12 @@ void scheduler_release(void) {
 			_delay_ms(DELAY_BETWEEN_CHARS);
 			uart0_send_char(0x7f);			uart0_send_char(0xff);
 		break;
-#endif // ANALYSIS
-#ifndef ANALYSIS
+#else // ANALYSIS
 			case state_uart_send :
 				_state = state_idle;
 				scheduler_release();
 			break;
 #endif // ANALYSIS
-
-
-
 
 		default: break;
 	}

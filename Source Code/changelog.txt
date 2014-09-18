@@ -1,3 +1,22 @@
+==================================
+Version 0.06c - 2014/09/18 by Andi
+==================================
+New Features, Improvements
+--------------------------
+- Added cs pin parameter in the init functions of the tc72 and accelerometer driver to accom
+
+Fixed Bugs, Changes
+-------------------
+- fixed minor errors
+
+ToDo
+----	
+- Updated main to work properly with analysis tool by sending accelerometer data at a working
+  rate for analysis to be conducted in real-time without any latency. Test was conducted at 
+  ~110Hz
+
+
+
 ============================================
 Version 0.06b - 2014/09/17 by Andi & Kenneth
 ============================================

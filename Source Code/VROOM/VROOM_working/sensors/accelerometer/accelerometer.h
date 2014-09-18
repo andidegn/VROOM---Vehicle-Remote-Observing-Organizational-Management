@@ -17,9 +17,6 @@
 #ifndef AIRCRAFT_H_
 #define AIRCRAFT_H_
 
-/* @define Defines the pin for chip select */
-#define ACC_CS_PIN PB0
-
 /* @define Defines all the control registers and the specific pins */
 #define ACC_CTRL_REG1	0x20
 #define ACC_Xen			0
@@ -138,10 +135,14 @@ typedef enum {
 /**********************************************************************//**
  * @ingroup acc_pub
  * @brief Initializes the driver
+ * @param uint8_t cs_pin - chip select pin
+ * @param ACC_POWER_MODE power_mode - accelerometer power mode
+ * @param ACC_OUTPUT_DATA_RATE output_data_rate - the rate the data is updated
+ * @param ACC_FULL_SCALE full_scale - the full scale g measurement
  *
  * @return void
  *************************************************************************/
-void acc_init(ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE output_data_rate, ACC_FULL_SCALE full_scale);
+void acc_init(uint8_t cs_pin, ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE output_data_rate, ACC_FULL_SCALE full_scale);
 
 /**********************************************************************//**
  * @ingroup acc_pub

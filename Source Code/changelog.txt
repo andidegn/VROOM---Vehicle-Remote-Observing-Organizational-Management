@@ -3,7 +3,9 @@ Version 0.06c - 2014/09/18 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-- Added cs pin parameter in the init functions of the tc72 and accelerometer driver to accom
+- Added cs pin parameter in the init functions of the tc72 and accelerometer driver to accommodate
+  SPI splitter hardware
+- Updated MemoryMap file
 
 Fixed Bugs, Changes
 -------------------
@@ -11,9 +13,8 @@ Fixed Bugs, Changes
 
 ToDo
 ----	
-- Updated main to work properly with analysis tool by sending accelerometer data at a working
-  rate for analysis to be conducted in real-time without any latency. Test was conducted at 
-  ~110Hz
+- MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane
+- missing commenting in btn_led_lcd and led_on_plane
 
 
 
@@ -24,6 +25,9 @@ New Features, Improvements
 --------------------------
 - Improved sensor_scheduler to work autonomously from the main program using a timer and a 
   state-machine
+- Updated main to work properly with analysis tool by sending accelerometer data at a working
+  rate for analysis to be conducted in real-time without any latency. Test was conducted at 
+  ~110Hz
 
 Fixed Bugs, Changes
 -------------------
@@ -31,9 +35,8 @@ Fixed Bugs, Changes
 
 ToDo
 ----	
-- Updated main to work properly with analysis tool by sending accelerometer data at a working
-  rate for analysis to be conducted in real-time without any latency. Test was conducted at 
-  ~110Hz
+- MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane
+- missing commenting in btn_led_lcd and led_on_plane
 
 
 
@@ -54,6 +57,7 @@ New Features, Improvements
 	- "operational_mode" bit(s) are no longer being written to UCSRnC register as synchronous		  
 	  and master SPI modes are not implemented
 	- Name changed to UART as only the asynchronous modes are implemented
+- Updated main to work properly with analysis tool
 
 Fixed Bugs, Changes
 -------------------
@@ -61,7 +65,6 @@ Fixed Bugs, Changes
 
 ToDo
 ----	
-- Updated main to work properly with analysis tool
 
 
 

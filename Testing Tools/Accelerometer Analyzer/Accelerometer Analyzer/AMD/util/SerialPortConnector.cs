@@ -13,10 +13,11 @@ namespace AMD.Util {
             if (portName == null || portName.Length < 4) return false;
 
             sp.PortName = portName;
-            sp.BaudRate = 115200;
+            sp.BaudRate = 28800;
             sp.Parity = Parity.None;
             sp.StopBits = StopBits.One;
             sp.Handshake = Handshake.None;
+            sp.DataBits = 8;
             sp.ReadTimeout = 1000;
             sp.ReadBufferSize = 65536;
 

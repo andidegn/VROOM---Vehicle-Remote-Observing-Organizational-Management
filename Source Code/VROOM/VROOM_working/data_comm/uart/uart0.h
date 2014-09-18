@@ -118,6 +118,7 @@ typedef enum {
 	UART0_BAUD_9600 = 9600,
 	UART0_BAUD_14K4 = 14400,
 	UART0_BAUD_19K2 = 19200,
+	UART0_BAUD_28K8 = 28800,
 	UART0_BAUD_38K4 = 38400,
 	UART0_BAUD_57K6 = 57600,
 	UART0_BAUD_115K2 = 115200,
@@ -147,28 +148,28 @@ void uart0_setup_async(UART0_MODE operational_mode,
 						 UART0_PARITY_MODE paraty_mode,
 						 UART0_STOP_BIT stop_bit,
 						 UART0_CHAR_SIZE char_size,
-						 void (*callback_function_ptr)(unsigned char cfp));
+						 void (*callback_function_ptr)(char cfp));
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends 1 (one) char of 'data' on the UART bus
  *
- * @param unsigned char data - the data to be sent
+ * @param char data - the data to be sent
  *
  * @return void
  *************************************************************************/
-void uart0_send_char(unsigned char data);
+void uart0_send_char(char data);
 
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends a string (x no. of chars) of 'data' on the UART bus
  *
- * @param unsigned char *data - the data to be sent
+ * @param char *data - the data to be sent
  * @param uint8_t length - the length of the string
  *
  * @return void
  *************************************************************************/
-void uart0_send_string(unsigned char *data, uint8_t length);
+void uart0_send_string(char *data, uint8_t length);
 
 #endif /* UART0_H_ */

@@ -35,7 +35,7 @@
 /* @} */
 
 /* local variables */
-static void (*_callback_function_ptr)(unsigned char cfp);
+static void (*_callback_function_ptr)(char cfp);
 static char _buffer_send_data[UART0_BUFFER_SIZE];
 static uint8_t _buffer_length = 0U;
 static uint8_t _buffer_index = 0U;
@@ -49,7 +49,7 @@ void uart0_setup_async(UART0_MODE operational_mode,
 						 UART0_PARITY_MODE paraty_mode,
 						 UART0_STOP_BIT stop_bit,
 						 UART0_CHAR_SIZE char_size,
-						 void (*callback_function_ptr)(unsigned char cfp)) {
+						 void (*callback_function_ptr)(char cfp)) {
 	/* saves the current state of the status register and disables global interrupt */
 	uint8_t _sreg = SREG;
 	cli();
@@ -144,7 +144,7 @@ void uart0_setup_async(UART0_MODE operational_mode,
  * @ingroup uart_pub
  * Sends one char
  *************************************************************************/
-void uart0_send_char(unsigned char data) {
+void uart0_send_char(char data) {
 	uart0_send_string(&data, 1U);
 }
 
@@ -154,7 +154,7 @@ void uart0_send_char(unsigned char data) {
  * the Data Register Empty interrupt bit.
  * @note If the data would make the local buffer overrun, the function returns
  *************************************************************************/
-void uart0_send_string(unsigned char *data, uint8_t length) {
+void uart0_send_string(char *data, uint8_t length) {
 	if (!(_buffer_length + length > 255)) {
 		/* saves the current state of the status register and disables global interrupt */
 		uint8_t _sreg = SREG;
@@ -196,7 +196,7 @@ ISR(USART0_UDRE_vect, ISR_BLOCK) {
  * supplied when setting up the UART, a callback to that function is being performed
  **************************************************************************/
 ISR(USART0_RX_vect, ISR_BLOCK) {
-	unsigned char received_data = UDR0;
+	char received_data = UDR0;
 	if (_callback_function_ptr != NULL) {
 		_callback_function_ptr(received_data);
 	}

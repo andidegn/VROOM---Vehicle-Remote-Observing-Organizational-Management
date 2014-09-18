@@ -148,28 +148,28 @@ void uart1_setup_async(UART1_MODE operational_mode,
 						 UART1_PARITY_MODE paraty_mode,
 						 UART1_STOP_BIT stop_bit,
 						 UART1_CHAR_SIZE char_size,
-						 void (*callback_function_ptr)(unsigned char cfp));
+						 void (*callback_function_ptr)(char cfp));
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends 1 (one) char of 'data' on the UART bus
  *
- * @param unsigned char data - the data to be sent
+ * @param char data - the data to be sent
  *
  * @return void
  *************************************************************************/
-void uart1_send_char(unsigned char data);
+void uart1_send_char(char data);
 
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends a string (x no. of chars) of 'data' on the UART bus
  *
- * @param unsigned char *data - the data to be sent
+ * @param char *data - the data to be sent
  * @param uint8_t length - the length of the string
  *
  * @return void
  *************************************************************************/
-void uart1_send_string(unsigned char *data, uint8_t length);
+void uart1_send_string(char *data, uint8_t length);
 
 #endif /* UART1_H_ */

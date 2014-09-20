@@ -6,9 +6,7 @@ accident_data.c
 
 data_comm\spi\spi.c
 
-data_comm\uart\uart0.c
-
-data_comm\uart\uart1.c
+data_comm\uart\uart.c
 
 hardware_boards\lcd_board\button_led\btn_led_lcd.c
 

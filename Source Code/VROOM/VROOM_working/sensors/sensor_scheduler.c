@@ -40,7 +40,7 @@ void scheduler_release(void) {
 	switch(_state) {
 		case state_uart_init :
 			_state = state_tc72_init;
-			uart0_setup_async(UART0_MODE_DOUBLE, UART0_BAUD_115K2, UART0_PARITY_DISABLED, UART0_ONE_STOP_BIT, UART0_8_BIT, NULL);
+			uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
 			scheduler_release();
 		break;
 

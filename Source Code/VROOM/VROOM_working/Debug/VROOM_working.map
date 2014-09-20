@@ -1,7 +1,7 @@
 Archive member included because of file (symbol)
 
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3.o)
-                              data_comm/uart/uart0.o (__addsf3)
+                              data_comm/uart/uart.o (__addsf3)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3x.o)
                               c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3.o) (__addsf3x)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(cmpsf2.o)
@@ -15,7 +15,7 @@ c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-t
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fixunssfsi.o)
                               accident_data.o (__fixunssfsi)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(floatsisf.o)
-                              data_comm/uart/uart0.o (__floatunsisf)
+                              data_comm/uart/uart.o (__floatunsisf)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_cmp.o)
                               c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(cmpsf2.o) (__fp_cmp)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_inf.o)
@@ -37,7 +37,7 @@ c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-t
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
                               c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3.o) (__mulsf3x)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_udivmodsi4.o)
-                              data_comm/uart/uart0.o (__udivmodsi4)
+                              data_comm/uart/uart.o (__udivmodsi4)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
                               c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o (exit)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_tablejump.o)
@@ -91,16 +91,16 @@ Discarded input sections
  .bss           0x00000000        0x0 data_comm/spi/spi.o
  .text.spi_send_byte
                 0x00000000       0x20 data_comm/spi/spi.o
- .text          0x00000000        0x0 data_comm/uart/uart0.o
- .bss           0x00000000        0x0 data_comm/uart/uart0.o
- .text          0x00000000        0x0 data_comm/uart/uart1.o
- .bss           0x00000000        0x0 data_comm/uart/uart1.o
+ .text          0x00000000        0x0 data_comm/uart/uart.o
+ .bss           0x00000000        0x0 data_comm/uart/uart.o
+ .text.uart0_send_string
+                0x00000000       0x1e data_comm/uart/uart.o
  .text.uart1_setup_async
-                0x00000000      0x146 data_comm/uart/uart1.o
- .text.uart1_send_string
-                0x00000000       0x4c data_comm/uart/uart1.o
+                0x00000000      0x13e data_comm/uart/uart.o
  .text.uart1_send_char
-                0x00000000       0x1e data_comm/uart/uart1.o
+                0x00000000       0x2a data_comm/uart/uart.o
+ .text.uart1_send_string
+                0x00000000       0x1e data_comm/uart/uart.o
  .text          0x00000000        0x0 hardware_boards/lcd_board/button_led/btn_led_lcd.o
  .bss           0x00000000        0x0 hardware_boards/lcd_board/button_led/btn_led_lcd.o
  .text          0x00000000        0x0 hardware_boards/lcd_board/lcd/lcd.o
@@ -296,8 +296,7 @@ Address of section .data set to 0x800200
 LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
 LOAD accident_data.o
 LOAD data_comm/spi/spi.o
-LOAD data_comm/uart/uart0.o
-LOAD data_comm/uart/uart1.o
+LOAD data_comm/uart/uart.o
 LOAD hardware_boards/lcd_board/button_led/btn_led_lcd.o
 LOAD hardware_boards/lcd_board/lcd/lcd.o
 LOAD indicators/led_on_plane/lop.o
@@ -407,7 +406,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1f00
+.text           0x00000000     0x1e9e
  *(.vectors)
  .vectors       0x00000000       0xe4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vector_default
@@ -533,209 +532,206 @@ END GROUP
                 0x000003ae       0xac data_comm/spi/spi.o
                 0x000003ae                __vector_24
  .text.uart0_setup_async
-                0x0000045a      0x136 data_comm/uart/uart0.o
+                0x0000045a      0x12e data_comm/uart/uart.o
                 0x0000045a                uart0_setup_async
- .text.uart0_send_string
-                0x00000590       0x4c data_comm/uart/uart0.o
-                0x00000590                uart0_send_string
  .text.uart0_send_char
-                0x000005dc       0x1c data_comm/uart/uart0.o
-                0x000005dc                uart0_send_char
+                0x00000588       0x2a data_comm/uart/uart.o
+                0x00000588                uart0_send_char
  .text.__vector_26
-                0x000005f8       0x82 data_comm/uart/uart0.o
-                0x000005f8                __vector_26
+                0x000005b2       0x5c data_comm/uart/uart.o
+                0x000005b2                __vector_26
  .text.__vector_25
-                0x0000067a       0x5e data_comm/uart/uart0.o
-                0x0000067a                __vector_25
+                0x0000060e       0x5e data_comm/uart/uart.o
+                0x0000060e                __vector_25
  .text.__vector_37
-                0x000006d8       0x82 data_comm/uart/uart1.o
-                0x000006d8                __vector_37
+                0x0000066c       0x5c data_comm/uart/uart.o
+                0x0000066c                __vector_37
  .text.__vector_36
-                0x0000075a       0x5e data_comm/uart/uart1.o
-                0x0000075a                __vector_36
+                0x000006c8       0x5e data_comm/uart/uart.o
+                0x000006c8                __vector_36
  .text.btn_led_lcd_init
-                0x000007b8       0x28 hardware_boards/lcd_board/button_led/btn_led_lcd.o
-                0x000007b8                btn_led_lcd_init
+                0x00000726       0x28 hardware_boards/lcd_board/button_led/btn_led_lcd.o
+                0x00000726                btn_led_lcd_init
  .text.btn_lcd_is_pressed
-                0x000007e0       0x26 hardware_boards/lcd_board/button_led/btn_led_lcd.o
-                0x000007e0                btn_lcd_is_pressed
+                0x0000074e       0x26 hardware_boards/lcd_board/button_led/btn_led_lcd.o
+                0x0000074e                btn_lcd_is_pressed
  .text.led_lcd_set
-                0x00000806       0x4a hardware_boards/lcd_board/button_led/btn_led_lcd.o
-                0x00000806                led_lcd_set
+                0x00000774       0x4a hardware_boards/lcd_board/button_led/btn_led_lcd.o
+                0x00000774                led_lcd_set
  .text.led_lcd_toggle
-                0x00000850       0x1e hardware_boards/lcd_board/button_led/btn_led_lcd.o
-                0x00000850                led_lcd_toggle
+                0x000007be       0x1e hardware_boards/lcd_board/button_led/btn_led_lcd.o
+                0x000007be                led_lcd_toggle
  .text.toggle_e
-                0x0000086e       0x14 hardware_boards/lcd_board/lcd/lcd.o
+                0x000007dc       0x14 hardware_boards/lcd_board/lcd/lcd.o
  .text.lcd_write
-                0x00000882       0x5e hardware_boards/lcd_board/lcd/lcd.o
+                0x000007f0       0x5e hardware_boards/lcd_board/lcd/lcd.o
  .text.lcd_read
-                0x000008e0       0x5e hardware_boards/lcd_board/lcd/lcd.o
+                0x0000084e       0x5e hardware_boards/lcd_board/lcd/lcd.o
  .text.lcd_waitbusy
-                0x0000093e       0x16 hardware_boards/lcd_board/lcd/lcd.o
+                0x000008ac       0x16 hardware_boards/lcd_board/lcd/lcd.o
  .text.lcd_command
-                0x00000954       0x10 hardware_boards/lcd_board/lcd/lcd.o
-                0x00000954                lcd_command
+                0x000008c2       0x10 hardware_boards/lcd_board/lcd/lcd.o
+                0x000008c2                lcd_command
  .text.lcd_gotoxy
-                0x00000964       0x10 hardware_boards/lcd_board/lcd/lcd.o
-                0x00000964                lcd_gotoxy
+                0x000008d2       0x10 hardware_boards/lcd_board/lcd/lcd.o
+                0x000008d2                lcd_gotoxy
  .text.lcd_clrscr
-                0x00000974        0x6 hardware_boards/lcd_board/lcd/lcd.o
-                0x00000974                lcd_clrscr
+                0x000008e2        0x6 hardware_boards/lcd_board/lcd/lcd.o
+                0x000008e2                lcd_clrscr
  .text.lcd_putc
-                0x0000097a       0x24 hardware_boards/lcd_board/lcd/lcd.o
-                0x0000097a                lcd_putc
+                0x000008e8       0x24 hardware_boards/lcd_board/lcd/lcd.o
+                0x000008e8                lcd_putc
  .text.lcd_puts
-                0x0000099e       0x1e hardware_boards/lcd_board/lcd/lcd.o
-                0x0000099e                lcd_puts
+                0x0000090c       0x1e hardware_boards/lcd_board/lcd/lcd.o
+                0x0000090c                lcd_puts
  .text.lcd_init
-                0x000009bc       0x6e hardware_boards/lcd_board/lcd/lcd.o
-                0x000009bc                lcd_init
+                0x0000092a       0x6e hardware_boards/lcd_board/lcd/lcd.o
+                0x0000092a                lcd_init
  .text.lop_init
-                0x00000a2a        0xe indicators/led_on_plane/lop.o
-                0x00000a2a                lop_init
+                0x00000998        0xe indicators/led_on_plane/lop.o
+                0x00000998                lop_init
  .text.lop_toggle_led
-                0x00000a38        0x8 indicators/led_on_plane/lop.o
-                0x00000a38                lop_toggle_led
+                0x000009a6        0x8 indicators/led_on_plane/lop.o
+                0x000009a6                lop_toggle_led
  .text.uart0_callback
-                0x00000a40       0x1a run.o
-                0x00000a40                uart0_callback
- .text.main     0x00000a5a      0x1b4 run.o
-                0x00000a5a                main
+                0x000009ae       0x1a run.o
+                0x000009ae                uart0_callback
+ .text.main     0x000009c8      0x1e4 run.o
+                0x000009c8                main
  .text.__vector_7
-                0x00000c0e       0x80 sensors/ab_encoder/ab-encoder.o
-                0x00000c0e                __vector_7
+                0x00000bac       0x80 sensors/ab_encoder/ab-encoder.o
+                0x00000bac                __vector_7
  .text.__vector_8
-                0x00000c8e       0x80 sensors/ab_encoder/ab-encoder.o
-                0x00000c8e                __vector_8
+                0x00000c2c       0x80 sensors/ab_encoder/ab-encoder.o
+                0x00000c2c                __vector_8
  .text._acc_callback
-                0x00000d0e       0x6a sensors/accelerometer/accelerometer.o
+                0x00000cac       0x6a sensors/accelerometer/accelerometer.o
  .text.acc_init
-                0x00000d78       0x74 sensors/accelerometer/accelerometer.o
-                0x00000d78                acc_init
+                0x00000d16       0x74 sensors/accelerometer/accelerometer.o
+                0x00000d16                acc_init
  .text.acc_measure
-                0x00000dec       0x2c sensors/accelerometer/accelerometer.o
-                0x00000dec                acc_measure
+                0x00000d8a       0x2c sensors/accelerometer/accelerometer.o
+                0x00000d8a                acc_measure
  .text.acc_get_x_axis
-                0x00000e18       0x1e sensors/accelerometer/accelerometer.o
-                0x00000e18                acc_get_x_axis
+                0x00000db6       0x1e sensors/accelerometer/accelerometer.o
+                0x00000db6                acc_get_x_axis
  .text.acc_get_y_axis
-                0x00000e36       0x1e sensors/accelerometer/accelerometer.o
-                0x00000e36                acc_get_y_axis
+                0x00000dd4       0x1e sensors/accelerometer/accelerometer.o
+                0x00000dd4                acc_get_y_axis
  .text.acc_get_z_axis
-                0x00000e54       0x1e sensors/accelerometer/accelerometer.o
-                0x00000e54                acc_get_z_axis
+                0x00000df2       0x1e sensors/accelerometer/accelerometer.o
+                0x00000df2                acc_get_z_axis
  .text.scheduler_release
-                0x00000e72       0xa0 sensors/sensor_scheduler.o
-                0x00000e72                scheduler_release
+                0x00000e10       0xa0 sensors/sensor_scheduler.o
+                0x00000e10                scheduler_release
  .text.scheduler_start
-                0x00000f12        0xa sensors/sensor_scheduler.o
-                0x00000f12                scheduler_start
+                0x00000eb0        0xa sensors/sensor_scheduler.o
+                0x00000eb0                scheduler_start
  .text._tc72_callback
-                0x00000f1c       0x3c sensors/tc72/tc72.o
+                0x00000eba       0x3c sensors/tc72/tc72.o
  .text.init_tc72
-                0x00000f58       0x4e sensors/tc72/tc72.o
-                0x00000f58                init_tc72
+                0x00000ef6       0x4e sensors/tc72/tc72.o
+                0x00000ef6                init_tc72
  .text.calculate_temperature
-                0x00000fa6       0x48 sensors/tc72/tc72.o
-                0x00000fa6                calculate_temperature
+                0x00000f44       0x48 sensors/tc72/tc72.o
+                0x00000f44                calculate_temperature
  .text.get_temperature
-                0x00000fee        0xc sensors/tc72/tc72.o
-                0x00000fee                get_temperature
+                0x00000f8c        0xc sensors/tc72/tc72.o
+                0x00000f8c                get_temperature
  .text.measure_temperature
-                0x00000ffa       0x20 sensors/tc72/tc72.o
-                0x00000ffa                measure_temperature
+                0x00000f98       0x20 sensors/tc72/tc72.o
+                0x00000f98                measure_temperature
  .text.init_Timer1_CTC
-                0x0000101a       0xc8 timer.o
-                0x0000101a                init_Timer1_CTC
+                0x00000fb8       0xc8 timer.o
+                0x00000fb8                init_Timer1_CTC
  .text.__vector_17
-                0x000010e2       0x4e timer.o
-                0x000010e2                __vector_17
+                0x00001080       0x4e timer.o
+                0x00001080                __vector_17
  .text.avr-libc.fplib
-                0x00001130        0xa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3.o)
-                0x00001130                __subsf3
-                0x00001132                __addsf3
+                0x000010ce        0xa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3.o)
+                0x000010ce                __subsf3
+                0x000010d0                __addsf3
  .text.avr-libc.fplib
-                0x0000113a       0xc0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3x.o)
-                0x00001154                __addsf3x
+                0x000010d8       0xc0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3x.o)
+                0x000010f2                __addsf3x
  .text.avr-libc.fplib
-                0x000011fa        0xa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fixsfsi.o)
-                0x000011fa                __fixsfsi
+                0x00001198        0xa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fixsfsi.o)
+                0x00001198                __fixsfsi
  .text.avr-libc.fplib
-                0x00001204       0x58 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fixunssfsi.o)
-                0x00001204                __fixunssfsi
+                0x000011a2       0x58 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fixunssfsi.o)
+                0x000011a2                __fixunssfsi
  .text.avr-libc.fplib
-                0x0000125c       0x7a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(floatsisf.o)
-                0x0000125c                __floatunsisf
-                0x00001260                __floatsisf
+                0x000011fa       0x7a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(floatsisf.o)
+                0x000011fa                __floatunsisf
+                0x000011fe                __floatsisf
  .text.avr-libc.fplib
-                0x000012d6        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_inf.o)
-                0x000012d6                __fp_inf
+                0x00001274        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_inf.o)
+                0x00001274                __fp_inf
  .text.avr-libc.fplib
-                0x000012e2        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_nan.o)
-                0x000012e2                __fp_nan
+                0x00001280        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_nan.o)
+                0x00001280                __fp_nan
  .text.avr-libc.fplib
-                0x000012e8        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
-                0x000012e8                __fp_pscA
+                0x00001286        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
+                0x00001286                __fp_pscA
  .text.avr-libc.fplib
-                0x000012f6        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscB.o)
-                0x000012f6                __fp_pscB
+                0x00001294        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscB.o)
+                0x00001294                __fp_pscB
  .text.avr-libc.fplib
-                0x00001304       0x22 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_round.o)
-                0x00001304                __fp_round
+                0x000012a2       0x22 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_round.o)
+                0x000012a2                __fp_round
  .text.avr-libc.fplib
-                0x00001326       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_split3.o)
-                0x00001326                __fp_split3
-                0x00001336                __fp_splitA
+                0x000012c4       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_split3.o)
+                0x000012c4                __fp_split3
+                0x000012d4                __fp_splitA
  .text.avr-libc.fplib
-                0x0000136a        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_zero.o)
-                0x0000136a                __fp_zero
-                0x0000136c                __fp_szero
+                0x00001308        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_zero.o)
+                0x00001308                __fp_zero
+                0x0000130a                __fp_szero
  .text.avr-libc.fplib
-                0x00001378        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3.o)
-                0x00001378                __mulsf3
+                0x00001316        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3.o)
+                0x00001316                __mulsf3
  .text.avr-libc.fplib
-                0x0000137c       0xc2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
-                0x00001390                __mulsf3x
-                0x00001394                __mulsf3_pse
+                0x0000131a       0xc2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
+                0x0000132e                __mulsf3x
+                0x00001332                __mulsf3_pse
  .text.libgcc.div
-                0x0000143e       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_udivmodsi4.o)
-                0x0000143e                __udivmodsi4
- .text.libgcc   0x00001482        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_tablejump.o)
-                0x00001482                __tablejump2__
-                0x00001486                __tablejump__
+                0x000013dc       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_udivmodsi4.o)
+                0x000013dc                __udivmodsi4
+ .text.libgcc   0x00001420        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_tablejump.o)
+                0x00001420                __tablejump2__
+                0x00001424                __tablejump__
  .text.avr-libc
-                0x0000148e       0x40 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtostrf.o)
-                0x0000148e                dtostrf
+                0x0000142c       0x40 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtostrf.o)
+                0x0000142c                dtostrf
  .text.avr-libc
-                0x000014ce       0x5c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(sprintf.o)
-                0x000014ce                sprintf
+                0x0000146c       0x5c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(sprintf.o)
+                0x0000146c                sprintf
  .text.avr-libc
-                0x0000152a      0x3dc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(vfprintf_std.o)
-                0x0000152a                vfprintf
+                0x000014c8      0x3dc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(vfprintf_std.o)
+                0x000014c8                vfprintf
  .text.avr-libc
-                0x00001906      0x2fa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtoa_prf.o)
-                0x00001906                dtoa_prf
+                0x000018a4      0x2fa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtoa_prf.o)
+                0x000018a4                dtoa_prf
  .text.avr-libc
-                0x00001c00      0x1b0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
-                0x00001c00                __ftoa_engine
+                0x00001b9e      0x1b0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
+                0x00001b9e                __ftoa_engine
  .text.avr-libc
-                0x00001db0       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(strnlen_P.o)
-                0x00001db0                strnlen_P
+                0x00001d4e       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(strnlen_P.o)
+                0x00001d4e                strnlen_P
  .text.avr-libc
-                0x00001dc6       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(strnlen.o)
-                0x00001dc6                strnlen
+                0x00001d64       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(strnlen.o)
+                0x00001d64                strnlen
  .text.avr-libc
-                0x00001ddc       0x64 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(fputc.o)
-                0x00001ddc                fputc
+                0x00001d7a       0x64 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(fputc.o)
+                0x00001d7a                fputc
  .text.avr-libc
-                0x00001e40       0xbc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ultoa_invert.o)
-                0x00001e40                __ultoa_invert
-                0x00001efc                . = ALIGN (0x2)
+                0x00001dde       0xbc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ultoa_invert.o)
+                0x00001dde                __ultoa_invert
+                0x00001e9a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001efc        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
-                0x00001efc                _exit
-                0x00001efc                exit
+ .fini9         0x00001e9a        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+                0x00001e9a                _exit
+                0x00001e9a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -754,18 +750,17 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001efc        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+ .fini0         0x00001e9a        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001f00                _etext = .
+                0x00001e9e                _etext = .
 
-.data           0x00800200       0x1c load address 0x00001f00
+.data           0x00800200       0x1c load address 0x00001e9e
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
  .data          0x00800200        0x0 accident_data.o
  .data          0x00800200        0x0 data_comm/spi/spi.o
- .data          0x00800200        0x0 data_comm/uart/uart0.o
- .data          0x00800200        0x0 data_comm/uart/uart1.o
+ .data          0x00800200        0x0 data_comm/uart/uart.o
  .data          0x00800200        0x0 hardware_boards/lcd_board/button_led/btn_led_lcd.o
  .data          0x00800200        0x0 hardware_boards/lcd_board/lcd/lcd.o
  .data          0x00800200        0x0 indicators/led_on_plane/lop.o
@@ -825,7 +820,7 @@ END GROUP
                 0x0080021c                _edata = .
                 0x0080021c                PROVIDE (__data_end, .)
 
-.bss            0x0080021c      0x2b5
+.bss            0x0080021c      0x137
                 0x0080021c                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
@@ -842,61 +837,61 @@ END GROUP
  .bss._handles  0x00800223       0x70 data_comm/spi/spi.o
  .bss._handle_count
                 0x00800293        0x1 data_comm/spi/spi.o
- .bss._buffer_index
-                0x00800294        0x1 data_comm/uart/uart0.o
- .bss._buffer_length
-                0x00800295        0x1 data_comm/uart/uart0.o
- .bss._buffer_send_data
-                0x00800296       0xff data_comm/uart/uart0.o
- .bss._callback_function_ptr
-                0x00800395        0x2 data_comm/uart/uart0.o
- .bss._buffer_index
-                0x00800397        0x1 data_comm/uart/uart1.o
- .bss._buffer_length
-                0x00800398        0x1 data_comm/uart/uart1.o
- .bss._buffer_send_data
-                0x00800399       0xff data_comm/uart/uart1.o
- .bss._callback_function_ptr
-                0x00800498        0x2 data_comm/uart/uart1.o
+ .bss._buffer1_tail
+                0x00800294        0x1 data_comm/uart/uart.o
+ .bss._buffer1_head
+                0x00800295        0x1 data_comm/uart/uart.o
+ .bss._buffer1_send_data
+                0x00800296       0x40 data_comm/uart/uart.o
+ .bss._callback_function1_ptr
+                0x008002d6        0x2 data_comm/uart/uart.o
+ .bss._buffer0_tail
+                0x008002d8        0x1 data_comm/uart/uart.o
+ .bss._buffer0_head
+                0x008002d9        0x1 data_comm/uart/uart.o
+ .bss._buffer0_send_data
+                0x008002da       0x40 data_comm/uart/uart.o
+ .bss._callback_function0_ptr
+                0x0080031a        0x2 data_comm/uart/uart.o
  .bss._listening
-                0x0080049a        0x1 run.o
- .bss._sending  0x0080049b        0x1 run.o
- .bss._index    0x0080049c        0x1 run.o
+                0x0080031c        0x1 run.o
+ .bss._sending  0x0080031d        0x1 run.o
+ .bss._index    0x0080031e        0x1 run.o
  .bss._uart_callback_data
-                0x0080049d       0x10 run.o
+                0x0080031f       0x10 run.o
  .bss._current_position
-                0x008004ad        0x2 sensors/ab_encoder/ab-encoder.o
+                0x0080032f        0x2 sensors/ab_encoder/ab-encoder.o
  .bss._current_state
-                0x008004af        0x1 sensors/ab_encoder/ab-encoder.o
- .bss._state    0x008004b0        0x1 sensors/accelerometer/accelerometer.o
+                0x00800331        0x1 sensors/ab_encoder/ab-encoder.o
+ .bss._state    0x00800332        0x1 sensors/accelerometer/accelerometer.o
  .bss._send_read
-                0x008004b1        0x7 sensors/accelerometer/accelerometer.o
+                0x00800333        0x7 sensors/accelerometer/accelerometer.o
  .bss._send_setup
-                0x008004b8        0x6 sensors/accelerometer/accelerometer.o
- .bss._z_axis   0x008004be        0x2 sensors/accelerometer/accelerometer.o
- .bss._y_axis   0x008004c0        0x2 sensors/accelerometer/accelerometer.o
- .bss._x_axis   0x008004c2        0x2 sensors/accelerometer/accelerometer.o
- .bss._state    0x008004c4        0x1 sensors/sensor_scheduler.o
- .bss._state    0x008004c5        0x1 sensors/tc72/tc72.o
+                0x0080033a        0x6 sensors/accelerometer/accelerometer.o
+ .bss._z_axis   0x00800340        0x2 sensors/accelerometer/accelerometer.o
+ .bss._y_axis   0x00800342        0x2 sensors/accelerometer/accelerometer.o
+ .bss._x_axis   0x00800344        0x2 sensors/accelerometer/accelerometer.o
+ .bss._state    0x00800346        0x1 sensors/sensor_scheduler.o
+ .bss._state    0x00800347        0x1 sensors/tc72/tc72.o
  .bss._send_setup
-                0x008004c6        0x2 sensors/tc72/tc72.o
+                0x00800348        0x2 sensors/tc72/tc72.o
  .bss._send_read
-                0x008004c8        0x4 sensors/tc72/tc72.o
- .bss._temp     0x008004cc        0x2 sensors/tc72/tc72.o
- .bss._ID       0x008004ce        0x1 sensors/tc72/tc72.o
- .bss._MSB      0x008004cf        0x1 sensors/tc72/tc72.o
- .bss._LSB      0x008004d0        0x1 sensors/tc72/tc72.o
+                0x0080034a        0x4 sensors/tc72/tc72.o
+ .bss._temp     0x0080034e        0x2 sensors/tc72/tc72.o
+ .bss._ID       0x00800350        0x1 sensors/tc72/tc72.o
+ .bss._MSB      0x00800351        0x1 sensors/tc72/tc72.o
+ .bss._LSB      0x00800352        0x1 sensors/tc72/tc72.o
  *(COMMON)
-                0x008004d1                PROVIDE (__bss_end, .)
-                0x00001f00                __data_load_start = LOADADDR (.data)
-                0x00001f1c                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800353                PROVIDE (__bss_end, .)
+                0x00001e9e                __data_load_start = LOADADDR (.data)
+                0x00001eba                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008004d1        0x0
-                0x008004d1                PROVIDE (__noinit_start, .)
+.noinit         0x00800353        0x0
+                0x00800353                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x008004d1                PROVIDE (__noinit_end, .)
-                0x008004d1                _end = .
-                0x008004d1                PROVIDE (__heap_start, .)
+                0x00800353                PROVIDE (__noinit_end, .)
+                0x00800353                _end = .
+                0x00800353                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -940,8 +935,7 @@ END GROUP
  .comment       0x00000000       0x30 accident_data.o
                                  0x31 (size before relaxing)
  .comment       0x00000000       0x31 data_comm/spi/spi.o
- .comment       0x00000000       0x31 data_comm/uart/uart0.o
- .comment       0x00000000       0x31 data_comm/uart/uart1.o
+ .comment       0x00000000       0x31 data_comm/uart/uart.o
  .comment       0x00000000       0x31 hardware_boards/lcd_board/button_led/btn_led_lcd.o
  .comment       0x00000000       0x31 hardware_boards/lcd_board/lcd/lcd.o
  .comment       0x00000000       0x31 indicators/led_on_plane/lop.o
@@ -974,154 +968,145 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x360
+.debug_aranges  0x00000000      0x348
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x48 accident_data.o
  .debug_aranges
                 0x00000048       0x48 data_comm/spi/spi.o
  .debug_aranges
-                0x00000090       0x40 data_comm/uart/uart0.o
+                0x00000090       0x68 data_comm/uart/uart.o
  .debug_aranges
-                0x000000d0       0x40 data_comm/uart/uart1.o
+                0x000000f8       0x38 hardware_boards/lcd_board/button_led/btn_led_lcd.o
  .debug_aranges
-                0x00000110       0x38 hardware_boards/lcd_board/button_led/btn_led_lcd.o
+                0x00000130       0x88 hardware_boards/lcd_board/lcd/lcd.o
  .debug_aranges
-                0x00000148       0x88 hardware_boards/lcd_board/lcd/lcd.o
+                0x000001b8       0x30 indicators/led_on_plane/lop.o
  .debug_aranges
-                0x000001d0       0x30 indicators/led_on_plane/lop.o
+                0x000001e8       0x28 run.o
  .debug_aranges
-                0x00000200       0x28 run.o
+                0x00000210       0x38 sensors/ab_encoder/ab-encoder.o
  .debug_aranges
-                0x00000228       0x38 sensors/ab_encoder/ab-encoder.o
+                0x00000248       0x48 sensors/accelerometer/accelerometer.o
  .debug_aranges
-                0x00000260       0x48 sensors/accelerometer/accelerometer.o
+                0x00000290       0x28 sensors/sensor_scheduler.o
  .debug_aranges
-                0x000002a8       0x28 sensors/sensor_scheduler.o
+                0x000002b8       0x40 sensors/tc72/tc72.o
  .debug_aranges
-                0x000002d0       0x40 sensors/tc72/tc72.o
+                0x000002f8       0x28 timer.o
  .debug_aranges
-                0x00000310       0x28 timer.o
- .debug_aranges
-                0x00000338       0x28 unit_test.o
+                0x00000320       0x28 unit_test.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x31e9
+.debug_info     0x00000000     0x30a3
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x290 accident_data.o
  .debug_info    0x00000290      0x514 data_comm/spi/spi.o
- .debug_info    0x000007a4      0x39a data_comm/uart/uart0.o
- .debug_info    0x00000b3e      0x39a data_comm/uart/uart1.o
- .debug_info    0x00000ed8      0x16d hardware_boards/lcd_board/button_led/btn_led_lcd.o
- .debug_info    0x00001045      0x5cb hardware_boards/lcd_board/lcd/lcd.o
- .debug_info    0x00001610      0x108 indicators/led_on_plane/lop.o
- .debug_info    0x00001718      0x877 run.o
- .debug_info    0x00001f8f      0x1ae sensors/ab_encoder/ab-encoder.o
- .debug_info    0x0000213d      0x4f8 sensors/accelerometer/accelerometer.o
- .debug_info    0x00002635      0x482 sensors/sensor_scheduler.o
- .debug_info    0x00002ab7      0x3fb sensors/tc72/tc72.o
- .debug_info    0x00002eb2      0x165 timer.o
- .debug_info    0x00003017      0x1d2 unit_test.o
+ .debug_info    0x000007a4      0x4eb data_comm/uart/uart.o
+ .debug_info    0x00000c8f      0x16d hardware_boards/lcd_board/button_led/btn_led_lcd.o
+ .debug_info    0x00000dfc      0x5cb hardware_boards/lcd_board/lcd/lcd.o
+ .debug_info    0x000013c7      0x108 indicators/led_on_plane/lop.o
+ .debug_info    0x000014cf      0x96a run.o
+ .debug_info    0x00001e39      0x1ae sensors/ab_encoder/ab-encoder.o
+ .debug_info    0x00001fe7      0x4f8 sensors/accelerometer/accelerometer.o
+ .debug_info    0x000024df      0x492 sensors/sensor_scheduler.o
+ .debug_info    0x00002971      0x3fb sensors/tc72/tc72.o
+ .debug_info    0x00002d6c      0x165 timer.o
+ .debug_info    0x00002ed1      0x1d2 unit_test.o
 
-.debug_abbrev   0x00000000     0x1255
+.debug_abbrev   0x00000000     0x11af
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x10d accident_data.o
  .debug_abbrev  0x0000010d      0x1d4 data_comm/spi/spi.o
- .debug_abbrev  0x000002e1      0x140 data_comm/uart/uart0.o
- .debug_abbrev  0x00000421      0x140 data_comm/uart/uart1.o
- .debug_abbrev  0x00000561      0x107 hardware_boards/lcd_board/button_led/btn_led_lcd.o
- .debug_abbrev  0x00000668      0x229 hardware_boards/lcd_board/lcd/lcd.o
- .debug_abbrev  0x00000891       0xb7 indicators/led_on_plane/lop.o
- .debug_abbrev  0x00000948      0x204 run.o
- .debug_abbrev  0x00000b4c       0xdc sensors/ab_encoder/ab-encoder.o
- .debug_abbrev  0x00000c28      0x1de sensors/accelerometer/accelerometer.o
- .debug_abbrev  0x00000e06       0xf3 sensors/sensor_scheduler.o
- .debug_abbrev  0x00000ef9      0x1bc sensors/tc72/tc72.o
- .debug_abbrev  0x000010b5       0xb2 timer.o
- .debug_abbrev  0x00001167       0xee unit_test.o
+ .debug_abbrev  0x000002e1      0x1c8 data_comm/uart/uart.o
+ .debug_abbrev  0x000004a9      0x107 hardware_boards/lcd_board/button_led/btn_led_lcd.o
+ .debug_abbrev  0x000005b0      0x229 hardware_boards/lcd_board/lcd/lcd.o
+ .debug_abbrev  0x000007d9       0xb7 indicators/led_on_plane/lop.o
+ .debug_abbrev  0x00000890      0x216 run.o
+ .debug_abbrev  0x00000aa6       0xdc sensors/ab_encoder/ab-encoder.o
+ .debug_abbrev  0x00000b82      0x1de sensors/accelerometer/accelerometer.o
+ .debug_abbrev  0x00000d60       0xf3 sensors/sensor_scheduler.o
+ .debug_abbrev  0x00000e53      0x1bc sensors/tc72/tc72.o
+ .debug_abbrev  0x0000100f       0xb2 timer.o
+ .debug_abbrev  0x000010c1       0xee unit_test.o
 
-.debug_line     0x00000000     0x1dcf
+.debug_line     0x00000000     0x1c85
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x199 accident_data.o
  .debug_line    0x00000199      0x2b0 data_comm/spi/spi.o
- .debug_line    0x00000449      0x27d data_comm/uart/uart0.o
- .debug_line    0x000006c6      0x27d data_comm/uart/uart1.o
- .debug_line    0x00000943      0x146 hardware_boards/lcd_board/button_led/btn_led_lcd.o
- .debug_line    0x00000a89      0x3ad hardware_boards/lcd_board/lcd/lcd.o
- .debug_line    0x00000e36      0x10c indicators/led_on_plane/lop.o
- .debug_line    0x00000f42      0x39a run.o
- .debug_line    0x000012dc      0x1b3 sensors/ab_encoder/ab-encoder.o
- .debug_line    0x0000148f      0x269 sensors/accelerometer/accelerometer.o
- .debug_line    0x000016f8      0x1f5 sensors/sensor_scheduler.o
- .debug_line    0x000018ed      0x221 sensors/tc72/tc72.o
- .debug_line    0x00001b0e      0x174 timer.o
- .debug_line    0x00001c82      0x14d unit_test.o
+ .debug_line    0x00000449      0x38a data_comm/uart/uart.o
+ .debug_line    0x000007d3      0x146 hardware_boards/lcd_board/button_led/btn_led_lcd.o
+ .debug_line    0x00000919      0x3ad hardware_boards/lcd_board/lcd/lcd.o
+ .debug_line    0x00000cc6      0x10c indicators/led_on_plane/lop.o
+ .debug_line    0x00000dd2      0x3c1 run.o
+ .debug_line    0x00001193      0x1b3 sensors/ab_encoder/ab-encoder.o
+ .debug_line    0x00001346      0x269 sensors/accelerometer/accelerometer.o
+ .debug_line    0x000015af      0x1f4 sensors/sensor_scheduler.o
+ .debug_line    0x000017a3      0x221 sensors/tc72/tc72.o
+ .debug_line    0x000019c4      0x174 timer.o
+ .debug_line    0x00001b38      0x14d unit_test.o
 
-.debug_frame    0x00000000      0x884
+.debug_frame    0x00000000      0x818
  *(.debug_frame)
  .debug_frame   0x00000000       0x74 accident_data.o
  .debug_frame   0x00000074       0xf0 data_comm/spi/spi.o
- .debug_frame   0x00000164      0x128 data_comm/uart/uart0.o
- .debug_frame   0x0000028c      0x128 data_comm/uart/uart1.o
- .debug_frame   0x000003b4       0x54 hardware_boards/lcd_board/button_led/btn_led_lcd.o
- .debug_frame   0x00000408      0x140 hardware_boards/lcd_board/lcd/lcd.o
- .debug_frame   0x00000548       0x44 indicators/led_on_plane/lop.o
- .debug_frame   0x0000058c       0x44 run.o
- .debug_frame   0x000005d0       0x9c sensors/ab_encoder/ab-encoder.o
- .debug_frame   0x0000066c       0x98 sensors/accelerometer/accelerometer.o
- .debug_frame   0x00000704       0x48 sensors/sensor_scheduler.o
- .debug_frame   0x0000074c       0x78 sensors/tc72/tc72.o
- .debug_frame   0x000007c4       0x8c timer.o
- .debug_frame   0x00000850       0x34 unit_test.o
+ .debug_frame   0x00000164      0x1e4 data_comm/uart/uart.o
+ .debug_frame   0x00000348       0x54 hardware_boards/lcd_board/button_led/btn_led_lcd.o
+ .debug_frame   0x0000039c      0x140 hardware_boards/lcd_board/lcd/lcd.o
+ .debug_frame   0x000004dc       0x44 indicators/led_on_plane/lop.o
+ .debug_frame   0x00000520       0x44 run.o
+ .debug_frame   0x00000564       0x9c sensors/ab_encoder/ab-encoder.o
+ .debug_frame   0x00000600       0x98 sensors/accelerometer/accelerometer.o
+ .debug_frame   0x00000698       0x48 sensors/sensor_scheduler.o
+ .debug_frame   0x000006e0       0x78 sensors/tc72/tc72.o
+ .debug_frame   0x00000758       0x8c timer.o
+ .debug_frame   0x000007e4       0x34 unit_test.o
 
-.debug_str      0x00000000     0x114a
+.debug_str      0x00000000      0xfb2
  *(.debug_str)
  .debug_str     0x00000000      0x20d accident_data.o
                                 0x266 (size before relaxing)
- .debug_str     0x0000020d      0x230 data_comm/spi/spi.o
+ .debug_str     0x0000020d      0x246 data_comm/spi/spi.o
                                 0x3fd (size before relaxing)
- .debug_str     0x0000043d      0x361 data_comm/uart/uart0.o
-                                0x4ad (size before relaxing)
- .debug_str     0x0000079e      0x24a data_comm/uart/uart1.o
-                                0x4ad (size before relaxing)
- .debug_str     0x000009e8       0x75 hardware_boards/lcd_board/button_led/btn_led_lcd.o
+ .debug_str     0x00000453      0x3e4 data_comm/uart/uart.o
+                                0x529 (size before relaxing)
+ .debug_str     0x00000837       0x75 hardware_boards/lcd_board/button_led/btn_led_lcd.o
                                 0x1d2 (size before relaxing)
- .debug_str     0x00000a5d      0x10d hardware_boards/lcd_board/lcd/lcd.o
+ .debug_str     0x000008ac      0x10d hardware_boards/lcd_board/lcd/lcd.o
                                 0x2a2 (size before relaxing)
- .debug_str     0x00000b6a       0x6c indicators/led_on_plane/lop.o
+ .debug_str     0x000009b9       0x6c indicators/led_on_plane/lop.o
                                 0x1c3 (size before relaxing)
- .debug_str     0x00000bd6       0xfc run.o
-                                0x56d (size before relaxing)
- .debug_str     0x00000cd2       0x99 sensors/ab_encoder/ab-encoder.o
+ .debug_str     0x00000a25      0x103 run.o
+                                0x56f (size before relaxing)
+ .debug_str     0x00000b28       0x99 sensors/ab_encoder/ab-encoder.o
                                 0x220 (size before relaxing)
- .debug_str     0x00000d6b      0x1a9 sensors/accelerometer/accelerometer.o
+ .debug_str     0x00000bc1      0x1bb sensors/accelerometer/accelerometer.o
                                 0x4f8 (size before relaxing)
- .debug_str     0x00000f14      0x171 sensors/sensor_scheduler.o
-                                0x60f (size before relaxing)
- .debug_str     0x00001085       0x62 sensors/tc72/tc72.o
+ .debug_str     0x00000d7c      0x171 sensors/sensor_scheduler.o
+                                0x611 (size before relaxing)
+ .debug_str     0x00000eed       0x62 sensors/tc72/tc72.o
                                 0x3ad (size before relaxing)
- .debug_str     0x000010e7       0x23 timer.o
+ .debug_str     0x00000f4f       0x23 timer.o
                                 0x270 (size before relaxing)
- .debug_str     0x0000110a       0x40 unit_test.o
+ .debug_str     0x00000f72       0x40 unit_test.o
                                 0x1e3 (size before relaxing)
 
-.debug_loc      0x00000000     0x1ca8
+.debug_loc      0x00000000     0x1b94
  *(.debug_loc)
  .debug_loc     0x00000000       0xb6 accident_data.o
  .debug_loc     0x000000b6      0x4dc data_comm/spi/spi.o
- .debug_loc     0x00000592      0x4e2 data_comm/uart/uart0.o
- .debug_loc     0x00000a74      0x4e2 data_comm/uart/uart1.o
- .debug_loc     0x00000f56       0xb6 hardware_boards/lcd_board/button_led/btn_led_lcd.o
- .debug_loc     0x0000100c      0x551 hardware_boards/lcd_board/lcd/lcd.o
- .debug_loc     0x0000155d       0x69 indicators/led_on_plane/lop.o
- .debug_loc     0x000015c6       0x68 run.o
- .debug_loc     0x0000162e      0x168 sensors/ab_encoder/ab-encoder.o
- .debug_loc     0x00001796      0x206 sensors/accelerometer/accelerometer.o
- .debug_loc     0x0000199c       0x49 sensors/sensor_scheduler.o
- .debug_loc     0x000019e5      0x141 sensors/tc72/tc72.o
- .debug_loc     0x00001b26      0x182 timer.o
+ .debug_loc     0x00000592      0x798 data_comm/uart/uart.o
+ .debug_loc     0x00000d2a       0xb6 hardware_boards/lcd_board/button_led/btn_led_lcd.o
+ .debug_loc     0x00000de0      0x551 hardware_boards/lcd_board/lcd/lcd.o
+ .debug_loc     0x00001331       0x69 indicators/led_on_plane/lop.o
+ .debug_loc     0x0000139a      0x180 run.o
+ .debug_loc     0x0000151a      0x168 sensors/ab_encoder/ab-encoder.o
+ .debug_loc     0x00001682      0x206 sensors/accelerometer/accelerometer.o
+ .debug_loc     0x00001888       0x49 sensors/sensor_scheduler.o
+ .debug_loc     0x000018d1      0x141 sensors/tc72/tc72.o
+ .debug_loc     0x00001a12      0x182 timer.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1141,22 +1126,21 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x298
+.debug_ranges   0x00000000      0x290
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x38 accident_data.o
  .debug_ranges  0x00000038       0x38 data_comm/spi/spi.o
- .debug_ranges  0x00000070       0x30 data_comm/uart/uart0.o
- .debug_ranges  0x000000a0       0x30 data_comm/uart/uart1.o
- .debug_ranges  0x000000d0       0x28 hardware_boards/lcd_board/button_led/btn_led_lcd.o
- .debug_ranges  0x000000f8       0x90 hardware_boards/lcd_board/lcd/lcd.o
- .debug_ranges  0x00000188       0x20 indicators/led_on_plane/lop.o
- .debug_ranges  0x000001a8       0x18 run.o
- .debug_ranges  0x000001c0       0x28 sensors/ab_encoder/ab-encoder.o
- .debug_ranges  0x000001e8       0x38 sensors/accelerometer/accelerometer.o
- .debug_ranges  0x00000220       0x18 sensors/sensor_scheduler.o
- .debug_ranges  0x00000238       0x30 sensors/tc72/tc72.o
- .debug_ranges  0x00000268       0x18 timer.o
- .debug_ranges  0x00000280       0x18 unit_test.o
+ .debug_ranges  0x00000070       0x58 data_comm/uart/uart.o
+ .debug_ranges  0x000000c8       0x28 hardware_boards/lcd_board/button_led/btn_led_lcd.o
+ .debug_ranges  0x000000f0       0x90 hardware_boards/lcd_board/lcd/lcd.o
+ .debug_ranges  0x00000180       0x20 indicators/led_on_plane/lop.o
+ .debug_ranges  0x000001a0       0x18 run.o
+ .debug_ranges  0x000001b8       0x28 sensors/ab_encoder/ab-encoder.o
+ .debug_ranges  0x000001e0       0x38 sensors/accelerometer/accelerometer.o
+ .debug_ranges  0x00000218       0x18 sensors/sensor_scheduler.o
+ .debug_ranges  0x00000230       0x30 sensors/tc72/tc72.o
+ .debug_ranges  0x00000260       0x18 timer.o
+ .debug_ranges  0x00000278       0x18 unit_test.o
 
 .debug_macro
  *(.debug_macro)

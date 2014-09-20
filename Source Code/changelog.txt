@@ -1,4 +1,24 @@
 ==================================
+Version 0.06d - 2014/09/20 by Andi
+==================================
+New Features, Improvements
+--------------------------
+- Improved UART driver to be more userfriendly
+- Upgraded the buffer inside the UART driver to be circular
+  so that it needs less memory to work properly
+
+Fixed Bugs, Changes
+-------------------
+- Changed UART drivers to be in one file instead of two
+
+ToDo
+----	
+- MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane
+- missing commenting in btn_led_lcd and led_on_plane
+
+
+
+==================================
 Version 0.06c - 2014/09/18 by Andi
 ==================================
 New Features, Improvements

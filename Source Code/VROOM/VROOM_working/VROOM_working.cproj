@@ -64,7 +64,7 @@
         <InterfaceProperties>
           <JtagEnableExtResetOnStartSession>false</JtagEnableExtResetOnStartSession>
           <IspClock>125000</IspClock>
-          <JtagDbgClock>2000000</JtagDbgClock>
+          <JtagDbgClock>523770</JtagDbgClock>
         </InterfaceProperties>
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
@@ -145,16 +145,10 @@
     <Compile Include="data_comm\spi\spi.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="data_comm\uart\uart0.c">
+    <Compile Include="data_comm\uart\uart.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="data_comm\uart\uart0.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="data_comm\uart\uart1.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="data_comm\uart\uart1.h">
+    <Compile Include="data_comm\uart\uart.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hardware_boards\lcd_board\button_led\btn_led_lcd.c">

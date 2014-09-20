@@ -24,12 +24,11 @@ sensors/accelerometer/accelerometer.d \
  ../sensors/accelerometer/../tc72/tc72.h \
  ../sensors/accelerometer/../tc72/../../data_comm/spi/spi.h \
  ../sensors/accelerometer/../accelerometer/accelerometer.h \
- ../sensors/accelerometer/../../data_comm/uart/uart0.h \
+ ../sensors/accelerometer/../../data_comm/uart/uart.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\math.h \
- ../sensors/accelerometer/../../data_comm/uart/../../sensors/sensor_scheduler.h \
  ../sensors/accelerometer/../../timer.h \
  ../sensors/accelerometer/../../sensors/sensor_scheduler.h
 
@@ -79,7 +78,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-g
 
 ../sensors/accelerometer/../accelerometer/accelerometer.h:
 
-../sensors/accelerometer/../../data_comm/uart/uart0.h:
+../sensors/accelerometer/../../data_comm/uart/uart.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\stdlib.h:
 
@@ -88,8 +87,6 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-g
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\math.h:
-
-../sensors/accelerometer/../../data_comm/uart/../../sensors/sensor_scheduler.h:
 
 ../sensors/accelerometer/../../timer.h:
 

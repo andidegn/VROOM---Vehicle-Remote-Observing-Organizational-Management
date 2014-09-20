@@ -19,7 +19,7 @@
 #define SEND_TO_UART 1
 #define UART_LOOP_BACK 1
 
-#define DELAY_BETWEEN_CHARS 0
+#define DELAY_BETWEEN_CHARS 1
 
 #include <avr/io.h>
 #include <stdlib.h>
@@ -28,6 +28,7 @@
 #include "sensors/tc72/tc72.h"
 #include "sensors/accelerometer/accelerometer.h"
 #include "sensors/sensor_scheduler.h"
+#include "data_comm/uart/uart.h"
 #include "hardware_boards/lcd_board/lcd/lcd.h"
 #include "indicators/led_on_plane/lop.h"
 #include "hardware_boards/lcd_board/button_led/btn_led_lcd.h"
@@ -48,21 +49,19 @@ int main(void) {
     }
 #else
 #if UART0
-#include "data_comm/uart/uart0.h"
-    uart0_setup_async(	UART0_MODE_DOUBLE,
-                        UART0_BAUD_28K8,
-                        UART0_PARITY_DISABLED,
-                        UART0_ONE_STOP_BIT,
-                        UART0_8_BIT,
+    uart0_setup_async(	UART_MODE_DOUBLE,
+                        UART_BAUD_115K2,
+                        UART_PARITY_DISABLED,
+                        UART_ONE_STOP_BIT,
+                        UART_8_BIT,
                         uart0_callback);
 #endif // UART0
 #if UART1
-#include "data_comm/uart/uart1.h"
-    uart1_setup_async(	UART1_MODE_NORMAL, 
-						UART1_BAUD_115K2, 
-						UART1_PARITY_DISABLED, 
-						UART1_ONE_STOP_BIT, 
-						UART1_8_BIT, 
+    uart1_setup_async(	UART_MODE_NORMAL,
+						UART_BAUD_115K2,
+						UART_PARITY_DISABLED,
+						UART_ONE_STOP_BIT,
+						UART_8_BIT,
 						uart1_callback);
 #endif // UART1
     lcd_init(LCD_DISP_ON);
@@ -158,7 +157,7 @@ int main(void) {
         }
 #endif // SEND_TO_UART
 
-        _delay_ms(20);
+        _delay_ms(0);
     }
 #endif // UNIT_TEST
 #endif // ANALYSIS

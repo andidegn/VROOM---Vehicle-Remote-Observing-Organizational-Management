@@ -51,8 +51,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../accident_data.c \
 ../data_comm/spi/spi.c \
-../data_comm/uart/uart0.c \
-../data_comm/uart/uart1.c \
+../data_comm/uart/uart.c \
 ../hardware_boards/lcd_board/button_led/btn_led_lcd.c \
 ../hardware_boards/lcd_board/lcd/lcd.c \
 ../indicators/led_on_plane/lop.c \
@@ -74,8 +73,7 @@ ASM_SRCS +=
 OBJS +=  \
 accident_data.o \
 data_comm/spi/spi.o \
-data_comm/uart/uart0.o \
-data_comm/uart/uart1.o \
+data_comm/uart/uart.o \
 hardware_boards/lcd_board/button_led/btn_led_lcd.o \
 hardware_boards/lcd_board/lcd/lcd.o \
 indicators/led_on_plane/lop.o \
@@ -90,8 +88,7 @@ unit_test.o
 OBJS_AS_ARGS +=  \
 accident_data.o \
 data_comm/spi/spi.o \
-data_comm/uart/uart0.o \
-data_comm/uart/uart1.o \
+data_comm/uart/uart.o \
 hardware_boards/lcd_board/button_led/btn_led_lcd.o \
 hardware_boards/lcd_board/lcd/lcd.o \
 indicators/led_on_plane/lop.o \
@@ -106,8 +103,7 @@ unit_test.o
 C_DEPS +=  \
 accident_data.d \
 data_comm/spi/spi.d \
-data_comm/uart/uart0.d \
-data_comm/uart/uart1.d \
+data_comm/uart/uart.d \
 hardware_boards/lcd_board/button_led/btn_led_lcd.d \
 hardware_boards/lcd_board/lcd/lcd.d \
 indicators/led_on_plane/lop.d \
@@ -122,8 +118,7 @@ unit_test.d
 C_DEPS_AS_ARGS +=  \
 accident_data.d \
 data_comm/spi/spi.d \
-data_comm/uart/uart0.d \
-data_comm/uart/uart1.d \
+data_comm/uart/uart.d \
 hardware_boards/lcd_board/button_led/btn_led_lcd.d \
 hardware_boards/lcd_board/lcd/lcd.d \
 indicators/led_on_plane/lop.d \
@@ -146,8 +141,6 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
-
-
 
 
 

@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AMD.Util.Serial.BaudRates;
+using System;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AMD.Util {
     public class SerialPortConnector {
 
-
-        public static bool SerialSetup(SerialPort sp, String portName) {
+        public static bool SerialSetup(SerialPort sp, String portName, BaudRate baud) {
             if (portName == null || portName.Length < 4) return false;
 
             sp.PortName = portName;
-            sp.BaudRate = 115200;
+            sp.BaudRate = baud.Value;
             sp.Parity = Parity.None;
             sp.StopBits = StopBits.One;
             sp.Handshake = Handshake.None;
             sp.DataBits = 8;
             sp.ReadTimeout = 1000;
             sp.ReadBufferSize = 65536;
-
+            
             sp.Open();
             sp.ReadTimeout = 1000;
             return true;
@@ -29,6 +25,5 @@ namespace AMD.Util {
         public static String[] getAvalComPort() {
             return System.IO.Ports.SerialPort.GetPortNames();
         }
-
     }
 }

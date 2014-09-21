@@ -1,4 +1,26 @@
 ==================================
+Version 0.06e - 2014/09/21 by Andi
+==================================
+New Features, Improvements
+--------------------------
+
+Fixed Bugs, Changes
+-------------------
+- Added callback option in sensor_scheduler for the UART
+
+ToDo
+----	
+- MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane
+- missing commenting in btn_led_lcd and led_on_plane
+
+Note
+----
+- Analysis functionality now working from sensor_scheduler. Problem was
+  baud rate too high and minor errors in UART driver (Was fixed in 0.06d)
+
+
+
+==================================
 Version 0.06d - 2014/09/20 by Andi
 ==================================
 New Features, Improvements
@@ -85,6 +107,8 @@ Fixed Bugs, Changes
 
 ToDo
 ----	
+- MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane
+- missing commenting in btn_led_lcd and led_on_plane
 
 
 

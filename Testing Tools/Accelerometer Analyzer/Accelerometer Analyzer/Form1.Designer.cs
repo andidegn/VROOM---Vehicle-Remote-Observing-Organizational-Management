@@ -29,7 +29,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btn_start = new System.Windows.Forms.Button();
-            this.btn_save_as = new System.Windows.Forms.Button();
             this.rtb_data = new System.Windows.Forms.RichTextBox();
             this.chkFullScale = new System.Windows.Forms.CheckBox();
             this.tkb_scale = new System.Windows.Forms.TrackBar();
@@ -37,6 +36,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_chart = new System.Windows.Forms.Panel();
             this.grp_axis = new System.Windows.Forms.GroupBox();
@@ -52,6 +52,9 @@
             this.chk_raw_data = new System.Windows.Forms.CheckBox();
             this.cbb_comport = new System.Windows.Forms.ComboBox();
             this.btn_refresh = new System.Windows.Forms.Button();
+            this.cbb_baud_rate = new System.Windows.Forms.ComboBox();
+            this.lbl_baud_rate = new System.Windows.Forms.Label();
+            this.btn_stop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tkb_scale)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -81,7 +84,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1067, 486);
+            this.chart1.Size = new System.Drawing.Size(1041, 469);
             this.chart1.SuppressExceptions = true;
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -98,23 +101,13 @@
             this.btn_start.UseVisualStyleBackColor = true;
             this.btn_start.Click += new System.EventHandler(this.btn_start_Click);
             // 
-            // btn_save_as
-            // 
-            this.btn_save_as.Location = new System.Drawing.Point(216, 2);
-            this.btn_save_as.Name = "btn_save_as";
-            this.btn_save_as.Size = new System.Drawing.Size(75, 23);
-            this.btn_save_as.TabIndex = 2;
-            this.btn_save_as.Text = "Save As...";
-            this.btn_save_as.UseVisualStyleBackColor = true;
-            this.btn_save_as.Click += new System.EventHandler(this.btn_save_as_Click);
-            // 
             // rtb_data
             // 
             this.rtb_data.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtb_data.Location = new System.Drawing.Point(895, 27);
+            this.rtb_data.Location = new System.Drawing.Point(869, 27);
             this.rtb_data.Name = "rtb_data";
-            this.rtb_data.Size = new System.Drawing.Size(193, 486);
+            this.rtb_data.Size = new System.Drawing.Size(193, 469);
             this.rtb_data.TabIndex = 3;
             this.rtb_data.Text = "";
             this.rtb_data.Visible = false;
@@ -124,7 +117,7 @@
             this.chkFullScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkFullScale.AutoSize = true;
             this.chkFullScale.Enabled = false;
-            this.chkFullScale.Location = new System.Drawing.Point(1002, 505);
+            this.chkFullScale.Location = new System.Drawing.Point(976, 488);
             this.chkFullScale.Name = "chkFullScale";
             this.chkFullScale.Size = new System.Drawing.Size(67, 17);
             this.chkFullScale.TabIndex = 4;
@@ -135,10 +128,10 @@
             // 
             this.tkb_scale.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tkb_scale.Location = new System.Drawing.Point(0, 492);
+            this.tkb_scale.Location = new System.Drawing.Point(0, 475);
             this.tkb_scale.Maximum = 10000;
             this.tkb_scale.Name = "tkb_scale";
-            this.tkb_scale.Size = new System.Drawing.Size(996, 45);
+            this.tkb_scale.Size = new System.Drawing.Size(970, 45);
             this.tkb_scale.TabIndex = 5;
             this.tkb_scale.Value = 400;
             this.tkb_scale.Scroll += new System.EventHandler(this.tkb_scale_Scroll);
@@ -146,19 +139,22 @@
             // 
             // tbx_send
             // 
-            this.tbx_send.Location = new System.Drawing.Point(627, 3);
+            this.tbx_send.Location = new System.Drawing.Point(700, 3);
             this.tbx_send.Name = "tbx_send";
-            this.tbx_send.Size = new System.Drawing.Size(222, 20);
+            this.tbx_send.Size = new System.Drawing.Size(154, 20);
             this.tbx_send.TabIndex = 6;
             this.tbx_send.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbx_send_KeyDown);
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1103, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(45, 24);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -166,6 +162,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
             this.printToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -174,14 +171,21 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
@@ -197,7 +201,7 @@
             this.pnl_chart.Controls.Add(this.chart1);
             this.pnl_chart.Location = new System.Drawing.Point(0, 27);
             this.pnl_chart.Name = "pnl_chart";
-            this.pnl_chart.Size = new System.Drawing.Size(1091, 540);
+            this.pnl_chart.Size = new System.Drawing.Size(1065, 523);
             this.pnl_chart.TabIndex = 10;
             // 
             // grp_axis
@@ -208,7 +212,7 @@
             this.grp_axis.Controls.Add(this.chk_z);
             this.grp_axis.Controls.Add(this.chk_y);
             this.grp_axis.Controls.Add(this.chk_x);
-            this.grp_axis.Location = new System.Drawing.Point(962, 181);
+            this.grp_axis.Location = new System.Drawing.Point(936, 181);
             this.grp_axis.Name = "grp_axis";
             this.grp_axis.Size = new System.Drawing.Size(103, 120);
             this.grp_axis.TabIndex = 7;
@@ -269,7 +273,7 @@
             this.tkb_length_offset.Minimum = -2000;
             this.tkb_length_offset.Name = "tkb_length_offset";
             this.tkb_length_offset.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tkb_length_offset.Size = new System.Drawing.Size(45, 478);
+            this.tkb_length_offset.Size = new System.Drawing.Size(45, 461);
             this.tkb_length_offset.TabIndex = 6;
             this.tkb_length_offset.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.tkb_length_offset.Scroll += new System.EventHandler(this.tkb_length_offset_Scroll);
@@ -279,7 +283,7 @@
             // btn_raw
             // 
             this.btn_raw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_raw.Location = new System.Drawing.Point(1016, 2);
+            this.btn_raw.Location = new System.Drawing.Point(990, 2);
             this.btn_raw.Name = "btn_raw";
             this.btn_raw.Size = new System.Drawing.Size(75, 23);
             this.btn_raw.TabIndex = 11;
@@ -290,7 +294,7 @@
             // lbl_send
             // 
             this.lbl_send.AutoSize = true;
-            this.lbl_send.Location = new System.Drawing.Point(589, 7);
+            this.lbl_send.Location = new System.Drawing.Point(662, 6);
             this.lbl_send.Name = "lbl_send";
             this.lbl_send.Size = new System.Drawing.Size(32, 13);
             this.lbl_send.TabIndex = 12;
@@ -308,8 +312,9 @@
             // 
             // chk_raw_data
             // 
+            this.chk_raw_data.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_raw_data.AutoSize = true;
-            this.chk_raw_data.Location = new System.Drawing.Point(902, 5);
+            this.chk_raw_data.Location = new System.Drawing.Point(876, 5);
             this.chk_raw_data.Name = "chk_raw_data";
             this.chk_raw_data.Size = new System.Drawing.Size(108, 17);
             this.chk_raw_data.TabIndex = 15;
@@ -319,14 +324,14 @@
             // cbb_comport
             // 
             this.cbb_comport.FormattingEnabled = true;
-            this.cbb_comport.Location = new System.Drawing.Point(433, 3);
+            this.cbb_comport.Location = new System.Drawing.Point(457, 3);
             this.cbb_comport.Name = "cbb_comport";
-            this.cbb_comport.Size = new System.Drawing.Size(121, 21);
+            this.cbb_comport.Size = new System.Drawing.Size(60, 21);
             this.cbb_comport.TabIndex = 16;
             // 
             // btn_refresh
             // 
-            this.btn_refresh.Location = new System.Drawing.Point(375, 2);
+            this.btn_refresh.Location = new System.Drawing.Point(399, 2);
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.Size = new System.Drawing.Size(52, 23);
             this.btn_refresh.TabIndex = 17;
@@ -334,11 +339,42 @@
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
+            // cbb_baud_rate
+            // 
+            this.cbb_baud_rate.FormattingEnabled = true;
+            this.cbb_baud_rate.Location = new System.Drawing.Point(588, 2);
+            this.cbb_baud_rate.Name = "cbb_baud_rate";
+            this.cbb_baud_rate.Size = new System.Drawing.Size(59, 21);
+            this.cbb_baud_rate.TabIndex = 18;
+            this.cbb_baud_rate.SelectedIndexChanged += new System.EventHandler(this.cbb_baud_rate_SelectedIndexChanged);
+            // 
+            // lbl_baud_rate
+            // 
+            this.lbl_baud_rate.AutoSize = true;
+            this.lbl_baud_rate.Location = new System.Drawing.Point(524, 6);
+            this.lbl_baud_rate.Name = "lbl_baud_rate";
+            this.lbl_baud_rate.Size = new System.Drawing.Size(58, 13);
+            this.lbl_baud_rate.TabIndex = 19;
+            this.lbl_baud_rate.Text = "Baud Rate";
+            // 
+            // btn_stop
+            // 
+            this.btn_stop.Location = new System.Drawing.Point(216, 1);
+            this.btn_stop.Name = "btn_stop";
+            this.btn_stop.Size = new System.Drawing.Size(75, 23);
+            this.btn_stop.TabIndex = 20;
+            this.btn_stop.Text = "Stop";
+            this.btn_stop.UseVisualStyleBackColor = true;
+            this.btn_stop.Click += new System.EventHandler(this.btn_stop_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1103, 561);
+            this.ClientSize = new System.Drawing.Size(1077, 544);
+            this.Controls.Add(this.btn_stop);
+            this.Controls.Add(this.lbl_baud_rate);
+            this.Controls.Add(this.cbb_baud_rate);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.cbb_comport);
             this.Controls.Add(this.chk_raw_data);
@@ -346,7 +382,6 @@
             this.Controls.Add(this.lbl_send);
             this.Controls.Add(this.btn_rst_buf);
             this.Controls.Add(this.tbx_send);
-            this.Controls.Add(this.btn_save_as);
             this.Controls.Add(this.btn_start);
             this.Controls.Add(this.pnl_chart);
             this.Controls.Add(this.menuStrip1);
@@ -374,7 +409,6 @@
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Button btn_start;
-        private System.Windows.Forms.Button btn_save_as;
         private System.Windows.Forms.RichTextBox rtb_data;
         private System.Windows.Forms.CheckBox chkFullScale;
         private System.Windows.Forms.TrackBar tkb_scale;
@@ -397,6 +431,10 @@
         private System.Windows.Forms.CheckBox chk_z;
         private System.Windows.Forms.CheckBox chk_y;
         private System.Windows.Forms.CheckBox chk_x;
+        private System.Windows.Forms.ComboBox cbb_baud_rate;
+        private System.Windows.Forms.Label lbl_baud_rate;
+        private System.Windows.Forms.Button btn_stop;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
     }
 }
 

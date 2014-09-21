@@ -15,7 +15,7 @@
 
 #define SCHEDULER_DELAY 0
 
-void scheduler_start(void);
+void scheduler_start(void (*callback_function_ptr)(char cfp));
 void scheduler_release(void);
 
 #endif /* COLLECT_SENSOR_DATA_H_ */

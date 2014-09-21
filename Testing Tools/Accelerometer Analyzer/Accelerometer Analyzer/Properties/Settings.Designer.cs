@@ -82,5 +82,41 @@ namespace Accelerometer_Analyzer.Properties {
                 this["col_raw_data"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cbb_baud_rate {
+            get {
+                return ((int)(this["cbb_baud_rate"]));
+            }
+            set {
+                this["cbb_baud_rate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000, 500")]
+        public global::System.Drawing.Size form_size {
+            get {
+                return ((global::System.Drawing.Size)(this["form_size"]));
+            }
+            set {
+                this["form_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState form_state {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["form_state"]));
+            }
+            set {
+                this["form_state"] = value;
+            }
+        }
     }
 }

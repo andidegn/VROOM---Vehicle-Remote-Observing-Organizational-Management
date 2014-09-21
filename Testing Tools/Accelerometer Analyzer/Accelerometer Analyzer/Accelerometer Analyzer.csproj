@@ -35,7 +35,8 @@
     <ApplicationIcon>3-axis.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MyClasses">
+    <Reference Include="MyClasses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\visual studio 2012\Projects\MyClasses\MyClasses\bin\Debug\MyClasses.dll</HintPath>
     </Reference>
     <Reference Include="System" />

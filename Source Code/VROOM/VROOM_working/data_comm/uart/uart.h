@@ -1,5 +1,5 @@
 /*
- * @file: UART0_Driver.h
+ * @file: UART_Driver.h
  *
  * @Created: 12-09-2014 20:34:36
  * @Author: Andi Degn
@@ -125,8 +125,8 @@ typedef enum {
  *
  * @param UART_MODE operational_mode - normal speed or double speed mode
  * @param UART_BAUD baud_rate - baud rate of operations
- * @param UART0_PARITY_MODE paraty_mode - sets the parity bit mode
- * @param UART0_STOP_BIT stop_bit - one or two stop bits
+ * @param UART_PARITY_MODE paraty_mode - sets the parity bit mode
+ * @param UART_STOP_BIT stop_bit - one or two stop bits
  * @param UART_CHAR_SIZE char_size - the character size between 5 and 9 bits
  * @param void *callback_function_ptr - the pointer to the function which should be called when the SPI interrupt is triggered
  *
@@ -168,8 +168,8 @@ void uart0_send_string(const char *data);
  *
  * @param UART_MODE operational_mode - normal speed or double speed mode
  * @param UART_BAUD baud_rate - baud rate of operations
- * @param UART1_PARITY_MODE paraty_mode - sets the parity bit mode
- * @param UART1_STOP_BIT stop_bit - one or two stop bits
+ * @param UART_PARITY_MODE paraty_mode - sets the parity bit mode
+ * @param UART_STOP_BIT stop_bit - one or two stop bits
  * @param UART_CHAR_SIZE char_size - the character size between 5 and 9 bits
  * @param void *callback_function_ptr - the pointer to the function which should be called when the SPI interrupt is triggered
  *

@@ -17,5 +17,14 @@
     <Setting Name="col_raw_data" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="cbb_baud_rate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="form_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1000, 500</Value>
+    </Setting>
+    <Setting Name="form_state" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

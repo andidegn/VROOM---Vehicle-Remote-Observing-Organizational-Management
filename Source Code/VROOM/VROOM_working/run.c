@@ -7,17 +7,18 @@
 
 /* #define F_CPU 11059200UL */
 
-
+#define ON 1
+#define OFF 0
 /*********************************//**
  * UNCOMMENT FOR RUN ALL UNIT TESTS  *
  *************************************/
-#define UNIT_TEST 0
-#define ANALYSIS 0
+#define UNIT_TEST OFF
+#define ANALYSIS OFF
 
-#define UART0 1
-#define UART1 0
-#define SEND_TO_UART 1
-#define UART_LOOP_BACK 1
+#define SEND_TO_UART OFF
+#define UART0 ON
+#define UART1 OFF
+#define UART_LOOP_BACK OFF
 
 #define DELAY_BETWEEN_CHARS 1
 
@@ -68,7 +69,7 @@ int main(void) {
     btn_led_lcd_init();
     led_lcd_set(LED_RED, LED_ON);
     lop_init();
-    scheduler_start();
+    scheduler_start(uart0_callback);
 
     sei();
 
@@ -155,6 +156,8 @@ int main(void) {
         } else {
             _delay_ms(3 * DELAY_BETWEEN_CHARS);
         }
+#else // SEND_TO_UART
+	_delay_ms(100);
 #endif // SEND_TO_UART
 
         _delay_ms(0);
@@ -164,6 +167,7 @@ int main(void) {
 }
 #if UART0
 void uart0_callback(char data) {
+	_listening = true;
     *(_uart_callback_data + (_index++ % 16)) = data;
 	#if UART_LOOP_BACK
     uart0_send_char(data);
@@ -172,7 +176,6 @@ void uart0_callback(char data) {
 #endif // UART0
 #if UART1
 void uart1_callback(char data) {
-    *(_uart_callback_data + (_index++ % 16)) = data;
     #if UART_LOOP_BACK
     uart1_send_char(data);
     #endif

@@ -12,9 +12,10 @@ using System.Windows.Forms;
 using AMD.Util;
 using Accelerometer_Analyzer.AMD.util;
 using System.Windows.Forms.DataVisualization.Charting;
-using MyClasses.Util.LiniarAlgebra;
+using AMD.Util.LiniarAlgebra;
 using System.Threading;
 using Accelerometer_Analyzer.Properties;
+using AMD.Util.Serial.BaudRates;
 
 namespace Accelerometer_Analyzer {
     public partial class Form1 : Form {
@@ -23,6 +24,7 @@ namespace Accelerometer_Analyzer {
         private SerialPort _port;
         private bool _start_reading;
         private bool _port_open = false;
+        private BaudRate _baud_rate;
 
         /* data collection for accelerometer data */
         private BindingList<byte> _received_data;
@@ -51,6 +53,7 @@ namespace Accelerometer_Analyzer {
             /* COM port */
             _start_reading = false;
             _update_com();
+            cbb_baud_rate.DataSource = BaudRateList.getInstance().getArray();
 
             /* data collection for accelerometer data */
             _received_data = new BindingList<byte>();
@@ -82,6 +85,9 @@ namespace Accelerometer_Analyzer {
             chk_z.Checked = Settings.Default.z_axis_en;
             chk_v_len.Checked = Settings.Default.v_len_en;
             chk_raw_data.Checked = Settings.Default.col_raw_data;
+            cbb_baud_rate.SelectedIndex = Settings.Default.cbb_baud_rate;
+            this.Size = Settings.Default.form_size;
+            this.WindowState = Settings.Default.form_state;
         }
 
         private void _save_settings() {
@@ -90,6 +96,13 @@ namespace Accelerometer_Analyzer {
             Settings.Default.z_axis_en = chk_z.Checked;
             Settings.Default.v_len_en = chk_v_len.Checked;
             Settings.Default.col_raw_data = chk_raw_data.Checked;
+            Settings.Default.cbb_baud_rate = cbb_baud_rate.SelectedIndex;
+            Settings.Default.form_state = this.WindowState != FormWindowState.Minimized ? this.WindowState : FormWindowState.Normal;
+            if (this.WindowState == FormWindowState.Maximized) {
+                this.WindowState = FormWindowState.Normal;
+            }
+            Settings.Default.form_size = this.Size;
+            
             Settings.Default.Save();
         }
 
@@ -100,10 +113,14 @@ namespace Accelerometer_Analyzer {
 
         private bool _connect_to_serial() {
             try {
+                if (_port_open) {
+                    _port.Close();
+                }
                 _port = new SerialPort();
-                SerialPortConnector.SerialSetup(_port, cbb_comport.SelectedValue.ToString());
+                _baud_rate = cbb_baud_rate.SelectedItem as BaudRate;
+                SerialPortConnector.SerialSetup(_port, cbb_comport.SelectedValue.ToString(), (cbb_baud_rate.SelectedValue as BaudRate));
                 _port.DataReceived += new SerialDataReceivedEventHandler(uart_data_received_handler);
-                _port_open = true;
+                _port_open = _port.IsOpen;
                 cbb_comport.Enabled = false;
                 chart1.BorderlineColor = Color.LimeGreen;
             } catch (Exception) {
@@ -352,13 +369,8 @@ namespace Accelerometer_Analyzer {
             }
         }
 
-        private void btn_save_as_Click(object sender, EventArgs e) {
-            try {
-                _port.Close();
-                chart1.BorderlineColor = Color.Black;
-            } catch {}
+        private void btn_stop_Click(object sender, EventArgs e) {
             _start_reading = false;
-            _write_to_file(true);
         }
 
         private void btn_refresh_Click(object sender, EventArgs e) {
@@ -417,19 +429,43 @@ namespace Accelerometer_Analyzer {
             }
         }
 
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
+            try {
+                _port.Close();
+                chart1.BorderlineColor = Color.Black;
+            } catch { }
+            _start_reading = false;
+            _write_to_file(true);
+        }
+
         private void printToolStripMenuItem_Click(object sender, EventArgs e) {
             chart1.Printing.Print(true);
         }
 
+        private void cbb_baud_rate_SelectedIndexChanged(object sender, EventArgs e) {
+            _baud_rate = ((sender as ComboBox).SelectedItem as BaudRate);
+            if (_port_open) {
+                try {
+                    _port.Close();
+                    _connect_to_serial();
+                } catch (Exception) {
+                    
+                    throw;
+                }
+            }
+        }
+
         private void tbx_send_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
-                if (!_port_open) {
+                if (_port == null || !_port.IsOpen) {
                     _connect_to_serial();
                 }
-                if (tbx_send.Text.Length > 0) {
+                if (_port.IsOpen && tbx_send.Text.Length > 0) {
                     try {
                         _port.Write(tbx_send.Text);
-                    } catch { }
+                    } catch (Exception) {
+                        throw;
+                    }
                 }
             }
         }

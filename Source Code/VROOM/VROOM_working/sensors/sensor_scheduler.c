@@ -7,7 +7,7 @@
 #include <util/delay.h>
 #include "sensor_scheduler.h"
 
-#define ANALYSIS 0
+#define ANALYSIS 1
 
 typedef enum {state_uart_init,
 			  state_tc72_init,
@@ -18,21 +18,25 @@ typedef enum {state_uart_init,
 			  state_acc_read,
 			  state_uart_send
 } SENSOR_STATE;
+
+/* local variables */
 static SENSOR_STATE _state;
+static void (*_callback_function_ptr)(char cfp);
 
 #if ANALYSIS
-#define DELAY_BETWEEN_CHARS 1
+#define DELAY_BETWEEN_CHARS 0
 static int16_t x_axis = 0;
 static int16_t y_axis = 0;
 static int16_t z_axis = 0;
 #endif // ANALYSIS
 
-void scheduler_start(void) {
-#if ANALYSIS
-	_state = state_uart_init;
-#else // ANALYSIS
-	_state = state_tc72_init;
-#endif // ANALYSIS
+void scheduler_start(void (*callback_function_ptr)(char cfp)) {
+	#if ANALYSIS
+		_state = state_uart_init;
+	#else // ANALYSIS
+		_state = state_tc72_init;
+	#endif // ANALYSIS
+	_callback_function_ptr = callback_function_ptr;
 	scheduler_release();
 }
 
@@ -40,7 +44,7 @@ void scheduler_release(void) {
 	switch(_state) {
 		case state_uart_init :
 			_state = state_tc72_init;
-			uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
+			uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_57K6, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _callback_function_ptr);
 			scheduler_release();
 		break;
 

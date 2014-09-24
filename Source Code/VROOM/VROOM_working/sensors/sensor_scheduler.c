@@ -7,7 +7,7 @@
 #include <util/delay.h>
 #include "sensor_scheduler.h"
 
-#define ANALYSIS 1
+#define ANALYSIS 0
 
 typedef enum {state_uart_init,
 			  state_tc72_init,

@@ -16,9 +16,10 @@
 #define ANALYSIS OFF
 
 #define SEND_TO_UART OFF
-#define UART0 ON
+#define UART0 OFF
 #define UART1 OFF
 #define UART_LOOP_BACK OFF
+#define GSM_TEST ON
 
 #define DELAY_BETWEEN_CHARS 1
 
@@ -33,9 +34,10 @@
 #include "hardware_boards/lcd_board/lcd/lcd.h"
 #include "indicators/led_on_plane/lop.h"
 #include "hardware_boards/lcd_board/button_led/btn_led_lcd.h"
+#include "hardware_boards/gsm_gps/gsm.h"
 
-void uart0_callback(char data);
-void uart1_callback(char data);
+void uart0_callback_test(char data);
+void uart1_callback_test(char data);
 
 static char _uart_callback_data[16];
 static uint8_t _index;
@@ -55,22 +57,29 @@ int main(void) {
                         UART_PARITY_DISABLED,
                         UART_ONE_STOP_BIT,
                         UART_8_BIT,
-                        uart0_callback);
+                        uart0_callback_test);
 #endif // UART0
 #if UART1
     uart1_setup_async(	UART_MODE_NORMAL,
-						UART_BAUD_115K2,
+						UART_BAUD_9600,
 						UART_PARITY_DISABLED,
 						UART_ONE_STOP_BIT,
 						UART_8_BIT,
-						uart1_callback);
+						uart1_callback_test);
 #endif // UART1
     lcd_init(LCD_DISP_ON);
     btn_led_lcd_init();
     led_lcd_set(LED_RED, LED_ON);
     lop_init();
-    scheduler_start(uart0_callback);
-
+	#if UART0
+    scheduler_start(uart0_callback_test);
+	#else
+	//scheduler_start(NULL);
+	#endif
+#if GSM_TEST
+	gsm_init();
+	gsm_start();
+#endif
     sei();
 
     const char degree = 0b011011111;
@@ -90,43 +99,36 @@ int main(void) {
 #else // !UNIT_TEST
     while (1) {
 
-        uint8_t SREG_cpy = SREG;
-        cli();
-        temp = get_temperature();
-        x_axis = (int)(acc_get_x_axis() * 1000);
-        y_axis = (int)(acc_get_y_axis() * 1000);
-        z_axis = (int)(acc_get_z_axis() * 1000);
-        SREG = SREG_cpy;
 
-        lcd_clrscr();
-        lcd_gotoxy(0, 0);
-        sprintf(buf, "x %05d", x_axis);
-        lcd_puts(buf);
-
-        lcd_gotoxy(8, 0);
-        sprintf(buf, "y %05d", y_axis);
-        lcd_puts(buf);
-
-        /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN1)) {
-            _listening = !_listening;
-            lop_toggle_led(LOP_YELLOW);
-            while (!btn_lcd_is_pressed(BTN_PIN1));
-        }
-
-        if (_listening) {
-            lcd_gotoxy(0, 1);
-            lcd_puts(_uart_callback_data);
-        } else {
-            lcd_gotoxy(0, 1);
-            sprintf(buf, "z %05d", z_axis);
-            lcd_puts(buf);
-
-            lcd_gotoxy(8, 1);
-            lcd_puts(dtostrf( temp, 2, 2, buf ));
-            lcd_putc(degree);
-            lcd_putc('C');
-        }
+        //lcd_clrscr();
+        //lcd_gotoxy(0, 0);
+        //sprintf(buf, "x %05d", x_axis);
+        //lcd_puts(buf);
+//
+        //lcd_gotoxy(8, 0);
+        //sprintf(buf, "y %05d", y_axis);
+        //lcd_puts(buf);
+//
+        ///* listening for switch press */
+        //if (!btn_lcd_is_pressed(BTN_PIN1)) {
+            //_listening = !_listening;
+            //lop_toggle_led(LOP_YELLOW);
+            //while (!btn_lcd_is_pressed(BTN_PIN1));
+        //}
+//
+        //if (_listening) {
+            //lcd_gotoxy(0, 1);
+            //lcd_puts(_uart_callback_data);
+        //} else {
+            //lcd_gotoxy(0, 1);
+            //sprintf(buf, "z %05d", z_axis);
+            //lcd_puts(buf);
+//
+            //lcd_gotoxy(8, 1);
+            //lcd_puts(dtostrf( temp, 2, 2, buf ));
+            //lcd_putc(degree);
+            //lcd_putc('C');
+        //}
 
 #if SEND_TO_UART
         /* listening for switch press */
@@ -160,13 +162,39 @@ int main(void) {
 	_delay_ms(100);
 #endif // SEND_TO_UART
 
-        _delay_ms(0);
+
+#if GSM_TEST
+        /* listening for switch press */
+        if (!btn_lcd_is_pressed(BTN_PIN0)) {
+			gsm_send(AT_TEST);
+            while (!btn_lcd_is_pressed(BTN_PIN0)) {
+				if (!btn_lcd_is_pressed(BTN_PIN1)) {
+					lcd_clrscr();
+				}
+			}
+        }
+        /* listening for switch press */
+        if (!btn_lcd_is_pressed(BTN_PIN1)) {
+			gsm_send(AT_MODEL_NO);
+            while (!btn_lcd_is_pressed(BTN_PIN1));
+        }
+        /* listening for switch press */
+        if (!btn_lcd_is_pressed(BTN_PIN2)) {
+			gsm_answer();
+            while (!btn_lcd_is_pressed(BTN_PIN2));
+        }
+        /* listening for switch press */
+        if (!btn_lcd_is_pressed(BTN_PIN3)) {
+			gsm_hang_up();
+            while (!btn_lcd_is_pressed(BTN_PIN3));
+        }
+#endif
     }
 #endif // UNIT_TEST
 #endif // ANALYSIS
 }
 #if UART0
-void uart0_callback(char data) {
+void uart0_callback_test(char data) {
 	_listening = true;
     *(_uart_callback_data + (_index++ % 16)) = data;
 	#if UART_LOOP_BACK
@@ -175,7 +203,7 @@ void uart0_callback(char data) {
 }
 #endif // UART0
 #if UART1
-void uart1_callback(char data) {
+void uart1_callback_test(char data) {
     #if UART_LOOP_BACK
     uart1_send_char(data);
     #endif

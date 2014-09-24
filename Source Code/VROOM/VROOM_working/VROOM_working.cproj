@@ -49,8 +49,8 @@
           <JtagInstrBitsAfter>0</JtagInstrBitsAfter>
           <JtagSelectedDeviceIndexInChain>
           </JtagSelectedDeviceIndexInChain>
-          <JtagDbgClock>0</JtagDbgClock>
-          <IspClock>125000</IspClock>
+          <JtagDbgClock>32000</JtagDbgClock>
+          <IspClock>0</IspClock>
         </InterfaceProperties>
         <InterfaceName>ISP</InterfaceName>
       </ToolOptions>
@@ -64,7 +64,7 @@
         <InterfaceProperties>
           <JtagEnableExtResetOnStartSession>false</JtagEnableExtResetOnStartSession>
           <IspClock>125000</IspClock>
-          <JtagDbgClock>523770</JtagDbgClock>
+          <JtagDbgClock>2000000</JtagDbgClock>
         </InterfaceProperties>
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
@@ -151,6 +151,12 @@
     <Compile Include="data_comm\uart\uart.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="hardware_boards\gsm_gps\gsm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="hardware_boards\gsm_gps\gsm.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="hardware_boards\lcd_board\button_led\btn_led_lcd.c">
       <SubType>compile</SubType>
     </Compile>
@@ -220,6 +226,7 @@
     <Folder Include="hardware_boards\lcd_board" />
     <Folder Include="hardware_boards\lcd_board\button_led" />
     <Folder Include="hardware_boards\lcd_board\lcd" />
+    <Folder Include="hardware_boards\gsm_gps" />
     <Folder Include="indicators" />
     <Folder Include="indicators\led_on_plane" />
     <Folder Include="sensors" />

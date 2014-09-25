@@ -169,6 +169,12 @@
     <Compile Include="hardware_boards\lcd_board\lcd\lcd.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="hardware_boards\sim908\sim908_gsm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="hardware_boards\sim908\sim908_gsm.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="indicators\led_on_plane\lop.c">
       <SubType>compile</SubType>
     </Compile>
@@ -224,6 +230,7 @@
     <Folder Include="hardware_boards\lcd_board\button_led" />
     <Folder Include="hardware_boards\lcd_board\lcd" />
     <Folder Include="hardware_boards\gsm_gps" />
+    <Folder Include="hardware_boards\sim908" />
     <Folder Include="indicators" />
     <Folder Include="indicators\led_on_plane" />
     <Folder Include="sensors" />

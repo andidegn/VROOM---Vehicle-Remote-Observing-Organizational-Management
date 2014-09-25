@@ -225,5 +225,9 @@ namespace TestTerminal {
             cbb_com_port.Enabled = true;
             btn_connect.Text = "Connect";
         }
+
+        private void btn_clear_Click(object sender, EventArgs e) {
+            rtb_terminal.Clear();
+        }
     }
 }

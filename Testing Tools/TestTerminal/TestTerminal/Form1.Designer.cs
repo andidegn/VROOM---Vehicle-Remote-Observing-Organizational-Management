@@ -55,6 +55,7 @@
             this.rtb_terminal = new System.Windows.Forms.RichTextBox();
             this.cbb_com_port = new System.Windows.Forms.ComboBox();
             this.lbl_com_port = new System.Windows.Forms.Label();
+            this.btn_clear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.gb_connection.SuspendLayout();
             this.gb_text_sms.SuspendLayout();
@@ -70,6 +71,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btn_clear);
             this.panel1.Controls.Add(this.gb_connection);
             this.panel1.Controls.Add(this.btn_error_report);
             this.panel1.Controls.Add(this.gb_text_sms);
@@ -368,7 +370,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbx_send.Location = new System.Drawing.Point(6, 546);
             this.tbx_send.Name = "tbx_send";
-            this.tbx_send.Size = new System.Drawing.Size(377, 20);
+            this.tbx_send.Size = new System.Drawing.Size(295, 20);
             this.tbx_send.TabIndex = 3;
             this.tbx_send.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbx_send_KeyDown);
             // 
@@ -399,6 +401,17 @@
             this.lbl_com_port.Size = new System.Drawing.Size(26, 13);
             this.lbl_com_port.TabIndex = 0;
             this.lbl_com_port.Text = "Port";
+            // 
+            // btn_clear
+            // 
+            this.btn_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_clear.Location = new System.Drawing.Point(308, 543);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(75, 23);
+            this.btn_clear.TabIndex = 19;
+            this.btn_clear.Text = "Clear";
+            this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
             // Form1
             // 
@@ -459,6 +472,7 @@
         private System.Windows.Forms.Button btn_error_report;
         private System.Windows.Forms.GroupBox gb_connection;
         private System.Windows.Forms.Button btn_network_reg_status;
+        private System.Windows.Forms.Button btn_clear;
 
     }
 }

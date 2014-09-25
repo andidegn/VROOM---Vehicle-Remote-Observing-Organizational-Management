@@ -15,6 +15,9 @@
 void _SIM908_callback(char data);
 void _pin_state(uint8_t driver_pin, uint8_t state);
 
+void u0_callback(char c);
+void u1_callback(char c);
+
 static char _sim908_buffer[128];
 static uint16_t _index;
 
@@ -29,6 +32,13 @@ static uint16_t _index;
 
 void SIM908_init(void)
 {
+	/* setting up uart for communication with the module */
+	//uart0_setup_async(UART_MODE_NORMAL, UART_BAUD_9600, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, u0_callback);
+	//uart0_send_string("UART running...");
+
+	/* setting up uart for communication with pc for diag */
+	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, u1_callback);
+
 	// Init the driver pins for GSM function
 	DDRE |= _BV(DDE5) | _BV(DDE3);
 	DDRG |= _BV(DDG5);
@@ -41,10 +51,12 @@ void SIM908_init(void)
 	PORTE &= ~_BV(GSM_DRIVER_PIN_5);	
 	
 
-	_delay_ms(1500);
+	_delay_ms(2000);
 	//	enable GSM TX?RX
 	PORTE |= _BV(GSM_DRIVER_PIN_4);
 	PORTG &= ~_BV(GSM_DRIVER_PIN_3);
+
+	
 	
 	//_pin_state(GSM_DRIVER_PIN_3, LOW);
 		//disable GPS TX?RX
@@ -123,4 +135,14 @@ void _SIM908_callback(char data)
 //	uart0_send_char(data);
 	//uart0_send_string("\n\r");
 	//uart0_send_string("\n\r", 2);
+}
+
+/* callbacks */
+void u0_callback(char c) {
+
+	uart1_send_char(c);
+}
+
+void u1_callback(char c) {
+	uart0_send_char(c);
 }

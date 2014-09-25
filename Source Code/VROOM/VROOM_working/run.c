@@ -24,8 +24,6 @@
 #define DELAY_BETWEEN_CHARS 1
 
 #include <avr/io.h>
-#include <stdlib.h>
-#include <avr/interrupt.h>
 #include <util/delay.h>
 #include "sensors/tc72/tc72.h"
 #include "sensors/accelerometer/accelerometer.h"
@@ -207,4 +205,4 @@ void uart1_callback_test(char data) {
     uart1_send_char(data);
     #endif
 }
-#endif // UART1
+}

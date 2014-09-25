@@ -156,4 +156,11 @@ $RECYCLE.BIN/
 .DS_Store
 
 # Atmel Studio _debug files
-Debug/
+*.d
+*.o
+*.elf
+*.eep
+*.hex
+*.lss
+*.map
+*.srec

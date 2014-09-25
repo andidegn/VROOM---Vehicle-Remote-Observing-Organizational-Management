@@ -37,7 +37,7 @@ void SIM908_init(void)
 	//uart0_send_string("UART running...");
 
 	/* setting up uart for communication with pc for diag */
-	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, u1_callback);
+//	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, u1_callback);
 
 	// Init the driver pins for GSM function
 	DDRE |= _BV(DDE5) | _BV(DDE3);

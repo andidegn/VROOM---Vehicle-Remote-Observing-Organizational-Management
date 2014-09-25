@@ -25,14 +25,20 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lbl_signal_strength = new System.Windows.Forms.Label();
+            this.gb_connection = new System.Windows.Forms.GroupBox();
+            this.btn_network_reg_status = new System.Windows.Forms.Button();
             this.btn_signal_strength = new System.Windows.Forms.Button();
+            this.lbl_signal_strength = new System.Windows.Forms.Label();
+            this.btn_error_report = new System.Windows.Forms.Button();
             this.gb_text_sms = new System.Windows.Forms.GroupBox();
             this.btn_send_msg = new System.Windows.Forms.Button();
             this.btn_read_msg = new System.Windows.Forms.Button();
             this.nud_msg = new System.Windows.Forms.NumericUpDown();
             this.btn_delete_all_msg = new System.Windows.Forms.Button();
             this.gb_call = new System.Windows.Forms.GroupBox();
+            this.btn_set_ring_tone = new System.Windows.Forms.Button();
+            this.nud_ring_tone = new System.Windows.Forms.NumericUpDown();
+            this.lbl_ring_tone = new System.Windows.Forms.Label();
             this.btn_set_speaker_volume = new System.Windows.Forms.Button();
             this.btn_set_ringer_volume = new System.Windows.Forms.Button();
             this.lbl_speaker_vol = new System.Windows.Forms.Label();
@@ -49,20 +55,14 @@
             this.rtb_terminal = new System.Windows.Forms.RichTextBox();
             this.cbb_com_port = new System.Windows.Forms.ComboBox();
             this.lbl_com_port = new System.Windows.Forms.Label();
-            this.lbl_ring_tone = new System.Windows.Forms.Label();
-            this.nud_ring_tone = new System.Windows.Forms.NumericUpDown();
-            this.btn_set_ring_tone = new System.Windows.Forms.Button();
-            this.btn_error_report = new System.Windows.Forms.Button();
-            this.gb_connection = new System.Windows.Forms.GroupBox();
-            this.btn_network_reg_status = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.gb_connection.SuspendLayout();
             this.gb_text_sms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_msg)).BeginInit();
             this.gb_call.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_ring_tone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_speaker_volume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_ringer_volume)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_ring_tone)).BeginInit();
-            this.gb_connection.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -88,14 +88,28 @@
             this.panel1.Size = new System.Drawing.Size(552, 569);
             this.panel1.TabIndex = 0;
             // 
-            // lbl_signal_strength
+            // gb_connection
             // 
-            this.lbl_signal_strength.AutoSize = true;
-            this.lbl_signal_strength.Location = new System.Drawing.Point(88, 24);
-            this.lbl_signal_strength.Name = "lbl_signal_strength";
-            this.lbl_signal_strength.Size = new System.Drawing.Size(13, 13);
-            this.lbl_signal_strength.TabIndex = 16;
-            this.lbl_signal_strength.Text = "0";
+            this.gb_connection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_connection.Controls.Add(this.btn_network_reg_status);
+            this.gb_connection.Controls.Add(this.btn_signal_strength);
+            this.gb_connection.Controls.Add(this.lbl_signal_strength);
+            this.gb_connection.Location = new System.Drawing.Point(389, 6);
+            this.gb_connection.Name = "gb_connection";
+            this.gb_connection.Size = new System.Drawing.Size(160, 118);
+            this.gb_connection.TabIndex = 18;
+            this.gb_connection.TabStop = false;
+            this.gb_connection.Text = "Connection";
+            // 
+            // btn_network_reg_status
+            // 
+            this.btn_network_reg_status.Location = new System.Drawing.Point(6, 48);
+            this.btn_network_reg_status.Name = "btn_network_reg_status";
+            this.btn_network_reg_status.Size = new System.Drawing.Size(75, 23);
+            this.btn_network_reg_status.TabIndex = 17;
+            this.btn_network_reg_status.Text = "Status";
+            this.btn_network_reg_status.UseVisualStyleBackColor = true;
+            this.btn_network_reg_status.Click += new System.EventHandler(this.btn_network_reg_status_Click);
             // 
             // btn_signal_strength
             // 
@@ -106,6 +120,26 @@
             this.btn_signal_strength.Text = "Signal Strength";
             this.btn_signal_strength.UseVisualStyleBackColor = true;
             this.btn_signal_strength.Click += new System.EventHandler(this.btn_signal_strength_Click);
+            // 
+            // lbl_signal_strength
+            // 
+            this.lbl_signal_strength.AutoSize = true;
+            this.lbl_signal_strength.Location = new System.Drawing.Point(88, 24);
+            this.lbl_signal_strength.Name = "lbl_signal_strength";
+            this.lbl_signal_strength.Size = new System.Drawing.Size(13, 13);
+            this.lbl_signal_strength.TabIndex = 16;
+            this.lbl_signal_strength.Text = "0";
+            // 
+            // btn_error_report
+            // 
+            this.btn_error_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_error_report.Location = new System.Drawing.Point(470, 543);
+            this.btn_error_report.Name = "btn_error_report";
+            this.btn_error_report.Size = new System.Drawing.Size(75, 23);
+            this.btn_error_report.TabIndex = 17;
+            this.btn_error_report.Text = "Error Report";
+            this.btn_error_report.UseVisualStyleBackColor = true;
+            this.btn_error_report.Click += new System.EventHandler(this.btn_error_report_Click);
             // 
             // gb_text_sms
             // 
@@ -177,6 +211,38 @@
             this.gb_call.TabIndex = 13;
             this.gb_call.TabStop = false;
             this.gb_call.Text = "Call";
+            // 
+            // btn_set_ring_tone
+            // 
+            this.btn_set_ring_tone.Location = new System.Drawing.Point(116, 95);
+            this.btn_set_ring_tone.Name = "btn_set_ring_tone";
+            this.btn_set_ring_tone.Size = new System.Drawing.Size(38, 23);
+            this.btn_set_ring_tone.TabIndex = 17;
+            this.btn_set_ring_tone.Text = "Set";
+            this.btn_set_ring_tone.UseVisualStyleBackColor = true;
+            this.btn_set_ring_tone.Click += new System.EventHandler(this.btn_set_ring_tone_Click);
+            // 
+            // nud_ring_tone
+            // 
+            this.nud_ring_tone.Location = new System.Drawing.Point(74, 98);
+            this.nud_ring_tone.Maximum = new decimal(new int[] {
+            19,
+            0,
+            0,
+            0});
+            this.nud_ring_tone.Name = "nud_ring_tone";
+            this.nud_ring_tone.Size = new System.Drawing.Size(36, 20);
+            this.nud_ring_tone.TabIndex = 16;
+            this.nud_ring_tone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nud_ring_tone_MouseDoubleClick);
+            // 
+            // lbl_ring_tone
+            // 
+            this.lbl_ring_tone.AutoSize = true;
+            this.lbl_ring_tone.Location = new System.Drawing.Point(6, 100);
+            this.lbl_ring_tone.Name = "lbl_ring_tone";
+            this.lbl_ring_tone.Size = new System.Drawing.Size(57, 13);
+            this.lbl_ring_tone.TabIndex = 15;
+            this.lbl_ring_tone.Text = "Ring Tone";
             // 
             // btn_set_speaker_volume
             // 
@@ -334,72 +400,6 @@
             this.lbl_com_port.TabIndex = 0;
             this.lbl_com_port.Text = "Port";
             // 
-            // lbl_ring_tone
-            // 
-            this.lbl_ring_tone.AutoSize = true;
-            this.lbl_ring_tone.Location = new System.Drawing.Point(6, 100);
-            this.lbl_ring_tone.Name = "lbl_ring_tone";
-            this.lbl_ring_tone.Size = new System.Drawing.Size(57, 13);
-            this.lbl_ring_tone.TabIndex = 15;
-            this.lbl_ring_tone.Text = "Ring Tone";
-            // 
-            // nud_ring_tone
-            // 
-            this.nud_ring_tone.Location = new System.Drawing.Point(74, 98);
-            this.nud_ring_tone.Maximum = new decimal(new int[] {
-            19,
-            0,
-            0,
-            0});
-            this.nud_ring_tone.Name = "nud_ring_tone";
-            this.nud_ring_tone.Size = new System.Drawing.Size(36, 20);
-            this.nud_ring_tone.TabIndex = 16;
-            this.nud_ring_tone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nud_ring_tone_MouseDoubleClick);
-            // 
-            // btn_set_ring_tone
-            // 
-            this.btn_set_ring_tone.Location = new System.Drawing.Point(116, 95);
-            this.btn_set_ring_tone.Name = "btn_set_ring_tone";
-            this.btn_set_ring_tone.Size = new System.Drawing.Size(38, 23);
-            this.btn_set_ring_tone.TabIndex = 17;
-            this.btn_set_ring_tone.Text = "Set";
-            this.btn_set_ring_tone.UseVisualStyleBackColor = true;
-            this.btn_set_ring_tone.Click += new System.EventHandler(this.btn_set_ring_tone_Click);
-            // 
-            // btn_error_report
-            // 
-            this.btn_error_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_error_report.Location = new System.Drawing.Point(470, 543);
-            this.btn_error_report.Name = "btn_error_report";
-            this.btn_error_report.Size = new System.Drawing.Size(75, 23);
-            this.btn_error_report.TabIndex = 17;
-            this.btn_error_report.Text = "Error Report";
-            this.btn_error_report.UseVisualStyleBackColor = true;
-            this.btn_error_report.Click += new System.EventHandler(this.btn_error_report_Click);
-            // 
-            // gb_connection
-            // 
-            this.gb_connection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.gb_connection.Controls.Add(this.btn_network_reg_status);
-            this.gb_connection.Controls.Add(this.btn_signal_strength);
-            this.gb_connection.Controls.Add(this.lbl_signal_strength);
-            this.gb_connection.Location = new System.Drawing.Point(389, 6);
-            this.gb_connection.Name = "gb_connection";
-            this.gb_connection.Size = new System.Drawing.Size(160, 118);
-            this.gb_connection.TabIndex = 18;
-            this.gb_connection.TabStop = false;
-            this.gb_connection.Text = "Connection";
-            // 
-            // btn_network_reg_status
-            // 
-            this.btn_network_reg_status.Location = new System.Drawing.Point(6, 48);
-            this.btn_network_reg_status.Name = "btn_network_reg_status";
-            this.btn_network_reg_status.Size = new System.Drawing.Size(75, 23);
-            this.btn_network_reg_status.TabIndex = 17;
-            this.btn_network_reg_status.Text = "Status";
-            this.btn_network_reg_status.UseVisualStyleBackColor = true;
-            this.btn_network_reg_status.Click += new System.EventHandler(this.btn_network_reg_status_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -413,15 +413,15 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.gb_connection.ResumeLayout(false);
+            this.gb_connection.PerformLayout();
             this.gb_text_sms.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nud_msg)).EndInit();
             this.gb_call.ResumeLayout(false);
             this.gb_call.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_ring_tone)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_speaker_volume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_ringer_volume)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_ring_tone)).EndInit();
-            this.gb_connection.ResumeLayout(false);
-            this.gb_connection.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -76,10 +76,10 @@ void gsm_hang_up(void) {
 
 /* callbacks */
 void uart0_callback(char c) {
-	uart1_send_char(c);
 	#if LOOP_TO_PC
-	lcd_putc(c);
+	uart1_send_char(c);
 	#endif
+	lcd_putc(c == '\r'? '\n': c);
 }
 
 #if LOOP_TO_PC

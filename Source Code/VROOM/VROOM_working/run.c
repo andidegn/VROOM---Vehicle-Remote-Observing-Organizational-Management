@@ -74,7 +74,7 @@ int main(void) {
 	#if UART0
     scheduler_start(uart0_callback_test);
 	#else
-	//scheduler_start(NULL);
+	scheduler_start(NULL);
 	#endif
 #if GSM_TEST
 	gsm_init();
@@ -102,26 +102,26 @@ int main(void) {
 #if GSM_TEST
         /* listening for switch press */
         if (!btn_lcd_is_pressed(BTN_PIN0)) {
-            while (!btn_lcd_is_pressed(BTN_PIN0)) {
-				if (!btn_lcd_is_pressed(BTN_PIN1)) {
-					lcd_clrscr();
-				}
-			}
-			gsm_send(AT_DIAG_TEST);
+            while (!btn_lcd_is_pressed(BTN_PIN0));
+			lcd_clrscr();
+			gsm_send(AT_CONN_SIGNAL_STRENGTH);
         }
         /* listening for switch press */
         if (!btn_lcd_is_pressed(BTN_PIN1)) {
             while (!btn_lcd_is_pressed(BTN_PIN1));
-			gsm_send(AT_DIAG_MODEL_NO);
+            lcd_clrscr();
+			gsm_send(AT_CONN_NETWORK_REGISTRATION_STATUS);
         }
         /* listening for switch press */
         if (!btn_lcd_is_pressed(BTN_PIN2)) {
             while (!btn_lcd_is_pressed(BTN_PIN2));
+            lcd_clrscr();
 			gsm_answer();
         }
         /* listening for switch press */
         if (!btn_lcd_is_pressed(BTN_PIN3)) {
             while (!btn_lcd_is_pressed(BTN_PIN3));
+            lcd_clrscr();
 			gsm_hang_up();
         }
 #else // GSM_TEST

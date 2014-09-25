@@ -175,9 +175,6 @@
     <Compile Include="indicators\led_on_plane\lop.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="LiquidCrystal.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="run.c">
       <SubType>compile</SubType>
     </Compile>
@@ -233,11 +230,6 @@
     <Folder Include="sensors\ab_encoder" />
     <Folder Include="sensors\accelerometer" />
     <Folder Include="sensors\tc72" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LiquidCrystal.cpp">
-      <SubType>compile</SubType>
-    </None>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

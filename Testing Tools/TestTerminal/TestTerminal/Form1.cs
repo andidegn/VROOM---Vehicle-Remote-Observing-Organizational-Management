@@ -150,8 +150,8 @@ namespace TestTerminal {
             btn_read_msg.BackColor = default(Color);
         }
 
-        private void btn_delete_all_msg_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_MSG_DEL_ALL);
+        private void btn_delete_msg_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_MSG_DEL + nud_msg.Value + AT_commands.AT_MSG_DEL_END);
         }
 
         private void btn_ctrl_z_Click(object sender, EventArgs e) {
@@ -202,6 +202,39 @@ namespace TestTerminal {
             _send_to_com(AT_commands.AT_CONN_NETWORK_REGISTRATION_STATUS);
         }
 
+        private void btn_clear_Click(object sender, EventArgs e) {
+            rtb_terminal.Clear();
+        }
+
+        private void btn_gps_pwr_Click(object sender, EventArgs e) {
+            Button b = sender as Button;
+            if (b.Text == "Off") {
+                _send_to_com(AT_commands.AT_GPS_POWER_ON);
+                b.BackColor = Color.DarkSeaGreen;
+                b.Text = "On";
+            } else if ((sender as Button).Text == "On") {
+                _send_to_com(AT_commands.AT_GPS_POWER_OFF);
+                b.BackColor = Color.Red;
+                b.Text = "Off";
+            }
+        }
+
+        private void btn_gps_status_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_GPS_GET_STATUS);
+        }
+
+        private void btn_gps_cold_rst_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_GPS_RST_COLD);
+        }
+
+        private void btn_gps_get_location_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_GPS_GET_LOCATION);
+        }
+
+        private void btn_exit_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
         private void tbx_send_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
                 e.Handled = true;
@@ -213,11 +246,6 @@ namespace TestTerminal {
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
-            _save_settings();
-        }
-        #endregion
-
         private void cbb_baud_rate_SelectedIndexChanged(object sender, EventArgs e) {
             if (_port != null) {
                 _port.Dispose();
@@ -226,8 +254,9 @@ namespace TestTerminal {
             btn_connect.Text = "Connect";
         }
 
-        private void btn_clear_Click(object sender, EventArgs e) {
-            rtb_terminal.Clear();
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+            _save_settings();
         }
+        #endregion
     }
 }

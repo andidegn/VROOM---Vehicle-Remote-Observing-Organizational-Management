@@ -15,6 +15,8 @@ namespace AMD.Util.terminal {
 
         #region message
         public const String AT_MSG_READ = "AT+CMGR="; // Add number in end to select msg to read
+        public const String AT_MSG_DEL = "AT+CMGD="; // Add number and add "AT_MSG_DEL_END after that
+        public const String AT_MSG_DEL_END = ",0";
         public const String AT_MSG_DEL_ALL = "AT+CMGD=1,4";
         public const String AT_MSG_FORMAT = "AT+CMGF ="; // Add number
         public const String AT_MSG_SEND = "AT+CMGS\"";
@@ -39,6 +41,17 @@ namespace AMD.Util.terminal {
         public const String AT_CONN_SIGNAL_STRENGTH = "AT+CSQ";
         public const String AT_CONN_ATTACH_STATUS = "AT+CGATT?";
         public const String AT_CONN_NETWORK_REGISTRATION_STATUS = "AT+CREG?";
+        #endregion
+
+        #region GPS
+        public const String AT_GPS_POWER_STATE = "AT+CGPSPWR?";
+        public const String AT_GPS_POWER_ON = "AT+CGPSPWR=1";
+        public const String AT_GPS_POWER_OFF = "AT+CGPSPWR=0";
+        public const String AT_GPS_RST_MODE = "AT+CGPSRST?";
+        public const String AT_GPS_RST_COLD = "AT+CGPSRST=0";
+        public const String AT_GPS_RST_AUTONOMY = "AT+CGPSRST=1";
+        public const String AT_GPS_GET_LOCATION = "AT+CGPSINF=0"; // Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course >
+        public const String AT_GPS_GET_STATUS = "AT+CGPSSTATUS?";
         #endregion
     }
 }

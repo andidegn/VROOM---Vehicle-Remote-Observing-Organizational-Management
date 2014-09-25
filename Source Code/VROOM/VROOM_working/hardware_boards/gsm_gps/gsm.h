@@ -44,6 +44,15 @@
 #define AT_CONN_ATTACH_STATUS "AT+CGATT?"
 #define AT_CONN_NETWORK_REGISTRATION_STATUS "AT+CREG?"
 
+/* GPS */
+#define AT_GPS_POWER_STATE "AT+CGPSPWR?"
+#define AT_GPS_POWER_ON "AT+CGPSPWR=1"
+#define AT_GPS_POWER_OFF "AT+CGPSPWR=0"
+#define AT_GPS_RST_MODE "AT+CGPSRST?"
+#define AT_GPS_RST_COLD "AT+CGPSRST=0"
+#define AT_GPS_RST_AUTONOMY "AT+CGPSRST=1"
+#define AT_GPS_GET_LOCATION "AT+CGPSINF=0" // Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course >
+#define AT_GPS_GET_STATUS "AT+CGPSSTATUS?"
 /* EOL */
 #define AT_EOL '\r'
 /* CTRL+Z */

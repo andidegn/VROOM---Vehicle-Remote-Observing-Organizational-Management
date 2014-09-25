@@ -30,7 +30,7 @@ void gsm_init(void) {
 	DDR(GSM_PORT) |= _BV(GSM_GSM_ENABLE_PIN) | _BV(GSM_GPS_ENABLE_PIN) | _BV(GSM_MODULE_START_PIN);
 
 	/* setting up uart for communication with the module */
-	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_9600, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, uart0_callback);
+	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, uart0_callback);
 
 	#if LOOP_TO_PC
 	/* setting up uart for communication with pc for diag */
@@ -46,10 +46,8 @@ void gsm_init(void) {
 }
 
 void gsm_start(void) {
-	GPS_DISABLE;
 	GSM_ENABLE;
-	_delay_ms(2000);
-	gsm_send(AT_DIAG_TEST);
+	GPS_DISABLE;
 }
 
 void gsm_send(const char *command) {

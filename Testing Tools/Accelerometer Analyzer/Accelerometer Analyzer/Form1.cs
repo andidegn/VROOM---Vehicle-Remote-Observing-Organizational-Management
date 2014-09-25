@@ -238,6 +238,7 @@ namespace Accelerometer_Analyzer {
             while ((line = sr.ReadLine()) != null) {
                 process_data(_get_vector_from_csv(line));
             }
+            sr.Dispose();
             _chart_visible(true);
             _set_title(this.Text + " - END OF FILE!");
             _zoom_trigger();
@@ -258,7 +259,6 @@ namespace Accelerometer_Analyzer {
 
         private bool _write_to_file(bool save_as) {
             if (_readingIndex > 0) {
-                StreamWriter file_formatted = null;
                 String current_dir = Directory.GetCurrentDirectory() + "\\";
                 String path = "Reading byte " + _start_time.ToString(_DateTime_format) + ".npp";
 
@@ -279,11 +279,12 @@ namespace Accelerometer_Analyzer {
                 }
 
                 _file_path = path;
-                file_formatted = new StreamWriter(path, false);
-                foreach (var v in _received_vectors) {
-                    try { file_formatted.Write(v.x + "," + v.y + "," + v.z + "," + "\n"); } catch { }
+                using (StreamWriter file_formatted = new StreamWriter(path, false)) {
+                    foreach (var v in _received_vectors) {
+                        try { file_formatted.Write(v.x + "," + v.y + "," + v.z + "," + "\n"); } catch { }
+                    }
+                    file_formatted.Close();
                 }
-                file_formatted.Close();
                 _readingIndex = 0;
                 _received_data.Clear();
                 _received_vectors.Clear();
@@ -426,12 +427,14 @@ namespace Accelerometer_Analyzer {
                     t.IsBackground = true;
                     t.Start();
                 }
+                
             }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
             try {
-                _port.Close();
+                //_port.Close();
+                _port.Dispose();
                 chart1.BorderlineColor = Color.Black;
             } catch { }
             _start_reading = false;

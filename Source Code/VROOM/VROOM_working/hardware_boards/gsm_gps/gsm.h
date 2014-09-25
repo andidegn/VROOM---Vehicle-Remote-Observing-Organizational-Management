@@ -15,21 +15,28 @@
 #define GSM_MODULE_START_PIN 5
 
 /* call */
-#define AT_ANSWER "ATA"
-#define AT_HANG_UP "ATH"
-#define AT_DIAL "ATD"
-#define AT_SHOW_NUM "AT+CNUM"
+#define AT_CALL_ANSWER "ATA"
+#define AT_CALL_HANG_UP "ATH"
+#define AT_CALL_DIAL "ATD"
+#define AT_CALL_SHOW_NUM "AT+CNUM"
+
+/* msg */
+#define AT_MSG_READ = "AT+CMGR=" // Add number in end to select msg to read
+#define AT_MSG_DEL_ALL = "AT+CMGD=1,4"
 
 /* diagnostics */
-#define AT_TEST "AT"
-#define AT_MODEL_NO "AT+CGMM"
-#define AT_MANUFACTURER "AT+CGMI"
+#define AT_DIAG_TEST "AT"
+#define AT_DIAG_MODEL_NO "AT+CGMM"
+#define AT_DIAG_MANUFACTURER "AT+CGMI"
 
 /* connection */
-#define AT_ATTACH_STATUS "AT+CGATT?"
+#define AT_CONN_SIGNAL_STRENGTH "AT+CSQ"
+#define AT_CONN_ATTACH_STATUS "AT+CGATT?"
 
 /* EOL */
 #define AT_EOL '\r'
+/* CTRL+Z */
+#define AT_CTRL_Z 26
 
 void gsm_init(void);
 void gsm_start(void);

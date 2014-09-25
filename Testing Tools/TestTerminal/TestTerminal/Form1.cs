@@ -27,6 +27,7 @@ namespace TestTerminal {
         private void _init_rest() {
             _update_com();
             cbb_baud_rate.DataSource = BaudRateList.getInstance().getArray();
+            tbx_send.Multiline = false;
             _load_settings();
         }
 
@@ -53,6 +54,9 @@ namespace TestTerminal {
         }
 
         private void _send_to_com(String s) {
+            if (_port == null || !_port.IsOpen) {
+                _connect_to_serial();
+            }
             try {
                 _port.WriteLine(s + Environment.NewLine);
             } catch {}
@@ -85,8 +89,15 @@ namespace TestTerminal {
             }
             rtb_terminal.AppendText(p);
             rtb_terminal.ScrollToCaret();
+
             if (p.Contains("RING")) {
                 btn_answer.BackColor = Color.Green;
+            } else if (p.Contains("+CMTI:")) {
+                btn_read_msg.BackColor = Color.Green;
+            } else if (p.Contains("+CSQ:")) {
+                lbl_signal_strength.Text = (p.Substring(p.IndexOf(' ') + 1, 4));
+            } else if (p == "OK\r" || p == "ERROR\r") {
+                rtb_terminal.AppendText("=========================\n");
             }
         }
         #endregion
@@ -103,10 +114,17 @@ namespace TestTerminal {
         }
 
         private void btn_connect_Click(object sender, EventArgs e) {
-            if (_connect_to_serial()) {
-                cbb_com_port.Enabled = false;
-            } else {
-                MessageBox.Show("Error opening port", "Connection error");
+            if ((sender as Button).Text == "Connect") {
+                if (_connect_to_serial()) {
+                    cbb_com_port.Enabled = false;
+                    (sender as Button).Text = "Disconnect";
+                } else {
+                    MessageBox.Show("Error opening port", "Connection error");
+                }
+            } else if ((sender as Button).Text == "Disconnect") {
+                cbb_com_port.Enabled = true;
+                _port.Dispose();
+                (sender as Button).Text = "Connect";
             }
         }
 
@@ -116,29 +134,81 @@ namespace TestTerminal {
 
         private void btn_answer_Click(object sender, EventArgs e) {
             if (btn_answer.Text == "Answer") {
-                _send_to_com(AT_commands.AT_ANSWER);
+                _send_to_com(AT_commands.AT_CALL_ANSWER);
                 btn_answer.Text = "Hang Up";
                 btn_answer.BackColor = Color.Red;
             } else if (btn_answer.Text == "Hang Up") {
-                _send_to_com(AT_commands.AT_HANG_UP);
+                _send_to_com(AT_commands.AT_CALL_HANG_UP);
                 btn_answer.Text = "Answer";
                 btn_answer.BackColor = default(Color);
             }
 
         }
 
+        private void btn_read_msg_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_MSG_READ + nud_msg.Value);
+            btn_read_msg.BackColor = default(Color);
+        }
+
+        private void btn_delete_all_msg_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_MSG_DEL_ALL);
+        }
+
+        private void btn_ctrl_z_Click(object sender, EventArgs e) {
+            if (_port == null || !_port.IsOpen) {
+                _connect_to_serial();
+            }
+            _port.WriteLine(((char)26).ToString());
+        }
+
+        private void btn_signal_strength_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_CONN_SIGNAL_STRENGTH);
+        }
+
+        private void btn_send_msg_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_MSG_FORMAT + "1");
+            _send_to_com(AT_commands.AT_MSG_SEND + tbx_send.Text + "\"");
+        }
+
+        private void btn_set_ringer_volume_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_AUDIO_SET_RINGER_VOLUME + nud_ringer_volume.Value);
+        }
+
+        private void btn_set_speaker_volume_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_AUDIO_SET_SPEAKER_VOLUME + nud_speaker_volume.Value);
+        }
+
+        private void nud_ringer_volume_MouseDoubleClick(object sender, MouseEventArgs e) {
+            _send_to_com(AT_commands.AT_AUDIO_GET_RINGER_VOLUME);
+        }
+
+        private void nud_speaker_volume_MouseDoubleClick(object sender, MouseEventArgs e) {
+            _send_to_com(AT_commands.AT_AUDIO_GET_SPEAKER_VOLUME);
+        }
+
+        private void nud_ring_tone_MouseDoubleClick(object sender, MouseEventArgs e) {
+            _send_to_com(AT_commands.AT_AUDIO_GET_CURRENT_ALERT_SOUND);
+        }
+
+        private void btn_set_ring_tone_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_AUDIO_SET_CURRENT_ALERT_SOUND + nud_ring_tone.Value);
+        }
+
+        private void btn_error_report_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_DIAG_GET_ERROR_REPORT);
+        }
+
+        private void btn_network_reg_status_Click(object sender, EventArgs e) {
+            _send_to_com(AT_commands.AT_CONN_NETWORK_REGISTRATION_STATUS);
+        }
+
         private void tbx_send_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
                 e.Handled = true;
-                if (_port == null || !_port.IsOpen) {
-                    _connect_to_serial();
-                }
-                if (_port.IsOpen && tbx_send.Text.Length > 0) {
-                    try {
-                        _send_to_com(tbx_send.Text);
-                    } catch (Exception) {
-                        throw;
-                    }
+                if (tbx_send.Text == "exit") {
+                    Application.Exit();
+                } else {
+                    _send_to_com(tbx_send.Text);
                 }
             }
         }
@@ -148,11 +218,12 @@ namespace TestTerminal {
         }
         #endregion
 
-        private void btn_ctrl_z_Click(object sender, EventArgs e) {
-            if (_port == null || !_port.IsOpen) {
-                _connect_to_serial();
+        private void cbb_baud_rate_SelectedIndexChanged(object sender, EventArgs e) {
+            if (_port != null) {
+                _port.Dispose();
             }
-            _port.WriteLine(((char)26).ToString());
+            cbb_com_port.Enabled = true;
+            btn_connect.Text = "Connect";
         }
     }
 }

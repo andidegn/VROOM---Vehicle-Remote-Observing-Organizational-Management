@@ -61,7 +61,7 @@ int main(void) {
 #endif // UART0
 #if UART1
     uart1_setup_async(	UART_MODE_NORMAL,
-						UART_BAUD_9600,
+						UART_BAUD_115K2,
 						UART_PARITY_DISABLED,
 						UART_ONE_STOP_BIT,
 						UART_8_BIT,
@@ -80,7 +80,6 @@ int main(void) {
 	gsm_init();
 	gsm_start();
 #endif
-    sei();
 
     const char degree = 0b011011111;
     int x_axis, y_axis, z_axis;
@@ -97,38 +96,65 @@ int main(void) {
     lcd_puts("Tests run: ");
     lcd_puts(itoa(tests_run, buf, 10));
 #else // !UNIT_TEST
+	sei();
     while (1) {
 
+#if GSM_TEST
+        /* listening for switch press */
+        if (!btn_lcd_is_pressed(BTN_PIN0)) {
+            while (!btn_lcd_is_pressed(BTN_PIN0)) {
+				if (!btn_lcd_is_pressed(BTN_PIN1)) {
+					lcd_clrscr();
+				}
+			}
+			gsm_send(AT_DIAG_TEST);
+        }
+        /* listening for switch press */
+        if (!btn_lcd_is_pressed(BTN_PIN1)) {
+            while (!btn_lcd_is_pressed(BTN_PIN1));
+			gsm_send(AT_DIAG_MODEL_NO);
+        }
+        /* listening for switch press */
+        if (!btn_lcd_is_pressed(BTN_PIN2)) {
+            while (!btn_lcd_is_pressed(BTN_PIN2));
+			gsm_answer();
+        }
+        /* listening for switch press */
+        if (!btn_lcd_is_pressed(BTN_PIN3)) {
+            while (!btn_lcd_is_pressed(BTN_PIN3));
+			gsm_hang_up();
+        }
+#else // GSM_TEST
 
-        //lcd_clrscr();
-        //lcd_gotoxy(0, 0);
-        //sprintf(buf, "x %05d", x_axis);
-        //lcd_puts(buf);
-//
-        //lcd_gotoxy(8, 0);
-        //sprintf(buf, "y %05d", y_axis);
-        //lcd_puts(buf);
-//
-        ///* listening for switch press */
-        //if (!btn_lcd_is_pressed(BTN_PIN1)) {
-            //_listening = !_listening;
-            //lop_toggle_led(LOP_YELLOW);
-            //while (!btn_lcd_is_pressed(BTN_PIN1));
-        //}
-//
-        //if (_listening) {
-            //lcd_gotoxy(0, 1);
-            //lcd_puts(_uart_callback_data);
-        //} else {
-            //lcd_gotoxy(0, 1);
-            //sprintf(buf, "z %05d", z_axis);
-            //lcd_puts(buf);
-//
-            //lcd_gotoxy(8, 1);
-            //lcd_puts(dtostrf( temp, 2, 2, buf ));
-            //lcd_putc(degree);
-            //lcd_putc('C');
-        //}
+        lcd_clrscr();
+        lcd_gotoxy(0, 0);
+        sprintf(buf, "x %05d", x_axis);
+        lcd_puts(buf);
+
+        lcd_gotoxy(8, 0);
+        sprintf(buf, "y %05d", y_axis);
+        lcd_puts(buf);
+
+        /* listening for switch press */
+        if (!btn_lcd_is_pressed(BTN_PIN1)) {
+            _listening = !_listening;
+            lop_toggle_led(LOP_YELLOW);
+            while (!btn_lcd_is_pressed(BTN_PIN1));
+        }
+
+        if (_listening) {
+            lcd_gotoxy(0, 1);
+            lcd_puts(_uart_callback_data);
+        } else {
+            lcd_gotoxy(0, 1);
+            sprintf(buf, "z %05d", z_axis);
+            lcd_puts(buf);
+
+            lcd_gotoxy(8, 1);
+            lcd_puts(dtostrf( temp, 2, 2, buf ));
+            lcd_putc(degree);
+            lcd_putc('C');
+        }
 
 #if SEND_TO_UART
         /* listening for switch press */
@@ -161,34 +187,7 @@ int main(void) {
 #else // SEND_TO_UART
 	_delay_ms(100);
 #endif // SEND_TO_UART
-
-
-#if GSM_TEST
-        /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN0)) {
-			gsm_send(AT_TEST);
-            while (!btn_lcd_is_pressed(BTN_PIN0)) {
-				if (!btn_lcd_is_pressed(BTN_PIN1)) {
-					lcd_clrscr();
-				}
-			}
-        }
-        /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN1)) {
-			gsm_send(AT_MODEL_NO);
-            while (!btn_lcd_is_pressed(BTN_PIN1));
-        }
-        /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN2)) {
-			gsm_answer();
-            while (!btn_lcd_is_pressed(BTN_PIN2));
-        }
-        /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN3)) {
-			gsm_hang_up();
-            while (!btn_lcd_is_pressed(BTN_PIN3));
-        }
-#endif
+#endif // GSM_TEST
     }
 #endif // UNIT_TEST
 #endif // ANALYSIS

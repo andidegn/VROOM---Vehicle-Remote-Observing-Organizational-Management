@@ -10,8 +10,8 @@
 #define ON 1
 #define OFF 0
 
-#define KENNETH_TEST OFF
-#define ANDI_TEST ON
+#define KENNETH_TEST ON
+#define ANDI_TEST OFF
 /*********************************//**
  * UNCOMMENT FOR RUN ALL UNIT TESTS  *
  *************************************/
@@ -22,7 +22,7 @@
 #define UART0 OFF
 #define UART1 OFF
 #define UART_LOOP_BACK OFF
-#define GSM_TEST ON
+#define GSM_TEST OFF
 
 #define DELAY_BETWEEN_CHARS 1
 
@@ -219,18 +219,32 @@ void uart1_callback_test(char data) {
 #include <avr/io.h>
 #include <util/delay.h>
 
-//#define F_CPU 11059200UL
+#define F_CPU 11059200UL
 int main (void)
 {
 	DDRA = 0xFF;
 	PORTA = 0xFF;
 
-	sei();
 	SIM908_init();
+	GSM_enable();
+	sei();
+	_delay_ms(5000);
+	SIM908_cmd("AT");
+	
+	_delay_ms(2000);
+	SIM908_cmd("AT");
+	
+	_delay_ms(2000);
+	SIM908_cmd("ATH");
+	
+	_delay_ms(2000);
+	SIM908_cmd("ATD60192949;");
+	
 	while (1)
 	{
 		PORTA ^= 1;
-		_delay_ms(100);
+		_delay_ms(1000);
+		
 	}
 }
 #endif

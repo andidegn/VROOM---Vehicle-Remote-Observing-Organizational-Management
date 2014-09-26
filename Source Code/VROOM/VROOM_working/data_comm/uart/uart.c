@@ -168,7 +168,7 @@ void uart0_send_char(char data) {
  * the Data Register Empty interrupt bit.
  *************************************************************************/
 void uart0_send_string(const char *data) {
-	while (*data) {
+	while (*data != '\0') {
 		uart0_send_char(*data++);
 	};
 }

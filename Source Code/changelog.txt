@@ -1,4 +1,17 @@
 =================================
+Version 0.071 - 2014/09/26 by Kenneth
+=================================
+* Added condition to avoid empthy strings when writing to UART
+* Added simple GSM driver for initiating sim908 and sending AT commands
+
+ToDo
+----	
+- MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane
+- missing commenting in btn_led_lcd and led_on_plane
+- In GSM add check for response and act if error 
+- Split up module test in individual file, instead of having it in main
+
+=================================
 Version 0.07 - 2014/09/21 by Andi
 =================================
 New Features, Improvements

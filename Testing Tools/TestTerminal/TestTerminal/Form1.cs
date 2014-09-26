@@ -95,10 +95,14 @@ namespace TestTerminal {
             } else if (p.Contains("+CMTI:")) {
                 btn_read_msg.BackColor = Color.Green;
             } else if (p.Contains("+CSQ:")) {
-                lbl_signal_strength.Text = (p.Substring(p.IndexOf(' ') + 1, 4));
+                lbl_signal_strength.Text = _calc_dbm(double.Parse(p.Substring(p.IndexOf(' ') + 1, 4))) + "dbm";
             } else if (p == "OK\r" || p == "ERROR\r") {
                 rtb_terminal.AppendText("=========================\n");
             }
+        }
+
+        private double _calc_dbm(double csq_value) {
+            return -113 + (csq_value * 2);
         }
         #endregion
 

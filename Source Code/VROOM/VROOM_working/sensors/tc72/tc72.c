@@ -9,8 +9,10 @@
 @}
 @note Complies MISRO 2004 standards
 ************************************************/
+#include <avr/interrupt.h>
 #include "tc72.h"
 #include "../sensor_scheduler.h"
+#include "../../data_comm/spi/spi.h"
 
 /* SPI commands */
 #define SDI_Read        0x02U

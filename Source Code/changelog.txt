@@ -1,7 +1,24 @@
-=================================
+===================================
+Version 0.071a - 2014/09/26 by Andi
+===================================
+- Added read function in UART so that it is not required to use callback
+  to read from the uart bus
+- Added a module test for the UART
+- Added testing templet for module tests in run.c
+
+ToDo
+----	
+- MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane
+- missing commenting in btn_led_lcd and led_on_plane
+- In GSM add check for response and act if error 
+- Split up module test in individual file, instead of having it in main
+
+
+
+=====================================
 Version 0.071 - 2014/09/26 by Kenneth
-=================================
-* Added condition to avoid empthy strings when writing to UART
+=====================================
+* Added condition to avoid empty strings when writing to UART (was already there)
 * Added simple GSM driver for initiating sim908 and sending AT commands
 
 ToDo
@@ -10,6 +27,8 @@ ToDo
 - missing commenting in btn_led_lcd and led_on_plane
 - In GSM add check for response and act if error 
 - Split up module test in individual file, instead of having it in main
+
+
 
 =================================
 Version 0.07 - 2014/09/21 by Andi

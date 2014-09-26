@@ -38,8 +38,19 @@
  * @brief defines the size of the transmit buffers \n
  * @{
  *************************************************************************/
-#define UART0_BUFFER_SIZE 64
-#define UART1_BUFFER_SIZE 64
+#define UART0_TX_BUFFER_SIZE 64
+#define UART0_RX_BUFFER_SIZE 64
+#define UART1_TX_BUFFER_SIZE 64
+#define UART1_RX_BUFFER_SIZE 255
+/* @} */
+
+/**********************************************************************//**
+ * @ingroup uart_pub
+ * @brief define for UART return
+ * @{
+ *************************************************************************/
+#define UART_NO_DATA 0x100U
+#define UART_BUFFER_OVERRUN 0x101U
 /* @} */
 
 /**********************************************************************//**
@@ -164,6 +175,16 @@ void uart0_send_string(const char *data);
 
 /**********************************************************************//**
  * @ingroup uart_pub
+ * @brief Reads 1 (one) char of 'data' in the UART buffer
+ *
+ * @param void
+ *
+ * @return uint16_t - next char(byte) in the buffer
+ *************************************************************************/
+uint16_t uart0_read_char(void);
+
+/**********************************************************************//**
+ * @ingroup uart_pub
  * @brief Sets up the UART1 bus as asynchronous using supplied parameters
  *
  * @param UART_MODE operational_mode - normal speed or double speed mode
@@ -204,5 +225,16 @@ void uart1_send_char(char data);
  * @return void
  *************************************************************************/
 void uart1_send_string(const char *data);
+
+/**********************************************************************//**
+ * @ingroup uart_pub
+ * @brief Reads 1 (one) char of 'data' in the UART buffer
+ *
+ * @param void
+ *
+ * @return uint16_t - next char(byte) in the buffer
+ *************************************************************************/
+uint16_t uart1_read_char(void);
+
 
 #endif /* UART_H_ */

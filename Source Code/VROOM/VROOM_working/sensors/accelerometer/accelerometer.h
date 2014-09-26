@@ -17,6 +17,8 @@
 #ifndef AIRCRAFT_H_
 #define AIRCRAFT_H_
 
+#include <avr/io.h>
+
 /* @define Defines all the control registers and the specific pins */
 #define ACC_CTRL_REG1	0x20
 #define ACC_Xen			0

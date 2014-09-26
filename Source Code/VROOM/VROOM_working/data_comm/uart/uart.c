@@ -3,7 +3,7 @@
  *
  * @Created: 12-09-2014 20:34:20
  * @Author: Andi Degn
- * @Version: 0.2
+ * @Version: 0.3
  * @defgroup uart UART Driver
  * @{
 	 This is a driver for the UART on the ATMEGA family processors
@@ -34,15 +34,21 @@
 
 /* local variables for UART0 */
 static void (*_callback_function0_ptr)(char cfp);
-static volatile char _buffer0_send_data[UART0_BUFFER_SIZE];
-static volatile uint8_t _buffer0_head = 0U;
-static volatile uint8_t _buffer0_tail = 0U;
+static volatile char _tx_buffer0[UART0_TX_BUFFER_SIZE];
+static volatile uint8_t _tx_buffer0_head = 0U;
+static volatile uint8_t _tx_buffer0_tail = 0U;
+static volatile char _rx_buffer0[UART0_RX_BUFFER_SIZE];
+static volatile uint8_t _rx_buffer0_head = 0U;
+static volatile uint8_t _rx_buffer0_tail = 0U;
 
 /* local variables for UART0 */
 static void (*_callback_function1_ptr)(char cfp);
-static volatile char _buffer1_send_data[UART1_BUFFER_SIZE];
-static volatile uint8_t _buffer1_head = 0U;
-static volatile uint8_t _buffer1_tail = 0U;
+static volatile char _tx_buffer1[UART1_TX_BUFFER_SIZE];
+static volatile uint8_t _tx_buffer1_head = 0U;
+static volatile uint8_t _tx_buffer1_tail = 0U;
+static volatile char _rx_buffer1[UART1_RX_BUFFER_SIZE];
+static volatile uint8_t _rx_buffer1_head = 0U;
+static volatile uint8_t _rx_buffer1_tail = 0U;
 
 /************************************************************************/
 /* UART0 functions                                                      */
@@ -112,7 +118,7 @@ void uart0_setup_async(UART_MODE operational_mode,
 	Bit 0 - TXB80: Transmit Data Bit 8
 	*/
 	UCSR0B = 0;
-	UCSR0B |= (callback_function_ptr != NULL ? _BV(RXCIE0) : 0) |
+	UCSR0B |= _BV(RXCIE0) |
 			  _BV(RXEN0) |
 			  _BV(TXEN0) |
 			  (char_size == UART_9_BIT ? _BV(UCSZ02) : 0);
@@ -149,14 +155,14 @@ void uart0_setup_async(UART_MODE operational_mode,
  * Sends one char
  *************************************************************************/
 void uart0_send_char(char data) {
-	uint8_t tmp = (_buffer0_head + 1) & (UART0_BUFFER_SIZE - 1);
+	uint8_t tmp = (_tx_buffer0_head + 1) & (UART0_TX_BUFFER_SIZE - 1);
 
 	/* waiting for free space in buffer */
-	while (tmp == _buffer0_tail);
+	while (tmp == _tx_buffer0_tail);
 
 	/* copying data to local buffer */
-	_buffer0_send_data[tmp] = data;
-	_buffer0_head = tmp;
+	_tx_buffer0[tmp] = data;
+	_tx_buffer0_head = tmp;
 
 	/* enable Data Register empty interrupt */
 	UCSR0B |= _BV(UDRIE0);
@@ -168,9 +174,21 @@ void uart0_send_char(char data) {
  * the Data Register Empty interrupt bit.
  *************************************************************************/
 void uart0_send_string(const char *data) {
-	while (*data != '\0') {
+	while (*data) {
 		uart0_send_char(*data++);
 	};
+}
+
+/**********************************************************************//**
+ * @ingroup uart_pub
+ * Reads one char
+ *************************************************************************/
+uint16_t uart0_read_char(void) {
+	if (_rx_buffer0_head != _rx_buffer0_tail) {
+		return _rx_buffer0[_rx_buffer0_tail = (_rx_buffer0_tail + 1) % UART0_RX_BUFFER_SIZE];
+	} else {
+		return UART_NO_DATA;
+	}
 }
 
 /**********************************************************************//**
@@ -178,8 +196,8 @@ void uart0_send_string(const char *data) {
  * Interrupt service routine for the UART transmit.
  **************************************************************************/
 ISR(USART0_UDRE_vect) {
-	if (_buffer0_head != _buffer0_tail) {
-		UDR0 = _buffer0_send_data[_buffer0_tail = (_buffer0_tail + 1) & (UART0_BUFFER_SIZE - 1)];
+	if (_tx_buffer0_head != _tx_buffer0_tail) {
+		UDR0 = _tx_buffer0[_tx_buffer0_tail = (_tx_buffer0_tail + 1) % UART0_TX_BUFFER_SIZE];
 	} else {
 		UCSR0B &= ~_BV(UDRIE0);
 	}
@@ -194,6 +212,10 @@ ISR(USART0_RX_vect) {
 	char received_data = UDR0;
 	if (_callback_function0_ptr != NULL) {
 		_callback_function0_ptr(received_data);
+	} else {
+		if (_rx_buffer0_head + 1 != _rx_buffer0_tail) {
+			_rx_buffer0[_rx_buffer0_head = (_rx_buffer0_head + 1) % UART0_RX_BUFFER_SIZE] = received_data;
+		}
 	}
 }
 
@@ -244,11 +266,8 @@ void uart1_setup_async(UART_MODE operational_mode,
 			break;
 
 		case UART_8_BIT:
-			_char_size = _BV(UCSZ10) | _BV(UCSZ11);
-			break;
-			
 		case UART_9_BIT:
-			_char_size = _BV(UCSZ10) | _BV(UCSZ11) | _BV(UCSZ12);
+			_char_size = _BV(UCSZ10) | _BV(UCSZ11);
 			break;
 
 		default:
@@ -270,7 +289,7 @@ void uart1_setup_async(UART_MODE operational_mode,
 	Bit 0 - TXB81: Transmit Data Bit 8
 	*/
 	UCSR1B = 0;
-	UCSR1B |= (callback_function_ptr != NULL ? _BV(RXCIE1) : 0) |
+	UCSR1B |= _BV(RXCIE1) |
 			  _BV(RXEN1) |
 			  _BV(TXEN1) |
 			  (char_size == UART_9_BIT ? _BV(UCSZ12) : 0);
@@ -304,14 +323,14 @@ void uart1_setup_async(UART_MODE operational_mode,
  * Sends one char
  *************************************************************************/
 void uart1_send_char(char data) {
-	uint8_t tmp = (_buffer1_head + 1) & (UART1_BUFFER_SIZE - 1);
+	uint8_t tmp = (_tx_buffer1_head + 1) % UART1_TX_BUFFER_SIZE;
 
 	/* waiting for free space in buffer */
-	while (tmp == _buffer1_tail);
+	while (tmp == _tx_buffer1_tail);
 
 	/* copying data to local buffer */
-	_buffer1_send_data[tmp] = data;
-	_buffer1_head = tmp;
+	_tx_buffer1[tmp] = data;
+	_tx_buffer1_head = tmp;
 
 	/* enable Data Register empty interrupt */
 	UCSR1B |= _BV(UDRIE1);
@@ -329,12 +348,24 @@ void uart1_send_string(const char *data) {
 }
 
 /**********************************************************************//**
+ * @ingroup uart_pub
+ * Reads one char
+ *************************************************************************/
+uint16_t uart1_read_char(void) {
+	if (_rx_buffer1_head != _rx_buffer1_tail) {
+		return _rx_buffer1[_rx_buffer1_tail = (_rx_buffer1_tail + 1) % UART1_RX_BUFFER_SIZE];
+	} else {
+		return UART_NO_DATA;
+	}
+}
+
+/**********************************************************************//**
  * @ingroup uart_priv
  * Interrupt service routine for the UART transmit.
  **************************************************************************/
 ISR(USART1_UDRE_vect) {
-	if (_buffer1_head != _buffer1_tail) {
-		UDR1 = _buffer1_send_data[_buffer1_tail = (_buffer1_tail + 1) & (UART1_BUFFER_SIZE - 1)];
+	if (_tx_buffer1_head != _tx_buffer1_tail) {
+		UDR1 = _tx_buffer1[_tx_buffer1_tail = (_tx_buffer1_tail + 1) % UART1_TX_BUFFER_SIZE];
 	} else {
 		UCSR1B &= ~_BV(UDRIE1);
 	}
@@ -349,5 +380,9 @@ ISR(USART1_RX_vect) {
 	char received_data = UDR1;
 	if (_callback_function1_ptr != NULL) {
 		_callback_function1_ptr(received_data);
+	} else {
+		if (_rx_buffer1_head + 1 != _rx_buffer1_tail) {
+			_rx_buffer1[_rx_buffer1_head = (_rx_buffer1_head + 1) % UART1_RX_BUFFER_SIZE] = received_data;
+		}
 	}
 }

@@ -57,7 +57,7 @@ static uint8_t _bytes_sent_ctr;
 
 /* Prototypes */
 static void _setup_spi(handle_param *param);
-static void _set_cs_level(uint8_t level);
+static inline void _set_cs_level(uint8_t level);
 static void _send_spi(uint8_t data);
 
 /**********************************************************************//**
@@ -166,7 +166,7 @@ static void _setup_spi(handle_param *param) {
  *
  * @return void
  **************************************************************************/
-static void _set_cs_level(uint8_t level) {
+static inline void _set_cs_level(uint8_t level) {
 	if (_cs_active_level == SPI_CS_ACTIVE_LOW) {
 		level = !level;
 	}

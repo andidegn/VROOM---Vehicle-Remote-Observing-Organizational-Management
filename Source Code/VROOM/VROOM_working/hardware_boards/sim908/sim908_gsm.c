@@ -19,7 +19,7 @@ static uint16_t _index;
 #define LOW  0
 
 #define DDR(x) (*(&x - 1))
-#define PIN(x) (*(&x - 2))	
+#define PIN(x) (*(&x - 2))
 
 /* Prototypes */
 void _SIM908_callback(char data);
@@ -28,13 +28,13 @@ void _PC_CALLBACK(char data);
 /* ToDo - Error code p. 235 AT_Commands document*/
 const char* GSM_ERR[773] = {	"Phone Faliure",
 								"No Connection to Phone"
-								
+
 						   };
 
 void SIM908_init(void)
-{	
+{
 	/* setting up uart for communication with the module */
- 	uart0_setup_async(UART_MODE_DOUBLE, 
+ 	uart0_setup_async(UART_MODE_DOUBLE,
  					  UART_BAUD_115K2,
  					  UART_PARITY_DISABLED,
  					  UART_ONE_STOP_BIT,
@@ -42,31 +42,31 @@ void SIM908_init(void)
  					  _SIM908_callback);
 
 	/* setting up uart for communication with pc for diag */
-	//uart1_setup_async(UART_MODE_DOUBLE, 
-						//UART_BAUD_115K2, 
-						//UART_PARITY_DISABLED, 
-						//UART_ONE_STOP_BIT, 
-						//UART_8_BIT, 
+	//uart1_setup_async(UART_MODE_DOUBLE,
+						//UART_BAUD_115K2,
+						//UART_PARITY_DISABLED,
+						//UART_ONE_STOP_BIT,
+						//UART_8_BIT,
 						//_PC_CALLBACK);
-						
+
 	/* saves the current state of the status register and disables global interrupt */
 	uint8_t SREG_cpy = SREG;
-	cli();					
-	
+	cli();
+
 	/* Set all related pins to output */
 	DDR(DRIVER_PORT) |= (1<<CE_PIN);
 	DDR(GSM_PORT) |= (1<<GSM_ENABLE_PIN);
 	DDR(GPS_PORT) |= (1<<GPS_ENABLE_PIN);
-	
+
 	/* Toggle driver pin to start module */
 	DRIVER_PORT |= _BV(CE_PIN);
 	_delay_ms(1500);
 	DRIVER_PORT &= ~_BV(CE_PIN);
 	_delay_ms(1500);
-	
+
 	/* Restore interrupt */
 	SREG = SREG_cpy;
-	
+
 	/* Set list of emergency numbers */
 	//SIM908_cmd("AT+CEMNL=112");
 }
@@ -93,7 +93,7 @@ void SIM908_cmd(const char *cmd)
 
 void call_PSAP(void)
 {
-	
+
 }
 
 void _SIM908_callback(char data)

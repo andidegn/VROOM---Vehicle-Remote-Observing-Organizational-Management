@@ -13,7 +13,6 @@
  * @}
  * @note Complies MISRO 2004 standards
  *************************************************************************/
-#include <avr/io.h>
 #include <avr/interrupt.h>
 
 #include "accelerometer.h"

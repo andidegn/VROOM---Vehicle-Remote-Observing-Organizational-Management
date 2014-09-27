@@ -20,5 +20,17 @@
     <Setting Name="cbb_com_port" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="color_timestamp" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Green</Value>
+    </Setting>
+    <Setting Name="color_text" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="color_background" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="font_rtb" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Courier New, 11.25pt</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

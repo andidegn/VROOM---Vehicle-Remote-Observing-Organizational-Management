@@ -23,23 +23,14 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_exit = new System.Windows.Forms.Button();
-            this.btn_clear = new System.Windows.Forms.Button();
-            this.btn_error_report = new System.Windows.Forms.Button();
-            this.btn_ctrl_z = new System.Windows.Forms.Button();
+            this.pnl_main = new System.Windows.Forms.Panel();
             this.chart_signal = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.tbx_send = new System.Windows.Forms.TextBox();
-            this.rtb_terminal = new System.Windows.Forms.RichTextBox();
-            this.gb_gps = new System.Windows.Forms.GroupBox();
-            this.btn_gps_get_location = new System.Windows.Forms.Button();
-            this.btn_gps_status = new System.Windows.Forms.Button();
-            this.btn_gps_cold_rst = new System.Windows.Forms.Button();
-            this.btn_gps_pwr = new System.Windows.Forms.Button();
+            this.pnl_ctrls = new System.Windows.Forms.Panel();
             this.gb_connection = new System.Windows.Forms.GroupBox();
             this.chk_graph = new System.Windows.Forms.CheckBox();
             this.chk_module_state = new System.Windows.Forms.CheckBox();
@@ -47,11 +38,6 @@
             this.chk_signal = new System.Windows.Forms.CheckBox();
             this.btn_network_reg_status = new System.Windows.Forms.Button();
             this.lbl_signal_strength = new System.Windows.Forms.Label();
-            this.gb_text_sms = new System.Windows.Forms.GroupBox();
-            this.btn_send_msg = new System.Windows.Forms.Button();
-            this.btn_read_msg = new System.Windows.Forms.Button();
-            this.nud_msg = new System.Windows.Forms.NumericUpDown();
-            this.btn_delete_msg = new System.Windows.Forms.Button();
             this.gb_call = new System.Windows.Forms.GroupBox();
             this.btn_set_ring_tone = new System.Windows.Forms.Button();
             this.nud_ring_tone = new System.Windows.Forms.NumericUpDown();
@@ -63,94 +49,76 @@
             this.nud_speaker_volume = new System.Windows.Forms.NumericUpDown();
             this.nud_ringer_volume = new System.Windows.Forms.NumericUpDown();
             this.btn_answer = new System.Windows.Forms.Button();
+            this.gb_text_sms = new System.Windows.Forms.GroupBox();
+            this.btn_send_msg = new System.Windows.Forms.Button();
+            this.btn_read_msg = new System.Windows.Forms.Button();
+            this.nud_msg = new System.Windows.Forms.NumericUpDown();
+            this.btn_delete_msg = new System.Windows.Forms.Button();
+            this.gb_gps = new System.Windows.Forms.GroupBox();
+            this.btn_gps_get_location = new System.Windows.Forms.Button();
+            this.btn_gps_status = new System.Windows.Forms.Button();
+            this.btn_gps_cold_rst = new System.Windows.Forms.Button();
+            this.btn_gps_pwr = new System.Windows.Forms.Button();
+            this.btn_exit = new System.Windows.Forms.Button();
+            this.btn_clear = new System.Windows.Forms.Button();
+            this.btn_error_report = new System.Windows.Forms.Button();
+            this.btn_ctrl_z = new System.Windows.Forms.Button();
+            this.tbx_send = new System.Windows.Forms.TextBox();
+            this.rtb_terminal = new System.Windows.Forms.RichTextBox();
+            this.cms_rtb_terminal = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timestampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.cbb_baud_rate = new System.Windows.Forms.ComboBox();
             this.lbl_baud = new System.Windows.Forms.Label();
             this.btn_connect = new System.Windows.Forms.Button();
             this.cbb_com_port = new System.Windows.Forms.ComboBox();
             this.lbl_com_port = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_signal_chart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dockUndockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnl_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_signal)).BeginInit();
-            this.gb_gps.SuspendLayout();
+            this.pnl_ctrls.SuspendLayout();
             this.gb_connection.SuspendLayout();
-            this.gb_text_sms.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_msg)).BeginInit();
             this.gb_call.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_ring_tone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_speaker_volume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_ringer_volume)).BeginInit();
+            this.gb_text_sms.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_msg)).BeginInit();
+            this.gb_gps.SuspendLayout();
+            this.cms_rtb_terminal.SuspendLayout();
+            this.cms_signal_chart.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnl_main
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnl_main.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.btn_exit);
-            this.panel1.Controls.Add(this.btn_clear);
-            this.panel1.Controls.Add(this.btn_error_report);
-            this.panel1.Controls.Add(this.btn_ctrl_z);
-            this.panel1.Controls.Add(this.chart_signal);
-            this.panel1.Controls.Add(this.tbx_send);
-            this.panel1.Controls.Add(this.rtb_terminal);
-            this.panel1.Controls.Add(this.gb_gps);
-            this.panel1.Controls.Add(this.gb_connection);
-            this.panel1.Controls.Add(this.gb_text_sms);
-            this.panel1.Controls.Add(this.gb_call);
-            this.panel1.Controls.Add(this.btn_refresh);
-            this.panel1.Controls.Add(this.cbb_baud_rate);
-            this.panel1.Controls.Add(this.lbl_baud);
-            this.panel1.Controls.Add(this.btn_connect);
-            this.panel1.Controls.Add(this.cbb_com_port);
-            this.panel1.Controls.Add(this.lbl_com_port);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(760, 538);
-            this.panel1.TabIndex = 0;
-            // 
-            // btn_exit
-            // 
-            this.btn_exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_exit.Location = new System.Drawing.Point(676, 512);
-            this.btn_exit.Name = "btn_exit";
-            this.btn_exit.Size = new System.Drawing.Size(75, 23);
-            this.btn_exit.TabIndex = 21;
-            this.btn_exit.Text = "Exit";
-            this.btn_exit.UseVisualStyleBackColor = true;
-            this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
-            // 
-            // btn_clear
-            // 
-            this.btn_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_clear.Location = new System.Drawing.Point(433, 512);
-            this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(75, 23);
-            this.btn_clear.TabIndex = 19;
-            this.btn_clear.Text = "Clear";
-            this.btn_clear.UseVisualStyleBackColor = true;
-            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
-            // 
-            // btn_error_report
-            // 
-            this.btn_error_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_error_report.Location = new System.Drawing.Point(595, 512);
-            this.btn_error_report.Name = "btn_error_report";
-            this.btn_error_report.Size = new System.Drawing.Size(75, 23);
-            this.btn_error_report.TabIndex = 17;
-            this.btn_error_report.Text = "Error Report";
-            this.btn_error_report.UseVisualStyleBackColor = true;
-            this.btn_error_report.Click += new System.EventHandler(this.btn_error_report_Click);
-            // 
-            // btn_ctrl_z
-            // 
-            this.btn_ctrl_z.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ctrl_z.Location = new System.Drawing.Point(514, 512);
-            this.btn_ctrl_z.Name = "btn_ctrl_z";
-            this.btn_ctrl_z.Size = new System.Drawing.Size(75, 23);
-            this.btn_ctrl_z.TabIndex = 9;
-            this.btn_ctrl_z.Text = "Ctrl+Z";
-            this.btn_ctrl_z.UseVisualStyleBackColor = true;
-            this.btn_ctrl_z.Click += new System.EventHandler(this.btn_ctrl_z_Click);
+            this.pnl_main.Controls.Add(this.chart_signal);
+            this.pnl_main.Controls.Add(this.pnl_ctrls);
+            this.pnl_main.Controls.Add(this.btn_exit);
+            this.pnl_main.Controls.Add(this.btn_clear);
+            this.pnl_main.Controls.Add(this.btn_error_report);
+            this.pnl_main.Controls.Add(this.btn_ctrl_z);
+            this.pnl_main.Controls.Add(this.tbx_send);
+            this.pnl_main.Controls.Add(this.rtb_terminal);
+            this.pnl_main.Controls.Add(this.btn_refresh);
+            this.pnl_main.Controls.Add(this.cbb_baud_rate);
+            this.pnl_main.Controls.Add(this.lbl_baud);
+            this.pnl_main.Controls.Add(this.btn_connect);
+            this.pnl_main.Controls.Add(this.cbb_com_port);
+            this.pnl_main.Controls.Add(this.lbl_com_port);
+            this.pnl_main.Location = new System.Drawing.Point(12, 12);
+            this.pnl_main.Name = "pnl_main";
+            this.pnl_main.Size = new System.Drawing.Size(760, 538);
+            this.pnl_main.TabIndex = 0;
             // 
             // chart_signal
             // 
@@ -162,6 +130,7 @@
             this.chart_signal.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             chartArea1.Name = "ChartArea1";
             this.chart_signal.ChartAreas.Add(chartArea1);
+            this.chart_signal.ContextMenuStrip = this.cms_signal_chart;
             legend1.Name = "Legend1";
             this.chart_signal.Legends.Add(legend1);
             this.chart_signal.Location = new System.Drawing.Point(7, 31);
@@ -177,82 +146,18 @@
             this.chart_signal.DoubleClick += new System.EventHandler(this.chart_signal_DoubleClick);
             this.chart_signal.MouseEnter += new System.EventHandler(this.chart_signal_MouseEnter);
             // 
-            // tbx_send
+            // pnl_ctrls
             // 
-            this.tbx_send.AllowDrop = true;
-            this.tbx_send.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnl_ctrls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbx_send.Location = new System.Drawing.Point(6, 514);
-            this.tbx_send.Name = "tbx_send";
-            this.tbx_send.Size = new System.Drawing.Size(421, 20);
-            this.tbx_send.TabIndex = 3;
-            this.tbx_send.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbx_send_KeyDown);
-            // 
-            // rtb_terminal
-            // 
-            this.rtb_terminal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtb_terminal.Location = new System.Drawing.Point(6, 30);
-            this.rtb_terminal.Name = "rtb_terminal";
-            this.rtb_terminal.Size = new System.Drawing.Size(500, 479);
-            this.rtb_terminal.TabIndex = 2;
-            this.rtb_terminal.Text = "";
-            // 
-            // gb_gps
-            // 
-            this.gb_gps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gb_gps.Controls.Add(this.btn_gps_get_location);
-            this.gb_gps.Controls.Add(this.btn_gps_status);
-            this.gb_gps.Controls.Add(this.btn_gps_cold_rst);
-            this.gb_gps.Controls.Add(this.btn_gps_pwr);
-            this.gb_gps.Location = new System.Drawing.Point(506, 256);
-            this.gb_gps.Name = "gb_gps";
-            this.gb_gps.Size = new System.Drawing.Size(249, 81);
-            this.gb_gps.TabIndex = 20;
-            this.gb_gps.TabStop = false;
-            this.gb_gps.Text = "GPS";
-            // 
-            // btn_gps_get_location
-            // 
-            this.btn_gps_get_location.Location = new System.Drawing.Point(6, 50);
-            this.btn_gps_get_location.Name = "btn_gps_get_location";
-            this.btn_gps_get_location.Size = new System.Drawing.Size(75, 23);
-            this.btn_gps_get_location.TabIndex = 3;
-            this.btn_gps_get_location.Text = "Location Fix";
-            this.btn_gps_get_location.UseVisualStyleBackColor = true;
-            this.btn_gps_get_location.Click += new System.EventHandler(this.btn_gps_get_location_Click);
-            // 
-            // btn_gps_status
-            // 
-            this.btn_gps_status.Location = new System.Drawing.Point(87, 19);
-            this.btn_gps_status.Name = "btn_gps_status";
-            this.btn_gps_status.Size = new System.Drawing.Size(75, 23);
-            this.btn_gps_status.TabIndex = 2;
-            this.btn_gps_status.Text = "Status";
-            this.btn_gps_status.UseVisualStyleBackColor = true;
-            this.btn_gps_status.Click += new System.EventHandler(this.btn_gps_status_Click);
-            // 
-            // btn_gps_cold_rst
-            // 
-            this.btn_gps_cold_rst.Location = new System.Drawing.Point(168, 19);
-            this.btn_gps_cold_rst.Name = "btn_gps_cold_rst";
-            this.btn_gps_cold_rst.Size = new System.Drawing.Size(75, 23);
-            this.btn_gps_cold_rst.TabIndex = 1;
-            this.btn_gps_cold_rst.Text = "Cold Reset";
-            this.btn_gps_cold_rst.UseVisualStyleBackColor = true;
-            this.btn_gps_cold_rst.Click += new System.EventHandler(this.btn_gps_cold_rst_Click);
-            // 
-            // btn_gps_pwr
-            // 
-            this.btn_gps_pwr.BackColor = System.Drawing.Color.Red;
-            this.btn_gps_pwr.Location = new System.Drawing.Point(6, 19);
-            this.btn_gps_pwr.Name = "btn_gps_pwr";
-            this.btn_gps_pwr.Size = new System.Drawing.Size(75, 23);
-            this.btn_gps_pwr.TabIndex = 0;
-            this.btn_gps_pwr.Text = "Off";
-            this.btn_gps_pwr.UseVisualStyleBackColor = false;
-            this.btn_gps_pwr.Click += new System.EventHandler(this.btn_gps_pwr_Click);
+            this.pnl_ctrls.Controls.Add(this.gb_connection);
+            this.pnl_ctrls.Controls.Add(this.gb_call);
+            this.pnl_ctrls.Controls.Add(this.gb_text_sms);
+            this.pnl_ctrls.Controls.Add(this.gb_gps);
+            this.pnl_ctrls.Location = new System.Drawing.Point(505, 0);
+            this.pnl_ctrls.Name = "pnl_ctrls";
+            this.pnl_ctrls.Size = new System.Drawing.Size(255, 509);
+            this.pnl_ctrls.TabIndex = 23;
             // 
             // gb_connection
             // 
@@ -263,7 +168,7 @@
             this.gb_connection.Controls.Add(this.chk_signal);
             this.gb_connection.Controls.Add(this.btn_network_reg_status);
             this.gb_connection.Controls.Add(this.lbl_signal_strength);
-            this.gb_connection.Location = new System.Drawing.Point(508, 3);
+            this.gb_connection.Location = new System.Drawing.Point(3, 8);
             this.gb_connection.Name = "gb_connection";
             this.gb_connection.Size = new System.Drawing.Size(249, 93);
             this.gb_connection.TabIndex = 18;
@@ -331,62 +236,11 @@
             // lbl_signal_strength
             // 
             this.lbl_signal_strength.AutoSize = true;
-            this.lbl_signal_strength.Location = new System.Drawing.Point(148, 35);
+            this.lbl_signal_strength.Location = new System.Drawing.Point(143, 35);
             this.lbl_signal_strength.Name = "lbl_signal_strength";
             this.lbl_signal_strength.Size = new System.Drawing.Size(16, 13);
             this.lbl_signal_strength.TabIndex = 16;
             this.lbl_signal_strength.Text = "---";
-            // 
-            // gb_text_sms
-            // 
-            this.gb_text_sms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gb_text_sms.Controls.Add(this.btn_send_msg);
-            this.gb_text_sms.Controls.Add(this.btn_read_msg);
-            this.gb_text_sms.Controls.Add(this.nud_msg);
-            this.gb_text_sms.Controls.Add(this.btn_delete_msg);
-            this.gb_text_sms.Location = new System.Drawing.Point(506, 209);
-            this.gb_text_sms.Name = "gb_text_sms";
-            this.gb_text_sms.Size = new System.Drawing.Size(249, 47);
-            this.gb_text_sms.TabIndex = 14;
-            this.gb_text_sms.TabStop = false;
-            this.gb_text_sms.Text = "Text (SMS)";
-            // 
-            // btn_send_msg
-            // 
-            this.btn_send_msg.Location = new System.Drawing.Point(6, 47);
-            this.btn_send_msg.Name = "btn_send_msg";
-            this.btn_send_msg.Size = new System.Drawing.Size(75, 23);
-            this.btn_send_msg.TabIndex = 13;
-            this.btn_send_msg.Text = "Send MSG";
-            this.btn_send_msg.UseVisualStyleBackColor = true;
-            this.btn_send_msg.Click += new System.EventHandler(this.btn_send_msg_Click);
-            // 
-            // btn_read_msg
-            // 
-            this.btn_read_msg.Location = new System.Drawing.Point(6, 18);
-            this.btn_read_msg.Name = "btn_read_msg";
-            this.btn_read_msg.Size = new System.Drawing.Size(75, 23);
-            this.btn_read_msg.TabIndex = 10;
-            this.btn_read_msg.Text = "Read MSG";
-            this.btn_read_msg.UseVisualStyleBackColor = true;
-            this.btn_read_msg.Click += new System.EventHandler(this.btn_read_msg_Click);
-            // 
-            // nud_msg
-            // 
-            this.nud_msg.Location = new System.Drawing.Point(88, 21);
-            this.nud_msg.Name = "nud_msg";
-            this.nud_msg.Size = new System.Drawing.Size(67, 20);
-            this.nud_msg.TabIndex = 11;
-            // 
-            // btn_delete_msg
-            // 
-            this.btn_delete_msg.Location = new System.Drawing.Point(168, 18);
-            this.btn_delete_msg.Name = "btn_delete_msg";
-            this.btn_delete_msg.Size = new System.Drawing.Size(75, 23);
-            this.btn_delete_msg.TabIndex = 12;
-            this.btn_delete_msg.Text = "Delete";
-            this.btn_delete_msg.UseVisualStyleBackColor = true;
-            this.btn_delete_msg.Click += new System.EventHandler(this.btn_delete_msg_Click);
             // 
             // gb_call
             // 
@@ -401,7 +255,7 @@
             this.gb_call.Controls.Add(this.nud_speaker_volume);
             this.gb_call.Controls.Add(this.nud_ringer_volume);
             this.gb_call.Controls.Add(this.btn_answer);
-            this.gb_call.Location = new System.Drawing.Point(506, 102);
+            this.gb_call.Location = new System.Drawing.Point(3, 107);
             this.gb_call.Name = "gb_call";
             this.gb_call.Size = new System.Drawing.Size(249, 101);
             this.gb_call.TabIndex = 13;
@@ -509,6 +363,226 @@
             this.btn_answer.UseVisualStyleBackColor = true;
             this.btn_answer.Click += new System.EventHandler(this.btn_answer_Click);
             // 
+            // gb_text_sms
+            // 
+            this.gb_text_sms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_text_sms.Controls.Add(this.btn_send_msg);
+            this.gb_text_sms.Controls.Add(this.btn_read_msg);
+            this.gb_text_sms.Controls.Add(this.nud_msg);
+            this.gb_text_sms.Controls.Add(this.btn_delete_msg);
+            this.gb_text_sms.Location = new System.Drawing.Point(3, 214);
+            this.gb_text_sms.Name = "gb_text_sms";
+            this.gb_text_sms.Size = new System.Drawing.Size(249, 47);
+            this.gb_text_sms.TabIndex = 14;
+            this.gb_text_sms.TabStop = false;
+            this.gb_text_sms.Text = "Text (SMS)";
+            // 
+            // btn_send_msg
+            // 
+            this.btn_send_msg.Location = new System.Drawing.Point(6, 47);
+            this.btn_send_msg.Name = "btn_send_msg";
+            this.btn_send_msg.Size = new System.Drawing.Size(75, 23);
+            this.btn_send_msg.TabIndex = 13;
+            this.btn_send_msg.Text = "Send MSG";
+            this.btn_send_msg.UseVisualStyleBackColor = true;
+            this.btn_send_msg.Click += new System.EventHandler(this.btn_send_msg_Click);
+            // 
+            // btn_read_msg
+            // 
+            this.btn_read_msg.Location = new System.Drawing.Point(6, 18);
+            this.btn_read_msg.Name = "btn_read_msg";
+            this.btn_read_msg.Size = new System.Drawing.Size(75, 23);
+            this.btn_read_msg.TabIndex = 10;
+            this.btn_read_msg.Text = "Read MSG";
+            this.btn_read_msg.UseVisualStyleBackColor = true;
+            this.btn_read_msg.Click += new System.EventHandler(this.btn_read_msg_Click);
+            // 
+            // nud_msg
+            // 
+            this.nud_msg.Location = new System.Drawing.Point(88, 21);
+            this.nud_msg.Name = "nud_msg";
+            this.nud_msg.Size = new System.Drawing.Size(67, 20);
+            this.nud_msg.TabIndex = 11;
+            // 
+            // btn_delete_msg
+            // 
+            this.btn_delete_msg.Location = new System.Drawing.Point(168, 18);
+            this.btn_delete_msg.Name = "btn_delete_msg";
+            this.btn_delete_msg.Size = new System.Drawing.Size(75, 23);
+            this.btn_delete_msg.TabIndex = 12;
+            this.btn_delete_msg.Text = "Delete";
+            this.btn_delete_msg.UseVisualStyleBackColor = true;
+            this.btn_delete_msg.Click += new System.EventHandler(this.btn_delete_msg_Click);
+            // 
+            // gb_gps
+            // 
+            this.gb_gps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_gps.Controls.Add(this.btn_gps_get_location);
+            this.gb_gps.Controls.Add(this.btn_gps_status);
+            this.gb_gps.Controls.Add(this.btn_gps_cold_rst);
+            this.gb_gps.Controls.Add(this.btn_gps_pwr);
+            this.gb_gps.Location = new System.Drawing.Point(3, 261);
+            this.gb_gps.Name = "gb_gps";
+            this.gb_gps.Size = new System.Drawing.Size(249, 81);
+            this.gb_gps.TabIndex = 20;
+            this.gb_gps.TabStop = false;
+            this.gb_gps.Text = "GPS";
+            // 
+            // btn_gps_get_location
+            // 
+            this.btn_gps_get_location.Location = new System.Drawing.Point(6, 50);
+            this.btn_gps_get_location.Name = "btn_gps_get_location";
+            this.btn_gps_get_location.Size = new System.Drawing.Size(75, 23);
+            this.btn_gps_get_location.TabIndex = 3;
+            this.btn_gps_get_location.Text = "Location Fix";
+            this.btn_gps_get_location.UseVisualStyleBackColor = true;
+            this.btn_gps_get_location.Click += new System.EventHandler(this.btn_gps_get_location_Click);
+            // 
+            // btn_gps_status
+            // 
+            this.btn_gps_status.Location = new System.Drawing.Point(87, 19);
+            this.btn_gps_status.Name = "btn_gps_status";
+            this.btn_gps_status.Size = new System.Drawing.Size(75, 23);
+            this.btn_gps_status.TabIndex = 2;
+            this.btn_gps_status.Text = "Status";
+            this.btn_gps_status.UseVisualStyleBackColor = true;
+            this.btn_gps_status.Click += new System.EventHandler(this.btn_gps_status_Click);
+            // 
+            // btn_gps_cold_rst
+            // 
+            this.btn_gps_cold_rst.Location = new System.Drawing.Point(168, 19);
+            this.btn_gps_cold_rst.Name = "btn_gps_cold_rst";
+            this.btn_gps_cold_rst.Size = new System.Drawing.Size(75, 23);
+            this.btn_gps_cold_rst.TabIndex = 1;
+            this.btn_gps_cold_rst.Text = "Cold Reset";
+            this.btn_gps_cold_rst.UseVisualStyleBackColor = true;
+            this.btn_gps_cold_rst.Click += new System.EventHandler(this.btn_gps_cold_rst_Click);
+            // 
+            // btn_gps_pwr
+            // 
+            this.btn_gps_pwr.BackColor = System.Drawing.Color.Red;
+            this.btn_gps_pwr.Location = new System.Drawing.Point(6, 19);
+            this.btn_gps_pwr.Name = "btn_gps_pwr";
+            this.btn_gps_pwr.Size = new System.Drawing.Size(75, 23);
+            this.btn_gps_pwr.TabIndex = 0;
+            this.btn_gps_pwr.Text = "Off";
+            this.btn_gps_pwr.UseVisualStyleBackColor = false;
+            this.btn_gps_pwr.Click += new System.EventHandler(this.btn_gps_pwr_Click);
+            // 
+            // btn_exit
+            // 
+            this.btn_exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_exit.Location = new System.Drawing.Point(676, 512);
+            this.btn_exit.Name = "btn_exit";
+            this.btn_exit.Size = new System.Drawing.Size(75, 23);
+            this.btn_exit.TabIndex = 21;
+            this.btn_exit.Text = "Exit";
+            this.btn_exit.UseVisualStyleBackColor = true;
+            this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
+            // 
+            // btn_clear
+            // 
+            this.btn_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_clear.Location = new System.Drawing.Point(433, 512);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(75, 23);
+            this.btn_clear.TabIndex = 19;
+            this.btn_clear.Text = "Clear";
+            this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
+            // 
+            // btn_error_report
+            // 
+            this.btn_error_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_error_report.Location = new System.Drawing.Point(595, 512);
+            this.btn_error_report.Name = "btn_error_report";
+            this.btn_error_report.Size = new System.Drawing.Size(75, 23);
+            this.btn_error_report.TabIndex = 17;
+            this.btn_error_report.Text = "Error Report";
+            this.btn_error_report.UseVisualStyleBackColor = true;
+            this.btn_error_report.Click += new System.EventHandler(this.btn_error_report_Click);
+            // 
+            // btn_ctrl_z
+            // 
+            this.btn_ctrl_z.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_ctrl_z.Location = new System.Drawing.Point(514, 512);
+            this.btn_ctrl_z.Name = "btn_ctrl_z";
+            this.btn_ctrl_z.Size = new System.Drawing.Size(75, 23);
+            this.btn_ctrl_z.TabIndex = 9;
+            this.btn_ctrl_z.Text = "Ctrl+Z";
+            this.btn_ctrl_z.UseVisualStyleBackColor = true;
+            this.btn_ctrl_z.Click += new System.EventHandler(this.btn_ctrl_z_Click);
+            // 
+            // tbx_send
+            // 
+            this.tbx_send.AllowDrop = true;
+            this.tbx_send.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbx_send.Location = new System.Drawing.Point(6, 514);
+            this.tbx_send.Name = "tbx_send";
+            this.tbx_send.Size = new System.Drawing.Size(421, 20);
+            this.tbx_send.TabIndex = 3;
+            this.tbx_send.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbx_send_KeyDown);
+            // 
+            // rtb_terminal
+            // 
+            this.rtb_terminal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtb_terminal.ContextMenuStrip = this.cms_rtb_terminal;
+            this.rtb_terminal.Location = new System.Drawing.Point(6, 30);
+            this.rtb_terminal.Name = "rtb_terminal";
+            this.rtb_terminal.Size = new System.Drawing.Size(500, 479);
+            this.rtb_terminal.TabIndex = 2;
+            this.rtb_terminal.Text = "";
+            // 
+            // cms_rtb_terminal
+            // 
+            this.cms_rtb_terminal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveAsToolStripMenuItem,
+            this.colorToolStripMenuItem,
+            this.fontToolStripMenuItem});
+            this.cms_rtb_terminal.Name = "cms_rtb_terminal";
+            this.cms_rtb_terminal.Size = new System.Drawing.Size(124, 70);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // colorToolStripMenuItem
+            // 
+            this.colorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.timestampToolStripMenuItem,
+            this.textToolStripMenuItem,
+            this.backgroundToolStripMenuItem});
+            this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.colorToolStripMenuItem.Text = "Color";
+            // 
+            // timestampToolStripMenuItem
+            // 
+            this.timestampToolStripMenuItem.Name = "timestampToolStripMenuItem";
+            this.timestampToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.timestampToolStripMenuItem.Text = "Timestamp";
+            this.timestampToolStripMenuItem.Click += new System.EventHandler(this.timestampToolStripMenuItem_Click);
+            // 
+            // textToolStripMenuItem
+            // 
+            this.textToolStripMenuItem.Name = "textToolStripMenuItem";
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.textToolStripMenuItem.Text = "Text";
+            this.textToolStripMenuItem.Click += new System.EventHandler(this.textToolStripMenuItem_Click);
+            // 
+            // backgroundToolStripMenuItem
+            // 
+            this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.backgroundToolStripMenuItem.Text = "Background";
+            this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.backgroundToolStripMenuItem_Click);
+            // 
             // btn_refresh
             // 
             this.btn_refresh.Location = new System.Drawing.Point(104, 1);
@@ -564,37 +638,69 @@
             this.lbl_com_port.TabIndex = 0;
             this.lbl_com_port.Text = "Port";
             // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
+            // 
+            // cms_signal_chart
+            // 
+            this.cms_signal_chart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dockUndockToolStripMenuItem,
+            this.resetToolStripMenuItem});
+            this.cms_signal_chart.Name = "cms_signal_chart";
+            this.cms_signal_chart.Size = new System.Drawing.Size(153, 70);
+            // 
+            // dockUndockToolStripMenuItem
+            // 
+            this.dockUndockToolStripMenuItem.Name = "dockUndockToolStripMenuItem";
+            this.dockUndockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dockUndockToolStripMenuItem.Text = "Dock/Undock";
+            this.dockUndockToolStripMenuItem.Click += new System.EventHandler(this.dockUndockToolStripMenuItem_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnl_main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(700, 390);
             this.Name = "Form1";
             this.Text = "AT Terminal";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnl_main.ResumeLayout(false);
+            this.pnl_main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_signal)).EndInit();
-            this.gb_gps.ResumeLayout(false);
+            this.pnl_ctrls.ResumeLayout(false);
             this.gb_connection.ResumeLayout(false);
             this.gb_connection.PerformLayout();
-            this.gb_text_sms.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nud_msg)).EndInit();
             this.gb_call.ResumeLayout(false);
             this.gb_call.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_ring_tone)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_speaker_volume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_ringer_volume)).EndInit();
+            this.gb_text_sms.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nud_msg)).EndInit();
+            this.gb_gps.ResumeLayout(false);
+            this.cms_rtb_terminal.ResumeLayout(false);
+            this.cms_signal_chart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnl_main;
         private System.Windows.Forms.Button btn_connect;
         private System.Windows.Forms.TextBox tbx_send;
         private System.Windows.Forms.RichTextBox rtb_terminal;
@@ -636,6 +742,17 @@
         private System.Windows.Forms.CheckBox chk_module_state;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_signal;
         private System.Windows.Forms.CheckBox chk_graph;
+        private System.Windows.Forms.Panel pnl_ctrls;
+        private System.Windows.Forms.ContextMenuStrip cms_rtb_terminal;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem timestampToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backgroundToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip cms_signal_chart;
+        private System.Windows.Forms.ToolStripMenuItem dockUndockToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
 
     }
 }

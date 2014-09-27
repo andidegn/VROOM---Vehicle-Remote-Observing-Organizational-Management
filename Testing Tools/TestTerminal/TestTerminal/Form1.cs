@@ -15,6 +15,8 @@ using AMD.Util.terminal;
 using System.Threading;
 using System.Windows.Forms.DataVisualization.Charting;
 using Accelerometer_Analyzer.AMD.util;
+using AMD.Util.Extensions;
+using System.IO;
 
 namespace TestTerminal {
     public partial class Form1 : Form {
@@ -25,75 +27,112 @@ namespace TestTerminal {
         private bool _checking_signal;
         private int _signal_ctr;
 
+        private Color _color_timestamp;
+        private Color _color_text;
+        private Color _color_background;
+
         private const String CHART_SERIES = "series";
-        private const int SIGNAL_DELAY = 1000;
+        private const int SIGNAL_INTERVAL = 2500;
         private bool _chart_docked;
         private int _zoom_value = 20;
+        System.Windows.Forms.Timer _signal_timer = new System.Windows.Forms.Timer();
 
+        #region setup
         public Form1() {
             InitializeComponent();
             _init_rest();
             _init_chart();
-        }
-
-        private void _update_signal() {
-            do {
-                _wait_for_signal = true;
-                this.BeginInvoke((Action)(() => { _send_to_com(AT_commands.AT_CONN_SIGNAL_STRENGTH); }));
-                Thread.Sleep(SIGNAL_DELAY);
-            } while (_checking_signal);
-            _wait_for_signal = false;
-            this.BeginInvoke((Action)(() => { chk_signal.Checked = false; }));
+            _init_signal_timer();
         }
 
         private void _init_rest() {
-            _update_com();
+            _com_update();
             cbb_baud_rate.DataSource = BaudRateList.getInstance().getArray();
             tbx_send.Multiline = false;
-            _load_settings();
+            _settings_load();
+            rtb_terminal.Font = new Font("Courier New", 11);
+            rtb_terminal.BackColor = _color_background;
             this.ActiveControl = tbx_send;
         }
 
-        private void _load_settings() {
+        private void _init_signal_timer() {
+            _signal_timer.Interval = SIGNAL_INTERVAL;
+            _signal_timer.Tick += (s, o) => {
+                if (_checking_signal) {
+                    _wait_for_signal = true;
+                    this.BeginInvoke((Action)(() => { _com_write(AT_commands.AT_CONN_SIGNAL_STRENGTH); }));
+                    Thread t = new Thread(_signal_timeout);
+                    t.Start();
+                } else {
+                    _wait_for_signal = false;
+                    this.BeginInvoke((Action)(() => { chk_signal.Checked = false; }));
+                    _signal_timer.Stop();
+                }
+            };
+        }
+
+        private void _signal_timeout() {
+            Thread.Sleep(150);
+            _wait_for_signal = false;
+        }
+
+        private void _settings_load() {
             cbb_baud_rate.SelectedIndex = Settings.Default.cbb_baud_rate;
             if (Settings.Default.cbb_com_port < cbb_com_port.Items.Count) {
                 cbb_com_port.SelectedIndex = Settings.Default.cbb_com_port;
             }
+
             this.Size = Settings.Default.window_size;
             this.WindowState = Settings.Default.window_state;
+
             chk_graph.Checked = Settings.Default.chart_enabled;
+
             _chart_docked = Settings.Default.chart_dock_state;
+
+            _color_timestamp = Settings.Default.color_timestamp;
+            _color_text = Settings.Default.color_text;
+            _color_background = Settings.Default.color_background;
+
+            rtb_terminal.Font = Settings.Default.font_rtb;
         }
 
-        private void _save_settings() {
+        private void _settings_save() {
             Settings.Default.cbb_baud_rate = cbb_baud_rate.SelectedIndex;
             Settings.Default.cbb_com_port = cbb_com_port.SelectedIndex;
+
             Settings.Default.window_state = this.WindowState != FormWindowState.Minimized ? this.WindowState : FormWindowState.Normal;
             if (this.WindowState == FormWindowState.Maximized) {
                 this.WindowState = FormWindowState.Normal;
             }
             Settings.Default.window_size = this.Size;
+
             Settings.Default.chart_enabled = chk_graph.Checked;
             Settings.Default.chart_dock_state = !_chart_docked;
 
+            Settings.Default.color_timestamp = _color_timestamp;
+            Settings.Default.color_text = _color_text;
+            Settings.Default.color_background = _color_background;
+            Settings.Default.font_rtb = rtb_terminal.Font;
+
             Settings.Default.Save();
         }
+        #endregion
 
         #region communication
-        private void _update_com() {
+        private void _com_update() {
             cbb_com_port.DataSource = SerialPortConnector.getAvalComPort();
         }
 
-        private void _send_to_com(String s) {
+        private void _com_write(String s) {
             if (_port == null || !_port.IsOpen) {
-                _connect_to_serial();
+                _com_connect();
             }
             try {
                 _port.WriteLine(s + Environment.NewLine);
             } catch { }
         }
 
-        private bool _connect_to_serial() {
+        private bool _com_connect() {
             try {
                 if (_port_open) {
                     _port.Close();
@@ -124,13 +163,17 @@ namespace TestTerminal {
                 this.BeginInvoke(new _rtb_append_eh(_rtb_append), p);
                 return;
             }
+            if (p.Length < 1) {
+                return;
+            }
+
             if (p.Contains("+CSQ:")) {
                 double raw_signal_value = double.Parse(p.Substring(p.IndexOf(' ') + 1, 4));
                 double.TryParse(p.Substring(p.IndexOf(' ') + 1, 4), out raw_signal_value);
                 prog_signal.Value = (int)(raw_signal_value * 10);
                 double dbm = _calc_dbm(raw_signal_value);
                 lbl_signal_strength.Text = dbm + "dbm";
-                _add_new_point(CHART_SERIES, (_signal_ctr += SIGNAL_DELAY) / 1000, dbm);
+                _chart_add_point(CHART_SERIES, (_signal_ctr += SIGNAL_INTERVAL) / 1000, dbm);
                 if (raw_signal_value == 0) {
                     lbl_signal_strength.ForeColor = Color.Red;
                     prog_signal.Style = ProgressBarStyle.Marquee;
@@ -140,7 +183,8 @@ namespace TestTerminal {
                 }
 
             } else if (!_wait_for_signal) {
-                rtb_terminal.AppendText(p);
+                rtb_terminal.AppendText((p != "\r" ? DateTime.Now.ToString("[HH:mm:ss] ") : ""), _color_timestamp);
+                rtb_terminal.AppendText(p, _color_text);
                 rtb_terminal.ScrollToCaret();
 
                 if (p.Contains("RING")) {
@@ -159,34 +203,58 @@ namespace TestTerminal {
             return -113 + (csq_value * 2);
         }
 
+        private void _color_select(ref Color to_be_changed) {
+            ColorDialog cd = new ColorDialog();
+            if (cd.ShowDialog() == DialogResult.OK) {
+                to_be_changed = cd.Color;
+            }
+        }
+
         private void _init_chart() {
             chart_signal.MouseWheel += chart_signal_MouseWheel;
             chart_signal.Series.Clear();
             chart_signal.ChartAreas[0].AxisX.Minimum = 0;
+            chart_signal.ChartAreas[0].AxisY.Minimum = -113;
+            chart_signal.ChartAreas[0].AxisY.Maximum = -30;
+            chart_signal.ChartAreas[0].AxisX.LabelStyle.Enabled = false; ;
+            chart_signal.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+            chart_signal.ChartAreas[0].AxisY.MajorGrid.LineWidth = 1;
             //chart_signal.ChartAreas[0].Area3DStyle.Enable3D = true;
             //chart_signal.ChartAreas[0].Area3DStyle.Inclination = 10;
             //chart_signal.ChartAreas[0].Area3DStyle.Rotation = 10;
             ChartControl.ChartSetup(chart_signal, CHART_SERIES, 1, Color.DarkRed, SeriesChartType.Line, ChartValueType.Int32);
             chart_signal.Series[CHART_SERIES].IsVisibleInLegend = false;
-            _set_chart_dock_state();
+            _chart_set_dock_state();
         }
 
-        delegate void _add_new_point_eh(String seriesName, double x, double y);
-        private void _add_new_point(String seriesName, double x, double y) {
+        delegate void _chart_add_point_eh(String seriesName, double x, double y);
+        private void _chart_add_point(String seriesName, double x, double y) {
             if (this.InvokeRequired) {
-                this.BeginInvoke(new _add_new_point_eh(_add_new_point), seriesName, x, y);
+                this.BeginInvoke(new _chart_add_point_eh(_chart_add_point), seriesName, x, y);
                 return;
             }
             try {
                 chart_signal.Series[seriesName].Points.AddXY((double)x, (double)y);
             } catch { }
-            _zoom_trigger();
+            _chart_zoom_trigger();
         }
 
-        delegate void _zoom_trigger_eh();
-        private void _zoom_trigger() {
+        delegate void _chart_clear_data_eh();
+        private void _chart_clear_data() {
             if (InvokeRequired) {
-                this.BeginInvoke(new _zoom_trigger_eh(_zoom_trigger));
+                this.BeginInvoke(new _chart_clear_data_eh(_chart_clear_data));
+                return;
+            }
+            foreach (var series in chart_signal.Series) {
+                series.Points.Clear();
+            }
+            _signal_ctr = 0;
+        }
+
+        delegate void _chart_zoom_trigger_eh();
+        private void _chart_zoom_trigger() {
+            if (InvokeRequired) {
+                this.BeginInvoke(new _chart_zoom_trigger_eh(_chart_zoom_trigger));
                 return;
             }
             chart_signal.ChartAreas[0].CursorX.AutoScroll = true;
@@ -195,37 +263,63 @@ namespace TestTerminal {
             chart_signal.ChartAreas[0].AxisX.ScaleView.Zoom(_signal_ctr / 1000 - _zoom_value, _signal_ctr / 1000);
         }
 
-        private void _set_chart_dock_state() {
+        private void _chart_set_dock_state() {
             if (_chart_docked) {
+                //this.pnl_ctrls.Controls.Remove(chart_signal);
+                this.pnl_main.Controls.Add(chart_signal);
+                chart_signal.BringToFront();
                 this.chart_signal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right));
                 this.chart_signal.Location = new System.Drawing.Point(7, 31);
-                this.chart_signal.Size = new System.Drawing.Size(rtb_terminal.Width, rtb_terminal.Height);
+                this.chart_signal.Size = new System.Drawing.Size(rtb_terminal.Width - 3, rtb_terminal.Height - 3);
                 _chart_docked = false;
             } else {
+                this.pnl_ctrls.Controls.Add(chart_signal);
                 this.chart_signal.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right));
                 this.chart_signal.Size = new System.Drawing.Size(245, 120);
-                this.chart_signal.Location = new System.Drawing.Point(this.Width - chart_signal.Width - 45, 350);
+                //this.chart_signal.Location = new System.Drawing.Point(this.Width - chart_signal.Width - 45, 350);
+                this.chart_signal.Location = new System.Drawing.Point(5, 350);
                 _chart_docked = true;
             }
         }
         #endregion
 
+        #region file
+        private bool _save_as() {
+            String path = String.Empty;
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Rich Text Files (.rtf)|*.rtf";
+            sfd.Title = "Save As...";
+            sfd.DefaultExt = "*.rtf";
+            sfd.RestoreDirectory = true;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                path = sfd.FileName;
+            } else {
+                return false;
+            }
+            rtb_terminal.SaveFile(path);
+            return true;
+        }
+        #endregion
+
         #region event handlers
+        #region Serial
         private void uart_data_received_handler(object sender, SerialDataReceivedEventArgs e) {
             try {
                 _rtb_append(_port.ReadLine());
             } catch (Exception) {
                 try {
-                    _connect_to_serial();
+                    _com_connect();
                 } catch { }
             }
         }
+        #endregion
 
+        #region Button
         private void btn_connect_Click(object sender, EventArgs e) {
             if ((sender as Button).Text == "Connect") {
-                cbb_com_port.Enabled = !_connect_to_serial();
+                cbb_com_port.Enabled = !_com_connect();
             } else if ((sender as Button).Text == "Disconnect") {
                 cbb_com_port.Enabled = true;
                 _checking_signal = false;
@@ -235,16 +329,16 @@ namespace TestTerminal {
         }
 
         private void btn_refresh_Click(object sender, EventArgs e) {
-            _update_com();
+            _com_update();
         }
 
         private void btn_answer_Click(object sender, EventArgs e) {
             if (btn_answer.Text == "Answer") {
-                _send_to_com(AT_commands.AT_CALL_ANSWER);
+                _com_write(AT_commands.AT_CALL_ANSWER);
                 btn_answer.Text = "Hang Up";
                 btn_answer.BackColor = Color.Red;
             } else if (btn_answer.Text == "Hang Up") {
-                _send_to_com(AT_commands.AT_CALL_HANG_UP);
+                _com_write(AT_commands.AT_CALL_HANG_UP);
                 btn_answer.Text = "Answer";
                 btn_answer.BackColor = default(Color);
             }
@@ -252,56 +346,44 @@ namespace TestTerminal {
         }
 
         private void btn_read_msg_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_MSG_READ + nud_msg.Value);
+            _com_write(AT_commands.AT_MSG_READ + nud_msg.Value);
             btn_read_msg.BackColor = default(Color);
         }
 
         private void btn_delete_msg_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_MSG_DEL + nud_msg.Value + AT_commands.AT_MSG_DEL_END);
+            _com_write(AT_commands.AT_MSG_DEL + nud_msg.Value + AT_commands.AT_MSG_DEL_END);
         }
 
         private void btn_ctrl_z_Click(object sender, EventArgs e) {
             if (_port == null || !_port.IsOpen) {
-                _connect_to_serial();
+                _com_connect();
             }
             _port.WriteLine(((char)26).ToString());
         }
 
         private void btn_send_msg_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_MSG_FORMAT + "1");
-            _send_to_com(AT_commands.AT_MSG_SEND + tbx_send.Text + "\"");
+            _com_write(AT_commands.AT_MSG_FORMAT + "1");
+            _com_write(AT_commands.AT_MSG_SEND + tbx_send.Text + "\"");
         }
 
         private void btn_set_ringer_volume_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_AUDIO_SET_RINGER_VOLUME + nud_ringer_volume.Value);
+            _com_write(AT_commands.AT_AUDIO_SET_RINGER_VOLUME + nud_ringer_volume.Value);
         }
 
         private void btn_set_speaker_volume_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_AUDIO_SET_SPEAKER_VOLUME + nud_speaker_volume.Value);
-        }
-
-        private void nud_ringer_volume_MouseDoubleClick(object sender, MouseEventArgs e) {
-            _send_to_com(AT_commands.AT_AUDIO_GET_RINGER_VOLUME);
-        }
-
-        private void nud_speaker_volume_MouseDoubleClick(object sender, MouseEventArgs e) {
-            _send_to_com(AT_commands.AT_AUDIO_GET_SPEAKER_VOLUME);
-        }
-
-        private void nud_ring_tone_MouseDoubleClick(object sender, MouseEventArgs e) {
-            _send_to_com(AT_commands.AT_AUDIO_GET_CURRENT_ALERT_SOUND);
+            _com_write(AT_commands.AT_AUDIO_SET_SPEAKER_VOLUME + nud_speaker_volume.Value);
         }
 
         private void btn_set_ring_tone_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_AUDIO_SET_CURRENT_ALERT_SOUND + nud_ring_tone.Value);
+            _com_write(AT_commands.AT_AUDIO_SET_CURRENT_ALERT_SOUND + nud_ring_tone.Value);
         }
 
         private void btn_error_report_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_DIAG_GET_ERROR_REPORT);
+            _com_write(AT_commands.AT_DIAG_GET_ERROR_REPORT);
         }
 
         private void btn_network_reg_status_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_CONN_NETWORK_REGISTRATION_STATUS);
+            _com_write(AT_commands.AT_CONN_NETWORK_REGISTRATION_STATUS);
         }
 
         private void btn_clear_Click(object sender, EventArgs e) {
@@ -311,32 +393,75 @@ namespace TestTerminal {
         private void btn_gps_pwr_Click(object sender, EventArgs e) {
             Button b = sender as Button;
             if (b.Text == "Off") {
-                _send_to_com(AT_commands.AT_GPS_POWER_ON);
+                _com_write(AT_commands.AT_GPS_POWER_ON);
                 b.BackColor = Color.DarkSeaGreen;
                 b.Text = "On";
             } else if ((sender as Button).Text == "On") {
-                _send_to_com(AT_commands.AT_GPS_POWER_OFF);
+                _com_write(AT_commands.AT_GPS_POWER_OFF);
                 b.BackColor = Color.Red;
                 b.Text = "Off";
             }
         }
 
         private void btn_gps_status_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_GPS_GET_STATUS);
+            _com_write(AT_commands.AT_GPS_GET_STATUS);
         }
 
         private void btn_gps_cold_rst_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_GPS_RST_COLD);
+            _com_write(AT_commands.AT_GPS_RST_COLD);
         }
 
         private void btn_gps_get_location_Click(object sender, EventArgs e) {
-            _send_to_com(AT_commands.AT_GPS_GET_LOCATION);
+            _com_write(AT_commands.AT_GPS_GET_LOCATION);
         }
 
         private void btn_exit_Click(object sender, EventArgs e) {
             Application.Exit();
         }
+        #endregion
 
+        #region ContextMenuStrip
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
+            _save_as();
+        }
+
+        private void timestampToolStripMenuItem_Click(object sender, EventArgs e) {
+            _color_select(ref _color_timestamp);
+        }
+
+        private void textToolStripMenuItem_Click(object sender, EventArgs e) {
+            _color_select(ref _color_text);
+        }
+
+        private void backgroundToolStripMenuItem_Click(object sender, EventArgs e) {
+            _color_select(ref _color_background);
+            rtb_terminal.BackColor = _color_background;
+        }
+
+        private void dockUndockToolStripMenuItem_Click(object sender, EventArgs e) {
+            _chart_set_dock_state();
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e) {
+            _chart_clear_data();
+        }
+        #endregion
+
+        #region NumberUpDown
+        private void nud_ringer_volume_MouseDoubleClick(object sender, MouseEventArgs e) {
+            _com_write(AT_commands.AT_AUDIO_GET_RINGER_VOLUME);
+        }
+
+        private void nud_speaker_volume_MouseDoubleClick(object sender, MouseEventArgs e) {
+            _com_write(AT_commands.AT_AUDIO_GET_SPEAKER_VOLUME);
+        }
+
+        private void nud_ring_tone_MouseDoubleClick(object sender, MouseEventArgs e) {
+            _com_write(AT_commands.AT_AUDIO_GET_CURRENT_ALERT_SOUND);
+        }
+        #endregion
+
+        #region TextBox
         private void tbx_send_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
                 e.Handled = true;
@@ -345,19 +470,20 @@ namespace TestTerminal {
                 if (tbx_send.Text == "exit") {
                     Application.Exit();
                 } else {
-                    _send_to_com(tbx_send.Text);
+                    _com_write(tbx_send.Text);
                 }
             }
         }
+        #endregion
 
+        #region CheckBox
         private void chk_signal_CheckedChanged(object sender, EventArgs e) {
             if ((sender as CheckBox).Checked) {
                 prog_signal.Style = ProgressBarStyle.Continuous;
                 _checking_signal = true;
-                Thread t = new Thread(() => _update_signal());
-                t.IsBackground = true;
-                t.Start();
+                _signal_timer.Start();
             } else {
+                prog_signal.Style = ProgressBarStyle.Marquee;
                 _checking_signal = false;
                 _wait_for_signal = false;
                 lbl_signal_strength.Text = "---";
@@ -368,11 +494,11 @@ namespace TestTerminal {
         private void chk_module_state_CheckedChanged(object sender, EventArgs e) {
             CheckBox c = sender as CheckBox;
             if (c.Text == "On") {
-                _send_to_com(AT_commands.AT_STATE_OFF);
+                _com_write(AT_commands.AT_STATE_OFF);
                 c.Checked = false;
                 c.Text = "Off";
             } else {
-                _send_to_com(AT_commands.AT_STATE_ON);
+                _com_write(AT_commands.AT_STATE_ON);
                 c.Checked = true;
                 c.Text = "On";
             }
@@ -381,7 +507,9 @@ namespace TestTerminal {
         private void chk_graph_CheckedChanged(object sender, EventArgs e) {
             chart_signal.Visible = (sender as CheckBox).Checked;
         }
+        #endregion
 
+        #region ComboBox
         private void cbb_baud_rate_SelectedIndexChanged(object sender, EventArgs e) {
             if (_port != null) {
                 _port.Dispose();
@@ -389,19 +517,17 @@ namespace TestTerminal {
             cbb_com_port.Enabled = true;
             btn_connect.Text = "Connect";
         }
+        #endregion
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
-            _save_settings();
+        #region Chart
+        private void chart_signal_DoubleClick(object sender, EventArgs e) {
+            _chart_set_dock_state();
         }
 
         private void chart_signal_MouseEnter(object sender, EventArgs e) {
             if (!tbx_send.Focused) {
                 chart_signal.Focus();
             }
-        }
-
-        private void chart_signal_DoubleClick(object sender, EventArgs e) {
-            _set_chart_dock_state();
         }
 
         private void chart_signal_MouseWheel(object sender, MouseEventArgs e) {
@@ -442,6 +568,25 @@ namespace TestTerminal {
                 }
 
             } catch { }
+        }
+        #endregion
+
+        #region Form
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+            _settings_save();
+        }
+        #endregion
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e) {
+            FontDialog fd = new FontDialog();
+            fd.Font = rtb_terminal.Font;
+            try {
+                if (fd.ShowDialog() == DialogResult.OK) {
+                    rtb_terminal.Font = fd.Font;
+                }
+            } catch {
+                rtb_terminal.AppendText("ERROR! Not a TrueType font!\n", Color.Red);
+            }
         }
         #endregion
     }

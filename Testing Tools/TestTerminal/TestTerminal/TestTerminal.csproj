@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AMD\util\AT_commands.cs" />
     <Compile Include="AMD\util\ChartControl.cs" />
+    <Compile Include="AMD\util\ExtensionMethods.cs" />
     <Compile Include="AMD\util\SerialPortConnector.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

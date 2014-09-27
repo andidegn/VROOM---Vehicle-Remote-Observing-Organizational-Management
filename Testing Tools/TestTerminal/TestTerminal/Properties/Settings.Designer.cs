@@ -94,5 +94,52 @@ namespace TestTerminal.Properties {
                 this["cbb_com_port"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Green")]
+        public global::System.Drawing.Color color_timestamp {
+            get {
+                return ((global::System.Drawing.Color)(this["color_timestamp"]));
+            }
+            set {
+                this["color_timestamp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color color_text {
+            get {
+                return ((global::System.Drawing.Color)(this["color_text"]));
+            }
+            set {
+                this["color_text"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color color_background {
+            get {
+                return ((global::System.Drawing.Color)(this["color_background"]));
+            }
+            set {
+                this["color_background"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Courier New, 11.25pt")]
+        public global::System.Drawing.Font font_rtb {
+            get {
+                return ((global::System.Drawing.Font)(this["font_rtb"]));
+            }
+            set {
+                this["font_rtb"] = value;
+            }
+        }
     }
 }

@@ -600,7 +600,6 @@ namespace Accelerometer_Analyzer {
                         break;
                 }
             }
-            //Thread.Sleep(_readingIndex / 100 + 250);
         }
         #endregion
 

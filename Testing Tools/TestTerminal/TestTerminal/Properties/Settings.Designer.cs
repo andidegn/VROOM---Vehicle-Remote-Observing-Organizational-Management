@@ -58,5 +58,41 @@ namespace TestTerminal.Properties {
                 this["window_state"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chart_dock_state {
+            get {
+                return ((bool)(this["chart_dock_state"]));
+            }
+            set {
+                this["chart_dock_state"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chart_enabled {
+            get {
+                return ((bool)(this["chart_enabled"]));
+            }
+            set {
+                this["chart_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cbb_com_port {
+            get {
+                return ((int)(this["cbb_com_port"]));
+            }
+            set {
+                this["cbb_com_port"] = value;
+            }
+        }
     }
 }

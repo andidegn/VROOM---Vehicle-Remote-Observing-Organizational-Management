@@ -227,21 +227,51 @@ namespace Accelerometer_Analyzer {
             }
             rtb_data.AppendText(p);
         }
+
+        delegate void _set_series_state_eh(Nullable<bool> state);
+        private void _set_series_state(Nullable<bool> state) {
+            if (InvokeRequired) {
+                this.BeginInvoke(new _set_series_state_eh(_set_series_state), state);
+                return;
+            }
+            chart1.Series["acc_x"].Enabled = state == null ? chk_x.Checked : (bool)state;
+            chart1.Series["acc_y"].Enabled = state == null ? chk_y.Checked : (bool)state;
+            chart1.Series["acc_z"].Enabled = state == null ? chk_z.Checked : (bool)state;
+            chart1.Series["v_len"].Enabled = state == null ? chk_v_len.Checked : (bool)state;
+        }
         #endregion
 
         #region file
+        private void _process_file(String file_path) {
+            StreamReader sr = new StreamReader(file_path);
+            try {
+                _file_path = file_path;
+                _set_title(file_path);
+            } catch (Exception ex) {
+                MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+            }
+
+            if (sr != null) {
+                System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
+                Thread t = new Thread(() => _print_csv(sr));
+                t.IsBackground = true;
+                t.Start();
+            }
+        }
+
         public void _print_csv(StreamReader sr) {
             String line;
-            _chart_visible(false);
             _clear_data();
             _readingIndex = 0;
+            _set_series_state(true);
             while ((line = sr.ReadLine()) != null) {
                 process_data(_get_vector_from_csv(line));
             }
             sr.Dispose();
-            _chart_visible(true);
-            _set_title(this.Text + " - END OF FILE!");
+            _set_title(_file_path + " - END OF FILE!");
+            Thread.Sleep(100);
             _zoom_trigger();
+            _set_series_state(null);
         }
 
         private Vector3D _get_vector_from_csv(String data) {
@@ -412,21 +442,7 @@ namespace Accelerometer_Analyzer {
             ofd.Multiselect = false;
 
             if (ofd.ShowDialog() == DialogResult.OK) {
-                StreamReader sr = null;
-                try {
-                    System.IO.Stream fileStream = ofd.OpenFile();
-                    sr = new System.IO.StreamReader(fileStream);
-                    _file_path = ofd.FileName;
-                    _set_title(ofd.FileName);
-                } catch (Exception ex) {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-                }
-
-                if (sr != null) {
-                    Thread t = new Thread(() => _print_csv(sr));
-                    t.IsBackground = true;
-                    t.Start();
-                }
+                _process_file(ofd.FileName);
                 
             }
         }
@@ -480,7 +496,6 @@ namespace Accelerometer_Analyzer {
         }
 
         private void tkb_scale_Scroll(object sender, EventArgs e) {
-            String scaleValue = tkb_scale.Value.ToString();
             _zoom_trigger();
         }
 
@@ -488,10 +503,6 @@ namespace Accelerometer_Analyzer {
             if (!tbx_send.Focused) {
                 tkb_length_offset.Focus();
             }
-        }
-
-        private void tkb_length_offset_Scroll(object sender, EventArgs e) {
-            _length_offset = (sender as TrackBar).Value;
         }
 
         private void chart1_MouseEnter(object sender, EventArgs e) {
@@ -592,5 +603,39 @@ namespace Accelerometer_Analyzer {
             //Thread.Sleep(_readingIndex / 100 + 250);
         }
         #endregion
+
+        private void chart1_DragDrop(object sender, DragEventArgs e) {
+
+            // process_data(_get_vector_from_csv(line));
+            // Handle FileDrop data. 
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+                // Assign the file names to a string array, in  
+                // case the user has selected multiple files. 
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.Length > 1) {
+                    MessageBox.Show("You can only drop \"1\" file at the time", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                try {
+                    _process_file(files[0]);
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
+        }
+
+        private void chart1_DragEnter(object sender, DragEventArgs e) {
+            if (e.Data.GetDataPresent(DataFormats.Text) ||
+               e.Data.GetDataPresent(DataFormats.FileDrop)) {
+                e.Effect = DragDropEffects.Copy;
+            } else {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void tkb_length_offset_ValueChanged(object sender, EventArgs e) {
+            _length_offset = (sender as TrackBar).Value;
+            _reload_file();
+        }
     }
 }

@@ -65,6 +65,7 @@
             // 
             // chart1
             // 
+            this.chart1.AllowDrop = true;
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -89,6 +90,8 @@
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             this.chart1.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.SystemDefault;
+            this.chart1.DragDrop += new System.Windows.Forms.DragEventHandler(this.chart1_DragDrop);
+            this.chart1.DragEnter += new System.Windows.Forms.DragEventHandler(this.chart1_DragEnter);
             this.chart1.MouseEnter += new System.EventHandler(this.chart1_MouseEnter);
             // 
             // btn_start
@@ -212,7 +215,7 @@
             this.grp_axis.Controls.Add(this.chk_z);
             this.grp_axis.Controls.Add(this.chk_y);
             this.grp_axis.Controls.Add(this.chk_x);
-            this.grp_axis.Location = new System.Drawing.Point(936, 181);
+            this.grp_axis.Location = new System.Drawing.Point(940, 144);
             this.grp_axis.Name = "grp_axis";
             this.grp_axis.Size = new System.Drawing.Size(103, 120);
             this.grp_axis.TabIndex = 7;
@@ -276,7 +279,7 @@
             this.tkb_length_offset.Size = new System.Drawing.Size(45, 461);
             this.tkb_length_offset.TabIndex = 6;
             this.tkb_length_offset.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tkb_length_offset.Scroll += new System.EventHandler(this.tkb_length_offset_Scroll);
+            this.tkb_length_offset.ValueChanged += new System.EventHandler(this.tkb_length_offset_ValueChanged);
             this.tkb_length_offset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tkb_length_offset_KeyDown);
             this.tkb_length_offset.MouseEnter += new System.EventHandler(this.tkb_length_offset_MouseEnter);
             // 

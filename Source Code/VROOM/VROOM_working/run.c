@@ -11,8 +11,8 @@
 #define OFF 0
 
 #define KENNETH_TEST OFF
-#define ANDI_TEST OFF
-#define MODULE_TEST ON
+#define ANDI_TEST ON
+#define MODULE_TEST OFF
 /*********************************//**
  * UNCOMMENT FOR RUN ALL UNIT TESTS  *
  *************************************/
@@ -74,16 +74,16 @@ int main(void) {
 		lcd_putc('\n');
 		lcd_puts(*(_results + i));
 
-        if (!btn_lcd_is_pressed(BTN_PIN0)) {
-            while (!btn_lcd_is_pressed(BTN_PIN0));
+        if (btn_lcd_is_pressed(BTN_PIN0)) {
+            while (btn_lcd_is_pressed(BTN_PIN0));
 			i++;
 			if (i > num_of_tests - 1) {
 				i = num_of_tests - 1;
 			}
         }
 
-        if (!btn_lcd_is_pressed(BTN_PIN1)) {
-            while (!btn_lcd_is_pressed(BTN_PIN1));
+        if (btn_lcd_is_pressed(BTN_PIN1)) {
+            while (btn_lcd_is_pressed(BTN_PIN1));
 			i--;
 			if (i < 1) {
 				i = 1;
@@ -138,7 +138,9 @@ int main(void) {
 						UART_8_BIT,
 						uart1_callback_test);
 #endif // UART1
-    lcd_init(LCD_DISP_ON);
+	if (!btn_lcd_is_pressed(BTN_PIN0)) {
+		lcd_init(LCD_DISP_ON);
+	}
     btn_led_lcd_init();
     led_lcd_set(LED_RED, LED_ON);
     lop_init();
@@ -174,31 +176,31 @@ int main(void) {
 
 #if GSM_TEST
         /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN0)) {
-            while (!btn_lcd_is_pressed(BTN_PIN0));
+        if (btn_lcd_is_pressed(BTN_PIN0)) {
+            while (btn_lcd_is_pressed(BTN_PIN0));
 			lcd_clrscr();
 			gsm_send(AT_CONN_SIGNAL_STRENGTH);
         }
         /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN1)) {
-            while (!btn_lcd_is_pressed(BTN_PIN1));
+        if (btn_lcd_is_pressed(BTN_PIN1)) {
+            while (btn_lcd_is_pressed(BTN_PIN1));
             lcd_clrscr();
 			gsm_send(AT_CONN_NETWORK_REGISTRATION_STATUS);
         }
         /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN2)) {
-            while (!btn_lcd_is_pressed(BTN_PIN2));
+        if (btn_lcd_is_pressed(BTN_PIN2)) {
+            while (btn_lcd_is_pressed(BTN_PIN2));
             lcd_clrscr();
 			gsm_answer();
         }
         /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN3)) {
-            while (!btn_lcd_is_pressed(BTN_PIN3));
+        if (btn_lcd_is_pressed(BTN_PIN3)) {
+            while (btn_lcd_is_pressed(BTN_PIN3));
             lcd_clrscr();
 			gsm_hang_up();
         }
 		while ((uart_read = uart0_read_char()) != UART_NO_DATA) {
-			lcd_putc((char)uart_read);
+			lcd_putc(uart_read == '\r'? '\n': uart_read);
 			uart1_send_char(uart_read);
 		}
 		while ((uart_read = uart1_read_char()) != UART_NO_DATA) {
@@ -216,10 +218,10 @@ int main(void) {
         lcd_puts(buf);
 
         /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN1)) {
+        if (btn_lcd_is_pressed(BTN_PIN1)) {
             _listening = !_listening;
             lop_toggle_led(LOP_YELLOW);
-            while (!btn_lcd_is_pressed(BTN_PIN1));
+            while (btn_lcd_is_pressed(BTN_PIN1));
         }
 
         if (_listening) {
@@ -238,11 +240,11 @@ int main(void) {
 
 #if SEND_TO_UART
         /* listening for switch press */
-        if (!btn_lcd_is_pressed(BTN_PIN0)) {
+        if (btn_lcd_is_pressed(BTN_PIN0)) {
             _sending = !_sending;
             led_lcd_toggle(LED_RED);
             led_lcd_toggle(LED_GREEN);
-            while (!btn_lcd_is_pressed(BTN_PIN0));
+            while (btn_lcd_is_pressed(BTN_PIN0));
         }
         if (_sending) {
 	#if UART0

@@ -31,6 +31,11 @@ namespace AMD.Util.terminal {
         public const String AT_AUDIO_SET_CURRENT_ALERT_SOUND = "AT+CALS="; // Add number 0-19
         #endregion
 
+        #region state
+        public const String AT_STATE_ON = "AT+CFUN=1";
+        public const String AT_STATE_OFF = "AT+CFUN=0";
+        #endregion
+
         #region diagnostic
         public const String AT_DIAG_MODEL_NO = "AT+CGMM";
         public const String AT_DIAG_MANUFACTURER = "AT+CGMI";

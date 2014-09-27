@@ -19,7 +19,7 @@ void btn_led_lcd_init() {
 }
 
 bool btn_lcd_is_pressed(uint8_t pin) {
-	return PIN(BTN_LED_PORT) & _BV(pin);
+	return !(PIN(BTN_LED_PORT) & _BV(pin));
 }
 
 void led_lcd_set(uint8_t led, uint8_t state) {

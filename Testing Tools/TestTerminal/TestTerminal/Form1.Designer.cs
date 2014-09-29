@@ -30,6 +30,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pnl_main = new System.Windows.Forms.Panel();
             this.chart_signal = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.cms_signal_chart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dockUndockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_ctrls = new System.Windows.Forms.Panel();
             this.gb_connection = new System.Windows.Forms.GroupBox();
             this.chk_graph = new System.Windows.Forms.CheckBox();
@@ -71,18 +74,17 @@
             this.timestampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.cbb_baud_rate = new System.Windows.Forms.ComboBox();
             this.lbl_baud = new System.Windows.Forms.Label();
             this.btn_connect = new System.Windows.Forms.Button();
             this.cbb_com_port = new System.Windows.Forms.ComboBox();
             this.lbl_com_port = new System.Windows.Forms.Label();
-            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cms_signal_chart = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.dockUndockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbl_operator_name = new System.Windows.Forms.Label();
             this.pnl_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_signal)).BeginInit();
+            this.cms_signal_chart.SuspendLayout();
             this.pnl_ctrls.SuspendLayout();
             this.gb_connection.SuspendLayout();
             this.gb_call.SuspendLayout();
@@ -93,7 +95,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_msg)).BeginInit();
             this.gb_gps.SuspendLayout();
             this.cms_rtb_terminal.SuspendLayout();
-            this.cms_signal_chart.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_main
@@ -146,6 +147,28 @@
             this.chart_signal.DoubleClick += new System.EventHandler(this.chart_signal_DoubleClick);
             this.chart_signal.MouseEnter += new System.EventHandler(this.chart_signal_MouseEnter);
             // 
+            // cms_signal_chart
+            // 
+            this.cms_signal_chart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dockUndockToolStripMenuItem,
+            this.resetToolStripMenuItem});
+            this.cms_signal_chart.Name = "cms_signal_chart";
+            this.cms_signal_chart.Size = new System.Drawing.Size(148, 48);
+            // 
+            // dockUndockToolStripMenuItem
+            // 
+            this.dockUndockToolStripMenuItem.Name = "dockUndockToolStripMenuItem";
+            this.dockUndockToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.dockUndockToolStripMenuItem.Text = "Dock/Undock";
+            this.dockUndockToolStripMenuItem.Click += new System.EventHandler(this.dockUndockToolStripMenuItem_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
             // pnl_ctrls
             // 
             this.pnl_ctrls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -162,6 +185,7 @@
             // gb_connection
             // 
             this.gb_connection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_connection.Controls.Add(this.lbl_operator_name);
             this.gb_connection.Controls.Add(this.chk_graph);
             this.gb_connection.Controls.Add(this.chk_module_state);
             this.gb_connection.Controls.Add(this.prog_signal);
@@ -583,6 +607,13 @@
             this.backgroundToolStripMenuItem.Text = "Background";
             this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.backgroundToolStripMenuItem_Click);
             // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
+            // 
             // btn_refresh
             // 
             this.btn_refresh.Location = new System.Drawing.Point(104, 1);
@@ -638,34 +669,14 @@
             this.lbl_com_port.TabIndex = 0;
             this.lbl_com_port.Text = "Port";
             // 
-            // fontToolStripMenuItem
+            // lbl_operator_name
             // 
-            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.fontToolStripMenuItem.Text = "Font";
-            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
-            // 
-            // cms_signal_chart
-            // 
-            this.cms_signal_chart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dockUndockToolStripMenuItem,
-            this.resetToolStripMenuItem});
-            this.cms_signal_chart.Name = "cms_signal_chart";
-            this.cms_signal_chart.Size = new System.Drawing.Size(153, 70);
-            // 
-            // dockUndockToolStripMenuItem
-            // 
-            this.dockUndockToolStripMenuItem.Name = "dockUndockToolStripMenuItem";
-            this.dockUndockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.dockUndockToolStripMenuItem.Text = "Dock/Undock";
-            this.dockUndockToolStripMenuItem.Click += new System.EventHandler(this.dockUndockToolStripMenuItem_Click);
-            // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resetToolStripMenuItem.Text = "Reset";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            this.lbl_operator_name.AutoSize = true;
+            this.lbl_operator_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_operator_name.Location = new System.Drawing.Point(90, 64);
+            this.lbl_operator_name.Name = "lbl_operator_name";
+            this.lbl_operator_name.Size = new System.Drawing.Size(0, 20);
+            this.lbl_operator_name.TabIndex = 25;
             // 
             // Form1
             // 
@@ -681,6 +692,7 @@
             this.pnl_main.ResumeLayout(false);
             this.pnl_main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_signal)).EndInit();
+            this.cms_signal_chart.ResumeLayout(false);
             this.pnl_ctrls.ResumeLayout(false);
             this.gb_connection.ResumeLayout(false);
             this.gb_connection.PerformLayout();
@@ -693,7 +705,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_msg)).EndInit();
             this.gb_gps.ResumeLayout(false);
             this.cms_rtb_terminal.ResumeLayout(false);
-            this.cms_signal_chart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -753,6 +764,7 @@
         private System.Windows.Forms.ContextMenuStrip cms_signal_chart;
         private System.Windows.Forms.ToolStripMenuItem dockUndockToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.Label lbl_operator_name;
 
     }
 }

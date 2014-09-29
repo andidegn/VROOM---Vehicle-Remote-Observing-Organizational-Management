@@ -23,8 +23,8 @@ static void _data0_received(char data);
 static void _data1_received(char data);
 
 uint8_t test_module_uart_run(void) {
-	uint8_t test_result = UART_PASSED;
-	uint16_t tmp_char = 0;
+	volatile uint8_t test_result = UART_PASSED;
+	volatile uint16_t tmp_char = 0;
 
 	/*******************************
 	 **** TESTING WITH CALLBACK ****
@@ -55,8 +55,9 @@ uint8_t test_module_uart_run(void) {
 	/* sending test string */
 	_i = 0;
 	uart0_send_string(_uart_test_string);
+		_delay_ms(1);
 
-	while (tmp_char = uart1_read_char() != UART_NO_DATA) {
+	while ((tmp_char = uart1_read_char()) != UART_NO_DATA) {
 		_uart_recieved_data[_i++] = tmp_char;
 	}
 
@@ -67,10 +68,11 @@ uint8_t test_module_uart_run(void) {
 
 static inline uint8_t _validate_data() {
 	uint8_t test_result = UART_PASSED;
-	
+
 	for (_i = 0; _i < TEST_STRING_LENGTH; _i++) {
 		if (_uart_test_string[_i] != _uart_recieved_data[_i]) {
 			test_result = UART_FAILED;
+			break;
 		}
 		_i++;
 	}

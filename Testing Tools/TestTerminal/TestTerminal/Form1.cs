@@ -54,13 +54,14 @@ namespace TestTerminal {
             rtb_terminal.BackColor = _color_background;
             this.ActiveControl = tbx_send;
         }
-
+        private int _skip_no_of_receptions;
         private void _init_signal_timer() {
             _signal_timer.Interval = SIGNAL_INTERVAL;
             _signal_timer.Tick += (s, o) => {
                 if (_checking_signal) {
                     _wait_for_signal = true;
                     this.BeginInvoke((Action)(() => { _com_write(AT_commands.AT_CONN_SIGNAL_STRENGTH); }));
+                    _skip_no_of_receptions = 3;
                     Thread t = new Thread(_signal_timeout);
                     t.Start();
                 } else {
@@ -72,8 +73,8 @@ namespace TestTerminal {
         }
 
         private void _signal_timeout() {
-            Thread.Sleep(150);
-            _wait_for_signal = false;
+            Thread.Sleep(450);
+            //_wait_for_signal = false;
         }
 
         private void _settings_load() {
@@ -167,22 +168,39 @@ namespace TestTerminal {
                 return;
             }
 
-            if (p.Contains("+CSQ:")) {
-                double raw_signal_value = double.Parse(p.Substring(p.IndexOf(' ') + 1, 4));
-                double.TryParse(p.Substring(p.IndexOf(' ') + 1, 4), out raw_signal_value);
-                prog_signal.Value = (int)(raw_signal_value * 10);
-                double dbm = _calc_dbm(raw_signal_value);
-                lbl_signal_strength.Text = dbm + "dbm";
-                _chart_add_point(CHART_SERIES, (_signal_ctr += SIGNAL_INTERVAL) / 1000, dbm);
-                if (raw_signal_value == 0) {
-                    lbl_signal_strength.ForeColor = Color.Red;
-                    prog_signal.Style = ProgressBarStyle.Marquee;
-                } else {
-                    lbl_signal_strength.ForeColor = Color.Black;
-                    prog_signal.Style = ProgressBarStyle.Continuous;
+            if (p.Contains("COPS")) {
+                if (p.Contains("\"")) {
+                    int first = p.IndexOf('"');
+                    int last = p.LastIndexOf('"');
+                    lbl_operator_name.Text = p.Substring(first + 1, last - first - 1);
+                } else if (p.EndsWith("0\r")) {
+                    lbl_operator_name.Text = "No Operator";
+                }
+            }
+
+            
+            
+            if (p.Contains("CSQ")) {
+                if (p.Contains("CSQ:")) {
+                    double raw_signal_value = double.Parse(p.Substring(p.IndexOf(' ') + 1, 4));
+                    double.TryParse(p.Substring(p.IndexOf(' ') + 1, 4), out raw_signal_value);
+                    prog_signal.Value = (int)(raw_signal_value * 10);
+                    double dbm = _calc_dbm(raw_signal_value);
+                    lbl_signal_strength.Text = dbm + "dbm";
+                    _chart_add_point(CHART_SERIES, (_signal_ctr += SIGNAL_INTERVAL) / 1000, dbm);
+                    if (raw_signal_value == 0) {
+                        lbl_signal_strength.ForeColor = Color.Red;
+                        prog_signal.Style = ProgressBarStyle.Marquee;
+                    } else {
+                        lbl_signal_strength.ForeColor = Color.Black;
+                        prog_signal.Style = ProgressBarStyle.Continuous;
+                    }
+                    if (lbl_operator_name.Text.Length == 0) {
+                        _com_write(AT_commands.AT_CONN_OPERATOR_NAME);
+                    }
                 }
 
-            } else if (!_wait_for_signal) {
+            } else if (_skip_no_of_receptions <= 0) {
                 rtb_terminal.AppendText((p != "\r" ? DateTime.Now.ToString("[HH:mm:ss] ") : ""), _color_timestamp);
                 rtb_terminal.AppendText(p, _color_text);
                 rtb_terminal.ScrollToCaret();
@@ -194,8 +212,8 @@ namespace TestTerminal {
                 } else if (p == "OK\r" || p == "ERROR\r") {
                     rtb_terminal.AppendText("=========================\n");
                 }
-            } else if (p == "OK\r") {
-                _wait_for_signal = false;
+            } else if (_skip_no_of_receptions > 0) {
+                _skip_no_of_receptions--;
             }
         }
 

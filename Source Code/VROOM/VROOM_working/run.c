@@ -11,8 +11,8 @@
 #define OFF 0
 
 #define KENNETH_TEST OFF
-#define ANDI_TEST ON
-#define MODULE_TEST OFF
+#define ANDI_TEST OFF
+#define MODULE_TEST ON
 /*********************************//**
  * UNCOMMENT FOR RUN ALL UNIT TESTS  *
  *************************************/

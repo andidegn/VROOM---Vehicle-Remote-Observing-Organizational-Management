@@ -10,7 +10,7 @@ namespace AMD.Util.terminal {
         public const String AT_CALL_ANSWER = "ATA";
         public const String AT_CALL_HANG_UP = "ATH";
         public const String AT_CALL_DIAL = "ATD";
-        public const String AT_CALL_SHOW_NUM = "AT+CNUM";
+        public const String AT_CALL_SHOW_CALLER_ID = "AT+CLIP="; // Add number
         #endregion
 
         #region message
@@ -46,6 +46,7 @@ namespace AMD.Util.terminal {
         public const String AT_CONN_SIGNAL_STRENGTH = "AT+CSQ";
         public const String AT_CONN_ATTACH_STATUS = "AT+CGATT?";
         public const String AT_CONN_NETWORK_REGISTRATION_STATUS = "AT+CREG?";
+        public const String AT_CONN_OPERATOR_NAME = "AT+COPS?";
         #endregion
 
         #region GPS

@@ -10,9 +10,9 @@
 #define ON 1
 #define OFF 0
 
-#define KENNETH_TEST OFF
+#define KENNETH_TEST ON
 #define ANDI_TEST OFF
-#define MODULE_TEST ON
+#define MODULE_TEST OFF
 /*********************************//**
  * UNCOMMENT FOR RUN ALL UNIT TESTS  *
  *************************************/
@@ -296,6 +296,7 @@ void uart1_callback_test(char data) {
 #if KENNETH_TEST
 
 #include "hardware_boards/sim908/sim908_gsm.h"
+#include "hardware_boards/lcd_board/lcd/lcd.h"
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -304,21 +305,40 @@ int main (void)
 {
 	DDRA = 0xFF;
 	PORTA = 0xFF;
+	char buf[10];
+	int8_t a = 0;
+	int8_t b = 0;
+	
+	lcd_init(LCD_DISP_ON);
+	
+	lcd_clrscr();
 
-	SIM908_init();
-	GSM_enable();
+
 	sei();
-	_delay_ms(5000);
-	SIM908_cmd("AT");
-
-	_delay_ms(2000);
-	SIM908_cmd("AT");
-
-	_delay_ms(2000);
-	SIM908_cmd("ATH");
-
-	_delay_ms(2000);
-	SIM908_cmd("ATD60192949;");
+	 a = SIM908_init();
+		
+	 b = GSM_enable();
+	 lcd_clrscr();
+	lcd_gotoxy(0, 0);
+	sprintf(buf, "Init %d", a);
+	lcd_puts(buf);
+		
+	lcd_gotoxy(0, 1);
+	sprintf(buf, "GSM %d", b);
+	lcd_puts(buf);
+	//
+	
+	//_delay_ms(5000);
+	//SIM908_cmd("AT");
+	//
+	//_delay_ms(2000);
+	//SIM908_cmd("AT");
+//
+	//_delay_ms(2000);
+////	SIM908_cmd("ATH");
+//
+	//_delay_ms(2000);
+	//SIM908_cmd("ATD60192949;");
 
 	while (1)
 	{

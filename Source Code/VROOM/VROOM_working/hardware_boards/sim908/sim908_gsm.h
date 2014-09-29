@@ -12,7 +12,6 @@
 #ifndef SIM908_GSM_H_
 #define SIM908_GSM_H_
 
-#include "..\..\data_comm\uart\uart.h"
 #include <avr/io.h>
 
 /* Uncomment for Arduino default port settings */
@@ -39,10 +38,18 @@
 
 /* *************************************************************************** */
 
-void SIM908_init(void);
-void SIM908_cmd(const char *cmd);
-void GSM_enable(void);
-void GPS_enable(void);
-void call_PSAP(void);
+
+/* Error List for AT Command response */
+#define SIM908_OK					 1
+#define SIM908_INVALID_RESPONSE		-1
+#define SIM908_FAIL					-2
+#define SIM908_TIMEOUT				-3
+
+
+int8_t SIM908_init(void);
+int8_t SIM908_cmd(const char *cmd);
+int8_t GSM_enable(void);
+int8_t GPS_enable(void);
+int8_t call_PSAP(void);
 
 #endif /* SIM908_GSM_H_ */

@@ -10,8 +10,8 @@
 #define ON 1
 #define OFF 0
 
-#define KENNETH_TEST ON
-#define ANDI_TEST OFF
+#define KENNETH_TEST OFF
+#define ANDI_TEST ON
 #define MODULE_TEST OFF
 /*********************************//**
  * UNCOMMENT FOR RUN ALL UNIT TESTS  *
@@ -23,7 +23,7 @@
 #define UART0 OFF
 #define UART1 OFF
 #define UART_LOOP_BACK OFF
-#define GSM_TEST OFF
+#define GSM_TEST ON
 
 #define DELAY_BETWEEN_CHARS 1
 

@@ -1,18 +1,13 @@
 /*
- * gsm.h
+ * at_commands.h
  *
- * Created: 24-09-2014 00:00:07
+ * Created: 01-10-2014 00:20:07
  *  Author: Andi Degn
  */
 
 
-#ifndef GSM_H_
-#define GSM_H_
-
-#define GSM_PORT PORTE
-#define GSM_GSM_ENABLE_PIN 3
-#define GSM_GPS_ENABLE_PIN 4
-#define GSM_MODULE_START_PIN 5
+#ifndef AT_COMMANDS_H_
+#define AT_COMMANDS_H_
 
 /* call */
 #define AT_CALL_ANSWER "ATA"
@@ -61,10 +56,4 @@
 /* CTRL+Z */
 #define AT_CTRL_Z 26
 
-void gsm_init(void);
-void gsm_start(void);
-void gsm_send(const char *command);
-void gsm_answer(void);
-void gsm_hang_up(void);
-
-#endif /* GSM_H_ */
+#endif /* AT_COMMANDS_H_ */

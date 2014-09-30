@@ -1,3 +1,19 @@
+=====================================
+Version 0.08 - 2014/09/30 by Kenneth
+=====================================
+* In SIM908 driver: Added response and command check for AT SET commands
+* In SIM908 driver: Added self-reset in case of no response in init function 
+* In Unit Test: Added unit test function for the command and response check
+* Started implementing module test for sensors
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+- Unit Test does not store result for all tests
+
+
 ===================================
 Version 0.071a - 2014/09/26 by Andi
 ===================================

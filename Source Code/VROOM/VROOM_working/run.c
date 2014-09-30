@@ -23,7 +23,7 @@
 #define UART0 OFF
 #define UART1 OFF
 #define UART_LOOP_BACK OFF
-#define GSM_TEST ON
+#define GSM_TEST OFF
 
 #define DELAY_BETWEEN_CHARS 1
 
@@ -297,10 +297,15 @@ void uart1_callback_test(char data) {
 
 #include "hardware_boards/sim908/sim908_gsm.h"
 #include "hardware_boards/lcd_board/lcd/lcd.h"
+#include "hardware_boards/lcd_board/button_led/btn_led_lcd.h"
 #include <avr/io.h>
 #include <util/delay.h>
 
 #define F_CPU 11059200UL
+
+
+
+	
 int main (void)
 {
 	DDRA = 0xFF;
@@ -308,43 +313,48 @@ int main (void)
 	char buf[10];
 	int8_t a = 0;
 	int8_t b = 0;
-	
-	lcd_init(LCD_DISP_ON);
-	
-	lcd_clrscr();
-
-
+	btn_led_lcd_init();
 	sei();
-	 a = SIM908_init();
-		
-	 b = GSM_enable();
-	 lcd_clrscr();
-	lcd_gotoxy(0, 0);
-	sprintf(buf, "Init %d", a);
-	lcd_puts(buf);
-		
-	lcd_gotoxy(0, 1);
-	sprintf(buf, "GSM %d", b);
-	lcd_puts(buf);
-	//
+	lcd_init(LCD_DISP_ON);
+	lcd_clrscr();
+	lcd_gotoxy(0,0);
+	lcd_puts("Init...");
+	SIM908_init();
+	lcd_puts("-OK!");
+	lcd_gotoxy(0,1);
+	lcd_puts("Enable GSM...");
+	GSM_enable();
+	lcd_puts("-OK!");
 	
-	//_delay_ms(5000);
-	//SIM908_cmd("AT");
-	//
-	//_delay_ms(2000);
-	//SIM908_cmd("AT");
-//
-	//_delay_ms(2000);
-////	SIM908_cmd("ATH");
-//
-	//_delay_ms(2000);
-	//SIM908_cmd("ATD60192949;");
+	#if UNIT_TEST
+		#include "unit_test.h"
+		char* result = run_all_tests();
+		lcd_clrscr();
+		lcd_gotoxy(0,0);
+		lcd_puts(result);
+		lcd_gotoxy(0,1);
+		lcd_puts("Tests run: ");
+		lcd_puts(itoa(tests_run, buf, 10));
+	#else //!UNIT_TEST
 
-	while (1)
-	{
-		PORTA ^= 1;
-		_delay_ms(1000);
-
-	}
+		lcd_clrscr();
+		lcd_puts("CALL...");
+		
+		while(call_PSAP() != SIM908_OK);
+		lcd_puts("-OK!");
+		
+		while (1)
+		{
+			if (btn_lcd_is_pressed(BTN_PIN0))
+			{
+				SIM908_cmd("ATH", OK);
+				lcd_gotoxy(0,1);
+				lcd_puts("HANG UP!!!");
+			}
+				
+			PORTA ^= 1;
+			_delay_ms(1000);
+		}
+	#endif // !UNIT_TEST
 }
 #endif

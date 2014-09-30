@@ -14,6 +14,7 @@
 #define UNIT_TEST_H_
 
 #include "sensors/tc72/tc72.h"
+#include "hardware_boards/sim908/sim908_gsm.h"
 
 /**********************************************************************//**
  * @ingroup ut

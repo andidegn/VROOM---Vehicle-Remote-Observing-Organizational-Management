@@ -4,7 +4,7 @@
 @Version: 0.1
 @defgroup sim908 Sim908_GSM
 @{
-	This is the driver for GSM module sim908
+	This is the driver for GSM/GPRS/GPS module sim908
 @}
 @note Complies MISRO 2004 standards
 ************************************************/
@@ -38,18 +38,32 @@
 
 /* *************************************************************************** */
 
+/* AT SET Commands */
+#define AT_TEST "AT"
+#define AT_AUDIO_SET_RINGER_VOLUME	"AT+CRSL="		// Add number 0-4
+#define AT_AUDIO_SET_SPEAKER_VOLUME "AT+CLVL="		// Add number 0-100
+#define AT_AUDIO_SET_CURRENT_ALERT_SOUND "AT+CALS=" // Add number 0-19
+
+#define AT_CALL_EMERGENCY	"ATD112;"
+
+#define AT_CALL_KENNETH		"ATD60192949;"
+#define AT_CALL_ANDI		"ATD60257898;"
+
+/* AT Responds */
+#define OK		"OK"
+#define ERROR	"ERROR"
 
 /* Error List for AT Command response */
 #define SIM908_OK					 1
-#define SIM908_INVALID_RESPONSE		-1
-#define SIM908_FAIL					-2
-#define SIM908_TIMEOUT				-3
-
+#define SIM908_INVALID_COMMAND		-1
+#define SIM908_INVALID_RESPONSE		-2
+#define SIM908_FAIL					-3
+#define SIM908_TIMEOUT				-4
 
 int8_t SIM908_init(void);
-int8_t SIM908_cmd(const char *cmd);
-int8_t GSM_enable(void);
-int8_t GPS_enable(void);
+int8_t SIM908_cmd(const char *cmd, const char *res);
+void GSM_enable(void);
+void GPS_enable(void);
 int8_t call_PSAP(void);
 
 #endif /* SIM908_GSM_H_ */

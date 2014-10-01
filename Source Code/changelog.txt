@@ -1,10 +1,39 @@
 =====================================
+Version 0.081 - 2014/10/01 by Kenneth
+=====================================
+New Features, Improvements
+--------------------------
+* In timer.c: Added timer 3 in CTC mode for counting a value used in timeout check
+* In SIM908 driver: Added timeout check in init function
+* Added call_PSAP() function in SIM908 driver to repeatedly make the call until it gets the correct response
+* Added module test for sensors
+
+Fixed Bugs, Changes
+-------------------
+* Changed filename for module test for sensors
+* Changed structure of SIM908 driver so that it has a callback 
+* Rearanged/cleaned up main (Only KENNETH_TEST)
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+- Unit Test does not store result for all tests
+
+
+=====================================
 Version 0.08 - 2014/09/30 by Kenneth
 =====================================
+New Features, Improvements
+--------------------------
 * In SIM908 driver: Added response and command check for AT SET commands
 * In SIM908 driver: Added self-reset in case of no response in init function 
 * In Unit Test: Added unit test function for the command and response check
 * Started implementing module test for sensors
+
+Fixed Bugs, Changes
+-------------------
 
 ToDo
 ----	
@@ -34,6 +63,8 @@ ToDo
 =====================================
 Version 0.071 - 2014/09/26 by Kenneth
 =====================================
+New Features, Improvements
+--------------------------
 * Added condition to avoid empty strings when writing to UART (was already there)
 * Added simple GSM driver for initiating sim908 and sending AT commands
 

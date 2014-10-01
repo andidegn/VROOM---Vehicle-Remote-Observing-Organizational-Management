@@ -10,8 +10,11 @@
 #define ON 1
 #define OFF 0
 
-#define KENNETH_TEST OFF
-#define ANDI_TEST ON
+#define KENNETH_TEST ON
+#define ANDI_TEST OFF
+
+
+#if ANDI_TEST
 #define MODULE_TEST OFF
 /*********************************//**
  * UNCOMMENT FOR RUN ALL UNIT TESTS  *
@@ -97,7 +100,6 @@ int main(void) {
 
 #endif // MODULE_TEST
 
-#if ANDI_TEST
 #include "sensors/tc72/tc72.h"
 #include "sensors/accelerometer/accelerometer.h"
 #include "sensors/sensor_scheduler.h"
@@ -293,41 +295,34 @@ void uart1_callback_test(char data) {
 #endif
 
 
+/* ***************************************************** */
+
 #if KENNETH_TEST
 
-#include "hardware_boards/sim908/sim908_gsm.h"
+#define UNIT_TEST			OFF
+#define MODULE_TEST_SENSORS	OFF
+#define MODULE_TEST_SIM908	ON
+
 #include "hardware_boards/lcd_board/lcd/lcd.h"
 #include "hardware_boards/lcd_board/button_led/btn_led_lcd.h"
 #include <avr/io.h>
 #include <util/delay.h>
-
+#include "unit_test.h"
+		
 #define F_CPU 11059200UL
 
-
-
-	
 int main (void)
 {
 	DDRA = 0xFF;
 	PORTA = 0xFF;
+	
 	char buf[10];
-	int8_t a = 0;
-	int8_t b = 0;
-	btn_led_lcd_init();
+	
 	sei();
+	btn_led_lcd_init();
 	lcd_init(LCD_DISP_ON);
-	lcd_clrscr();
-	lcd_gotoxy(0,0);
-	lcd_puts("Init...");
-	SIM908_init();
-	lcd_puts("-OK!");
-	lcd_gotoxy(0,1);
-	lcd_puts("Enable GSM...");
-	GSM_enable();
-	lcd_puts("-OK!");
 	
 	#if UNIT_TEST
-		#include "unit_test.h"
 		char* result = run_all_tests();
 		lcd_clrscr();
 		lcd_gotoxy(0,0);
@@ -335,14 +330,46 @@ int main (void)
 		lcd_gotoxy(0,1);
 		lcd_puts("Tests run: ");
 		lcd_puts(itoa(tests_run, buf, 10));
-	#else //!UNIT_TEST
-
-		lcd_clrscr();
-		lcd_puts("CALL...");
+	#endif /* UNIT_TEST */
 		
-		while(call_PSAP() != SIM908_OK);
+	
+	#if MODULE_TEST_SENSORS
+		#include "sensors/test_module_sensors.h"
+		sensors_init();
+		while (1)
+		{
+			sensors_read_data();
+			sensors_print_data();
+			_delay_ms(500);
+		}
+	#endif /* MODULE_TEST_SENSORS */
+	
+	#if MODULE_TEST_SIM908
+		#include "hardware_boards/sim908/sim908_gsm.h"
+		#include "timer.h"
+		init_Timer3_CTC(TIMER_PS256, TIMER_10HZ); // Used to count for timeout
+		
+		lcd_clrscr();
+		lcd_gotoxy(0,0);
+		lcd_puts("Init...");
+		int8_t init = SIM908_init();
+			
+		if (init == SIM908_OK)
+			lcd_puts("-OK!");
+		else if (init == SIM908_TIMEOUT)
+			lcd_puts("-TIMEOUT!");
+		
+		lcd_gotoxy(0,1);
+		lcd_puts("Enable GSM...");
+		GSM_enable();
 		lcd_puts("-OK!");
 		
+		//lcd_clrscr();
+		//lcd_puts("CALL...");
+		
+		//call_PSAP();
+		//lcd_puts("-OK!");
+
 		while (1)
 		{
 			if (btn_lcd_is_pressed(BTN_PIN0))
@@ -351,10 +378,16 @@ int main (void)
 				lcd_gotoxy(0,1);
 				lcd_puts("HANG UP!!!");
 			}
-				
+			
 			PORTA ^= 1;
-			_delay_ms(1000);
+			_delay_ms(100);
 		}
-	#endif // !UNIT_TEST
+	#endif /* MODULE_TEST_SIM908 */
+	
+	
+	while (1)
+	{
+		
+	}
 }
-#endif
+#endif /* KENNETH_TEST */

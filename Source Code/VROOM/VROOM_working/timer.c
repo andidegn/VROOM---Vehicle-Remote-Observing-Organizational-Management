@@ -1,10 +1,11 @@
 /********************************************//**
 @file timer.c
 @author: Kenneth René Jensen
-@Version: 0.2
+@Version: 0.3
 @defgroup timer Timer
 @{
-	Setup of timer 1 to CTC mode.
+	Setup of timer 1 to CTC mode for stating the scheduler.
+	Setup of timer 3 to CTC mode for counting etc. used for timeout
 @}
 ************************************************/
 #include "timer.h"
@@ -15,6 +16,8 @@
 
 /*! Macro for calculating the value for clock count based on frequency and prescaler */
 #define TOP_VALUE(frequency_in_hz, prescaler) (F_CPU/(prescaler * frequency_in_hz)-1)
+
+uint32_t SIM908_TIMEOUT_COUNTER;
 
 /********************************************************************************************************************//**
  @ingroup timer
@@ -70,7 +73,70 @@ void init_Timer1_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 	SREG = _sreg;
 }
 
+void init_Timer3_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
+{
+	/* saves the current state of the status register and disables global interrupt */
+	uint8_t _sreg = SREG;
+	cli();
+
+	/* Set top value to */
+	OCR3A = TOP_VALUE(hz, prescaler);
+
+	/* Set Timer mode 4: CTC */
+	TCCR3B |= _BV(WGM32);
+
+	/* Set prescaler */
+	switch(prescaler)
+	{
+		case TIMER_PS1 :
+		TCCR3B &= ~_BV(CS31) & ~_BV(CS32);
+		TCCR3B |= _BV(CS30);
+		break;
+
+		case TIMER_PS8 :
+		TCCR3B &= ~_BV(CS30) & ~_BV(CS32);
+		TCCR3B |= _BV(CS31);
+		break;
+
+		case TIMER_PS64 :
+		TCCR3B &= ~_BV(CS32);
+		TCCR3B |= _BV(CS30) | _BV(CS31);
+		break;
+
+		case TIMER_PS256 :
+		TCCR3B &= ~_BV(CS30) & ~_BV(CS31);
+		TCCR3B |= _BV(CS32);
+		break;
+
+		case TIMER_PS1024 :
+		TCCR3B |= _BV(CS30) | _BV(CS31) | _BV(CS32);
+		break;
+
+		default: break;
+	}
+
+	/* restoring status register */
+	SREG = _sreg;
+}
+
+void start_timer3(void)
+{
+	/* Enable interrupts */
+	TIMSK3 |= _BV(OCIE3A);
+}
+
+void stop_timer3(void)
+{
+	/* Disable interrupts */
+	TIMSK3 &= ~_BV(OCIE3A);
+}
+
 ISR(TIMER1_COMPA_vect)
 {
 	scheduler_release();
+}
+
+ISR(TIMER3_COMPA_vect)
+{
+	SIM908_TIMEOUT_COUNTER++;
 }

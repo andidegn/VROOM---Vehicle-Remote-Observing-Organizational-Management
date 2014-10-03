@@ -30,11 +30,11 @@ void gsm_init(void) {
 	DDR(GSM_PORT) |= _BV(GSM_GSM_ENABLE_PIN) | _BV(GSM_GPS_ENABLE_PIN) | _BV(GSM_MODULE_START_PIN);
 
 	/* setting up uart for communication with the module */
-	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
+	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, uart0_callback);
 
 	#if LOOP_TO_PC
 	/* setting up uart for communication with pc for diag */
-	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
+	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, uart1_callback);
 	#endif
 
 	/* waiting for proper startup */
@@ -73,11 +73,22 @@ void gsm_hang_up(void) {
 
 
 /* callbacks */
+static uint8_t _nl_cnt;
 void uart0_callback(char c) {
 	#if LOOP_TO_PC
 	uart1_send_char(c);
 	#endif
-	lcd_putc(c == '\r'? '\n': c);
+	if (c == '+') {
+		lcd_putc('\n');
+	}
+	if (c == '\n') {
+		_nl_cnt++;
+	} else if (c != '\r') {
+		lcd_putc(c);
+	}
+	//if (_nl_cnt % 2 == 0) {
+		//lcd_putc('\n');
+	//}
 }
 
 #if LOOP_TO_PC

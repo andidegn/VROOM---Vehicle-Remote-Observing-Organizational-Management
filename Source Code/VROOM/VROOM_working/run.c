@@ -10,8 +10,8 @@
 #define ON 1
 #define OFF 0
 
-#define KENNETH_TEST ON
-#define ANDI_TEST OFF
+#define KENNETH_TEST OFF
+#define ANDI_TEST ON
 
 
 #if ANDI_TEST
@@ -92,7 +92,7 @@ int main(void) {
 				i = 1;
 			}
         }
-		
+
 		_delay_ms(100);
 	}
 	return 0;
@@ -201,6 +201,8 @@ int main(void) {
             lcd_clrscr();
 			gsm_hang_up();
         }
+		
+		/* These are only read when no callback is defined in the uart setup { */
 		while ((uart_read = uart0_read_char()) != UART_NO_DATA) {
 			lcd_putc(uart_read == '\r'? '\n': uart_read);
 			uart1_send_char(uart_read);
@@ -208,6 +210,7 @@ int main(void) {
 		while ((uart_read = uart1_read_char()) != UART_NO_DATA) {
 			uart0_send_char(uart_read);
 		}
+		/* } */
 #else // GSM_TEST
 
         lcd_clrscr();
@@ -308,20 +311,20 @@ void uart1_callback_test(char data) {
 #include <avr/io.h>
 #include <util/delay.h>
 #include "unit_test.h"
-		
+
 #define F_CPU 11059200UL
 
 int main (void)
 {
 	DDRA = 0xFF;
 	PORTA = 0xFF;
-	
+
 	char buf[10];
-	
+
 	sei();
 	btn_led_lcd_init();
 	lcd_init(LCD_DISP_ON);
-	
+
 	#if UNIT_TEST
 		char* result = run_all_tests();
 		lcd_clrscr();
@@ -331,8 +334,8 @@ int main (void)
 		lcd_puts("Tests run: ");
 		lcd_puts(itoa(tests_run, buf, 10));
 	#endif /* UNIT_TEST */
-		
-	
+
+
 	#if MODULE_TEST_SENSORS
 		#include "sensors/test_module_sensors.h"
 		sensors_init();
@@ -343,30 +346,30 @@ int main (void)
 			_delay_ms(500);
 		}
 	#endif /* MODULE_TEST_SENSORS */
-	
+
 	#if MODULE_TEST_SIM908
 		#include "hardware_boards/sim908/sim908_gsm.h"
 		#include "timer.h"
 		init_Timer3_CTC(TIMER_PS256, TIMER_10HZ); // Used to count for timeout
-		
+
 		lcd_clrscr();
 		lcd_gotoxy(0,0);
 		lcd_puts("Init...");
 		int8_t init = SIM908_init();
-			
+
 		if (init == SIM908_OK)
 			lcd_puts("-OK!");
 		else if (init == SIM908_TIMEOUT)
 			lcd_puts("-TIMEOUT!");
-		
+
 		lcd_gotoxy(0,1);
 		lcd_puts("Enable GSM...");
 		GSM_enable();
 		lcd_puts("-OK!");
-		
+
 		//lcd_clrscr();
 		//lcd_puts("CALL...");
-		
+
 		//call_PSAP();
 		//lcd_puts("-OK!");
 
@@ -378,16 +381,16 @@ int main (void)
 				lcd_gotoxy(0,1);
 				lcd_puts("HANG UP!!!");
 			}
-			
+
 			PORTA ^= 1;
 			_delay_ms(100);
 		}
 	#endif /* MODULE_TEST_SIM908 */
-	
-	
+
+
 	while (1)
 	{
-		
+
 	}
 }
 #endif /* KENNETH_TEST */

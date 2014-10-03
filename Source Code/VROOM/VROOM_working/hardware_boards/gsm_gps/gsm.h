@@ -9,10 +9,26 @@
 #ifndef GSM_H_
 #define GSM_H_
 
+#define STK 1
+
+#if STK
 #define GSM_PORT PORTE
-#define GSM_GSM_ENABLE_PIN 3
-#define GSM_GPS_ENABLE_PIN 4
-#define GSM_MODULE_START_PIN 5
+#define GSM_GSM_PORT			PORTE
+#define GSM_GPS_PORT			PORTE
+#define GSM_MODULE_PORT			PORTE
+#define GSM_GSM_ENABLE_PIN		3
+#define GSM_GPS_ENABLE_PIN		4
+#define GSM_MODULE_START_PIN	5
+#else
+#define GSM_GSM_PORT			PORTE
+#define GSM_GPS_PORT			PORTG
+#define GSM_MODULE_PORT			PORTE
+#define GSM_GSM_ENABLE_PIN		5
+#define GSM_GPS_ENABLE_PIN		5
+#define GSM_MODULE_START_PIN	3
+#endif
+
+
 
 /* call */
 #define AT_CALL_ANSWER "ATA"

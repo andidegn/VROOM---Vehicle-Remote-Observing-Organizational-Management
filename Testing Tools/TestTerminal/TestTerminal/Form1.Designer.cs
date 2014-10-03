@@ -29,12 +29,14 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pnl_main = new System.Windows.Forms.Panel();
+            this.wb_maps = new System.Windows.Forms.WebBrowser();
             this.chart_signal = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cms_signal_chart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dockUndockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_ctrls = new System.Windows.Forms.Panel();
             this.gb_connection = new System.Windows.Forms.GroupBox();
+            this.lbl_operator_name = new System.Windows.Forms.Label();
             this.chk_graph = new System.Windows.Forms.CheckBox();
             this.chk_module_state = new System.Windows.Forms.CheckBox();
             this.prog_signal = new System.Windows.Forms.ProgressBar();
@@ -58,6 +60,12 @@
             this.nud_msg = new System.Windows.Forms.NumericUpDown();
             this.btn_delete_msg = new System.Windows.Forms.Button();
             this.gb_gps = new System.Windows.Forms.GroupBox();
+            this.chk_map = new System.Windows.Forms.CheckBox();
+            this.btn_map = new System.Windows.Forms.Button();
+            this.tbx_lat = new System.Windows.Forms.TextBox();
+            this.lbl_lat = new System.Windows.Forms.Label();
+            this.tbx_long = new System.Windows.Forms.TextBox();
+            this.lbl_long = new System.Windows.Forms.Label();
             this.btn_gps_get_location = new System.Windows.Forms.Button();
             this.btn_gps_status = new System.Windows.Forms.Button();
             this.btn_gps_cold_rst = new System.Windows.Forms.Button();
@@ -81,7 +89,6 @@
             this.btn_connect = new System.Windows.Forms.Button();
             this.cbb_com_port = new System.Windows.Forms.ComboBox();
             this.lbl_com_port = new System.Windows.Forms.Label();
-            this.lbl_operator_name = new System.Windows.Forms.Label();
             this.pnl_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_signal)).BeginInit();
             this.cms_signal_chart.SuspendLayout();
@@ -102,6 +109,7 @@
             this.pnl_main.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_main.Controls.Add(this.wb_maps);
             this.pnl_main.Controls.Add(this.chart_signal);
             this.pnl_main.Controls.Add(this.pnl_ctrls);
             this.pnl_main.Controls.Add(this.btn_exit);
@@ -120,6 +128,18 @@
             this.pnl_main.Name = "pnl_main";
             this.pnl_main.Size = new System.Drawing.Size(760, 538);
             this.pnl_main.TabIndex = 0;
+            // 
+            // wb_maps
+            // 
+            this.wb_maps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.wb_maps.Location = new System.Drawing.Point(7, 31);
+            this.wb_maps.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wb_maps.Name = "wb_maps";
+            this.wb_maps.Size = new System.Drawing.Size(497, 476);
+            this.wb_maps.TabIndex = 24;
+            this.wb_maps.Visible = false;
             // 
             // chart_signal
             // 
@@ -199,10 +219,19 @@
             this.gb_connection.TabStop = false;
             this.gb_connection.Text = "Connection";
             // 
+            // lbl_operator_name
+            // 
+            this.lbl_operator_name.AutoSize = true;
+            this.lbl_operator_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_operator_name.Location = new System.Drawing.Point(90, 64);
+            this.lbl_operator_name.Name = "lbl_operator_name";
+            this.lbl_operator_name.Size = new System.Drawing.Size(0, 20);
+            this.lbl_operator_name.TabIndex = 25;
+            // 
             // chk_graph
             // 
             this.chk_graph.AutoSize = true;
-            this.chk_graph.Location = new System.Drawing.Point(191, 34);
+            this.chk_graph.Location = new System.Drawing.Point(191, 33);
             this.chk_graph.Name = "chk_graph";
             this.chk_graph.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chk_graph.Size = new System.Drawing.Size(55, 17);
@@ -239,7 +268,7 @@
             // 
             this.chk_signal.AutoSize = true;
             this.chk_signal.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_signal.Location = new System.Drawing.Point(87, 34);
+            this.chk_signal.Location = new System.Drawing.Point(87, 33);
             this.chk_signal.Name = "chk_signal";
             this.chk_signal.Size = new System.Drawing.Size(55, 17);
             this.chk_signal.TabIndex = 18;
@@ -441,16 +470,80 @@
             // gb_gps
             // 
             this.gb_gps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_gps.Controls.Add(this.chk_map);
+            this.gb_gps.Controls.Add(this.btn_map);
+            this.gb_gps.Controls.Add(this.tbx_lat);
+            this.gb_gps.Controls.Add(this.lbl_lat);
+            this.gb_gps.Controls.Add(this.tbx_long);
+            this.gb_gps.Controls.Add(this.lbl_long);
             this.gb_gps.Controls.Add(this.btn_gps_get_location);
             this.gb_gps.Controls.Add(this.btn_gps_status);
             this.gb_gps.Controls.Add(this.btn_gps_cold_rst);
             this.gb_gps.Controls.Add(this.btn_gps_pwr);
             this.gb_gps.Location = new System.Drawing.Point(3, 261);
             this.gb_gps.Name = "gb_gps";
-            this.gb_gps.Size = new System.Drawing.Size(249, 81);
+            this.gb_gps.Size = new System.Drawing.Size(249, 137);
             this.gb_gps.TabIndex = 20;
             this.gb_gps.TabStop = false;
             this.gb_gps.Text = "GPS";
+            // 
+            // chk_map
+            // 
+            this.chk_map.AutoSize = true;
+            this.chk_map.Location = new System.Drawing.Point(199, 53);
+            this.chk_map.Name = "chk_map";
+            this.chk_map.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chk_map.Size = new System.Drawing.Size(47, 17);
+            this.chk_map.TabIndex = 9;
+            this.chk_map.Text = "Map";
+            this.chk_map.UseVisualStyleBackColor = true;
+            this.chk_map.CheckedChanged += new System.EventHandler(this.chk_map_CheckedChanged);
+            // 
+            // btn_map
+            // 
+            this.btn_map.Location = new System.Drawing.Point(87, 50);
+            this.btn_map.Name = "btn_map";
+            this.btn_map.Size = new System.Drawing.Size(75, 23);
+            this.btn_map.TabIndex = 8;
+            this.btn_map.Text = "Update Map";
+            this.btn_map.UseVisualStyleBackColor = true;
+            this.btn_map.Click += new System.EventHandler(this.btn_map_Click);
+            // 
+            // tbx_lat
+            // 
+            this.tbx_lat.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tbx_lat.Location = new System.Drawing.Point(87, 105);
+            this.tbx_lat.Name = "tbx_lat";
+            this.tbx_lat.ReadOnly = true;
+            this.tbx_lat.Size = new System.Drawing.Size(156, 20);
+            this.tbx_lat.TabIndex = 7;
+            // 
+            // lbl_lat
+            // 
+            this.lbl_lat.AutoSize = true;
+            this.lbl_lat.Location = new System.Drawing.Point(6, 108);
+            this.lbl_lat.Name = "lbl_lat";
+            this.lbl_lat.Size = new System.Drawing.Size(45, 13);
+            this.lbl_lat.TabIndex = 6;
+            this.lbl_lat.Text = "Latitude";
+            // 
+            // tbx_long
+            // 
+            this.tbx_long.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tbx_long.Location = new System.Drawing.Point(87, 79);
+            this.tbx_long.Name = "tbx_long";
+            this.tbx_long.ReadOnly = true;
+            this.tbx_long.Size = new System.Drawing.Size(156, 20);
+            this.tbx_long.TabIndex = 5;
+            // 
+            // lbl_long
+            // 
+            this.lbl_long.AutoSize = true;
+            this.lbl_long.Location = new System.Drawing.Point(6, 82);
+            this.lbl_long.Name = "lbl_long";
+            this.lbl_long.Size = new System.Drawing.Size(54, 13);
+            this.lbl_long.TabIndex = 4;
+            this.lbl_long.Text = "Longitude";
             // 
             // btn_gps_get_location
             // 
@@ -669,15 +762,6 @@
             this.lbl_com_port.TabIndex = 0;
             this.lbl_com_port.Text = "Port";
             // 
-            // lbl_operator_name
-            // 
-            this.lbl_operator_name.AutoSize = true;
-            this.lbl_operator_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_operator_name.Location = new System.Drawing.Point(90, 64);
-            this.lbl_operator_name.Name = "lbl_operator_name";
-            this.lbl_operator_name.Size = new System.Drawing.Size(0, 20);
-            this.lbl_operator_name.TabIndex = 25;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -704,6 +788,7 @@
             this.gb_text_sms.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nud_msg)).EndInit();
             this.gb_gps.ResumeLayout(false);
+            this.gb_gps.PerformLayout();
             this.cms_rtb_terminal.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -765,6 +850,13 @@
         private System.Windows.Forms.ToolStripMenuItem dockUndockToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.Label lbl_operator_name;
+        private System.Windows.Forms.TextBox tbx_lat;
+        private System.Windows.Forms.Label lbl_lat;
+        private System.Windows.Forms.TextBox tbx_long;
+        private System.Windows.Forms.Label lbl_long;
+        private System.Windows.Forms.Button btn_map;
+        private System.Windows.Forms.WebBrowser wb_maps;
+        private System.Windows.Forms.CheckBox chk_map;
 
     }
 }

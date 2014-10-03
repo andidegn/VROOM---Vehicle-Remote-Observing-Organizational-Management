@@ -17,6 +17,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using Accelerometer_Analyzer.AMD.util;
 using AMD.Util.Extensions;
 using System.IO;
+using System.Globalization;
 
 namespace TestTerminal {
     public partial class Form1 : Form {
@@ -52,9 +53,11 @@ namespace TestTerminal {
             _settings_load();
             rtb_terminal.Font = new Font("Courier New", 11);
             rtb_terminal.BackColor = _color_background;
+            wb_maps.ScriptErrorsSuppressed = true;
             this.ActiveControl = tbx_send;
         }
         private int _skip_no_of_receptions;
+        private bool _map_docked;
         private void _init_signal_timer() {
             _signal_timer.Interval = SIGNAL_INTERVAL;
             _signal_timer.Tick += (s, o) => {
@@ -177,6 +180,35 @@ namespace TestTerminal {
                     lbl_operator_name.Text = "No Operator";
                 }
             }
+            int cnt = (from c in p
+                      where c == ','
+                      select c).Count();
+
+            if (cnt == 8) {
+                string[] sloc_arr = p.Split(',');
+                double longitude_raw = double.Parse(sloc_arr[2], CultureInfo.CreateSpecificCulture("en-US")) * 100;
+                double latitude_raw = double.Parse(sloc_arr[1], CultureInfo.CreateSpecificCulture("en-US")) * 100;
+
+                int long_deg = (int)(longitude_raw / 10000);
+                int long_min = (int)(longitude_raw / 100 % 100);
+                double long_sec = longitude_raw % 100;
+
+
+                int lat_deg = (int)(latitude_raw / 10000);
+                int lat_min = (int)(latitude_raw / 100 % 100);
+                double lat_sec = latitude_raw % 100;
+
+                double long_rl = long_deg + ((double)long_min / 60) + ((double)long_sec / 3600);
+                double lat_rl = lat_deg + ((double)lat_min / 60) + ((double)lat_sec / 3600);
+                //double lat_rl = lat_deg + (double)(lat_min * 100 / 60) / 100 + (double)(lat_sec * 100 / 60) / 10000;
+
+                tbx_long.Text = long_rl.ToString();
+                tbx_lat.Text = lat_rl.ToString();
+
+                if (chk_map.Checked) {
+                    _update_map();
+                }
+            }
 
             
             
@@ -297,7 +329,7 @@ namespace TestTerminal {
                 this.chart_signal.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right));
                 this.chart_signal.Size = new System.Drawing.Size(245, 120);
                 //this.chart_signal.Location = new System.Drawing.Point(this.Width - chart_signal.Width - 45, 350);
-                this.chart_signal.Location = new System.Drawing.Point(5, 350);
+                this.chart_signal.Location = new System.Drawing.Point(5, gb_connection.Height + gb_call.Height + gb_text_sms.Height + gb_gps.Height + 25);
                 _chart_docked = true;
             }
         }
@@ -607,5 +639,41 @@ namespace TestTerminal {
             }
         }
         #endregion
+
+        private void btn_map_Click(object sender, EventArgs e) {
+            _update_map();
+        }
+
+        private void _update_map() {
+            String link = "http://www.google.com/maps?q=" + tbx_long.Text.Replace(',', '.') + "," + tbx_lat.Text.Replace(',', '.');
+            wb_maps.Navigate(link);
+            wb_maps.Visible = chk_map.Checked = true;
+        }
+
+        private void chk_map_CheckedChanged(object sender, EventArgs e) {
+            wb_maps.Visible = chk_map.Checked;
+            //_map_docked = chk_map.Checked;
+            //_map_set_docked_state();
+        }
+
+        private void _map_set_docked_state() {
+            //if (_map_docked) {
+            //    this.pnl_main.Controls.Add(wb_maps);
+            //    wb_maps.BringToFront();
+            //    this.wb_maps.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            //    | System.Windows.Forms.AnchorStyles.Left)
+            //    | System.Windows.Forms.AnchorStyles.Right));
+            //    this.wb_maps.Location = new System.Drawing.Point(7, 31);
+            //    this.wb_maps.Size = new System.Drawing.Size(rtb_terminal.Width - 3, rtb_terminal.Height - 3);
+            //    _map_docked = false;
+            //} else {
+            //    this.pnl_ctrls.Controls.Add(wb_maps);
+            //    this.wb_maps.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right));
+            //    this.wb_maps.Size = new System.Drawing.Size(245, 120);
+            //    //this.chart_signal.Location = new System.Drawing.Point(this.Width - chart_signal.Width - 45, 350);
+            //    this.wb_maps.Location = new System.Drawing.Point(5, gb_connection.Height + gb_call.Height + gb_text_sms.Height + gb_gps.Height + (_chart_docked ? chart_signal.Height : 0) + 25);
+            //    _map_docked = true;
+            //}
+        }
     }
 }

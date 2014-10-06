@@ -13,12 +13,14 @@
 #define SIM908_GSM_H_
 
 #include <avr/io.h>
+#include <string.h>
+
 #include "at_commands.h"
 #include "../../data_comm/uart/uart.h"
 #include "../../timer.h"
 
 /* Timeout value in 1/10 sec - Minimum 5 seconds because of the internal delay in function */
-#define SIM908_TIMEOUT_VALUE	50
+#define SIM908_TIMEOUT_VALUE	100
 
 #if SIM908_TIMEOUT_VALUE < 50
 	#error SIM908_TIMEOUT_VALUE must be >= 50

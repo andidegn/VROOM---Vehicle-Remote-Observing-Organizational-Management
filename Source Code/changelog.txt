@@ -1,4 +1,25 @@
 =====================================
+Version 0.082 - 2014/10/06 by Kenneth
+=====================================
+New Features, Improvements
+--------------------------
+* Added timeout check in call_PSAP function in SIM908 driver
+* Added timeout check for AT response in SIM908 driver
+* New structure/optimized the driver, so that no busy waiting in SIM908_cmd function is needed 
+
+Fixed Bugs, Changes
+-------------------
+* Removed timeout in SIM908 init function
+* Removed unit test of _SIM908_check_response function in SIM908 driver, as it didn't maked sense anymore
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+
+
+=====================================
 Version 0.081 - 2014/10/01 by Kenneth
 =====================================
 New Features, Improvements

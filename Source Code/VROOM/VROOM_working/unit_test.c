@@ -43,14 +43,8 @@ char* test_tc72_calc(void)
  ************************************************************************************************************************/
 char* test_SIM908_cmd(void)
 {
-	mu_assert( "Err-02-100", SIM908_cmd("AT", "OK") == SIM908_OK );
-	mu_assert( "Err-02-101", SIM908_cmd("AT", "ERROR") == SIM908_FAIL );
-	mu_assert( "Err-02-102", SIM908_cmd("TAT", "OK") == SIM908_INVALID_COMMAND );
-	mu_assert( "Err-02-103", SIM908_cmd("TAT", "ERROR") == SIM908_INVALID_COMMAND );
-	mu_assert( "Err-02-104", SIM908_cmd("AT", "") == SIM908_FAIL );
-	mu_assert( "Err-02-105", SIM908_cmd("AT", "TEST") == SIM908_FAIL );
-	mu_assert( "Err-02-106", SIM908_cmd("AT", "OK") == SIM908_OK );
-	mu_assert( "Err-02-107", SIM908_cmd("AT", "OK") == SIM908_OK);
+	mu_assert( "Err-02-100", SIM908_cmd("AT") == SIM908_RESPONSE_OK );
+	mu_assert( "Err-02-101", SIM908_cmd("TAT") == SIM908_INVALID_COMMAND );
 
 	return "02-1PASS";
 }

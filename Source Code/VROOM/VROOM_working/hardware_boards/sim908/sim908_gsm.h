@@ -1,7 +1,7 @@
 /********************************************//**
 @file sim908_gsm.h
 @author: Kenneth René Jensen
-@Version: 0.2
+@Version: 0.3
 @defgroup sim908 Sim908_GSM
 @{
 	This is the driver for GSM/GPRS/GPS module sim908
@@ -19,8 +19,8 @@
 #include "../../data_comm/uart/uart.h"
 #include "../../timer.h"
 
-/* Timeout value in 1/10 sec - Minimum 5 seconds because of the internal delay in function */
-#define SIM908_TIMEOUT_VALUE	100
+/* Timeout value in 1/10 sec - Minimum 5 seconds because of the internal delay in call function */
+#define SIM908_TIMEOUT_VALUE	50
 
 #if SIM908_TIMEOUT_VALUE < 50
 	#error SIM908_TIMEOUT_VALUE must be >= 50
@@ -54,21 +54,24 @@
 #define AT_CALL_KENNETH		"ATD60192949;"
 #define AT_CALL_ANDI		"ATD60257898;"
 
-/* AT Responds */
+/* Error List for return */
+#define SIM908_RESPONSE_OK			 1
+#define SIM908_RESPONSE_ERROR		 0
+#define SIM908_INVALID_COMMAND		-1
+#define SIM908_INVALID_RESPONSE		-2
+
+#define SIM908_OK					 1
+#define SIM908_TIMEOUT				-3
+#define SIM908_FAIL					-4
+
+/* AT Respond strings */
 #define OK		"OK"
 #define ERROR	"ERROR"
 
-/* Error List for return */
-#define SIM908_OK					 1
-#define SIM908_INVALID_COMMAND		-1
-#define SIM908_INVALID_RESPONSE		-2
-#define SIM908_FAIL					-3
-#define SIM908_TIMEOUT				-4
-
-uint8_t SIM908_init(void);
-int8_t SIM908_cmd(const char *cmd, const char *res);
+void SIM908_init(void);
 void GSM_enable(void);
 void GPS_enable(void);
-void call_PSAP(void);
+int8_t SIM908_cmd(const char *cmd);
+int8_t call_PSAP(void);
 
 #endif /* SIM908_GSM_H_ */

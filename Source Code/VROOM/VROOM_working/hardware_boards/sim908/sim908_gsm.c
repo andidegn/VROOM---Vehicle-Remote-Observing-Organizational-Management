@@ -10,11 +10,7 @@
 ************************************************/
 #include "sim908_gsm.h"
 
-#ifdef PC_CALLBACK
-	void _PC_CALLBACK(char data);
-#endif
-
-static volatile char _sim908_buffer[16];
+static volatile char _sim908_buffer[32];
 static volatile uint8_t _index = 0;
 static volatile uint8_t _CR_counter = 0;
 static volatile uint8_t _LF_counter = 0;
@@ -39,9 +35,8 @@ int8_t _wait_response(void);
 /********************************************************************************************************************//**
  @ingroup sim908
  @brief Initiates the SIM908 module
- @return 1 if initiation has succeeded
-		-4 if timeout
- @note UART0 is used to communicate with the module. The function runs recursively until it timeout or succeed 
+ @return void
+ @note UART0 is used to communicate with the module. Timer3 is used in determining timeouts. 
  ************************************************************************************************************************/
 void SIM908_init(void)
 {	
@@ -54,17 +49,13 @@ void SIM908_init(void)
 		
 	/* Setting up uart for communication */
  	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _SIM908_callback);
-
-	#ifdef PC_CALLBACK
-		uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _PC_CALLBACK);
-	#endif
 	
 	/* Set all related pins to output */
 	DDR(DRIVER_PORT) |= (1<<CE_PIN);
 	DDR(GSM_PORT) |= (1<<GSM_ENABLE_PIN);
 	DDR(GPS_PORT) |= (1<<GPS_ENABLE_PIN);
 	
-	/* Toggle driver pin to start SIM908 module */
+	/* Toggle driver pin to start up SIM908 module */
 	DRIVER_PORT |= _BV(CE_PIN);
 	_delay_ms(1500);
 	DRIVER_PORT &= ~_BV(CE_PIN);
@@ -75,8 +66,17 @@ void SIM908_init(void)
 	
 	GSM_enable();
 	
+	/* Synchronizing baud rate */
+	while (SIM908_cmd(AT_DIAG_TEST) != SIM908_RESPONSE_OK);
+	
+	/* Set baud rate to the host baud rate */
+	SIM908_cmd(AT_BAUD_115K2);
+	
 	/* Enable Echo */
 	SIM908_cmd(AT_DIAG_ECHO_ENABLE);
+	
+	/* Setup phone functionality */
+	SIM908_cmd(AT_FULL_FUNCTIONALITY);
 }
 
 /********************************************************************************************************************//**
@@ -105,11 +105,11 @@ void GPS_enable(void)
  @ingroup sim908
  @brief Used for sending AT SET commands.
  @param *cmd is the AT command as a string
-		*res is the expected response as a string
- @return 1 if valid command and getting expected response
-		-1 if invalid command
-		-2 if invalid response
-		-3 if fail 
+ @return 1 if command and response is OK
+		 0 if command is OK but response is ERROR
+		-1 if invalid command (not starting with AT)
+		-2 if command is OK but response is invalid
+		-3 if timeout
  ************************************************************************************************************************/
 int8_t SIM908_cmd(const char *cmd)
 {  
@@ -140,8 +140,9 @@ int8_t SIM908_cmd(const char *cmd)
 /********************************************************************************************************************//**
  @ingroup sim908
  @brief Calling Public-safety answering point
- @return void
- @note Pushes the call until it get correct response
+ @return 1 if call established and response is OK
+		-3 if timeout
+ @note Pushes the call again if it fails until it times out 
  ************************************************************************************************************************/
 int8_t call_PSAP(void)
 {
@@ -249,10 +250,3 @@ void _SIM908_callback(char data)
 		default: break;
 	}
 }
-
-#ifdef PC_CALLBACK
-	void _PC_callback(char data)
-	{
-
-	}
-#endif

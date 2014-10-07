@@ -1,11 +1,14 @@
 =====================================
-Version 0.082 - 2014/10/06 by Kenneth
+Version 0.082 - 2014/10/07 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
 * Added timeout check in call_PSAP function in SIM908 driver
 * Added timeout check for AT response in SIM908 driver
 * New structure/optimized the driver, so that no busy waiting in SIM908_cmd function is needed 
+* Added some relevant AT commands in header file
+* Added baud sync and setup commands in SIM908 init function
+* Added doxygen comments in SIM908 driver and Timer
 
 Fixed Bugs, Changes
 -------------------

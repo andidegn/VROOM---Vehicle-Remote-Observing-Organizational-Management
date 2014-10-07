@@ -21,8 +21,9 @@ uint32_t SIM908_TIMEOUT_COUNTER;
 
 /********************************************************************************************************************//**
  @ingroup timer
- @brief Initiates timer 1 in CTC mode. Enables interrupt based on topvalue
+ @brief Initiates timer 1 in CTC mode
  @param TIMER_PRESCALER enum, TIMER_FREQUENCY enum
+ @note Enables interrupt
 ************************************************************************************************************************/
 void init_Timer1_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 {
@@ -73,6 +74,11 @@ void init_Timer1_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 	SREG = _sreg;
 }
 
+/********************************************************************************************************************//**
+ @ingroup timer
+ @brief Initiates timer 3 in CTC mode. 
+ @param TIMER_PRESCALER enum, TIMER_FREQUENCY enum
+************************************************************************************************************************/
 void init_Timer3_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 {
 	/* saves the current state of the status register and disables global interrupt */
@@ -119,12 +125,20 @@ void init_Timer3_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 	SREG = _sreg;
 }
 
+/********************************************************************************************************************//**
+ @ingroup timer
+ @brief Enables interrupt for timer3
+************************************************************************************************************************/
 void start_timer3(void)
 {
 	/* Enable interrupts */
 	TIMSK3 |= _BV(OCIE3A);
 }
 
+/********************************************************************************************************************//**
+ @ingroup timer
+ @brief Disables interrupt for timer3
+************************************************************************************************************************/
 void stop_timer3(void)
 {
 	/* Disable interrupts */

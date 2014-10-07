@@ -356,7 +356,6 @@ int main (void)
 		sei();
 		SIM908_init();
 		
-		
 		lcd_puts(" ...");
 		lcd_gotoxy(0,1);
 		int8_t test1 = SIM908_cmd(AT_DIAG_TEST);
@@ -373,14 +372,13 @@ int main (void)
 _delay_ms(100);
 
 
-
 		//lcd_puts("Enable GSM...");
 	//	lcd_puts("-OK!");
 
 		//lcd_clrscr();
 		//lcd_puts("CALL...");
 //
-		//int8_t test6 = call_PSAP();
+	//	int8_t test6 = call_PSAP();
 		//lcd_puts(itoa(test6, buf, 10));
 		
 		while (1)

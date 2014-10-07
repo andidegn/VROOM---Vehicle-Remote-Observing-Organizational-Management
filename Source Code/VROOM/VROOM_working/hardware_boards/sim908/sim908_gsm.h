@@ -49,7 +49,6 @@
 #endif /* ARDUINO_ATMEGA2560_DEFAULT */
 
 /* *************************************************************************** */
-
 #define AT_CALL_EMERGENCY	"ATD112;"
 #define AT_CALL_KENNETH		"ATD60192949;"
 #define AT_CALL_ANDI		"ATD60257898;"

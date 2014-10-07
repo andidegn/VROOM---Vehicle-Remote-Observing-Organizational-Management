@@ -36,35 +36,13 @@ char* test_tc72_calc(void)
 
 /********************************************************************************************************************//**
  @ingroup ut
- @brief Test of function: SIM908_cmd(const char *cmd, const char *res) in sim908.c
- @return char* - if all tests pass: "02-1PASS" 
-			   - if test fail: the error code line where it fails
- @note Test is performed using AT set commands. The SIM908 module must be initialized in order to run this test
- ************************************************************************************************************************/
-char* test_SIM908_cmd(void)
-{
-	mu_assert( "Err-02-100", SIM908_cmd("AT") == SIM908_RESPONSE_OK );
-	mu_assert( "Err-02-101", SIM908_cmd("TAT") == SIM908_INVALID_COMMAND );
-
-	return "02-1PASS";
-}
-
-/********************************************************************************************************************//**
- @ingroup ut
  @brief Run all unit tests
  @return char* - if all tests pass: "xx-xPASS" 
 			   - if test fail: the error code line where it fails			   
 ************************************************************************************************************************/
 char* run_all_tests(void) 
 {
-	//char* arr[] =
-	//{
-		//test_tc72_calc(),
-		//test_SIM908_cmd()
-	//};
-	
 	mu_run_test(test_tc72_calc);
-	mu_run_test(test_SIM908_cmd);
 	
 	return "All test passed";
 }

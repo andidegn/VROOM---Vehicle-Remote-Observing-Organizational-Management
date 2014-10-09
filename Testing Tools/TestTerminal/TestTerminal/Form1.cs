@@ -457,8 +457,8 @@ namespace TestTerminal {
             _com_write(AT_commands.AT_GPS_GET_STATUS);
         }
 
-        private void btn_gps_cold_rst_Click(object sender, EventArgs e) {
-            _com_write(AT_commands.AT_GPS_RST_COLD);
+        private void btn_gps_hot_rst_Click(object sender, EventArgs e) {
+            _com_write(AT_commands.AT_GPS_RST_AUTONOMY);
         }
 
         private void btn_gps_get_location_Click(object sender, EventArgs e) {

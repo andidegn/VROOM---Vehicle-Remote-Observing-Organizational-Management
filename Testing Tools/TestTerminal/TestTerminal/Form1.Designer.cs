@@ -68,7 +68,7 @@
             this.lbl_long = new System.Windows.Forms.Label();
             this.btn_gps_get_location = new System.Windows.Forms.Button();
             this.btn_gps_status = new System.Windows.Forms.Button();
-            this.btn_gps_cold_rst = new System.Windows.Forms.Button();
+            this.btn_gps_hot_rst = new System.Windows.Forms.Button();
             this.btn_gps_pwr = new System.Windows.Forms.Button();
             this.btn_exit = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
@@ -478,7 +478,7 @@
             this.gb_gps.Controls.Add(this.lbl_long);
             this.gb_gps.Controls.Add(this.btn_gps_get_location);
             this.gb_gps.Controls.Add(this.btn_gps_status);
-            this.gb_gps.Controls.Add(this.btn_gps_cold_rst);
+            this.gb_gps.Controls.Add(this.btn_gps_hot_rst);
             this.gb_gps.Controls.Add(this.btn_gps_pwr);
             this.gb_gps.Location = new System.Drawing.Point(3, 261);
             this.gb_gps.Name = "gb_gps";
@@ -565,15 +565,15 @@
             this.btn_gps_status.UseVisualStyleBackColor = true;
             this.btn_gps_status.Click += new System.EventHandler(this.btn_gps_status_Click);
             // 
-            // btn_gps_cold_rst
+            // btn_gps_hot_rst
             // 
-            this.btn_gps_cold_rst.Location = new System.Drawing.Point(168, 19);
-            this.btn_gps_cold_rst.Name = "btn_gps_cold_rst";
-            this.btn_gps_cold_rst.Size = new System.Drawing.Size(75, 23);
-            this.btn_gps_cold_rst.TabIndex = 1;
-            this.btn_gps_cold_rst.Text = "Cold Reset";
-            this.btn_gps_cold_rst.UseVisualStyleBackColor = true;
-            this.btn_gps_cold_rst.Click += new System.EventHandler(this.btn_gps_cold_rst_Click);
+            this.btn_gps_hot_rst.Location = new System.Drawing.Point(168, 19);
+            this.btn_gps_hot_rst.Name = "btn_gps_hot_rst";
+            this.btn_gps_hot_rst.Size = new System.Drawing.Size(75, 23);
+            this.btn_gps_hot_rst.TabIndex = 1;
+            this.btn_gps_hot_rst.Text = "Hot Reset";
+            this.btn_gps_hot_rst.UseVisualStyleBackColor = true;
+            this.btn_gps_hot_rst.Click += new System.EventHandler(this.btn_gps_hot_rst_Click);
             // 
             // btn_gps_pwr
             // 
@@ -829,7 +829,7 @@
         private System.Windows.Forms.Button btn_clear;
         private System.Windows.Forms.GroupBox gb_gps;
         private System.Windows.Forms.Button btn_gps_pwr;
-        private System.Windows.Forms.Button btn_gps_cold_rst;
+        private System.Windows.Forms.Button btn_gps_hot_rst;
         private System.Windows.Forms.Button btn_gps_get_location;
         private System.Windows.Forms.Button btn_gps_status;
         private System.Windows.Forms.Button btn_exit;

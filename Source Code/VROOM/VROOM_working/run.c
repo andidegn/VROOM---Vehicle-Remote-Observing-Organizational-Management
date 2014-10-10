@@ -10,8 +10,8 @@
 #define ON 1
 #define OFF 0
 
-#define KENNETH_TEST ON
-#define ANDI_TEST OFF
+#define KENNETH_TEST OFF
+#define ANDI_TEST ON
 
 
 #if ANDI_TEST

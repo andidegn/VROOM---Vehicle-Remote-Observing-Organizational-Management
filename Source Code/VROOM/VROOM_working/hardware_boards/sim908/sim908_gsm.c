@@ -77,6 +77,12 @@ void SIM908_init(void)
 	
 	/* Setup phone functionality */
 	SIM908_cmd(AT_FULL_FUNCTIONALITY);
+	
+	/* Enable GPS */
+	SIM908_cmd(AT_GPS_POWER_ON);
+	
+	/* Set GPS reset to autonomous */
+	SIM908_cmd(AT_GPS_RST_AUTONOMY);
 }
 
 /********************************************************************************************************************//**

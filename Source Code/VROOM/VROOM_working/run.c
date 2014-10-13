@@ -10,8 +10,8 @@
 #define ON 1
 #define OFF 0
 
-#define KENNETH_TEST OFF
-#define ANDI_TEST ON
+#define KENNETH_TEST ON
+#define ANDI_TEST OFF
 
 
 #if ANDI_TEST
@@ -297,19 +297,21 @@ void uart1_callback_test(char data) {
 #endif
 #endif
 
-
 /* ***************************************************** */
 
 #if KENNETH_TEST
 
 #define F_CPU 11059200UL
 
-#define UNIT_TEST			OFF
-#define MODULE_TEST_SENSORS	OFF
-#define MODULE_TEST_SIM908	ON
+#define UNIT_TEST						OFF
+#define MODULE_TEST_SENSORS				OFF
+#define MODULE_TEST_SIM908				OFF
+#define INTEGRATION_TEST_SIM908_SENSORS	ON
 
 #include "hardware_boards/lcd_board/lcd/lcd.h"
 #include "hardware_boards/lcd_board/button_led/btn_led_lcd.h"
+#include "sensors/sensor_scheduler.h"
+#include "hardware_boards/sim908/sim908.h"
 #include <avr/io.h>
 #include <util/delay.h>
 #include "unit_test.h"
@@ -319,7 +321,10 @@ int main (void)
 {
 	DDRA = 0xFF;
 	PORTA = 0xFF;
-
+	
+	const char degree = 0b011011111;
+	int x_axis, y_axis, z_axis;
+	float temp;
 	char buf[10];
 	
 	btn_led_lcd_init();
@@ -335,7 +340,6 @@ int main (void)
 		lcd_puts(itoa(tests_run, buf, 10));
 	#endif /* UNIT_TEST */
 
-
 	#if MODULE_TEST_SENSORS
 		#include "sensors/test_module_sensors.h"
 		sensors_init();
@@ -348,53 +352,56 @@ int main (void)
 	#endif /* MODULE_TEST_SENSORS */
 
 	#if MODULE_TEST_SIM908
-		#include "hardware_boards/sim908/sim908_gsm.h"
-
 		lcd_clrscr();
 		lcd_gotoxy(0,0);
 		lcd_puts("Init...");
+
+		SIM908_init();		
 		sei();
-		SIM908_init();
+		SIM908_start();
 		
-		lcd_puts(" ...");
-		lcd_gotoxy(0,1);
-		int8_t test1 = SIM908_cmd(AT_DIAG_TEST);
-		lcd_puts(itoa(test1, buf, 10));
-		int8_t test2 = SIM908_cmd(AT_DIAG_TEST);
-		lcd_puts(itoa(test2, buf, 10));
-		int8_t test3 = SIM908_cmd(AT_DIAG_TEST);
-		lcd_puts(itoa(test3, buf, 10));
-		int8_t test4 = SIM908_cmd(AT_DIAG_TEST);	
-		lcd_puts(itoa(test4, buf, 10));
-		int8_t test5 = SIM908_cmd("OAT");		
-		lcd_puts(itoa(test5, buf, 10));
+		lcd_puts("...DONE");
 
-_delay_ms(100);
-
-
-		//lcd_puts("Enable GSM...");
-	//	lcd_puts("-OK!");
-
-		//lcd_clrscr();
-		//lcd_puts("CALL...");
-//
-	//	int8_t test6 = call_PSAP();
-		//lcd_puts(itoa(test6, buf, 10));
-		
 		while (1)
 		{
-			if (btn_lcd_is_pressed(BTN_PIN0))
-			{
-				SIM908_cmd("ATH");
-				lcd_gotoxy(0,1);
-				lcd_puts("HANG UP!!!");
-			}
 
-			PORTA ^= 1;
-			_delay_ms(100);
 		}
 	#endif /* MODULE_TEST_SIM908 */
 
+	#if INTEGRATION_TEST_SIM908_SENSORS
+		SIM908_init();
+		sei();
+		scheduler_start(NULL);
+		SIM908_start();
+		
+		while (1)		
+		{
+			x_axis = (int)(acc_get_x_axis()*100);
+			y_axis = (int)(acc_get_y_axis()*100);
+			z_axis = (int)(acc_get_z_axis()*100);
+			temp = get_temperature();
+			
+			lcd_clrscr();
+			lcd_gotoxy(0, 0);
+			lcd_puts("x ");
+			lcd_puts(itoa(x_axis, buf, 10));
+
+			lcd_gotoxy(8, 0);
+			lcd_puts("y ");
+			lcd_puts(itoa(y_axis, buf, 10));;
+			
+			lcd_gotoxy(0, 1);
+			lcd_puts("z ");
+			lcd_puts(itoa(z_axis, buf, 10));
+			
+			lcd_gotoxy(8, 1);
+			lcd_puts(dtostrf( temp, 2, 2, buf ));
+			lcd_putc(degree);
+			lcd_putc('C');
+				
+			_delay_ms(100);
+		}
+	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
 	while (1)
 	{

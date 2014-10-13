@@ -1,4 +1,26 @@
 =====================================
+Version 0.083 - 2014/10/13 by Kenneth
+=====================================
+New Features, Improvements
+--------------------------
+* Added integration test for sensor module and SIM908 module in main function
+* Added loop-back to PC option in SIM908 driver using UART1
+
+Fixed Bugs, Changes
+-------------------
+* Renamed SIM908_gsm to SIM908, as this driver will be for the whole module
+* SIM908_init() structure changes, so that it only initiates the module
+* SIM908_start() function added to setup the module
+* GPS started and reset in SIM908_start();
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+
+
+=====================================
 Version 0.082 - 2014/10/07 by Kenneth
 =====================================
 New Features, Improvements

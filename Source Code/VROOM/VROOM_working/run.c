@@ -316,7 +316,6 @@ void uart1_callback_test(char data) {
 #include <util/delay.h>
 #include "unit_test.h"
 
-
 int main (void)
 {
 	DDRA = 0xFF;

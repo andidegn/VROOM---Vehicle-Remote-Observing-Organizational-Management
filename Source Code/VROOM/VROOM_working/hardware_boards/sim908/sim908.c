@@ -29,6 +29,9 @@ typedef enum {ignore_data, record_data} CALLBACK_STATE;
 CALLBACK_STATE _callback_state = ignore_data;
 
 /* Prototypes */
+void _setup_GSM(void);
+void _setup_GPS(void);
+void _setup_GPRS(void);
 int8_t _SIM908_check_response(void);
 void _flush_buffer(void);
 int8_t _wait_response(void);
@@ -80,28 +83,10 @@ void SIM908_init(void)
 
 void SIM908_start(void)
 {
-	/* Synchronizing baud rate */
-	while (SIM908_cmd(AT_DIAG_TEST) != SIM908_RESPONSE_OK);
-	
-	/* Set baud rate to the host baud rate */
-	SIM908_cmd(AT_BAUD_115K2);
-	
-	/* Enable Echo */
-	SIM908_cmd(AT_DIAG_ECHO_ENABLE);
-	
-	/* Setup phone functionality */
-	SIM908_cmd(AT_FULL_FUNCTIONALITY);
-	
-	/* Forbid incoming calls */
-	SIM908_cmd(AT_FORBID_INCOMING_CALLS);
-	
-	/* Enable GPS */
-	SIM908_cmd(AT_GPS_POWER_ON);
-	
-	/* Set GPS reset to autonomous */
-	SIM908_cmd(AT_GPS_RST_AUTONOMY);
-
+	_setup_GSM();
+	_setup_GPS();
 	GSM_enable();
+	// _setup_GPRS();
 }
 
 /********************************************************************************************************************//**
@@ -186,6 +171,67 @@ int8_t call_PSAP(void)
 	
 	stop_timer3();
 	return SIM908_TIMEOUT;
+}
+
+void _setup_GSM(void)
+{
+	/* Synchronizing baud rate */
+	while (SIM908_cmd(AT_DIAG_TEST) != SIM908_RESPONSE_OK);
+		
+	/* Set baud rate to the host baud rate */
+	SIM908_cmd(AT_BAUD_115K2);
+		
+	/* Enable Echo */
+	SIM908_cmd(AT_DIAG_ECHO_ENABLE);
+		
+	/* Setup phone functionality */
+	SIM908_cmd(AT_FULL_FUNCTIONALITY);
+		
+	/* Forbid incoming calls */
+	SIM908_cmd(AT_FORBID_INCOMING_CALLS);
+}
+
+void _setup_GPS(void)
+{
+	/* Enable GPS */
+	SIM908_cmd(AT_GPS_POWER_ON);
+		
+	/* Set GPS reset to autonomous */
+	SIM908_cmd(AT_GPS_RST_AUTONOMY);
+}
+
+/*
+ *	States setting up GPRS:
+ *	1:	Attach to network		AT+CGATT=1
+ *	2:	Set single mode			AT+CIPMUX=0
+ *	3:	Set APN					AT+CSTT="internet.mtelia.dk"	(AT+CSTT=<APN>,<USERNAME>,<PASSWORD>)
+ *  4:	Bring up GPRS			AT+CIICR
+ *  5:  Get local IP address	AT+CIFSR						(MUST BE CALLED??)
+ *  6:	Open TCP connection		AT+CIPSTART="TCP","83.90.178.139","80" 
+ *  7:	Send data (140 bytes)	AT+CIPSEND=140
+ *  8:	Close TCP connection	AT+CIPCLOSE=1
+ */
+void _setup_GPRS(void)
+{
+	/* Attach to network */
+	SIM908_cmd(AT_GPRS_ATTACHED);
+	
+	/* Set Single-connection mode */
+	SIM908_cmd(AT_TCPIP_SINGLE);
+	
+	/* Set APN */
+	SIM908_cmd(AT_TCP_APN);
+	
+	/* Bring up GPRS */
+	SIM908_cmd(AT_GPRS_BRING_UP);
+	
+	/* Local IP MUST BE CALLED ??? - different response */
+	uart0_send_string(AT_GPRS_GET_LOCAL_IP);
+	uart0_send_char(CR);
+	uart0_send_char(LF);
+	
+	/* Open TCP connection */
+	SIM908_cmd(AT_OPEN_TCP);
 }
 
 void _flush_buffer(void)

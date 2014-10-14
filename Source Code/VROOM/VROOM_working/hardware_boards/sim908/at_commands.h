@@ -54,6 +54,54 @@
 #define AT_RESTORE_PROFILE1			"ATZ1"
 #define AT_MANUFACTURER_DEFAULTS	"AT&F0"
 
+/* ******************** AT Commands for GPRS ******************** */
+
+/* Setup access point to TCP connection */
+#define AT_TCP_APN					"AT+CSTT=\"internet.mtelia.dk\"" /* Telia */
+
+/* Bring up Wireless Connection */
+#define AT_GPRS_BRING_UP			"AT+CIICR"
+
+/* Get local IP address */
+#define AT_GPRS_GET_LOCAL_IP		"AT+CIFSR"
+
+/* Open/Close TCP/UDP Connection (AT+CIPSTART=<n>,<mode>,<domain name>, <port>") */
+#define AT_OPEN_TCP					"AT+CIPSTART=\"TCP\",\"83.90.178.139\",\"80\""	
+#define AT_OPEN_UDP					"AT+CIPSTART=\"UDP\",\"83.90.178.139\",\"6\""	
+#define AT_CLOSE_TCP_UDP_SLOW		"AT+CIPCLOSE=0"
+#define AT_CLOSE_TCP_UDP_QUICK		"AT+CIPCLOSE=1"
+
+/* TCP/IP connection mode */
+#define AT_TCPIP_SINGLE				"AT+CIPMUX=0"
+#define AT_TCPIP_MULTI				"AT+CIPMUX=1"
+
+/* TCP/IP application Mode */
+#define AT_TCPIP_NORMAL_MODE		"AT+CIPMODE=0"
+#define AT_TCPIP_TRANSPARENT_MODE	"AT+CIPMODE=1"
+
+/* Attach or Detach from GPRS Service */
+#define AT_GPRS_DETACHED			"AT+CGATT=0"
+#define AT_GPRS_ATTACHED			"AT+CGATT=1"
+
+/* Packet data protocol context */
+#define AT_PDP_CONTEXT_DEACTIVATE	"AT+CIPSHUT"
+#define AT_PDP_DEACTIVE_PROFILE_1	"AT+CGACT=0,1"
+#define AT_PDP_DEACTIVE_PROFILE_2	"AT+CGACT=0,2"
+#define AT_PDP_DEACTIVE_PROFILE_3	"AT+CGACT=0,3"
+#define AT_PDP_ACTIVATE_PROFILE_1	"AT+CGACT=1,1"
+#define AT_PDP_ACTIVATE_PROFILE_2	"AT+CGACT=1,2"
+#define AT_PDP_ACTIVATE_PROFILE_3	"AT+CGACT=1,3"
+
+/* ************************************************************** */
+
+/* ******************** AT Commands for FTP ********************* */
+#define AT_FTP_SET_SERVER_ADDRESS	"AT+FTPSERV=\"\""	/* Missing value after = */
+#define AT_FTP_SET_USER_NAME_VROOM	"AT+FTPUN=\"VROOM\""
+#define AT_FTP_SET_PASSWORD			"AT+FTPPW=\"VROOM\""
+
+
+/* ************************************************************** */
+
 /* Module device status
    Response: <CR><LF> +CPAS: [status] <CR><LF>
    Status:

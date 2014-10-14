@@ -5,6 +5,7 @@ New Features, Improvements
 --------------------------
 * Added integration test for sensor module and SIM908 module in main function
 * Added loop-back to PC option in SIM908 driver using UART1
+* Added relevant AT commands for GPRS in header file
 
 Fixed Bugs, Changes
 -------------------

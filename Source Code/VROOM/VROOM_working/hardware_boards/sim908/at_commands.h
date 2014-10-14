@@ -29,14 +29,12 @@
 /* Set phone functionality */
 #define AT_MINIMUM_FUNCTIONALITY	"AT+CFUN=0"
 #define AT_FULL_FUNCTIONALITY		"AT+CFUN=1"
-#define AT_DISABLE_TX				"AT+CFUN=2"
-#define AT_DISABLE_RX				"AT+CFUN=3"
 #define AT_DISABLE_TX_RX			"AT+CFUN=4"
 #define AT_RESET_MODULE				"AT+CFUN=1,1"
 
 /* Incoming call */
-#define AT_ENABLE_INCOMMING_CALLS	"AT+GSMBUSY=0"
-#define AT_FORBID_INCOMMING_CALLS	"AT+GSMBUSY=1"
+#define AT_ENABLE_INCOMING_CALLS	"AT+GSMBUSY=0"
+#define AT_FORBID_INCOMING_CALLS	"AT+GSMBUSY=1"
 #define AT_FORBID_VOICE_CALLS_ONLY	"AT+GSMBUSY=2"	/* Circuit-Switched Data (CSD) calls enabled */
 
 /* Acceptable calls white list */

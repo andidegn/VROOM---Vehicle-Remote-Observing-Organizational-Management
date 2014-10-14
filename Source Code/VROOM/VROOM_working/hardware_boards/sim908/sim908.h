@@ -1,7 +1,7 @@
 /********************************************//**
-@file sim908_gsm.h
+@file sim908.h
 @author: Kenneth René Jensen
-@Version: 0.3
+@Version: 0.4
 @defgroup sim908 Sim908_GSM
 @{
 	This is the driver for GSM/GPRS/GPS module sim908
@@ -68,6 +68,7 @@
 #define ERROR	"ERROR"
 
 void SIM908_init(void);
+void SIM908_start(void);
 void GSM_enable(void);
 void GPS_enable(void);
 int8_t SIM908_cmd(const char *cmd);

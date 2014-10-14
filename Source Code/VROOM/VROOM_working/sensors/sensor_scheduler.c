@@ -61,7 +61,6 @@ void scheduler_release(void) {
 		case state_timer_init :
 			_state = state_tc72_read;
 			init_Timer1_CTC(TIMER_PS8, TIMER_500HZ);
-			init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
 		break;
 
 		/* reoccurring */

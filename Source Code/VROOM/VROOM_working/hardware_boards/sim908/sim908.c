@@ -1,16 +1,18 @@
 /********************************************//**
-@file sim908_gsm.c
+@file sim908.c
 @author: Kenneth René Jensen
-@Version: 0.3
+@Version: 0.4
 @defgroup sim908 Sim908_GSM
 @{
 	This is the driver for GSM/GPRS/GPS module sim908
 @}
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
-#include "sim908_gsm.h"
+#include "sim908.h"
 
-static volatile char _sim908_buffer[32];
+#define PC_CALLBACK
+
+static volatile char _sim908_buffer[16];
 static volatile uint8_t _index = 0;
 static volatile uint8_t _CR_counter = 0;
 static volatile uint8_t _LF_counter = 0;
@@ -28,9 +30,12 @@ CALLBACK_STATE _callback_state = ignore_data;
 
 /* Prototypes */
 int8_t _SIM908_check_response(void);
-void _SIM908_callback(char data);
 void _flush_buffer(void);
 int8_t _wait_response(void);
+void _SIM908_callback(char data);
+#ifdef  PC_CALLBACK
+void _PC_callback(char data); 
+#endif
 
 /********************************************************************************************************************//**
  @ingroup sim908
@@ -44,28 +49,37 @@ void SIM908_init(void)
 	uint8_t SREG_cpy = SREG;
 	cli();
 	
-	/* Setting up timer for timeout determination */	
-	init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
-		
-	/* Setting up uart for communication */
- 	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _SIM908_callback);
-	
 	/* Set all related pins to output */
 	DDR(DRIVER_PORT) |= (1<<CE_PIN);
 	DDR(GSM_PORT) |= (1<<GSM_ENABLE_PIN);
 	DDR(GPS_PORT) |= (1<<GPS_ENABLE_PIN);
-	
+		
 	/* Toggle driver pin to start up SIM908 module */
 	DRIVER_PORT |= _BV(CE_PIN);
 	_delay_ms(1500);
 	DRIVER_PORT &= ~_BV(CE_PIN);
 	_delay_ms(1500);
-	
+		
 	/* Restore interrupt */
 	SREG = SREG_cpy;
+		
+	/* Setting up timer for timeout determination */	
+	init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
+		
+	/* Setting up UART for internal communication */
+ 	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _SIM908_callback);
+	 
+	#ifdef PC_CALLBACK
+	/* Setting up UART for external communication */
+	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _PC_callback);
+	#endif
 	
-	GSM_enable();
-	
+	/* Waiting for proper startup */
+	_delay_ms(5000);
+}
+
+void SIM908_start(void)
+{
 	/* Synchronizing baud rate */
 	while (SIM908_cmd(AT_DIAG_TEST) != SIM908_RESPONSE_OK);
 	
@@ -78,11 +92,16 @@ void SIM908_init(void)
 	/* Setup phone functionality */
 	SIM908_cmd(AT_FULL_FUNCTIONALITY);
 	
+	/* Forbid incoming calls */
+	SIM908_cmd(AT_FORBID_INCOMING_CALLS);
+	
 	/* Enable GPS */
 	SIM908_cmd(AT_GPS_POWER_ON);
 	
 	/* Set GPS reset to autonomous */
 	SIM908_cmd(AT_GPS_RST_AUTONOMY);
+
+	GSM_enable();
 }
 
 /********************************************************************************************************************//**
@@ -122,8 +141,6 @@ int8_t SIM908_cmd(const char *cmd)
 	int8_t _cmd_check = 0;
 	_flush_buffer();
 	
-	// ToDo - Flow control _ uart ready
-	
 	_callback_state = record_data;
 	
 	uart0_send_string(cmd);
@@ -135,8 +152,6 @@ int8_t SIM908_cmd(const char *cmd)
 	if(_cmd_check == SIM908_OK)
 	{
 		_callback_state = ignore_data;
-	
-		// ToDo - Flow control _ uart not ready	
 		return _SIM908_check_response();
 	}
 	
@@ -240,6 +255,10 @@ int8_t _SIM908_check_response()
 
 void _SIM908_callback(char data)
 {
+	#ifdef PC_CALLBACK
+		uart1_send_char(data);
+	#endif
+		
 	switch (_callback_state)
 	{
 		case ignore_data : break;
@@ -256,3 +275,10 @@ void _SIM908_callback(char data)
 		default: break;
 	}
 }
+
+#ifdef PC_CALLBACK
+void _PC_callback(char data) 
+{
+	uart0_send_char(data);
+}
+#endif

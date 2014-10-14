@@ -184,23 +184,20 @@ namespace TestTerminal {
                       where c == ','
                       select c).Count();
 
-            if (cnt == 8) {
+            if (cnt == 8 && p[3] != '.') {
                 string[] sloc_arr = p.Split(',');
-                double longitude_raw = double.Parse(sloc_arr[2], CultureInfo.CreateSpecificCulture("en-US")) * 100;
-                double latitude_raw = double.Parse(sloc_arr[1], CultureInfo.CreateSpecificCulture("en-US")) * 100;
 
-                int long_deg = (int)(longitude_raw / 10000);
-                int long_min = (int)(longitude_raw / 100 % 100);
-                double long_sec = longitude_raw % 100;
+                String longitude_deg_st = sloc_arr[2].Substring(0, sloc_arr[2].IndexOf('.') - 2);
+                String latitude_deg_st = sloc_arr[1].Substring(0, sloc_arr[1].IndexOf('.') - 2);
 
+                double longitude_min_dec = double.Parse(sloc_arr[2].Substring(sloc_arr[2].IndexOf('.') - 2), CultureInfo.CreateSpecificCulture("en-US"));
+                double latitude_min_dec = double.Parse(sloc_arr[1].Substring(sloc_arr[1].IndexOf('.') - 2), CultureInfo.CreateSpecificCulture("en-US"));
+                
+                int long_deg = int.Parse(longitude_deg_st);
+                int lat_deg = int.Parse(latitude_deg_st);
 
-                int lat_deg = (int)(latitude_raw / 10000);
-                int lat_min = (int)(latitude_raw / 100 % 100);
-                double lat_sec = latitude_raw % 100;
-
-                double long_rl = long_deg + ((double)long_min / 60) + ((double)long_sec / 3600);
-                double lat_rl = lat_deg + ((double)lat_min / 60) + ((double)lat_sec / 3600);
-                //double lat_rl = lat_deg + (double)(lat_min * 100 / 60) / 100 + (double)(lat_sec * 100 / 60) / 10000;
+                double long_rl = long_deg + longitude_min_dec / 60;
+                double lat_rl = lat_deg + latitude_min_dec / 60;
 
                 tbx_long.Text = long_rl.ToString();
                 tbx_lat.Text = lat_rl.ToString();

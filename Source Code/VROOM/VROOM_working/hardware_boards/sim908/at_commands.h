@@ -54,20 +54,18 @@
 #define AT_RESTORE_PROFILE1			"ATZ1"
 #define AT_MANUFACTURER_DEFAULTS	"AT&F0"
 
-/* ******************** AT Commands for GPRS ******************** */
+/********************************** TCP / UDP **********************************/
+#define AT_TCP_APN_TELIA			"AT+CSTT=\"internet.mtelia.dk\""
+#define AT_TCP_APN_CALLME			"AT+CSTT=\"websp\""
 
-/* Setup access point to TCP connection */
-#define AT_TCP_APN					"AT+CSTT=\"internet.mtelia.dk\"" /* Telia */
-
-/* Bring up Wireless Connection */
-#define AT_GPRS_BRING_UP			"AT+CIICR"
-
-/* Get local IP address */
+#define AT_GPRS_ACTIVATE			"AT+CIICR"
 #define AT_GPRS_GET_LOCAL_IP		"AT+CIFSR"
 
-/* Open/Close TCP/UDP Connection (AT+CIPSTART=<n>,<mode>,<domain name>, <port>") */
-#define AT_OPEN_TCP					"AT+CIPSTART=\"TCP\",\"83.90.178.139\",\"80\""	
-#define AT_OPEN_UDP					"AT+CIPSTART=\"UDP\",\"83.90.178.139\",\"6\""	
+#define AT_GPRS_DETACHED			"AT+CGATT=0"
+#define AT_GPRS_ATTACHED			"AT+CGATT=1"
+
+#define AT_OPEN_TCP					"AT+CIPSTART=\"TCP\",\"andidegn.dk\",\"1404\""	
+#define AT_OPEN_UDP					"AT+CIPSTART=\"UDP\",\"andidegn.dk\",\"1404\""	
 #define AT_CLOSE_TCP_UDP_SLOW		"AT+CIPCLOSE=0"
 #define AT_CLOSE_TCP_UDP_QUICK		"AT+CIPCLOSE=1"
 
@@ -78,29 +76,33 @@
 /* TCP/IP application Mode */
 #define AT_TCPIP_NORMAL_MODE		"AT+CIPMODE=0"
 #define AT_TCPIP_TRANSPARENT_MODE	"AT+CIPMODE=1"
+/*******************************************************************************/
 
-/* Attach or Detach from GPRS Service */
-#define AT_GPRS_DETACHED			"AT+CGATT=0"
-#define AT_GPRS_ATTACHED			"AT+CGATT=1"
+/*********************************** FTP ***************************************/
 
-/* Packet data protocol context */
-#define AT_PDP_CONTEXT_DEACTIVATE	"AT+CIPSHUT"
-#define AT_PDP_DEACTIVE_PROFILE_1	"AT+CGACT=0,1"
-#define AT_PDP_DEACTIVE_PROFILE_2	"AT+CGACT=0,2"
-#define AT_PDP_DEACTIVE_PROFILE_3	"AT+CGACT=0,3"
-#define AT_PDP_ACTIVATE_PROFILE_1	"AT+CGACT=1,1"
-#define AT_PDP_ACTIVATE_PROFILE_2	"AT+CGACT=1,2"
-#define AT_PDP_ACTIVATE_PROFILE_3	"AT+CGACT=1,3"
+#define AT_FTP_BEARER1_CONTYPE_GPS	"AT+SAPBR=3,1,\"Contype\",\"GPRS\""
+#define AT_FTP_BEARER1_APN_TELIA	"AT+SAPBR=3,1,\"APN\",\"internet.mtelia.dk\""
+#define AT_FTP_BEARER1_APN_CALLME	"AT+SAPBR=3,1,\"APN\",\"websp\""
 
-/* ************************************************************** */
+#define AT_FTP_BEARER1_QUERY		"AT+SAPBR=2,1"	/* Different response */
+#define AT_FTP_OPEN_BEARER1			"AT+SAPBR=1,1"
+#define AT_FTP_CLOSE_BEARER1		"AT+SAPBR=0,1"
+#define AT_FTP_USE_PROFILE1			"AT+FTPCID=1"
 
-/* ******************** AT Commands for FTP ********************* */
-#define AT_FTP_SET_SERVER_ADDRESS	"AT+FTPSERV=\"\""	/* Missing value after = */
+#define AT_FTP_SET_DATA_TYPE_ASCII	"AT+FTPTYPE=\"A\""
+#define AT_FTP_SET_DATA_TYPE_BINARY	"AT+FTPTYPE=\"I\""
+
+#define AT_FTP_PUT_FILE_STORING		"AT+FTPPUTOPT=\"STOR\""
+#define AT_FTP_PUT_FILE_APPENDING	"AT+FTPPUTOPT=\"APPE\""
+#define AT_FTP_PUT_FILE_UNIQUE		"AT+FTPPUTOPT=\"STOU\""
+
+#define AT_FTP_SET_SERVER_ADDRESS	"AT+FTPSERV=\"ftp.andidegn.dk\""	
+#define AT_FTP_SET_CONTROL_PORT		"AT+FTPPORT=1404"	
 #define AT_FTP_SET_USER_NAME_VROOM	"AT+FTPUN=\"VROOM\""
-#define AT_FTP_SET_PASSWORD			"AT+FTPPW=\"VROOM\""
-
-
-/* ************************************************************** */
+#define AT_FTP_SET_PASSWORD			"AT+FTPPW=\"6198fg(/G6F/&5(!(!8gf87gMF.\""
+#define AT_FTP_PUT_NAME				"AT+FTPPUTNAME=\"ftp-test.txt\""
+#define AT_FTP_PUT_PATH				"AT+FTPPUTPATH=\"/\""
+/*******************************************************************************/
 
 /* Module device status
    Response: <CR><LF> +CPAS: [status] <CR><LF>

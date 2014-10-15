@@ -31,7 +31,8 @@ CALLBACK_STATE _callback_state = ignore_data;
 /* Prototypes */
 void _setup_GSM(void);
 void _setup_GPS(void);
-void _setup_GPRS(void);
+void _setup_GPRS_TCPIP(void);
+void _setup_GPRS_FTP(void);
 int8_t _SIM908_check_response(void);
 void _flush_buffer(void);
 int8_t _wait_response(void);
@@ -83,10 +84,21 @@ void SIM908_init(void)
 
 void SIM908_start(void)
 {
+	/* Synchronizing baud rate */
+	while (SIM908_cmd(AT_DIAG_TEST) != SIM908_RESPONSE_OK);
+		
+	/* Set baud rate to the host baud rate */
+	SIM908_cmd(AT_BAUD_115K2);
+		
+	/* Enable Echo */
+	SIM908_cmd(AT_DIAG_ECHO_ENABLE);
+		
 	_setup_GSM();
 	_setup_GPS();
 	GSM_enable();
-	// _setup_GPRS();
+	_setup_GPRS_FTP();
+	
+	// _setup_GPRS_TCPIP();
 }
 
 /********************************************************************************************************************//**
@@ -174,16 +186,7 @@ int8_t call_PSAP(void)
 }
 
 void _setup_GSM(void)
-{
-	/* Synchronizing baud rate */
-	while (SIM908_cmd(AT_DIAG_TEST) != SIM908_RESPONSE_OK);
-		
-	/* Set baud rate to the host baud rate */
-	SIM908_cmd(AT_BAUD_115K2);
-		
-	/* Enable Echo */
-	SIM908_cmd(AT_DIAG_ECHO_ENABLE);
-		
+{		
 	/* Setup phone functionality */
 	SIM908_cmd(AT_FULL_FUNCTIONALITY);
 		
@@ -200,18 +203,19 @@ void _setup_GPS(void)
 	SIM908_cmd(AT_GPS_RST_AUTONOMY);
 }
 
-/*
- *	States setting up GPRS:
+/* ********************************** TCP / IP **********************************
+ *	States setting up GPRS - TCP:
  *	1:	Attach to network		AT+CGATT=1
  *	2:	Set single mode			AT+CIPMUX=0
- *	3:	Set APN					AT+CSTT="internet.mtelia.dk"	(AT+CSTT=<APN>,<USERNAME>,<PASSWORD>)
+ *	3:	Set APN					AT+CSTT="websp"	(AT+CSTT=<APN>,<USERNAME>,<PASSWORD>)
  *  4:	Bring up GPRS			AT+CIICR
  *  5:  Get local IP address	AT+CIFSR						(MUST BE CALLED??)
- *  6:	Open TCP connection		AT+CIPSTART="TCP","83.90.178.139","80" 
+ *  ------------------------------------------------------------------------------
+ *  6:	Open TCP connection		AT+CIPSTART="TCP","andidegn.dk","1404" 
  *  7:	Send data (140 bytes)	AT+CIPSEND=140
  *  8:	Close TCP connection	AT+CIPCLOSE=1
- */
-void _setup_GPRS(void)
+ * *******************************************************************************/
+void _setup_GPRS_TCPIP(void)
 {
 	/* Attach to network */
 	SIM908_cmd(AT_GPRS_ATTACHED);
@@ -220,10 +224,10 @@ void _setup_GPRS(void)
 	SIM908_cmd(AT_TCPIP_SINGLE);
 	
 	/* Set APN */
-	SIM908_cmd(AT_TCP_APN);
+	SIM908_cmd(AT_TCP_APN_CALLME);
 	
 	/* Bring up GPRS */
-	SIM908_cmd(AT_GPRS_BRING_UP);
+	SIM908_cmd(AT_GPRS_ACTIVATE);
 	
 	/* Local IP MUST BE CALLED ??? - different response */
 	uart0_send_string(AT_GPRS_GET_LOCAL_IP);
@@ -233,6 +237,50 @@ void _setup_GPRS(void)
 	/* Open TCP connection */
 	SIM908_cmd(AT_OPEN_TCP);
 }
+
+/* ********************************** FTP **********************************
+ *	States setting up GPRS - FTP:
+ *	1:	Set bearer parameter	AT+SAPBR=3,1,"Contype","GPRS"
+ *								AT+SAPBR=3,1,"APN","internet.mtelia.dk"
+ *	2:	Use bearer profile		AT+FTPCID=1
+ *  3:	FTP login				AT+FTPSERV="ftp.andidegn.dk"
+ *								AT+FTPPORT=1404
+ *								AT+FTPUN="VROOM"
+ *								AT+FTPPW="6198fg(/G6F/&5(!(!8gf87gMF."	
+ *  4:  Configure put			AT+FTPPUTNAME="ftp-test.txt"
+ *								AT+FTPPUTPATH="/"
+ *								AT+FTPTYPE="A"
+ *								AT+FTPPUTOPT="APPE"
+ * --- Following steps needs to be called whenever data transfer is needed ---
+ *  5:	Open bearer				AT+SAPBR=1,1
+	6:	Open FTP PUT session	AT+FTPPUT=1
+ *	7:  Set write data			AT+FTPPUT=2,140
+ *	8:	Write text (140 bytes)
+ *	9:	End write session		AT+FTPPUT=2,0
+ *	10: Close bearer			AT+SAPBR=0,1
+ ***************************************************************************/
+void _setup_GPRS_FTP(void)
+{
+	/* Set bearer parameters */
+	SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS);
+	SIM908_cmd(AT_FTP_BEARER1_APN_CALLME);
+	
+	/* Use bearer profile 1 */
+	SIM908_cmd(AT_FTP_USE_PROFILE1);
+	
+	/* FTP login */
+	SIM908_cmd(AT_FTP_SET_SERVER_ADDRESS);
+	SIM908_cmd(AT_FTP_SET_CONTROL_PORT);
+	SIM908_cmd(AT_FTP_SET_USER_NAME_VROOM);
+	SIM908_cmd(AT_FTP_SET_PASSWORD);
+	
+	/* Set put information */
+	SIM908_cmd(AT_FTP_PUT_NAME);
+	SIM908_cmd(AT_FTP_PUT_PATH);	
+	SIM908_cmd(AT_FTP_SET_DATA_TYPE_ASCII);
+	SIM908_cmd(AT_FTP_PUT_FILE_APPENDING);
+}
+
 
 void _flush_buffer(void)
 {

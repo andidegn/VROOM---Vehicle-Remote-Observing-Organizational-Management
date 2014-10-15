@@ -89,6 +89,7 @@
             this.btn_connect = new System.Windows.Forms.Button();
             this.cbb_com_port = new System.Windows.Forms.ComboBox();
             this.lbl_com_port = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.pnl_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_signal)).BeginInit();
             this.cms_signal_chart.SuspendLayout();
@@ -134,9 +135,12 @@
             this.wb_maps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.wb_maps.CausesValidation = false;
             this.wb_maps.Location = new System.Drawing.Point(7, 31);
             this.wb_maps.MinimumSize = new System.Drawing.Size(20, 20);
             this.wb_maps.Name = "wb_maps";
+            this.wb_maps.ScriptErrorsSuppressed = true;
+            this.wb_maps.ScrollBarsEnabled = false;
             this.wb_maps.Size = new System.Drawing.Size(497, 476);
             this.wb_maps.TabIndex = 24;
             this.wb_maps.Visible = false;
@@ -857,6 +861,7 @@
         private System.Windows.Forms.Button btn_map;
         private System.Windows.Forms.WebBrowser wb_maps;
         private System.Windows.Forms.CheckBox chk_map;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
 
     }
 }

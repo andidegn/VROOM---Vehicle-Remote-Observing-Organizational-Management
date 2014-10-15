@@ -37,6 +37,8 @@ namespace TestTerminal {
         private bool _chart_docked;
         private int _zoom_value = 20;
         System.Windows.Forms.Timer _signal_timer = new System.Windows.Forms.Timer();
+        private int _skip_no_of_receptions;
+        private bool _map_docked;
 
         #region setup
         public Form1() {
@@ -53,11 +55,8 @@ namespace TestTerminal {
             _settings_load();
             rtb_terminal.Font = new Font("Courier New", 11);
             rtb_terminal.BackColor = _color_background;
-            wb_maps.ScriptErrorsSuppressed = true;
             this.ActiveControl = tbx_send;
         }
-        private int _skip_no_of_receptions;
-        private bool _map_docked;
         private void _init_signal_timer() {
             _signal_timer.Interval = SIGNAL_INTERVAL;
             _signal_timer.Tick += (s, o) => {

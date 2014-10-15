@@ -55,8 +55,8 @@
 #define AT_MANUFACTURER_DEFAULTS	"AT&F0"
 
 /********************************** TCP / UDP **********************************/
-#define AT_TCP_APN_TELIA			"AT+CSTT=\"internet.mtelia.dk\"" 
-#define AT_TCP_APN_CALLME			"AT+CSTT=\"websp\"" 
+#define AT_TCP_APN_TELIA			"AT+CSTT=\"internet.mtelia.dk\""
+#define AT_TCP_APN_CALLME			"AT+CSTT=\"websp\""
 
 #define AT_GPRS_ACTIVATE			"AT+CIICR"
 #define AT_GPRS_GET_LOCAL_IP		"AT+CIFSR"

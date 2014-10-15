@@ -96,8 +96,9 @@ void SIM908_start(void)
 	_setup_GSM();
 	_setup_GPS();
 	GSM_enable();
+	_setup_GPRS_FTP();
+	
 	// _setup_GPRS_TCPIP();
-	// _setup_GPRS_FTP();
 }
 
 /********************************************************************************************************************//**
@@ -241,18 +242,18 @@ void _setup_GPRS_TCPIP(void)
  *	States setting up GPRS - FTP:
  *	1:	Set bearer parameter	AT+SAPBR=3,1,"Contype","GPRS"
  *								AT+SAPBR=3,1,"APN","internet.mtelia.dk"
- *	2:	Open bearer				AT+SAPBR=1,1
- *	3:	Use bearer profile		AT+FTPCID=1
- *  4:	FTP login				AT+FTPSERV="ftp.andidegn.dk"
+ *	2:	Use bearer profile		AT+FTPCID=1
+ *  3:	FTP login				AT+FTPSERV="ftp.andidegn.dk"
  *								AT+FTPPORT=1404
  *								AT+FTPUN="VROOM"
  *								AT+FTPPW="6198fg(/G6F/&5(!(!8gf87gMF."	
- *  5:  Configure put			AT+FTPPUTNAME="ftp-test.txt"
+ *  4:  Configure put			AT+FTPPUTNAME="ftp-test.txt"
  *								AT+FTPPUTPATH="/"
  *								AT+FTPTYPE="A"
  *								AT+FTPPUTOPT="APPE"
- * -------------------------------------------------------------------------
- *  6:	Open FTP PUT session	AT+FTPPUT=1
+ * --- Following steps needs to be called whenever data transfer is needed ---
+ *  5:	Open bearer				AT+SAPBR=1,1
+	6:	Open FTP PUT session	AT+FTPPUT=1
  *	7:  Set write data			AT+FTPPUT=2,140
  *	8:	Write text (140 bytes)
  *	9:	End write session		AT+FTPPUT=2,0
@@ -263,9 +264,6 @@ void _setup_GPRS_FTP(void)
 	/* Set bearer parameters */
 	SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS);
 	SIM908_cmd(AT_FTP_BEARER1_APN_CALLME);
-	
-	/* Open bearer */
-	SIM908_cmd(AT_FTP_OPEN_BEARER1);
 	
 	/* Use bearer profile 1 */
 	SIM908_cmd(AT_FTP_USE_PROFILE1);
@@ -282,6 +280,7 @@ void _setup_GPRS_FTP(void)
 	SIM908_cmd(AT_FTP_SET_DATA_TYPE_ASCII);
 	SIM908_cmd(AT_FTP_PUT_FILE_APPENDING);
 }
+
 
 void _flush_buffer(void)
 {

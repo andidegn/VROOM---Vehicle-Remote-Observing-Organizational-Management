@@ -370,8 +370,9 @@ int main (void)
 	#if INTEGRATION_TEST_SIM908_SENSORS
 		SIM908_init();
 		sei();
-		scheduler_start(NULL);
 		SIM908_start();
+		
+		scheduler_start(NULL);
 		
 		while (1)		
 		{

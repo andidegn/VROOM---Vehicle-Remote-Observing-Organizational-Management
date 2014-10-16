@@ -57,6 +57,7 @@
 /********************************** TCP / UDP **********************************/
 #define AT_TCP_APN_TELIA			"AT+CSTT=\"internet.mtelia.dk\""
 #define AT_TCP_APN_CALLME			"AT+CSTT=\"websp\""
+#define AT_TCP_APN_TELENOR			"AT+CSTT=\"internet\""
 
 #define AT_GPRS_ACTIVATE			"AT+CIICR"
 #define AT_GPRS_GET_LOCAL_IP		"AT+CIFSR"
@@ -79,7 +80,6 @@
 /*******************************************************************************/
 
 /*********************************** FTP ***************************************/
-
 #define AT_FTP_BEARER1_CONTYPE_GPS	"AT+SAPBR=3,1,\"Contype\",\"GPRS\""
 #define AT_FTP_BEARER1_APN_TELIA	"AT+SAPBR=3,1,\"APN\",\"internet.mtelia.dk\""
 #define AT_FTP_BEARER1_APN_CALLME	"AT+SAPBR=3,1,\"APN\",\"websp\""

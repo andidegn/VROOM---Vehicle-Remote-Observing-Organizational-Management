@@ -4,7 +4,7 @@
 @Version: 0.1
 @defgroup ad Accident Data
 @{
-	This is the data for an Accident report. 
+	This is the data for an Accident report.
 	Followed eCall standards for data structure.
 @}
 @note Complies MISRO 2004 standards
@@ -19,13 +19,13 @@
 /**********************************************************************//**
  * @ingroup ad
  * @brief struct containing the MSD for an accident report
- * @note According eCall standard EN 15722 the MSD consists of 140 bytes 
+ * @note According eCall standard EN 15722 the MSD consists of 140 bytes
  *************************************************************************/
-typedef struct 
+typedef struct
 {
-	/*  Content of control byte: |---Reserved--- | No confidence in position | Test call | Manual activation | Automatic activation | 
+	/*  Content of control byte: |---Reserved--- | No confidence in position | Test call | Manual activation | Automatic activation |
 		Bit:					 | 0 | 1 | 2 | 3 |			  4				 |     5	 |	    6			 |	       7		    | */
-	uint8_t control;		
+	uint8_t control;
 	char VIN[20];			/* VIN number according to ISO 3779 */
 	uint32_t time_stamp;	/* UTC Seconds */
 	int32_t latitude;		/* Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) */
@@ -51,7 +51,7 @@ void set_control_byte(bool test_call, bool position_can_be_trusted, bool automat
 
 /**********************************************************************//**
  * @ingroup ad
- * @brief function to set the vehicle identification number 
+ * @brief function to set the vehicle identification number
  * @return void
  * @param VIN - an array of 4 bytes
  * @note The number consist of 17 characters not including the letters I, O or Q.
@@ -62,7 +62,7 @@ void set_VIN(char VIN[]);
  * @ingroup ad
  * @brief function to set the vehicle location
  * @return void
- * @param latitude - Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) 
+ * @param latitude - Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000)
  * @param longitude - Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000)
  *************************************************************************/
 void set_location(int32_t latitude, int32_t longitude);
@@ -92,5 +92,7 @@ void set_service_provider(uint8_t sp[]);
  * @note May also be blank field
  *************************************************************************/
 void set_optional_data(char *s);
+
+void get_lat_long(char *__raw_at_str, double *__latitude, double *__longitude);
 
 #endif /* ACCIDENT_DATA_H_ */

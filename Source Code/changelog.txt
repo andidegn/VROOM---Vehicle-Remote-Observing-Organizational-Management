@@ -1,4 +1,21 @@
 =====================================
+Version 0.095 - 2014/10/20 by Kenneth
+=====================================
+New Features, Improvements
+--------------------------
+* Added time(.h/.c) to get UTC time in milliseconds
+* Started implementing structire of MSD
+
+Fixed Bugs, Changes
+-------------------
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+
+=====================================
 Version 0.09 - 2014/10/15 by Kenneth
 =====================================
 New Features, Improvements

@@ -13,7 +13,6 @@
 #define KENNETH_TEST ON
 #define ANDI_TEST OFF
 
-
 #if ANDI_TEST
 #define MODULE_TEST OFF
 /*********************************//**
@@ -306,7 +305,7 @@ void uart1_callback_test(char data) {
 #define UNIT_TEST						OFF
 #define MODULE_TEST_SENSORS				OFF
 #define MODULE_TEST_SIM908				OFF
-#define INTEGRATION_TEST_SIM908_SENSORS	ON
+#define INTEGRATION_TEST_SIM908_SENSORS	OFF
 
 #include "hardware_boards/lcd_board/lcd/lcd.h"
 #include "hardware_boards/lcd_board/button_led/btn_led_lcd.h"
@@ -324,7 +323,7 @@ int main (void)
 	const char degree = 0b011011111;
 	int x_axis, y_axis, z_axis;
 	float temp;
-	char buf[10];
+	char buf[20];
 	
 	btn_led_lcd_init();
 	lcd_init(LCD_DISP_ON);
@@ -403,9 +402,34 @@ int main (void)
 		}
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
+	#include "accident_data.h"
+
+	char *at_response = "0,953.27674,5552.192069,62.171906,20141012141759.000,160422,12,0.000000,294.187958";
+	
+	char file[24];
+	set_MSD(at_response, NULL, NULL, NULL);
+	
+	_msd.optional_data = "HEJ";
+	
 	while (1)
 	{
-
+		lcd_clrscr();
+		lcd_gotoxy(0,0);
+		//sprintf(buf, "%f", _msd.latitude);
+		lcd_puts(dtostrf(  _msd.latitude, 2, 2, buf ));
+	//	lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
+		lcd_gotoxy(0,1);
+	//	sprintf(buf, "%f", _msd.longitude);
+		lcd_puts(dtostrf(  _msd.longitude, 2, 2, buf ));
+	//	lcd_puts(buf);
+	//	lcd_puts(ultoa(sec2, buf, 10));
+		_delay_ms(1000);
+		lcd_gotoxy(0,0);
+		lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
+		_delay_ms(1000);
+		lcd_gotoxy(0,1);
+		lcd_puts(_msd.optional_data);
+		_delay_ms(1000);
 	}
 }
 #endif /* KENNETH_TEST */

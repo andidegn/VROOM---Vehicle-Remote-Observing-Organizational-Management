@@ -49,50 +49,8 @@ extern MSD _msd;
  *************************************************************************/
 void set_control_byte(bool test_call, bool position_can_be_trusted, bool automatic_activation);
 
-/**********************************************************************//**
- * @ingroup ad
- * @brief function to set the vehicle identification number
- * @return void
- * @param VIN - an array of 4 bytes
- * @note The number consist of 17 characters not including the letters I, O or Q.
- *************************************************************************/
-void set_VIN(char VIN[]);
+void set_MSD(char *__GPS_AT_respons, char *__VIN, uint8_t *__SP_IPV4, char *__optional);
 
-/**********************************************************************//**
- * @ingroup ad
- * @brief function to set the vehicle location
- * @return void
- * @param latitude - Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000)
- * @param longitude - Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000)
- *************************************************************************/
-void set_location(int32_t latitude, int32_t longitude);
-
-/**********************************************************************//**
- * @ingroup ad
- * @brief function to set the vehicle direction
- * @return void
- * @param value - The nearest integer of 360.0*value/255.0 (0 ? value ? 255)
- *************************************************************************/
-void set_direction(uint8_t value);
-
-/**********************************************************************//**
- * @ingroup ad
- * @brief function to set the service provider
- * @return void
- * @param sp - An array of 4 bytes consisting the SP in IPV4 format
- * @note May also be blank field
- *************************************************************************/
-void set_service_provider(uint8_t sp[]);
-
-/**********************************************************************//**
- * @ingroup ad
- * @brief function to set further data (e.g. crash information, number of passengers, temperature)
- * @return void
- * @param s - Maximum 102 bytes string allowed
- * @note May also be blank field
- *************************************************************************/
-void set_optional_data(char *s);
-
-void get_lat_long(char *__raw_at_str, double *__latitude, double *__longitude);
+void get_UTC_string(char *__raw_at_str, char *__UTC_time_string);
 
 #endif /* ACCIDENT_DATA_H_ */

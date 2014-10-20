@@ -83,6 +83,7 @@
 #define AT_FTP_BEARER1_CONTYPE_GPS	"AT+SAPBR=3,1,\"Contype\",\"GPRS\""
 #define AT_FTP_BEARER1_APN_TELIA	"AT+SAPBR=3,1,\"APN\",\"internet.mtelia.dk\""
 #define AT_FTP_BEARER1_APN_CALLME	"AT+SAPBR=3,1,\"APN\",\"websp\""
+#define AT_FTP_BEARER1_APN_TELENOR	"AT+SAPBR=3,1,\"APN\",\"internet\""
 
 #define AT_FTP_BEARER1_QUERY		"AT+SAPBR=2,1"	/* Different response */
 #define AT_FTP_OPEN_BEARER1			"AT+SAPBR=1,1"

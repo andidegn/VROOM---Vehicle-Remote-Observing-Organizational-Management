@@ -185,6 +185,11 @@ int8_t call_PSAP(void)
 	return SIM908_TIMEOUT;
 }
 
+int8_t send_MSD(const char* content, const char* filename)
+{
+	
+}
+
 void _setup_GSM(void)
 {		
 	/* Setup phone functionality */
@@ -241,7 +246,7 @@ void _setup_GPRS_TCPIP(void)
 /* ********************************** FTP **********************************
  *	States setting up GPRS - FTP:
  *	1:	Set bearer parameter	AT+SAPBR=3,1,"Contype","GPRS"
- *								AT+SAPBR=3,1,"APN","internet.mtelia.dk"
+ *								AT+SAPBR=3,1,"APN","websp"
  *	2:	Use bearer profile		AT+FTPCID=1
  *  3:	FTP login				AT+FTPSERV="ftp.andidegn.dk"
  *								AT+FTPPORT=1404

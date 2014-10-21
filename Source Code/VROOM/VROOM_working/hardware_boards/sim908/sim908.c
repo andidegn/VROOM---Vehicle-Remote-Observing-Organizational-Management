@@ -185,9 +185,77 @@ int8_t call_PSAP(void)
 	return SIM908_TIMEOUT;
 }
 
-int8_t send_MSD(const char* content, const char* filename)
+/********************************************************************************************************************//**
+ @ingroup sim908
+ @brief Calling Public-safety answering point
+ @return 1 if call established and response is OK
+		-3 if timeout
+ @note Pushes the call again if it fails until it times out 
+ ************************************************************************************************************************/
+int8_t send_MSD(void)
 {
+	char filename[39];
+	char buf[20];
+	strcat(filename, AT_FTP_PUT_FILE_NAME); // 14
+	strcat(filename, UTC_string);	// 25
+
+	/* ToDo */
+	SIM908_cmd(filename);
 	
+	SIM908_cmd(AT_FTP_OPEN_BEARER1);
+	SIM908_cmd(AT_FTP_PUT_OPEN_SESSION);
+	_delay_ms(8000);
+	SIM908_cmd("AT+FTPPUT=2,140");
+	_delay_ms(1000);
+	
+	uart0_send_string("Control: ");					// 9 bytes
+	uart0_send_string(itoa(_msd.control, buf, 2));	// 4 bytes
+	uart0_send_char(CR);							// 1
+	uart0_send_char(LF);							// 1
+	
+	uart0_send_string("VIN: ");
+	uart0_send_string(_msd.VIN);
+	uart0_send_char(CR);
+	uart0_send_char(LF);
+	
+	uart0_send_string("UCT sec: ");					// 9 bytes
+	uart0_send_string(ultoa(_msd.time_stamp, buf, 10));
+	uart0_send_char(CR);							// 1
+	uart0_send_char(LF);							// 1
+	
+	uart0_send_string("Longitude: ");
+	uart0_send_string(ltoa(  _msd.longitude, buf, 10 ));
+	uart0_send_char(CR);
+	uart0_send_char(LF);
+	
+	uart0_send_string("Latitude: ");
+	uart0_send_string(ltoa(  _msd.latitude, buf, 10 ));
+	uart0_send_char(CR);
+	uart0_send_char(LF);
+	
+	uart0_send_string("Direction: ");
+	uart0_send_string(itoa(_msd.direction, buf, 10));
+	uart0_send_char(CR);
+	uart0_send_char(LF);
+	
+	uart0_send_string("SP IPV4: ");
+	uart0_send_string(itoa(_msd.sp[0], buf, 10));
+	uart0_send_char('.');
+	uart0_send_string(itoa(_msd.sp[1], buf, 10));
+	uart0_send_char('.');
+	uart0_send_string(itoa(_msd.sp[2], buf, 10));
+	uart0_send_char('.');
+	uart0_send_string(itoa(_msd.sp[3], buf, 10));
+	uart0_send_char(CR);
+	uart0_send_char(LF);
+
+	uart0_send_string(_msd.optional_data);
+	uart0_send_char(CR);
+	uart0_send_char(LF);
+	
+	_delay_ms(1000);
+	SIM908_cmd(AT_FTP_PUT_CLOSE_SESSION);
+	SIM908_cmd(AT_FTP_CLOSE_BEARER1);
 }
 
 void _setup_GSM(void)
@@ -252,12 +320,12 @@ void _setup_GPRS_TCPIP(void)
  *								AT+FTPPORT=1404
  *								AT+FTPUN="VROOM"
  *								AT+FTPPW="6198fg(/G6F/&5(!(!8gf87gMF."	
- *  4:  Configure put			AT+FTPPUTNAME="ftp-test.txt"
- *								AT+FTPPUTPATH="/"
+ *  4:  Configure put			AT+FTPPUTPATH="/"
  *								AT+FTPTYPE="A"
- *								AT+FTPPUTOPT="APPE"
+ *								AT+FTPPUTOPT="STOR"
  * --- Following steps needs to be called whenever data transfer is needed ---
- *  5:	Open bearer				AT+SAPBR=1,1
+ *  5:	Create filename:		AT+FTPPUTNAME="<filename>"
+	6:	Open bearer				AT+SAPBR=1,1
 	6:	Open FTP PUT session	AT+FTPPUT=1
  *	7:  Set write data			AT+FTPPUT=2,140
  *	8:	Write text (140 bytes)
@@ -280,10 +348,9 @@ void _setup_GPRS_FTP(void)
 	SIM908_cmd(AT_FTP_SET_PASSWORD);
 	
 	/* Set put information */
-	SIM908_cmd(AT_FTP_PUT_NAME);
-	SIM908_cmd(AT_FTP_PUT_PATH);	
 	SIM908_cmd(AT_FTP_SET_DATA_TYPE_ASCII);
-	SIM908_cmd(AT_FTP_PUT_FILE_APPENDING);
+	SIM908_cmd(AT_FTP_PUT_FILE_STORING);
+	SIM908_cmd(AT_FTP_PUT_FILE_PATH);
 }
 
 

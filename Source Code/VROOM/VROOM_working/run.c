@@ -305,7 +305,9 @@ void uart1_callback_test(char data) {
 #define UNIT_TEST						OFF
 #define MODULE_TEST_SENSORS				OFF
 #define MODULE_TEST_SIM908				OFF
-#define INTEGRATION_TEST_SIM908_SENSORS	OFF
+#define INTEGRATION_TEST_SIM908_SENSORS	ON
+
+#define UNIT_TEST_MSD					OFF
 
 #include "hardware_boards/lcd_board/lcd/lcd.h"
 #include "hardware_boards/lcd_board/button_led/btn_led_lcd.h"
@@ -313,6 +315,8 @@ void uart1_callback_test(char data) {
 #include "hardware_boards/sim908/sim908.h"
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdbool.h>
+#include <math.h>
 #include "unit_test.h"
 
 int main (void)
@@ -370,15 +374,28 @@ int main (void)
 		SIM908_init();
 		sei();
 		SIM908_start();
-		
-		scheduler_start(NULL);
-		
+		int32_t acc_total = 0;
+		bool flag = false;
+		scheduler_start(NULL);		
+			
+		char *at_response = "0,953.27674,5552.192069,62.171906,20141021175538.000,160422,12,0.000000,294.187958";
+		set_MSD(true, true, false, at_response, "W0L000036V1940069", NULL , "Acc: ? | Temp: ?");
+
+		_delay_ms(10000);
+				
 		while (1)		
 		{
 			x_axis = (int)(acc_get_x_axis()*100);
 			y_axis = (int)(acc_get_y_axis()*100);
 			z_axis = (int)(acc_get_z_axis()*100);
 			temp = get_temperature();
+			// acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
+			
+			if (temp > 28 && flag == false)
+			{
+				send_MSD();
+				flag = true;
+			}
 			
 			lcd_clrscr();
 			lcd_gotoxy(0, 0);
@@ -402,34 +419,55 @@ int main (void)
 		}
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
-	#include "accident_data.h"
+	#if UNIT_TEST_MSD
+		#include "accident_data.h"
 
-	char *at_response = "0,953.27674,5552.192069,62.171906,20141012141759.000,160422,12,0.000000,294.187958";
-	
-	char file[24];
-	set_MSD(at_response, NULL, NULL, NULL);
-	
-	_msd.optional_data = "HEJ";
-	
+		char *at_response = "0,953.27674,5552.192069,62.171906,20141021164456.000,160422,12,0.000000,294.187958";
+
+		set_MSD(true, true, false, at_response, "W0L000036V1940069", NULL , "Acc: ? | Temp: ?");
+
+		while (1)
+		{
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts("Control: ");
+			lcd_puts(itoa(_msd.control, buf, 2));
+			lcd_gotoxy(0,1);
+			lcd_puts(_msd.VIN);
+			_delay_ms(2000);
+		
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
+			lcd_gotoxy(0,1);
+			lcd_puts(itoa(_msd.direction, buf, 10));
+			_delay_ms(2000);
+		
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts("Long: ");
+			lcd_puts(dtostrf(  _msd.longitude, 2, 2, buf ));
+			lcd_gotoxy(0,1);
+			lcd_puts("Lati: ");
+			lcd_puts(dtostrf(  _msd.latitude, 2, 2, buf ));
+			_delay_ms(2000);
+		
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts("SP: ");
+			lcd_puts(itoa(_msd.sp[0], buf, 10)); lcd_putc('.');
+			lcd_puts(itoa(_msd.sp[1], buf, 10)); lcd_putc('.');
+			lcd_puts(itoa(_msd.sp[2], buf, 10)); lcd_putc('.');
+			lcd_puts(itoa(_msd.sp[3], buf, 10));
+			lcd_gotoxy(0,1);
+			lcd_puts(_msd.optional_data);
+			_delay_ms(2000);
+		}
+	#endif /* UNIT_TEST_MSD */
+				
 	while (1)
 	{
-		lcd_clrscr();
-		lcd_gotoxy(0,0);
-		//sprintf(buf, "%f", _msd.latitude);
-		lcd_puts(dtostrf(  _msd.latitude, 2, 2, buf ));
-	//	lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
-		lcd_gotoxy(0,1);
-	//	sprintf(buf, "%f", _msd.longitude);
-		lcd_puts(dtostrf(  _msd.longitude, 2, 2, buf ));
-	//	lcd_puts(buf);
-	//	lcd_puts(ultoa(sec2, buf, 10));
-		_delay_ms(1000);
-		lcd_gotoxy(0,0);
-		lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
-		_delay_ms(1000);
-		lcd_gotoxy(0,1);
-		lcd_puts(_msd.optional_data);
-		_delay_ms(1000);
+		
 	}
 }
 #endif /* KENNETH_TEST */

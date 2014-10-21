@@ -16,6 +16,7 @@
 #include <string.h>
 
 #include "at_commands.h"
+#include "../../accident_data.h"
 #include "../../data_comm/uart/uart.h"
 #include "../../timer.h"
 
@@ -73,5 +74,6 @@ void GSM_enable(void);
 void GPS_enable(void);
 int8_t SIM908_cmd(const char *cmd);
 int8_t call_PSAP(void);
+int8_t send_MSD(void);
 
 #endif /* SIM908_GSM_H_ */

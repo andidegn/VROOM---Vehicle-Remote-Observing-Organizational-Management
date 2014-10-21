@@ -95,14 +95,18 @@
 
 #define AT_FTP_PUT_FILE_STORING		"AT+FTPPUTOPT=\"STOR\""
 #define AT_FTP_PUT_FILE_APPENDING	"AT+FTPPUTOPT=\"APPE\""
-#define AT_FTP_PUT_FILE_UNIQUE		"AT+FTPPUTOPT=\"STOU\""
+#define AT_FTP_PUT_FILE_UNIQUE		"AT+FTPPUTOPT=\"STOU\""	/* Not possible in */
+
+#define AT_FTP_PUT_OPEN_SESSION		"AT+FTPPUT=1"
+#define AT_FTP_PUT_CLOSE_SESSION	"AT+FTPPUT=2,0"
+#define AT_FTP_PUT_WRITE_140BYTE	"AT+FTPPUT=2,140"
 
 #define AT_FTP_SET_SERVER_ADDRESS	"AT+FTPSERV=\"ftp.andidegn.dk\""	
 #define AT_FTP_SET_CONTROL_PORT		"AT+FTPPORT=1404"	
 #define AT_FTP_SET_USER_NAME_VROOM	"AT+FTPUN=\"VROOM\""
 #define AT_FTP_SET_PASSWORD			"AT+FTPPW=\"6198fg(/G6F/&5(!(!8gf87gMF.\""
-#define AT_FTP_PUT_NAME				"AT+FTPPUTNAME=\"ftp-test.txt\""
-#define AT_FTP_PUT_PATH				"AT+FTPPUTPATH=\"/\""
+#define AT_FTP_PUT_FILE_NAME		"AT+FTPPUTNAME=\""
+#define AT_FTP_PUT_FILE_PATH		"AT+FTPPUTPATH=\"/\""
 /*******************************************************************************/
 
 /* Module device status

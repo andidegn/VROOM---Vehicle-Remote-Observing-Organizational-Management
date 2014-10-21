@@ -1,4 +1,27 @@
 =====================================
+Version 0.096 - 2014/10/21 by Kenneth
+=====================================
+New Features, Improvements
+--------------------------
+* Finished structure of MSD
+* Started implementing send_msb() function, which starts a session 
+  and sends the MSB struct over FTP (not a pretty solution so far)
+* Added an integration test in main, which sends MSB to FTP server when temperature > 28 degrees
+  This resulted in the problem descriped under ToDo
+
+Fixed Bugs, Changes
+-------------------
+* FTP put file name is now the modified string of GPS UTC time (UTC_string)
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+- PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes
+
+
+=====================================
 Version 0.095 - 2014/10/20 by Kenneth
 =====================================
 New Features, Improvements

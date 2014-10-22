@@ -5,7 +5,7 @@
 @defgroup ad Accident Data
 @{
 	This is the data for an Accident report.
-	Followed eCall standards for data structure.
+	Followed eCall standards for MSD data structure.
 @}
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
@@ -15,8 +15,9 @@
 #include <string.h>
 #include <stdlib.h>
 
-MSD _msd;
+#define BLANK_CHAR 0x20
 
+MSD _msd;
 char UTC_string[25];
 
 static void _raw_to_array(char **__output, char *__raw_at_str);
@@ -92,8 +93,8 @@ static void _set_UTC_string(char *__utc_raw)
 /**********************************************************************//**
  * @ingroup ad
  * @brief function to set the control byte \n
- * 	Content of control byte: |---Reserved--- | No confidence in position | Test call | Manual activation | Automatic activation | \n
-	Bit:					 | 0 | 1 | 2 | 3 |			  4				 |     5	 |	    6			 |	       7		    | \n
+ *	Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |\n
+ *	Bit:		  |	       7			 |	       6		 |     5	 |			  4			  | 3 | 2 | 1 | 0 |\n
  * @return void
  * @param test_call - Flag for testing purposes
  * @param position_can_be_trusted - confidence in position
@@ -102,7 +103,7 @@ static void _set_UTC_string(char *__utc_raw)
  *************************************************************************/
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm)
 {
-	_msd.control |= __position_can_be_trusted<<3 | __test_call<<2 |  __manual_alarm<<1 | __auto_alarm;
+	_msd.control |= __position_can_be_trusted<<4 | __test_call<<5 |  __manual_alarm<<6 | __auto_alarm<<7;
 }
 
 /**********************************************************************//**
@@ -119,6 +120,9 @@ static void _set_VIN(char *__VIN)
 	{
 		_msd.VIN[i++] = *__VIN++;
 	}
+	_msd.VIN[17] = BLANK_CHAR;
+	_msd.VIN[18] = BLANK_CHAR;
+	_msd.VIN[19] = BLANK_CHAR;
 }
 
 static void _set_UTC_sec(char *__utc_raw)
@@ -192,13 +196,19 @@ static void _set_service_provider(uint8_t *__sp)
 {	
 	if (__sp == NULL)
 	{
-		memset(__sp, 0, 4);
+		_msd.sp[0] = BLANK_CHAR;
+		_msd.sp[1] = BLANK_CHAR;
+		_msd.sp[2] = BLANK_CHAR;
+		_msd.sp[3] = BLANK_CHAR;
 	}
 	
-	_msd.sp[0] = __sp[0];
-	_msd.sp[1] = __sp[1];
-	_msd.sp[2] = __sp[2];
-	_msd.sp[3] = __sp[3];
+	else
+	{
+		_msd.sp[0] = __sp[0];
+		_msd.sp[1] = __sp[1];
+		_msd.sp[2] = __sp[2];
+		_msd.sp[3] = __sp[3];	
+	}
 }
 
 /**********************************************************************//**
@@ -210,14 +220,20 @@ static void _set_service_provider(uint8_t *__sp)
  *************************************************************************/
 static void _set_optional_data(char *__s)
 {
-    /* MAX SIZE OF DATA = 102 bytes */
-	if (sizeof(__s) > 102)
-	{
-		_msd.optional_data = "ERROR";
-	}
+	uint8_t i = 0;
 	
-	else
+	for (i = 0; i< 102; i++)
 	{
-		_msd.optional_data = __s;
+		_msd.optional_data[i] = 'A';
 	}
+//
+	//while (*__s)
+	//{
+		//_msd.optional_data[i++] = *__s++;
+	//}
+	//
+    //while (i < 102)
+    //{
+		//_msd.optional_data[i++] = BLANK_CHAR;
+    //}
 }

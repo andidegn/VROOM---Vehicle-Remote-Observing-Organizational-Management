@@ -54,38 +54,12 @@
 #define AT_RESTORE_PROFILE1			"ATZ1"
 #define AT_MANUFACTURER_DEFAULTS	"AT&F0"
 
-/********************************** TCP / UDP **********************************/
-#define AT_TCP_APN_TELIA			"AT+CSTT=\"internet.mtelia.dk\""
-#define AT_TCP_APN_CALLME			"AT+CSTT=\"websp\""
-#define AT_TCP_APN_TELENOR			"AT+CSTT=\"internet\""
-
-#define AT_GPRS_ACTIVATE			"AT+CIICR"
-#define AT_GPRS_GET_LOCAL_IP		"AT+CIFSR"
-
-#define AT_GPRS_DETACHED			"AT+CGATT=0"
-#define AT_GPRS_ATTACHED			"AT+CGATT=1"
-
-#define AT_OPEN_TCP					"AT+CIPSTART=\"TCP\",\"andidegn.dk\",\"1404\""	
-#define AT_OPEN_UDP					"AT+CIPSTART=\"UDP\",\"andidegn.dk\",\"1404\""	
-#define AT_CLOSE_TCP_UDP_SLOW		"AT+CIPCLOSE=0"
-#define AT_CLOSE_TCP_UDP_QUICK		"AT+CIPCLOSE=1"
-
-/* TCP/IP connection mode */
-#define AT_TCPIP_SINGLE				"AT+CIPMUX=0"
-#define AT_TCPIP_MULTI				"AT+CIPMUX=1"
-
-/* TCP/IP application Mode */
-#define AT_TCPIP_NORMAL_MODE		"AT+CIPMODE=0"
-#define AT_TCPIP_TRANSPARENT_MODE	"AT+CIPMODE=1"
-/*******************************************************************************/
-
 /*********************************** FTP ***************************************/
 #define AT_FTP_BEARER1_CONTYPE_GPS	"AT+SAPBR=3,1,\"Contype\",\"GPRS\""
 #define AT_FTP_BEARER1_APN_TELIA	"AT+SAPBR=3,1,\"APN\",\"internet.mtelia.dk\""
 #define AT_FTP_BEARER1_APN_CALLME	"AT+SAPBR=3,1,\"APN\",\"websp\""
 #define AT_FTP_BEARER1_APN_TELENOR	"AT+SAPBR=3,1,\"APN\",\"internet\""
 
-#define AT_FTP_BEARER1_QUERY		"AT+SAPBR=2,1"	/* Different response */
 #define AT_FTP_OPEN_BEARER1			"AT+SAPBR=1,1"
 #define AT_FTP_CLOSE_BEARER1		"AT+SAPBR=0,1"
 #define AT_FTP_USE_PROFILE1			"AT+FTPCID=1"
@@ -95,7 +69,7 @@
 
 #define AT_FTP_PUT_FILE_STORING		"AT+FTPPUTOPT=\"STOR\""
 #define AT_FTP_PUT_FILE_APPENDING	"AT+FTPPUTOPT=\"APPE\""
-#define AT_FTP_PUT_FILE_UNIQUE		"AT+FTPPUTOPT=\"STOU\""	/* Not possible in */
+#define AT_FTP_PUT_FILE_UNIQUE		"AT+FTPPUTOPT=\"STOU\""		/* Not supported in FileZilla */
 
 #define AT_FTP_PUT_OPEN_SESSION		"AT+FTPPUT=1"
 #define AT_FTP_PUT_CLOSE_SESSION	"AT+FTPPUT=2,0"
@@ -154,7 +128,7 @@
 #define AT_GPS_RST_MODE "AT+CGPSRST?"
 #define AT_GPS_RST_COLD "AT+CGPSRST=0"
 #define AT_GPS_RST_AUTONOMY "AT+CGPSRST=1"
-#define AT_GPS_GET_LOCATION "AT+CGPSINF=0" // Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course >
+#define AT_GPS_GET_LOCATION "AT+CGPSINF=0" // Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course>
 #define AT_GPS_GET_STATUS "AT+CGPSSTATUS?"
 /* EOL */
 #define AT_EOL '\r'

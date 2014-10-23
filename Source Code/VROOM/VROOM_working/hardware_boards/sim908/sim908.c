@@ -191,7 +191,6 @@ int8_t call_PSAP(void)
  ************************************************************************************************************************/
 int8_t send_MSD(void)
 {
-	convert_file_stream();
 	char filename[39];
 	char *name = "Testing\"";
 
@@ -208,8 +207,16 @@ int8_t send_MSD(void)
 	SIM908_cmd("AT+FTPPUT=2,140");
 	_delay_ms(1000);
 
-	uart0_send_string(&_msd_file_stream);
+	//uart0_send_string(&_msd_file_stream);
 
+	uart0_send_string(&_msd.control);
+	uart0_send_string(&_msd.VIN);
+	uart0_send_string(&_msd.time_stamp);
+	uart0_send_string(&_msd.latitude);
+	uart0_send_string(&_msd.longitude);
+	uart0_send_string(&_msd.direction);
+	uart0_send_string(&_msd.sp);	
+	uart0_send_string(&_msd.optional_data);
 	uart0_send_char(CR);
 	uart0_send_char(LF);
 

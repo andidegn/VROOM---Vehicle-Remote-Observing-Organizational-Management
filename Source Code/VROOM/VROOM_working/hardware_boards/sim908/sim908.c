@@ -37,46 +37,46 @@ void _flush_buffer(void);
 int8_t _wait_response(void);
 void _SIM908_callback(char data);
 #ifdef  PC_CALLBACK
-void _PC_callback(char data); 
+void _PC_callback(char data);
 #endif
 
 /********************************************************************************************************************//**
  @ingroup sim908
  @brief Initiates the SIM908 module
  @return void
- @note UART0 is used to communicate with the module. Timer3 is used in determining timeouts. 
+ @note UART0 is used to communicate with the module. Timer3 is used in determining timeouts.
  ************************************************************************************************************************/
 void SIM908_init(void)
-{	
+{
 	/* Saves the current state of the status register and disables global interrupt */
 	uint8_t SREG_cpy = SREG;
 	cli();
-	
+
 	/* Set all related pins to output */
 	DDR(DRIVER_PORT) |= (1<<CE_PIN);
 	DDR(GSM_PORT) |= (1<<GSM_ENABLE_PIN);
 	DDR(GPS_PORT) |= (1<<GPS_ENABLE_PIN);
-		
+
 	/* Toggle driver pin to start up SIM908 module */
 	DRIVER_PORT |= _BV(CE_PIN);
 	_delay_ms(1500);
 	DRIVER_PORT &= ~_BV(CE_PIN);
 	_delay_ms(1500);
-		
+
 	/* Restore interrupt */
 	SREG = SREG_cpy;
-		
-	/* Setting up timer for timeout determination */	
+
+	/* Setting up timer for timeout determination */
 	init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
-		
+
 	/* Setting up UART for internal communication */
  	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _SIM908_callback);
-	 
+
 	#ifdef PC_CALLBACK
 	/* Setting up UART for external communication */
 	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _PC_callback);
 	#endif
-	
+
 	/* Waiting for proper startup */
 	_delay_ms(5000);
 }
@@ -85,13 +85,13 @@ void SIM908_start(void)
 {
 	/* Synchronizing baud rate */
 	while (SIM908_cmd(AT_DIAG_TEST) != SIM908_RESPONSE_OK);
-		
+
 	/* Set baud rate to the host baud rate */
 	SIM908_cmd(AT_BAUD_115K2);
-		
+
 	/* Enable Echo */
 	SIM908_cmd(AT_DIAG_ECHO_ENABLE);
-		
+
 	_setup_GSM();
 	_setup_GPS();
 	GSM_enable();
@@ -131,24 +131,24 @@ void GPS_enable(void)
 		-3 if timeout
  ************************************************************************************************************************/
 int8_t SIM908_cmd(const char *cmd)
-{  
+{
 	int8_t _cmd_check = 0;
 	_flush_buffer();
-	
+
 	_callback_state = record_data;
-	
+
 	uart0_send_string(cmd);
 	uart0_send_char(CR);
 	uart0_send_char(LF);
-	
+
 	_cmd_check = _wait_response();
-	
+
 	if(_cmd_check == SIM908_OK)
 	{
 		_callback_state = ignore_data;
 		return _SIM908_check_response();
 	}
-	
+
 	return _cmd_check;
 }
 
@@ -157,27 +157,27 @@ int8_t SIM908_cmd(const char *cmd)
  @brief Calling Public-safety answering point
  @return 1 if call established and response is OK
 		-3 if timeout
- @note Pushes the call again if it fails until it times out 
+ @note Pushes the call again if it fails until it times out
  ************************************************************************************************************************/
 int8_t call_PSAP(void)
 {
 	int8_t _call_check = 0;
-	
+
 	start_timer3();
 	SIM908_TIMEOUT_COUNTER = 0;
-	
+
 	while (!_TIMEOUT())
 	{
 		/* _call_check = SIM908_cmd(AT_CALL_EMERGENCY); */
 		_call_check = SIM908_cmd(AT_CALL_KENNETH);
-		
+
 		if (_call_check == SIM908_RESPONSE_OK)
 		{
 			stop_timer3();
 			return SIM908_OK;
 		}
 	}
-	
+
 	stop_timer3();
 	return SIM908_TIMEOUT;
 }
@@ -187,7 +187,7 @@ int8_t call_PSAP(void)
  @brief Calling Public-safety answering point
  @return 1 if call established and response is OK
 		-3 if timeout
- @note Pushes the call again if it fails until it times out 
+ @note Pushes the call again if it fails until it times out
  ************************************************************************************************************************/
 int8_t send_MSD(void)
 {
@@ -198,9 +198,9 @@ int8_t send_MSD(void)
 	strcat(filename, AT_FTP_PUT_FILE_NAME); // 14
 	//	strcat(filename, UTC_string);	// 25
 	strcat(filename, name);
-	
+
 	SIM908_cmd(filename);
-		
+
 	SIM908_cmd(AT_FTP_OPEN_BEARER1);
 	SIM908_cmd(AT_FTP_PUT_OPEN_SESSION);
 	_delay_ms(4000);
@@ -221,14 +221,14 @@ int8_t send_MSD(void)
 
 void _send_line(const char *s)
 {
-	
+
 }
 
 void _setup_GSM(void)
-{		
+{
 	/* Setup phone functionality */
 	SIM908_cmd(AT_FULL_FUNCTIONALITY);
-		
+
 	/* Forbid incoming calls */
 	SIM908_cmd(AT_FORBID_INCOMING_CALLS);
 }
@@ -237,7 +237,7 @@ void _setup_GPS(void)
 {
 	/* Enable GPS */
 	SIM908_cmd(AT_GPS_POWER_ON);
-		
+
 	/* Set GPS reset to autonomous */
 	SIM908_cmd(AT_GPS_RST_AUTONOMY);
 }
@@ -250,7 +250,7 @@ void _setup_GPS(void)
  *  3:	FTP login				AT+FTPSERV="ftp.andidegn.dk"
  *								AT+FTPPORT=1404
  *								AT+FTPUN="VROOM"
- *								AT+FTPPW="6198fg(/G6F/&5(!(!8gf87gMF."	
+ *								AT+FTPPW="6198fg(/G6F/&5(!(!8gf87gMF."
  *  4:  Configure put			AT+FTPPUTPATH="/"
  *								AT+FTPTYPE="A"
  *								AT+FTPPUTOPT="STOR"
@@ -268,16 +268,16 @@ void _setup_GPRS_FTP(void)
 	/* Set bearer parameters */
 	SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS);
 	SIM908_cmd(AT_FTP_BEARER1_APN_CALLME);
-	
+
 	/* Use bearer profile 1 */
 	SIM908_cmd(AT_FTP_USE_PROFILE1);
-	
+
 	/* FTP login */
 	SIM908_cmd(AT_FTP_SET_SERVER_ADDRESS);
 	SIM908_cmd(AT_FTP_SET_CONTROL_PORT);
 	SIM908_cmd(AT_FTP_SET_USER_NAME_VROOM);
 	SIM908_cmd(AT_FTP_SET_PASSWORD);
-	
+
 	/* Set put information */
 	SIM908_cmd(AT_FTP_SET_DATA_TYPE_BINARY);
 	SIM908_cmd(AT_FTP_PUT_FILE_STORING);
@@ -293,7 +293,7 @@ void _flush_buffer(void)
 }
 
 int8_t _wait_response(void)
-{	
+{
 	start_timer3();
 	SIM908_TIMEOUT_COUNTER = 0;
 	while (_CR_counter < 3  || _LF_counter < 3)
@@ -309,44 +309,44 @@ int8_t _wait_response(void)
 	return SIM908_OK;
 }
 
-/* AT test command echo and expected response: 
-	AT <CR> <LF> <CR> <LF> OK <CR> <LF> 
-	0x41 = A	
-	0x54 = T 
+/* AT test command echo and expected response:
+	AT <CR> <LF> <CR> <LF> OK <CR> <LF>
+	0x41 = A
+	0x54 = T
 	0x0d = <CR>
 	0x0a = <LF>
 	0x0d = <CR>
 	0x0a = <LF>
-	0x4f = O		
-	0x4b = K		
-	0x0d = <CR>		
-	0x0a = <LF>			
+	0x4f = O
+	0x4b = K
+	0x0d = <CR>
+	0x0a = <LF>
 */
 int8_t _SIM908_check_response()
 {
 	/* Check command for the letter A/a */
 	if(_sim908_buffer[0] != 0x41 && _sim908_buffer[0] != 0x61)
 		return	SIM908_INVALID_COMMAND;
-		
+
 	/* Check command for the letter T/t */
 	if(_sim908_buffer[1] != 0x54 && _sim908_buffer[1] != 0x74)
 		return	SIM908_INVALID_COMMAND;
-	
+
 	/* Check if response is OK */
 	if (_sim908_buffer[_index-6] == CR && _sim908_buffer[_index-5] == LF
 	    && _sim908_buffer[_index-4] == 'O' && _sim908_buffer[_index-3] == 'K'
 		&& _sim908_buffer[_index-2] == CR && _sim908_buffer[_index-1] == LF)
 			return SIM908_RESPONSE_OK;
-			
+
 	/* Check if response is ERROR */
 	if (_sim908_buffer[_index-9] == CR && _sim908_buffer[_index-8] == LF
 		&& _sim908_buffer[_index-7] == 'E' && _sim908_buffer[_index-6] == 'R'
-		&& _sim908_buffer[_index-5] == 'R' && _sim908_buffer[_index-4] == 'O' 
+		&& _sim908_buffer[_index-5] == 'R' && _sim908_buffer[_index-4] == 'O'
 		&& _sim908_buffer[_index-3] == 'R'
 		&& _sim908_buffer[_index-2] == CR && _sim908_buffer[_index-1] == LF)
 			return SIM908_RESPONSE_ERROR;
-			
-	return SIM908_INVALID_RESPONSE;	
+
+	return SIM908_INVALID_RESPONSE;
 }
 
 void _SIM908_callback(char data)
@@ -354,26 +354,26 @@ void _SIM908_callback(char data)
 	#ifdef PC_CALLBACK
 		uart1_send_char(data);
 	#endif
-		
+
 	switch (_callback_state)
 	{
 		case ignore_data : break;
-		
+
 		case record_data :
-			_sim908_buffer[_index++] = data;	
-		
+			_sim908_buffer[_index++] = data;
+
 			if (data == CR)
 				_CR_counter++;
 			else if (data == LF)
 				_LF_counter++;
 		break;
-		
+
 		default: break;
 	}
 }
 
 #ifdef PC_CALLBACK
-void _PC_callback(char data) 
+void _PC_callback(char data)
 {
 	uart0_send_char(data);
 }

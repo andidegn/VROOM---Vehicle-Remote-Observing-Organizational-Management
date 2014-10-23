@@ -229,7 +229,7 @@ namespace TestTerminal {
                 }
 
             } else if (_skip_no_of_receptions <= 0) {
-                rtb_terminal.AppendText((p != "\r" ? DateTime.Now.ToString("[HH:mm:ss] ") : ""), _color_timestamp);
+                rtb_terminal.AppendText((p != "\r" ? DateTime.Now.ToString("[dd-MM-yyyy HH:mm:ss] ") : ""), _color_timestamp);
                 rtb_terminal.AppendText(p, _color_text);
                 rtb_terminal.ScrollToCaret();
 

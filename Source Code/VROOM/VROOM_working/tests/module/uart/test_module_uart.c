@@ -11,7 +11,7 @@
 #include "../../../data_comm/uart/uart.h"
 
 #define TEST_STRING_LENGTH 17
-static volatile char *_uart_test_string = "UART testing...\r\n";
+static char *_uart_test_string = "UART testing...\r\n";
 static char _eol_char = '\n';
 static char *_uart_recieved_data[TEST_STRING_LENGTH];
 static char _i;
@@ -58,10 +58,10 @@ uint8_t test_module_uart_run(void) {
 		_delay_ms(1);
 
 	while ((tmp_char = uart1_read_char()) != UART_NO_DATA) {
-		_uart_recieved_data[_i++] = tmp_char;
+		*_uart_recieved_data[_i++] = tmp_char;
 	}
 
-	test_result = _validate_data(_uart_test_string, _uart_recieved_data);
+	test_result = _validate_data();
 
 	return test_result;
 }
@@ -70,7 +70,7 @@ static inline uint8_t _validate_data() {
 	uint8_t test_result = UART_PASSED;
 
 	for (_i = 0; _i < TEST_STRING_LENGTH; _i++) {
-		if (_uart_test_string[_i] != _uart_recieved_data[_i]) {
+		if (_uart_test_string[_i] != *_uart_recieved_data[_i]) {
 			test_result = UART_FAILED;
 			break;
 		}
@@ -80,7 +80,7 @@ static inline uint8_t _validate_data() {
 }
 
 static void _data0_received(char data) {
-	_uart_recieved_data[_i++] = data;
+	*_uart_recieved_data[_i++] = data;
 	if (data == _eol_char || _i > TEST_STRING_LENGTH) {
 		_roundtrip_complete = true;
 	}

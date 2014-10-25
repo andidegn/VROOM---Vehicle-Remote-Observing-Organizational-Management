@@ -18,7 +18,7 @@
 #define BLANK_CHAR 0x20
 
 MSD _msd;
-char UTC_string[25];
+char UTC_string[24];
 
 static void _raw_to_array(char **__output, char *__raw_at_str);
 static void _set_UTC_string(char *__utc_raw);
@@ -66,7 +66,7 @@ static void _raw_to_array(char **__output, char *__raw_at_str) {
 
 static void _set_UTC_string(char *__utc_raw)
 {
-	/* 2014-10-12_13.17.34.000 */
+	/* Format: 2014-10-12_13.17.34.000 */
 	uint8_t i = 0;
 	while (*__utc_raw != '\0')
 	{
@@ -127,12 +127,12 @@ static void _set_VIN(char *__VIN)
 
 static void _set_UTC_sec(char *__utc_raw)
 {
-	char year[5] = {__utc_raw[0],  __utc_raw[1], __utc_raw[2], __utc_raw[3]};
-	char month[3] = {__utc_raw[4],  __utc_raw[5]};
-	char day[3] = {__utc_raw[6],  __utc_raw[7]};
-	char hour[3] = {__utc_raw[8],  __utc_raw[9]};
-	char minute[3] = {__utc_raw[10],  __utc_raw[11]};
-	char second[3] = {__utc_raw[12],  __utc_raw[13]};
+	char year[5] = {__utc_raw[0],  __utc_raw[1], __utc_raw[2], __utc_raw[3], '0'};
+	char month[3] = {__utc_raw[4],  __utc_raw[5], '\0'};
+	char day[3] = {__utc_raw[6],  __utc_raw[7], '\0'};
+	char hour[3] = {__utc_raw[8],  __utc_raw[9], '\0'};
+	char minute[3] = {__utc_raw[10],  __utc_raw[11], '\0'};
+	char second[3] = {__utc_raw[12],  __utc_raw[13], '\0'};
 
 	FIXED_TIME t;
 	t.year = atoi(year);
@@ -144,7 +144,7 @@ static void _set_UTC_sec(char *__utc_raw)
 
 	_msd.time_stamp = calc_UTC_seconds(&t);
 }
-
+#define SWAP_INT32(x) (((((x) >> 24) | (((x) & 0x00FF0000) >> 8) | (((x) & 0x0000FF00) << 8) | ((x) << 24))) & 0xFFFF)
 static void _set_lat_long(char *__lat_raw, char *__long_raw) {
 	int lat_i = 0;
 	int long_i = 0;
@@ -166,8 +166,6 @@ static void _set_lat_long(char *__lat_raw, char *__long_raw) {
 	}
 	lat_deg[lat_i] = '\0';
 
-
-
 	for (i = 0; i < long_i; i++) {
 		long_deg[i] = __long_raw[i];
 	}
@@ -177,6 +175,14 @@ static void _set_lat_long(char *__lat_raw, char *__long_raw) {
 	// Needs to be change to milliarcseconds (int32_t)
 	_msd.latitude = atoi(lat_deg) + atof(&__lat_raw[lat_i]) / 60;
 	_msd.longitude = atoi(long_deg) + atof(&__long_raw[long_i]) / 60;
+	
+	//char buf[20];
+	//lcd_clrscr();
+	//lcd_gotoxy(0, 0);
+	//lcd_puts(itoa( SWAP_INT32(_msd.latitude), buf, 2 ));
+	//
+	//lcd_gotoxy(0, 1);
+	//lcd_puts(itoa( SWAP_INT32( _msd.longitude), buf, 2));
 }
 
 static void _set_direction(char *__direction_raw)
@@ -222,18 +228,13 @@ static void _set_optional_data(char *__s)
 {
 	uint8_t i = 0;
 	
-	for (i = 0; i< 102; i++)
+	while (*__s != '\0')
 	{
-		_msd.optional_data[i] = 'A';
+		_msd.optional_data[i++] = *__s++;
 	}
-//
-	//while (*__s)
-	//{
-		//_msd.optional_data[i++] = *__s++;
-	//}
-	//
-    //while (i < 102)
-    //{
-		//_msd.optional_data[i++] = BLANK_CHAR;
-    //}
+	
+    while (i < 102)
+    {
+		_msd.optional_data[i++] = BLANK_CHAR;
+    }
 }

@@ -23,7 +23,7 @@ static volatile uint8_t _LF_counter = 0;
 #define DDR(x) (*(&x - 1))
 #define PIN(x) (*(&x - 2))
 
-#define _TIMEOUT() (SIM908_TIMEOUT_COUNTER > SIM908_TIMEOUT_VALUE )
+#define _TIMEOUT() (SIM908_timeout_counter > SIM908_TIMEOUT_VALUE )
 
 typedef enum {ignore_data, record_data} CALLBACK_STATE;
 CALLBACK_STATE _callback_state = ignore_data;
@@ -35,6 +35,7 @@ void _setup_GPRS_FTP(void);
 int8_t _SIM908_check_response(void);
 void _flush_buffer(void);
 int8_t _wait_response(void);
+char* _get_GPS_response(void);
 void _SIM908_callback(char data);
 #ifdef  PC_CALLBACK
 void _PC_callback(char data);
@@ -91,6 +92,8 @@ void SIM908_start(void)
 
 	/* Enable Echo */
 	SIM908_cmd(AT_DIAG_ECHO_ENABLE);
+	
+	SIM908_cmd("AT+CPIN=5130");
 
 	_setup_GSM();
 	_setup_GPS();
@@ -164,7 +167,7 @@ int8_t call_PSAP(void)
 	int8_t _call_check = 0;
 
 	start_timer3();
-	SIM908_TIMEOUT_COUNTER = 0;
+	SIM908_timeout_counter = 0;
 
 	while (!_TIMEOUT())
 	{
@@ -184,20 +187,16 @@ int8_t call_PSAP(void)
 
 /********************************************************************************************************************//**
  @ingroup sim908
- @brief Calling Public-safety answering point
+ @brief Sends MSB binary file to FTP server
  @return 1 if call established and response is OK
 		-3 if timeout
- @note Pushes the call again if it fails until it times out
  ************************************************************************************************************************/
 int8_t send_MSD(void)
 {
-	char filename[39];
-	char *name = "Testing\"";
-
-	strcat(filename, AT_FTP_PUT_FILE_NAME); // 14
-	//	strcat(filename, UTC_string);	// 25
-	strcat(filename, name);
-
+	//char filename[39];
+	char *filename = "AT+FTPPUTNAME=\"AA_TEST11.hex\"";
+	//strcat(filename, AT_FTP_PUT_FILE_NAME); // 15
+	//strcat(filename, UTC_string);			  // 24
 	SIM908_cmd(filename);
 
 	SIM908_cmd(AT_FTP_OPEN_BEARER1);
@@ -206,9 +205,7 @@ int8_t send_MSD(void)
 
 	SIM908_cmd("AT+FTPPUT=2,140");
 	_delay_ms(1000);
-
-	//uart0_send_string(&_msd_file_stream);
-
+	
 	uart0_send_string(&_msd.control);
 	uart0_send_string(&_msd.VIN);
 	uart0_send_string(&_msd.time_stamp);
@@ -217,18 +214,16 @@ int8_t send_MSD(void)
 	uart0_send_string(&_msd.direction);
 	uart0_send_string(&_msd.sp);	
 	uart0_send_string(&_msd.optional_data);
+
 	uart0_send_char(CR);
 	uart0_send_char(LF);
 
 	_delay_ms(1000);
 	SIM908_cmd(AT_FTP_PUT_CLOSE_SESSION);
-	_delay_ms(4000);
+	_delay_ms(8000);
 	SIM908_cmd(AT_FTP_CLOSE_BEARER1);
-}
-
-void _send_line(const char *s)
-{
-
+	
+	return SIM908_OK;
 }
 
 void _setup_GSM(void)
@@ -274,7 +269,7 @@ void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
 	SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS);
-	SIM908_cmd(AT_FTP_BEARER1_APN_CALLME);
+	SIM908_cmd(AT_FTP_BEARER1_APN_TELENOR);
 
 	/* Use bearer profile 1 */
 	SIM908_cmd(AT_FTP_USE_PROFILE1);
@@ -302,7 +297,7 @@ void _flush_buffer(void)
 int8_t _wait_response(void)
 {
 	start_timer3();
-	SIM908_TIMEOUT_COUNTER = 0;
+	SIM908_timeout_counter = 0;
 	while (_CR_counter < 3  || _LF_counter < 3)
 	{
 		if (_TIMEOUT())
@@ -354,6 +349,12 @@ int8_t _SIM908_check_response()
 			return SIM908_RESPONSE_ERROR;
 
 	return SIM908_INVALID_RESPONSE;
+}
+
+char* _get_GPS_response(void)
+{
+	// ToDo
+	return 1;
 }
 
 void _SIM908_callback(char data)

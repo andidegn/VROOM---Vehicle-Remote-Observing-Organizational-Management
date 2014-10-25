@@ -23,7 +23,4 @@ uint64_t swap_uint64( uint64_t val );
 
 int64_t swap_int64( int64_t val );
 
-void convert_file_stream();
-
-
 #endif /* BIG_TO_LITTLE_ENDIAN_H_ */

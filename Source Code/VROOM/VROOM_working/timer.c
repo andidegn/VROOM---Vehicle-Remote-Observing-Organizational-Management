@@ -17,7 +17,7 @@
 /*! Macro for calculating the value for clock count based on frequency and prescaler */
 #define TOP_VALUE(frequency_in_hz, prescaler) (F_CPU/(prescaler * frequency_in_hz)-1)
 
-uint32_t SIM908_TIMEOUT_COUNTER;
+uint32_t SIM908_timeout_counter;
 
 /********************************************************************************************************************//**
  @ingroup timer
@@ -152,5 +152,5 @@ ISR(TIMER1_COMPA_vect)
 
 ISR(TIMER3_COMPA_vect)
 {
-	SIM908_TIMEOUT_COUNTER++;
+	SIM908_timeout_counter++;
 }

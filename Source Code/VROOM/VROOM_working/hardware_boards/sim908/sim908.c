@@ -194,7 +194,7 @@ int8_t call_PSAP(void)
 int8_t send_MSD(void)
 {
 	//char filename[39];
-	char *filename = "AT+FTPPUTNAME=\"AA_TEST11.hex\"";
+	char *filename = "AT+FTPPUTNAME=\"AA_TEST15.hex\"";
 	//strcat(filename, AT_FTP_PUT_FILE_NAME); // 15
 	//strcat(filename, UTC_string);			  // 24
 	SIM908_cmd(filename);

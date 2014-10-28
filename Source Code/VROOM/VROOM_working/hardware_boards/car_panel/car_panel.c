@@ -9,6 +9,8 @@
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
 #include "car_panel.h"
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
 /* Changing port will maybe require changes in the interrupt setup */
 #define PORT			PORTJ
@@ -33,9 +35,9 @@ void init_car_panel(void)
 	DDR(PORT) &= ~(1<<CANCEL | 1<<ALARM);
 	DDR(PORT) |= (1<<CONTROL) | (1<<STATUS_RED) | (1<<STATUS_BLUE) | (1<<STATUS_GREEN);
 	
-	/* Setup external interrupts for PJ0 and PJ1 to trigger on rising edge (PCINT9 and PCINT10) */
+	/* Setup external interrupts for PJ0 and PJ1 (PCINT9 and PCINT10) */
 	PCICR |= (1<<PCIE1);
-	PCMSK1 |= (1<<PCINT9) |(1<<PCINT10);
+	PCMSK1 |= (1<<PCINT9) | (1<<PCINT10);
 	
 	/* Restore interrupt */
 	SREG = SREG_cpy;
@@ -74,7 +76,7 @@ void set_control(Control c)
 			PORT |= (1<<CONTROL);
 		break;
 		
-		case ACTIVATED :
+		case DEACTIVATED :
 			PORT &= ~(1<<CONTROL);
 		break;
 	}
@@ -82,30 +84,34 @@ void set_control(Control c)
 
 ISR (PCINT1_vect)
 {
-	volatile uint8_t _bit_changed;
-
-    _bit_changed = PIN(PORT) ^ _port_history;
-    _port_history = PIN(PORT);
-
-    if(_bit_changed & (1 << CANCEL))
-    {
-	    /* PCINT9 changed */
-		// ToDo
-		// Start 3 seconds timer
-		// Check if bit has changed
-		//   if bit has not changed within 3 seconds, do not trigger alarm
-		//    else trigger alarm
-		// Stop timer
-    }
-
-    if(_bit_changed & (1 << ALARM))
-    {
-	    /* PCINT10 changed */
+	_pin_data = (PIN(PORT) & 0x3);
+	
+	if ((PIN(PORT) & 0x3) == 0x3)
+	{
+		/* Nothing */
+	}
+	
+	else if((PIN(PORT) & (1<<ALARM)) == 0x2)
+	{
+		set_control(WAITING);
+		/* PCINT10 changed */
 		// ToDo
 		// Start 3 seconds timer
 		// Check if bit has changed
 		//   if bit has not changed within 3 seconds, trigger ALARM
 		//    else break
+		// Stop timer
+    }
+
+    else if((PIN(PORT) & (1<<CANCEL)) == 0x1)
+    {
+		set_status(ONLINE);
+		/* PCINT9 changed */
+		// ToDo
+		// Start 3 seconds timer
+		// Check if bit has changed
+		//   if bit has not changed within 3 seconds, do not trigger alarm
+		//    else trigger alarm
 		// Stop timer
     }
 }

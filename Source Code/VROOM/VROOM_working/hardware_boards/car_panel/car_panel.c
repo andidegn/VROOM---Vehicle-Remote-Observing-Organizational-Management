@@ -35,9 +35,9 @@ void init_car_panel(void)
 	DDR(PORT) &= ~(1<<CANCEL | 1<<ALARM);
 	DDR(PORT) |= (1<<CONTROL) | (1<<STATUS_RED) | (1<<STATUS_BLUE) | (1<<STATUS_GREEN);
 	
-	/* Setup external interrupts for PJ0 and PJ1 (PCINT9 and PCINT10) */
+	/* Setup external interrupts for PJ1 (PCINT10) */
 	PCICR |= (1<<PCIE1);
-	PCMSK1 |= (1<<PCINT9) | (1<<PCINT10);
+	PCMSK1 |= (1<<PCINT10);
 	
 	/* Restore interrupt */
 	SREG = SREG_cpy;
@@ -82,16 +82,15 @@ void set_control(Control c)
 	}
 }
 
+void wait_cancel_emmergency()
+{
+	// Implement 3 sec. timer 
+	while ((PIN(PORT) & (1<<CANCEL)));		
+}
+
 ISR (PCINT1_vect)
 {
-	_pin_data = (PIN(PORT) & 0x3);
-	
-	if ((PIN(PORT) & 0x3) == 0x3)
-	{
-		/* Nothing */
-	}
-	
-	else if((PIN(PORT) & (1<<ALARM)) == 0x2)
+	if(!(PIN(PORT) & (1<<ALARM)))
 	{
 		set_control(WAITING);
 		/* PCINT10 changed */
@@ -101,17 +100,30 @@ ISR (PCINT1_vect)
 		//   if bit has not changed within 3 seconds, trigger ALARM
 		//    else break
 		// Stop timer
+		lcd_clrscr();
+		lcd_gotoxy(0,0);
+		lcd_puts("ALARM");
     }
 
-    else if((PIN(PORT) & (1<<CANCEL)) == 0x1)
-    {
-		set_status(ONLINE);
-		/* PCINT9 changed */
-		// ToDo
-		// Start 3 seconds timer
-		// Check if bit has changed
-		//   if bit has not changed within 3 seconds, do not trigger alarm
-		//    else trigger alarm
-		// Stop timer
-    }
+    //else if(!(PIN(PORT) & (1<<CANCEL)))
+    //{
+		//set_status(ONLINE);
+		///* PCINT9 changed */
+		//// ToDo
+		//// if No alarm, break;
+		//// Start 3 seconds timer
+		//// Check if bit has changed
+		////   if bit has changed within 3 seconds, do not trigger alarm
+		////    else trigger alarm
+		//// Stop timer
+		//lcd_clrscr();
+		//lcd_gotoxy(0,0);
+		//lcd_puts("CANCEL");
+    //}
+	else
+	{
+		lcd_clrscr();
+		lcd_gotoxy(0,0);
+		lcd_puts("NOTHING");
+	}
 }

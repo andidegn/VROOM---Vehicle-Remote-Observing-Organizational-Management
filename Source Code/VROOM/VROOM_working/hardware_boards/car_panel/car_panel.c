@@ -11,6 +11,7 @@
 #include "car_panel.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include "../../timer.h"
 
 /* Changing port will maybe require changes in the interrupt setup */
 #define PORT			PORTJ
@@ -38,7 +39,8 @@ void init_car_panel(void)
 	/* Setup external interrupts for PJ1 (PCINT10) */
 	PCICR |= (1<<PCIE1);
 	PCMSK1 |= (1<<PCINT10);
-	
+
+start_timer3();
 	/* Restore interrupt */
 	SREG = SREG_cpy;
 }
@@ -87,12 +89,11 @@ void wait_cancel_emmergency()
 	// Implement 3 sec. timer 
 	while ((PIN(PORT) & (1<<CANCEL)));		
 }
-
+volatile char buf[10];
 ISR (PCINT1_vect)
-{
+{	
 	if(!(PIN(PORT) & (1<<ALARM)))
 	{
-		set_control(WAITING);
 		/* PCINT10 changed */
 		// ToDo
 		// Start 3 seconds timer
@@ -100,9 +101,32 @@ ISR (PCINT1_vect)
 		//   if bit has not changed within 3 seconds, trigger ALARM
 		//    else break
 		// Stop timer
-		lcd_clrscr();
-		lcd_gotoxy(0,0);
-		lcd_puts("ALARM");
+		while (car_panel_counter < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<ALARM)))
+		{	
+			if (car_panel_counter%5 == 0) /* Blinking */
+			{
+				set_control(WAITING);
+				lcd_clrscr();
+				lcd_gotoxy(0,0);
+				lcd_puts("BLINK");
+			}
+		}
+		
+		if (car_panel_counter >= BUTTON_PRESS_TIME )
+		{
+				
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts("ACTIVATED");
+			set_control(ACTIVATED);
+		}
+		else
+		{
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts("DEACTIVATED");
+			set_control(DEACTIVATED);
+		}
     }
 
     //else if(!(PIN(PORT) & (1<<CANCEL)))
@@ -121,9 +145,13 @@ ISR (PCINT1_vect)
 		//lcd_puts("CANCEL");
     //}
 	else
-	{
-		lcd_clrscr();
-		lcd_gotoxy(0,0);
-		lcd_puts("NOTHING");
+	{			
+		
+		lcd_puts(itoa(car_panel_counter, buf, 10));
+		car_panel_counter = 0;
+		//stop_timer3();
+		//lcd_clrscr();
+		//lcd_gotoxy(0,0);
+		//lcd_puts("NOTHING");
 	}
 }

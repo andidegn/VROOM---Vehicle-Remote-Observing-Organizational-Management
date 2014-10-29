@@ -12,6 +12,9 @@
 #ifndef CAR_PANEL_H_
 #define CAR_PANEL_H_
 
+/* Time of butten press before activation/deactivation in 1/10 sec */
+#define BUTTON_PRESS_TIME		30
+
 typedef enum 
 {
 	INIT, 

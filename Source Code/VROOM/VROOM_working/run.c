@@ -319,6 +319,7 @@ void uart1_callback_test(char data) {
 #include <stdbool.h>
 #include <math.h>
 #include "unit_test.h"
+#include "timer.h"
 
 int main (void)
 {
@@ -332,6 +333,8 @@ int main (void)
 	
 	btn_led_lcd_init();
 	lcd_init(LCD_DISP_ON);
+	/* Setting up shared timer used as counter */
+	init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
 
 	#if UNIT_TEST
 		char* result = run_all_tests();

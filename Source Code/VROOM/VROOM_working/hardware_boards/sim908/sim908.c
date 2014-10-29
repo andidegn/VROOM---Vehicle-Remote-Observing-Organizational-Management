@@ -67,9 +67,6 @@ void SIM908_init(void)
 	/* Restore interrupt */
 	SREG = SREG_cpy;
 
-	/* Setting up timer for timeout determination */
-	init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
-
 	/* Setting up UART for internal communication */
  	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _SIM908_callback);
 

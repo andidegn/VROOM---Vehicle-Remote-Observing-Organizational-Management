@@ -67,9 +67,6 @@ void SIM908_init(void)
 	/* Restore interrupt */
 	SREG = SREG_cpy;
 
-	/* Setting up timer for timeout determination */
-	init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
-
 	/* Setting up UART for internal communication */
  	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _SIM908_callback);
 
@@ -194,7 +191,7 @@ int8_t call_PSAP(void)
 int8_t send_MSD(void)
 {
 	//char filename[39];
-	char *filename = "AT+FTPPUTNAME=\"AA_TEST11.hex\"";
+	char *filename = "AT+FTPPUTNAME=\"AA_TEST15.hex\"";
 	//strcat(filename, AT_FTP_PUT_FILE_NAME); // 15
 	//strcat(filename, UTC_string);			  // 24
 	SIM908_cmd(filename);

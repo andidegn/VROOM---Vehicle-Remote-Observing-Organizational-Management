@@ -305,7 +305,8 @@ void uart1_callback_test(char data) {
 #define UNIT_TEST						OFF
 #define MODULE_TEST_SENSORS				OFF
 #define MODULE_TEST_SIM908				OFF
-#define INTEGRATION_TEST_SIM908_SENSORS	ON
+#define MODULE_TEST_CAR_PANEL			ON
+#define INTEGRATION_TEST_SIM908_SENSORS	OFF
 
 #define UNIT_TEST_MSD					OFF
 
@@ -318,6 +319,7 @@ void uart1_callback_test(char data) {
 #include <stdbool.h>
 #include <math.h>
 #include "unit_test.h"
+#include "timer.h"
 
 int main (void)
 {
@@ -331,6 +333,8 @@ int main (void)
 	
 	btn_led_lcd_init();
 	lcd_init(LCD_DISP_ON);
+	/* Setting up shared timer used as counter */
+	init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
 
 	#if UNIT_TEST
 		char* result = run_all_tests();
@@ -369,6 +373,23 @@ int main (void)
 
 		}
 	#endif /* MODULE_TEST_SIM908 */
+	
+	#if MODULE_TEST_CAR_PANEL
+		#include "hardware_boards/car_panel/car_panel.h"
+		lcd_clrscr();
+		lcd_gotoxy(0,0);
+		lcd_puts("Init...");
+		init_car_panel();
+		sei();
+		lcd_gotoxy(0,1);
+		lcd_puts("...DONE");
+
+		while (1)
+		{
+
+		}
+	#endif /* MODULE_TEST_CAR_PANEL */
+		
 
 	#if INTEGRATION_TEST_SIM908_SENSORS
 		lcd_clrscr();

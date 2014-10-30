@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MyClasses">
-      <HintPath>..\..\..\..\..\..\visual studio 2012\Projects\MyClasses\MyClasses\bin\Debug\MyClasses.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\visual studio 2012\Projects\MyClasses\MyClasses\bin\Debug\MyClasses.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

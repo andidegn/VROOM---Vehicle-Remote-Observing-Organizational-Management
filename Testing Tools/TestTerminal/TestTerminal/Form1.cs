@@ -325,7 +325,7 @@ namespace TestTerminal {
                 this.chart_signal.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right));
                 this.chart_signal.Size = new System.Drawing.Size(245, 120);
                 //this.chart_signal.Location = new System.Drawing.Point(this.Width - chart_signal.Width - 45, 350);
-                this.chart_signal.Location = new System.Drawing.Point(5, gb_connection.Height + gb_call.Height + gb_text_sms.Height + gb_gps.Height + 25);
+                this.chart_signal.Location = new System.Drawing.Point(5, gb_gps.Top + gb_gps.Height + 25);
                 _chart_docked = true;
             }
         }

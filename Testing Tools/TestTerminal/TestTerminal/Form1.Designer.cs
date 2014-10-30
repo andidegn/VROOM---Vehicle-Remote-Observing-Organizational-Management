@@ -312,12 +312,13 @@
             this.gb_call.Controls.Add(this.nud_speaker_volume);
             this.gb_call.Controls.Add(this.nud_ringer_volume);
             this.gb_call.Controls.Add(this.btn_answer);
-            this.gb_call.Location = new System.Drawing.Point(3, 107);
+            this.gb_call.Location = new System.Drawing.Point(3, 250);
             this.gb_call.Name = "gb_call";
             this.gb_call.Size = new System.Drawing.Size(249, 101);
             this.gb_call.TabIndex = 13;
             this.gb_call.TabStop = false;
             this.gb_call.Text = "Call";
+            this.gb_call.Visible = false;
             // 
             // btn_set_ring_tone
             // 
@@ -427,12 +428,13 @@
             this.gb_text_sms.Controls.Add(this.btn_read_msg);
             this.gb_text_sms.Controls.Add(this.nud_msg);
             this.gb_text_sms.Controls.Add(this.btn_delete_msg);
-            this.gb_text_sms.Location = new System.Drawing.Point(3, 214);
+            this.gb_text_sms.Location = new System.Drawing.Point(3, 357);
             this.gb_text_sms.Name = "gb_text_sms";
             this.gb_text_sms.Size = new System.Drawing.Size(249, 47);
             this.gb_text_sms.TabIndex = 14;
             this.gb_text_sms.TabStop = false;
             this.gb_text_sms.Text = "Text (SMS)";
+            this.gb_text_sms.Visible = false;
             // 
             // btn_send_msg
             // 
@@ -484,7 +486,7 @@
             this.gb_gps.Controls.Add(this.btn_gps_status);
             this.gb_gps.Controls.Add(this.btn_gps_hot_rst);
             this.gb_gps.Controls.Add(this.btn_gps_pwr);
-            this.gb_gps.Location = new System.Drawing.Point(3, 261);
+            this.gb_gps.Location = new System.Drawing.Point(3, 107);
             this.gb_gps.Name = "gb_gps";
             this.gb_gps.Size = new System.Drawing.Size(249, 137);
             this.gb_gps.TabIndex = 20;

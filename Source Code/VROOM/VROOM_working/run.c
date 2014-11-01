@@ -200,7 +200,7 @@ int main(void) {
             lcd_clrscr();
 			gsm_hang_up();
         }
-		
+
 		/* These are only read when no callback is defined in the uart setup { */
 		while ((uart_read = uart0_read_char()) != UART_NO_DATA) {
 			lcd_putc(uart_read == '\r'? '\n': uart_read);
@@ -325,12 +325,12 @@ int main (void)
 {
 	DDRA = 0xFF;
 	PORTA = 0xFF;
-	
+
 	const char degree = 0b011011111;
 	int x_axis, y_axis, z_axis;
 	float temp;
 	char buf[20];
-	
+
 	btn_led_lcd_init();
 	lcd_init(LCD_DISP_ON);
 	/* Setting up shared timer used as counter */
@@ -362,10 +362,10 @@ int main (void)
 		lcd_gotoxy(0,0);
 		lcd_puts("Init...");
 
-		SIM908_init();		
+		SIM908_init();
 		sei();
 		SIM908_start();
-		
+
 		lcd_puts("...DONE");
 
 		while (1)
@@ -373,13 +373,13 @@ int main (void)
 
 		}
 	#endif /* MODULE_TEST_SIM908 */
-	
+
 	#if MODULE_TEST_CAR_PANEL
 		#include "hardware_boards/car_panel/car_panel.h"
 		lcd_clrscr();
 		lcd_gotoxy(0,0);
 		lcd_puts("Init...");
-		init_car_panel();
+		car_panel_init();
 		sei();
 		lcd_gotoxy(0,1);
 		lcd_puts("...DONE");
@@ -389,7 +389,7 @@ int main (void)
 
 		}
 	#endif /* MODULE_TEST_CAR_PANEL */
-		
+
 
 	#if INTEGRATION_TEST_SIM908_SENSORS
 		lcd_clrscr();
@@ -400,30 +400,30 @@ int main (void)
 		sei();
 		SIM908_start();
 		lcd_puts(" - OK");
-		
+
 		int32_t acc_total = 0;
 		bool flag = false;
 		uint8_t sp[4] = {100,200,100,200};
-		scheduler_start(NULL);		
+		scheduler_start(NULL);
 
 		char *at_response = "0,953.27674,5552.192069,62.171906,20141021164456.000,160422,12,0.000000,294.187958";
 
 		set_MSD(true, true, false, at_response, "W0L000036V1940069", sp , "Acc: ? | Temp: ?");
 
-		while (1)		
+		while (1)
 		{
 			x_axis = (int)(acc_get_x_axis()*100);
 			y_axis = (int)(acc_get_y_axis()*100);
 			z_axis = (int)(acc_get_z_axis()*100);
 			temp = get_temperature();
 			// acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
-			
+
 			if (temp > 28 && flag == false)
 			{
 				send_MSD();
 				flag = true;
 			}
-			
+
 			lcd_clrscr();
 			lcd_gotoxy(0, 0);
 			lcd_puts("x ");
@@ -432,16 +432,16 @@ int main (void)
 			lcd_gotoxy(8, 0);
 			lcd_puts("y ");
 			lcd_puts(itoa(y_axis, buf, 10));;
-			
+
 			lcd_gotoxy(0, 1);
 			lcd_puts("z ");
 			lcd_puts(itoa(z_axis, buf, 10));
-			
+
 			lcd_gotoxy(8, 1);
 			lcd_puts(dtostrf( temp, 2, 2, buf ));
 			lcd_putc(degree);
 			lcd_putc('C');
-				
+
 			_delay_ms(100);
 		}
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
@@ -462,14 +462,14 @@ int main (void)
 			lcd_gotoxy(0,1);
 			lcd_puts(_msd.VIN);
 			_delay_ms(2000);
-		
+
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
 			lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
 			lcd_gotoxy(0,1);
 			lcd_puts(itoa(_msd.direction, buf, 10));
 			_delay_ms(2000);
-		
+
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
 			lcd_puts("Long: ");
@@ -478,7 +478,7 @@ int main (void)
 			lcd_puts("Lati: ");
 			lcd_puts(dtostrf(  _msd.latitude, 2, 2, buf ));
 			_delay_ms(2000);
-		
+
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
 			lcd_puts("SP: ");
@@ -491,10 +491,10 @@ int main (void)
 			_delay_ms(2000);
 		}
 	#endif /* UNIT_TEST_MSD */
-				
+
 	while (1)
 	{
-		
+
 	}
 }
 #endif /* KENNETH_TEST */

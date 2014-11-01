@@ -1,3 +1,24 @@
+===================================
+Version 0.098b - 2014/11/01 by Andi
+===================================
+New Features, Improvements
+--------------------------
+
+Fixed Bugs, Changes
+-------------------
+* Removed timer from car_panel and substituded a delay instead
+* Renamed functions to car_panel_XXXX to make it easier to use
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+- PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes
+- PROBLEM: latitude and longitude are not correct when sent binary
+- Implement ISR in in car_panel
+
+
 =====================================
 Version 0.098 - 2014/10/27 by Kenneth
 =====================================

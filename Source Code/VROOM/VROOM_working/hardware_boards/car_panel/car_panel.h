@@ -2,9 +2,9 @@
 @file car_panel.h
 @author: Kenneth René Jensen
 @Version: 0.1
-@defgroup 
+@defgroup
 @{
-	
+
 @}
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
@@ -15,11 +15,11 @@
 /* Time of butten press before activation/deactivation in 1/10 sec */
 #define BUTTON_PRESS_TIME		30
 
-typedef enum 
+typedef enum
 {
-	INIT, 
-	OFFLINE, 
-	ONLINE		
+	INIT,
+	OFFLINE,
+	ONLINE
 } Status;
 
 typedef enum
@@ -29,8 +29,8 @@ typedef enum
 	DEACTIVATED
 } Control;
 
-void init_car_panel(void);
-void set_status(Status s);
-void set_control(Control c);
+void car_panel_init(void);
+void car_panel_set_status(Status s);
+void car_panel_set_control(Control c);
 
 #endif /* CAR_PANEL_H_ */

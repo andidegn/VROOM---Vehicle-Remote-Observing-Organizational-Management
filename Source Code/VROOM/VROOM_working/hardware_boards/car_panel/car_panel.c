@@ -15,7 +15,7 @@
 #include "car_panel.h"
 #include "../lcd_board/lcd/lcd.h"
 
-/* Changing port will maybe require changes in the interrupt setup */
+/* Changing port will require changes in the interrupt setup */
 #define PORT			PORTJ
 
 #define DDR(x) (*(&x - 1))
@@ -39,9 +39,11 @@ void car_panel_init(void)
 
 	/* Set buttons to input and LEDs to output */
 	DDR(PORT) &= ~(1<<CANCEL | 1<<ALARM);
-	PORT |= _BV(CANCEL) | _BV(ALARM);
 	DDR(PORT) |= (1<<CONTROL) | (1<<STATUS_RED) | (1<<STATUS_BLUE) | (1<<STATUS_GREEN);
-
+	
+	/* Pull-up on buttons */
+	PORT |= (1<<CANCEL | 1<<ALARM);
+	
 	/* Setup external interrupts for PJ1 (PCINT10) */
 	PCICR |= (1<<PCIE1);
 	PCMSK1 |= (1<<PCINT10);
@@ -96,11 +98,13 @@ void wait_cancel_emmergency()
 	while ((PIN(PORT) & (1<<CANCEL)));
 }
 volatile char buf[10];
+volatile int i = 0;
 ISR (PCINT1_vect)
 {
 
 	if(!(PIN(PORT) & (1<<ALARM)))
 	{
+		_alarm_button_pressed = true;
 		/* PCINT10 changed */
 		// ToDo
 		// Start 3 seconds timer

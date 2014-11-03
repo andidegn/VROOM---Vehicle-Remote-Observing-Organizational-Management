@@ -13,9 +13,8 @@
 #include <stdlib.h>
 #include <util/delay.h>
 #include "car_panel.h"
-#include "../lcd_board/lcd/lcd.h"
 
-/* Changing port will maybe require changes in the interrupt setup */
+/* Changing port will require changes in the interrupt setup */
 #define PORT			PORTJ
 
 #define DDR(x) (*(&x - 1))
@@ -30,6 +29,7 @@
 
 /* Local variables */
 static uint8_t _car_panel_counter;
+static bool _alarm_cancelled;
 
 void car_panel_init(void)
 {
@@ -39,14 +39,15 @@ void car_panel_init(void)
 
 	/* Set buttons to input and LEDs to output */
 	DDR(PORT) &= ~(1<<CANCEL | 1<<ALARM);
-	PORT |= _BV(CANCEL) | _BV(ALARM);
 	DDR(PORT) |= (1<<CONTROL) | (1<<STATUS_RED) | (1<<STATUS_BLUE) | (1<<STATUS_GREEN);
-
+	
+	/* Pull-up on buttons */
+	PORT |= (1<<CANCEL | 1<<ALARM);
+	
 	/* Setup external interrupts for PJ1 (PCINT10) */
 	PCICR |= (1<<PCIE1);
 	PCMSK1 |= (1<<PCINT10);
-	//init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
-	//start_timer3();
+	
 	/* Restore interrupt */
 	SREG = SREG_cpy;
 }
@@ -76,90 +77,110 @@ void car_panel_set_control(Control c)
 {
 	switch (c)
 	{
-		case WAITING :
+		case ALARM_WAITING :
 			PORT ^= (1<<CONTROL);
 		break;
 
-		case ACTIVATED :
+		case ALARM_ACTIVATED :
 			PORT |= (1<<CONTROL);
 		break;
 
-		case DEACTIVATED :
+		case ALARM_NOT_ACTIVATED :
 			PORT &= ~(1<<CONTROL);
 		break;
 	}
 }
 
-void wait_cancel_emmergency()
+bool car_panel_wait_cancel_emmergency(void)
 {
-	// Implement 3 sec. timer
-	while ((PIN(PORT) & (1<<CANCEL)));
+	/* Saves the current state of the status register and disables global interrupt */
+	uint8_t SREG_cpy = SREG;
+	cli();
+
+	_alarm_cancelled = false;
+	_car_panel_counter = 0;
+	
+	while (_car_panel_counter < BUTTON_PRESS_TIME)
+	{						
+		if(!(PIN(PORT) & (1<<CANCEL)))
+		{
+			_car_panel_counter = 0;
+			while (_car_panel_counter < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<CANCEL)))
+			{
+				_delay_ms(100);
+				_car_panel_counter++;
+				
+				if (_car_panel_counter % 5 == 0)
+				{
+					 car_panel_set_control(ALARM_WAITING);
+				}
+			}
+			
+			if (_car_panel_counter >= BUTTON_PRESS_TIME )
+			{
+				car_panel_set_control(ALARM_NOT_ACTIVATED);
+				_alarm_cancelled = true;		
+			}
+			else
+			{
+				car_panel_set_control(ALARM_ACTIVATED);
+				_alarm_cancelled = false;	
+			}
+		}
+		else
+		{
+			_delay_ms(100);
+			_car_panel_counter++;
+			_alarm_cancelled = false;
+		}
+	}
+				
+	/* Restore interrupt */
+	SREG = SREG_cpy;	
+	
+	return _alarm_cancelled;
 }
-volatile char buf[10];
+
 ISR (PCINT1_vect)
 {
-
 	if(!(PIN(PORT) & (1<<ALARM)))
 	{
-		/* PCINT10 changed */
-		// ToDo
-		// Start 3 seconds timer
-		// Check if bit has changed
-		//   if bit has not changed within 3 seconds, trigger ALARM
-		//    else break
-		// Stop timer
 		while (_car_panel_counter < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<ALARM)))
 		{
 			_delay_ms(100);
-			if (_car_panel_counter++ % 5 == 0) /* Blinking */
+			_car_panel_counter++;
+			if (_car_panel_counter % 5 == 0)
 			{
-				car_panel_set_control(WAITING);
-				lcd_clrscr();
-				lcd_gotoxy(0,0);
-				lcd_puts("BLINK");
+				car_panel_set_control(ALARM_WAITING);
 			}
 		}
 
 		if (_car_panel_counter >= BUTTON_PRESS_TIME )
 		{
-
-			lcd_clrscr();
-			lcd_gotoxy(0,0);
-			lcd_puts("ACTIVATED");
-			car_panel_set_control(ACTIVATED);
+			/* Disable interrupts */
+			PCMSK1 &= ~(1<<PCINT10);
+		
+			if (!car_panel_wait_cancel_emmergency())
+			{
+				/* ToDo */
+				// SEND ALARM !!!
+			}
+			else
+			{
+				_car_panel_counter = 0;
+				/* Enable interrupts */
+				PCMSK1 |= (1<<PCINT10);
+			}
 		}
+		
 		else
 		{
-			lcd_clrscr();
-			lcd_gotoxy(0,0);
-			lcd_puts("DEACTIVATED");
-			car_panel_set_control(DEACTIVATED);
+			car_panel_set_control(ALARM_NOT_ACTIVATED);
 		}
     }
-
-    //else if(!(PIN(PORT) & (1<<CANCEL)))
-    //{
-		//set_status(ONLINE);
-		///* PCINT9 changed */
-		//// ToDo
-		//// if No alarm, break;
-		//// Start 3 seconds timer
-		//// Check if bit has changed
-		////   if bit has changed within 3 seconds, do not trigger alarm
-		////    else trigger alarm
-		//// Stop timer
-		//lcd_clrscr();
-		//lcd_gotoxy(0,0);
-		//lcd_puts("CANCEL");
-    //}
+	
 	else
 	{
-
-		lcd_puts(itoa(_car_panel_counter, buf, 10));
 		_car_panel_counter = 0;
-		//stop_timer3();
-		//lcd_clrscr();
-		//lcd_gotoxy(0,0);
-		//lcd_puts("NOTHING");
 	}
 }

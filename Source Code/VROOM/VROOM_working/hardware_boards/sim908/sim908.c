@@ -90,7 +90,7 @@ void SIM908_start(void)
 	/* Enable Echo */
 	SIM908_cmd(AT_DIAG_ECHO_ENABLE);
 	
-	SIM908_cmd("AT+CPIN=5130");
+	//SIM908_cmd("AT+CPIN=5130");
 
 	_setup_GSM();
 	_setup_GPS();
@@ -191,7 +191,7 @@ int8_t call_PSAP(void)
 int8_t send_MSD(void)
 {
 	//char filename[39];
-	char *filename = "AT+FTPPUTNAME=\"AA_TEST15.hex\"";
+	char *filename = "AT+FTPPUTNAME=\"ERERER5.VROOM\"";
 	//strcat(filename, AT_FTP_PUT_FILE_NAME); // 15
 	//strcat(filename, UTC_string);			  // 24
 	SIM908_cmd(filename);
@@ -206,7 +206,15 @@ int8_t send_MSD(void)
 	uart0_send_string(&_msd.control);
 	uart0_send_string(&_msd.VIN);
 	uart0_send_string(&_msd.time_stamp);
-	uart0_send_string(&_msd.latitude);
+	
+	uart0_send_data(&_msd.latitude, 4);
+	//uart0_send_char(&_msd.latitude);
+	//uart0_send_char(&_msd.latitude+1);
+	//uart0_send_char(&_msd.latitude+2);
+	//uart0_send_char(&_msd.latitude+3);
+	
+	
+	//uart0_send_string(&_msd.latitude);
 	uart0_send_string(&_msd.longitude);
 	uart0_send_string(&_msd.direction);
 	uart0_send_string(&_msd.sp);	
@@ -266,7 +274,7 @@ void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
 	SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS);
-	SIM908_cmd(AT_FTP_BEARER1_APN_TELENOR);
+	SIM908_cmd(AT_FTP_BEARER1_APN_CALLME);
 
 	/* Use bearer profile 1 */
 	SIM908_cmd(AT_FTP_USE_PROFILE1);

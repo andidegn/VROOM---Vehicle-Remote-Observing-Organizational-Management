@@ -305,8 +305,8 @@ void uart1_callback_test(char data) {
 #define UNIT_TEST						OFF
 #define MODULE_TEST_SENSORS				OFF
 #define MODULE_TEST_SIM908				OFF
-#define MODULE_TEST_CAR_PANEL			ON
-#define INTEGRATION_TEST_SIM908_SENSORS	OFF
+#define MODULE_TEST_CAR_PANEL			OFF
+#define INTEGRATION_TEST_SIM908_SENSORS	ON
 
 #define UNIT_TEST_MSD					OFF
 
@@ -383,10 +383,25 @@ int main (void)
 		sei();
 		lcd_gotoxy(0,1);
 		lcd_puts("...DONE");
-
+		bool _is_alarm_cancled = false;
 		while (1)
 		{
-
+			//_is_alarm_cancled = car_panel_wait_cancel_emmergency();
+			//
+			//if (_is_alarm_cancled)
+			//{
+				//lcd_clrscr();
+				//lcd_gotoxy(0,0);
+				//lcd_puts("CANCLED");	
+			//}
+			//
+			//else
+			//{
+				//lcd_clrscr();
+				//lcd_gotoxy(0,0);
+				//lcd_puts("NOT CANCLED");
+			//}
+			_delay_ms(100);
 		}
 	#endif /* MODULE_TEST_CAR_PANEL */
 
@@ -409,14 +424,14 @@ int main (void)
 		char *at_response = "0,953.27674,5552.192069,62.171906,20141021164456.000,160422,12,0.000000,294.187958";
 
 		set_MSD(true, true, false, at_response, "W0L000036V1940069", sp , "Acc: ? | Temp: ?");
-
+		_delay_ms(8000);
 		while (1)
 		{
 			x_axis = (int)(acc_get_x_axis()*100);
 			y_axis = (int)(acc_get_y_axis()*100);
 			z_axis = (int)(acc_get_z_axis()*100);
 			temp = get_temperature();
-			// acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
+			acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
 
 			if (temp > 28 && flag == false)
 			{

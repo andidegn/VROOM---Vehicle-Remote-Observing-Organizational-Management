@@ -173,6 +173,8 @@ void uart0_send_char(char data);
  *************************************************************************/
 void uart0_send_string(const char *data);
 
+void uart0_send_data(const char *data, uint8_t __length);
+
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Reads 1 (one) char of 'data' in the UART buffer

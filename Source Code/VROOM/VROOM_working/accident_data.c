@@ -127,14 +127,13 @@ static void _set_VIN(char *__VIN)
 
 static void _set_UTC_sec(char *__utc_raw)
 {
-	/* Does not work when adding '\0' to the last index ? */
-	char year[5] = {__utc_raw[0],  __utc_raw[1], __utc_raw[2], __utc_raw[3]};
-	char month[3] = {__utc_raw[4],  __utc_raw[5]};
-	char day[3] = {__utc_raw[6],  __utc_raw[7]};
-	char hour[3] = {__utc_raw[8],  __utc_raw[9]};
-	char minute[3] = {__utc_raw[10],  __utc_raw[11]};
-	char second[3] = {__utc_raw[12],  __utc_raw[13]};
-	// Try to test with &char
+	char year[5] = {__utc_raw[0],  __utc_raw[1], __utc_raw[2], __utc_raw[3], '\0'};
+	char month[3] = {__utc_raw[4],  __utc_raw[5], '\0'};
+	char day[3] = {__utc_raw[6],  __utc_raw[7], '\0'};
+	char hour[3] = {__utc_raw[8],  __utc_raw[9], '\0'};
+	char minute[3] = {__utc_raw[10],  __utc_raw[11], '\0'};
+	char second[3] = {__utc_raw[12],  __utc_raw[13], '\0'};
+
 	FIXED_TIME t;
 	t.year = atoi(year);
 	t.mon = atoi(month);

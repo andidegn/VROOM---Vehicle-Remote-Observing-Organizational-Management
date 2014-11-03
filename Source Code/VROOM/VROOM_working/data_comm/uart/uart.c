@@ -179,6 +179,13 @@ void uart0_send_string(const char *data) {
 	};
 }
 
+// Tilføj i uart1 + tilføj i header
+void uart0_send_data(const char *data, uint8_t __length) {
+	while (__length-- > 0) {
+		uart0_send_char(*data++);
+	};
+}
+
 /**********************************************************************//**
  * @ingroup uart_pub
  * Reads one char

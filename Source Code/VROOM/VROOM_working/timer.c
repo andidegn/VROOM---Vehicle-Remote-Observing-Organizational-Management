@@ -18,7 +18,6 @@
 #define TOP_VALUE(frequency_in_hz, prescaler) (F_CPU/(prescaler * frequency_in_hz)-1)
 
 uint32_t SIM908_timeout_counter = 0;
-uint8_t car_panel_counter = 0;
 
 /********************************************************************************************************************//**
  @ingroup timer
@@ -154,5 +153,4 @@ ISR(TIMER1_COMPA_vect)
 ISR(TIMER3_COMPA_vect)
 {
 	SIM908_timeout_counter++;
-	car_panel_counter++;
 }

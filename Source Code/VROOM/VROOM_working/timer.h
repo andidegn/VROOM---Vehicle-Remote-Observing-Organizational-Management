@@ -73,6 +73,5 @@ void stop_timer3(void);
 @brief extern variable which counts in timer3 ISR
 ************************************************************************************************************************/
 extern uint32_t SIM908_timeout_counter;
-extern uint8_t car_panel_counter;
 
 #endif /* TIMER_H_ */

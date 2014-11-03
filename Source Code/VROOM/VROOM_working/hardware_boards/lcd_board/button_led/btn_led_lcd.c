@@ -12,6 +12,7 @@
 
 void btn_led_lcd_init() {
 	DDR(BTN_LED_PORT) &= ~0x0f;
+	BTN_LED_PORT |= 0x0f;
 	DDR(BTN_LED_PORT) |= 0x30;
 	BTN_LED_PORT |= _BV(BTN_PIN0) | _BV(BTN_PIN1) | _BV(BTN_PIN2) | _BV(BTN_PIN3);
 	led_lcd_set(LED_GREEN, LED_OFF);

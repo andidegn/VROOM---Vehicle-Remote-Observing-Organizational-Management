@@ -173,6 +173,15 @@ void uart0_send_char(char data);
  *************************************************************************/
 void uart0_send_string(const char *data);
 
+/**********************************************************************//**
+ * @ingroup uart_pub
+ * @brief Sends data (based on length) of 'data' on the UART bus.
+ *
+ * @param const char *data - data to be sent
+ * @param uint8_t __length - number of bytes
+ * @note Does not terminates when zero character is meet 
+ * @return void
+ *************************************************************************/
 void uart0_send_data(const char *data, uint8_t __length);
 
 /**********************************************************************//**
@@ -227,6 +236,17 @@ void uart1_send_char(char data);
  * @return void
  *************************************************************************/
 void uart1_send_string(const char *data);
+
+/**********************************************************************//**
+ * @ingroup uart_pub
+ * @brief Sends data (based on length) of 'data' on the UART bus.
+ *
+ * @param const char *data - data to be sent
+ * @param uint8_t __length - number of bytes
+ * @note Does not terminates when zero character is meet 
+ * @return void
+ *************************************************************************/
+void uart1_send_data(const char *data, uint8_t __length);
 
 /**********************************************************************//**
  * @ingroup uart_pub

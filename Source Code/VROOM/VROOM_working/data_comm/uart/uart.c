@@ -179,7 +179,12 @@ void uart0_send_string(const char *data) {
 	};
 }
 
-// Tilføj i uart1 + tilføj i header
+/**********************************************************************//**
+ * @ingroup uart_pub
+ * Loops through the 'data' string stores it in a local buffer, then sets
+ * the Data Register Empty interrupt bit.
+ * Does not terminates when zero character is meet
+ *************************************************************************/
 void uart0_send_data(const char *data, uint8_t __length) {
 	while (__length-- > 0) {
 		uart0_send_char(*data++);
@@ -352,6 +357,18 @@ void uart1_send_string(const char *data) {
 	while (*data) {
 		uart1_send_char(*data++);
 	}
+}
+
+/**********************************************************************//**
+ * @ingroup uart_pub
+ * Loops through the 'data' string stores it in a local buffer, then sets
+ * the Data Register Empty interrupt bit.
+ * Does not terminates when zero character is meet
+ *************************************************************************/
+void uart1_send_data(const char *data, uint8_t __length) {
+	while (__length-- > 0) {
+		uart1_send_char(*data++);
+	};
 }
 
 /**********************************************************************//**

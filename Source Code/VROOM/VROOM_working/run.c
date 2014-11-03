@@ -425,6 +425,7 @@ int main (void)
 
 		set_MSD(true, true, false, at_response, "W0L000036V1940069", sp , "Acc: ? | Temp: ?");
 		_delay_ms(8000);
+		send_MSD();
 		while (1)
 		{
 			x_axis = (int)(acc_get_x_axis()*100);
@@ -433,11 +434,11 @@ int main (void)
 			temp = get_temperature();
 			acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
 
-			if (temp > 28 && flag == false)
-			{
-				send_MSD();
-				flag = true;
-			}
+			//if (temp > 28 && flag == false)
+			//{
+				//send_MSD();
+				//flag = true;
+			//}
 
 			lcd_clrscr();
 			lcd_gotoxy(0, 0);

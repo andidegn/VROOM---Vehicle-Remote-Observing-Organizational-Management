@@ -191,7 +191,7 @@ int8_t call_PSAP(void)
 int8_t send_MSD(void)
 {
 	//char filename[39];
-	char *filename = "AT+FTPPUTNAME=\"ERERER5.VROOM\"";
+	char *filename = "AT+FTPPUTNAME=\"NUVIRKERDET.VROOM\"";
 	//strcat(filename, AT_FTP_PUT_FILE_NAME); // 15
 	//strcat(filename, UTC_string);			  // 24
 	SIM908_cmd(filename);
@@ -203,23 +203,15 @@ int8_t send_MSD(void)
 	SIM908_cmd("AT+FTPPUT=2,140");
 	_delay_ms(1000);
 	
-	uart0_send_string(&_msd.control);
-	uart0_send_string(&_msd.VIN);
-	uart0_send_string(&_msd.time_stamp);
-	
+	uart0_send_data(&_msd.control, 1);
+	uart0_send_data(&_msd.VIN, 20);
+	uart0_send_data(&_msd.time_stamp, 4);
 	uart0_send_data(&_msd.latitude, 4);
-	//uart0_send_char(&_msd.latitude);
-	//uart0_send_char(&_msd.latitude+1);
-	//uart0_send_char(&_msd.latitude+2);
-	//uart0_send_char(&_msd.latitude+3);
+	uart0_send_data(&_msd.longitude, 4);
+	uart0_send_data(&_msd.direction, 1);
+	uart0_send_data(&_msd.sp, 4);	
+	uart0_send_data(&_msd.optional_data, 102);
 	
-	
-	//uart0_send_string(&_msd.latitude);
-	uart0_send_string(&_msd.longitude);
-	uart0_send_string(&_msd.direction);
-	uart0_send_string(&_msd.sp);	
-	uart0_send_string(&_msd.optional_data);
-
 	uart0_send_char(CR);
 	uart0_send_char(LF);
 

@@ -144,7 +144,7 @@ static void _set_UTC_sec(char *__utc_raw)
 
 	_msd.time_stamp = calc_UTC_seconds(&t);
 }
-//#define SWAP_INT32(x) (((((x) >> 24) | (((x) & 0x00FF0000) >> 8) | (((x) & 0x0000FF00) << 8) | ((x) << 24))) & 0xFFFF)
+
 static void _set_lat_long(char *__lat_raw, char *__long_raw) {
 	int lat_i = 0;
 	int long_i = 0;
@@ -175,14 +175,6 @@ static void _set_lat_long(char *__lat_raw, char *__long_raw) {
 	// Needs to be change to milliarcseconds (int32_t)
 	_msd.latitude = atoi(lat_deg) + atof(&__lat_raw[lat_i]) / 60;
 	_msd.longitude = atoi(long_deg) + atof(&__long_raw[long_i]) / 60;
-	
-	//char buf[20];
-	//lcd_clrscr();
-	//lcd_gotoxy(0, 0);
-	//lcd_puts(itoa( SWAP_INT32(_msd.latitude), buf, 2 ));
-	//
-	//lcd_gotoxy(0, 1);
-	//lcd_puts(itoa( SWAP_INT32( _msd.longitude), buf, 2));
 }
 
 static void _set_direction(char *__direction_raw)

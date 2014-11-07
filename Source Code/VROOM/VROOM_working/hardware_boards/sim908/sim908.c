@@ -8,8 +8,12 @@
 @}
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
-#include <stdbool.h>
 #include "sim908.h"
+#include "at_commands.h"
+#include "../../data_comm/uart/uart.h"
+#include "../../accident_data.h"
+#include "../../util/time.h"
+#include "../../timer.h"
 
 #define PC_CALLBACK
 #define RX_BUFFER_SIZE 256
@@ -27,6 +31,9 @@ static volatile uint8_t _ack_respons = 0; /* 0= waiting, 1 = ok, 2 = error */
 static volatile uint8_t _ack_ftp_respons = 0; /* 0= waiting, 1 = ok, 2 = error */
 static volatile uint8_t _ack_gps_respons = 0; /* 0= waiting, 1 = ok, 2 = error */
 
+/* External from accident_data */
+char MSD_filename[24];
+
 #define CR	0x0D
 #define LF	0x0A
 //#define CR	'\r'
@@ -35,23 +42,26 @@ static volatile uint8_t _ack_gps_respons = 0; /* 0= waiting, 1 = ok, 2 = error *
 #define DDR(x) (*(&x - 1))
 #define PIN(x) (*(&x - 2))
 
-#define _TIMEOUT() (SIM908_timeout_counter > SIM908_TIMEOUT_VALUE )
+// #define _TIMEOUT() (SIM908_timeout_counter > SIM908_TIMEOUT_VALUE )
 #define RETRY_ATTEMPTS 5
 
-typedef enum {ignore_data, record_data} CALLBACK_STATE;
-CALLBACK_STATE _callback_state = ignore_data;
+//typedef enum {ignore_data, record_data} CALLBACK_STATE;
+//CALLBACK_STATE _callback_state = ignore_data;
 
 /* Prototypes */
-void _setup_GSM(void);
-void _setup_GPS(void);
-void _setup_GPRS_FTP(void);
-bool _wait_response(uint8_t *__flag, uint8_t __ok_def);
-bool _check_response(const char *defined_response);
+static void _setup_GSM(void);
+static void _setup_GPS(void);
+static void _setup_GPRS_FTP(void);
+static void _GSM_enable(void);
+static void _GPS_enable(void);
+static bool _wait_response(uint8_t *__flag, uint8_t __ok_def);
+static bool _check_response(const char *defined_response);
+static void _get_GPS_response(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course);
+static void _set_MSD_filename(char *__UTC_raw);
 static char _char_at(uint8_t index);
-//int8_t _SIM908_check_response(void);
-void _flush_buffer(void);
-char* _get_GPS_response(void);
+
 void _SIM908_callback(char data);
+
 #ifdef  PC_CALLBACK
 void _PC_callback(char data);
 #endif
@@ -108,30 +118,8 @@ void SIM908_start(void)
 
 	_setup_GSM();
 	_setup_GPS();
-	GSM_enable();
+	_GSM_enable();
 	_setup_GPRS_FTP();
-}
-
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Enable communication with GSM module
- @return void
- ************************************************************************************************************************/
-void GSM_enable(void)
-{
-	GPS_PORT |= (1<<GPS_ENABLE_PIN);
-	GSM_PORT &= ~(1<<GSM_ENABLE_PIN);
-}
-
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Enable communication with GPS module
- @return void
- ************************************************************************************************************************/
-void GPS_enable(void)
-{
-	GPS_PORT &= ~(1<<GPS_ENABLE_PIN);
-	GSM_PORT |= (1<<GSM_ENABLE_PIN);
 }
 
 /********************************************************************************************************************//**
@@ -152,42 +140,30 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 	return __wait_for_ok ? _wait_response(&_ack_respons, SIM908_RESPONSE_OK) : true;
 }
 
+void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course, uint8_t *__IPV4)
+{
+	_get_GPS_response(__UTC_sec, __latitude, __longitude, __course);
+	/* ToDo*/
+	// Set IPV4 address __msd.sd (is a uint8_t[4])
+}
+
 /********************************************************************************************************************//**
  @ingroup sim908
  @brief Calling Public-safety answering point
- @return 1 if call established and response is OK
-		-3 if timeout
- @note Pushes the call again if it fails until it times out
+ @return void
  ************************************************************************************************************************/
-//int8_t call_PSAP(void)
-//{
-	//int8_t _call_check = 0;
-//
-	//start_timer3();
-	//SIM908_timeout_counter = 0;
-//
-	//while (!_TIMEOUT())
-	//{
-		///* _call_check = SIM908_cmd(AT_CALL_EMERGENCY); */
-		//_call_check = SIM908_cmd(AT_CALL_KENNETH);
-//
-		//if (_call_check == SIM908_RESPONSE_OK)
-		//{
-			//stop_timer3();
-			//return SIM908_OK;
-		//}
-	//}
-//
-	//stop_timer3();
-	//return SIM908_TIMEOUT;
-//}
+void call_PSAP(void)
+{
+	/* Enable incoming calls */
+	SIM908_cmd(AT_ENABLE_INCOMING_CALLS, true);
+	
+	SIM908_cmd(AT_CALL_KENNETH, true);
+}
 
 /********************************************************************************************************************//**
  @ingroup sim908
  @brief Sends MSB binary file to FTP server
- @return 1 if call established and response is OK
-		-3 if timeout
-
+ @return void
  * --- Following steps needs to be called whenever data transfer is needed ---
  *  5:	Create filename:		AT+FTPPUTNAME="<filename>"
  *  6:	Open bearer				AT+SAPBR=1,1
@@ -197,17 +173,14 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
  *	9:	Write text (140 bytes)
  *	10:	End write session		AT+FTPPUT=2,0
  *	11: Close bearer			AT+SAPBR=0,1
-
-
-
  ************************************************************************************************************************/
-int8_t send_MSD(void)
+void send_MSD(void)
 {
 	uint8_t ___retry_ctr = RETRY_ATTEMPTS;
 	//char filename[39];
 	char *filename = "AT+FTPPUTNAME=\"NUVIRKERDET.VROOM\"";
 	//strcat(filename, AT_FTP_PUT_FILE_NAME); // 15
-	//strcat(filename, UTC_string);			  // 24
+	//strcat(filename, MSD_filename);			  // 24
 
 	SIM908_cmd(filename, true);
 
@@ -243,11 +216,9 @@ int8_t send_MSD(void)
 	} while (!_wait_response(&_ack_ftp_respons, SIM908_RESPONSE_FTP_PUT_CLOSE) && ___retry_ctr-- > 0);
 
 	SIM908_cmd(AT_FTP_CLOSE_BEARER1, true);
-
-	return 1;
 }
 
-void _setup_GSM(void)
+static void _setup_GSM(void)
 {
 	/* Setup phone functionality */
 	SIM908_cmd(AT_FULL_FUNCTIONALITY, true);
@@ -256,7 +227,7 @@ void _setup_GSM(void)
 	SIM908_cmd(AT_FORBID_INCOMING_CALLS, true);
 }
 
-void _setup_GPS(void)
+static void _setup_GPS(void)
 {
 	while(_ack_gps_respons == SIM908_RESPONSE_WAITING);
 	/* Enable GPS */
@@ -279,7 +250,7 @@ void _setup_GPS(void)
  *								AT+FTPTYPE="A"
  *								AT+FTPPUTOPT="STOR"
  ***************************************************************************/
-void _setup_GPRS_FTP(void)
+static void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
 	SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS, true);
@@ -300,7 +271,29 @@ void _setup_GPRS_FTP(void)
 	SIM908_cmd(AT_FTP_PUT_FILE_PATH, true);
 }
 
-bool _wait_response(uint8_t *__flag, uint8_t __ok_def)
+/********************************************************************************************************************//**
+ @ingroup sim908
+ @brief Enable communication with GSM module
+ @return void
+ ************************************************************************************************************************/
+static void _GSM_enable(void)
+{
+	GPS_PORT |= (1<<GPS_ENABLE_PIN);
+	GSM_PORT &= ~(1<<GSM_ENABLE_PIN);
+}
+
+/********************************************************************************************************************//**
+ @ingroup sim908
+ @brief Enable communication with GPS module
+ @return void
+ ************************************************************************************************************************/
+static void _GPS_enable(void)
+{
+	GPS_PORT &= ~(1<<GPS_ENABLE_PIN);
+	GSM_PORT |= (1<<GSM_ENABLE_PIN);
+}
+
+static bool _wait_response(uint8_t *__flag, uint8_t __ok_def)
 {
 	while(*__flag == SIM908_RESPONSE_WAITING) {
 		_delay_ms(100);
@@ -324,46 +317,7 @@ bool _wait_response(uint8_t *__flag, uint8_t __ok_def)
 	0x0d = <CR>
 	0x0a = <LF>
 */
-int8_t _SIM908_check_response()
-{
-	///* Check command for the letter A/a */
-	//if(_sim908_buffer[0] != 0x41 && _sim908_buffer[0] != 0x61)
-		//return	SIM908_INVALID_COMMAND;
-//
-	///* Check command for the letter T/t */
-	//if(_sim908_buffer[1] != 0x54 && _sim908_buffer[1] != 0x74)
-		//return	SIM908_INVALID_COMMAND;
-//
-	///* Check if response is OK */
-	//if (_sim908_buffer[_index-6] == CR && _sim908_buffer[_index-5] == LF
-	    //&& _sim908_buffer[_index-4] == 'O' && _sim908_buffer[_index-3] == 'K'
-		//&& _sim908_buffer[_index-2] == CR && _sim908_buffer[_index-1] == LF)
-			//return SIM908_RESPONSE_OK;
-//
-	///* Check if response is ERROR */
-	//if (_sim908_buffer[_index-9] == CR && _sim908_buffer[_index-8] == LF
-		//&& _sim908_buffer[_index-7] == 'E' && _sim908_buffer[_index-6] == 'R'
-		//&& _sim908_buffer[_index-5] == 'R' && _sim908_buffer[_index-4] == 'O'
-		//&& _sim908_buffer[_index-3] == 'R'
-		//&& _sim908_buffer[_index-2] == CR && _sim908_buffer[_index-1] == LF)
-			//return SIM908_RESPONSE_ERROR;
-//
-	///* Responses:
-		//OK
-		//ERROR
-		//GPS (some commas)
-		//FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
-		//FTP PUT RESPONSE:		"+FTPPUT:2,140"
-		//FTP PUT CLOSE SESSION:	"+FTPPUT:1,0"
-		//CREG (Save response in a bool)
-	//*/
-//
-//
-//
-	//return SIM908_INVALID_RESPONSE;
-}
-
-bool _check_response(const char *defined_response) {
+static bool _check_response(const char *defined_response) {
 	char c;
 	for(int i = 0; i < sizeof(defined_response); i++) {
 		c = _char_at(i);
@@ -379,10 +333,37 @@ static char _char_at(uint8_t __index) {
 	return _rx_buffer[i];
 }
 
-char* _get_GPS_response(void)
+/* mode, longitude, latitude, altitude, UTC time, TTFF, Satelite in view, speed over ground, course over ground */
+static void _get_GPS_response(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)
 {
-	// ToDo
-	return 1;
+	// ToDo - Impl. is in accident_data.c (commented)
+	// also call _set_MSD_filename(<utc raw data>)
+}
+
+static void _set_MSD_filename(char *__UTC_raw)
+{
+	/* Format: 2014-10-12_13.17.34.000 */
+	uint8_t i = 0;
+	while (*__UTC_raw != '\0')
+	{
+		if (i == 4 || i == 7)
+		{
+			MSD_filename[i++] = '-';
+		}
+		else if (i == 10)
+		{
+			MSD_filename[i++] = '_';
+		}
+		else if (i == 13 || i == 16)
+		{
+			MSD_filename[i++] = '.';
+		}
+		else
+		{
+			MSD_filename[i++] = *__UTC_raw++;
+		}
+	}
+	MSD_filename[i++] = '\"';
 }
 
 void _SIM908_callback(char data)

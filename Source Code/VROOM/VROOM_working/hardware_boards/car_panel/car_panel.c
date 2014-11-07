@@ -1,7 +1,7 @@
 /********************************************//**
 @file car_panel.c
 @author: Kenneth René Jensen
-@Version: 0.1
+@Version: 0.2
 @defgroup
 @{
 
@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <util/delay.h>
 #include "car_panel.h"
+#include "../../accident_data.h"
 
 /* Changing port will require changes in the interrupt setup */
 #define PORT			PORTJ
@@ -115,17 +116,7 @@ bool car_panel_wait_cancel_emmergency(void)
 					 car_panel_set_control(ALARM_WAITING);
 				}
 			}
-			
-			if (_car_panel_counter >= BUTTON_PRESS_TIME )
-			{
-				car_panel_set_control(ALARM_NOT_ACTIVATED);
-				_alarm_cancelled = true;		
-			}
-			else
-			{
-				car_panel_set_control(ALARM_ACTIVATED);
-				_alarm_cancelled = false;	
-			}
+			_alarm_cancelled = (_car_panel_counter >= BUTTON_PRESS_TIME) ? true : false;
 		}
 		else
 		{
@@ -164,12 +155,13 @@ ISR (PCINT1_vect)
 
 			if (!car_panel_wait_cancel_emmergency())
 			{
-				/* ToDo */
-				// SEND ALARM !!!
+				car_panel_set_control(ALARM_ACTIVATED);
+				emergency_alarm(true, false);
 			}
+			
 			else
 			{
-				car_panel_set_status(ONLINE);
+				car_panel_set_control(ALARM_NOT_ACTIVATED);
 				_car_panel_counter = 0;
 				/* Enable interrupts */
 				PCMSK1 |= (1<<PCINT10);

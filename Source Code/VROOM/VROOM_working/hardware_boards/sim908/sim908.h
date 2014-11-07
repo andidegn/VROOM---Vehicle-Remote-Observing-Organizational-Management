@@ -14,11 +14,7 @@
 
 #include <avr/io.h>
 #include <string.h>
-
-#include "at_commands.h"
-#include "../../accident_data.h"
-#include "../../data_comm/uart/uart.h"
-#include "../../timer.h"
+#include <stdbool.h>
 
 /* Timeout value in 1/10 sec - Minimum 5 seconds because of the internal delay in call function */
 #define SIM908_TIMEOUT_VALUE	50
@@ -55,25 +51,25 @@
 #define AT_CALL_ANDI		"ATD60257898;"
 
 /* Error List for return */
-#define SIM908_RESPONSE_WAITING		 0
-#define SIM908_RESPONSE_OK			 1
-#define SIM908_RESPONSE_ERROR		 2
+#define SIM908_RESPONSE_WAITING			0
+#define SIM908_RESPONSE_OK				1
+#define SIM908_RESPONSE_ERROR			2
 
-#define SIM908_RESPONSE_FTP_PUT_OPEN  10
-#define SIM908_RESPONSE_FTP_PUT_CLOSE 11
+#define SIM908_RESPONSE_FTP_PUT_OPEN	10
+#define SIM908_RESPONSE_FTP_PUT_CLOSE	11
 #define SIM908_RESPONSE_FTP_PUT_SUCCESS 12
-#define SIM908_RESPONSE_FTP_PUT_ERROR 13
+#define SIM908_RESPONSE_FTP_PUT_ERROR	13
 
-#define SIM908_RESPONSE_GPS_OK		 20
+#define SIM908_RESPONSE_GPS_OK			20
 
-#define SIM908_RESPONSE_CREG_OK		 1
+#define SIM908_RESPONSE_CREG_OK			1
 
 /* AT Respond strings */
 #define RESPONSE_RDY		"RDY"
 #define RESPONSE_OK			"OK"
 #define RESPONSE_ERROR		"ERROR"
-#define RESPONSE_CR_LF		"\r\n"
-#define RESPONSE_LF_CR		"\r\n"
+#define RESPONSE_CR_LF		"\r\n" /* ?? */
+#define RESPONSE_LF_CR		"\r\n" /* ?? */
 #define RESPONSE_AT			"AT"
 #define RESPONSE_GPS_READY	"GPS Ready"
 /* 	FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
@@ -85,10 +81,9 @@
 
 void SIM908_init(void);
 void SIM908_start(void);
-void GSM_enable(void);
-void GPS_enable(void);
 bool SIM908_cmd(const char *cmd, bool __wait_for_ok);
-int8_t call_PSAP(void);
-int8_t send_MSD(void);
+void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course, uint8_t *__IPV4);
+void call_PSAP(void);
+void send_MSD(void);
 
 #endif /* SIM908_GSM_H_ */

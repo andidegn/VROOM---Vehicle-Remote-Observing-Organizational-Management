@@ -1,7 +1,7 @@
 /********************************************//**
 @file car_panel.h
 @author: Kenneth René Jensen
-@Version: 0.1
+@Version: 0.2
 @defgroup
 @{
 

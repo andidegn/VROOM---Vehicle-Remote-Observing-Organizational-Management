@@ -423,9 +423,9 @@ int main (void)
 
 		char *at_response = "0,953.27674,5552.192069,62.171906,20141021164456.000,160422,12,0.000000,294.187958";
 
-		set_MSD(true, true, false, at_response, "W0L000036V1940069", sp , "Acc: ? | Temp: ?");
+//		set_MSD(true, true, false, at_response, "W0L000036V1940069", sp , "Acc: ? | Temp: ?");
 		_delay_ms(8000);
-		send_MSD();
+//		send_MSD();
 		while (1)
 		{
 			x_axis = (int)(acc_get_x_axis()*100);

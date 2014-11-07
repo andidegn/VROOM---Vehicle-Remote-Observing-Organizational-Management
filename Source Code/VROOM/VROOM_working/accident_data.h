@@ -1,7 +1,7 @@
 /********************************************//**
 @file accident_data.h
 @author: Kenneth René Jensen
-@Version: 0.5
+@Version: 0.6
 @defgroup ad Accident Data
 @{
 	This is the data for an Accident report.
@@ -13,6 +13,7 @@
 #ifndef ACCIDENT_DATA_H_
 #define ACCIDENT_DATA_H_
 
+#include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -36,9 +37,8 @@ typedef struct __attribute__((packed))
 } MSD;
 
 extern MSD _msd;
+extern char MSD_filename[24];
 
-void set_MSD(bool __test_call, bool __manual_alarm, bool __auto_alarm, char *__GPS_AT_respons, char *__VIN, uint8_t *__SP_IPV4, char *__optional);
-
-extern char UTC_string[24];
+void emergency_alarm(bool __manual_alarm, bool __auto_alarm);
 
 #endif /* ACCIDENT_DATA_H_ */

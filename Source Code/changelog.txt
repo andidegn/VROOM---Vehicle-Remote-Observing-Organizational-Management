@@ -1,4 +1,26 @@
 ===================================
+Version 0.103 - 2014/11/07 by Kenneth
+===================================
+New Features, Improvements
+--------------------------
+* Added prototype for _get_GPS_response function in SIM908.c
+* Added function _set_MSD_filename(char *__UTC_raw); in SIM908 (Replaces the functing UTC_string in accident_data.c)
+* Added prototype for set_MSD_data function in SIM908
+* Implemented emergency_alarm function in accident_data and changed the structure completly
+* Added vroom_config header file for configuration
+
+Fixed Bugs, Changes
+-------------------
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+- PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes
+
+
+===================================
 Version 0.100 - 2014/11/07 by Andi
 ===================================
 New Features, Improvements
@@ -21,7 +43,6 @@ ToDo
 - missing commenting in btn_led_lcd and led_on_plane
 - Split up module test in individual file, instead of having it in main
 - PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes
-- 
 
 
 ===================================

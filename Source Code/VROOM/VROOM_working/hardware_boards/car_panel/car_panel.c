@@ -159,7 +159,9 @@ ISR (PCINT1_vect)
 		{
 			/* Disable interrupts */
 			PCMSK1 &= ~(1<<PCINT10);
-		
+			
+			car_panel_set_status(INIT);
+
 			if (!car_panel_wait_cancel_emmergency())
 			{
 				/* ToDo */
@@ -167,6 +169,7 @@ ISR (PCINT1_vect)
 			}
 			else
 			{
+				car_panel_set_status(ONLINE);
 				_car_panel_counter = 0;
 				/* Enable interrupts */
 				PCMSK1 |= (1<<PCINT10);

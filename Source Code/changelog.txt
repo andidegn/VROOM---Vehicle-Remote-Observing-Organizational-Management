@@ -1,4 +1,30 @@
 ===================================
+Version 0.100 - 2014/11/07 by Andi
+===================================
+New Features, Improvements
+--------------------------
+* Implemented validation check on SIM908 module
+* Implemented response capability on SIM908
+* Implemented circular buffer for response in SIM908 driver
+* Implemented a _char_at(int index) function for the circular buffer
+
+Fixed Bugs, Changes
+-------------------
+* Fixed startup procedure so that module resets more reliably when uploading software
+* Fixed latitude and longitude binary bug by creating new function: 
+  uartX_send_data(uint8_t data, uint8_t length). Problem was that uartX_send_string skips
+  zero (0x00) bytes as it is detected as the null char ('\0')
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+- PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes
+- 
+
+
+===================================
 Version 0.099 - 2014/11/03 by Kenneth
 ===================================
 New Features, Improvements

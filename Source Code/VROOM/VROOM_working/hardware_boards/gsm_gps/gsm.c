@@ -32,6 +32,12 @@ void gsm_init(void) {
 	DDR(GSM_GPS_PORT) |= _BV(GSM_GPS_ENABLE_PIN);
 	DDR(GSM_MODULE_PORT) |= _BV(GSM_MODULE_START_PIN);
 
+	/* waiting for proper startup */
+	//_delay_ms(2000);
+	/* starting the module */
+	GSM_MODULE_PORT |= _BV(GSM_MODULE_START_PIN);
+	_delay_ms(500);
+	GSM_MODULE_PORT &= ~_BV(GSM_MODULE_START_PIN);
 	/* setting up uart for communication with the module */
 	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, uart0_callback);
 
@@ -40,12 +46,7 @@ void gsm_init(void) {
 	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, uart1_callback);
 	#endif
 
-	/* waiting for proper startup */
-	_delay_ms(2000);
-	/* starting the module */
-	GSM_MODULE_PORT |= _BV(GSM_MODULE_START_PIN);
-	_delay_ms(1500);
-	GSM_MODULE_PORT &= ~_BV(GSM_MODULE_START_PIN);
+	gsm_send("AT");
 }
 
 void gsm_start(void) {

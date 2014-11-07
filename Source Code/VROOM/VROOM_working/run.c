@@ -392,7 +392,7 @@ int main (void)
 			//{
 				//lcd_clrscr();
 				//lcd_gotoxy(0,0);
-				//lcd_puts("CANCLED");	
+				//lcd_puts("CANCLED");
 			//}
 			//
 			//else
@@ -411,8 +411,8 @@ int main (void)
 		lcd_gotoxy(0, 0);
 		lcd_puts("INIT SIM...");
 		_delay_ms(1000);
-		SIM908_init();
 		sei();
+		SIM908_init();
 		SIM908_start();
 		lcd_puts(" - OK");
 

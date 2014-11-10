@@ -490,22 +490,22 @@ int main (void)
 			lcd_puts(itoa(_msd.direction, buf, 10));
 			_delay_ms(2000);
 
-			//lcd_clrscr();
-			//lcd_gotoxy(0,0);
-			//lcd_puts("Long: ");
-			//lcd_puts(itoa(_msd.longitude, buf, 10));
-			//lcd_gotoxy(0,1);
-			//lcd_puts("Lati: ");
-			//lcd_puts(itoa(_msd.latitude, buf, 10));
-			//_delay_ms(2000);
-//
 			lcd_clrscr();
-			//lcd_gotoxy(0,0);
-			//lcd_puts("SP: ");
-			//lcd_puts(itoa(_msd.sp[0], buf, 10)); lcd_putc('.');
-			//lcd_puts(itoa(_msd.sp[1], buf, 10)); lcd_putc('.');
-			//lcd_puts(itoa(_msd.sp[2], buf, 10)); lcd_putc('.');
-			//lcd_puts(itoa(_msd.sp[3], buf, 10));
+			lcd_gotoxy(0,0);
+			lcd_puts("Long: ");
+			lcd_puts(itoa(_msd.longitude, buf, 10));
+			lcd_gotoxy(0,1);
+			lcd_puts("Lati: ");
+			lcd_puts(itoa(_msd.latitude, buf, 10));
+			_delay_ms(2000);
+
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts("SP: ");
+			lcd_puts(itoa(_msd.sp[0], buf, 10)); lcd_putc('.');
+			lcd_puts(itoa(_msd.sp[1], buf, 10)); lcd_putc('.');
+			lcd_puts(itoa(_msd.sp[2], buf, 10)); lcd_putc('.');
+			lcd_puts(itoa(_msd.sp[3], buf, 10));
 			lcd_gotoxy(0,1);
 			lcd_puts(_msd.optional_data);
 			_delay_ms(2000);

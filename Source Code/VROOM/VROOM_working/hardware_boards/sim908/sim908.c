@@ -65,7 +65,6 @@ static int32_t _set_lat_long(char *__lat_long_raw);
 static uint8_t _set_direction(char *__direction_raw);
 static void _set_service_provider(uint8_t *__IPV4);
 static void _raw_to_array(char **__output, char *__raw_at_str);
-static void _set_MSD_filename(char *__UTC_raw);
 
 void _SIM908_callback(char data);
 
@@ -112,7 +111,6 @@ void SIM908_init(void)
 
 void SIM908_start(void)
 {
-
 	/* Synchronizing baud rate */
 	SIM908_cmd(AT_DIAG_TEST, true);
 
@@ -162,6 +160,7 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	*__course = _set_direction(output[8]);
 	
 	// ToDo - Set IPV4 address (is a uint8_t[4])
+	// Memory leak !!!
 	// _set_service_provider(&__IPV4);
 	
 	/* Set filename for MSD */
@@ -198,7 +197,7 @@ void call_PSAP(void)
 void send_MSD(char *__vroom_id)
 {
 	uint8_t ___retry_ctr = RETRY_ATTEMPTS;
-	char *filename[63];
+	char *filename[64];
 	//char *filename = "AT+FTPPUTNAME=\"test_lat_long.VROOM\"";
 	strcat(filename, AT_FTP_PUT_FILE_NAME); // 15 incl \0
 	strcat(filename, "\"");					// 2 incl \0
@@ -368,8 +367,7 @@ char* _get_GPS_response(void)
 	//SIM908_cmd(AT_GPS_GET_LOCATION, true);
 	
 	// ToDo - Store result somehow
-	
-	return "0,953.27674,5552.192069,62.171906,20141110152800.007,160422,12,0.000000,294.187958";
+	return "0,953.27674,5552.192069,62.171906,20141110152620.007,160422,12,0.000000,294.187958";
 }
 
 static uint32_t _set_UTC_sec(char *__utc_raw)
@@ -391,38 +389,6 @@ static uint32_t _set_UTC_sec(char *__utc_raw)
 
 	return calc_UTC_seconds(&t);
 }
-
-//static void _set_lat_long(char *__lat_raw, char *__long_raw) {
-	//int lat_i = 0;
-	//int long_i = 0;
-	//int i;
-	//for (i = 0; i < 6; i++) {
-		//if (__lat_raw[i] == '.') {
-			//lat_i = i - 2;
-		//}
-		//if (__long_raw[i] == '.') {
-			//long_i = i - 2;
-		//}
-	//}
-//
-	//char lat_deg[3];
-	//char long_deg[3];
-//
-	//for (i = 0; i < lat_i; i++) {
-		//lat_deg[i] = __lat_raw[i];
-	//}
-	//lat_deg[lat_i] = '\0';
-//
-	//for (i = 0; i < long_i; i++) {
-		//long_deg[i] = __long_raw[i];
-	//}
-	//long_deg[long_i] = '\0';
-//
-	///* gg + (mm.mmmmmm * 60 / 100) / 100 = gg.mmmmmmmm */
-	//// Needs to be change to milliarcseconds (int32_t)
-	//_msd.latitude = atoi(lat_deg) + atof(&__lat_raw[lat_i]) / 60;
-	//_msd.longitude = atoi(long_deg) + atof(&__long_raw[long_i]) / 60;
-//}
 
 static int32_t _set_lat_long(char *__lat_long_raw) 
 {
@@ -447,13 +413,13 @@ static int32_t _set_lat_long(char *__lat_long_raw)
 	float __decimal_degree = (atoi(__lat_long_deg) + atof(&__lat_long_raw[__lat_long_i]) / 60);
 
 	/* From decimal degrees to milliarcseconds */
-	return __decimal_degree * 3600000;
+	return (__decimal_degree * 3600000);
 }
 
 static uint8_t _set_direction(char *__direction_raw)
 {
 	/* (0 <= __direction_raw >= 255) */
-	return 255.0*atoi(__direction_raw)/360.0;
+	return (255.0*atoi(__direction_raw)/360.0);
 }
 
 /**********************************************************************//**

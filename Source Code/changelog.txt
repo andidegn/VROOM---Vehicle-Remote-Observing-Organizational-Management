@@ -5,7 +5,7 @@ New Features, Improvements
 --------------------------
 * Implemented functions to convert (a hardcoded) GPS response into MSD data structure.
 * Added emergency flag (Needed to do that because it locks in the car_panel ISR, when alarm is manually set)
-* Added correct file naming for MSD, including a VROOM_ID defined in the config header (just set to phone number).
+* Added appended string for file naming MSD file, including a VROOM_ID defined in the config header (just set to phone number).
 
 Fixed Bugs, Changes
 -------------------

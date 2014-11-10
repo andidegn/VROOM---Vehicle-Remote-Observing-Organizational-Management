@@ -162,7 +162,7 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	*__course = _set_direction(output[8]);
 	
 	// ToDo - Set IPV4 address (is a uint8_t[4])
-	_set_service_provider(&__IPV4);
+	// _set_service_provider(&__IPV4);
 	
 	/* Set filename for MSD */
 	_set_MSD_filename(output[4]);
@@ -369,7 +369,7 @@ char* _get_GPS_response(void)
 	
 	// ToDo - Store result somehow
 	
-	return "0,953.27674,5552.192069,62.171906,20141110143912.007,160422,12,0.000000,294.187958";
+	return "0,953.27674,5552.192069,62.171906,20141110152800.007,160422,12,0.000000,294.187958";
 }
 
 static uint32_t _set_UTC_sec(char *__utc_raw)
@@ -465,7 +465,7 @@ static uint8_t _set_direction(char *__direction_raw)
 static void _set_service_provider(uint8_t *__IPV4)
 {	
 	/* ToDo - AT command to get IPV4 address */
-	uint8_t __SP_response[4] = {100, 0, 100, 0};
+	uint8_t __SP_response[4] = {100, 100, 100, 100};
 	
 	if (__SP_response == NULL)
 	{
@@ -521,7 +521,6 @@ static void _set_MSD_filename(char *__UTC_raw)
 		}
 	}
 	MSD_filename[i] = '\0';
-	//MSD_filename[i++] = '\"';
 }
 
 void _SIM908_callback(char data)

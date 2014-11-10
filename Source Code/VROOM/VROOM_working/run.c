@@ -435,7 +435,7 @@ int main (void)
 
 			if (emergency_flag)
 			{
-				emergency_alarm(true,false);
+				emergency_alarm(true, false);
 				lcd_clrscr();
 				lcd_gotoxy(0,0);
 				lcd_puts(MSD_filename);
@@ -471,44 +471,44 @@ int main (void)
 
 	#if UNIT_TEST_MSD
 	
-	set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp);
-
+	//set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp);
+	emergency_alarm(true, false);
 		while (1)
 		{
-			//lcd_clrscr();
-			//lcd_gotoxy(0,0);
-			//lcd_puts("Control: ");
-			//lcd_puts(itoa(70, buf, 10));
-			////lcd_gotoxy(0,1);
-			////lcd_puts(_msd.VIN);
-			//_delay_ms(2000);
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts("Control: ");
+			lcd_puts(itoa(_msd.control, buf, 16));
+			lcd_gotoxy(0,1);
+			lcd_puts(_msd.VIN);
+			_delay_ms(2000);
 
-			//lcd_clrscr();
-			//lcd_gotoxy(0,0);
-			//lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
-			//lcd_gotoxy(0,1);
-			//lcd_puts(itoa(_msd.direction, buf, 10));
-			//_delay_ms(2000);
-//
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
+			lcd_gotoxy(0,1);
+			lcd_puts(itoa(_msd.direction, buf, 10));
+			_delay_ms(2000);
+
 			//lcd_clrscr();
 			//lcd_gotoxy(0,0);
 			//lcd_puts("Long: ");
-			//lcd_puts(dtostrf(  _msd.longitude, 2, 2, buf ));
+			//lcd_puts(itoa(_msd.longitude, buf, 10));
 			//lcd_gotoxy(0,1);
 			//lcd_puts("Lati: ");
-			//lcd_puts(dtostrf(  _msd.latitude, 2, 2, buf ));
+			//lcd_puts(itoa(_msd.latitude, buf, 10));
 			//_delay_ms(2000);
 //
-			//lcd_clrscr();
+			lcd_clrscr();
 			//lcd_gotoxy(0,0);
 			//lcd_puts("SP: ");
 			//lcd_puts(itoa(_msd.sp[0], buf, 10)); lcd_putc('.');
 			//lcd_puts(itoa(_msd.sp[1], buf, 10)); lcd_putc('.');
 			//lcd_puts(itoa(_msd.sp[2], buf, 10)); lcd_putc('.');
 			//lcd_puts(itoa(_msd.sp[3], buf, 10));
-			//lcd_gotoxy(0,1);
-			//lcd_puts(_msd.optional_data);
-			//_delay_ms(2000);
+			lcd_gotoxy(0,1);
+			lcd_puts(_msd.optional_data);
+			_delay_ms(2000);
 		}
 	#endif /* UNIT_TEST_MSD */
 

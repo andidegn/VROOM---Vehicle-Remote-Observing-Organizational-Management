@@ -28,13 +28,13 @@ void emergency_alarm(bool __manual_alarm, bool __auto_alarm)
 	set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp);
 	
 	/* ToDo - Can position be trusted ?? */
-	bool _confidence_in_position = true;
-	_set_control_byte(_confidence_in_position, CONFIG_TEST_CALL, __manual_alarm, __auto_alarm);
+	bool __confidence_in_position = true;
+	_set_control_byte(__confidence_in_position, CONFIG_TEST_CALL, __manual_alarm, __auto_alarm);
 	_set_VIN(CONFIG_VIN);
 	/* ToDo - get optional data */
-	_set_optional_data("ACC [G]: ? | Temp [ºC]: ?");
-	
-	send_MSD(VROOM_ID);
+	_set_optional_data("ACC [G]: ? | Temp [C]: ?");
+
+	send_MSD(CONFIG_VROOM_ID);
 	
 	// call_PSAP();
 	

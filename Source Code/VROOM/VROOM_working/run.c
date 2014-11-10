@@ -314,6 +314,8 @@ void uart1_callback_test(char data) {
 #include "hardware_boards/lcd_board/button_led/btn_led_lcd.h"
 #include "sensors/sensor_scheduler.h"
 #include "hardware_boards/sim908/sim908.h"
+#include "hardware_boards/car_panel/car_panel.h"
+#include "accident_data.h"
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdbool.h>
@@ -411,21 +413,18 @@ int main (void)
 		lcd_gotoxy(0, 0);
 		lcd_puts("INIT SIM...");
 		_delay_ms(1000);
-		sei();
+		
 		SIM908_init();
+		car_panel_init();
+		
+		sei();
 		SIM908_start();
 		lcd_puts(" - OK");
 
 		int32_t acc_total = 0;
 		bool flag = false;
-		uint8_t sp[4] = {100,200,100,200};
 		scheduler_start(NULL);
-
-		char *at_response = "0,953.27674,5552.192069,62.171906,20141021164456.000,160422,12,0.000000,294.187958";
-
-//		set_MSD(true, true, false, at_response, "W0L000036V1940069", sp , "Acc: ? | Temp: ?");
-		_delay_ms(8000);
-//		send_MSD();
+		
 		while (1)
 		{
 			x_axis = (int)(acc_get_x_axis()*100);
@@ -434,6 +433,14 @@ int main (void)
 			temp = get_temperature();
 			acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
 
+			if (emergency_flag)
+			{
+				emergency_alarm(true,false);
+				lcd_clrscr();
+				lcd_gotoxy(0,0);
+				lcd_puts(MSD_filename);
+				_delay_ms(1000);
+			}
 			//if (temp > 28 && flag == false)
 			//{
 				//send_MSD();
@@ -463,48 +470,45 @@ int main (void)
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
 	#if UNIT_TEST_MSD
-		#include "accident_data.h"
-
-		char *at_response = "0,953.27674,5552.192069,62.171906,20141021164456.000,160422,12,0.000000,294.187958";
-		uint8_t *sp = {100,200,300,400};
-		set_MSD(true, true, false, at_response, "W0L000036V1940069", sp , "Acc: ? | Temp: ?");
+	
+	set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp);
 
 		while (1)
 		{
-			lcd_clrscr();
-			lcd_gotoxy(0,0);
-			lcd_puts("Control: ");
-			lcd_puts(itoa(_msd.control, buf, 2));
-			lcd_gotoxy(0,1);
-			lcd_puts(_msd.VIN);
-			_delay_ms(2000);
+			//lcd_clrscr();
+			//lcd_gotoxy(0,0);
+			//lcd_puts("Control: ");
+			//lcd_puts(itoa(70, buf, 10));
+			////lcd_gotoxy(0,1);
+			////lcd_puts(_msd.VIN);
+			//_delay_ms(2000);
 
-			lcd_clrscr();
-			lcd_gotoxy(0,0);
-			lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
-			lcd_gotoxy(0,1);
-			lcd_puts(itoa(_msd.direction, buf, 10));
-			_delay_ms(2000);
-
-			lcd_clrscr();
-			lcd_gotoxy(0,0);
-			lcd_puts("Long: ");
-			lcd_puts(dtostrf(  _msd.longitude, 2, 2, buf ));
-			lcd_gotoxy(0,1);
-			lcd_puts("Lati: ");
-			lcd_puts(dtostrf(  _msd.latitude, 2, 2, buf ));
-			_delay_ms(2000);
-
-			lcd_clrscr();
-			lcd_gotoxy(0,0);
-			lcd_puts("SP: ");
-			lcd_puts(itoa(_msd.sp[0], buf, 10)); lcd_putc('.');
-			lcd_puts(itoa(_msd.sp[1], buf, 10)); lcd_putc('.');
-			lcd_puts(itoa(_msd.sp[2], buf, 10)); lcd_putc('.');
-			lcd_puts(itoa(_msd.sp[3], buf, 10));
-			lcd_gotoxy(0,1);
-			lcd_puts(_msd.optional_data);
-			_delay_ms(2000);
+			//lcd_clrscr();
+			//lcd_gotoxy(0,0);
+			//lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
+			//lcd_gotoxy(0,1);
+			//lcd_puts(itoa(_msd.direction, buf, 10));
+			//_delay_ms(2000);
+//
+			//lcd_clrscr();
+			//lcd_gotoxy(0,0);
+			//lcd_puts("Long: ");
+			//lcd_puts(dtostrf(  _msd.longitude, 2, 2, buf ));
+			//lcd_gotoxy(0,1);
+			//lcd_puts("Lati: ");
+			//lcd_puts(dtostrf(  _msd.latitude, 2, 2, buf ));
+			//_delay_ms(2000);
+//
+			//lcd_clrscr();
+			//lcd_gotoxy(0,0);
+			//lcd_puts("SP: ");
+			//lcd_puts(itoa(_msd.sp[0], buf, 10)); lcd_putc('.');
+			//lcd_puts(itoa(_msd.sp[1], buf, 10)); lcd_putc('.');
+			//lcd_puts(itoa(_msd.sp[2], buf, 10)); lcd_putc('.');
+			//lcd_puts(itoa(_msd.sp[3], buf, 10));
+			//lcd_gotoxy(0,1);
+			//lcd_puts(_msd.optional_data);
+			//_delay_ms(2000);
 		}
 	#endif /* UNIT_TEST_MSD */
 

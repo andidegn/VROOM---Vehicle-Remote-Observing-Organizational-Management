@@ -125,7 +125,9 @@ bool car_panel_wait_cancel_emmergency(void)
 			_alarm_cancelled = false;
 		}
 	}
-				
+	
+	_alarm_cancelled ? car_panel_set_control(ALARM_NOT_ACTIVATED) : car_panel_set_control(ALARM_ACTIVATED);			
+						
 	/* Restore interrupt */
 	SREG = SREG_cpy;	
 	
@@ -155,13 +157,13 @@ ISR (PCINT1_vect)
 
 			if (!car_panel_wait_cancel_emmergency())
 			{
-				car_panel_set_control(ALARM_ACTIVATED);
-				emergency_alarm(true, false);
+				//car_panel_set_control(ALARM_ACTIVATED);
+				emergency_flag = true;
 			}
 			
 			else
 			{
-				car_panel_set_control(ALARM_NOT_ACTIVATED);
+				//car_panel_set_control(ALARM_NOT_ACTIVATED);
 				_car_panel_counter = 0;
 				/* Enable interrupts */
 				PCMSK1 |= (1<<PCINT10);

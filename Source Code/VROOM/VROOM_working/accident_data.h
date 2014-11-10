@@ -38,6 +38,7 @@ typedef struct __attribute__((packed))
 
 extern MSD _msd;
 extern char MSD_filename[24];
+extern bool emergency_flag;
 
 void emergency_alarm(bool __manual_alarm, bool __auto_alarm);
 

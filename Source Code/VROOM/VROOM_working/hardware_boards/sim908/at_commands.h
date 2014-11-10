@@ -59,6 +59,7 @@
 #define AT_FTP_BEARER1_APN_TELIA	"AT+SAPBR=3,1,\"APN\",\"internet.mtelia.dk\""
 #define AT_FTP_BEARER1_APN_CALLME	"AT+SAPBR=3,1,\"APN\",\"websp\""
 #define AT_FTP_BEARER1_APN_TELENOR	"AT+SAPBR=3,1,\"APN\",\"internet\""
+#define AT_FTP_BEARER1_APN_TDC		"AT+SAPBR=3,1,\"APN\",\"internet\""
 
 #define AT_FTP_OPEN_BEARER1			"AT+SAPBR=1,1"
 #define AT_FTP_CLOSE_BEARER1		"AT+SAPBR=0,1"
@@ -79,7 +80,7 @@
 #define AT_FTP_SET_CONTROL_PORT		"AT+FTPPORT=1404"	
 #define AT_FTP_SET_USER_NAME_VROOM	"AT+FTPUN=\"VROOM\""
 #define AT_FTP_SET_PASSWORD			"AT+FTPPW=\"6198fg(/G6F/&5(!(!8gf87gMF.\""
-#define AT_FTP_PUT_FILE_NAME		"AT+FTPPUTNAME=\""
+#define AT_FTP_PUT_FILE_NAME		"AT+FTPPUTNAME="
 #define AT_FTP_PUT_FILE_PATH		"AT+FTPPUTPATH=\"/\""
 /*******************************************************************************/
 

@@ -12,7 +12,8 @@
 #include <stdbool.h>
 
 /* ToDo - Config file (not as header), to set the VIN number for the specific vehicle, and flag for test call */
-const bool CONFIG_TEST_CALL = true;
-#define CONFIG_VIN "W0L000036V1940069"
+#define CONFIG_TEST_CALL	1
+#define CONFIG_VIN			"W0L000036V1940069"
+#define VROOM_ID			"60192949"
 
 #endif /* VROOM_CONFIG_H_ */

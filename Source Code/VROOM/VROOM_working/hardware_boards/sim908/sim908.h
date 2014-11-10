@@ -84,6 +84,6 @@ void SIM908_start(void);
 bool SIM908_cmd(const char *cmd, bool __wait_for_ok);
 void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course, uint8_t *__IPV4);
 void call_PSAP(void);
-void send_MSD(void);
+void send_MSD(char *__vroom_id);
 
 #endif /* SIM908_GSM_H_ */

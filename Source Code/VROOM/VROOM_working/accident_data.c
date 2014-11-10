@@ -17,20 +17,14 @@
 #define BLANK_CHAR 0x20
 
 MSD _msd;
+bool emergency_flag = false;
 
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm);
 static void _set_VIN(char *__VIN);
 static void _set_optional_data(char *__s);
-//static void _raw_to_array(char **__output, char *__raw_at_str);
-//static void _set_UTC_string(char *__utc_raw);
-//static void _set_UTC_sec(char *__utc_raw);
-//static void _set_lat_long(char *__lat_raw, char *__long_raw);
-//static void _set_direction(char *__direction_raw);
-//static void _set_service_provider(uint8_t *__sp);
 
 void emergency_alarm(bool __manual_alarm, bool __auto_alarm)
 {
-	call_PSAP();
 	set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp);
 	
 	/* ToDo - Can position be trusted ?? */
@@ -38,9 +32,13 @@ void emergency_alarm(bool __manual_alarm, bool __auto_alarm)
 	_set_control_byte(_confidence_in_position, CONFIG_TEST_CALL, __manual_alarm, __auto_alarm);
 	_set_VIN(CONFIG_VIN);
 	/* ToDo - get optional data */
-	_set_optional_data("Acc: ? | Temp: ?");
+	_set_optional_data("ACC [G]: ? | Temp [ºC]: ?");
 	
-	send_MSD();
+	send_MSD(VROOM_ID);
+	
+	// call_PSAP();
+	
+	emergency_flag = false;
 }
 
 /**********************************************************************//**
@@ -99,121 +97,3 @@ static void _set_optional_data(char *__s)
 		_msd.optional_data[i++] = BLANK_CHAR;
     }
 }
-
-/* mode, longitude, latitude, altitude, UTC time, TTFF, Satelite in view, speed over ground, course over ground */
-//void set_MSD(bool __test_call, bool __manual_alarm, bool __auto_alarm, char *__GPS_AT_respons, char *__VIN, uint8_t *__SP_IPV4, char *__optional)
-//{
-//char *output[9];
-//
-//_raw_to_array(output, __GPS_AT_respons);
-//
-///* GPS raw data: <mode>,<longitude>,<latitude>,<altitude>,<UTC time>,<TTFF>,<num>,<speed>,<course> */
-//_set_lat_long(output[2], output[1]);
-//_set_UTC_sec(output[4]);
-//_set_UTC_string(output[4]);
-//_set_direction(output[8]);
-//
-///* ToDo - Can position be trusted ?? */
-//bool _confidence_in_position = true;
-//
-//_set_control_byte(_confidence_in_position, __test_call, __manual_alarm, __auto_alarm);
-//_set_VIN(__VIN);
-//_set_service_provider(__SP_IPV4);
-//_set_optional_data(__optional);		/* MAX SIZE OF DATA = 102 bytes */
-//}
-
-//static void _raw_to_array(char **__output, char *__raw_at_str) {
-	//__output[0] = strtok(__raw_at_str, ",");
-	//__output[1] = strtok(NULL, ",");
-	//__output[2] = strtok(NULL, ",");
-	//__output[3] = strtok(NULL, ",");
-	//__output[4] = strtok(NULL, ",");
-	//__output[5] = strtok(NULL, ",");
-	//__output[6] = strtok(NULL, ",");
-	//__output[7] = strtok(NULL, ",");
-	//__output[8] = strtok(NULL, ",");
-//}
-
-//static void _set_UTC_sec(char *__utc_raw)
-//{
-	//char year[5] = {__utc_raw[0],  __utc_raw[1], __utc_raw[2], __utc_raw[3], '\0'};
-	//char month[3] = {__utc_raw[4],  __utc_raw[5], '\0'};
-	//char day[3] = {__utc_raw[6],  __utc_raw[7], '\0'};
-	//char hour[3] = {__utc_raw[8],  __utc_raw[9], '\0'};
-	//char minute[3] = {__utc_raw[10],  __utc_raw[11], '\0'};
-	//char second[3] = {__utc_raw[12],  __utc_raw[13], '\0'};
-//
-	//FIXED_TIME t;
-	//t.year = atoi(year);
-	//t.mon = atoi(month);
-	//t.day = atoi(day);
-	//t.hour = atoi(hour);
-	//t.min = atoi(minute);
-	//t.sec = atoi(second);
-//
-	//_msd.time_stamp = calc_UTC_seconds(&t);
-//}
-//
-//static void _set_lat_long(char *__lat_raw, char *__long_raw) {
-	//int lat_i = 0;
-	//int long_i = 0;
-	//int i;
-	//for (i = 0; i < 6; i++) {
-		//if (__lat_raw[i] == '.') {
-			//lat_i = i - 2;
-		//}
-		//if (__long_raw[i] == '.') {
-			//long_i = i - 2;
-		//}
-	//}
-//
-	//char lat_deg[3];
-	//char long_deg[3];
-//
-	//for (i = 0; i < lat_i; i++) {
-		//lat_deg[i] = __lat_raw[i];
-	//}
-	//lat_deg[lat_i] = '\0';
-//
-	//for (i = 0; i < long_i; i++) {
-		//long_deg[i] = __long_raw[i];
-	//}
-	//long_deg[long_i] = '\0';
-//
-	///* gg + (mm.mmmmmm * 60 / 100) / 100 = gg.mmmmmmmm */
-	//// Needs to be change to milliarcseconds (int32_t)
-	//_msd.latitude = atoi(lat_deg) + atof(&__lat_raw[lat_i]) / 60;
-	//_msd.longitude = atoi(long_deg) + atof(&__long_raw[long_i]) / 60;
-//}
-//
-//static void _set_direction(char *__direction_raw)
-//{
-	///* (0 ? __direction_raw ? 255) */
-	//_msd.direction = 360.0*atoi(__direction_raw)/255.0;
-//}
-//
-///**********************************************************************//**
- //* @ingroup ad
- //* @brief function to set the service provider
- //* @return void
- //* @param sp - An array of 4 bytes consisting the SP in IPV4 format
- //* @note May also be blank field
- //*************************************************************************/
-//static void _set_service_provider(uint8_t *__sp)
-//{	
-	//if (__sp == NULL)
-	//{
-		//_msd.sp[0] = 0;
-		//_msd.sp[1] = 0;
-		//_msd.sp[2] = 0;
-		//_msd.sp[3] = 0;
-	//}
-	//
-	//else
-	//{
-		//_msd.sp[0] = __sp[0];
-		//_msd.sp[1] = __sp[1];
-		//_msd.sp[2] = __sp[2];
-		//_msd.sp[3] = __sp[3];	
-	//}
-//}

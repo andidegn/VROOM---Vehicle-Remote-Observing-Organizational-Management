@@ -56,9 +56,16 @@ static void _GSM_enable(void);
 static void _GPS_enable(void);
 static bool _wait_response(uint8_t *__flag, uint8_t __ok_def);
 static bool _check_response(const char *defined_response);
-static void _get_GPS_response(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course);
+static char* _get_GPS_response(void);
 static void _set_MSD_filename(char *__UTC_raw);
 static char _char_at(uint8_t index);
+
+static uint32_t _set_UTC_sec(char *__utc_raw);
+static int32_t _set_lat_long(char *__lat_long_raw);
+static uint8_t _set_direction(char *__direction_raw);
+static void _set_service_provider(uint8_t *__IPV4);
+static void _raw_to_array(char **__output, char *__raw_at_str);
+static void _set_MSD_filename(char *__UTC_raw);
 
 void _SIM908_callback(char data);
 
@@ -114,7 +121,7 @@ void SIM908_start(void)
 
 	/* Enable Echo */
 	SIM908_cmd(AT_DIAG_ECHO_ENABLE, true);
-	//SIM908_cmd("AT+CPIN=5130");
+	SIM908_cmd("AT+CPIN=5130", true);
 
 	_setup_GSM();
 	_setup_GPS();
@@ -142,9 +149,23 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 
 void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course, uint8_t *__IPV4)
 {
-	_get_GPS_response(__UTC_sec, __latitude, __longitude, __course);
-	/* ToDo*/
-	// Set IPV4 address __msd.sd (is a uint8_t[4])
+	char *__GPS_AT_respons = _get_GPS_response();
+	/* Split the response into different strings */
+	char *output[9];
+	/* GPS raw data: <mode>,<longitude>,<latitude>,<altitude>,<UTC time>,<TTFF>,<num>,<speed>,<course> */
+	_raw_to_array(output, __GPS_AT_respons);
+
+	// _set_lat_long(output[2], output[1], &__latitude, &__longitude);
+	*__longitude = _set_lat_long(output[1]);
+	*__latitude = _set_lat_long(output[2]);
+	*__UTC_sec = _set_UTC_sec(output[4]);
+	*__course = _set_direction(output[8]);
+	
+	// ToDo - Set IPV4 address (is a uint8_t[4])
+	_set_service_provider(&__IPV4);
+	
+	/* Set filename for MSD */
+	_set_MSD_filename(output[4]);
 }
 
 /********************************************************************************************************************//**
@@ -174,13 +195,17 @@ void call_PSAP(void)
  *	10:	End write session		AT+FTPPUT=2,0
  *	11: Close bearer			AT+SAPBR=0,1
  ************************************************************************************************************************/
-void send_MSD(void)
+void send_MSD(char *__vroom_id)
 {
 	uint8_t ___retry_ctr = RETRY_ATTEMPTS;
-	//char filename[39];
-	char *filename = "AT+FTPPUTNAME=\"NUVIRKERDET.VROOM\"";
-	//strcat(filename, AT_FTP_PUT_FILE_NAME); // 15
-	//strcat(filename, MSD_filename);			  // 24
+	char *filename[63];
+	//char *filename = "AT+FTPPUTNAME=\"test_lat_long.VROOM\"";
+	strcat(filename, AT_FTP_PUT_FILE_NAME); // 15 incl \0
+	strcat(filename, "\"");					// 2 incl \0
+	strcat(filename, MSD_filename);			// 24 incl \0 (2014-10-12_13.17.34.000)
+	strcat(filename, "-(");					// 3
+	strcat(filename, __vroom_id);			// 9
+	strcat(filename, ").vroom\"");			// 9 incl \0
 
 	SIM908_cmd(filename, true);
 
@@ -254,7 +279,7 @@ static void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
 	SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS, true);
-	SIM908_cmd(AT_FTP_BEARER1_APN_CALLME, true);
+	SIM908_cmd(AT_FTP_BEARER1_APN_TDC, true);
 
 	/* Use bearer profile 1 */
 	SIM908_cmd(AT_FTP_USE_PROFILE1, true);
@@ -334,10 +359,142 @@ static char _char_at(uint8_t __index) {
 }
 
 /* mode, longitude, latitude, altitude, UTC time, TTFF, Satelite in view, speed over ground, course over ground */
-static void _get_GPS_response(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)
+char* _get_GPS_response(void)
 {
-	// ToDo - Impl. is in accident_data.c (commented)
-	// also call _set_MSD_filename(<utc raw data>)
+	//do {
+	//SIM908_cmd(AT_FTP_PUT_CLOSE_SESSION, false);
+	//} while (!_wait_response(&_ack_gps_respons, RESPONSE_GPS_READY) && ___retry_ctr-- > 0);
+			
+	//SIM908_cmd(AT_GPS_GET_LOCATION, true);
+	
+	// ToDo - Store result somehow
+	
+	return "0,953.27674,5552.192069,62.171906,20141110143912.007,160422,12,0.000000,294.187958";
+}
+
+static uint32_t _set_UTC_sec(char *__utc_raw)
+{
+	char year[5] = {__utc_raw[0],  __utc_raw[1], __utc_raw[2], __utc_raw[3], '\0'};
+	char month[3] = {__utc_raw[4],  __utc_raw[5], '\0'};
+	char day[3] = {__utc_raw[6],  __utc_raw[7], '\0'};
+	char hour[3] = {__utc_raw[8],  __utc_raw[9], '\0'};
+	char minute[3] = {__utc_raw[10],  __utc_raw[11], '\0'};
+	char second[3] = {__utc_raw[12],  __utc_raw[13], '\0'};
+
+	FIXED_TIME t;
+	t.year = atoi(year);
+	t.mon = atoi(month);
+	t.day = atoi(day);
+	t.hour = atoi(hour);
+	t.min = atoi(minute);
+	t.sec = atoi(second);
+
+	return calc_UTC_seconds(&t);
+}
+
+//static void _set_lat_long(char *__lat_raw, char *__long_raw) {
+	//int lat_i = 0;
+	//int long_i = 0;
+	//int i;
+	//for (i = 0; i < 6; i++) {
+		//if (__lat_raw[i] == '.') {
+			//lat_i = i - 2;
+		//}
+		//if (__long_raw[i] == '.') {
+			//long_i = i - 2;
+		//}
+	//}
+//
+	//char lat_deg[3];
+	//char long_deg[3];
+//
+	//for (i = 0; i < lat_i; i++) {
+		//lat_deg[i] = __lat_raw[i];
+	//}
+	//lat_deg[lat_i] = '\0';
+//
+	//for (i = 0; i < long_i; i++) {
+		//long_deg[i] = __long_raw[i];
+	//}
+	//long_deg[long_i] = '\0';
+//
+	///* gg + (mm.mmmmmm * 60 / 100) / 100 = gg.mmmmmmmm */
+	//// Needs to be change to milliarcseconds (int32_t)
+	//_msd.latitude = atoi(lat_deg) + atof(&__lat_raw[lat_i]) / 60;
+	//_msd.longitude = atoi(long_deg) + atof(&__long_raw[long_i]) / 60;
+//}
+
+static int32_t _set_lat_long(char *__lat_long_raw) 
+{
+	uint8_t __lat_long_i = 0;
+	uint8_t i;
+	char __lat_long_deg[3];
+	
+	for (i = 0; i < 6; i++) 
+	{
+		if (__lat_long_raw[i] == '.') 
+		{
+			__lat_long_i = i - 2;
+		}
+	}
+	
+	for (i = 0; i < __lat_long_i; i++) 
+	{
+		__lat_long_deg[i] = __lat_long_raw[i];
+	}
+	__lat_long_deg[__lat_long_i] = '\0';
+
+	float __decimal_degree = (atoi(__lat_long_deg) + atof(&__lat_long_raw[__lat_long_i]) / 60);
+
+	/* From decimal degrees to milliarcseconds */
+	return __decimal_degree * 3600000;
+}
+
+static uint8_t _set_direction(char *__direction_raw)
+{
+	/* (0 <= __direction_raw >= 255) */
+	return 255.0*atoi(__direction_raw)/360.0;
+}
+
+/**********************************************************************//**
+ * @brief function to set the service provider
+ * @return void
+ * @param sp - An array of 4 bytes consisting the SP in IPV4 format
+ * @note May also be blank field
+ *************************************************************************/
+static void _set_service_provider(uint8_t *__IPV4)
+{	
+	/* ToDo - AT command to get IPV4 address */
+	uint8_t __SP_response[4] = {100, 0, 100, 0};
+	
+	if (__SP_response == NULL)
+	{
+		__IPV4[0] = 0;
+		__IPV4[1] = 0;
+		__IPV4[2] = 0;
+		__IPV4[3] = 0;
+	}
+	
+	else
+	{
+		__IPV4[0] = __SP_response[0];
+		__IPV4[1] = __SP_response[1];
+		__IPV4[2] = __SP_response[2];
+		__IPV4[3] = __SP_response[3];	
+	}
+}
+
+static void _raw_to_array(char **__output, char *__raw_at_str)
+{
+	__output[0] = strtok(__raw_at_str, ",");
+	__output[1] = strtok(NULL, ",");
+	__output[2] = strtok(NULL, ",");
+	__output[3] = strtok(NULL, ",");
+	__output[4] = strtok(NULL, ",");
+	__output[5] = strtok(NULL, ",");
+	__output[6] = strtok(NULL, ",");
+	__output[7] = strtok(NULL, ",");
+	__output[8] = strtok(NULL, ",");
 }
 
 static void _set_MSD_filename(char *__UTC_raw)
@@ -363,7 +520,8 @@ static void _set_MSD_filename(char *__UTC_raw)
 			MSD_filename[i++] = *__UTC_raw++;
 		}
 	}
-	MSD_filename[i++] = '\"';
+	MSD_filename[i] = '\0';
+	//MSD_filename[i++] = '\"';
 }
 
 void _SIM908_callback(char data)
@@ -409,7 +567,6 @@ void _SIM908_callback(char data)
 		}
 		_rx_response_length = 0;
 	}
-
 }
 
 #ifdef PC_CALLBACK

@@ -1,4 +1,28 @@
 ===================================
+Version 0.104 - 2014/11/10 by Kenneth
+===================================
+New Features, Improvements
+--------------------------
+* Implemented functions to convert (a hardcoded) GPS response into MSD data structure.
+* Added emergency flag (Needed to do that because it locks in the car_panel ISR, when alarm is manually set)
+* Added correct file naming for MSD, including a VROOM_ID defined in the config header (just set to phone number).
+
+Fixed Bugs, Changes
+-------------------
+* Fixed bug in function for calculating course
+* Changed latitude/longitude function so that it stores the data in milliarcseconds
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+- Needs to store the GPS response somehow
+- Needs to check for CREG 
+- INFO: System needs to send data before making the phone call as the system is busy when calling
+
+
+===================================
 Version 0.103 - 2014/11/07 by Kenneth
 ===================================
 New Features, Improvements

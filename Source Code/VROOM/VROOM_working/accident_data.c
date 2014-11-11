@@ -13,6 +13,7 @@
 #include "accident_data.h"
 #include "hardware_boards/sim908/sim908.h"
 #include "vroom_config.h"
+#include <util/delay.h>
 
 #define BLANK_CHAR 0x20
 
@@ -36,7 +37,7 @@ void emergency_alarm(bool __manual_alarm, bool __auto_alarm)
 	_set_optional_data("ACC [G]: ? | Temp [C]: ?");
 	
 	//send_MSD(CONFIG_VROOM_ID);
-	
+
 //	call_PSAP();
 	
 	emergency_flag = false;

@@ -54,13 +54,13 @@ static void _wait_for_connection(void);
 static bool _wait_response(uint8_t *__flag, uint8_t __ok_def);
 static bool _check_response(const char *defined_response);
 static void _get_GPS_response(void);
-static void _set_MSD_filename(char *__UTC_raw);
 static char _char_at(uint8_t __index, uint8_t __tail, uint8_t __length);
 static void _raw_to_array(char **__output);
 
-static uint32_t _set_UTC_sec(char *__utc_raw);
-static int32_t _set_lat_long(char *__lat_long_raw);
-static uint8_t _set_direction(char *__direction_raw);
+static uint32_t _set_UTC_sec(const char *__utc_raw);
+static int32_t _set_lat_long(const char *__lat_long_raw);
+static uint8_t _set_direction(const char *__direction_raw);
+static void _set_MSD_filename(const char *__UTC_raw);
 static void _set_service_provider(uint8_t *__IPV4);
 
 void _SIM908_callback(char data);
@@ -165,8 +165,8 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	
 	// ToDo - Set IPV4 address (is a uint8_t[4])
 	_set_service_provider(__IPV4);
-	
 	_set_MSD_filename(*(output + 4));
+	
 }
 
 /********************************************************************************************************************//**
@@ -202,6 +202,7 @@ void send_MSD(char *__vroom_id)
 		
 	uint8_t ___retry_ctr = RETRY_ATTEMPTS;
 	char *filename = malloc(64 * sizeof(char));
+	//char filename[64];
 	/* 2014-10-12_13.17.34.000-(60192949).vroom */
 	strcpy(filename, AT_FTP_PUT_FILE_NAME); 
 	strcat(filename, "\"");					
@@ -381,7 +382,7 @@ void _get_GPS_response(void)
 	} while (!_wait_response(&_ack_gps_response, SIM908_RESPONSE_GPS_PULL));
 }
 
-static uint32_t _set_UTC_sec(char *__utc_raw)
+static uint32_t _set_UTC_sec(const char *__utc_raw)
 {
 	char year[5] = {__utc_raw[0],  __utc_raw[1], __utc_raw[2], __utc_raw[3], '\0'};
 	char month[3] = {__utc_raw[4],  __utc_raw[5], '\0'};
@@ -433,35 +434,35 @@ static uint32_t _set_UTC_sec(char *__utc_raw)
 	//*__longitude = atoi(long_deg) + atof(&__long_raw[long_i]) / 60;
 //}
 
-static int32_t _set_lat_long(char *__lat_long_raw) 
+static int32_t _set_lat_long(const char *__lat_long_raw) 
 {
-	uint8_t __lat_long_i = 0;
+	uint8_t lat_long_i = 0;
 	uint8_t i;
-	char __lat_long_deg[3];
+	char lat_long_deg[3];
 	
 	for (i = 0; i < 6; i++) 
 	{
 		if (__lat_long_raw[i] == '.') 
 		{
-			__lat_long_i = i - 2;
+			lat_long_i = i - 2;
 		}
 	}
 	
-	for (i = 0; i < __lat_long_i; i++) 
+	for (i = 0; i < lat_long_i; i++) 
 	{
-		__lat_long_deg[i] = __lat_long_raw[i];
+		lat_long_deg[i] = __lat_long_raw[i];
 	}
-	__lat_long_deg[__lat_long_i] = '\0';
+	lat_long_deg[lat_long_i] = '\0';
 
 	/* Don't know if /60 is needed ?! */
 	/* gg + (mm.mmmmmm * 60 / 100) / 100 = gg.mmmmmmmm */
-	float __decimal_degree = (atoi(__lat_long_deg) + atof(&__lat_long_raw[__lat_long_i]) / 60);
+	float __decimal_degree = (atoi(lat_long_deg) + atof(&__lat_long_raw[lat_long_i]) / 60);
 
 	/* From decimal degrees to milliarcseconds */
 	return (__decimal_degree * 3600000);
 }
 
-static uint8_t _set_direction(char *__direction_raw)
+static uint8_t _set_direction(const char *__direction_raw)
 {
 	/* (0 <= __direction_raw >= 255) */
 	return (255.0*atoi(__direction_raw)/360.0);
@@ -508,27 +509,28 @@ static void _raw_to_array(char **__output) {
 	}
 }
 
-static void _set_MSD_filename(char *__UTC_raw)
+static void _set_MSD_filename(const char *__UTC_raw)
 {
 	/* Format: 2014-10-12_13.17.34.000 */
 	uint8_t i = 0;
-	for (i = 0; i < 19; i++) 
+
+	for (i = 0; i < 19; i++)
 	{
 		if (i == 4 || i == 7)
 		{
-			MSD_filename[i++] = '-';
+			MSD_filename[i] = '-';
 		}
 		else if (i == 10)
 		{
-			MSD_filename[i++] = '_';
+			MSD_filename[i] = '_';
 		}
 		else if (i == 13 || i == 16)
 		{
-			MSD_filename[i++] = '.';
+			MSD_filename[i] = '.';
 		}
 		else
 		{
-			MSD_filename[i++] = *__UTC_raw++;
+			MSD_filename[i] = *__UTC_raw++;
 		}
 	}
 	MSD_filename[i] = '\0';

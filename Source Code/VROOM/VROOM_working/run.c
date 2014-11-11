@@ -382,8 +382,8 @@ int main (void)
 	#endif /* MODULE_TEST_CAR_PANEL */
 
 	#if INTEGRATION_TEST_SIM908_SENSORS
-		SIM908_init();
 		car_panel_init();
+		SIM908_init();
 		
 		sei();
 		
@@ -403,10 +403,7 @@ int main (void)
 				emergency_alarm(true, false);
 			}
 			
-			if (connection_status_flag == CREG_VALUE_OK) 
-				car_panel_set_status(STATUS_ONLINE);
-			else
-				car_panel_set_status(STATUS_OFFLINE);
+			connection_status_flag == CREG_VALUE_OK ? car_panel_set_status(STATUS_ONLINE) : car_panel_set_status(STATUS_OFFLINE);
 			
 			//if (temp > 28 || acc_total > 1000)
 			//{

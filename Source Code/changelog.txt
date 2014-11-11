@@ -1,4 +1,27 @@
 ===================================
+Version 0.110 - 2014/11/11 by Kenneth & Andi
+===================================
+New Features, Improvements
+--------------------------
+* Memory leak in MSD optional data fixed
+* Implemented function to get GPS response and split it into sub-strings
+* Implemented check for CREG status
+* Added connection_status_flag which is set at anytime CREG changes
+* Implemented MSD filename based on time stamp for GPS response
+* Car panel driver finetuned
+* Main and SIM908 cleaned for unused code
+
+Fixed Bugs, Changes
+-------------------
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane
+- Split up module test in individual file, instead of having it in main
+
+
+===================================
 Version 0.104 - 2014/11/10 by Kenneth
 ===================================
 New Features, Improvements

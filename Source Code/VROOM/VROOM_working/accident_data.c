@@ -36,7 +36,7 @@ void emergency_alarm(bool __manual_alarm, bool __auto_alarm)
 	/* ToDo - get optional data */
 	_set_optional_data("ACC [G]: ? | Temp [C]: ?");
 	
-	//send_MSD(CONFIG_VROOM_ID);
+	send_MSD(CONFIG_VROOM_ID);
 
 //	call_PSAP();
 	

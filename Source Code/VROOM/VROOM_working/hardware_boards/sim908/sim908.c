@@ -155,7 +155,6 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	
 	/* GPS raw data: <mode>,<longitude>,<latitude>,<altitude>,<UTC time>,<TTFF>,<num>,<speed>,<course> */
 	_get_GPS_response();
-
 	_raw_to_array(output);
 
 	*__longitude = _set_lat_long(*(output + 1));
@@ -163,10 +162,8 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	*__UTC_sec = _set_UTC_sec(*(output + 4));
 	*__course = _set_direction(*(output + 8));
 	
-	// ToDo - Set IPV4 address (is a uint8_t[4])
 	_set_service_provider(__IPV4);
 	_set_MSD_filename(*(output + 4));
-	
 }
 
 /********************************************************************************************************************//**
@@ -201,9 +198,8 @@ void send_MSD(char *__vroom_id)
 	_wait_for_connection();
 		
 	uint8_t ___retry_ctr = RETRY_ATTEMPTS;
-	char *filename = malloc(64 * sizeof(char));
-	//char filename[64];
-	/* 2014-10-12_13.17.34.000-(60192949).vroom */
+	char *filename = malloc(60 * sizeof(char));
+	/* 2014-10-12_13.17.34-(60192949).vroom */
 	strcpy(filename, AT_FTP_PUT_FILE_NAME); 
 	strcat(filename, "\"");					
 	strcat(filename, MSD_filename);			
@@ -240,7 +236,6 @@ void send_MSD(char *__vroom_id)
 
 		uart0_send_char(CR);
 		uart0_send_char(LF);
-
 	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_OPEN) && ___retry_ctr-- > 0);
 
 	___retry_ctr = RETRY_ATTEMPTS;
@@ -288,6 +283,7 @@ static void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
 	SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS, true);
+	// SIM908_cmd(AT_FTP_BEARER1_APN_CALLME, true)
 	SIM908_cmd(AT_FTP_BEARER1_APN_TDC, true);
 
 	/* Use bearer profile 1 */
@@ -436,7 +432,7 @@ static uint32_t _set_UTC_sec(const char *__utc_raw)
 
 static int32_t _set_lat_long(const char *__lat_long_raw) 
 {
-	uint8_t lat_long_i = 0;
+	int8_t lat_long_i = 0;
 	uint8_t i;
 	char lat_long_deg[3];
 	

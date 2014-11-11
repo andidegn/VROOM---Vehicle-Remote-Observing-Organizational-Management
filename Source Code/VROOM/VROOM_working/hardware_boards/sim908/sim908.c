@@ -148,7 +148,7 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course, uint8_t *__IPV4)
 {
 	char *__GPS_AT_respons = _get_GPS_response();
-	/* Split the response into different strings */
+	/* Splits the response into different strings */
 	char *output[9];
 	/* GPS raw data: <mode>,<longitude>,<latitude>,<altitude>,<UTC time>,<TTFF>,<num>,<speed>,<course> */
 	_raw_to_array(output, __GPS_AT_respons);
@@ -160,10 +160,8 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	*__course = _set_direction(output[8]);
 	
 	// ToDo - Set IPV4 address (is a uint8_t[4])
-	// Memory leak !!!
-	// _set_service_provider(&__IPV4);
+	_set_service_provider(__IPV4);
 	
-	/* Set filename for MSD */
 	_set_MSD_filename(output[4]);
 }
 
@@ -198,13 +196,13 @@ void send_MSD(char *__vroom_id)
 {
 	uint8_t ___retry_ctr = RETRY_ATTEMPTS;
 	char *filename[64];
-	//char *filename = "AT+FTPPUTNAME=\"test_lat_long.VROOM\"";
-	strcat(filename, AT_FTP_PUT_FILE_NAME); // 15 incl \0
-	strcat(filename, "\"");					// 2 incl \0
-	strcat(filename, MSD_filename);			// 24 incl \0 (2014-10-12_13.17.34.000)
-	strcat(filename, "-(");					// 3
-	strcat(filename, __vroom_id);			// 9
-	strcat(filename, ").vroom\"");			// 9 incl \0
+	/* 2014-10-12_13.17.34.000-(60192949).vroom */
+	strcat(filename, AT_FTP_PUT_FILE_NAME); 
+	strcat(filename, "\"");					
+	strcat(filename, MSD_filename);			
+	strcat(filename, "-(");					
+	strcat(filename, __vroom_id);			
+	strcat(filename, ").vroom\"");			
 
 	SIM908_cmd(filename, true);
 
@@ -367,7 +365,7 @@ char* _get_GPS_response(void)
 	//SIM908_cmd(AT_GPS_GET_LOCATION, true);
 	
 	// ToDo - Store result somehow
-	return "0,953.27674,5552.192069,62.171906,20141110152620.007,160422,12,0.000000,294.187958";
+	return "0,953.27674,5552.192069,62.171906,20141110093150.007,160422,12,0.000000,294.187958";
 }
 
 static uint32_t _set_UTC_sec(char *__utc_raw)
@@ -431,8 +429,8 @@ static uint8_t _set_direction(char *__direction_raw)
 static void _set_service_provider(uint8_t *__IPV4)
 {	
 	/* ToDo - AT command to get IPV4 address */
-	uint8_t __SP_response[4] = {100, 100, 100, 100};
-	
+	uint8_t __SP_response[4] = {100, 0, 100, 0};
+
 	if (__SP_response == NULL)
 	{
 		__IPV4[0] = 0;

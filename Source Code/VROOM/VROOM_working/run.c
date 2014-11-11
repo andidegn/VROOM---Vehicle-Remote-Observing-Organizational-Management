@@ -325,18 +325,13 @@ void uart1_callback_test(char data) {
 
 int main (void)
 {
-	DDRA = 0xFF;
-	PORTA = 0xFF;
-
 	const char degree = 0b011011111;
-	int x_axis, y_axis, z_axis;
+	int16_t x_axis, y_axis, z_axis;
 	float temp;
+	int32_t acc_total = 0;
 	char buf[20];
 
-	btn_led_lcd_init();
 	lcd_init(LCD_DISP_ON);
-	/* Setting up shared timer used as counter */
-	init_Timer3_CTC(TIMER_PS256, TIMER_10HZ);
 
 	#if UNIT_TEST
 		char* result = run_all_tests();
@@ -378,73 +373,41 @@ int main (void)
 
 	#if MODULE_TEST_CAR_PANEL
 		#include "hardware_boards/car_panel/car_panel.h"
-		lcd_clrscr();
-		lcd_gotoxy(0,0);
-		lcd_puts("Init...");
 		car_panel_init();
 		sei();
-		lcd_gotoxy(0,1);
-		lcd_puts("...DONE");
-		bool _is_alarm_cancled = false;
 		while (1)
 		{
-			//_is_alarm_cancled = car_panel_wait_cancel_emmergency();
-			//
-			//if (_is_alarm_cancled)
-			//{
-				//lcd_clrscr();
-				//lcd_gotoxy(0,0);
-				//lcd_puts("CANCLED");
-			//}
-			//
-			//else
-			//{
-				//lcd_clrscr();
-				//lcd_gotoxy(0,0);
-				//lcd_puts("NOT CANCLED");
-			//}
-			_delay_ms(100);
+			
 		}
 	#endif /* MODULE_TEST_CAR_PANEL */
 
-
 	#if INTEGRATION_TEST_SIM908_SENSORS
-		lcd_clrscr();
-		lcd_gotoxy(0, 0);
-		lcd_puts("INIT SIM...");
-		_delay_ms(1000);
-		
 		SIM908_init();
 		car_panel_init();
 		
 		sei();
+		
 		SIM908_start();
-		lcd_puts(" - OK");
-
-		int32_t acc_total = 0;
-		bool flag = false;
 		scheduler_start(NULL);
+		
+		car_panel_set_status(STATUS_ONLINE);
 		
 		while (1)
 		{
-			x_axis = (int)(acc_get_x_axis()*100);
-			y_axis = (int)(acc_get_y_axis()*100);
-			z_axis = (int)(acc_get_z_axis()*100);
+			x_axis = (int16_t)(acc_get_x_axis()*100);
+			y_axis = (int16_t)(acc_get_y_axis()*100);
+			z_axis = (int16_t)(acc_get_z_axis()*100);
 			temp = get_temperature();
 			acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
 
 			if (emergency_flag)
 			{
 				emergency_alarm(true, false);
-				lcd_clrscr();
-				lcd_gotoxy(0,0);
-				lcd_puts(MSD_filename);
-				_delay_ms(1000);
 			}
-			//if (temp > 28 && flag == false)
+			
+			//if (temp > 28 || acc_total > 1000)
 			//{
-				//send_MSD();
-				//flag = true;
+				//emergency_flag = true;
 			//}
 
 			lcd_clrscr();
@@ -465,14 +428,12 @@ int main (void)
 			lcd_putc(degree);
 			lcd_putc('C');
 
-			_delay_ms(100);
+			_delay_ms(200);
 		}
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
 	#if UNIT_TEST_MSD
-	
-	//set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp);
-	emergency_alarm(true, false);
+		emergency_alarm(true, false);
 		while (1)
 		{
 			lcd_clrscr();
@@ -481,23 +442,23 @@ int main (void)
 			lcd_puts(itoa(_msd.control, buf, 16));
 			lcd_gotoxy(0,1);
 			lcd_puts(_msd.VIN);
-			_delay_ms(2000);
+			_delay_ms(5000);
 
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
 			lcd_puts(ultoa(_msd.time_stamp, buf, 10) );
 			lcd_gotoxy(0,1);
 			lcd_puts(itoa(_msd.direction, buf, 10));
-			_delay_ms(2000);
+			_delay_ms(5000);
 
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
 			lcd_puts("Long: ");
-			lcd_puts(itoa(_msd.longitude, buf, 10));
+			lcd_puts(ltoa(_msd.longitude, buf, 16));
 			lcd_gotoxy(0,1);
 			lcd_puts("Lati: ");
-			lcd_puts(itoa(_msd.latitude, buf, 10));
-			_delay_ms(2000);
+			lcd_puts(ltoa(_msd.latitude, buf, 16));
+			_delay_ms(5000);
 
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
@@ -508,7 +469,7 @@ int main (void)
 			lcd_puts(itoa(_msd.sp[3], buf, 10));
 			lcd_gotoxy(0,1);
 			lcd_puts(_msd.optional_data);
-			_delay_ms(2000);
+			_delay_ms(5000);
 		}
 	#endif /* UNIT_TEST_MSD */
 

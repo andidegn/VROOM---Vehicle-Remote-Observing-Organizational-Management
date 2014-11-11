@@ -1,7 +1,7 @@
 /********************************************//**
 @file car_panel.h
 @author: Kenneth René Jensen
-@Version: 0.2
+@Version: 0.3
 @defgroup
 @{
 
@@ -14,14 +14,16 @@
 
 #include <stdbool.h>
 
-/* Time of butten press before activation/deactivation in 1/10 sec */
+/* Time of button press before activation/deactivation in 1/10 sec */
 #define BUTTON_PRESS_TIME		30
 
 typedef enum
 {
-	INIT,
-	OFFLINE,
-	ONLINE
+	STATUS_ATTENTION_TOGGLE,
+	STATUS_ATTENTION_CONSTANT,
+	STATUS_OFFLINE,
+	STATUS_ONLINE,
+	STATUS_RESET
 } Status;
 
 typedef enum

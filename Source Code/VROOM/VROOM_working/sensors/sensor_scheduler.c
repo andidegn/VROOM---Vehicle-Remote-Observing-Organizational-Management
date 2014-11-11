@@ -60,11 +60,12 @@ void scheduler_release(void) {
 
 		case state_timer_init :
 			_state = state_tc72_read;
-			init_Timer1_CTC(TIMER_PS8, TIMER_500HZ);
+			init_Timer1_CTC(TIMER_PS8, TIMER_100HZ);
 		break;
 
 		/* reoccurring */
 		case state_idle :
+			/* Insert check for emergency_flag */
 			_state = state_tc72_read;
 		break;
 

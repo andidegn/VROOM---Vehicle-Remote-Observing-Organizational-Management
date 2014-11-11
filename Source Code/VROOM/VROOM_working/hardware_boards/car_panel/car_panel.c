@@ -1,7 +1,7 @@
 /********************************************//**
 @file car_panel.c
 @author: Kenneth René Jensen
-@Version: 0.2
+@Version: 0.3
 @defgroup
 @{
 
@@ -57,19 +57,28 @@ void car_panel_set_status(Status s)
 {
 	switch (s)
 	{
-		case INIT :
+		case STATUS_ATTENTION_TOGGLE :
+			PORT &= ~(1<<STATUS_RED | 1<<STATUS_GREEN);
+			PORT ^= (1<<STATUS_BLUE);
+		break;
+		
+		case STATUS_ATTENTION_CONSTANT :
 			PORT &= ~(1<<STATUS_RED | 1<<STATUS_GREEN);
 			PORT |= (1<<STATUS_BLUE);
 		break;
-
-		case ONLINE :
+		
+		case STATUS_ONLINE :
 			PORT &= ~(1<<STATUS_RED | 1<<STATUS_BLUE);
 			PORT |= (1<<STATUS_GREEN);
 		break;
 
-		case OFFLINE :
+		case STATUS_OFFLINE :
 			PORT &= ~(1<<STATUS_BLUE | 1<<STATUS_GREEN);
 			PORT |= (1<<STATUS_RED);
+		break;
+		
+		case STATUS_RESET :	
+			PORT &= ~(1<<STATUS_RED | 1<<STATUS_GREEN | 1<<STATUS_BLUE);
 		break;
 	}
 }
@@ -110,24 +119,25 @@ bool car_panel_wait_cancel_emmergency(void)
 			{
 				_delay_ms(100);
 				_car_panel_counter++;
-				
-				if (_car_panel_counter % 5 == 0)
-				{
-					 car_panel_set_control(ALARM_WAITING);
-				}
+				car_panel_set_control(ALARM_WAITING);
 			}
 			_alarm_cancelled = (_car_panel_counter >= BUTTON_PRESS_TIME) ? true : false;
 		}
 		else
 		{
 			_delay_ms(100);
-			_car_panel_counter++;
-			_alarm_cancelled = false;
+			_car_panel_counter++;			
+		}
+				
+		if (_car_panel_counter % 2 == 0)
+		{
+			car_panel_set_status(STATUS_ATTENTION_TOGGLE);
 		}
 	}
 	
 	_alarm_cancelled ? car_panel_set_control(ALARM_NOT_ACTIVATED) : car_panel_set_control(ALARM_ACTIVATED);			
-						
+	_alarm_cancelled ? car_panel_set_status(STATUS_RESET) : car_panel_set_status(STATUS_ATTENTION_CONSTANT);
+									
 	/* Restore interrupt */
 	SREG = SREG_cpy;	
 	
@@ -142,10 +152,7 @@ ISR (PCINT1_vect)
 		{
 			_delay_ms(100);
 			_car_panel_counter++;
-			if (_car_panel_counter % 5 == 0)
-			{
-				car_panel_set_control(ALARM_WAITING);
-			}
+			car_panel_set_control(ALARM_WAITING);
 		}
 
 		if (_car_panel_counter >= BUTTON_PRESS_TIME )
@@ -153,31 +160,21 @@ ISR (PCINT1_vect)
 			/* Disable interrupts */
 			PCMSK1 &= ~(1<<PCINT10);
 			
-			car_panel_set_status(INIT);
-
 			if (!car_panel_wait_cancel_emmergency())
 			{
-				//car_panel_set_control(ALARM_ACTIVATED);
 				emergency_flag = true;
 			}
-			
 			else
 			{
-				//car_panel_set_control(ALARM_NOT_ACTIVATED);
 				_car_panel_counter = 0;
 				/* Enable interrupts */
 				PCMSK1 |= (1<<PCINT10);
 			}
 		}
-		
 		else
 		{
+			_car_panel_counter = 0;
 			car_panel_set_control(ALARM_NOT_ACTIVATED);
 		}
     }
-	
-	else
-	{
-		_car_panel_counter = 0;
-	}
 }

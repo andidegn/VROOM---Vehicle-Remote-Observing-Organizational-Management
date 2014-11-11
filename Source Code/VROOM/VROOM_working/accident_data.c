@@ -33,10 +33,10 @@ void emergency_alarm(bool __manual_alarm, bool __auto_alarm)
 	_set_VIN(CONFIG_VIN);
 	/* ToDo - get optional data */
 	_set_optional_data("ACC [G]: ? | Temp [C]: ?");
-
+	
 	send_MSD(CONFIG_VROOM_ID);
 	
-	// call_PSAP();
+//	call_PSAP();
 	
 	emergency_flag = false;
 }
@@ -86,11 +86,8 @@ static void _set_VIN(char *__VIN)
 static void _set_optional_data(char *__s)
 {
 	uint8_t i = 0;
-	
-	while (*__s != '\0')
-	{
-		_msd.optional_data[i++] = *__s++;
-	}
+
+	do { _msd.optional_data[i++] = *__s; }  while (*__s++ != '\0');
 	
     while (i < 102)
     {

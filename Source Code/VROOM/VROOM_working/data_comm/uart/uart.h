@@ -41,7 +41,7 @@
 #define UART0_TX_BUFFER_SIZE 64
 #define UART0_RX_BUFFER_SIZE 64
 #define UART1_TX_BUFFER_SIZE 64
-#define UART1_RX_BUFFER_SIZE 255
+#define UART1_RX_BUFFER_SIZE 64
 /* @} */
 
 /**********************************************************************//**
@@ -50,7 +50,7 @@
  * @{
  *************************************************************************/
 #define UART_NO_DATA 0x100U
-#define UART_BUFFER_OVERRUN 0x101U
+#define UART_BUFFER_OVERRUN 0x200U
 /* @} */
 
 /**********************************************************************//**

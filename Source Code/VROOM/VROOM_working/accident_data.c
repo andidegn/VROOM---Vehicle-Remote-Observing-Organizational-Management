@@ -18,6 +18,7 @@
 
 MSD _msd;
 bool emergency_flag = false;
+uint8_t connection_status_flag = CREG_VALUE_NOT_CONN;
 
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm);
 static void _set_VIN(char *__VIN);
@@ -25,7 +26,7 @@ static void _set_optional_data(char *__s);
 
 void emergency_alarm(bool __manual_alarm, bool __auto_alarm)
 {
-	set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp);
+	set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp[0]);
 	
 	/* ToDo - Can position be trusted ?? */
 	bool __confidence_in_position = true;

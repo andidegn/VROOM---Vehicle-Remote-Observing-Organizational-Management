@@ -16,13 +16,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-/* Timeout value in 1/10 sec - Minimum 5 seconds because of the internal delay in call function */
-#define SIM908_TIMEOUT_VALUE	50
-
-#if SIM908_TIMEOUT_VALUE < 50
-	#error SIM908_TIMEOUT_VALUE must be >= 50
-#endif
-
 /* Uncomment for Arduino default port settings */
 // #define ARDUINO_ATMEGA2560_DEFAULT
 #define STK600
@@ -61,23 +54,30 @@
 #define SIM908_RESPONSE_FTP_PUT_ERROR	13
 
 #define SIM908_RESPONSE_GPS_OK			20
+#define SIM908_RESPONSE_GPS_PULL		21
 
-#define SIM908_RESPONSE_CREG_OK			1
+#define SIM908_CONNECTED				31
+#define SIM908_NOT_CONNECTED			32
 
 /* AT Respond strings */
 #define RESPONSE_RDY		"RDY"
 #define RESPONSE_OK			"OK"
 #define RESPONSE_ERROR		"ERROR"
-#define RESPONSE_CR_LF		"\r\n" /* ?? */
-#define RESPONSE_LF_CR		"\r\n" /* ?? */
+#define RESPONSE_CR_LF		"\r\n"
+#define RESPONSE_LF_CR		"\n\r"
 #define RESPONSE_AT			"AT"
 #define RESPONSE_GPS_READY	"GPS Ready"
+#define RESPONSE_GPS_PULL	"0,"
 /* 	FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
 	FTP PUT RESPONSE:		"+FTPPUT:2,140"
 	FTP PUT CLOSE SESSION:	"+FTPPUT:1,0"		*/
 #define RESPONSE_FTP_PUT	"+FTPPUT:"
-#define RESPONSE_FTP_PUT2	"+FTPPUT="
 #define RESPONSE_CREG		"+CREG: " /* +CREG: 1 = connected */
+
+#define CREG_VALUE_NOT_CONN		0
+#define CREG_VALUE_OK			1
+#define CREG_VALUE_SEARCHING	2
+#define CREG_VALUE_NOT_REG		3
 
 void SIM908_init(void);
 void SIM908_start(void);

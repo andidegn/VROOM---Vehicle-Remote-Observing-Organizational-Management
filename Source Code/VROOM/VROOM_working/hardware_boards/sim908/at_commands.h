@@ -9,11 +9,14 @@
 #define AT_COMMANDS_H_
 
 /* diagnostics */
-#define AT_DIAG_TEST "AT"
-#define AT_DIAG_ECHO_ENABLE "ATE1"
-#define AT_DIAG_ECHO_DISABLE "ATE0"
-#define AT_DIAG_MODEL_NO "AT+CGMM"
-#define AT_DIAG_MANUFACTURER "AT+CGMI"
+#define AT_DIAG_TEST				"AT"
+#define AT_DIAG_ECHO_ENABLE			"ATE1"
+#define AT_DIAG_ECHO_DISABLE		"ATE0"
+#define AT_DIAG_MODEL_NO			"AT+CGMM"
+#define AT_DIAG_MANUFACTURER		"AT+CGMI"
+
+/* enable +CREG: unsolicited result code */
+#define AT_ENABLE_CREG				"AT+CREG=1"
 
 /* Set baud rate - Note autobauding does not support 115200bps */
 #define AT_BAUD_AUTO				"AT+IPR=0"	

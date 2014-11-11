@@ -390,8 +390,6 @@ int main (void)
 		SIM908_start();
 		scheduler_start(NULL);
 		
-		car_panel_set_status(STATUS_ONLINE);
-		
 		while (1)
 		{
 			x_axis = (int16_t)(acc_get_x_axis()*100);
@@ -404,6 +402,11 @@ int main (void)
 			{
 				emergency_alarm(true, false);
 			}
+			
+			if (connection_status_flag == CREG_VALUE_OK) 
+				car_panel_set_status(STATUS_ONLINE);
+			else
+				car_panel_set_status(STATUS_OFFLINE);
 			
 			//if (temp > 28 || acc_total > 1000)
 			//{

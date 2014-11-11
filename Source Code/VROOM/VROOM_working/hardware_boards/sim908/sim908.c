@@ -108,6 +108,9 @@ void SIM908_init(void)
 
 void SIM908_start(void)
 {
+	/* Enable CREG unsolicited result code */
+	SIM908_cmd(AT_ENABLE_CREG, true);
+	
 	/* Synchronizing baud rate */
 	SIM908_cmd(AT_DIAG_TEST, true);
 

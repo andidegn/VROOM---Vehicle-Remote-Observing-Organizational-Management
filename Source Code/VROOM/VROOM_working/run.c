@@ -377,24 +377,24 @@ int main (void)
 		sei();
 		while (1)
 		{
-			
+
 		}
 	#endif /* MODULE_TEST_CAR_PANEL */
 
 	#if INTEGRATION_TEST_SIM908_SENSORS
 		car_panel_init();
 		SIM908_init();
-		
+
 		sei();
-		
+
 		SIM908_start();
 		scheduler_start(NULL);
-		
+
 		while (1)
 		{
-			x_axis = (int16_t)(acc_get_x_axis()*100);
-			y_axis = (int16_t)(acc_get_y_axis()*100);
-			z_axis = (int16_t)(acc_get_z_axis()*100);
+			x_axis = _x_axis_buffer[0];
+			y_axis = _y_axis_buffer[0];
+			z_axis = _z_axis_buffer[0];
 			temp = get_temperature();
 			acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
 
@@ -402,9 +402,9 @@ int main (void)
 			{
 				emergency_alarm(true, false);
 			}
-			
+
 			connection_status_flag == CREG_VALUE_OK ? car_panel_set_status(STATUS_ONLINE) : car_panel_set_status(STATUS_OFFLINE);
-			
+
 			//if (temp > 28 || acc_total > 1000)
 			//{
 				//emergency_flag = true;

@@ -1,6 +1,26 @@
-===================================
+==================================
+Version 0.111 - 2014/11/13 by Andi
+==================================
+New Features, Improvements
+--------------------------
+* Added circular buffer in sensor_scheduler for accelerometer readings
+* Made x, y and z axis buffers in sensor_scheduler extern so that reading can
+  happen independent of the scheduler
+
+Fixed Bugs, Changes
+-------------------
+* Fixed accelerometer setup, scale and sensibility now works
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane and a lot of others
+- Split up module test in individual file, instead of having it in main
+
+
+============================================
 Version 0.110 - 2014/11/11 by Kenneth & Andi
-===================================
+============================================
 New Features, Improvements
 --------------------------
 * Memory leak in MSD optional data fixed
@@ -21,9 +41,9 @@ ToDo
 - Split up module test in individual file, instead of having it in main
 
 
-===================================
+=====================================
 Version 0.104 - 2014/11/10 by Kenneth
-===================================
+=====================================
 New Features, Improvements
 --------------------------
 * Implemented functions to convert (a hardcoded) GPS response into MSD data structure.
@@ -45,9 +65,9 @@ ToDo
 - INFO: System needs to send data before making the phone call as the system is busy when calling
 
 
-===================================
+=====================================
 Version 0.103 - 2014/11/07 by Kenneth
-===================================
+=====================================
 New Features, Improvements
 --------------------------
 * Added prototype for _get_GPS_response function in SIM908.c
@@ -92,9 +112,9 @@ ToDo
 - PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes
 
 
-===================================
+=====================================
 Version 0.099 - 2014/11/03 by Kenneth
-===================================
+=====================================
 New Features, Improvements
 --------------------------
 

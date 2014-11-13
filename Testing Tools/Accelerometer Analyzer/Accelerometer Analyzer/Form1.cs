@@ -32,6 +32,7 @@ namespace Accelerometer_Analyzer {
         private byte _prev_byte;
         private int _length_offset;
         private int _readingIndex;
+        private double _max_value;
 
         /* timing */
         DateTime _start_time;
@@ -199,6 +200,10 @@ namespace Accelerometer_Analyzer {
         private void process_data(Vector3D acc) {
             _readingIndex++;
             double len = acc.Length;
+            if (_max_value < len) {
+                _max_value = len;
+            }
+            _update_max_value_lbl();
             _add_new_point("acc_x", _readingIndex, acc.x);
             _add_new_point("acc_y", _readingIndex, acc.y);
             _add_new_point("acc_z", _readingIndex, acc.z);
@@ -217,6 +222,15 @@ namespace Accelerometer_Analyzer {
                 return;
             }
             this.Text = p;
+        }
+
+        delegate void _update_max_value_lbl_eh();
+        private void _update_max_value_lbl() {
+            if (InvokeRequired) {
+                this.BeginInvoke(new _update_max_value_lbl_eh(_update_max_value_lbl));
+                return;
+            }
+            lbl_max_value_value.Text = Math.Round(_max_value, 2).ToString();
         }
 
         delegate void _rtb_append_eh(String p);
@@ -424,6 +438,11 @@ namespace Accelerometer_Analyzer {
             }
         }
 
+        private void lbl_max_value_Click(object sender, EventArgs e) {
+            _max_value = 0;
+            _update_max_value_lbl();
+        }
+
         private void tkb_length_offset_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.R) {
                 tkb_length_offset.Value = _length_offset = 0;
@@ -601,7 +620,6 @@ namespace Accelerometer_Analyzer {
                 }
             }
         }
-        #endregion
 
         private void chart1_DragDrop(object sender, DragEventArgs e) {
 
@@ -636,5 +654,6 @@ namespace Accelerometer_Analyzer {
             _length_offset = (sender as TrackBar).Value;
             _reload_file();
         }
+        #endregion
     }
 }

@@ -39,6 +39,8 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_chart = new System.Windows.Forms.Panel();
+            this.lbl_max_value_value = new System.Windows.Forms.Label();
+            this.lbl_max_value_title = new System.Windows.Forms.Label();
             this.grp_axis = new System.Windows.Forms.GroupBox();
             this.chk_v_len = new System.Windows.Forms.CheckBox();
             this.chk_z = new System.Windows.Forms.CheckBox();
@@ -197,6 +199,8 @@
             this.pnl_chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_chart.Controls.Add(this.lbl_max_value_value);
+            this.pnl_chart.Controls.Add(this.lbl_max_value_title);
             this.pnl_chart.Controls.Add(this.grp_axis);
             this.pnl_chart.Controls.Add(this.tkb_length_offset);
             this.pnl_chart.Controls.Add(this.chkFullScale);
@@ -206,6 +210,30 @@
             this.pnl_chart.Name = "pnl_chart";
             this.pnl_chart.Size = new System.Drawing.Size(1065, 523);
             this.pnl_chart.TabIndex = 10;
+            // 
+            // lbl_max_value_value
+            // 
+            this.lbl_max_value_value.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_max_value_value.AutoSize = true;
+            this.lbl_max_value_value.BackColor = System.Drawing.Color.White;
+            this.lbl_max_value_value.Location = new System.Drawing.Point(992, 267);
+            this.lbl_max_value_value.Name = "lbl_max_value_value";
+            this.lbl_max_value_value.Size = new System.Drawing.Size(13, 13);
+            this.lbl_max_value_value.TabIndex = 22;
+            this.lbl_max_value_value.Text = "0";
+            this.lbl_max_value_value.DoubleClick += new System.EventHandler(this.lbl_max_value_Click);
+            // 
+            // lbl_max_value_title
+            // 
+            this.lbl_max_value_title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_max_value_title.AutoSize = true;
+            this.lbl_max_value_title.BackColor = System.Drawing.Color.White;
+            this.lbl_max_value_title.Location = new System.Drawing.Point(940, 267);
+            this.lbl_max_value_title.Name = "lbl_max_value_title";
+            this.lbl_max_value_title.Size = new System.Drawing.Size(56, 13);
+            this.lbl_max_value_title.TabIndex = 21;
+            this.lbl_max_value_title.Text = "Max v-len:";
+            this.lbl_max_value_title.DoubleClick += new System.EventHandler(this.lbl_max_value_Click);
             // 
             // grp_axis
             // 
@@ -438,6 +466,8 @@
         private System.Windows.Forms.Label lbl_baud_rate;
         private System.Windows.Forms.Button btn_stop;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.Label lbl_max_value_value;
+        private System.Windows.Forms.Label lbl_max_value_title;
     }
 }
 

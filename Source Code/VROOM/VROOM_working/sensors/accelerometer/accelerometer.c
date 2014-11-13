@@ -84,7 +84,7 @@ void acc_init(uint8_t cs_pin, ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE ou
 
 	_send_setup[0] = ACC_CTRL_REG1 | _BV(ACC_MULTI_BIT);
 	_send_setup[1] = power_mode | output_data_rate | _BV(ACC_Xen) | _BV(ACC_Yen) | _BV(ACC_Zen);
-	_send_setup[3] = full_scale;
+	_send_setup[4] = full_scale | _BV(ACC_BDU);
 
 	spi_send(_handle, _send_setup, 6U);
 

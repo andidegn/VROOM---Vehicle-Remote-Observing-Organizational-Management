@@ -539,7 +539,7 @@ void _SIM908_callback(char data)
 	#endif
 
 	_rx_response_length++;
-	_rx_buffer[_rx_buffer_tail = (_rx_buffer_tail + 1) % RX_BUFFER_SIZE] = data;
+	_rx_buffer[_rx_buffer_tail = (_rx_buffer_tail + 1) % RX_BUFFER_SIZE] = data; /* This technically starts from index '1', but as the buffer is circular, it does not matter */
 
 	if (data == CR)
 		_CR_counter++;

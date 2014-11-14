@@ -51,6 +51,8 @@ void car_panel_init(void)
 	
 	/* Restore interrupt */
 	SREG = SREG_cpy;
+	
+	car_panel_set_status(STATUS_OFFLINE);
 }
 
 void car_panel_set_status(Status s)
@@ -162,7 +164,7 @@ ISR (PCINT1_vect)
 			
 			if (!car_panel_wait_cancel_emmergency())
 			{
-				emergency_flag = true;
+				emergency_flag = EMERGENCY_MANUAL_ALARM;
 			}
 			else
 			{

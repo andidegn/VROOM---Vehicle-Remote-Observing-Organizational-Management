@@ -317,8 +317,10 @@ void uart1_callback_test(char data) {
 #include "hardware_boards/car_panel/car_panel.h"
 #include "accident_data.h"
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include <util/delay.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <math.h>
 #include "unit_test.h"
 #include "timer.h"
@@ -398,17 +400,12 @@ int main (void)
 			temp = get_temperature();
 			acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
 
-			if (emergency_flag)
+			connection_status_flag == STATUS_CONNECTED ? car_panel_set_status(STATUS_ONLINE) : car_panel_set_status(STATUS_OFFLINE);
+			
+			if (emergency_flag == (EMERGENCY_AUTO_ALARM | EMERGENCY_MANUAL_ALARM))
 			{
-				emergency_alarm(true, false);
+				emergency_alarm();
 			}
-
-			connection_status_flag == CREG_VALUE_OK ? car_panel_set_status(STATUS_ONLINE) : car_panel_set_status(STATUS_OFFLINE);
-
-			//if (temp > 28 || acc_total > 1000)
-			//{
-				//emergency_flag = true;
-			//}
 
 			lcd_clrscr();
 			lcd_gotoxy(0, 0);

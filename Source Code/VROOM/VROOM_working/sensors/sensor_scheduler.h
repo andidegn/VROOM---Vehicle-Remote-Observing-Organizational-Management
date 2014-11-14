@@ -10,7 +10,6 @@
 
 #include "tc72/tc72.h"
 #include "accelerometer/accelerometer.h"
-#include "../data_comm/uart/uart.h"
 #include "../timer.h"
 
 #define SCHEDULER_DELAY 0

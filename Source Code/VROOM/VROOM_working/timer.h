@@ -12,8 +12,7 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-#include "sensors/sensor_scheduler.h"
-
+#include <stdio.h>
 /********************************************************************//**
  @enum TIMER_PRESCALER
  @ingroup timer

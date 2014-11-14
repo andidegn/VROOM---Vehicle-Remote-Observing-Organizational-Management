@@ -9,8 +9,7 @@
 
 #define ANALYSIS 0
 
-typedef enum {state_uart_init,
-			  state_tc72_init,
+typedef enum {state_tc72_init,
 			  state_acc_init,
 			  state_timer_init,
 			  state_idle,
@@ -42,12 +41,6 @@ void scheduler_start(void (*callback_function_ptr)(char cfp)) {
 
 void scheduler_release(void) {
 	switch(_state) {
-		case state_uart_init :
-			_state = state_tc72_init;
-			uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_57K6, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _callback_function_ptr);
-			scheduler_release();
-		break;
-
 		case state_tc72_init :
 			_state = state_acc_init;
 			init_tc72(PB4);
@@ -65,7 +58,6 @@ void scheduler_release(void) {
 
 		/* reoccurring */
 		case state_idle :
-			/* Insert check for emergency_flag */
 			_state = state_tc72_read;
 		break;
 

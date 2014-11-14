@@ -9,6 +9,8 @@
 @}
 ************************************************/
 #include "timer.h"
+#include "sensors/sensor_scheduler.h"
+#include <avr/interrupt.h>
 
 #ifndef F_CPU
 	#error F_CPU must be defined!!!

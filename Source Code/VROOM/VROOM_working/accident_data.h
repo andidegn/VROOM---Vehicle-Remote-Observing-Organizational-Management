@@ -36,11 +36,23 @@ typedef struct __attribute__((packed))
 	char optional_data[102];/* Optional. Further data (e.g. crash information, number of passengers) or blank field */
 } MSD;
 
-extern MSD _msd;
-extern char MSD_filename[24];
-extern bool emergency_flag;
-extern uint8_t connection_status_flag;
+typedef enum {	EMERGENCY_NO_ALARM = 0,
+				EMERGENCY_MANUAL_ALARM = 1,
+				EMERGENCY_AUTO_ALARM = 2,
+				EMERGENCY_ALARM_SENT = 3
+} EMERGENCY_FLAG;
 
-void emergency_alarm(bool __manual_alarm, bool __auto_alarm);
+typedef enum {	STATUS_NOT_CONNECTED = 0,
+				STATUS_CONNECTED = 1,
+				STATUS_SEARCHING = 2,
+				STATUS_NOT_REG = 3
+} CONNECTION_STATUS_FLAG;
+
+extern char MSD_filename[24];
+extern MSD _msd;
+extern EMERGENCY_FLAG emergency_flag;
+extern CONNECTION_STATUS_FLAG connection_status_flag;
+
+void emergency_alarm(void);
 
 #endif /* ACCIDENT_DATA_H_ */

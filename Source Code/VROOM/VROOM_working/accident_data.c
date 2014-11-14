@@ -13,34 +13,39 @@
 #include "accident_data.h"
 #include "hardware_boards/sim908/sim908.h"
 #include "vroom_config.h"
-#include <util/delay.h>
 
 #define BLANK_CHAR 0x20
 
 MSD _msd;
-bool emergency_flag = false;
-uint8_t connection_status_flag = CREG_VALUE_NOT_CONN;
+EMERGENCY_FLAG emergency_flag = EMERGENCY_NO_ALARM;
+CONNECTION_STATUS_FLAG connection_status_flag = STATUS_NOT_CONNECTED;
+
+static bool _confidence_in_position;
 
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm);
 static void _set_VIN(char *__VIN);
 static void _set_optional_data(char *__s);
 
-void emergency_alarm(bool __manual_alarm, bool __auto_alarm)
+void emergency_alarm(void)
 {
 	set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp[0]);
 	
 	/* ToDo - Can position be trusted ?? */
-	bool __confidence_in_position = true;
-	_set_control_byte(__confidence_in_position, CONFIG_TEST_CALL, __manual_alarm, __auto_alarm);
+	if (_msd.latitude == 0 || _msd.longitude == 0)
+		_confidence_in_position = false;
+	else
+		_confidence_in_position = true;
+	
+	_set_control_byte(_confidence_in_position, CONFIG_TEST_CALL, emergency_flag == EMERGENCY_MANUAL_ALARM, emergency_flag == EMERGENCY_AUTO_ALARM);
 	_set_VIN(CONFIG_VIN);
 	/* ToDo - get optional data */
-	_set_optional_data("ACC [G]: ? | Temp [C]: ?");
+	_set_optional_data("ACC [G]: ? | Temp [°C]: ? | Passengers: ? | Speed [km/h]: ?");
 	
 	send_MSD(CONFIG_VROOM_ID);
 
 //	call_PSAP();
 	
-	emergency_flag = false;
+	emergency_flag = EMERGENCY_ALARM_SENT;
 }
 
 /**********************************************************************//**

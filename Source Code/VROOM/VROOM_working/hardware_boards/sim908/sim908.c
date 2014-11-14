@@ -13,6 +13,7 @@
 #include "../../data_comm/uart/uart.h"
 #include "../../accident_data.h"
 #include "../../util/time.h"
+#include "../../vroom_config.h"
 
 #define PC_CALLBACK
 #define RX_BUFFER_SIZE 256
@@ -110,7 +111,7 @@ void SIM908_start(void)
 {
 	/* Enable CREG unsolicited result code */
 	SIM908_cmd(AT_ENABLE_CREG, true);
-	
+
 	/* Synchronizing baud rate */
 	SIM908_cmd(AT_DIAG_TEST, true);
 
@@ -152,7 +153,7 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	for (uint8_t i = 0; i < 9; i++) {
 		*(output + i) = malloc(18 * sizeof(char));
 	}
-	
+
 	/* GPS raw data: <mode>,<longitude>,<latitude>,<altitude>,<UTC time>,<TTFF>,<num>,<speed>,<course> */
 	_get_GPS_response();
 	_raw_to_array(output);
@@ -161,7 +162,7 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	*__latitude = _set_lat_long(*(output + 2));
 	*__UTC_sec = _set_UTC_sec(*(output + 4));
 	*__course = _set_direction(*(output + 8));
-	
+
 	_set_service_provider(__IPV4);
 	_set_MSD_filename(*(output + 4));
 }
@@ -175,7 +176,7 @@ void call_PSAP(void)
 {
 	/* Enable incoming calls */
 	SIM908_cmd(AT_ENABLE_INCOMING_CALLS, true);
-	
+
 	SIM908_cmd(AT_CALL_KENNETH, true);
 }
 
@@ -196,34 +197,35 @@ void call_PSAP(void)
 void send_MSD(char *__vroom_id)
 {
 	_wait_for_connection();
-		
-	uint8_t ___retry_ctr = RETRY_ATTEMPTS;
+
+	uint8_t _retry_ctr = RETRY_ATTEMPTS;
 	char *filename = malloc(60 * sizeof(char));
 	/* 2014-10-12_13.17.34-(60192949).vroom */
-	strcpy(filename, AT_FTP_PUT_FILE_NAME); 
-	strcat(filename, "\"");					
-	strcat(filename, MSD_filename);			
-	strcat(filename, "-(");					
-	strcat(filename, __vroom_id);			
-	strcat(filename, ").vroom\"");			
+	strcpy(filename, CONFIG_FTP_PUT_FILE_NAME);
+	strcat(filename, "\"");
+	strcat(filename, MSD_filename);
+	strcat(filename, "-(");
+	strcat(filename, __vroom_id);
+	strcat(filename, ").vroom\"");
 
 	SIM908_cmd(filename, true);
+	free(filename);
 
-	while (!SIM908_cmd(AT_FTP_OPEN_BEARER1, true) && ___retry_ctr-- > 0){
+	while (!SIM908_cmd(AT_FTP_OPEN_BEARER1, true) && _retry_ctr-- > 0){
 		_delay_ms(1000);
 	}
-		
-	___retry_ctr = RETRY_ATTEMPTS;
+
+	_retry_ctr = RETRY_ATTEMPTS;
 	do {
 		SIM908_cmd(AT_FTP_PUT_OPEN_SESSION, false);
-	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_OPEN) && ___retry_ctr-- > 0);
+	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_OPEN) && _retry_ctr-- > 0);
 
-	___retry_ctr = RETRY_ATTEMPTS;
+	_retry_ctr = RETRY_ATTEMPTS;
 	do {
 		SIM908_cmd(AT_FTP_PUT_WRITE_140BYTE, false);
-	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_SUCCESS) && ___retry_ctr-- > 0);
+	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_SUCCESS) && _retry_ctr-- > 0);
 
-	___retry_ctr = RETRY_ATTEMPTS;
+	_retry_ctr = RETRY_ATTEMPTS;
 	do {
 		uart0_send_data(&_msd.control, 1);
 		uart0_send_data(&_msd.VIN[0], 20);
@@ -236,13 +238,13 @@ void send_MSD(char *__vroom_id)
 
 		uart0_send_char(CR);
 		uart0_send_char(LF);
-	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_OPEN) && ___retry_ctr-- > 0);
+	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_OPEN) && _retry_ctr-- > 0);
 
-	___retry_ctr = RETRY_ATTEMPTS;
+	_retry_ctr = RETRY_ATTEMPTS;
 	_delay_ms(100);
 	do {
 		SIM908_cmd(AT_FTP_PUT_CLOSE_SESSION, true);
-	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_CLOSE) && ___retry_ctr-- > 0);
+	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_CLOSE) && _retry_ctr-- > 0);
 
 	SIM908_cmd(AT_FTP_CLOSE_BEARER1, true);
 }
@@ -282,23 +284,22 @@ static void _setup_GPS(void)
 static void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
-	SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS, true);
-	// SIM908_cmd(AT_FTP_BEARER1_APN_CALLME, true)
-	SIM908_cmd(AT_FTP_BEARER1_APN_TDC, true);
+	//SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS, true);
+	SIM908_cmd(CONFIG_FTP_BEARER_APN, true);
 
 	/* Use bearer profile 1 */
 	SIM908_cmd(AT_FTP_USE_PROFILE1, true);
 
 	/* FTP login */
-	SIM908_cmd(AT_FTP_SET_SERVER_ADDRESS, true);
-	SIM908_cmd(AT_FTP_SET_CONTROL_PORT, true);
-	SIM908_cmd(AT_FTP_SET_USER_NAME_VROOM, true);
-	SIM908_cmd(AT_FTP_SET_PASSWORD, true);
+	SIM908_cmd(CONFIG_FTP_SET_SERVER_ADDRESS, true);
+	SIM908_cmd(CONFIG_FTP_SET_CONTROL_PORT, true);
+	SIM908_cmd(CONFIG_FTP_SET_USER_NAME_VROOM, true);
+	SIM908_cmd(CONFIG_FTP_SET_PASSWORD, true);
 
 	/* Set put information */
 	SIM908_cmd(AT_FTP_SET_DATA_TYPE_BINARY, true);
 	SIM908_cmd(AT_FTP_PUT_FILE_STORING, true);
-	SIM908_cmd(AT_FTP_PUT_FILE_PATH, true);
+	SIM908_cmd(CONFIG_FTP_PUT_FILE_PATH, true);
 }
 
 /********************************************************************************************************************//**
@@ -369,7 +370,7 @@ static char _char_at(uint8_t __index, uint8_t __tail, uint8_t __length) {
 	return _rx_buffer[i];
 }
 
-/* mode, longitude, latitude, altitude, UTC time, TTFF, Satelite in view, speed over ground, course over ground */
+/* mode, longitude, latitude, altitude, UTC time, TTFF, Satellite in view, speed over ground, course over ground */
 void _get_GPS_response(void)
 {
 	_delay_ms(1000);
@@ -398,64 +399,28 @@ static uint32_t _set_UTC_sec(const char *__utc_raw)
 	return calc_UTC_seconds(&t);
 }
 
-//static void _get_lat_long(char *__lat_raw, char *__long_raw, int32_t *__longitude, int32_t *__latitude) {
-	//int lat_i = 0;
-	//int long_i = 0;
-	//int i;
-	//for (i = 0; i < 6; i++) {
-		//if (__lat_raw[i] == '.') {
-			//lat_i = i - 2;
-		//}
-		//if (__long_raw[i] == '.') {
-			//long_i = i - 2;
-		//}
-	//}
-//
-	//char lat_deg[3];
-	//char long_deg[3];
-//
-	//for (i = 0; i < lat_i; i++) {
-		//lat_deg[i] = __lat_raw[i];
-	//}
-	//lat_deg[lat_i] = '\0';
-//
-	//for (i = 0; i < long_i; i++) {
-		//long_deg[i] = __long_raw[i];
-	//}
-	//long_deg[long_i] = '\0';
-//
-	///* gg + (mm.mmmmmm * 60 / 100) / 100 = gg.mmmmmmmm */
-	//// Needs to be change to milliarcseconds (int32_t)
-	//*__latitude = atoi(lat_deg) + atof(&__lat_raw[lat_i]) / 60;
-	//*__longitude = atoi(long_deg) + atof(&__long_raw[long_i]) / 60;
-//}
+static int32_t _set_lat_long(const char *__lat_long_raw) {
+    int8_t lat_long_i = 0;
+    uint8_t i;
+    char lat_long_deg[3];
 
-static int32_t _set_lat_long(const char *__lat_long_raw) 
-{
-	int8_t lat_long_i = 0;
-	uint8_t i;
-	char lat_long_deg[3];
-	
-	for (i = 0; i < 6; i++) 
-	{
-		if (__lat_long_raw[i] == '.') 
-		{
-			lat_long_i = i - 2;
-		}
-	}
-	
-	for (i = 0; i < lat_long_i; i++) 
-	{
-		lat_long_deg[i] = __lat_long_raw[i];
-	}
-	lat_long_deg[lat_long_i] = '\0';
+    for (i = 0; i < 6; i++) {
+        if (__lat_long_raw[i] == '.') {
+            lat_long_i = i - 2;
+        }
+    }
 
-	/* Don't know if /60 is needed ?! */
-	/* gg + (mm.mmmmmm * 60 / 100) / 100 = gg.mmmmmmmm */
-	float __decimal_degree = (atoi(lat_long_deg) + atof(&__lat_long_raw[lat_long_i]) / 60);
+    for (i = 0; i < lat_long_i; i++) {
+        lat_long_deg[i] = __lat_long_raw[i];
+    }
+    lat_long_deg[lat_long_i] = '\0';
 
-	/* From decimal degrees to milliarcseconds */
-	return (__decimal_degree * 3600000);
+    /* Don't know if /60 is needed ?! */
+    /* gg + (mm.mmmmmm * 60 / 100) / 100 = gg.mmmmmmmm */
+    float __decimal_degree = (atoi(lat_long_deg) + atof(&__lat_long_raw[lat_long_i]) / 60);
+
+    /* From decimal degrees to milliarcseconds */
+    return (__decimal_degree * 3600000);
 }
 
 static uint8_t _set_direction(const char *__direction_raw)
@@ -471,7 +436,7 @@ static uint8_t _set_direction(const char *__direction_raw)
  * @note May also be blank field
  *************************************************************************/
 static void _set_service_provider(uint8_t *__IPV4)
-{	
+{
 	/* ToDo - AT command to get IPV4 address */
 	uint8_t __SP_response[4] = {100, 0, 100, 0};
 
@@ -482,13 +447,13 @@ static void _set_service_provider(uint8_t *__IPV4)
 		__IPV4[2] = 0;
 		__IPV4[3] = 0;
 	}
-	
+
 	else
 	{
 		__IPV4[0] = __SP_response[0];
 		__IPV4[1] = __SP_response[1];
 		__IPV4[2] = __SP_response[2];
-		__IPV4[3] = __SP_response[3];	
+		__IPV4[3] = __SP_response[3];
 	}
 }
 

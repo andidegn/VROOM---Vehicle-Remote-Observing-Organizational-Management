@@ -113,7 +113,9 @@ bool car_panel_wait_cancel_emmergency(void)
 	_car_panel_counter = 0;
 	
 	while (_car_panel_counter < BUTTON_PRESS_TIME)
-	{						
+	{					
+		_car_panel_counter % 2 == 0 ? car_panel_set_status(STATUS_ATTENTION_TOGGLE) : car_panel_set_status(STATUS_ATTENTION_CONSTANT);			
+				
 		if(!(PIN(PORT) & (1<<CANCEL)))
 		{
 			_car_panel_counter = 0;
@@ -122,22 +124,19 @@ bool car_panel_wait_cancel_emmergency(void)
 				_delay_ms(100);
 				_car_panel_counter++;
 				car_panel_set_control(ALARM_WAITING);
+				car_panel_set_status(STATUS_ATTENTION_TOGGLE);
 			}
 			_alarm_cancelled = (_car_panel_counter >= BUTTON_PRESS_TIME) ? true : false;
+			car_panel_set_control(ALARM_NOT_ACTIVATED); 		
 		}
 		else
 		{
 			_delay_ms(100);
 			_car_panel_counter++;			
-		}
-				
-		if (_car_panel_counter % 2 == 0)
-		{
-			car_panel_set_status(STATUS_ATTENTION_TOGGLE);
-		}
+		}	
 	}
 	
-	_alarm_cancelled ? car_panel_set_control(ALARM_NOT_ACTIVATED) : car_panel_set_control(ALARM_ACTIVATED);			
+	_alarm_cancelled ? car_panel_set_control(ALARM_NOT_ACTIVATED) : car_panel_set_control(ALARM_ACTIVATED);		
 	_alarm_cancelled ? car_panel_set_status(STATUS_RESET) : car_panel_set_status(STATUS_ATTENTION_CONSTANT);
 									
 	/* Restore interrupt */

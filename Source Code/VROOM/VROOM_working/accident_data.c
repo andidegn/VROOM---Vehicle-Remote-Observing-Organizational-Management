@@ -23,18 +23,15 @@ CONNECTION_STATUS_FLAG connection_status_flag = STATUS_NOT_CONNECTED;
 static bool _confidence_in_position;
 
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm);
-static void _set_VIN(char *__VIN);
-static void _set_optional_data(char *__s);
+static void _set_VIN(const char *__VIN);
+static void _set_optional_data(const char *__s);
 
 void emergency_alarm(void)
 {
 	set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp[0]);
 	
 	/* ToDo - Can position be trusted ?? */
-	if (_msd.latitude == 0 || _msd.longitude == 0)
-		_confidence_in_position = false;
-	else
-		_confidence_in_position = true;
+	_confidence_in_position = (_msd.latitude != 0 || _msd.longitude != 0) ? true : false;
 	
 	_set_control_byte(_confidence_in_position, CONFIG_TEST_CALL, emergency_flag == EMERGENCY_MANUAL_ALARM, emergency_flag == EMERGENCY_AUTO_ALARM);
 	_set_VIN(CONFIG_VIN);
@@ -43,7 +40,7 @@ void emergency_alarm(void)
 	
 	send_MSD(CONFIG_VROOM_ID);
 
-//	call_PSAP();
+	// call_PSAP();
 	
 	emergency_flag = EMERGENCY_ALARM_SENT;
 }
@@ -71,7 +68,7 @@ static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, 
  * @param VIN - an array of 4 bytes
  * @note The number consist of 17 characters not including the letters I, O or Q.
  *************************************************************************/
-static void _set_VIN(char *__VIN)
+static void _set_VIN(const char *__VIN)
 {
 	uint8_t i = 0;
 	while (*__VIN != '\0')
@@ -90,7 +87,7 @@ static void _set_VIN(char *__VIN)
  * @param s - Maximum 102 bytes string allowed
  * @note May also be blank field
  *************************************************************************/
-static void _set_optional_data(char *__s)
+static void _set_optional_data(const char *__s)
 {
 	uint8_t i = 0;
 

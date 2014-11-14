@@ -402,7 +402,7 @@ int main (void)
 
 			connection_status_flag == STATUS_CONNECTED ? car_panel_set_status(STATUS_ONLINE) : car_panel_set_status(STATUS_OFFLINE);
 			
-			if (emergency_flag == (EMERGENCY_AUTO_ALARM | EMERGENCY_MANUAL_ALARM))
+			if (emergency_flag == EMERGENCY_AUTO_ALARM ||  emergency_flag == EMERGENCY_MANUAL_ALARM)
 			{
 				emergency_alarm();
 			}

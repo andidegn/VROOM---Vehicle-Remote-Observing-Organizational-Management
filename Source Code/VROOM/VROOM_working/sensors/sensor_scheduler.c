@@ -15,16 +15,16 @@ typedef enum {state_tc72_init,
 			  state_idle,
 			  state_tc72_read,
 			  state_acc_read,
-			  state_uart_send
+			  state_acc_store_buffer
 } SENSOR_STATE;
-
-/* local variables */
-static SENSOR_STATE _state;
-static void (*_callback_function_ptr)(char cfp);
 
 int16_t _x_axis_buffer[ACC_BUFFER_SIZE];
 int16_t _y_axis_buffer[ACC_BUFFER_SIZE];
 int16_t _z_axis_buffer[ACC_BUFFER_SIZE];
+
+/* local variables */
+static SENSOR_STATE _state;
+static void (*_callback_function_ptr)(char cfp);
 static uint8_t _acc_buffer_head = 0; /* may not be needed */
 static uint8_t _acc_buffer_tail = 0;
 
@@ -67,10 +67,10 @@ void scheduler_release(void) {
 		break;
 
 		case state_acc_read :
-			_state = state_uart_send;
+			_state = state_acc_store_buffer;
 			acc_measure();
 		break;
-		case state_uart_send :
+		case state_acc_store_buffer :
 			_state = state_idle;
 			_x_axis_buffer[_acc_buffer_tail] = (int)(acc_get_x_axis() * 4000);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
 			_y_axis_buffer[_acc_buffer_tail] = (int)(acc_get_y_axis() * 4000);

@@ -3,7 +3,7 @@
  *
  * @Created: 10-04-2014 12:03:35
  * @Author: Andi Degn
- * @Version: 0.3
+ * @Version: 0.4
  * @{
 	 This is a driver for the SPI bus
 	 on the ATMEGA family processors.
@@ -56,9 +56,9 @@ static uint8_t _no_of_bytes;
 static uint8_t _bytes_sent_ctr;
 
 /* Prototypes */
-static void _setup_spi(handle_param *param);
-static inline void _set_cs_level(uint8_t level);
-static void _send_spi(uint8_t data);
+static void _setup_spi(handle_param *__param);
+static inline void _set_cs_level(uint8_t __level);
+static void _send(uint8_t __data);
 
 /**********************************************************************//**
  * @ingroup spi_pub
@@ -66,26 +66,26 @@ static void _send_spi(uint8_t data);
  * handle_param array and returns a handle
  * @note Max 16 different handles are available
  **************************************************************************/
-int8_t spi_master_setup(SPI_DATA_MODE mode,
-						SPI_DATA_DIRECTION data_direction,
-						SPI_DIVIDER freq_divider,
-						uint8_t cs_pin,
-						SPI_CS_ACTIVE_LEVEL cs_active_level,
-						void (*callback_function_ptr)(uint8_t *cfp)) {
+int8_t spi_master_setup(SPI_DATA_MODE __mode,
+						SPI_DATA_DIRECTION __data_direction,
+						SPI_DIVIDER __freq_divider,
+						uint8_t __cs_pin,
+						SPI_CS_ACTIVE_LEVEL __cs_active_level,
+						void (*__callback_function_ptr)(uint8_t *__data)) {
 	int8_t ret = -1;
 
     if (_handle_count < MAX_HANDLES) {
-	    _handles[_handle_count].mode = mode;
-	    _handles[_handle_count].data_direction = data_direction;
-	    _handles[_handle_count].freq_divider = freq_divider;
-	    _handles[_handle_count].cs_pin = cs_pin;
-	    _handles[_handle_count].cs_active_level = cs_active_level;
-	    _handles[_handle_count].callback_function_ptr = callback_function_ptr;
+	    _handles[_handle_count].mode = __mode;
+	    _handles[_handle_count].data_direction = __data_direction;
+	    _handles[_handle_count].freq_divider = __freq_divider;
+	    _handles[_handle_count].cs_pin = __cs_pin;
+	    _handles[_handle_count].cs_active_level = __cs_active_level;
+	    _handles[_handle_count].callback_function_ptr = __callback_function_ptr;
 	    ret = _handle_count++;
     }
-	_cs_pin = cs_pin;
-	_cs_active_level = cs_active_level;
-	DDR_SPI |= cs_pin;
+	_cs_pin = __cs_pin;
+	_cs_active_level = __cs_active_level;
+	DDR_SPI |= __cs_pin;
 	_set_cs_level(CS_INACTIVE);
 
     return ret;
@@ -118,11 +118,11 @@ int8_t spi_master_setup(SPI_DATA_MODE mode,
  * SPI_DIVIDER_64	  |     0 |    1 |    0 |\n
  * SPI_DIVIDER_128	  |     0 |    1 |    1 |\n
  *
- * @param handle_param *param - a struct containing the parameters for the SPI setup
+ * @param handle_param *__param - a struct containing the parameters for the SPI setup
  *
  * @return void
  **************************************************************************/
-static void _setup_spi(handle_param *param) {
+static void _setup_spi(handle_param *__param) {
 	/* saves the current state of the status register and disables global interrupt */
 	uint8_t _sreg = SREG;
 	cli();
@@ -135,14 +135,14 @@ static void _setup_spi(handle_param *param) {
 	SPCR = 0x00;
 
 	/* Sets the active CS/CE pin and pin level */
-	_cs_pin = param->cs_pin;
-	_cs_active_level = param->cs_active_level;
+	_cs_pin = __param->cs_pin;
+	_cs_active_level = __param->cs_active_level;
 	DDR_SPI |= _BV(_cs_pin);
 
 	/* Sets an additional bit if the divider is 2, 8 or 32 */
-	if ((param->freq_divider == SPI_DIVIDER_2) ||
-		(param->freq_divider == SPI_DIVIDER_8) ||
-		(param->freq_divider == SPI_DIVIDER_32)) {
+	if ((__param->freq_divider == SPI_DIVIDER_2) ||
+		(__param->freq_divider == SPI_DIVIDER_8) ||
+		(__param->freq_divider == SPI_DIVIDER_32)) {
 		SPSR |= _BV(SPI2X);
 	} else {
 		SPSR &= ~_BV(SPI2X);
@@ -153,7 +153,7 @@ static void _setup_spi(handle_param *param) {
 		 0x2C (0x4C) |SPIE| SPE|DORD|MSTR|CPOL|CPHA|SPR1|SPR0| SPCR
 	Read/Write		 | R/W| R/W| R/W| R/W| R/W| R/W| R/W| R/W|
 	*/
-	SPCR |= _BV(SPE) | param->data_direction | _BV(MSTR) | param->mode | param->freq_divider;
+	SPCR |= _BV(SPE) | __param->data_direction | _BV(MSTR) | __param->mode | __param->freq_divider;
 	/* restore the status register */
 	SREG = _sreg;
 }
@@ -162,15 +162,15 @@ static void _setup_spi(handle_param *param) {
  * @ingroup spi_priv
  * Sets the CS/CE level based on the level
  *
- * @param uint8_t level - CS_ACTIVE or CS_INACTIVE
+ * @param uint8_t __level - CS_ACTIVE or CS_INACTIVE
  *
  * @return void
  **************************************************************************/
-static inline void _set_cs_level(uint8_t level) {
+static inline void _set_cs_level(uint8_t __level) {
 	if (_cs_active_level == SPI_CS_ACTIVE_LOW) {
-		level = !level;
+		__level = !__level;
 	}
-	if (level == CS_INACTIVE) {
+	if (__level == CS_INACTIVE) {
 		PORTB &= ~_BV(_cs_pin);
 	} else {
 		PORTB |= _BV(_cs_pin);
@@ -178,34 +178,44 @@ static inline void _set_cs_level(uint8_t level) {
 }
 
 /**********************************************************************//**
- * @ingroup spi_pub
+ * @ingroup spi_priv
  * Sets up the SPI with 'handle' if it is not already the current
  * handle. Then sends the data and returns '1'.
  * If the SPI driver is busy performing another task, the data
  * is not sent and a '0' is returned
+ *
+ * @param uint8_t __data - the data to be sent
+ *
+ * @return void
  **************************************************************************/
-static void _send_spi(uint8_t data) {
+static void _send(uint8_t __data) {
     /* putting data in output register and incrementing the _bytes_sent_ctr counter */
-    SPDR = data;
+    SPDR = __data;
     _bytes_sent_ctr++;
-}
-
-int8_t spi_send_byte(int8_t handle, uint8_t data) {
-	return spi_send(handle, &data, 1);
 }
 
 /**********************************************************************//**
  * @ingroup spi_pub
- * Stores the "*data" and the no_of_bytes and calls "send_spi()"
- * with the first data slot
+ * Sends 1 (one) byte of data by passing __handle and __data to spi_send()
+ * and setting length to 1 (one)
  **************************************************************************/
-int8_t spi_send(int8_t handle, uint8_t *data_array, uint8_t no_of_bytes) {
+int8_t spi_send_byte(int8_t __handle, uint8_t __data) {
+	return spi_send(__handle, &__data, 1);
+}
+
+/**********************************************************************//**
+ * @ingroup spi_pub
+ * Stores the "data" pointer and the no_of_bytes and calls "_send()"
+ * with the first data slot
+ * @note This "data" pointer is being used to store the returning data as well
+ **************************************************************************/
+int8_t spi_send(int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes) {
 	int8_t ret = -1;
 
 	/* checking if the SPI driver is in use, if so it checks if it is the current handle that is using it */
-	if (!_is_busy || (handle == _current_handle)) {
-		_data_array = data_array;
-		_no_of_bytes = no_of_bytes;
+	if (!_is_busy || (__handle == _current_handle)) {
+		_data_array = __data_array;
+		_no_of_bytes = __no_of_bytes;
 		_bytes_sent_ctr = 0U;
 
 		/* saves the current state of the status register and disables global interrupt */
@@ -213,8 +223,8 @@ int8_t spi_send(int8_t handle, uint8_t *data_array, uint8_t no_of_bytes) {
 		cli();
 
 		/* checks if the device calling the SPI is the same as is already registered. If not, set it up */
-		if (_current_handle != handle) {
-			_current_handle = handle;
+		if (_current_handle != __handle) {
+			_current_handle = __handle;
 			_setup_spi(&_handles[_current_handle]);
 		}
 
@@ -228,7 +238,7 @@ int8_t spi_send(int8_t handle, uint8_t *data_array, uint8_t no_of_bytes) {
 		SPCR |= _BV(SPIE);
 
 		/* sending the data */
-		_send_spi(_data_array[0]);
+		_send(*_data_array);
 
 		/* restore status register */
 		SREG = _sreg;
@@ -257,11 +267,11 @@ void spi_release(void) {
  **************************************************************************/
 ISR(SPI_STC_vect, ISR_BLOCK) {
 	/* store data from SPI interrupt */
-	_data_array[_bytes_sent_ctr - 1] = SPDR;
+	*(_data_array +_bytes_sent_ctr - 1) = SPDR;
 
 	/* checks if more bytes need to be sent */
 	if (_bytes_sent_ctr < _no_of_bytes) {
-		_send_spi(_data_array[_bytes_sent_ctr]);
+		_send(*(_data_array + _bytes_sent_ctr));
 	} else {
 		spi_release();
 		if (_handles[_current_handle].callback_function_ptr != NULL) {

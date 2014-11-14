@@ -3,10 +3,10 @@
  *
  * @Created: 01-09-2014 09:22:18
  * @Author: Andi Degn
- * @Version: 0.1
+ * @Version: 0.2
  * @defgroup acc Accelerometer Driver
  * @{
-	 This is a driver for the accelerometer LIS331
+	 This is a driver for the accelerometer LIS331HH
 	 on the ATMEGA family processors.
 	 @defgroup acc_priv Private
 	 @defgroup acc_pub Public
@@ -44,14 +44,14 @@ static uint8_t _send_read[7];
 static ACC_STATE _state;
 
 /* prototypes */
-static void _acc_callback(uint8_t *data);
-static void _acc_read_from_reg(uint8_t reg, uint8_t no_of_dummy_bytes);
+static void _acc_callback(uint8_t *__data);
+static void _acc_read_from_reg(uint8_t __reg, uint8_t __no_of_dummy_bytes);
 
 /**********************************************************************//**
  * @ingroup acc_pub
  * Sets up the SPI and writes the setup parameters to the accelerometer chip
  **************************************************************************/
-void acc_init(uint8_t cs_pin, ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE output_data_rate, ACC_FULL_SCALE full_scale) {
+void acc_init(uint8_t __cs_pin, ACC_POWER_MODE __power_mode, ACC_OUTPUT_DATA_RATE __output_data_rate, ACC_FULL_SCALE __full_scale) {
 
 	/* Disable interrupt */
 	uint8_t SREG_cpy = SREG;
@@ -61,7 +61,7 @@ void acc_init(uint8_t cs_pin, ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE ou
 	_handle = spi_master_setup(SPI_MODE_3,
 							   SPI_MSB_FIRST,
 							   SPI_DIVIDER_128,
-							   cs_pin,
+							   __cs_pin,
 							   SPI_CS_ACTIVE_LOW,
 							   _acc_callback);
 
@@ -83,8 +83,8 @@ void acc_init(uint8_t cs_pin, ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE ou
 	*/
 
 	_send_setup[0] = ACC_CTRL_REG1 | _BV(ACC_MULTI_BIT);
-	_send_setup[1] = power_mode | output_data_rate | _BV(ACC_Xen) | _BV(ACC_Yen) | _BV(ACC_Zen);
-	_send_setup[4] = full_scale | _BV(ACC_BDU);
+	_send_setup[1] = __power_mode | __output_data_rate | _BV(ACC_Xen) | _BV(ACC_Yen) | _BV(ACC_Zen);
+	_send_setup[4] = __full_scale | _BV(ACC_BDU);
 
 	spi_send(_handle, _send_setup, 6U);
 
@@ -163,7 +163,7 @@ float acc_get_z_axis(void) {
  *
  * @return void
  **************************************************************************/
-static void _acc_callback(uint8_t *data) {
+static void _acc_callback(uint8_t *__data) {
 	switch (_state)	{
 		case INIT:
 			_state = RUNNING;
@@ -176,9 +176,9 @@ static void _acc_callback(uint8_t *data) {
 			cli();
 
 			/* reading the data and storing them in 16 bit signed integers */
-			_x_axis = (data[2] << 8) | data[1];
-			_y_axis = (data[4] << 8) | data[3];
-			_z_axis = (data[6] << 8) | data[5];
+			_x_axis = (__data[2] << 8) | __data[1];
+			_y_axis = (__data[4] << 8) | __data[3];
+			_z_axis = (__data[6] << 8) | __data[5];
 
 			/* Restore interrupt */
 			SREG = SREG_cpy;

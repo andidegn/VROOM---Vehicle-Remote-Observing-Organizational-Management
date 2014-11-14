@@ -329,8 +329,9 @@ int main (void)
 {
 	const char degree = 0b011011111;
 	int16_t x_axis, y_axis, z_axis;
+	int16_t *_acc_buffer = malloc(3 * sizeof(int16_t));
 	float temp;
-	int32_t acc_total = 0;
+	volatile uint32_t acc_total = 0;
 	char buf[20];
 
 	lcd_init(LCD_DISP_ON);
@@ -394,14 +395,19 @@ int main (void)
 
 		while (1)
 		{
-			x_axis = _x_axis_buffer[0];
-			y_axis = _y_axis_buffer[0];
-			z_axis = _z_axis_buffer[0];
+			scheduler_get_last_readings(_acc_buffer);
+			x_axis = *_acc_buffer;
+			y_axis = *(_acc_buffer + 1);
+			z_axis = *(_acc_buffer + 2);
 			temp = get_temperature();
-			acc_total = sqrt(x_axis*x_axis + y_axis*y_axis + z_axis*z_axis);
+			acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
+
+			if (acc_total > 1000) {
+				emergency_flag = EMERGENCY_AUTO_ALARM;
+			}
 
 			connection_status_flag == STATUS_CONNECTED ? car_panel_set_status(STATUS_ONLINE) : car_panel_set_status(STATUS_OFFLINE);
-			
+
 			if (emergency_flag == EMERGENCY_AUTO_ALARM ||  emergency_flag == EMERGENCY_MANUAL_ALARM)
 			{
 				emergency_alarm();

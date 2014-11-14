@@ -3,10 +3,10 @@
  *
  * @Created: 01-09-2014 09:22:18
  * @Author: Andi Degn
- * @Version: 0.1
+ * @Version: 0.2
  * @defgroup acc Accelerometer Driver
  * @{
-	 This is a driver for the accelerometer LIS331
+	 This is a driver for the accelerometer LIS331HH
 	 on the ATMEGA family processors.
 	 @defgroup acc_priv Private
 	 @defgroup acc_pub Public

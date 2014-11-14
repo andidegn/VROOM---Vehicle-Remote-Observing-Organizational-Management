@@ -3,7 +3,7 @@
  *
  * @Created: 12-09-2014 20:34:36
  * @Author: Andi Degn
- * @Version: 0.3
+ * @Version: 0.4
  * @defgroup uart UART Driver
  * @{
 	 This is a driver for the UART0-1
@@ -134,55 +134,55 @@ typedef enum {
  * @ingroup uart_pub
  * @brief Sets up the UART0 bus as asynchronous using supplied parameters
  *
- * @param UART_MODE operational_mode - normal speed or double speed mode
- * @param UART_BAUD baud_rate - baud rate of operations
- * @param UART_PARITY_MODE paraty_mode - sets the parity bit mode
- * @param UART_STOP_BIT stop_bit - one or two stop bits
- * @param UART_CHAR_SIZE char_size - the character size between 5 and 9 bits
- * @param void *callback_function_ptr - the pointer to the function which should be called when the SPI interrupt is triggered
+ * @param UART_MODE __operational_mode - normal speed or double speed mode
+ * @param UART_BAUD __baud_rate - baud rate of operations
+ * @param UART_PARITY_MODE __paraty_mode - sets the parity bit mode
+ * @param UART_STOP_BIT __stop_bit - one or two stop bits
+ * @param UART_CHAR_SIZE __char_size - the character size between 5 and 9 bits
+ * @param void *__callback_function_ptr - the pointer to the function which should be called when the SPI interrupt is triggered
  *
  * @note BE SURE TO HAVE SELECTED A CLOCK SPEED FOR THE MCU WITH A LOW ERROR RATE FOR UART USAGE
  *
  * @return uint8_t - a handle for the setup
  *************************************************************************/
-void uart0_setup_async(UART_MODE operational_mode,
-						 UART_BAUD baud_rate,
-						 UART_PARITY_MODE paraty_mode,
-						 UART_STOP_BIT stop_bit,
-						 UART_CHAR_SIZE char_size,
-						 void (*callback_function_ptr)(char cfp));
+void uart0_setup_async(UART_MODE __operational_mode,
+						 UART_BAUD __baud_rate,
+						 UART_PARITY_MODE __paraty_mode,
+						 UART_STOP_BIT __stop_bit,
+						 UART_CHAR_SIZE __char_size,
+						 void (*__callback_function_ptr)(char __data));
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends 1 (one) char of 'data' on the UART bus
  *
- * @param char data - the data to be sent
+ * @param char __data - the data to be sent
  *
  * @return void
  *************************************************************************/
-void uart0_send_char(char data);
+void uart0_send_char(char __data);
 
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends a string (x no. of chars) of 'data' on the UART bus
  *
- * @param const char *data - a sting to be sent
+ * @param const char *__data - a sting to be sent
  *
  * @return void
  *************************************************************************/
-void uart0_send_string(const char *data);
+void uart0_send_string(const char *__data);
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends data (based on length) of 'data' on the UART bus.
  *
- * @param const char *data - data to be sent
+ * @param const char *__data - data to be sent
  * @param uint8_t __length - number of bytes
- * @note Does not terminates when zero character is meet 
+ * @note Does not terminates when zero character is meet
  * @return void
  *************************************************************************/
-void uart0_send_data(const char *data, uint8_t __length);
+void uart0_send_data(const char *__data, uint8_t __length);
 
 /**********************************************************************//**
  * @ingroup uart_pub
@@ -198,55 +198,55 @@ uint16_t uart0_read_char(void);
  * @ingroup uart_pub
  * @brief Sets up the UART1 bus as asynchronous using supplied parameters
  *
- * @param UART_MODE operational_mode - normal speed or double speed mode
- * @param UART_BAUD baud_rate - baud rate of operations
- * @param UART_PARITY_MODE paraty_mode - sets the parity bit mode
- * @param UART_STOP_BIT stop_bit - one or two stop bits
- * @param UART_CHAR_SIZE char_size - the character size between 5 and 9 bits
- * @param void *callback_function_ptr - the pointer to the function which should be called when the SPI interrupt is triggered
+ * @param UART_MODE __operational_mode - normal speed or double speed mode
+ * @param UART_BAUD __baud_rate - baud rate of operations
+ * @param UART_PARITY_MODE __paraty_mode - sets the parity bit mode
+ * @param UART_STOP_BIT __stop_bit - one or two stop bits
+ * @param UART_CHAR_SIZE __char_size - the character size between 5 and 9 bits
+ * @param void *__callback_function_ptr - the pointer to the function which should be called when the SPI interrupt is triggered
  *
  * @note BE SURE TO HAVE SELECTED A CLOCK SPEED FOR THE MCU WITH A LOW ERROR RATE FOR UART USAGE
  *
  * @return uint8_t - a handle for the setup
  *************************************************************************/
-void uart1_setup_async(UART_MODE operational_mode,
-						 UART_BAUD baud_rate,
-						 UART_PARITY_MODE paraty_mode,
-						 UART_STOP_BIT stop_bit,
-						 UART_CHAR_SIZE char_size,
-						 void (*callback_function_ptr)(char cfp));
+void uart1_setup_async(UART_MODE __operational_mode,
+						 UART_BAUD __baud_rate,
+						 UART_PARITY_MODE __paraty_mode,
+						 UART_STOP_BIT __stop_bit,
+						 UART_CHAR_SIZE __char_size,
+						 void (*__callback_function_ptr)(char __data));
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends 1 (one) char of 'data' on the UART bus
  *
- * @param char data - the data to be sent
+ * @param char __data - the data to be sent
  *
  * @return void
  *************************************************************************/
-void uart1_send_char(char data);
+void uart1_send_char(char __data);
 
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends a string (x no. of chars) of 'data' on the UART bus
  *
- * @param const char *data - a sting to be sent
+ * @param const char *__data - a sting to be sent
  *
  * @return void
  *************************************************************************/
-void uart1_send_string(const char *data);
+void uart1_send_string(const char *__data);
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief Sends data (based on length) of 'data' on the UART bus.
  *
- * @param const char *data - data to be sent
+ * @param const char *__data - data to be sent
  * @param uint8_t __length - number of bytes
- * @note Does not terminates when zero character is meet 
+ * @note Does not terminates when zero character is meet
  * @return void
  *************************************************************************/
-void uart1_send_data(const char *data, uint8_t __length);
+void uart1_send_data(const char *__data, uint8_t __length);
 
 /**********************************************************************//**
  * @ingroup uart_pub

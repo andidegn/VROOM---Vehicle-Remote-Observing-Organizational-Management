@@ -15,20 +15,20 @@ typedef enum {state_tc72_init,
 			  state_idle,
 			  state_tc72_read,
 			  state_acc_read,
-			  state_acc_store_buffer
+			  state_store_in_buffers
 } SENSOR_STATE;
 
-int16_t _x_axis_buffer[ACC_BUFFER_SIZE];
-int16_t _y_axis_buffer[ACC_BUFFER_SIZE];
-int16_t _z_axis_buffer[ACC_BUFFER_SIZE];
+int16_t x_axis_buffer[ACC_BUFFER_SIZE];
+int16_t y_axis_buffer[ACC_BUFFER_SIZE];
+int16_t z_axis_buffer[ACC_BUFFER_SIZE];
 
 /* local variables */
 static SENSOR_STATE _state;
-static void (*_callback_function_ptr)(char cfp);
+static void (*_callback_function_ptr)(char __data); /* not implemented yet */
 static uint8_t _acc_buffer_head = 0; /* may not be needed */
 static uint8_t _acc_buffer_tail = 0;
 
-void scheduler_start(void (*callback_function_ptr)(char cfp)) {
+void scheduler_start(void (*callback_function_ptr)(char __data)) {
 	#if ANALYSIS
 		#define DELAY_BETWEEN_CHARS 0
 		_state = state_uart_init;
@@ -37,6 +37,12 @@ void scheduler_start(void (*callback_function_ptr)(char cfp)) {
 	#endif // ANALYSIS
 	_callback_function_ptr = callback_function_ptr;
 	scheduler_release();
+}
+
+void scheduler_get_last_readings(int16_t *buffer) {
+	*buffer = x_axis_buffer[_acc_buffer_tail];
+	*(buffer + 1) = y_axis_buffer[_acc_buffer_tail];
+	*(buffer + 2) = z_axis_buffer[_acc_buffer_tail];
 }
 
 void scheduler_release(void) {
@@ -67,22 +73,22 @@ void scheduler_release(void) {
 		break;
 
 		case state_acc_read :
-			_state = state_acc_store_buffer;
+			_state = state_store_in_buffers;
 			acc_measure();
 		break;
-		case state_acc_store_buffer :
+		case state_store_in_buffers :
 			_state = state_idle;
-			_x_axis_buffer[_acc_buffer_tail] = (int)(acc_get_x_axis() * 4000);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
-			_y_axis_buffer[_acc_buffer_tail] = (int)(acc_get_y_axis() * 4000);
-			_z_axis_buffer[_acc_buffer_tail] = (int)(acc_get_z_axis() * 4000);
+			x_axis_buffer[_acc_buffer_tail] = (int)(acc_get_x_axis() * 400);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
+			y_axis_buffer[_acc_buffer_tail] = (int)(acc_get_y_axis() * 400);
+			z_axis_buffer[_acc_buffer_tail] = (int)(acc_get_z_axis() * 400);
 
 #if ANALYSIS
 			_delay_ms(DELAY_BETWEEN_CHARS);
-			uart1_send_char(_x_axis_buffer[_acc_buffer_tail] >> 8);	uart1_send_char(_x_axis_buffer[_acc_buffer_tail] & 0xff);
+			uart1_send_char(x_axis_buffer[_acc_buffer_tail] >> 8);	uart1_send_char(x_axis_buffer[_acc_buffer_tail] & 0xff);
 			_delay_ms(DELAY_BETWEEN_CHARS);
-			uart1_send_char(_y_axis_buffer[_acc_buffer_tail] >> 8);	uart1_send_char(_y_axis_buffer[_acc_buffer_tail] & 0xff);
+			uart1_send_char(y_axis_buffer[_acc_buffer_tail] >> 8);	uart1_send_char(y_axis_buffer[_acc_buffer_tail] & 0xff);
 			_delay_ms(DELAY_BETWEEN_CHARS);
-			uart1_send_char(_z_axis_buffer[_acc_buffer_tail] >> 8);	uart1_send_char(_z_axis_buffer[_acc_buffer_tail] & 0xff);
+			uart1_send_char(z_axis_buffer[_acc_buffer_tail] >> 8);	uart1_send_char(z_axis_buffer[_acc_buffer_tail] & 0xff);
 			_delay_ms(DELAY_BETWEEN_CHARS);
 			uart1_send_char(0x7f);									uart1_send_char(0xff);
 #endif // ANALYSIS

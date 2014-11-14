@@ -1,4 +1,29 @@
 ==================================
+Version 0.120 - 2014/11/14 by Andi
+==================================
+New Features, Improvements
+--------------------------
+* Moved a lot of defines into vroom_config.h
+* Added schedular_get_last_readings() function in sensor_scheduler
+
+Fixed Bugs, Changes
+-------------------
+* Changed a lot of defines into macros for generality in sim908.h
+* Updated corrosponding code in sim908.h
+* Fixed naming in spi, uart and sensor_scheduler
+* Updated comments in spi and uart
+* Fixed simple alarm-trigger test in run.c, axis^2 became too large.
+  Changed acc_total to uint32_t instead of int32_t
+  Changed multiplier in sensor_scheduler to accommodate for smaller value
+
+ToDo
+----	
+- MISRA check all files
+- missing commenting in btn_led_lcd and led_on_plane and a lot of others
+- Split up module test in individual file, instead of having it in main
+
+
+==================================
 Version 0.111 - 2014/11/13 by Andi
 ==================================
 New Features, Improvements
@@ -9,7 +34,7 @@ New Features, Improvements
 
 Fixed Bugs, Changes
 -------------------
-* Fixed accelerometer setup, scale and sensibility now works
+* Fixed accelerometer. Setup, scale and sensibility now works
 
 ToDo
 ----	

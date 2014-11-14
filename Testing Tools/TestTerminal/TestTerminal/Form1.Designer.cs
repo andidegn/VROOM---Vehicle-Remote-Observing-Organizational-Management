@@ -779,6 +779,7 @@
             this.Name = "Form1";
             this.Text = "AT Terminal";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.pnl_main.ResumeLayout(false);
             this.pnl_main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_signal)).EndInit();

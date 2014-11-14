@@ -120,7 +120,10 @@ void SIM908_start(void)
 
 	/* Enable Echo */
 	SIM908_cmd(AT_DIAG_ECHO_ENABLE, true);
-	SIM908_cmd("AT+CPIN=5130", true);
+
+#ifdef CONFIG_PIN
+	SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN, true);
+#endif
 
 	_setup_GSM();
 	_setup_GPS();
@@ -165,6 +168,11 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 
 	_set_service_provider(__IPV4);
 	_set_MSD_filename(*(output + 4));
+
+	for (uint8_t i = 0; i < 9; i++) {
+		free(*(output + i));
+	}
+	free(output);
 }
 
 /********************************************************************************************************************//**
@@ -177,7 +185,7 @@ void call_PSAP(void)
 	/* Enable incoming calls */
 	SIM908_cmd(AT_ENABLE_INCOMING_CALLS, true);
 
-	SIM908_cmd(AT_CALL_KENNETH, true);
+	SIM908_cmd(AT_CALL_DIAL(CONFIG_EMERGENCY_PHONE_NUMBER), true);
 }
 
 /********************************************************************************************************************//**
@@ -201,7 +209,7 @@ void send_MSD(char *__vroom_id)
 	uint8_t _retry_ctr = RETRY_ATTEMPTS;
 	char *filename = malloc(60 * sizeof(char));
 	/* 2014-10-12_13.17.34-(60192949).vroom */
-	strcpy(filename, CONFIG_FTP_PUT_FILE_NAME);
+	strcpy(filename, AT_FTP_PUT_FILE_NAME);
 	strcat(filename, "\"");
 	strcat(filename, MSD_filename);
 	strcat(filename, "-(");
@@ -222,7 +230,7 @@ void send_MSD(char *__vroom_id)
 
 	_retry_ctr = RETRY_ATTEMPTS;
 	do {
-		SIM908_cmd(AT_FTP_PUT_WRITE_140BYTE, false);
+		SIM908_cmd(AT_FTP_PUT_FILE_SIZE(CONFIG_FTP_FILE_SIZE), false);
 	} while (!_wait_response(&_ack_ftp_response, SIM908_RESPONSE_FTP_PUT_SUCCESS) && _retry_ctr-- > 0);
 
 	_retry_ctr = RETRY_ATTEMPTS;
@@ -285,21 +293,21 @@ static void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
 	//SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS, true);
-	SIM908_cmd(CONFIG_FTP_BEARER_APN, true);
+	SIM908_cmd(AT_FTP_BEARER1_APN(CONFIG_APN), true);
 
 	/* Use bearer profile 1 */
 	SIM908_cmd(AT_FTP_USE_PROFILE1, true);
 
 	/* FTP login */
-	SIM908_cmd(CONFIG_FTP_SET_SERVER_ADDRESS, true);
-	SIM908_cmd(CONFIG_FTP_SET_CONTROL_PORT, true);
-	SIM908_cmd(CONFIG_FTP_SET_USER_NAME_VROOM, true);
-	SIM908_cmd(CONFIG_FTP_SET_PASSWORD, true);
+	SIM908_cmd(AT_FTP_SET_SERVER_ADDRESS(CONFIG_FTP_SERVER_ADDRESS), true);
+	SIM908_cmd(AT_FTP_SET_CONTROL_PORT(CONFIG_FTP_PORT), true);
+	SIM908_cmd(AT_FTP_SET_USER_NAME(CONFIG_FTP_USER), true);
+	SIM908_cmd(AT_FTP_SET_PASSWORD(CONFIG_FTP_PW), true);
 
 	/* Set put information */
 	SIM908_cmd(AT_FTP_SET_DATA_TYPE_BINARY, true);
 	SIM908_cmd(AT_FTP_PUT_FILE_STORING, true);
-	SIM908_cmd(CONFIG_FTP_PUT_FILE_PATH, true);
+	SIM908_cmd(AT_FTP_PUT_FILE_PATH(CONFIG_FTP_FILE_PATH), true);
 }
 
 /********************************************************************************************************************//**

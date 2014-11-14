@@ -110,7 +110,7 @@ namespace TestTerminal {
             Settings.Default.window_size = this.Size;
 
             Settings.Default.chart_enabled = chk_graph.Checked;
-            Settings.Default.chart_dock_state = !_chart_docked;
+            Settings.Default.chart_dock_state = _chart_docked;
 
             Settings.Default.color_timestamp = _color_timestamp;
             Settings.Default.color_text = _color_text;
@@ -270,7 +270,7 @@ namespace TestTerminal {
             //chart_signal.ChartAreas[0].Area3DStyle.Rotation = 10;
             ChartControl.ChartSetup(chart_signal, CHART_SERIES, 1, Color.DarkRed, SeriesChartType.Line, ChartValueType.Int32);
             chart_signal.Series[CHART_SERIES].IsVisibleInLegend = false;
-            _chart_set_dock_state();
+            _chart_set_dock_state(false);
         }
 
         delegate void _chart_add_point_eh(String seriesName, double x, double y);
@@ -309,7 +309,10 @@ namespace TestTerminal {
             chart_signal.ChartAreas[0].AxisX.ScaleView.Zoom(_signal_ctr / 1000 - _zoom_value, _signal_ctr / 1000);
         }
 
-        private void _chart_set_dock_state() {
+        private void _chart_set_dock_state(bool toggle) {
+            if (toggle) {
+                _chart_docked = !_chart_docked;
+            }
             if (_chart_docked) {
                 //this.pnl_ctrls.Controls.Remove(chart_signal);
                 this.pnl_main.Controls.Add(chart_signal);
@@ -319,14 +322,15 @@ namespace TestTerminal {
                 | System.Windows.Forms.AnchorStyles.Right));
                 this.chart_signal.Location = new System.Drawing.Point(7, 31);
                 this.chart_signal.Size = new System.Drawing.Size(rtb_terminal.Width - 3, rtb_terminal.Height - 3);
-                _chart_docked = false;
             } else {
                 this.pnl_ctrls.Controls.Add(chart_signal);
                 this.chart_signal.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right));
                 this.chart_signal.Size = new System.Drawing.Size(245, 120);
                 //this.chart_signal.Location = new System.Drawing.Point(this.Width - chart_signal.Width - 45, 350);
-                this.chart_signal.Location = new System.Drawing.Point(5, gb_gps.Top + gb_gps.Height + 25);
-                _chart_docked = true;
+                int ancher = gb_text_sms.Visible ? gb_text_sms.Top + gb_text_sms.Height :
+                             gb_call.Visible ? gb_call.Top + gb_call.Height :
+                             gb_gps.Visible ? gb_gps.Top + gb_gps.Height : 0;
+                this.chart_signal.Location = new System.Drawing.Point(5, ancher + 25);
             }
         }
         #endregion
@@ -485,7 +489,7 @@ namespace TestTerminal {
         }
 
         private void dockUndockToolStripMenuItem_Click(object sender, EventArgs e) {
-            _chart_set_dock_state();
+            _chart_set_dock_state(true);
         }
 
         private void resetToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -567,7 +571,7 @@ namespace TestTerminal {
 
         #region Chart
         private void chart_signal_DoubleClick(object sender, EventArgs e) {
-            _chart_set_dock_state();
+            _chart_set_dock_state(true);
         }
 
         private void chart_signal_MouseEnter(object sender, EventArgs e) {
@@ -620,6 +624,17 @@ namespace TestTerminal {
         #region Form
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             _settings_save();
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e) {
+            if (e.Control && e.Shift) {
+                if (e.KeyCode == Keys.M) {
+                    gb_text_sms.Visible = !gb_text_sms.Visible;
+                } else if (e.KeyCode == Keys.C) {
+                    gb_call.Visible = !gb_call.Visible;
+                }
+                _chart_set_dock_state(false);
+            }
         }
         #endregion
 

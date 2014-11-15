@@ -122,9 +122,8 @@ void SIM908_start(void)
 	SIM908_cmd(AT_DIAG_ECHO_ENABLE, true);
 
 #ifdef CONFIG_PIN
-	SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN, true);
-#endif
-
+	SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN), true);
+#endif	
 	_setup_GSM();
 	_setup_GPS();
 	_GSM_enable();

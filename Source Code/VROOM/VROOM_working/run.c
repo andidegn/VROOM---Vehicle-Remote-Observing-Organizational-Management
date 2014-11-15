@@ -402,8 +402,10 @@ int main (void)
 			temp = get_temperature();
 			acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
 
-			if (acc_total > 1000) {
-				emergency_flag = EMERGENCY_AUTO_ALARM;
+			if (acc_total > 1000)
+			{
+				if (!car_panel_wait_cancel_emmergency())
+					emergency_flag = EMERGENCY_AUTO_ALARM;
 			}
 
 			connection_status_flag == STATUS_CONNECTED ? car_panel_set_status(STATUS_ONLINE) : car_panel_set_status(STATUS_OFFLINE);

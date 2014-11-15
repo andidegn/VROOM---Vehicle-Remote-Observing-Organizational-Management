@@ -38,7 +38,7 @@
 #define AT_FULL_FUNCTIONALITY			"AT+CFUN=1"
 #define AT_DISABLE_TX_RX				"AT+CFUN=4"
 #define AT_RESET_MODULE					"AT+CFUN=1,1"
-#define AT_ENTER_SIM_PIN(PIN)			"AT+CPIN=" PIN
+#define AT_ENTER_SIM_PIN(PIN)			"AT+CPIN="PIN
 
 /* Incoming call */
 #define AT_ENABLE_INCOMING_CALLS		"AT+GSMBUSY=0"
@@ -46,7 +46,7 @@
 #define AT_FORBID_VOICE_CALLS_ONLY		"AT+GSMBUSY=2"	/* Circuit-Switched Data (CSD) calls enabled */
 
 /* Acceptable calls white list */
-#define AT_EMERGENCY_CALL_ONLY(NUMBER)	"AT+CWHITELIST=1,1," NUMBER
+#define AT_EMERGENCY_CALL_ONLY(NUMBER)	"AT+CWHITELIST=1,1,"NUMBER
 
 /* Flow control */
 #define AT_NO_FLOW_CONTROL				"AT+IFC=0,0"

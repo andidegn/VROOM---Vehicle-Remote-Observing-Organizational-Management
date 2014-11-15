@@ -110,7 +110,7 @@ bool car_panel_wait_cancel_emmergency(void)
 	cli();
 
 	_alarm_cancelled = false;
-	_car_panel_counter = 0;
+	_car_panel_counter = 0;	
 	
 	while (_car_panel_counter < BUTTON_PRESS_TIME)
 	{					
@@ -138,7 +138,9 @@ bool car_panel_wait_cancel_emmergency(void)
 	
 	_alarm_cancelled ? car_panel_set_control(ALARM_NOT_ACTIVATED) : car_panel_set_control(ALARM_ACTIVATED);		
 	_alarm_cancelled ? car_panel_set_status(STATUS_RESET) : car_panel_set_status(STATUS_ATTENTION_CONSTANT);
-									
+					
+	_car_panel_counter = 0;		
+					
 	/* Restore interrupt */
 	SREG = SREG_cpy;	
 	

@@ -393,7 +393,7 @@ int main (void)
 
 		SIM908_start();
 		scheduler_start(NULL);
-
+		_delay_ms(200);
 		while (1)
 		{
 			scheduler_get_last_readings(_acc_buffer);

@@ -385,10 +385,11 @@ int main (void)
 	#endif /* MODULE_TEST_CAR_PANEL */
 
 	#if INTEGRATION_TEST_SIM908_SENSORS
-		car_panel_init();
-		SIM908_init();
 
 		sei();
+		
+		car_panel_init();
+		SIM908_init();
 
 		SIM908_start();
 		scheduler_start(NULL);

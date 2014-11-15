@@ -13,8 +13,8 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST NO
-#define KENNETH_TEST YES
+#define ANDI_TEST YES
+#define KENNETH_TEST NO
 
 /* ISP APN */
 #define CONFIG_APN_TELIA				"internet.mtelia.dk"

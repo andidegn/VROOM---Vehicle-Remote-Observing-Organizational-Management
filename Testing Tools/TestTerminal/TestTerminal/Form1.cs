@@ -57,6 +57,7 @@ namespace TestTerminal {
             rtb_terminal.BackColor = _color_background;
             this.ActiveControl = tbx_send;
         }
+
         private void _init_signal_timer() {
             _signal_timer.Interval = SIGNAL_INTERVAL;
             _signal_timer.Tick += (s, o) => {
@@ -329,7 +330,7 @@ namespace TestTerminal {
                 //this.chart_signal.Location = new System.Drawing.Point(this.Width - chart_signal.Width - 45, 350);
                 int ancher = gb_text_sms.Visible ? gb_text_sms.Top + gb_text_sms.Height :
                              gb_call.Visible ? gb_call.Top + gb_call.Height :
-                             gb_gps.Visible ? gb_gps.Top + gb_gps.Height : 0;
+                             gb_gps.Top + gb_gps.Height;
                 this.chart_signal.Location = new System.Drawing.Point(5, ancher + 25);
             }
         }
@@ -626,7 +627,7 @@ namespace TestTerminal {
             _settings_save();
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e) {
+        private void Event_KeyUp(object sender, KeyEventArgs e) {
             if (e.Control && e.Shift) {
                 if (e.KeyCode == Keys.M) {
                     gb_text_sms.Visible = !gb_text_sms.Visible;

@@ -169,6 +169,7 @@
             this.chart_signal.Text = "chart_signal";
             this.chart_signal.Visible = false;
             this.chart_signal.DoubleClick += new System.EventHandler(this.chart_signal_DoubleClick);
+            this.chart_signal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Event_KeyUp);
             this.chart_signal.MouseEnter += new System.EventHandler(this.chart_signal_MouseEnter);
             // 
             // cms_signal_chart
@@ -658,6 +659,7 @@
             this.rtb_terminal.Size = new System.Drawing.Size(500, 479);
             this.rtb_terminal.TabIndex = 2;
             this.rtb_terminal.Text = "";
+            this.rtb_terminal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Event_KeyUp);
             // 
             // cms_rtb_terminal
             // 
@@ -779,7 +781,7 @@
             this.Name = "Form1";
             this.Text = "AT Terminal";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Event_KeyUp);
             this.pnl_main.ResumeLayout(false);
             this.pnl_main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_signal)).EndInit();

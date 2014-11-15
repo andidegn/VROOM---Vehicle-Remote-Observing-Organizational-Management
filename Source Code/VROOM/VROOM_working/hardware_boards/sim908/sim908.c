@@ -262,7 +262,7 @@ static void _setup_GSM(void)
 	SIM908_cmd(AT_FULL_FUNCTIONALITY, true);
 
 	/* Forbid incoming calls */
-	SIM908_cmd(AT_FORBID_INCOMING_CALLS, true);
+	SIM908_cmd(AT_ENABLE_INCOMING_CALLS, true);
 }
 
 static void _setup_GPS(void)
@@ -518,7 +518,7 @@ void _SIM908_callback(char data)
 	else if (data == LF)
 		_LF_counter++;
 
-	if (_CR_counter > 0 || _LF_counter > 0) {
+	if (_CR_counter > 0 && _LF_counter > 0) {
 		_CR_counter = _LF_counter = 0;
 		if (_check_response(RESPONSE_OK)) {
 			_ack_response = SIM908_RESPONSE_OK;

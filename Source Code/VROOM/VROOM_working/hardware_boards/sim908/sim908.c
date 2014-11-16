@@ -234,13 +234,13 @@ void send_MSD(char *__vroom_id)
 
 	_retry_ctr = RETRY_ATTEMPTS;
 	do {
-		uart0_send_data(&_msd.control, 1);
+		uart0_send_data((char*)(&_msd.control), 1);
 		uart0_send_data(&_msd.VIN[0], 20);
-		uart0_send_data(&_msd.time_stamp, 4);
-		uart0_send_data(&_msd.latitude, 4);
-		uart0_send_data(&_msd.longitude, 4);
-		uart0_send_data(&_msd.direction, 1);
-		uart0_send_data(&_msd.sp[0], 4);
+		uart0_send_data((char*)(&_msd.time_stamp), 4);
+		uart0_send_data((char*)(&_msd.latitude), 4);
+		uart0_send_data((char*)(&_msd.longitude), 4);
+		uart0_send_data((char*)(&_msd.direction), 1);
+		uart0_send_data((char*)(&_msd.sp[0]), 4);
 		uart0_send_data(&_msd.optional_data[0], 102);
 
 		uart0_send_char(CR);
@@ -262,7 +262,7 @@ static void _setup_GSM(void)
 	SIM908_cmd(AT_FULL_FUNCTIONALITY, true);
 
 	/* Forbid incoming calls */
-	SIM908_cmd(AT_ENABLE_INCOMING_CALLS, true);
+	SIM908_cmd(AT_FORBID_INCOMING_CALLS, true);
 }
 
 static void _setup_GPS(void)
@@ -291,7 +291,7 @@ static void _setup_GPS(void)
 static void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
-	//SIM908_cmd(AT_FTP_BEARER1_CONTYPE_GPS, true);
+	SIM908_cmd(AT_FTP_BEARER1_APN(AT_CONTYPE_GPRS), true);
 	SIM908_cmd(AT_FTP_BEARER1_APN(CONFIG_APN), true);
 
 	/* Use bearer profile 1 */

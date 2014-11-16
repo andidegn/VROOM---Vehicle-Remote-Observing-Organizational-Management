@@ -9,8 +9,8 @@
 #define AT_COMMANDS_H_
 
 /* Data carrier type */
-#define CONFIG_CONTYPE_GPRS				"GPRS"
-#define CONFIG_CONTYPE_CSD				"CSD"
+#define AT_CONTYPE_GPRS				"GPRS"
+#define AT_CONTYPE_CSD				"CSD"
 
 /* diagnostics */
 #define AT_DIAG_TEST					"AT"
@@ -112,7 +112,7 @@
 /* msg */
 #define AT_MSG_READ "AT+CMGR=" // Add number in end to select msg to read
 #define AT_MSG_DEL_ALL "AT+CMGD=1,4"
-#define AT_MSG_FORMAT "AT+CMGF =" // Add number
+#define AT_MSG_FORMAT "AT+CMGF=" // Add number
 #define AT_MSG_SEND "AT+CMGS\""
 
 /* audio */

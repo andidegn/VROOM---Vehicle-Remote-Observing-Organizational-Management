@@ -5,7 +5,7 @@
 @defgroup ut unit_test
 @{
 	This is the unit test platform for all relevant functions 
-	(including arithmetic) in the WROOM system.
+	(including arithmetic) in the VROOM system.
 @}
 @note Complies MISRO 2004 standards
 ************************************************/
@@ -33,6 +33,10 @@ char* test_tc72_calc(void)
 
 	return "01-1PASS";
 }
+
+
+//mu_assert( "Err-02-107", test_uart("TEST", "TEST") == true );
+//mu_assert( "Err-02-107", test_uart("TEST", "BÆ") == false );
 
 /********************************************************************************************************************//**
  @ingroup ut

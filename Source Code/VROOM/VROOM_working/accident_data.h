@@ -5,7 +5,7 @@
 @defgroup ad Accident Data
 @{
 	This is the data for an Accident report.
-	Followed eCall standards for MSD data structure.
+	Comply eCall standards for MSD data structure.
 @}
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
@@ -13,8 +13,6 @@
 #ifndef ACCIDENT_DATA_H_
 #define ACCIDENT_DATA_H_
 
-#include <string.h>
-#include <stdbool.h>
 #include <stdio.h>
 
 /**********************************************************************//**
@@ -36,23 +34,40 @@ typedef struct __attribute__((packed))
 	char optional_data[102];/* Optional. Further data (e.g. crash information, number of passengers) or blank field */
 } MSD;
 
+/**********************************************************************//**
+ * @ingroup ad
+ * @brief Flag to detect if an alarm has been triggered
+ *************************************************************************/
 typedef enum {	EMERGENCY_NO_ALARM = 0,
 				EMERGENCY_MANUAL_ALARM = 1,
 				EMERGENCY_AUTO_ALARM = 2,
 				EMERGENCY_ALARM_SENT = 3
 } EMERGENCY_FLAG;
 
-typedef enum {	STATUS_NOT_CONNECTED = 0,
-				STATUS_CONNECTED = 1,
-				STATUS_SEARCHING = 2,
-				STATUS_NOT_REG = 3
+/**********************************************************************//**
+ * @ingroup ad
+ * @brief Flag to detect the connection status
+ * @note Corresponding to CREG response in SIM908 p. 77 in AT Commands manual v. 1.02 
+ *************************************************************************/
+typedef enum {	CREG_NOT_REGISTERED = 0,
+				CREG_REGISTERED = 1,
+				CREG_SEARCHING = 2,
+				CREG_REGISTRATION_DENIED = 3,
+				CREG_UNKNOWN = 4,
+				CREG_REGISTERED_ROOMING = 5
 } CONNECTION_STATUS_FLAG;
 
-extern char MSD_filename[24];
-extern MSD _msd;
-extern EMERGENCY_FLAG emergency_flag;
-extern CONNECTION_STATUS_FLAG connection_status_flag;
+extern char EXT_MSD_FILENAME[24];
+extern MSD EXT_MSD;
+extern EMERGENCY_FLAG EXT_EMERGENCY_FLAG;
+extern CONNECTION_STATUS_FLAG EXT_CONNECTION_STATUS_FLAG;
 
+/********************************************************************************************************************//**
+ @ingroup ad
+ @brief Function to call when an emergency alarm is triggered. Steps in function: 
+		Record needed data -> create MSD structure -> sent structure over FTP -> call to emergency number
+ @return void
+************************************************************************************************************************/
 void emergency_alarm(void);
 
 #endif /* ACCIDENT_DATA_H_ */

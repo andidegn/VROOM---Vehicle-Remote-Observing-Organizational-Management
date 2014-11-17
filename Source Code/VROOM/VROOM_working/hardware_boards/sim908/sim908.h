@@ -1,7 +1,7 @@
 /********************************************//**
 @file sim908.h
 @author: Kenneth René Jensen
-@Version: 0.4
+@Version: 0.5
 @defgroup sim908 Sim908_GSM
 @{
 	This is the driver for GSM/GPRS/GPS module sim908
@@ -53,9 +53,6 @@
 #define SIM908_RESPONSE_GPS_OK			20
 #define SIM908_RESPONSE_GPS_PULL		21
 
-#define SIM908_CONNECTED				31
-#define SIM908_NOT_CONNECTED			32
-
 /* AT Respond strings */
 #define RESPONSE_RDY		"RDY"
 #define RESPONSE_OK			"OK"
@@ -65,22 +62,65 @@
 #define RESPONSE_AT			"AT"
 #define RESPONSE_GPS_READY	"GPS Ready"
 #define RESPONSE_GPS_PULL	"0,"
-/* 	FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
-	FTP PUT RESPONSE:		"+FTPPUT:2,140"
-	FTP PUT CLOSE SESSION:	"+FTPPUT:1,0"		*/
 #define RESPONSE_FTP_PUT	"+FTPPUT:"
 #define RESPONSE_CREG		"+CREG: " /* +CREG: 1 = connected */
 
-#define CREG_VALUE_NOT_CONN		0
-#define CREG_VALUE_OK			1
-#define CREG_VALUE_SEARCHING	2
-#define CREG_VALUE_NOT_REG		3
-
+/********************************************************************************************************************//**
+ @ingroup sim908
+ @brief Initiates the SIM908 module
+ @return void
+ @note UART0 is used to communicate with the module.
+ ************************************************************************************************************************/
 void SIM908_init(void);
+
+/********************************************************************************************************************//**
+ @ingroup sim908
+ @brief Starts the SIM908 module in following procedure.
+		setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP
+ @return void
+ ************************************************************************************************************************/
 void SIM908_start(void);
+
+/********************************************************************************************************************//**
+ @ingroup sim908
+ @brief Used for sending AT SET commands.
+ @param *cmd is the AT command as a string
+ @return true if successful else false
+ ************************************************************************************************************************/
 bool SIM908_cmd(const char *cmd, bool __wait_for_ok);
+
+/********************************************************************************************************************//**
+ @ingroup sim908
+ @brief Sets the MSD with relevant information given from GPS response
+ @param *__UTC_sec points to the timestamp in MSD structure
+		*__latitude points to the latitude in MSD structure
+		*__longitude points to the longitude in MSD structure
+		*__course points to the direction in MSD structure 
+		*__IPV4 points to sp in MSD structure
+ @return void
+ ************************************************************************************************************************/
 void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course, uint8_t *__IPV4);
+
+/********************************************************************************************************************//**
+ @ingroup sim908
+ @brief Calling Public-safety answering point
+ @return void
+ ************************************************************************************************************************/
 void call_PSAP(void);
-void send_MSD(char *__vroom_id);
+
+/********************************************************************************************************************//**
+ @ingroup sim908
+ @brief Sends MSD binary file to FTP server
+	*   1:	Create filename:		AT+FTPPUTNAME="<filename>"
+	*   2:	Open bearer				AT+SAPBR=1,1
+	*   3:	Open FTP PUT session	AT+FTPPUT=1
+	*	4:  Set write data			AT+FTPPUT=2,140
+	*	5:	Write text (140 bytes)
+	*	6:	End write session		AT+FTPPUT=2,0
+	*	7:  Close bearer			AT+SAPBR=0,1
+ @param const char array with the VROOM ID (defined in vroom_config.h)
+ @return void
+ ************************************************************************************************************************/
+void send_MSD(const char *__vroom_id);
 
 #endif /* SIM908_GSM_H_ */

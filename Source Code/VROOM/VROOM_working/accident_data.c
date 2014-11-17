@@ -1,48 +1,59 @@
 /********************************************//**
 @file accident_data.c
 @author: Kenneth René Jensen
-@Version: 0.5
+@Version: 0.6
 @defgroup ad Accident Data
 @{
 	This is the data for an Accident report.
-	Followed eCall standards for MSD data structure.
+	Comply eCall standards for MSD data structure.
 @}
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
 
+#include <stdbool.h>
 #include "accident_data.h"
 #include "hardware_boards/sim908/sim908.h"
 #include "vroom_config.h"
 
 #define BLANK_CHAR 0x20
 
-MSD _msd;
-EMERGENCY_FLAG emergency_flag = EMERGENCY_NO_ALARM;
-CONNECTION_STATUS_FLAG connection_status_flag = STATUS_NOT_CONNECTED;
+/* Global variables */
+MSD EXT_MSD;
+EMERGENCY_FLAG EXT_EMERGENCY_FLAG = EMERGENCY_NO_ALARM;
+CONNECTION_STATUS_FLAG EXT_CONNECTION_STATUS_FLAG = CREG_NOT_REGISTERED;
 
+/* Local variables */
 static bool _confidence_in_position;
 
+/* Prototypes */
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm);
 static void _set_VIN(const char *__VIN);
 static void _set_optional_data(const char *__s);
 
+/********************************************************************************************************************//**
+ @ingroup ad
+ @brief Function to call when an emergency alarm is triggered. Steps in function: 
+		Record needed data -> create MSD structure -> sent structure over FTP -> call to emergency number
+ @return void
+************************************************************************************************************************/
 void emergency_alarm(void)
 {
-	set_MSD_data(&_msd.time_stamp, &_msd.latitude, &_msd.longitude, &_msd.direction, &_msd.sp[0]);
+	set_MSD_data(&EXT_MSD.time_stamp, &EXT_MSD.latitude, &EXT_MSD.longitude, &EXT_MSD.direction, &EXT_MSD.sp[0]);
 	
 	/* ToDo - Can position be trusted ?? */
-	_confidence_in_position = (_msd.latitude != 0 || _msd.longitude != 0) ? true : false;
+	_confidence_in_position = (EXT_MSD.latitude != 0 || EXT_MSD.longitude != 0) ? true : false;
 	
-	_set_control_byte(_confidence_in_position, CONFIG_TEST_CALL, emergency_flag == EMERGENCY_MANUAL_ALARM, emergency_flag == EMERGENCY_AUTO_ALARM);
+	_set_control_byte(_confidence_in_position, CONFIG_TEST_CALL, EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM, EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM);
 	_set_VIN(CONFIG_VIN);
+	
 	/* ToDo - get optional data */
 	_set_optional_data("ACC [G]: ? | Temp [°C]: ? | Passengers: ? | Speed [km/h]: ?");
 	
 	send_MSD(CONFIG_VROOM_ID);
 
-	// call_PSAP();
+	/* call_PSAP(); */
 	
-	emergency_flag = EMERGENCY_ALARM_SENT;
+	EXT_EMERGENCY_FLAG = EMERGENCY_ALARM_SENT;
 }
 
 /**********************************************************************//**
@@ -51,14 +62,14 @@ void emergency_alarm(void)
  *	Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |\n
  *	Bit:		  |	       7			 |	       6		 |     5	 |			  4			  | 3 | 2 | 1 | 0 |\n
  * @return void
- * @param test_call - Flag for testing purposes
  * @param position_can_be_trusted - confidence in position
- * @param auto_alarm - Flag to show if it is an automatic activated alarm
+ * @param test_call - Flag for testing purposes
  * @param manual_alarm - Flag to show if it is a manual activated alarm
+ * @param auto_alarm - Flag to show if it is an automatic activated alarm
  *************************************************************************/
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm)
 {
-	_msd.control |= __position_can_be_trusted<<4 | __test_call<<5 |  __manual_alarm<<6 | __auto_alarm<<7;
+	EXT_MSD.control |= __position_can_be_trusted<<4 | __test_call<<5 |  __manual_alarm<<6 | __auto_alarm<<7;
 }
 
 /**********************************************************************//**
@@ -73,11 +84,11 @@ static void _set_VIN(const char *__VIN)
 	uint8_t i = 0;
 	while (*__VIN != '\0')
 	{
-		_msd.VIN[i++] = *__VIN++;
+		EXT_MSD.VIN[i++] = *__VIN++;
 	}
-	_msd.VIN[17] = BLANK_CHAR;
-	_msd.VIN[18] = BLANK_CHAR;
-	_msd.VIN[19] = BLANK_CHAR;
+	EXT_MSD.VIN[17] = BLANK_CHAR;
+	EXT_MSD.VIN[18] = BLANK_CHAR;
+	EXT_MSD.VIN[19] = BLANK_CHAR;
 }
 
 /**********************************************************************//**
@@ -91,10 +102,10 @@ static void _set_optional_data(const char *__s)
 {
 	uint8_t i = 0;
 
-	do { _msd.optional_data[i++] = *__s; }  while (*__s++ != '\0');
+	do { EXT_MSD.optional_data[i++] = *__s; }  while (*__s++ != '\0');
 	
     while (i < 102)
     {
-		_msd.optional_data[i++] = BLANK_CHAR;
+		EXT_MSD.optional_data[i++] = BLANK_CHAR;
     }
 }

@@ -1,13 +1,15 @@
 /********************************************//**
 @file car_panel.c
 @author: Kenneth René Jensen
-@Version: 0.3
-@defgroup
+@Version: 0.4
+@defgroup cp Car_Panel
 @{
-
+	This is the driver for the car panel in VROOM system.
+	The panel includes two tact switches, a RGB LED and a single LED.
 @}
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdlib.h>
@@ -32,6 +34,11 @@
 static uint8_t _car_panel_counter;
 static bool _alarm_cancelled;
 
+/********************************************//**
+ @ingroup cp
+ @brief Initiates the Car Panel
+ @return void
+************************************************/
 void car_panel_init(void)
 {
 	/* Saves the current state of the status register and disables global interrupt */
@@ -45,16 +52,33 @@ void car_panel_init(void)
 	/* Pull-up on buttons */
 	PORT |= (1<<CANCEL | 1<<ALARM);
 	
-	/* Setup external interrupts for PJ1 (PCINT10) */
-	PCICR |= (1<<PCIE1);
-	PCMSK1 |= (1<<PCINT10);
-	
 	/* Restore interrupt */
 	SREG = SREG_cpy;
 	
 	car_panel_set_status(STATUS_OFFLINE);
 }
 
+/********************************************//**
+ @ingroup cp
+ @brief Enable external interrupt on ALARM button PJ1 (PCINT10)
+ @return void
+************************************************/
+void car_panel_start(void)
+{
+	PCICR |= (1<<PCIE1);
+	PCMSK1 |= (1<<PCINT10);
+}
+
+/********************************************//**
+ @ingroup cp
+ @brief Set the status LED
+ @param STATUS_ATTENTION_TOGGLE - blue LED toggle
+		STATUS_ATTENTION_CONSTANT - blue LED ON
+		STATUS_ONLINE - green LED ON
+		STATUS_OFFLINE - red LED ON
+		STATUS_RESET - all LEDS OFF
+ @return void
+************************************************/
 void car_panel_set_status(Status s)
 {
 	switch (s)
@@ -85,6 +109,14 @@ void car_panel_set_status(Status s)
 	}
 }
 
+/********************************************//**
+ @ingroup cp
+ @brief Set the control LED
+ @param ALARM_WAITING - LED toggle
+		ALARM_ACTIVATED - LED ON
+		ALARM_NOT_ACTIVATED - LED OFF
+ @return void
+************************************************/
 void car_panel_set_control(Control c)
 {
 	switch (c)
@@ -103,6 +135,11 @@ void car_panel_set_control(Control c)
 	}
 }
 
+/********************************************//**
+ @ingroup cp
+ @brief Cancel alarm button. Wait 3 seconds to determine false alarm
+ @return true if alarm is canceled else false
+************************************************/
 bool car_panel_wait_cancel_emmergency(void)
 {
 	/* Saves the current state of the status register and disables global interrupt */
@@ -147,6 +184,10 @@ bool car_panel_wait_cancel_emmergency(void)
 	return _alarm_cancelled;
 }
 
+/********************************************//**
+ @ingroup cp
+ @brief ISR for ALARM button
+************************************************/
 ISR (PCINT1_vect)
 {
 	if(!(PIN(PORT) & (1<<ALARM)))
@@ -165,7 +206,7 @@ ISR (PCINT1_vect)
 			
 			if (!car_panel_wait_cancel_emmergency())
 			{
-				emergency_flag = EMERGENCY_MANUAL_ALARM;
+				EXT_EMERGENCY_FLAG = EMERGENCY_MANUAL_ALARM;
 			}
 			else
 			{

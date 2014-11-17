@@ -72,7 +72,6 @@
 #define AT_FTP_SET_PASSWORD(PW)			"AT+FTPPW=\"" PW "\""
 #define AT_FTP_PUT_FILE_PATH(PATH)		"AT+FTPPUTPATH=\"" PATH "\""
 #define AT_FTP_PUT_FILE_NAME			"AT+FTPPUTNAME=" /* remember to add '"' at either end of the filename */
-//#define AT_FTP_PUT_FILE_NAME(NAME)		"AT+FTPPUTNAME=\"" NAME "\"" /* doesn't work yet */
 
 #define AT_FTP_OPEN_BEARER1				"AT+SAPBR=1,1"
 #define AT_FTP_CLOSE_BEARER1			"AT+SAPBR=0,1"
@@ -137,8 +136,7 @@
 #define AT_GPS_RST_AUTONOMY "AT+CGPSRST=1"
 #define AT_GPS_GET_LOCATION "AT+CGPSINF=0" // Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course>
 #define AT_GPS_GET_STATUS "AT+CGPSSTATUS?"
-/* EOL */
-#define AT_EOL '\r'
+
 /* CTRL+Z */
 #define AT_CTRL_Z 26
 

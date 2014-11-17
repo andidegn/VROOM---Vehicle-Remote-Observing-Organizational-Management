@@ -1,4 +1,32 @@
 ==================================
+Version 0.125 - 2014/11/17 by Kenneth
+==================================
+New Features, Improvements
+--------------------------
+* Car panel init function changed so that it does not enable interrupts. car panel start function added instead
+* Doxygen comments added in car_panel(.c/.h), sim908(.c/.h) and accident_data(.c/.h)
+
+Fixed Bugs, Changes
+-------------------
+* Deleted unused files (ab-encoder, Andi's version of sim908 driver, led_on_plane)
+* Deleted unused code in main
+* Changed naming on extern variables
+* Changed naming on enums in accident data
+* Removed unused defines in SIM908.h
+* Added volatile parameter for flag in _wait_response in SIM908 to to avoid warning
+
+ToDo
+----	
+- MISRA check all files
+- Split up module test in individual files
+- Module test for car panel needed
+- Integrate the UART test in the unit test platform 
+- Doxygen structure profing in all files
+- Comments in SIM908 ISR
+- Include file for all common libraries
+
+
+==================================
 Version 0.120 - 2014/11/14 by Andi
 ==================================
 New Features, Improvements

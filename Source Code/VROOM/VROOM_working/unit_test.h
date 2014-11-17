@@ -5,7 +5,7 @@
 @defgroup ut unit_test
 @{
 	This is the unit test platform for all relevant functions
-	(including arithmetic) in the WROOM system.
+	(including arithmetic) in the VROOM system.
 @}
 @note Complies MISRO 2004 standards
 ************************************************/

@@ -16,6 +16,10 @@
 #define ANDI_TEST NO
 #define KENNETH_TEST YES
 
+/* MSD details */
+#define CONFIG_TEST_CALL				true
+#define CONFIG_VIN						"W0L000036V1940069"
+
 /* ISP APN */
 #define CONFIG_APN_TELIA				"internet.mtelia.dk"
 #define CONFIG_APN_CALLME				"websp"
@@ -27,9 +31,6 @@
 #define CONFIG_PSAP_NUMBER_TEST_KENNETH	"60192949" /* Only for testing */
 #define CONFIG_PSAP_NUMBER_TEST_ANDI	"60257898" /* Only for testing */
 
-/* ToDo - Config file (not as header), to set the VIN number for the specific vehicle, and flag for test call */
-#define CONFIG_TEST_CALL				true
-#define CONFIG_VIN						"W0L000036V1940069"
 
 #define CONFIG_EMERGENCY_PHONE_NUMBER	CONFIG_PSAP_NUMBER_TEST_KENNETH
 
@@ -40,7 +41,6 @@
 #define CONFIG_FTP_PW					"6198fg(/G6F/&5(!(!8gf87gMF."
 #define CONFIG_FTP_FILE_PATH			"/"
 #define CONFIG_FTP_FILE_SIZE			"140" /* no of bytes */
-//#define CONFIG_FTP_FILE_NAME_NAMEING(T_STAMP, ID) T_STAMP "-(" ID ").vroom" /* doesn't work yet */
 
 /* Test parameters */
 #if KENNETH_TEST

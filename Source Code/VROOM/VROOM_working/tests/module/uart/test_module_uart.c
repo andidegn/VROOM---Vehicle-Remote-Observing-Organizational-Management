@@ -13,16 +13,16 @@
 #define TEST_STRING_LENGTH 17
 static char *_uart_test_string = "UART testing...\r\n";
 static char _eol_char = '\n';
-static char *_uart_recieved_data[TEST_STRING_LENGTH];
+static char *_uart_recieved_data;
 static char _i;
 static uint16_t _timeout_ctr;
 static bool _roundtrip_complete = false;
 
-static inline uint8_t _validate_data();
+static inline uint8_t _validate_data(const char *__uart_compare_string);
 static void _data0_received(char data);
 static void _data1_received(char data);
 
-uint8_t test_module_uart_run(void) {
+bool test_module_uart_run(const char *__uart_test_string, const char *__uart_compare_string) {
 	volatile uint8_t test_result = UART_PASSED;
 	volatile uint16_t tmp_char = 0;
 
@@ -32,10 +32,11 @@ uint8_t test_module_uart_run(void) {
 	/* init both uarts with callback */
 	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _data0_received);
 	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _data1_received);
-
+	
+	_uart_recieved_data = malloc(sizeof(__uart_test_string));
 	/* sending test string */
 	_i = 0;
-	uart0_send_string(_uart_test_string);
+	uart0_send_string(__uart_test_string);
 
 	/* waiting until round-trip has been completed */
 	_timeout_ctr = 0;
@@ -66,10 +67,11 @@ uint8_t test_module_uart_run(void) {
 	return test_result;
 }
 
-static inline uint8_t _validate_data() {
+static inline uint8_t _validate_data(const char *__uart_compare_string) {
 	uint8_t test_result = UART_PASSED;
-
-	for (_i = 0; _i < TEST_STRING_LENGTH; _i++) {
+	
+	while (*__uart_compare_string != '\0') {}
+	//for (_i = 0; _i < TEST_STRING_LENGTH; _i++) {
 		if (_uart_test_string[_i] != *_uart_recieved_data[_i]) {
 			test_result = UART_FAILED;
 			break;

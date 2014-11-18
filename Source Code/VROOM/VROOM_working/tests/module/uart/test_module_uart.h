@@ -23,6 +23,7 @@
 #define TEST_MODULE_UART_H_
 
 #include <avr/io.h>
+#include <stdbool.h>
 
 #define UART_PASSED 1
 #define UART_FAILED 0
@@ -31,11 +32,12 @@
  * @ingroup test_uart_pub
  * @brief Starts the testing routine for uart0 and uart1
  *
- * @param void
+ * @param const char *__uart_test_string - string to be send
+ * @param const char *__uart_compare_string - string to be compared to
  *
- * @return uint8_t - UART_PASSED (1) or UART_FAILED (0)
+ * @return bool - true = passed; false = failed
  * @note To run this test uart0 and uart1 must be connect crossed. TX0->RX1, TX1->RX0
  *************************************************************************/
-uint8_t test_module_uart_run(void);
+bool test_module_uart_run(const char *__uart_test_string, const char *__uart_compare_string);
 
 #endif /* TEST_MODULE_UART_H_ */

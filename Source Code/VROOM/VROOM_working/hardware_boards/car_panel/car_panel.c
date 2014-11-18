@@ -12,10 +12,9 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <stdlib.h>
 #include <util/delay.h>
 #include "car_panel.h"
-#include "../../accident_data.h"
+#include "../../accident_logic/accident_data.h"
 
 /* Changing port will require changes in the interrupt setup */
 #define PORT			PORTJ

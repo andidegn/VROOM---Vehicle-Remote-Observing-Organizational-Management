@@ -13,7 +13,7 @@
 #ifndef CAR_PANEL_H_
 #define CAR_PANEL_H_
 
-#include <stdbool.h>
+#include "../../includes.h"
 
 /* Time of button press before activation/deactivation in 1/10 sec */
 #define BUTTON_PRESS_TIME		30

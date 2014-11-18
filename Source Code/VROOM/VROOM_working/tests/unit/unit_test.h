@@ -13,7 +13,7 @@
 #ifndef UNIT_TEST_H_
 #define UNIT_TEST_H_
 
-#include "sensors/tc72/tc72.h"
+#include "../../sensors/thermometer/tc72.h"
 
 /**********************************************************************//**
  * @ingroup ut

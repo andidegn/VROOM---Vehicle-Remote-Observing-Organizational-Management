@@ -20,20 +20,16 @@
 
 #define UNIT_TEST_MSD					OFF
 
+#include "includes.h"
 #include "hardware_boards/lcd_board/lcd/lcd.h"
-#include "hardware_boards/lcd_board/button_led/btn_led_lcd.h"
 #include "sensors/sensor_scheduler.h"
 #include "hardware_boards/sim908/sim908.h"
 #include "hardware_boards/car_panel/car_panel.h"
-#include "accident_data.h"
+#include "accident_logic/accident_data.h"
+#include "tests/unit/unit_test.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <math.h>
-#include "unit_test.h"
-#include "timer.h"
 
 int main (void)
 {

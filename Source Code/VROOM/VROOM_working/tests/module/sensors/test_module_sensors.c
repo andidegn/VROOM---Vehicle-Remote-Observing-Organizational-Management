@@ -10,10 +10,10 @@
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
 #include <avr/io.h>
-#include <stdlib.h>
 #include "test_module_sensors.h"
-#include "../hardware_boards/lcd_board/lcd/lcd.h"
-#include "sensor_scheduler.h"
+#include "../../../includes.h"
+#include "../../../hardware_boards/lcd_board/lcd/lcd.h"
+#include "../../../sensors/sensor_scheduler.h"
 
 const char degree = 0b011011111;
 static int x_axis, y_axis, z_axis;

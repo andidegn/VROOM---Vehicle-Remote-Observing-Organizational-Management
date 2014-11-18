@@ -12,7 +12,8 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-#include <stdio.h>
+#include "../../includes.h"
+
 /********************************************************************//**
  @enum TIMER_PRESCALER
  @ingroup timer

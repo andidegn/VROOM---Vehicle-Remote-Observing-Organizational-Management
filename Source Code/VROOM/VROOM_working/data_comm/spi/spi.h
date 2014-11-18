@@ -17,8 +17,7 @@
 #ifndef SPI_H_
 #define SPI_H_
 
-#include <stdio.h>
-#include <stdbool.h>
+#include "../../includes.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 

@@ -8,9 +8,9 @@
 #ifndef COLLECT_SENSOR_DATA_H_
 #define COLLECT_SENSOR_DATA_H_
 
-#include "tc72/tc72.h"
-#include "accelerometer/accelerometer.h"
-#include "../timer.h"
+#include "thermometer/tc72.h"
+#include "accelerometer/lis331hh.h"
+#include "../util/timer/timer.h"
 
 #define SCHEDULER_DELAY 0
 #define ACC_BUFFER_SIZE 25

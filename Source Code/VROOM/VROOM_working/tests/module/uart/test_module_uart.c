@@ -4,9 +4,7 @@
  * Created: 26-09-2014 15:48:21
  *  Author: Andi Degn
  */
-
 #include <avr/io.h>
-#include <stdbool.h>
 #include "test_module_uart.h"
 #include "../../../data_comm/uart/uart.h"
 

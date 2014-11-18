@@ -10,10 +10,9 @@
 @note NOT YET Complies MISRO 2004 standards
 ************************************************/
 
-#include <stdbool.h>
 #include "accident_data.h"
-#include "hardware_boards/sim908/sim908.h"
-#include "vroom_config.h"
+#include "../hardware_boards/sim908/sim908.h"
+#include "../vroom_config.h"
 
 #define BLANK_CHAR 0x20
 

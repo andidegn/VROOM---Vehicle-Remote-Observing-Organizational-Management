@@ -13,8 +13,7 @@
 #define SIM908_GSM_H_
 
 #include <avr/io.h>
-#include <string.h>
-#include <stdbool.h>
+#include "../../includes.h"
 
 /* Uncomment for Arduino default port settings */
 // #define ARDUINO_ATMEGA2560_DEFAULT

@@ -22,8 +22,7 @@
 #ifndef TEST_MODULE_UART_H_
 #define TEST_MODULE_UART_H_
 
-#include <avr/io.h>
-#include <stdbool.h>
+#include "../../../includes.h"
 
 #define UART_PASSED 1
 #define UART_FAILED 0

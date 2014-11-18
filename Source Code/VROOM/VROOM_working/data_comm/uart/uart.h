@@ -26,8 +26,8 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <stdlib.h>
 #include <util/delay.h>
+#include "../../includes.h"
 
 #ifndef F_CPU
 	#error: F_CPU must be defined!!!

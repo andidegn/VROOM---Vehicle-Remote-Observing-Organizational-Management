@@ -3,7 +3,7 @@
  *
  * @Created: 12-09-2014 20:34:20
  * @Author: Andi Degn
- * @Version: 0.4
+ * @Version: 0.5
  * @defgroup uart UART Driver
  * @{
 	 This is a driver for the UART on the ATMEGA family processors
@@ -13,9 +13,11 @@
  */
 
 #include "uart.h"
+#include <stdlib.h>
+#include <util/delay.h>
 
 /**********************************************************************//**
- * @ingroup uart_pub
+ * @ingroup uart_priv
  * @brief defines for the factor used to calculate baud rate and UBRR0value
  * @{
  *************************************************************************/
@@ -24,7 +26,7 @@
 /* @} */
 
 /**********************************************************************//**
- * @ingroup uart_pub
+ * @ingroup uart_priv
  * @brief defines for calculating the UBRR0 value
  * @note 0.5F is added to make sure rounding is done rather than truncating
  * @{
@@ -145,6 +147,7 @@ void uart0_setup_async(UART_MODE __operational_mode,
 
 	/* storing callback function */
 	_callback_function0_ptr = __callback_function_ptr;
+	_tx_buffer0_tail = _tx_buffer0_head = _rx_buffer0_tail = _rx_buffer0_head = 0U;
 
 	/* restore the status register */
 	SREG = _sreg;
@@ -196,11 +199,15 @@ void uart0_send_data(const char *__data, uint8_t __length) {
  * Reads one char
  *************************************************************************/
 uint16_t uart0_read_char(void) {
-	if (_rx_buffer0_head != _rx_buffer0_tail) {
-		return _rx_buffer0[_rx_buffer0_tail = (_rx_buffer0_tail + 1) % UART0_RX_BUFFER_SIZE];
+	uint16_t _result;
+	if (_callback_function0_ptr != NULL) {
+		_result = UART_READ_NOT_ALOWED;
+	} else if (_rx_buffer0_head != _rx_buffer0_tail) {
+		_result = _rx_buffer0[_rx_buffer0_tail = (_rx_buffer0_tail + 1) % UART0_RX_BUFFER_SIZE];
 	} else {
-		return UART_NO_DATA;
+		_result = UART_NO_DATA;
 	}
+	return _result;
 }
 
 /**********************************************************************//**
@@ -325,6 +332,7 @@ void uart1_setup_async(UART_MODE __operational_mode,
 
 	/* storing callback function */
 	_callback_function1_ptr = __callback_function_ptr;
+	_tx_buffer1_tail = _tx_buffer1_head = _rx_buffer1_tail = _rx_buffer1_head = 0U;
 
 	/* restores the status register */
 	SREG = _sreg;
@@ -376,11 +384,15 @@ void uart1_send_data(const char *__data, uint8_t __length) {
  * Reads one char
  *************************************************************************/
 uint16_t uart1_read_char(void) {
-	if (_rx_buffer1_head != _rx_buffer1_tail) {
-		return _rx_buffer1[_rx_buffer1_tail = (_rx_buffer1_tail + 1) % UART1_RX_BUFFER_SIZE];
+	uint16_t _result;
+	if (_callback_function1_ptr != NULL) {
+		_result = UART_READ_NOT_ALOWED;
+	} else if (_rx_buffer1_head != _rx_buffer1_tail) {
+		_result = _rx_buffer1[_rx_buffer1_tail = (_rx_buffer1_tail + 1) % UART1_RX_BUFFER_SIZE];
 	} else {
-		return UART_NO_DATA;
+		_result = UART_NO_DATA;
 	}
+	return _result;
 }
 
 /**********************************************************************//**

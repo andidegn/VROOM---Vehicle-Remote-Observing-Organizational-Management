@@ -5,24 +5,29 @@
  *  Author: Andi Degn
  */
 #include <avr/io.h>
+#include <stdlib.h>
+#include <util/delay.h>
 #include "test_module_uart.h"
 #include "../../../data_comm/uart/uart.h"
 
-#define TEST_STRING_LENGTH 17
-static char *_uart_test_string = "UART testing...\r\n";
+#define RECEIVED_DATA_LENGTH 255
+
+static char *_uart_compare_string;
+static char *_uart_received_data;
 static char _eol_char = '\n';
-static char *_uart_recieved_data;
-static char _i;
+static char _index;
 static uint16_t _timeout_ctr;
 static bool _roundtrip_complete = false;
 
-static inline uint8_t _validate_data(const char *__uart_compare_string);
+static bool _validate_data(void);
 static void _data0_received(char data);
 static void _data1_received(char data);
 
 bool test_module_uart_run(const char *__uart_test_string, const char *__uart_compare_string) {
-	volatile uint8_t test_result = UART_PASSED;
+	volatile bool test_result = false;
 	volatile uint16_t tmp_char = 0;
+
+	_uart_compare_string = __uart_compare_string;
 
 	/*******************************
 	 **** TESTING WITH CALLBACK ****
@@ -30,58 +35,72 @@ bool test_module_uart_run(const char *__uart_test_string, const char *__uart_com
 	/* init both uarts with callback */
 	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _data0_received);
 	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _data1_received);
-	
-	_uart_recieved_data = malloc(sizeof(__uart_test_string));
+
 	/* sending test string */
-	_i = 0;
+	_index = 0;
+	_uart_received_data = malloc(RECEIVED_DATA_LENGTH * sizeof(char));
 	uart0_send_string(__uart_test_string);
+	_delay_ms(0); /* Apparently needed when using low baud rate */
 
 	/* waiting until round-trip has been completed */
 	_timeout_ctr = 0;
+	_roundtrip_complete = false;
 	while (!_roundtrip_complete && _timeout_ctr++ < 1000) {
 		_delay_ms(1);
 	}
 
 	test_result = _validate_data();
+	free(_uart_received_data);
+	
+	if (test_result == true) {
+		/**********************************
+		 **** TESTING WITHOUT CALLBACK ****
+		 **********************************/
+		/* init both uarts without callback */
+		uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_460K8, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
+		uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_460K8, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
+	
+		_index = 0;
+		_uart_received_data = malloc(RECEIVED_DATA_LENGTH * sizeof(char));
 
-	/**********************************
-	 **** TESTING WITHOUT CALLBACK ****
-	 **********************************/
-	/* init both uarts without callback */
-	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
-	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
-
-	/* sending test string */
-	_i = 0;
-	uart0_send_string(_uart_test_string);
-		_delay_ms(1);
-
-	while ((tmp_char = uart1_read_char()) != UART_NO_DATA) {
-		*_uart_recieved_data[_i++] = tmp_char;
+		/* sending test string */
+		uart0_send_string(__uart_test_string);
+		
+		while ((tmp_char = uart1_read_char()) != UART_NO_DATA) {
+			uart1_send_char(tmp_char);
+			_delay_ms(1);
+			while ((tmp_char = uart0_read_char()) != UART_NO_DATA) {
+				*(_uart_received_data + _index++) = tmp_char;
+			}
+		}
+		
+	
+		test_result = _validate_data();
+		free(_uart_received_data);
 	}
-
-	test_result = _validate_data();
-
 	return test_result;
 }
 
-static inline uint8_t _validate_data(const char *__uart_compare_string) {
-	uint8_t test_result = UART_PASSED;
-	
-	while (*__uart_compare_string != '\0') {}
-	//for (_i = 0; _i < TEST_STRING_LENGTH; _i++) {
-		if (_uart_test_string[_i] != *_uart_recieved_data[_i]) {
-			test_result = UART_FAILED;
+static bool _validate_data(void) {
+
+	uint8_t i = 0;
+	bool _result = false;
+
+	while (*(_uart_compare_string + i) != '\0') {
+		if (*(_uart_compare_string + i) != *(_uart_received_data + i)) {
+			_result = false;
 			break;
 		}
-		_i++;
+		_result = true;
+		i++;
 	}
-	return test_result;
+	return _result;
 }
 
 static void _data0_received(char data) {
-	*_uart_recieved_data[_i++] = data;
-	if (data == _eol_char || _i > TEST_STRING_LENGTH) {
+	*(_uart_received_data + _index++) = data;
+
+	if (*(_uart_compare_string + _index) == '\0') {
 		_roundtrip_complete = true;
 	}
 }

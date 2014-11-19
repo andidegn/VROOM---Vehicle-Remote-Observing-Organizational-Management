@@ -8,9 +8,9 @@
 	Setup of timer 3 to CTC mode for counting etc. used for timeout
 @}
 ************************************************/
+#include <avr/interrupt.h>
 #include "timer.h"
 #include "../../sensors/sensor_scheduler.h"
-#include <avr/interrupt.h>
 
 #ifndef F_CPU
 	#error F_CPU must be defined!!!

@@ -1,19 +1,22 @@
-/********************************************//**
-@file sim908.h
-@author: Kenneth René Jensen
-@Version: 0.5
-@defgroup sim908 Sim908_GSM
-@{
-	This is the driver for GSM/GPRS/GPS module sim908
-@}
-@note Complies MISRO 2004 standards
-************************************************/
+/************************************************//*
+ * @file: sim908.h
+ *
+ * @Created: 25-09-2014 13:09:36
+ * @Author: Kenneth René Jensen
+ * @Version: 0.5
+ * @defgroup sim908 Sim908_GSM
+ * @{
+	 This is the driver for GSM/GPRS/GPS module sim908
+	 @defgroup sim908_priv Private
+	 @defgroup sim908_pub Public
+ * @}
+ */
 
 #ifndef SIM908_GSM_H_
 #define SIM908_GSM_H_
 
 #include <avr/io.h>
-#include "../../includes.h"
+#include <stdbool.h>
 
 /* Uncomment for Arduino default port settings */
 // #define ARDUINO_ATMEGA2560_DEFAULT
@@ -39,30 +42,32 @@
 
 /* *************************************************************************** */
 
-/* Error List for return */
-#define SIM908_RESPONSE_WAITING			0
-#define SIM908_RESPONSE_OK				1
-#define SIM908_RESPONSE_ERROR			2
+/* Flag list for response */
+#define SIM908_FLAG_WAITING			0
+#define SIM908_FLAG_OK				1
+#define SIM908_FLAG_ERROR			2
 
-#define SIM908_RESPONSE_FTP_PUT_OPEN	10
-#define SIM908_RESPONSE_FTP_PUT_CLOSE	11
-#define SIM908_RESPONSE_FTP_PUT_SUCCESS 12
-#define SIM908_RESPONSE_FTP_PUT_ERROR	13
+#define SIM908_FLAG_FTP_PUT_OPEN	10
+#define SIM908_FLAG_FTP_PUT_CLOSE	11
+#define SIM908_FLAG_FTP_PUT_SUCCESS 12
+#define SIM908_FLAG_FTP_PUT_ERROR	13
 
-#define SIM908_RESPONSE_GPS_OK			20
-#define SIM908_RESPONSE_GPS_PULL		21
+#define SIM908_FLAG_GPS_OK			20
+#define SIM908_FLAG_GPS_PULL		21
 
-/* AT Respond strings */
-#define RESPONSE_RDY		"RDY"
-#define RESPONSE_OK			"OK"
-#define RESPONSE_ERROR		"ERROR"
-#define RESPONSE_CR_LF		"\r\n"
-#define RESPONSE_LF_CR		"\n\r"
-#define RESPONSE_AT			"AT"
-#define RESPONSE_GPS_READY	"GPS Ready"
-#define RESPONSE_GPS_PULL	"0,"
-#define RESPONSE_FTP_PUT	"+FTPPUT:"
-#define RESPONSE_CREG		"+CREG: " /* +CREG: 1 = connected */
+#define SIM908_FLAG_RUNNING			30
+
+/* AT response compare string literals */
+#define SIM908_RESPONSE_RDY			"RDY"
+#define SIM908_RESPONSE_OK			"OK"
+#define SIM908_RESPONSE_ERROR		"ERROR"
+#define SIM908_RESPONSE_CR_LF		"\r\n"
+#define SIM908_RESPONSE_LF_CR		"\n\r"
+#define SIM908_RESPONSE_AT			"AT"
+#define SIM908_RESPONSE_GPS_READY	"GPS Ready"
+#define SIM908_RESPONSE_GPS_PULL	"0,"
+#define SIM908_RESPONSE_FTP_PUT		"+FTPPUT:"
+#define SIM908_RESPONSE_CREG		"+CREG: " /* +CREG: 1 = connected */
 
 /********************************************************************************************************************//**
  @ingroup sim908
@@ -94,7 +99,7 @@ bool SIM908_cmd(const char *cmd, bool __wait_for_ok);
  @param *__UTC_sec points to the timestamp in MSD structure
 		*__latitude points to the latitude in MSD structure
 		*__longitude points to the longitude in MSD structure
-		*__course points to the direction in MSD structure 
+		*__course points to the direction in MSD structure
 		*__IPV4 points to sp in MSD structure
  @return void
  ************************************************************************************************************************/

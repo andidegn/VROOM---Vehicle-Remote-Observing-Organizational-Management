@@ -1,6 +1,35 @@
 ==================================
-Version 0.125 - 2014/11/17 by Kenneth
+Version 0.126 - 2014/11/19 by Andi
 ==================================
+New Features, Improvements
+--------------------------
+* Added UART module test for testing with minunit macro
+* Added UART module test section in run.c\main
+* Added/proofed Doxygen comments in:
+   - accident_data(.c/.h)
+   - spi(.c/.h)
+   - uart(.c/.h)
+   - car_panel(.c/.h)
+   - at_commands.h
+
+Fixed Bugs, Changes
+-------------------
+* Tweaked startup procedure in sim908.c. Module starts up much faster now
+* Added system-ready check in sim908.c so that startup delay is not nessesary
+* Minor change in uart.c. uartX_read_char() do not try to read from the buffer if a callback is defined
+
+ToDo
+----		
+- MISRA check all files
+- Split up module test in individual files
+- Module test for car panel needed
+- Integrate the UART test in the unit test platform 
+- Doxygen structure proofing in all files
+
+
+=====================================
+Version 0.125 - 2014/11/17 by Kenneth
+=====================================
 New Features, Improvements
 --------------------------
 * Car panel init function changed so that it does not enable interrupts. car panel start function added instead
@@ -21,7 +50,7 @@ ToDo
 - Split up module test in individual files
 - Module test for car panel needed
 - Integrate the UART test in the unit test platform 
-- Doxygen structure profing in all files
+- Doxygen structure proofing in all files
 - Comments in SIM908 ISR
 - Include file for all common libraries
 
@@ -41,8 +70,8 @@ Fixed Bugs, Changes
 * Fixed naming in spi, uart and sensor_scheduler
 * Updated comments in spi and uart
 * Fixed simple alarm-trigger test in run.c, axis^2 became too large.
-  Changed acc_total to uint32_t instead of int32_t
-  Changed multiplier in sensor_scheduler to accommodate for smaller value
+   - Changed acc_total to uint32_t instead of int32_t
+   - Changed multiplier in sensor_scheduler to accommodate for smaller value
 
 ToDo
 ----	
@@ -58,7 +87,7 @@ New Features, Improvements
 --------------------------
 * Added circular buffer in sensor_scheduler for accelerometer readings
 * Made x, y and z axis buffers in sensor_scheduler extern so that reading can
-  happen independent of the scheduler
+   happen independent of the scheduler
 
 Fixed Bugs, Changes
 -------------------
@@ -154,8 +183,8 @@ Fixed Bugs, Changes
 -------------------
 * Fixed startup procedure so that module resets more reliably when uploading software
 * Fixed latitude and longitude binary bug by creating new function: 
-  uartX_send_data(uint8_t data, uint8_t length). Problem was that uartX_send_string skips
-  zero (0x00) bytes as it is detected as the null char ('\0')
+   - uartX_send_data(uint8_t data, uint8_t length). Problem was that uartX_send_string skips
+     zero (0x00) bytes as it is detected as the null char ('\0')
 
 ToDo
 ----	
@@ -217,7 +246,7 @@ New Features, Improvements
 Fixed Bugs, Changes
 -------------------
 * Fixed bug caused by memory padding (used __attribute__((packed)) 
-  in order to tell compiler that structure should be packed 
+   in order to tell compiler that structure should be packed 
 
 ToDo
 ----	
@@ -236,9 +265,9 @@ New Features, Improvements
 --------------------------
 * Finished structure of MSD
 * Started implementing send_msb() function, which starts a session 
-  and sends the MSB struct over FTP (not a pretty solution so far)
-* Added an integration test in main, which sends MSB to FTP server when temperature > 28 degrees
-  This resulted in the problem descriped under ToDo
+   and sends the MSB struct over FTP (not a pretty solution so far)
+* Added an integration test in main, which sends MSB to FTP server when temperature > 28 degrees.
+   This resulted in the problem descriped under ToDo
 
 Fixed Bugs, Changes
 -------------------
@@ -275,8 +304,8 @@ Version 0.09 - 2014/10/15 by Kenneth
 New Features, Improvements
 --------------------------
 * Added working setup function for data communication in SIM908 module.
-  For testing purposses it is set to append an existing .txt file on the FTP server.
-  Note: Sending/writing to FTP are still not implemented, but is tested manually. 
+   For testing purposses it is set to append an existing .txt file on the FTP server.
+! Note: Sending/writing to FTP are still not implemented, but is tested manually. 
 
 Fixed Bugs, Changes
 -------------------
@@ -383,10 +412,15 @@ ToDo
 ===================================
 Version 0.071a - 2014/09/26 by Andi
 ===================================
-- Added read function in UART so that it is not required to use callback
-  to read from the uart bus
-- Added a module test for the UART
-- Added testing templet for module tests in run.c
+New Features, Improvements
+--------------------------
+* Added read function in UART so that it is not required to use callback
+   to read from the uart bus
+* Added a module test for the UART
+* Added testing templet for module tests in run.c
+
+Fixed Bugs, Changes
+-------------------
 
 ToDo
 ----	
@@ -419,10 +453,10 @@ Version 0.07 - 2014/09/21 by Andi
 =================================
 New Features, Improvements
 --------------------------
-- Added initial gsm files with simple init and other functions for testing
-- Updated main to test gsm communication
-- Added UART pass-through to be able to monitor communication between MCU
-  and gsm/gps shield from terminal
+* Added initial gsm files with simple init and other functions for testing
+* Updated main to test gsm communication
+* Added UART pass-through to be able to monitor communication between MCU
+   and gsm/gps shield from terminal
 
 Fixed Bugs, Changes
 -------------------
@@ -442,7 +476,7 @@ New Features, Improvements
 
 Fixed Bugs, Changes
 -------------------
-- Added callback option in sensor_scheduler for the UART
+* Added callback option in sensor_scheduler for the UART
 
 ToDo
 ----	
@@ -452,7 +486,7 @@ ToDo
 Note
 ----
 - Analysis functionality now working from sensor_scheduler. Problem was
-  baud rate too high and minor errors in UART driver (Was fixed in 0.06d)
+   baud rate too high and minor errors in UART driver (Was fixed in 0.06d)
 
 
 
@@ -461,9 +495,9 @@ Version 0.06d - 2014/09/20 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-- Improved UART driver to be more userfriendly
-- Upgraded the buffer inside the UART driver to be circular
-  so that it needs less memory to work properly
+* Improved UART driver to be more userfriendly
+* Upgraded the buffer inside the UART driver to be circular
+   so that it needs less memory to work properly
 
 Fixed Bugs, Changes
 -------------------
@@ -481,9 +515,9 @@ Version 0.06c - 2014/09/18 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-- Added cs pin parameter in the init functions of the tc72 and accelerometer driver to accommodate
-  SPI splitter hardware
-- Updated MemoryMap file
+* Added cs pin parameter in the init functions of the tc72 and accelerometer driver to accommodate
+   SPI splitter hardware
+* Updated MemoryMap file
 
 Fixed Bugs, Changes
 -------------------
@@ -501,15 +535,15 @@ Version 0.06b - 2014/09/17 by Andi & Kenneth
 ============================================
 New Features, Improvements
 --------------------------
-- Improved sensor_scheduler to work autonomously from the main program using a timer and a 
-  state-machine
-- Updated main to work properly with analysis tool by sending accelerometer data at a working
-  rate for analysis to be conducted in real-time without any latency. Test was conducted at 
-  ~110Hz
+* Improved sensor_scheduler to work autonomously from the main program using a timer and a 
+   state-machine
+* Updated main to work properly with analysis tool by sending accelerometer data at a working
+   rate for analysis to be conducted in real-time without any latency. Test was conducted at 
+   ~110Hz
 
 Fixed Bugs, Changes
 -------------------
-- fixed minor errors
+* fixed minor errors
 
 ToDo
 ----	
@@ -523,7 +557,7 @@ Version 0.06 - 2014/09/16 by Andi
 =================================
 New Features, Improvements
 --------------------------
-- Improvements in usart0-1:
+* Improvements in usart0-1:
 	- USART_CHAR_SIZE enum changed and switch-case added in usartN_setup_async(...) function
 	  as the identifier in USART_8_BIT and USART_9_BIT was the same
 	- Added "+0.5F" to the CALC_UBRRn macro to make sure it rounds off rather than truncating
@@ -535,11 +569,11 @@ New Features, Improvements
 	- "operational_mode" bit(s) are no longer being written to UCSRnC register as synchronous		  
 	  and master SPI modes are not implemented
 	- Name changed to UART as only the asynchronous modes are implemented
-- Updated main to work properly with analysis tool
+* Updated main to work properly with analysis tool
 
 Fixed Bugs, Changes
 -------------------
-- fixed minor errors
+* fixed minor errors
 
 ToDo
 ----	
@@ -553,20 +587,20 @@ Version 0.05 - 2014/09/15 by Andi
 =================================
 New Features, Improvements
 --------------------------
-- added usart driver for USART0 and USART1
-- re-added state machine in accelerometer and tc72 to avoid return of garbage data in the callback    
-  routine
-- setup usart transmission for testing with pc. it sends the accelerometer data
-- re-written the accelerometer driver to be able to take setup parameters
-- added LED driver for LEDs on aircraft on PORTB
-- added LED and switch driver for the LCD board on PORTK (no available ISR for rotary encoder)
-- added memory map file with port/pin information from all drivers
-- completed doxygen documentation in usart0-1 and accelerometer
-- updated main to include tests
+* added usart driver for USART0 and USART1
+* re-added state machine in accelerometer and tc72 to avoid return of garbage data in the callback    
+   routine
+* setup usart transmission for testing with pc. it sends the accelerometer data
+* re-written the accelerometer driver to be able to take setup parameters
+* added LED driver for LEDs on aircraft on PORTB
+* added LED and switch driver for the LCD board on PORTK (no available ISR for rotary encoder)
+* added memory map file with port/pin information from all drivers
+* completed doxygen documentation in usart0-1 and accelerometer
+* updated main to include tests
 
 Fixed Bugs, Changes
 -------------------
-- fixed minor errors
+* fixed minor errors
 
 ToDo
 ----	
@@ -580,12 +614,12 @@ Version 0.04 - 2014/09/11 by Kenneth
 ====================================
 New Features, Improvements
 --------------------------
-- Added a structure with doxygen documentation of the accident report 
+* Added a structure with doxygen documentation of the accident report 
    according to eCall and EN 15722 standards for MSD.
 
 Fixed Bugs, Changes
 -------------------
-- Clean up in multiple files (mostly in comments)
+* Clean up in multiple files (mostly in comments)
 
 ToDo
 ----	
@@ -597,11 +631,11 @@ Version 0.031 - 2014/09/08 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-- Added the Unit Test, which was missing in v0.03 and added the test in main
+* Added the Unit Test, which was missing in v0.03 and added the test in main
 
 Fixed Bugs, Changes
 -------------------
-- Fixed comments style in SPI and Accelerometer driver (*/ instead of //)
+* Fixed comments style in SPI and Accelerometer driver (*/ instead of //)
 
 ToDo
 ----	
@@ -618,23 +652,23 @@ Version 0.03 - 2014/09/05 by Andi
 =================================
 New Features, Improvements
 --------------------------
-- Completed doxygen documentation in spi and acc driver
-- Added sensors_init() function in sensor_scheduler 
-- Updated sensor_scheduler to work with current content
-- Added scheduler_release() call in the tc72 and acc callback driver to accomodate for the
+* Completed doxygen documentation in spi and acc driver
+* Added sensors_init() function in sensor_scheduler 
+* Updated sensor_scheduler to work with current content
+* Added scheduler_release() call in the tc72 and acc callback driver to accomodate for the
    sequential sensors read structure
-- Defined scheduler delay for control of the reading period
+* Defined scheduler delay for control of the reading period
  
 Fixed Bugs, Changes
 -------------------
-- Changed the structure of the SPI driver to make it work properly
-- Assembled everything in a fresh project to fix unknown accelerometer data error
-- Fixed error where array went out of scope in tc72 driver under setup (moved array
+* Changed the structure of the SPI driver to make it work properly
+* Assembled everything in a fresh project to fix unknown accelerometer data error
+* Fixed error where array went out of scope in tc72 driver under setup (moved array
    decleration out of the function). Was causing corrupt memory
-- Renamed collect_sensors_sata to sensor_scheduler
-- Renamed function read_sensors() to scheduler_release() as it's not being called from the
+* Renamed collect_sensors_sata to sensor_scheduler
+* Renamed function read_sensors() to scheduler_release() as it's not being called from the
    drivers callback functions when they are done reading
-- Cleaned up drivers in general
+* Cleaned up drivers in general
  
 ToDo
 ----	
@@ -648,12 +682,12 @@ Version 0.02 - 2014/09/05 by Kenneth
 ====================================
 New Features, Improvements
 --------------------------
-- unit test included for tc72 (use #define UNIT_TEST to run test)
-- tc72 pass MISRA standards, except violation on some rules when calculating temperature
+* unit test included for tc72 (use #define UNIT_TEST to run test)
+* tc72 pass MISRA standards, except violation on some rules when calculating temperature
  
 Fixed Bugs, Changes
 -------------------
-- Fixed temperature conversion so that negative values is represented correctly 
+* Fixed temperature conversion so that negative values is represented correctly 
 
 ToDo
 ----	
@@ -666,7 +700,7 @@ Version 0.01 - 2014/09/03 by Kenneth
 ====================================
 New Features, Improvements
 --------------------------
-- First working version of tc72 driver with shared SPI and timer
+* First working version of tc72 driver with shared SPI and timer
  
 Fixed Bugs, Changes
 -------------------

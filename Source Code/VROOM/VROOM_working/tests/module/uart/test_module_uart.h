@@ -22,10 +22,7 @@
 #ifndef TEST_MODULE_UART_H_
 #define TEST_MODULE_UART_H_
 
-#include "../../../includes.h"
-
-#define UART_PASSED 1
-#define UART_FAILED 0
+#include <stdbool.h>
 
 /**********************************************************************//**
  * @ingroup test_uart_pub

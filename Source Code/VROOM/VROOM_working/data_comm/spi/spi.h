@@ -16,9 +16,6 @@
 
 #ifndef SPI_H_
 #define SPI_H_
-
-#include "../../includes.h"
-#include <avr/io.h>
 #include <avr/interrupt.h>
 
 /**********************************************************************//**
@@ -135,6 +132,8 @@ int8_t spi_send(int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes);
 /**********************************************************************//**
  * @ingroup spi_pub
  * @brief Releases the SPI
+ *
+ * @param void
  *
  * @return void
  *************************************************************************/

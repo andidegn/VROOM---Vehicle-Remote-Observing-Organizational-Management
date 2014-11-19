@@ -1,28 +1,56 @@
-/*
- * at_commands.h
+/**********************************************************************//**
+ * @file: at_commands.h
  *
- * Created: 01-10-2014 00:20:07
- *  Author: Andi Degn
- */
+ * @Created: 01-10-2014 00:20:07
+ * @Author: Andi Degn
+ * @Version: 0.8
+ * @defgroup at AT Commands
+ * @{
+	 This is a header containing all the most
+	 relevant AT commands for this system
+ * @}
+ * @note NOT YET Complies MISRO 2004 standards
+ *************************************************************************/
+
 
 #ifndef AT_COMMANDS_H_
 #define AT_COMMANDS_H_
 
-/* Data carrier type */
-#define AT_CONTYPE_GPRS				"GPRS"
-#define AT_CONTYPE_CSD				"CSD"
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the Data carrier type
+ * @{
+ *************************************************************************/
+#define AT_CONTYPE_GPRS					"GPRS"
+#define AT_CONTYPE_CSD					"CSD"
+/* @} */
 
-/* diagnostics */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the diagnostics
+ * @{
+ *************************************************************************/
 #define AT_DIAG_TEST					"AT"
 #define AT_DIAG_ECHO_ENABLE				"ATE1"
 #define AT_DIAG_ECHO_DISABLE			"ATE0"
 #define AT_DIAG_MODEL_NO				"AT+CGMM"
 #define AT_DIAG_MANUFACTURER			"AT+CGMI"
+/* @} */
 
-/* enable +CREG: unsolicited result code */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Define for the enable +CREG: unsolicited result code
+ * @{
+ *************************************************************************/
 #define AT_ENABLE_CREG					"AT+CREG=1"
+/* @} */
 
-/* Set baud rate - Note autobauding does not support 115200bps */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the baud rate
+ * @note autobauding does not support 115200bps
+ * @{
+ *************************************************************************/
 #define AT_BAUD_AUTO					"AT+IPR=0"
 #define AT_BAUD_1200					"AT+IPR=1200"
 #define AT_BAUD_2400					"AT+IPR=2400"
@@ -32,37 +60,72 @@
 #define AT_BAUD_38K4					"AT+IPR=38400"
 #define AT_BAUD_57K6					"AT+IPR=57600"
 #define AT_BAUD_115K2					"AT+IPR=115200"
+/* @} */
 
-/* Set phone functionality */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the phone functionality
+ * @{
+ *************************************************************************/
 #define AT_MINIMUM_FUNCTIONALITY		"AT+CFUN=0"
 #define AT_FULL_FUNCTIONALITY			"AT+CFUN=1"
 #define AT_DISABLE_TX_RX				"AT+CFUN=4"
 #define AT_RESET_MODULE					"AT+CFUN=1,1"
-#define AT_ENTER_SIM_PIN(PIN)			"AT+CPIN="PIN
+#define AT_ENTER_SIM_PIN(PIN)			"AT+CPIN=" PIN
+/* @} */
 
-/* Incoming call */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the incoming call allowance setting
+ * @{
+ *************************************************************************/
 #define AT_ENABLE_INCOMING_CALLS		"AT+GSMBUSY=0"
 #define AT_FORBID_INCOMING_CALLS		"AT+GSMBUSY=1"
 #define AT_FORBID_VOICE_CALLS_ONLY		"AT+GSMBUSY=2"	/* Circuit-Switched Data (CSD) calls enabled */
+/* @} */
 
-/* Acceptable calls white list */
-#define AT_EMERGENCY_CALL_ONLY(NUMBER)	"AT+CWHITELIST=1,1,"NUMBER
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Define for the calls white list
+ * @{
+ *************************************************************************/
+#define AT_EMERGENCY_CALL_ONLY(NUMBER)	"AT+CWHITELIST=1,1," NUMBER
+/* @} */
 
-/* Flow control */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the flow control
+ * @{
+ *************************************************************************/
 #define AT_NO_FLOW_CONTROL				"AT+IFC=0,0"
 #define AT_SOFTWARE_FLOW_CONTROL		"AT+IFC=1,1" /* Should not be used for data calls */
 #define AT_HARDWARE_FLOW_CONTROL		"AT+IFC=2,2"
+/* @} */
 
-/* Store active profile */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the store active profile
+ * @{
+ *************************************************************************/
 #define AT_STORE_PROFILE0				"AT&W0"
 #define AT_STORE_PROFILE1				"AT&W1"
+/* @} */
 
-/* Reset Default Configuration */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the reset to default functionality
+ * @{
+ *************************************************************************/
 #define AT_RESTORE_PROFILE0				"ATZ0"
 #define AT_RESTORE_PROFILE1				"ATZ1"
 #define AT_MANUFACTURER_DEFAULTS		"AT&F0"
+/* @} */
 
-/*********************************** FTP ***************************************/
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines FTP setup and comminication
+ * @{
+ *************************************************************************/
 #define AT_FTP_BEARER1_CONTYPE(TYPE)	"AT+SAPBR=3,1,\"Contype\",\"" TYPE "\""
 #define AT_FTP_BEARER1_APN(NAME)		"AT+SAPBR=3,1,\"APN\",\"" NAME "\""
 
@@ -87,47 +150,74 @@
 #define AT_FTP_PUT_OPEN_SESSION			"AT+FTPPUT=1"
 #define AT_FTP_PUT_CLOSE_SESSION		"AT+FTPPUT=2,0"
 #define AT_FTP_PUT_FILE_SIZE(SIZE)		"AT+FTPPUT=2," SIZE
-/*******************************************************************************/
+/* @} */
 
-/* Module device status
-   Response: <CR><LF> +CPAS: [status] <CR><LF>
-   Status:
-			0 ready
-			1 unavailable
-			2 unknown
-			3 ringing
-			4 call in progress
-			5 asleep
-*/
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Define for the module device status
+ * The different responses are:\n
+ * 0 ready\n
+ * 1 unavailable\n
+ * 2 unknown\n
+ * 3 ringing\n
+ * 4 call in progress\n
+ * 5 asleep\n
+ * @{
+ *************************************************************************/
 #define AT_MODULE_DEVICE_STATUS "AT+CPAS"
+/* @} */
 
-/* call */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the call
+ * @{
+ *************************************************************************/
 #define AT_CALL_ANSWER "ATA"
 #define AT_CALL_HANG_UP "ATH0" // Disconnects all calls on the channel the command is requested
 #define AT_CALL_DIAL(NUMBER) "ATD" NUMBER ";" // Add phone number and end with an ';'
 #define AT_CALL_REDIAL "ATDL"
 #define AT_CALL_SHOW_NUM "AT+CNUM"
+/* @} */
 
-/* msg */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the message
+ * @{
+ *************************************************************************/
 #define AT_MSG_READ "AT+CMGR=" // Add number in end to select msg to read
 #define AT_MSG_DEL_ALL "AT+CMGD=1,4"
 #define AT_MSG_FORMAT "AT+CMGF=" // Add number
 #define AT_MSG_SEND "AT+CMGS\""
+/* @} */
 
-/* audio */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the audio setup
+ * @{
+ *************************************************************************/
 #define AT_AUDIO_GET_RINGER_VOLUME "AT+CRSL?"
 #define AT_AUDIO_SET_RINGER_VOLUME "AT+CRSL=" // Add number 0-4
 #define AT_AUDIO_GET_SPEAKER_VOLUME "AT+CLVL?"
 #define AT_AUDIO_SET_SPEAKER_VOLUME "AT+CLVL=" // Add number 0-100
 #define AT_AUDIO_GET_CURRENT_ALERT_SOUND "AT+CALS?"
 #define AT_AUDIO_SET_CURRENT_ALERT_SOUND "AT+CALS=" // Add number 0-19
+/* @} */
 
-/* connection */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the connection
+ * @{
+ *************************************************************************/
 #define AT_CONN_SIGNAL_STRENGTH "AT+CSQ"
 #define AT_CONN_ATTACH_STATUS "AT+CGATT?"
 #define AT_CONN_NETWORK_REGISTRATION_STATUS "AT+CREG?"
+/* @} */
 
-/* GPS */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines for the GPS
+ * @{
+ *************************************************************************/
 #define AT_GPS_POWER_STATE "AT+CGPSPWR?"
 #define AT_GPS_POWER_ON "AT+CGPSPWR=1"
 #define AT_GPS_POWER_OFF "AT+CGPSPWR=0"
@@ -136,8 +226,14 @@
 #define AT_GPS_RST_AUTONOMY "AT+CGPSRST=1"
 #define AT_GPS_GET_LOCATION "AT+CGPSINF=0" // Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course>
 #define AT_GPS_GET_STATUS "AT+CGPSSTATUS?"
+/* @} */
 
-/* CTRL+Z */
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Define for the ctrl+Z command
+ * @{
+ *************************************************************************/
 #define AT_CTRL_Z 26
+/* @} */
 
 #endif /* AT_COMMANDS_H_ */

@@ -12,7 +12,7 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-#include "../../includes.h"
+#include <avr/io.h>
 
 /********************************************************************//**
  @enum TIMER_PRESCALER

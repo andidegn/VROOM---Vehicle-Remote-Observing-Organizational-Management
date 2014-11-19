@@ -16,11 +16,11 @@
 #define MODULE_TEST_SENSORS				OFF
 #define MODULE_TEST_SIM908				OFF
 #define MODULE_TEST_CAR_PANEL			OFF
+#define MODULE_TEST_UART				OFF
 #define INTEGRATION_TEST_SIM908_SENSORS	ON
 
 #define UNIT_TEST_MSD					OFF
 
-#include "includes.h"
 #include "hardware_boards/lcd_board/lcd/lcd.h"
 #include "sensors/sensor_scheduler.h"
 #include "hardware_boards/sim908/sim908.h"
@@ -30,14 +30,10 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <stdlib.h>
 
 int main (void)
 {
-	const char degree = 0b011011111;
-	int16_t x_axis, y_axis, z_axis;
-	int16_t *_acc_buffer = malloc(3 * sizeof(int16_t));
-	float temp;
-	volatile uint32_t acc_total = 0;
 	char buf[20];
 
 	lcd_init(LCD_DISP_ON);
@@ -53,7 +49,7 @@ int main (void)
 	#endif /* UNIT_TEST */
 
 	#if MODULE_TEST_SENSORS
-		#include "sensors/test_module_sensors.h"
+		#include "tests/module/sensors/test_module_sensors.h"
 		sensors_init();
 		while (1)
 		{
@@ -90,8 +86,40 @@ int main (void)
 		}
 	#endif /* MODULE_TEST_CAR_PANEL */
 
+	#if MODULE_TEST_UART
+		#include "tests/module/uart/test_module_uart.h"
+
+		sei();
+		char *_test_strings[] = {
+			"½1234567890+´qwertyuiopåäsdfghjklæø'<zxcvbnm,.-§!\"#¤%&/()=?`QWERTYUIOPÅÂSDFGHJKLÆØ*>ZXCVBNM;:_@£$€{[]}|€~\µ'",
+			"test_string2",
+			"test_string3",
+			"test_string4"
+		};
+
+		char *_compare_strings[] = {
+			"½1234567890+´qwertyuiopåäsdfghjklæø'<zxcvbnm,.-§!\"#¤%&/()=?`QWERTYUIOPÅÂSDFGHJKLÆØ*>ZXCVBNM;:_@£$€{[]}|€~\µ'",	/* pass */
+			"test_",		/* pass */
+			"fail",			/* fail */
+			"test_string4_"	/* fail */
+		};
+
+		for (uint8_t k = 0; k < 4; k++) {
+			lcd_puts(test_module_uart_run(_test_strings[k], _compare_strings[k]) ? "PASSED" : "FAILED");
+			lcd_putc('\n');
+		}
+
+		while (1);
+	#endif /* MODULE_TEST_UART */
+
 	#if INTEGRATION_TEST_SIM908_SENSORS
-	sei();
+		int16_t *_acc_buffer = malloc(3 * sizeof(int16_t));
+		volatile uint32_t acc_total = 0;
+		const char degree = 0b011011111;
+		int16_t x_axis, y_axis, z_axis;
+		float temp;
+
+		sei();
 		car_panel_init();
 		SIM908_init();
 

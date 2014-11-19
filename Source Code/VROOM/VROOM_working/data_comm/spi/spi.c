@@ -12,7 +12,7 @@
  **************************************************************************/
 
 #include "spi.h"
-#include <util/delay.h>
+#include <stdlib.h>
 
 /**********************************************************************//**
  * @ingroup spi_priv
@@ -49,7 +49,7 @@ static int8_t _current_handle = -1;
 static handle_param _handles[MAX_HANDLES];
 static uint8_t _cs_pin;
 static uint8_t _cs_active_level;
-static volatile bool _is_busy = false;
+static volatile uint8_t _is_busy = 0;
 
 static uint8_t *_data_array;
 static uint8_t _no_of_bytes;
@@ -229,7 +229,7 @@ int8_t spi_send(int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes) {
 		}
 
 		/* setting the SPI in busy mode */
-		_is_busy = true;
+		_is_busy = 1U;
 
 		/* activating chip select on the slave */
 		_set_cs_level(CS_ACTIVE);
@@ -256,7 +256,7 @@ void spi_release(void) {
 	SPCR &= ~_BV(SPIE);
 	_set_cs_level(CS_INACTIVE);
 	_no_of_bytes = 0U;
-	_is_busy = false;
+	_is_busy = 0U;
 }
 
 /**********************************************************************//**

@@ -3,7 +3,7 @@
  *
  * @Created: 12-09-2014 20:34:36
  * @Author: Andi Degn
- * @Version: 0.4
+ * @Version: 0.5
  * @defgroup uart UART Driver
  * @{
 	 This is a driver for the UART0-1
@@ -24,10 +24,7 @@
 #ifndef UART_H_
 #define UART_H_
 
-#include <avr/io.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
-#include "../../includes.h"
 
 #ifndef F_CPU
 	#error: F_CPU must be defined!!!
@@ -38,10 +35,10 @@
  * @brief defines the size of the transmit buffers \n
  * @{
  *************************************************************************/
-#define UART0_TX_BUFFER_SIZE 64
-#define UART0_RX_BUFFER_SIZE 64
-#define UART1_TX_BUFFER_SIZE 64
-#define UART1_RX_BUFFER_SIZE 64
+#define UART0_TX_BUFFER_SIZE 8
+#define UART0_RX_BUFFER_SIZE 8
+#define UART1_TX_BUFFER_SIZE 8
+#define UART1_RX_BUFFER_SIZE 256
 /* @} */
 
 /**********************************************************************//**
@@ -50,7 +47,8 @@
  * @{
  *************************************************************************/
 #define UART_NO_DATA 0x100U
-#define UART_BUFFER_OVERRUN 0x200U
+#define UART_READ_NOT_ALOWED 0x200U
+#define UART_BUFFER_OVERRUN 0x300U
 /* @} */
 
 /**********************************************************************//**

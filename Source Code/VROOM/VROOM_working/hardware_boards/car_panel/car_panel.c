@@ -1,4 +1,4 @@
-/*
+/**********************************************************************//**
  * @file car_panel.c
  *
  * @author: Kenneth René Jensen
@@ -8,7 +8,7 @@
 	The panel includes two tact switches, a RGB LED and a single LED.
  * @}
  * @note NOT YET Complies MISRO 2004 standards
- */
+ *************************************************************************/
 
 #include <avr/interrupt.h>
 #include <util/delay.h>
@@ -39,12 +39,12 @@
  * Defines for the different mask bits
  * @{
  **************************************************************************/
-#define CANCEL			0
-#define ALARM			1
-#define CONTROL			3
-#define STATUS_RED		5
-#define STATUS_BLUE		6
-#define STATUS_GREEN	7
+#define BTN_CANCEL			0
+#define BTN_ALARM			1
+#define LED_CONTROL			3
+#define LED_STATUS_RED		5
+#define LED_STATUS_BLUE		6
+#define LED_STATUS_GREEN	7
 /* @} */
 
 /* Local variables */
@@ -62,16 +62,16 @@ void car_panel_init(void)
 	cli();
 
 	/* Set buttons to input and LEDs to output */
-	DDR(PORT) &= ~(1<<CANCEL | 1<<ALARM);
-	DDR(PORT) |= (1<<CONTROL) | (1<<STATUS_RED) | (1<<STATUS_BLUE) | (1<<STATUS_GREEN);
+	DDR(PORT) &= ~(1<<BTN_CANCEL | 1<<BTN_ALARM);
+	DDR(PORT) |= (1<<LED_CONTROL) | (1<<LED_STATUS_RED) | (1<<LED_STATUS_BLUE) | (1<<LED_STATUS_GREEN);
 
 	/* Pull-up on buttons */
-	PORT |= (1<<CANCEL | 1<<ALARM);
+	PORT |= (1<<BTN_CANCEL | 1<<BTN_ALARM);
 
 	/* Restore interrupt */
 	SREG = SREG_cpy;
 
-	car_panel_set_status(STATUS_OFFLINE);
+	car_panel_set_status(STATUS_RED);
 }
 
 /**********************************************************************//**
@@ -81,7 +81,8 @@ void car_panel_init(void)
 void car_panel_start(void)
 {
 	PCICR |= (1<<PCIE1);
-	PCMSK1 |= (1<<PCINT10);
+	car_panel_set_alarm_button_state(true);
+	car_panel_set_cancel_button_state(false);
 }
 
 /**********************************************************************//**
@@ -92,28 +93,28 @@ void car_panel_set_status(Status __s)
 {
 	switch (__s)
 	{
-		case STATUS_ATTENTION_TOGGLE :
-			PORT &= ~(1<<STATUS_RED | 1<<STATUS_GREEN);
-			PORT ^= (1<<STATUS_BLUE);
+		case STATUS_BLUE_TOGGLE :
+			PORT &= ~(1<<LED_STATUS_RED | 1<<LED_STATUS_GREEN);
+			PORT ^= (1<<LED_STATUS_BLUE);
 		break;
 
-		case STATUS_ATTENTION_CONSTANT :
-			PORT &= ~(1<<STATUS_RED | 1<<STATUS_GREEN);
-			PORT |= (1<<STATUS_BLUE);
+		case STATUS_BLUE :
+			PORT &= ~(1<<LED_STATUS_RED | 1<<LED_STATUS_GREEN);
+			PORT |= (1<<LED_STATUS_BLUE);
 		break;
 
-		case STATUS_ONLINE :
-			PORT &= ~(1<<STATUS_RED | 1<<STATUS_BLUE);
-			PORT |= (1<<STATUS_GREEN);
+		case STATUS_GREEN :
+			PORT &= ~(1<<LED_STATUS_RED | 1<<LED_STATUS_BLUE);
+			PORT |= (1<<LED_STATUS_GREEN);
 		break;
 
-		case STATUS_OFFLINE :
-			PORT &= ~(1<<STATUS_BLUE | 1<<STATUS_GREEN);
-			PORT |= (1<<STATUS_RED);
+		case STATUS_RED :
+			PORT &= ~(1<<LED_STATUS_BLUE | 1<<LED_STATUS_GREEN);
+			PORT |= (1<<LED_STATUS_RED);
 		break;
 
 		case STATUS_RESET :
-			PORT &= ~(1<<STATUS_RED | 1<<STATUS_GREEN | 1<<STATUS_BLUE);
+			PORT &= ~(1<<LED_STATUS_RED | 1<<LED_STATUS_GREEN | 1<<LED_STATUS_BLUE);
 		break;
 	}
 }
@@ -127,15 +128,15 @@ void car_panel_set_control(Control __c)
 	switch (__c)
 	{
 		case ALARM_WAITING :
-			PORT ^= (1<<CONTROL);
+			PORT ^= (1<<LED_CONTROL);
 		break;
 
 		case ALARM_ACTIVATED :
-			PORT |= (1<<CONTROL);
+			PORT |= (1<<LED_CONTROL);
 		break;
 
 		case ALARM_NOT_ACTIVATED :
-			PORT &= ~(1<<CONTROL);
+			PORT &= ~(1<<LED_CONTROL);
 		break;
 	}
 }
@@ -150,23 +151,24 @@ bool car_panel_wait_cancel_emmergency(void)
 	/* Saves the current state of the status register and disables global interrupt */
 	uint8_t SREG_cpy = SREG;
 	cli();
+	car_panel_set_alarm_button_state(false);
 
 	_alarm_cancelled = false;
 	_car_panel_counter = 0;
 
 	while (_car_panel_counter < BUTTON_PRESS_TIME)
 	{
-		_car_panel_counter % 2 == 0 ? car_panel_set_status(STATUS_ATTENTION_TOGGLE) : car_panel_set_status(STATUS_ATTENTION_CONSTANT);
+		_car_panel_counter % 2 == 0 ? car_panel_set_status(STATUS_RED) : car_panel_set_status(STATUS_BLUE);
 
-		if(!(PIN(PORT) & (1<<CANCEL)))
+		if(!(PIN(PORT) & (1<<BTN_CANCEL)))
 		{
 			_car_panel_counter = 0;
-			while (_car_panel_counter < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<CANCEL)))
+			while (_car_panel_counter < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<BTN_CANCEL)))
 			{
 				_delay_ms(100);
 				_car_panel_counter++;
 				car_panel_set_control(ALARM_WAITING);
-				car_panel_set_status(STATUS_ATTENTION_TOGGLE);
+				car_panel_set_status(STATUS_BLUE_TOGGLE);
 			}
 			_alarm_cancelled = (_car_panel_counter >= BUTTON_PRESS_TIME) ? true : false;
 			car_panel_set_control(ALARM_NOT_ACTIVATED);
@@ -178,15 +180,45 @@ bool car_panel_wait_cancel_emmergency(void)
 		}
 	}
 
-	_alarm_cancelled ? car_panel_set_control(ALARM_NOT_ACTIVATED) : car_panel_set_control(ALARM_ACTIVATED);
-	_alarm_cancelled ? car_panel_set_status(STATUS_RESET) : car_panel_set_status(STATUS_ATTENTION_CONSTANT);
-
-	_car_panel_counter = 0;
-
+	if (_alarm_cancelled)
+	{
+		car_panel_set_alarm_button_state(true);
+		car_panel_set_control(ALARM_NOT_ACTIVATED);
+		car_panel_set_status(STATUS_RESET);
+	} else {
+		car_panel_set_control(ALARM_ACTIVATED);
+		car_panel_set_status(STATUS_BLUE);
+	}
 	/* Restore interrupt */
 	SREG = SREG_cpy;
 
 	return _alarm_cancelled;
+}
+
+/**********************************************************************//**
+ * @ingroup cp_pub
+ * Sets the interrupt for the alarm button
+ *************************************************************************/
+void car_panel_set_alarm_button_state(bool state)
+{
+	if (state) {
+		PCMSK1 |= (1<<PCINT10);
+	} else {
+		PCMSK1 &= ~(1<<PCINT10);
+	}
+}
+
+/**********************************************************************//**
+ * @ingroup cp_pub
+ * Sets the interrupt for the cancel button
+ *************************************************************************/
+void car_panel_set_cancel_button_state(bool state)
+{
+	if (state) {
+		PCMSK1 |= (1<<PCINT9);
+	} else {
+		PCMSK1 &= ~(1<<PCINT9);
+	}
 }
 
 /**********************************************************************//**
@@ -199,35 +231,41 @@ bool car_panel_wait_cancel_emmergency(void)
  **************************************************************************/
 ISR (PCINT1_vect)
 {
-	if(!(PIN(PORT) & (1<<ALARM)))
+	if(!(PIN(PORT) & (1<<BTN_ALARM)))
 	{
-		while (_car_panel_counter < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<ALARM)))
+		_car_panel_counter = 0;
+		while (_car_panel_counter++ < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<BTN_ALARM)))
 		{
 			_delay_ms(100);
-			_car_panel_counter++;
 			car_panel_set_control(ALARM_WAITING);
 		}
 
 		if (_car_panel_counter >= BUTTON_PRESS_TIME )
 		{
-			/* Disable interrupts */
-			PCMSK1 &= ~(1<<PCINT10);
-
 			if (!car_panel_wait_cancel_emmergency())
 			{
 				EXT_EMERGENCY_FLAG = EMERGENCY_MANUAL_ALARM;
 			}
-			else
-			{
-				_car_panel_counter = 0;
-				/* Enable interrupts */
-				PCMSK1 |= (1<<PCINT10);
-			}
 		}
 		else
 		{
-			_car_panel_counter = 0;
 			car_panel_set_control(ALARM_NOT_ACTIVATED);
 		}
-    }
+    } else if (!(PIN(PORT) & (1 << BTN_CANCEL))) {
+		_car_panel_counter = 0;
+		while (_car_panel_counter++ < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<BTN_CANCEL)))
+		{
+			_delay_ms(100);
+			car_panel_set_control(ALARM_WAITING);
+		}
+
+		if (_car_panel_counter >= BUTTON_PRESS_TIME )
+		{
+			EXT_EMERGENCY_FLAG = EMERGENCY_NO_ALARM;
+			/* Enable interrupts for reset (CANCEL) button */
+			car_panel_set_alarm_button_state(true);
+			car_panel_set_cancel_button_state(false);
+			car_panel_set_control(ALARM_NOT_ACTIVATED);
+		}
+	}
 }

@@ -1,4 +1,4 @@
-/*
+/**********************************************************************//**
  * @file car_panel.h
  *
  * @author: Kenneth René Jensen
@@ -11,7 +11,7 @@
 	@defgroup cp_pub Public
  * @}
  * @note NOT YET Complies MISRO 2004 standards
- */
+ *************************************************************************/
 
 #ifndef CAR_PANEL_H_
 #define CAR_PANEL_H_
@@ -31,10 +31,10 @@
  *************************************************************************/
 typedef enum
 {
-	STATUS_ATTENTION_TOGGLE,
-	STATUS_ATTENTION_CONSTANT,
-	STATUS_OFFLINE,
-	STATUS_ONLINE,
+	STATUS_BLUE_TOGGLE,
+	STATUS_BLUE,
+	STATUS_RED,
+	STATUS_GREEN,
 	STATUS_RESET
 } Status;
 /* @} */
@@ -101,5 +101,25 @@ void car_panel_set_control(Control __c);
  * @return bool - true if alarm is canceled else false
  *************************************************************************/
 bool car_panel_wait_cancel_emmergency(void);
+
+/**********************************************************************//**
+ * @ingroup cp_pub
+ * @brief Sets the activation state of the alarm button
+ *
+ * @param bool state - true = activate; false = de-activate
+ *
+ * @return void
+ *************************************************************************/
+void car_panel_set_alarm_button_state(bool state);
+
+/**********************************************************************//**
+ * @ingroup cp_pub
+ * @brief Sets the activation state of the cancel button
+ *
+ * @param bool state - true = activate; false = de-activate
+ *
+ * @return void
+ *************************************************************************/
+void car_panel_set_cancel_button_state(bool state);
 
 #endif /* CAR_PANEL_H_ */

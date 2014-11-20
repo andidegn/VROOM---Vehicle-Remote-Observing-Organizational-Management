@@ -1,4 +1,4 @@
-/*
+/**********************************************************************//**
  * @file accident_data.c
  *
  * @author: Kenneth René Jensen
@@ -8,13 +8,14 @@
 	Comply eCall standards for MSD data structure.
  * @}
  * @note NOT YET Complies MISRO 2004 standards
- */
+ *************************************************************************/
 
 #include "accident_data.h"
 #include "../hardware_boards/sim908/sim908.h"
 #include "../vroom_config.h"
 
 /**********************************************************************//**
+ * @def BLANK_CHAR
  * @ingroup ad_priv
  * @brief define for the space char ' '
  * @{
@@ -40,9 +41,9 @@ static void _set_optional_data(const char *__s);
  * Starts the sequence required for placing an emergency call and send
  * an MSD packet.
  * Steps in function:\n
- * 1. Record needed data
- * 2. Create MSD structure
- * 3. sent structure over FTP
+ * 1. Record needed data\n
+ * 2. Create MSD structure\n
+ * 3. sent structure over FTP\n
  * 4. call to emergency number
  **************************************************************************/
 void emergency_alarm(void)
@@ -60,7 +61,7 @@ void emergency_alarm(void)
 
 	send_MSD(CONFIG_VROOM_ID);
 
-	/* call_PSAP(); */
+	/*call_PSAP();*/
 
 	EXT_EMERGENCY_FLAG = EMERGENCY_ALARM_SENT;
 }

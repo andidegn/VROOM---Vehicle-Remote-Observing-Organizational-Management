@@ -1,4 +1,4 @@
-/************************************************//*
+/**********************************************************************//**
  * @file: sim908.h
  *
  * @Created: 25-09-2014 13:09:36
@@ -10,7 +10,7 @@
 	 @defgroup sim908_priv Private
 	 @defgroup sim908_pub Public
  * @}
- */
+ *************************************************************************/
 
 #ifndef SIM908_GSM_H_
 #define SIM908_GSM_H_
@@ -58,7 +58,16 @@
 #define SIM908_FLAG_RUNNING			30
 
 /* AT response compare string literals */
+
+/**********************************************************************//**
+ * @def AT_Response
+ * @ingroup sim908_priv
+ * @brief defines the AT response string literals
+ * @{
+ *************************************************************************/
 #define SIM908_RESPONSE_RDY			"RDY"
+/* @} */
+
 #define SIM908_RESPONSE_OK			"OK"
 #define SIM908_RESPONSE_ERROR		"ERROR"
 #define SIM908_RESPONSE_CR_LF		"\r\n"
@@ -68,7 +77,6 @@
 #define SIM908_RESPONSE_GPS_PULL	"0,"
 #define SIM908_RESPONSE_FTP_PUT		"+FTPPUT:"
 #define SIM908_RESPONSE_CREG		"+CREG: " /* +CREG: 1 = connected */
-
 /********************************************************************************************************************//**
  @ingroup sim908
  @brief Initiates the SIM908 module

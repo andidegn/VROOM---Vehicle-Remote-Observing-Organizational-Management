@@ -1,9 +1,9 @@
-/*
+/**********************************************************************//**
  * test_module_uart.c
  *
  * Created: 26-09-2014 15:48:21
  *  Author: Andi Degn
- */
+ *************************************************************************/
 #include <avr/io.h>
 #include <stdlib.h>
 #include <util/delay.h>
@@ -51,7 +51,7 @@ bool test_module_uart_run(const char *__uart_test_string, const char *__uart_com
 
 	test_result = _validate_data();
 	free(_uart_received_data);
-	
+
 	if (test_result == true) {
 		/**********************************
 		 **** TESTING WITHOUT CALLBACK ****
@@ -59,13 +59,13 @@ bool test_module_uart_run(const char *__uart_test_string, const char *__uart_com
 		/* init both uarts without callback */
 		uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_460K8, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
 		uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_460K8, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, NULL);
-	
+
 		_index = 0;
 		_uart_received_data = malloc(RECEIVED_DATA_LENGTH * sizeof(char));
 
 		/* sending test string */
 		uart0_send_string(__uart_test_string);
-		
+
 		while ((tmp_char = uart1_read_char()) != UART_NO_DATA) {
 			uart1_send_char(tmp_char);
 			_delay_ms(1);
@@ -73,8 +73,8 @@ bool test_module_uart_run(const char *__uart_test_string, const char *__uart_com
 				*(_uart_received_data + _index++) = tmp_char;
 			}
 		}
-		
-	
+
+
 		test_result = _validate_data();
 		free(_uart_received_data);
 	}

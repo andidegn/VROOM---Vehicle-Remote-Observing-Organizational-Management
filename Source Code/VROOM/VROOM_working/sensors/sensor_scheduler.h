@@ -1,9 +1,9 @@
-/*
+/**********************************************************************//**
  * collect_sensor_data.h
  *
  * Created: 03-09-2014 13:55:08
  *  Author: Kenneth René Jensen
- */
+  *************************************************************************/
 
 #ifndef COLLECT_SENSOR_DATA_H_
 #define COLLECT_SENSOR_DATA_H_

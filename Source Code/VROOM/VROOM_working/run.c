@@ -1,9 +1,9 @@
-/*
+/**********************************************************************//**
  * Acc_test_fresh.c
  *
  * Created: 05-09-2014 08:13:16
  *  Author: Andi Degn
- */
+ *************************************************************************/
 
 /* #define F_CPU 11059200UL */
 
@@ -136,17 +136,20 @@ int main (void)
 			temp = get_temperature();
 			acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
 
-			if (acc_total > 1000)
+			if (acc_total > 1000 && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
 			{
 				if (!car_panel_wait_cancel_emmergency())
 					EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
 			}
 
-			EXT_CONNECTION_STATUS_FLAG == CREG_REGISTERED ? car_panel_set_status(STATUS_ONLINE) : car_panel_set_status(STATUS_OFFLINE);
+			EXT_CONNECTION_STATUS_FLAG == CREG_REGISTERED ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
 			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
 				emergency_alarm();
+
+				/* Enable cancel button for reset purpose */
+				car_panel_set_cancel_button_state(true);
 			}
 
 			lcd_clrscr();

@@ -1,17 +1,17 @@
-/********************************************//**
+/**********************************************************************//**
 @file vroom_config.h
 @author: Kenneth René Jensen
 @Version: 0.1
 @note NOT YET Complies MISRO 2004 standards
-************************************************/
+*************************************************************************/
 
 #ifndef VROOM_CONFIG_H_
 #define VROOM_CONFIG_H_
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST NO
-#define KENNETH_TEST YES
+#define ANDI_TEST YES
+#define KENNETH_TEST NO
 
 /* MSD details */
 #define CONFIG_TEST_CALL				true

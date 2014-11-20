@@ -1,4 +1,4 @@
-/********************************************//**
+/**********************************************************************//**
 @file tc72.c
 @author: Kenneth René Jensen
 @Version: 0.3
@@ -8,7 +8,7 @@
 	on the ATMEGA family processors.
 @}
 @note Complies MISRO 2004 standards
-************************************************/
+ *************************************************************************/
 #include <avr/interrupt.h>
 #include "tc72.h"
 #include "../sensor_scheduler.h"

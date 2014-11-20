@@ -1,3 +1,23 @@
+============================================
+Version 0.130 - 2014/11/20 by Andi & Kenneth
+============================================
+New Features, Improvements
+--------------------------
+* Added reset functionality after emergency in case of false alarm
+
+Fixed Bugs, Changes
+-------------------
+* Chaneged car_panel functionality structure
+* Added doxygen comments in some files
+
+ToDo
+----		
+- MISRA check all files
+- Split up module test in individual files
+- Module test for car panel needed
+- Doxygen structure proofing in all files
+
+
 ==================================
 Version 0.126 - 2014/11/19 by Andi
 ==================================
@@ -23,7 +43,6 @@ ToDo
 - MISRA check all files
 - Split up module test in individual files
 - Module test for car panel needed
-- Integrate the UART test in the unit test platform 
 - Doxygen structure proofing in all files
 
 

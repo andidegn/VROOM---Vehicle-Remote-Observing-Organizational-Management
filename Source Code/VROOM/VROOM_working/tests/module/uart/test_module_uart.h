@@ -1,4 +1,4 @@
-/*
+/**********************************************************************//**
  * @file: test_module_uart.h
  *
  * @Created: 26-09-2014 15:47:38
@@ -16,7 +16,7 @@
 	 @defgroup test_uart_priv Private
 	 @defgroup test_uart_pub Public
  * @}
- */
+ *************************************************************************/
 
 
 #ifndef TEST_MODULE_UART_H_

@@ -1,13 +1,12 @@
-/********************************************//**
+/**********************************************************************//**
 @file sim908.c
 @author: Kenneth René Jensen
 @Version: 0.5
-@defgroup sim908 Sim908_GSM
 @{
 	This is the driver for GSM/GPRS/GPS module sim908
 @}
 @note NOT YET Complies MISRO 2004 standards
-************************************************/
+ *************************************************************************/
 #include <stdlib.h>
 #include <string.h>
 #include <util/delay.h>
@@ -40,8 +39,23 @@ static uint8_t _gps_response_length = 0;
 /* External from accident_data */
 char EXT_MSD_FILENAME[24];
 
+/**********************************************************************//**
+ * @def CR
+ * @ingroup sim908_priv
+ * @brief define for the carriage return char '\r'
+ * @{
+ *************************************************************************/
 #define CR	0x0D /* '\r' */
+/* @} */
+
+/**********************************************************************//**
+ * @def LF
+ * @ingroup sim908_priv
+ * @brief define for the line feed char '\n'
+ * @{
+ *************************************************************************/
 #define LF	0x0A /* '\n' */
+/* @} */
 
 #define DDR(x) (*(&x - 1))
 #define PIN(x) (*(&x - 2))
@@ -106,9 +120,6 @@ void SIM908_init(void)
 	/* Setting up UART for external communication */
 	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _PC_callback);
 	#endif
-
-	///* Waiting for proper startup is required */
-	//_delay_ms(2500);
 }
 
 /********************************************************************************************************************//**

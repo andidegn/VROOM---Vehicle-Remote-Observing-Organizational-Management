@@ -1,4 +1,4 @@
-/*
+/**********************************************************************//**
  * @file accident_data.h
  *
  * @author: Kenneth René Jensen
@@ -11,7 +11,7 @@
 	@defgroup ad_pub Public
  * @}
  * @note NOT YET Complies MISRO 2004 standards
- */
+ *************************************************************************/
 
 #ifndef ACCIDENT_DATA_H_
 #define ACCIDENT_DATA_H_
@@ -19,6 +19,7 @@
 #include <avr/io.h>
 
 /**********************************************************************//**
+ * @struct MSD
  * @ingroup ad_pub
  * @brief struct containing the MSD for an accident report
  * @note According eCall standard EN 15722 the MSD consists of 140 bytes

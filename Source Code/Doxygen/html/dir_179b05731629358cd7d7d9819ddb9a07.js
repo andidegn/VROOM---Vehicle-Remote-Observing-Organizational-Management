@@ -1,0 +1,5 @@
+var dir_179b05731629358cd7d7d9819ddb9a07 =
+[
+    [ "spi", "dir_4260ae0ee5559b25db26e56b2b7b44a0.html", "dir_4260ae0ee5559b25db26e56b2b7b44a0" ],
+    [ "uart", "dir_1f6e31210ea61b529734802e62d81495.html", "dir_1f6e31210ea61b529734802e62d81495" ]
+];

@@ -12,11 +12,11 @@
  * @note NOT YET Complies MISRO 2004 standards
  *************************************************************************/
 
-
 #ifndef AT_COMMANDS_H_
 #define AT_COMMANDS_H_
 
 /**********************************************************************//**
+ * @def Data
  * @ingroup at
  * @brief Defines for the Data carrier type
  * @{
@@ -26,6 +26,7 @@
 /* @} */
 
 /**********************************************************************//**
+ * @def Diag
  * @ingroup at
  * @brief Defines for the diagnostics
  * @{
@@ -38,6 +39,7 @@
 /* @} */
 
 /**********************************************************************//**
+ * @def +CREG
  * @ingroup at
  * @brief Define for the enable +CREG: unsolicited result code
  * @{
@@ -46,6 +48,7 @@
 /* @} */
 
 /**********************************************************************//**
+ * @def BAUD
  * @ingroup at
  * @brief Defines for the baud rate
  * @note autobauding does not support 115200bps
@@ -63,6 +66,7 @@
 /* @} */
 
 /**********************************************************************//**
+ * @def Func
  * @ingroup at
  * @brief Defines for the phone functionality
  * @{

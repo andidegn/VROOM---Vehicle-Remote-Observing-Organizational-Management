@@ -4,6 +4,7 @@ Version 0.130 - 2014/11/20 by Andi & Kenneth
 New Features, Improvements
 --------------------------
 * Added reset functionality after emergency in case of false alarm
+* Added PSAP Simulatiion GUI
 
 Fixed Bugs, Changes
 -------------------

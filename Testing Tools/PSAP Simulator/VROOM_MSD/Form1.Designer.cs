@@ -43,9 +43,12 @@
             this.MSD_File_Watcher.Filter = "*.vroom";
             this.MSD_File_Watcher.SynchronizingObject = this;
             this.MSD_File_Watcher.Created += new System.IO.FileSystemEventHandler(this.MSD_File_Watcher_Changed);
+            this.MSD_File_Watcher.Deleted += new System.IO.FileSystemEventHandler(this.MSD_File_Watcher_Deleted);
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(512, 11);
@@ -56,6 +59,8 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(139, 11);
@@ -96,6 +101,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 282);
+            this.MinimumSize = new System.Drawing.Size(720, 282);
             this.Controls.Add(this.msd_details);
             this.Controls.Add(this.msd_text_box);
             this.Controls.Add(this.label2);

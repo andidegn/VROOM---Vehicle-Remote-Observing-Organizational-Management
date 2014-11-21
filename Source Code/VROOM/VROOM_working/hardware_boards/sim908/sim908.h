@@ -76,7 +76,12 @@
 #define SIM908_RESPONSE_GPS_READY	"GPS Ready"
 #define SIM908_RESPONSE_GPS_PULL	"0,"
 #define SIM908_RESPONSE_FTP_PUT		"+FTPPUT:"
-#define SIM908_RESPONSE_CREG		"+CREG: " /* +CREG: 1 = connected */
+#define SIM908_RESPONSE_CREG		"+CREG: "		/* +CREG: 1 = connected */
+
+/* ToDo in ISR */
+#define SIM908_RESPONSE_CALL_READY	"Call Ready"
+#define SIM908_RESPONSE_IP			"+CGPADDR: 1,"  /* +CGPADDR: 1,"10.132.118.14" */
+
 /********************************************************************************************************************//**
  @ingroup sim908
  @brief Initiates the SIM908 module

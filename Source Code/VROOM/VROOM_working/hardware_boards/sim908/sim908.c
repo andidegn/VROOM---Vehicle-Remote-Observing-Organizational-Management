@@ -32,6 +32,7 @@ static volatile uint8_t _system_running_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_ftp_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_gps_response_flag = SIM908_FLAG_WAITING;
+static volatile uint8_t _ack_ip_response_flag = SIM908_FLAG_WAITING;
 
 static uint8_t _gps_response_tail = 0;
 static uint8_t _gps_response_length = 0;
@@ -142,13 +143,22 @@ void SIM908_start(void)
 
 	/* Set baud rate to the host baud rate */
 	SIM908_cmd(AT_BAUD_115K2, true);
-
+	
 	#ifdef CONFIG_PIN
+	/* wait for +CPIN: SIM PIN */
+	_delay_ms(1000);
 	SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN), true);
 	#endif
+		
 	_setup_GSM();
 	_setup_GPRS_FTP();
 	_setup_GPS();
+	
+	/* Replace this with check - ToDo in ISR */
+	_wait_for_connection();
+	
+	/* Activate PDP context */
+	SIM908_cmd(AT_GPRS_ACTIVATE_PDP_CONTEXT, true);
 }
 
 /********************************************************************************************************************//**
@@ -234,7 +244,7 @@ void call_PSAP(void)
 void send_MSD(const char *__vroom_id)
 {
 	_wait_for_connection();
-
+	
 	uint8_t _retry_ctr = RETRY_ATTEMPTS;
 	char *filename = malloc(60 * sizeof(char));
 	/* 2014-10-12_13.17.34-(60192949).vroom */
@@ -405,13 +415,14 @@ static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def)
 */
 static bool _check_response(const char *defined_response) {
 	char c;
-	for(int i = 0; i < sizeof(defined_response); i++) {
+	bool ret = true;
+	uint8_t i;
+		
+	for(i = 0; i < strlen(defined_response) && ret != false; i++) {
 		c = _char_at(i, _rx_buffer_tail, _rx_response_length);
-		if (c != defined_response[i]) {
-			return false;
-		}
+		ret = (c == defined_response[i]) ? true : false;
 	}
-	return true;
+	return ret;
 }
 
 static char _char_at(uint8_t __index, uint8_t __tail, uint8_t __length) {
@@ -422,7 +433,7 @@ static char _char_at(uint8_t __index, uint8_t __tail, uint8_t __length) {
 /* mode, longitude, latitude, altitude, UTC time, TTFF, Satellite in view, speed over ground, course over ground */
 static void _get_GPS_response(void)
 {
-	_delay_ms(1000);
+	// _delay_ms(1000); /* Maybe needed */
 	do {
 		SIM908_cmd(AT_GPS_GET_LOCATION, false);
 	} while (!_wait_response(&_ack_gps_response_flag, SIM908_FLAG_GPS_PULL));
@@ -497,7 +508,14 @@ static uint8_t _set_direction(const char *__direction_raw)
  * @note May also be blank field
  *************************************************************************/
 static void _set_service_provider(uint8_t *__IPV4)
-{
+{	
+	/* ToDo in ISR */
+	/* Get IP response: +CGPADDR: 1,"10.132.118.14" */
+	//do {
+		//SIM908_cmd(AT_GPRS_GET_SERVICE_PROVIDER_IP, false);
+	//} while (!_wait_response(&_ack_ip_response_flag, ??));
+	//
+	char *IP;
 	/* ToDo - AT command to get IPV4 address */
 	uint8_t __SP_response[4] = {100, 0, 100, 0};
 

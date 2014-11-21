@@ -127,7 +127,16 @@
 
 /**********************************************************************//**
  * @ingroup at
- * @brief Defines FTP setup and comminication
+ * @brief Defines GPRS PDP context
+ * @{
+ *************************************************************************/
+#define AT_GPRS_ACTIVATE_PDP_CONTEXT	"AT+CGACT=1,1"
+#define AT_GPRS_GET_SERVICE_PROVIDER_IP "AT+CGPADDR=1"
+/* @} */
+
+/**********************************************************************//**
+ * @ingroup at
+ * @brief Defines FTP setup and communication
  * @{
  *************************************************************************/
 #define AT_FTP_BEARER1_CONTYPE(TYPE)	"AT+SAPBR=3,1,\"Contype\",\"" TYPE "\""

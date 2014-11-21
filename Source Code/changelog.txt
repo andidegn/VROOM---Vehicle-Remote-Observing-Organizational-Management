@@ -1,4 +1,30 @@
 ============================================
+Version 0.131 - 2014/11/21 by Kenneth
+============================================
+New Features, Improvements
+--------------------------
+* Added AT command to activate PDP context. The status must be 'Call Ready' before it can be activated 
+* Added AT command to get the sevice provider IPV4. Needs to be added in MSD
+
+Fixed Bugs, Changes
+-------------------
+* Fixed bug in _check_response in sim908  (strlen() used instead of sizeof() in array). 
+  
+ToDo
+----		
+- MISRA check all files
+- Split up module test in individual files
+- Module test for car panel needed
+- Doxygen structure proofing in all files
+- ToDo in SIM908:
+   - Get the IP from response
+   - Check for "Call Ready" response
+- Problems in SIM908:
+   - Sometimes 'O' is missing in the "OK" response (Don't know if this is fixed yet)
+   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+
+
+============================================
 Version 0.130 - 2014/11/20 by Andi & Kenneth
 ============================================
 New Features, Improvements
@@ -16,7 +42,10 @@ ToDo
 - Split up module test in individual files
 - Module test for car panel needed
 - Doxygen structure proofing in all files
-- Sometimes 'O' is missing in the 'OK' response in SIM908
+- Problems in SIM908:
+   - Sometimes 'O' is missing in the "OK" response
+   - CREG is sometimes detected as not connected, even though +CREG: 1
+   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
 ==================================

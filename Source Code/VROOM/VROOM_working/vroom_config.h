@@ -10,8 +10,8 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST YES
-#define KENNETH_TEST NO
+#define ANDI_TEST NO
+#define KENNETH_TEST YES
 
 /* MSD details */
 #define CONFIG_TEST_CALL				true

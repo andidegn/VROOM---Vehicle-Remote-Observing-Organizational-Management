@@ -63,14 +63,14 @@ typedef enum {	CREG_NOT_REGISTERED = 0,
 				CREG_SEARCHING = 2,
 				CREG_REGISTRATION_DENIED = 3,
 				CREG_UNKNOWN = 4,
-				CREG_REGISTERED_ROOMING = 5
+				CREG_REGISTERED_ROOMING = 5,
 } CONNECTION_STATUS_FLAG;
 /* @} */
 
 extern char EXT_MSD_FILENAME[24];
 extern MSD EXT_MSD;
 extern EMERGENCY_FLAG EXT_EMERGENCY_FLAG;
-extern CONNECTION_STATUS_FLAG EXT_CONNECTION_STATUS_FLAG;
+extern CONNECTION_STATUS_FLAG EXT_CONNECTION_CREG_FLAG;
 
 /**********************************************************************//**
  * @ingroup ad_pub

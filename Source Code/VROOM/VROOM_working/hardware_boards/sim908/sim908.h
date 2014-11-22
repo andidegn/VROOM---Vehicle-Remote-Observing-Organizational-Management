@@ -55,7 +55,11 @@
 #define SIM908_FLAG_GPS_OK			20
 #define SIM908_FLAG_GPS_PULL		21
 
-#define SIM908_FLAG_RUNNING			30
+#define SIM908_FLAG_CALL_READY		30
+
+#define SIM908_FLAG_IP_PULL			40
+
+#define SIM908_FLAG_RUNNING			100
 
 /* AT response compare string literals */
 
@@ -78,7 +82,6 @@
 #define SIM908_RESPONSE_FTP_PUT		"+FTPPUT:"
 #define SIM908_RESPONSE_CREG		"+CREG: "		/* +CREG: 1 = connected */
 
-/* ToDo in ISR */
 #define SIM908_RESPONSE_CALL_READY	"Call Ready"
 #define SIM908_RESPONSE_IP			"+CGPADDR: 1,"  /* +CGPADDR: 1,"10.132.118.14" */
 

@@ -33,6 +33,7 @@ static volatile uint8_t _ack_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_ftp_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_gps_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_ip_response_flag = SIM908_FLAG_WAITING;
+static volatile uint8_t _ack_call_ready_response_flag = SIM908_FLAG_WAITING;
 
 static uint8_t _gps_response_tail = 0;
 static uint8_t _gps_response_length = 0;
@@ -143,22 +144,22 @@ void SIM908_start(void)
 
 	/* Set baud rate to the host baud rate */
 	SIM908_cmd(AT_BAUD_115K2, true);
-	
+
 	#ifdef CONFIG_PIN
 	/* wait for +CPIN: SIM PIN */
 	_delay_ms(1000);
 	SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN), true);
 	#endif
-		
+
 	_setup_GSM();
 	_setup_GPRS_FTP();
 	_setup_GPS();
-	
+
 	/* Replace this with check - ToDo in ISR */
 	_wait_for_connection();
-	
+
 	/* Activate PDP context */
-	SIM908_cmd(AT_GPRS_ACTIVATE_PDP_CONTEXT, true);
+	//SIM908_cmd(AT_GPRS_PDP_ACTIVATE_CONTEXT, true);
 }
 
 /********************************************************************************************************************//**
@@ -206,7 +207,6 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	*__UTC_sec = _set_UTC_sec(*(output + 4));
 	*__course = _set_direction(*(output + 8));
 
-	_set_service_provider(__IPV4);
 	_set_MSD_filename(*(output + 4));
 
 	for (uint8_t i = 0; i < 9; i++) {
@@ -244,7 +244,7 @@ void call_PSAP(void)
 void send_MSD(const char *__vroom_id)
 {
 	_wait_for_connection();
-	
+
 	uint8_t _retry_ctr = RETRY_ATTEMPTS;
 	char *filename = malloc(60 * sizeof(char));
 	/* 2014-10-12_13.17.34-(60192949).vroom */
@@ -384,7 +384,7 @@ static void _GPS_enable(void)
 }
 
 static void _wait_for_connection(void) {
-	while (EXT_CONNECTION_STATUS_FLAG != CREG_REGISTERED) {
+	while (EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED && _ack_call_ready_response_flag != SIM908_FLAG_CALL_READY) {
 		_delay_ms(CONNECTION_RETRY_DELAY_IN_MS);
 	}
 }
@@ -417,7 +417,7 @@ static bool _check_response(const char *defined_response) {
 	char c;
 	bool ret = true;
 	uint8_t i;
-		
+
 	for(i = 0; i < strlen(defined_response) && ret != false; i++) {
 		c = _char_at(i, _rx_buffer_tail, _rx_response_length);
 		ret = (c == defined_response[i]) ? true : false;
@@ -506,15 +506,20 @@ static uint8_t _set_direction(const char *__direction_raw)
  * @param array of 4 bytes
  * @return void
  * @note May also be blank field
+ * DDDD  EEEEE L     EEEEE TTTTT EEEEE  ???
+ * D   D E     L     E       T   E     ?   ?
+ * D   D EEE   L     EEE     T   EEE      ?
+ * D   D E     L     E       T   E       ?
+ * DDDD  EEEEE LLLLL EEEEE   T   EEEEE   ?
  *************************************************************************/
 static void _set_service_provider(uint8_t *__IPV4)
-{	
+{
 	/* ToDo in ISR */
 	/* Get IP response: +CGPADDR: 1,"10.132.118.14" */
-	//do {
-		//SIM908_cmd(AT_GPRS_GET_SERVICE_PROVIDER_IP, false);
-	//} while (!_wait_response(&_ack_ip_response_flag, ??));
-	//
+	do {
+		SIM908_cmd(AT_GPRS_PDP_GET_IP, false);
+	} while (!_wait_response(&_ack_ip_response_flag, SIM908_FLAG_IP_PULL));
+
 	char *IP;
 	/* ToDo - AT command to get IPV4 address */
 	uint8_t __SP_response[4] = {100, 0, 100, 0};
@@ -605,7 +610,7 @@ void _SIM908_callback(char data)
 		} else if (_check_response(SIM908_RESPONSE_ERROR)) {									/* Error */
 			_ack_response_flag = SIM908_FLAG_ERROR;
 		} else if (_check_response(SIM908_RESPONSE_CREG)) {										/* CREG */
-			EXT_CONNECTION_STATUS_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) == '1' ? CREG_REGISTERED : CREG_NOT_REGISTERED;
+			EXT_CONNECTION_CREG_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) == '1' ? CREG_REGISTERED : CREG_NOT_REGISTERED;
 		} else if (_check_response(SIM908_RESPONSE_GPS_READY)) {								/* GPS Ready */
 			_ack_gps_response_flag = SIM908_FLAG_GPS_OK;
 		} else if (_check_response(SIM908_RESPONSE_FTP_PUT)) {									/* FTPPUT */
@@ -632,6 +637,8 @@ void _SIM908_callback(char data)
 			_system_running_flag = SIM908_FLAG_RUNNING;
 		} else if (_check_response(SIM908_RESPONSE_AT)) {									/* Sync AT cmd */
 			_rx_response_length = 0;
+		} else if (_check_response(SIM908_RESPONSE_CALL_READY)) {
+			_ack_call_ready_response_flag = SIM908_RESPONSE_CALL_READY;
 		}
 		_rx_response_length = 0;
 	}

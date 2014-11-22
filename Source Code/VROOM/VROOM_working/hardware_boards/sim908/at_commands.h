@@ -130,8 +130,9 @@
  * @brief Defines GPRS PDP context
  * @{
  *************************************************************************/
-#define AT_GPRS_ACTIVATE_PDP_CONTEXT	"AT+CGACT=1,1"
-#define AT_GPRS_GET_SERVICE_PROVIDER_IP "AT+CGPADDR=1"
+#define AT_GPRS_PDP_ACTIVATE_CONTEXT	"AT+CGACT=1,1"
+#define AT_GPRS_PDP_GET_IP				"AT+CGPADDR=1"
+#define AT_GPRS_PDP_SETUP_CONTEXT(APN)	"AT+CGDCONT=1,\"IP\",\"" APN "\""
 /* @} */
 
 /**********************************************************************//**

@@ -12,6 +12,7 @@
 #define NO 0
 #define ANDI_TEST YES
 #define KENNETH_TEST NO
+#define DEBUG_UART_ENABLE
 
 /* MSD details */
 #define CONFIG_TEST_CALL				true

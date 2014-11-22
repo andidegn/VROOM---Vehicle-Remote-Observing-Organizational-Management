@@ -54,6 +54,7 @@
 
 #define SIM908_FLAG_GPS_OK			20
 #define SIM908_FLAG_GPS_PULL		21
+#define SIM908_FLAG_GPS_PULL_OK		22
 
 #define SIM908_FLAG_CALL_READY		30
 
@@ -72,17 +73,18 @@
 #define SIM908_RESPONSE_RDY			"RDY"
 /* @} */
 
+#define SIM908_RESPONSE_SKIP		"AT+"
 #define SIM908_RESPONSE_OK			"OK"
-#define SIM908_RESPONSE_ERROR		"ERROR"
+#define SIM908_RESPONSE_ERROR		"ERR"
 #define SIM908_RESPONSE_CR_LF		"\r\n"
 #define SIM908_RESPONSE_LF_CR		"\n\r"
 #define SIM908_RESPONSE_AT			"AT"
-#define SIM908_RESPONSE_GPS_READY	"GPS Ready"
+#define SIM908_RESPONSE_GPS_READY	"GPS"
 #define SIM908_RESPONSE_GPS_PULL	"0,"
 #define SIM908_RESPONSE_FTP_PUT		"+FTPPUT:"
 #define SIM908_RESPONSE_CREG		"+CREG: "		/* +CREG: 1 = connected */
 
-#define SIM908_RESPONSE_CALL_READY	"Call Ready"
+#define SIM908_RESPONSE_CALL_READY	"Call"
 #define SIM908_RESPONSE_IP			"+CGPADDR: 1,"  /* +CGPADDR: 1,"10.132.118.14" */
 
 /********************************************************************************************************************//**

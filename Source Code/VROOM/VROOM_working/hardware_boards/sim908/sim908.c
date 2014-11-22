@@ -17,8 +17,7 @@
 #include "../../util/time.h"
 #include "../../vroom_config.h"
 
-#define PC_CALLBACK
-#define RX_BUFFER_SIZE 256
+#define RX_BUFFER_SIZE 128
 
 /* Local variables */
 static volatile uint8_t _CR_counter = 0;
@@ -29,6 +28,9 @@ static volatile uint8_t _rx_buffer_tail = 0;
 static volatile uint8_t _rx_response_length = 0;
 
 static volatile uint8_t _system_running_flag = SIM908_FLAG_WAITING;
+
+static volatile uint8_t _gps_pull_flag = SIM908_FLAG_WAITING;
+
 static volatile uint8_t _ack_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_ftp_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_gps_response_flag = SIM908_FLAG_WAITING;
@@ -85,7 +87,7 @@ static void _set_service_provider(uint8_t *__IPV4);
 
 void _SIM908_callback(char data);
 
-#ifdef  PC_CALLBACK
+#ifdef  DEBUG_UART_ENABLE
 void _PC_callback(char data);
 #endif
 
@@ -118,7 +120,7 @@ void SIM908_init(void)
 	/* Setting up UART for internal communication */
  	uart0_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _SIM908_callback);
 
-	#ifdef PC_CALLBACK
+	#ifdef DEBUG_UART_ENABLE
 	/* Setting up UART for external communication */
 	uart1_setup_async(UART_MODE_DOUBLE, UART_BAUD_115K2, UART_PARITY_DISABLED, UART_ONE_STOP_BIT, UART_8_BIT, _PC_callback);
 	#endif
@@ -134,7 +136,7 @@ void SIM908_start(void)
 {
 	while (_system_running_flag == SIM908_FLAG_WAITING);
 	/* Enable Echo */
-	SIM908_cmd(AT_DIAG_ECHO_ENABLE, true);
+	SIM908_cmd(AT_DIAG_ECHO_DISABLE, true);
 
 	/* Enable CREG unsolicited result code */
 	SIM908_cmd(AT_ENABLE_CREG, true);
@@ -176,6 +178,11 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 	uart0_send_string(__cmd);
 	uart0_send_char(CR);
 	uart0_send_char(LF);
+	#ifdef DEBUG_UART_ENABLE
+		uart1_send_string(__cmd);
+		uart1_send_char(CR);
+		uart1_send_char(LF);
+	#endif
 
 	return __wait_for_ok ? _wait_response(&_ack_response_flag, SIM908_FLAG_OK) : true;
 }
@@ -241,59 +248,68 @@ void call_PSAP(void)
  @param const char array with the VROOM ID (defined in vroom_config.h)
  @return void
  ************************************************************************************************************************/
-void send_MSD(const char *__vroom_id)
-{
-	_wait_for_connection();
+void send_MSD(const char *__vroom_id) {
+    _wait_for_connection();
 
-	uint8_t _retry_ctr = RETRY_ATTEMPTS;
-	char *filename = malloc(60 * sizeof(char));
-	/* 2014-10-12_13.17.34-(60192949).vroom */
-	strcpy(filename, AT_FTP_PUT_FILE_NAME);
-	strcat(filename, "\"");
-	strcat(filename, EXT_MSD_FILENAME);
-	strcat(filename, "-(");
-	strcat(filename, __vroom_id);
-	strcat(filename, ").vroom\"");
+    uint8_t _retry_ctr = RETRY_ATTEMPTS;
+    char *filename = malloc(60 * sizeof(char));
+    /* 2014-10-12_13.17.34-(60192949).vroom */
+    strcpy(filename, AT_FTP_PUT_FILE_NAME);
+    strcat(filename, "\"");
+    strcat(filename, EXT_MSD_FILENAME);
+    strcat(filename, "-(");
+    strcat(filename, __vroom_id);
+    strcat(filename, ").vroom\"");
 
-	SIM908_cmd(filename, true);
-	free(filename);
+    SIM908_cmd(filename, true);
+    free(filename);
 
-	while (!SIM908_cmd(AT_FTP_OPEN_BEARER1, true) && _retry_ctr-- > 0){
-		_delay_ms(1000);
-	}
+    while (!SIM908_cmd(AT_FTP_OPEN_BEARER1, true) && _retry_ctr-- > 0) {
+        _delay_ms(1000);
+    }
 
-	_retry_ctr = RETRY_ATTEMPTS;
-	do {
-		SIM908_cmd(AT_FTP_PUT_OPEN_SESSION, false);
-	} while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
+    if (_retry_ctr > -1) {
+        _retry_ctr = RETRY_ATTEMPTS;
+        do {
+            SIM908_cmd(AT_FTP_PUT_OPEN_SESSION, false);
+        } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
+    }
 
-	_retry_ctr = RETRY_ATTEMPTS;
-	do {
-		SIM908_cmd(AT_FTP_PUT_FILE_SIZE(CONFIG_FTP_FILE_SIZE), false);
-	} while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_SUCCESS) && _retry_ctr-- > 0);
+    if (_retry_ctr > -1) {
+        _retry_ctr = RETRY_ATTEMPTS;
+        do {
+            SIM908_cmd(AT_FTP_PUT_FILE_SIZE(CONFIG_FTP_FILE_SIZE), false);
+        } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_SUCCESS) && _retry_ctr-- > 0);
+    }
 
-	_retry_ctr = RETRY_ATTEMPTS;
-	do {
-		uart0_send_data((char*)(&EXT_MSD.control), 1);
-		uart0_send_data(&EXT_MSD.VIN[0], 20);
-		uart0_send_data((char*)(&EXT_MSD.time_stamp), 4);
-		uart0_send_data((char*)(&EXT_MSD.latitude), 4);
-		uart0_send_data((char*)(&EXT_MSD.longitude), 4);
-		uart0_send_data((char*)(&EXT_MSD.direction), 1);
-		uart0_send_data((char*)(&EXT_MSD.sp[0]), 4);
-		uart0_send_data(&EXT_MSD.optional_data[0], 102);
+    if (_retry_ctr > -1) {
+        _retry_ctr = RETRY_ATTEMPTS;
+        do {
+            uart0_send_data((char*)(&EXT_MSD.control), 1);
+            uart0_send_data(&EXT_MSD.VIN[0], 20);
+            uart0_send_data((char*)(&EXT_MSD.time_stamp), 4);
+            uart0_send_data((char*)(&EXT_MSD.latitude), 4);
+            uart0_send_data((char*)(&EXT_MSD.longitude), 4);
+            uart0_send_data((char*)(&EXT_MSD.direction), 1);
+            uart0_send_data((char*)(&EXT_MSD.sp[0]), 4);
+            uart0_send_data(&EXT_MSD.optional_data[0], 102);
 
-		uart0_send_char(CR);
-		uart0_send_char(LF);
-	} while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
+            uart0_send_char(CR);
+            uart0_send_char(LF);
+        } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
+    }
 
-	_retry_ctr = RETRY_ATTEMPTS;
-	_delay_ms(100);
-	do {
-		SIM908_cmd(AT_FTP_PUT_CLOSE_SESSION, true);
-	} while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_CLOSE) && _retry_ctr-- > 0);
+    if (_retry_ctr > -1) {
+        _retry_ctr = RETRY_ATTEMPTS;
+        _delay_ms(100);
+        do {
+            SIM908_cmd(AT_FTP_PUT_CLOSE_SESSION, true);
+        } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_CLOSE) && _retry_ctr-- > 0);
+    }
 
-	SIM908_cmd(AT_FTP_CLOSE_BEARER1, true);
+    if (_retry_ctr > -1) {
+        SIM908_cmd(AT_FTP_CLOSE_BEARER1, true);
+    }
 }
 
 /********************************************************************************************************************//**
@@ -419,6 +435,7 @@ static bool _check_response(const char *defined_response) {
 	uint8_t i;
 
 	for(i = 0; i < strlen(defined_response) && ret != false; i++) {
+	//for(i = 0; i < 2 && ret != false; i++) {
 		c = _char_at(i, _rx_buffer_tail, _rx_response_length);
 		ret = (c == defined_response[i]) ? true : false;
 	}
@@ -436,7 +453,8 @@ static void _get_GPS_response(void)
 	// _delay_ms(1000); /* Maybe needed */
 	do {
 		SIM908_cmd(AT_GPS_GET_LOCATION, false);
-	} while (!_wait_response(&_ack_gps_response_flag, SIM908_FLAG_GPS_PULL));
+		_gps_pull_flag = SIM908_FLAG_GPS_PULL;
+	} while (!_wait_response(&_ack_gps_response_flag, SIM908_FLAG_GPS_PULL_OK));
 }
 
 /********************************************************************************************************************//**
@@ -589,7 +607,7 @@ static void _set_MSD_filename(const char *__UTC_raw)
 
 void _SIM908_callback(char data)
 {
-	#ifdef PC_CALLBACK
+	#ifdef DEBUG_UART_ENABLE
 		uart1_send_char(data);																	/* Mirroring communication from sim908 to uart1 */
 	#endif
 
@@ -609,6 +627,13 @@ void _SIM908_callback(char data)
 			_ack_response_flag = SIM908_FLAG_OK;
 		} else if (_check_response(SIM908_RESPONSE_ERROR)) {									/* Error */
 			_ack_response_flag = SIM908_FLAG_ERROR;
+		} else if (_check_response(SIM908_RESPONSE_GPS_PULL)) {								/* GPS pull */
+			if (_gps_pull_flag == SIM908_FLAG_GPS_PULL) {
+				_gps_response_tail = _rx_buffer_tail;
+				_gps_response_length = _rx_response_length;
+				_ack_gps_response_flag = SIM908_FLAG_GPS_PULL_OK;
+				_gps_pull_flag = SIM908_FLAG_WAITING;
+			}
 		} else if (_check_response(SIM908_RESPONSE_CREG)) {										/* CREG */
 			EXT_CONNECTION_CREG_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) == '1' ? CREG_REGISTERED : CREG_NOT_REGISTERED;
 		} else if (_check_response(SIM908_RESPONSE_GPS_READY)) {								/* GPS Ready */
@@ -629,10 +654,6 @@ void _SIM908_callback(char data)
 			} else {
 				_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_ERROR;
 			}
-		} else if (_check_response(SIM908_RESPONSE_GPS_PULL)) {								/* GPS pull */
-			_gps_response_tail = _rx_buffer_tail;
-			_gps_response_length = _rx_response_length;
-			_ack_gps_response_flag = SIM908_FLAG_GPS_PULL;
 		} else if (_check_response(SIM908_RESPONSE_RDY)) {									/* System ready */
 			_system_running_flag = SIM908_FLAG_RUNNING;
 		} else if (_check_response(SIM908_RESPONSE_AT)) {									/* Sync AT cmd */
@@ -644,9 +665,10 @@ void _SIM908_callback(char data)
 	}
 }
 
-#ifdef PC_CALLBACK
+#ifdef DEBUG_UART_ENABLE
 void _PC_callback(char data)
 {
 	uart0_send_char(data);
+	uart1_send_char(data);
 }
 #endif

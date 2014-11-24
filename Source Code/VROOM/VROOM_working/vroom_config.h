@@ -10,12 +10,15 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST YES
-#define KENNETH_TEST NO
+#define ANDI_TEST NO
+#define KENNETH_TEST YES
 #define DEBUG_UART_ENABLE
 
 /* MSD details */
+#define CONFIG_MSD_FORMAT_VERSION		1
 #define CONFIG_TEST_CALL				true
+#define CONFIG_VEHICLE_CLASS			VEHICLE_CLASS_M(1)	/* M1 = No more than eight seats in addition to the driver’s seat, and having a maximum mass not exceeding 3.5 tons */
+#define CONFIG_FUEL_TYPE				FUEL_TYPE_GASOLINE
 #define CONFIG_VIN						"W0L000036V1940069"
 
 /* ISP APN */
@@ -28,7 +31,6 @@
 #define CONFIG_PSAP_NUMBER_EUROPE		"112"
 #define CONFIG_PSAP_NUMBER_TEST_KENNETH	"60192949" /* Only for testing */
 #define CONFIG_PSAP_NUMBER_TEST_ANDI	"60257898" /* Only for testing */
-
 
 #define CONFIG_EMERGENCY_PHONE_NUMBER	CONFIG_PSAP_NUMBER_TEST_KENNETH
 

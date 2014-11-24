@@ -34,8 +34,6 @@ static volatile uint8_t _gps_pull_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_ftp_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_gps_response_flag = SIM908_FLAG_WAITING;
-static volatile uint8_t _ack_ip_response_flag = SIM908_FLAG_WAITING;
-static volatile uint8_t _ack_call_ready_response_flag = SIM908_FLAG_WAITING;
 
 static uint8_t _gps_response_tail = 0;
 static uint8_t _gps_response_length = 0;
@@ -83,7 +81,6 @@ static uint32_t _set_UTC_sec(const char *__utc_raw);
 static int32_t _set_lat_long(const char *__lat_long_raw);
 static uint8_t _set_direction(const char *__direction_raw);
 static void _set_MSD_filename(const char *__UTC_raw);
-static void _set_service_provider(uint8_t *__IPV4);
 
 void _SIM908_callback(char data);
 
@@ -197,7 +194,7 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 		*__IPV4 points to sp in MSD structure
  @return void
  ************************************************************************************************************************/
-void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course, uint8_t *__IPV4)
+void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)
 {
 	char **output;
 	output = (char**)malloc(9 * sizeof(char*));
@@ -284,18 +281,23 @@ void send_MSD(const char *__vroom_id) {
 
     if (_retry_ctr > -1) {
         _retry_ctr = RETRY_ATTEMPTS;
+	
         do {
-            uart0_send_data((char*)(&EXT_MSD.control), 1);
-            uart0_send_data(&EXT_MSD.VIN[0], 20);
-            uart0_send_data((char*)(&EXT_MSD.time_stamp), 4);
-            uart0_send_data((char*)(&EXT_MSD.latitude), 4);
-            uart0_send_data((char*)(&EXT_MSD.longitude), 4);
-            uart0_send_data((char*)(&EXT_MSD.direction), 1);
-            uart0_send_data((char*)(&EXT_MSD.sp[0]), 4);
-            uart0_send_data(&EXT_MSD.optional_data[0], 102);
-
-            uart0_send_char(CR);
-            uart0_send_char(LF);
+			EXT_MSD.msg_identifier = RETRY_ATTEMPTS - _retry_ctr + 1;
+			uart0_send_data((char*)(&EXT_MSD.version), 1);
+			uart0_send_data((char*)(&EXT_MSD.msg_identifier), 1);			
+			uart0_send_data((char*)(&EXT_MSD.control), 1);	
+			uart0_send_data((char*)(&EXT_MSD.vehicle_class), 1);
+			uart0_send_data(&EXT_MSD.VIN[0], 20);
+			uart0_send_data((char*)(&EXT_MSD.fuel_type), 1);			
+			uart0_send_data((char*)(&EXT_MSD.time_stamp), 4);
+			uart0_send_data((char*)(&EXT_MSD.latitude), 4);
+			uart0_send_data((char*)(&EXT_MSD.longitude), 4);
+			uart0_send_data((char*)(&EXT_MSD.direction), 1);
+			uart0_send_data(&EXT_MSD.optional_data[0], 102);
+			
+			uart0_send_char(CR);
+			uart0_send_char(LF);	
         } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
     }
 
@@ -400,7 +402,7 @@ static void _GPS_enable(void)
 }
 
 static void _wait_for_connection(void) {
-	while (EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED && _ack_call_ready_response_flag != SIM908_FLAG_CALL_READY) {
+	while (EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED) {
 		_delay_ms(CONNECTION_RETRY_DELAY_IN_MS);
 	}
 }
@@ -518,47 +520,6 @@ static uint8_t _set_direction(const char *__direction_raw)
 	return (255.0*atoi(__direction_raw)/360.0);
 }
 
-/**********************************************************************//**
- * @ingroup sim908
- * @brief Set the service provider IPV4 address in MSD structure
- * @param array of 4 bytes
- * @return void
- * @note May also be blank field
- * DDDD  EEEEE L     EEEEE TTTTT EEEEE  ???
- * D   D E     L     E       T   E     ?   ?
- * D   D EEE   L     EEE     T   EEE      ?
- * D   D E     L     E       T   E       ?
- * DDDD  EEEEE LLLLL EEEEE   T   EEEEE   ?
- *************************************************************************/
-static void _set_service_provider(uint8_t *__IPV4)
-{
-	/* ToDo in ISR */
-	/* Get IP response: +CGPADDR: 1,"10.132.118.14" */
-	do {
-		SIM908_cmd(AT_GPRS_PDP_GET_IP, false);
-	} while (!_wait_response(&_ack_ip_response_flag, SIM908_FLAG_IP_PULL));
-
-	char *IP;
-	/* ToDo - AT command to get IPV4 address */
-	uint8_t __SP_response[4] = {100, 0, 100, 0};
-
-	if (__SP_response == NULL)
-	{
-		__IPV4[0] = 0;
-		__IPV4[1] = 0;
-		__IPV4[2] = 0;
-		__IPV4[3] = 0;
-	}
-
-	else
-	{
-		__IPV4[0] = __SP_response[0];
-		__IPV4[1] = __SP_response[1];
-		__IPV4[2] = __SP_response[2];
-		__IPV4[3] = __SP_response[3];
-	}
-}
-
 static void _raw_to_array(char **__output) {
 	uint8_t i, j = 0, ij = 0;
 	for (i = 0; i < _gps_response_length; i++) {
@@ -658,9 +619,7 @@ void _SIM908_callback(char data)
 			_system_running_flag = SIM908_FLAG_RUNNING;
 		} else if (_check_response(SIM908_RESPONSE_AT)) {									/* Sync AT cmd */
 			_rx_response_length = 0;
-		} else if (_check_response(SIM908_RESPONSE_CALL_READY)) {
-			_ack_call_ready_response_flag = SIM908_RESPONSE_CALL_READY;
-		}
+		} 
 		_rx_response_length = 0;
 	}
 }

@@ -2,7 +2,7 @@
  * @file accident_data.c
  *
  * @author: Kenneth René Jensen
- * @Version: 0.6
+ * @Version: 0.7
  * @{
 	This is the data for an Accident report.
 	Comply eCall standards for MSD data structure.
@@ -21,7 +21,7 @@
  * @{
  *************************************************************************/
 #define BLANK_CHAR 0x20
-/* @} */
+/** @} */
 
 /* Global variables */
 MSD EXT_MSD;
@@ -48,14 +48,16 @@ static void _set_optional_data(const char *__s);
  **************************************************************************/
 void emergency_alarm(void)
 {
-	set_MSD_data(&EXT_MSD.time_stamp, &EXT_MSD.latitude, &EXT_MSD.longitude, &EXT_MSD.direction, &EXT_MSD.sp[0]);
-
+	EXT_MSD.version = CONFIG_MSD_FORMAT_VERSION;
+	EXT_MSD.vehicle_class = CONFIG_VEHICLE_CLASS;
+	EXT_MSD.fuel_type = CONFIG_FUEL_TYPE;
+	
+	set_MSD_data(&EXT_MSD.time_stamp, &EXT_MSD.latitude, &EXT_MSD.longitude, &EXT_MSD.direction);
 	/* ToDo - Can position be trusted ?? */
 	_confidence_in_position = (EXT_MSD.latitude != 0 || EXT_MSD.longitude != 0) ? true : false;
-
 	_set_control_byte(_confidence_in_position, CONFIG_TEST_CALL, EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM, EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM);
 	_set_VIN(CONFIG_VIN);
-
+	
 	/* ToDo - get optional data */
 	_set_optional_data("ACC [G]: ? | Temp [°C]: ? | Passengers: ? | Speed [km/h]: ?");
 

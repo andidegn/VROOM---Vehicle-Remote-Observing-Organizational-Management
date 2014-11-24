@@ -2,7 +2,7 @@
  * @file accident_data.h
  *
  * @author: Kenneth René Jensen
- * @Version: 0.6
+ * @Version: 0.7
  * @defgroup ad Accident Data
  * @{
 	This is the data for an Accident report.
@@ -27,18 +27,52 @@
  *************************************************************************/
 typedef struct __attribute__((packed))
 {
-	/*  Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |
-		Bit no:		  |	       7			 |	       6		 |     5	 |			  4			  | 3 | 2 | 1 | 0 | */
-	uint8_t control;
-	char VIN[20];			/* VIN number 17-characters according to ISO 3779 (last 3 char is blank) */
-	uint32_t time_stamp;	/* UTC Seconds */
-	int32_t latitude;		/* Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) */
-	int32_t longitude;		/* Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) */
-	uint8_t direction;		/* Direction in degrees. The nearest integer of 360.0*value/255.0 (0 ? value ? 255) */
-	uint8_t sp[4];			/* Optional. Service provider IPV4 format or blank field */
-	char optional_data[102];/* Optional. Further data (e.g. crash information, number of passengers) or blank field */
+	uint8_t version;			/* Referring to a public register to determine the meaning and encoding of the optional data */
+	uint8_t msg_identifier;		/* Numbers of re-transmission */
+	uint8_t control;			/* | bit 7: Automatic activation | bit 6: Manual activation | bit 5: Test call | bit 4: Confidence in position | bit 3-0: Reserved | */
+	uint8_t vehicle_class;		/* | bit 7-4 = classification | bit 3-0: category | */
+	char VIN[20];				/* VIN number 17-characters (last 3 char is blank) ISO 3779 */
+	uint8_t fuel_type;		
+	uint32_t time_stamp;		/* UTC Seconds */
+	int32_t latitude;			/* Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) ISO 6709 */ 
+	int32_t longitude;			/* Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) ISO 6709 */
+	uint8_t direction;			/* Direction in degrees. The nearest integer of 360.0*value/255.0 (0 ? value ? 255) */
+	char optional_data[102];	/* Optional. Further data (e.g. crash information, number of passengers) or blank field */
 } MSD;
-/* @} */
+/** @} */
+
+/**********************************************************************//**
+ * @define FUEL_TYPES
+ * @ingroup ad_pub
+ * @brief Constant vehicle fuel type definition
+ * @{
+ *************************************************************************/
+#define FUEL_TYPE_OTHER			0
+#define FUEL_TYPE_GASOLINE		1
+#define FUEL_TYPE_DIESEL		2
+#define FUEL_TYPE_NATURALGAS	3
+#define FUEL_TYPE_PROPANE		4
+#define FUEL_TYPE_ELECTRIC		5
+#define FUEL_TYPE_HYDROGEN		6
+/** @} */
+
+/**********************************************************************//**
+ * @define VEHICLE_CLASS
+ * @ingroup ad_pub
+ * @brief Constant vehicle class type definition
+ * @note Upper nibble contains class definition: [SA, L, M, N, O, T, G]
+ * @	 Lower nibble contains class category definition: [1 - 7]
+ * @	 Details: http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32007L0046&from=EN 
+ * @{
+ *************************************************************************/
+#define VEHICLE_CLASS_L(category)	(1<<4 | category)	/* Motor vehicles with less than four wheels */
+#define VEHICLE_CLASS_M(category)	(2<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of passengers */
+#define VEHICLE_CLASS_N(category)	(3<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of goods */
+#define VEHICLE_CLASS_O(category)	(4<<4 | category)	/* Trailers (including semi–trailers) */
+#define VEHICLE_CLASS_T(category)	(5<<4 | category)	/* Agricultural and Forestry tractors */
+#define VEHICLE_CLASS_G(category)	(6<<4 | category)	/* Off-road vehicles */
+#define VEHICLE_CLASS_SA(category)	(7<<4 | category)	/* Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/
+/** @} */
 
 /**********************************************************************//**
  * @ingroup ad_pub
@@ -50,7 +84,7 @@ typedef enum {	EMERGENCY_NO_ALARM = 0,
 				EMERGENCY_AUTO_ALARM = 2,
 				EMERGENCY_ALARM_SENT = 3
 } EMERGENCY_FLAG;
-/* @} */
+/** @} */
 
 /**********************************************************************//**
  * @ingroup ad_pub
@@ -65,7 +99,7 @@ typedef enum {	CREG_NOT_REGISTERED = 0,
 				CREG_UNKNOWN = 4,
 				CREG_REGISTERED_ROOMING = 5,
 } CONNECTION_STATUS_FLAG;
-/* @} */
+/** @} */
 
 extern char EXT_MSD_FILENAME[24];
 extern MSD EXT_MSD;

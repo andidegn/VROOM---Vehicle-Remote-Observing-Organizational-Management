@@ -1,4 +1,28 @@
 ============================================
+Version 0.140 - 2014/11/24 by Kenneth
+============================================
+New Features, Improvements
+--------------------------
+* New structure of MSD: 
+  - Added Version, Message Identifier, Vehicle Class and Fuel Type definitions
+  - Deleted IPV4.
+* Added parameters for MSD into VROOM.config.h
+
+Fixed Bugs, Changes
+-------------------
+* IP is no longer relevant as new eCall standard for MSD has deleminated this
+
+ToDo
+----		
+- MISRA check all files
+- Split up module test in individual files
+- Module test for car panel needed
+- Doxygen structure proofing in all files
+- Notes SIM908:
+   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+
+
+============================================
 Version 0.131 - 2014/11/21 by Kenneth
 ============================================
 New Features, Improvements

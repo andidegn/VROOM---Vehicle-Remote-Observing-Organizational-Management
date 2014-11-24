@@ -24,7 +24,7 @@
 #define SCK PB1
 #define MOSI PB2
 #define MISO PB3
-/* @} */
+/** @} */
 
 /**********************************************************************//**
  * @ingroup spi_priv

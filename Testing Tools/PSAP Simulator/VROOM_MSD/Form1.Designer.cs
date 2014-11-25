@@ -34,6 +34,9 @@
             this.msd_text_box = new System.Windows.Forms.ListBox();
             this.msd_details = new System.Windows.Forms.ListBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.path_label = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.web_browser = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.MSD_File_Watcher)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +81,7 @@
             this.msd_text_box.Location = new System.Drawing.Point(470, 48);
             this.msd_text_box.Name = "msd_text_box";
             this.msd_text_box.ScrollAlwaysVisible = true;
-            this.msd_text_box.Size = new System.Drawing.Size(216, 199);
+            this.msd_text_box.Size = new System.Drawing.Size(216, 277);
             this.msd_text_box.TabIndex = 5;
             this.msd_text_box.SelectedIndexChanged += new System.EventHandler(this.msd_file_box_SelectedIndexChanged);
             // 
@@ -92,20 +95,52 @@
             this.msd_details.Location = new System.Drawing.Point(27, 48);
             this.msd_details.Name = "msd_details";
             this.msd_details.ScrollAlwaysVisible = true;
-            this.msd_details.Size = new System.Drawing.Size(405, 199);
+            this.msd_details.Size = new System.Drawing.Size(405, 316);
             this.msd_details.TabIndex = 12;
             this.msd_details.SelectedIndexChanged += new System.EventHandler(this.msd_details_SelectedIndexChanged);
+            this.msd_details.MouseDown += new System.Windows.Forms.MouseEventHandler(this.msd_details_MouseClick);
+            // 
+            // path_label
+            // 
+            this.path_label.AutoSize = true;
+            this.path_label.Location = new System.Drawing.Point(24, 377);
+            this.path_label.Name = "path_label";
+            this.path_label.Size = new System.Drawing.Size(80, 13);
+            this.path_label.TabIndex = 13;
+            this.path_label.Text = "MSD path label";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(470, 341);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(216, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "MSD path";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // web_browser
+            // 
+            this.web_browser.Location = new System.Drawing.Point(27, 48);
+            this.web_browser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.web_browser.Name = "web_browser";
+            this.web_browser.Size = new System.Drawing.Size(405, 316);
+            this.web_browser.TabIndex = 15;
+            this.web_browser.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(720, 282);
-            this.MinimumSize = new System.Drawing.Size(720, 282);
+            this.ClientSize = new System.Drawing.Size(720, 415);
+            this.Controls.Add(this.web_browser);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.path_label);
             this.Controls.Add(this.msd_details);
             this.Controls.Add(this.msd_text_box);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MinimumSize = new System.Drawing.Size(720, 282);
             this.Name = "Form1";
             this.Text = "PSAP Simulation GUI";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -123,6 +158,9 @@
         private System.Windows.Forms.ListBox msd_text_box;
         private System.Windows.Forms.ListBox msd_details;
         public System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label path_label;
+        private System.Windows.Forms.WebBrowser web_browser;
 
 
     }

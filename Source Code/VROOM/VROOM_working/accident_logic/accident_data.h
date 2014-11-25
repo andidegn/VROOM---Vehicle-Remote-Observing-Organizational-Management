@@ -36,7 +36,7 @@ typedef struct __attribute__((packed))
 	uint32_t time_stamp;		/* UTC Seconds */
 	int32_t latitude;			/* Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) ISO 6709 */ 
 	int32_t longitude;			/* Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) ISO 6709 */
-	uint8_t direction;			/* Direction in degrees. The nearest integer of 360.0*value/255.0 (0 ? value ? 255) */
+	uint8_t direction;			/* Direction in degrees. The nearest integer of 255.0*value/360.0 (0 <= value >= 255) */
 	char optional_data[102];	/* Optional. Further data (e.g. crash information, number of passengers) or blank field */
 } MSD;
 /** @} */

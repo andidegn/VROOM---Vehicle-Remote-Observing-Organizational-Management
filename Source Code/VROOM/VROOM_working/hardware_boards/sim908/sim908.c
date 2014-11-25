@@ -201,7 +201,7 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	for (uint8_t i = 0; i < 9; i++) {
 		*(output + i) = malloc(18 * sizeof(char));
 	}
-
+	
 	/* GPS raw data: <mode>,<longitude>,<latitude>,<altitude>,<UTC time>,<TTFF>,<num>,<speed>,<course> */
 	_get_GPS_response();
 	_raw_to_array(output);

@@ -8,7 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 using VROOM_MSD.Properties;
+using System.Reflection;
+using System.Resources;
+using Microsoft.Maps.MapControl.WPF;
+
 
 namespace VROOM_MSD
 {
@@ -17,51 +22,78 @@ namespace VROOM_MSD
         private string _path;
         private MSD_structure _msd;
         private int coordinate_idx;
+        private SoundPlayer ALARM;
 
         public Form1()
         {
             InitializeComponent();
+
+            mapUserControl.Map.Height = elementHost1.Height;
+            mapUserControl.Map.Width = elementHost1.Width;
+            mapUserControl.Map.CredentialsProvider = new ApplicationIdCredentialsProvider("AvNimwfYic8BJOuBLqc6jTBeroePra8F7kovNHua9kXACh4SPdBBtoL3a1PZCqmT");
+
+            mapUserControl.Map.Center = new Location(56.0, 11.0);
+            mapUserControl.Map.ZoomLevel = 5;
+            // mapUserControl.Map.Language = "da-DK";
+
+            // mapUserControl.Map.LocationToViewportPoint(new Location(55.8698711111111, 9.88794666666667));
+
             _path = Settings.Default.LastPath;
             path_label.Text = _path;
             MSD_File_Watcher.Path = _path;
+            folderBrowserDialog1.SelectedPath = _path;
+            folderBrowserDialog1.ShowNewFolderButton = false;
+            folderBrowserDialog1.Description = "Locate MSD folder (*.vroom files)";
+            _msd = new MSD_structure();
+            ALARM = new SoundPlayer(Path.GetFullPath("alert.wav"));
 
             String[] items = Directory.GetFiles(MSD_File_Watcher.Path, MSD_File_Watcher.Filter);
 
             foreach (String file in items)
             {
                 msd_text_box.Items.Add(Path.GetFileName(file));
+                _msd.AddNewMSD(ReadSelectedFile(_path + Path.GetFileName(file)));
             }
+
+            msd_text_box.SelectedIndex = msd_text_box.Items.Count - 1;
         }
         
         private void MSD_File_Watcher_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
             msd_text_box.Items.Add(e.Name);
+            _msd.AddNewMSD(ReadSelectedFile(_path + e.Name));
+
+            ALARM.Play();
         }
 
         private void MSD_File_Watcher_Deleted(object sender, System.IO.FileSystemEventArgs e)
         {
-            msd_text_box.Items.Remove(e.Name);
+            //msd_text_box.Items.Remove(e.Name);
+            //_msd.DeleteMSD(msd_text_box.SelectedIndex);
         }
 
         private Byte[] ReadSelectedFile(String path)
         {
-            FileStream msd = new FileStream(path, FileMode.Open);
-            byte[] data = new byte[msd.Length];
-            msd.Read(data, 0, (int)msd.Length);
-            msd.Close();
-
+            byte[] data;
+            using(FileStream msd = new FileStream(path, FileMode.Open ))
+            {
+                data = new byte[msd.Length];
+                msd.Read(data, 0, (int)msd.Length);
+            }
+      
             return data;
         }
 
         private void msd_file_box_SelectedIndexChanged(object sender, EventArgs e)
         {
+            web_browser.Visible = false;
+
             if (msd_text_box.SelectedItem != null) 
             {
-               _msd = new MSD_structure(ReadSelectedFile(_path + msd_text_box.Text));
-
+               _msd.DecodeMSD(msd_text_box.SelectedIndex);
                // msd_text_box.SelectedItem.ForeColor = System.Drawing.Color.Black;
                //(msd_text_box.SelectedItem.Text as Control).ForeColor = Color.Yellow;
-
+                //msd_text_box.BackColor = 
                msd_details.Items.Clear();
                msd_details.Items.Add("======================================================================");
                msd_details.Items.Add(msd_text_box.Text);
@@ -108,14 +140,18 @@ namespace VROOM_MSD
             // Right clicked on coordinates tap
             if (e.Button == MouseButtons.Right && msd_details.SelectedIndex == coordinate_idx)
             {
-                String lati = String.Format("{0}",_msd.GetLatitudeDD());
-                String longi = String.Format("{0}", _msd.GetLongitudeDD());
+                Pushpin pin = new Pushpin();
+                pin.Location = new Location(_msd.GetLatitudeDD(), _msd.GetLongitudeDD());
+                mapUserControl.Map.Children.Add(pin);
+            }
+        }
 
-                String link = "http://www.google.com/maps?q=" + lati.Replace(',', '.') + "," + longi.Replace(',', '.');
-                web_browser.Navigate(link);
-                web_browser.Visible = true;
-
-                MessageBox.Show("ToDo");
+        private void msd_file_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Right clicked on MSD File
+            if (e.Button == MouseButtons.Right)
+            {
+                MessageBox.Show(_msd.GetMSDHexString(msd_text_box.SelectedIndex), ".vroom file HEX view", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
         }
 
@@ -126,8 +162,7 @@ namespace VROOM_MSD
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.SelectedPath = _path;
+        {            
             DialogResult result = folderBrowserDialog1.ShowDialog();
             if (result == DialogResult.OK) 
             {

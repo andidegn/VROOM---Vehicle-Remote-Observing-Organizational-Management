@@ -37,7 +37,12 @@
             this.path_label = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.web_browser = new System.Windows.Forms.WebBrowser();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.mapUserControl = new VROOM_MSD.MapUserControl();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             ((System.ComponentModel.ISupportInitialize)(this.MSD_File_Watcher)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // MSD_File_Watcher
@@ -84,6 +89,7 @@
             this.msd_text_box.Size = new System.Drawing.Size(216, 277);
             this.msd_text_box.TabIndex = 5;
             this.msd_text_box.SelectedIndexChanged += new System.EventHandler(this.msd_file_box_SelectedIndexChanged);
+            this.msd_text_box.MouseDown += new System.Windows.Forms.MouseEventHandler(this.msd_file_MouseClick);
             // 
             // msd_details
             // 
@@ -102,6 +108,7 @@
             // 
             // path_label
             // 
+            this.path_label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.path_label.AutoSize = true;
             this.path_label.Location = new System.Drawing.Point(24, 377);
             this.path_label.Name = "path_label";
@@ -111,6 +118,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(470, 341);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(216, 23);
@@ -128,11 +136,35 @@
             this.web_browser.TabIndex = 15;
             this.web_browser.Visible = false;
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // elementHost1
+            // 
+            this.elementHost1.Location = new System.Drawing.Point(300, 161);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(234, 174);
+            this.elementHost1.TabIndex = 16;
+            this.elementHost1.Text = "Map";
+            this.elementHost1.Child = this.mapUserControl;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 415);
+            this.splitter1.TabIndex = 17;
+            this.splitter1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 415);
+            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.web_browser);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.path_label);
@@ -145,6 +177,7 @@
             this.Text = "PSAP Simulation GUI";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.MSD_File_Watcher)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,6 +194,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label path_label;
         private System.Windows.Forms.WebBrowser web_browser;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private MapUserControl mapUserControl;
+        private System.Windows.Forms.Splitter splitter1;
 
 
     }

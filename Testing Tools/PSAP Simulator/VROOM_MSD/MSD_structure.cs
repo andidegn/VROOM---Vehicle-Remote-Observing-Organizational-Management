@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace VROOM_MSD
 {
@@ -20,13 +21,42 @@ namespace VROOM_MSD
         public Byte direction { get; private set; }
         public String optional { get; private set; }
 
+        private List<byte[]> MSD_Data_bin;
         private Byte[] MSD;
-        public MSD_structure(Byte[] vroom_file_data)
+
+        public MSD_structure()
         {
-            int index = 0;
+            MSD_Data_bin = new List<byte[]>();
+        }
+
+        public void AddNewMSD(Byte[] vroom_file_data)
+        {
+            MSD_Data_bin.Add(vroom_file_data);
+        }
+
+        public void DeleteMSD(int index)
+        {
+            MSD_Data_bin.RemoveAt(index);
+        }
+
+        public String GetMSDHexString(int index)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (byte item in MSD_Data_bin[index])
+            {
+                sb.Append(String.Format("0x{0:X2} ", item));
+            }
+
+            return sb.ToString();
+        }
+
+        public void DecodeMSD(int index)
+        {
+            int i = 0;
             int offset = 0;
 
-            MSD = vroom_file_data;
+            MSD = MSD_Data_bin[index];
 
             version = MSD[offset++];
             msg_identifier = MSD[offset++];
@@ -38,11 +68,11 @@ namespace VROOM_MSD
 
             fuel_type = MSD[offset++];
 
-            for (index = 3; index >= 0; index--)
+            for (i = 3; i >= 0; i--)
             {
-                UTC_sec = BitConverter.ToUInt32(MSD, (index + offset));
-                latutude = BitConverter.ToInt32(MSD, (index + offset + 4));
-                longitude = BitConverter.ToInt32(MSD, (index + offset + 8));
+                UTC_sec = BitConverter.ToUInt32(MSD, (i + offset));
+                latutude = BitConverter.ToInt32(MSD, (i + offset + 4));
+                longitude = BitConverter.ToInt32(MSD, (i + offset + 8));
             }
             offset += 12;
 
@@ -53,7 +83,7 @@ namespace VROOM_MSD
 
         public String GetControlByteString()
         {
-            return Convert.ToString(control, 2);
+            return Convert.ToString(control, 2).PadLeft(8, '0');
         }
 
         private String GetString(int offset, int number_of_bytes)

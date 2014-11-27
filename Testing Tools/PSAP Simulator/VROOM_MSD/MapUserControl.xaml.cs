@@ -24,6 +24,13 @@ namespace VROOM_MSD
         public MapUserControl()
         {
             InitializeComponent();
+
+          //  Map.MouseWheel += Map_MouseWheel;
+        }
+
+        private void Map_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            //  MessageBox.Show("HEJ");
         }
     }
 }

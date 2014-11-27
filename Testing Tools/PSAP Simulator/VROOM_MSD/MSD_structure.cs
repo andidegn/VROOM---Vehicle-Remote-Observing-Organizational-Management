@@ -21,29 +21,29 @@ namespace VROOM_MSD
         public Byte direction { get; private set; }
         public String optional { get; private set; }
 
-        private List<byte[]> MSD_Data_bin;
+        private Dictionary<String,byte[]> MSD_Data_bin;
         private Byte[] MSD;
 
         public MSD_structure()
         {
-            MSD_Data_bin = new List<byte[]>();
+            MSD_Data_bin = new Dictionary<String, byte[]>();
         }
 
-        public void AddNewMSD(Byte[] vroom_file_data)
+        public void AddNewMSD(String key, Byte[] vroom_file_data)
         {
-            MSD_Data_bin.Add(vroom_file_data);
+            MSD_Data_bin[key] = vroom_file_data;
         }
 
-        public void DeleteMSD(int index)
+        public void DeleteMSD(String key)
         {
-            MSD_Data_bin.RemoveAt(index);
+            MSD_Data_bin.Remove(key);
         }
 
-        public String GetMSDHexString(int index)
+        public String GetMSDHexString(String key)
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (byte item in MSD_Data_bin[index])
+            foreach (byte item in MSD_Data_bin[key])
             {
                 sb.Append(String.Format("0x{0:X2} ", item));
             }
@@ -51,12 +51,12 @@ namespace VROOM_MSD
             return sb.ToString();
         }
 
-        public void DecodeMSD(int index)
+        public void DecodeMSD(String key)
         {
             int i = 0;
             int offset = 0;
 
-            MSD = MSD_Data_bin[index];
+            MSD = MSD_Data_bin[key];
 
             version = MSD[offset++];
             msg_identifier = MSD[offset++];

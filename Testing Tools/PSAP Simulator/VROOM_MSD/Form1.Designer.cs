@@ -1,6 +1,6 @@
 ﻿namespace VROOM_MSD
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MSD_File_Watcher = new System.IO.FileSystemWatcher();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,13 +37,14 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.path_label = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.web_browser = new System.Windows.Forms.WebBrowser();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.MapViewStyle = new System.Windows.Forms.ComboBox();
+            this.vroom_logo = new System.Windows.Forms.PictureBox();
+            this.elementHost = new System.Windows.Forms.Integration.ElementHost();
             this.mapUserControl = new VROOM_MSD.MapUserControl();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             ((System.ComponentModel.ISupportInitialize)(this.MSD_File_Watcher)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vroom_logo)).BeginInit();
             this.SuspendLayout();
             // 
             // MSD_File_Watcher
@@ -55,129 +57,95 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(512, 11);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 29);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "MSD Files";
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(139, 11);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(146, 29);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "MSD Details";
             // 
             // msd_text_box
             // 
-            this.msd_text_box.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.msd_text_box, "msd_text_box");
             this.msd_text_box.ForeColor = System.Drawing.Color.DarkRed;
             this.msd_text_box.FormattingEnabled = true;
-            this.msd_text_box.Location = new System.Drawing.Point(470, 48);
             this.msd_text_box.Name = "msd_text_box";
-            this.msd_text_box.ScrollAlwaysVisible = true;
-            this.msd_text_box.Size = new System.Drawing.Size(216, 277);
-            this.msd_text_box.TabIndex = 5;
             this.msd_text_box.SelectedIndexChanged += new System.EventHandler(this.msd_file_box_SelectedIndexChanged);
             this.msd_text_box.MouseDown += new System.Windows.Forms.MouseEventHandler(this.msd_file_MouseClick);
             // 
             // msd_details
             // 
             this.msd_details.AccessibleRole = System.Windows.Forms.AccessibleRole.Alert;
-            this.msd_details.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.msd_details, "msd_details");
             this.msd_details.FormattingEnabled = true;
-            this.msd_details.Location = new System.Drawing.Point(27, 48);
             this.msd_details.Name = "msd_details";
-            this.msd_details.ScrollAlwaysVisible = true;
-            this.msd_details.Size = new System.Drawing.Size(405, 316);
-            this.msd_details.TabIndex = 12;
             this.msd_details.SelectedIndexChanged += new System.EventHandler(this.msd_details_SelectedIndexChanged);
             this.msd_details.MouseDown += new System.Windows.Forms.MouseEventHandler(this.msd_details_MouseClick);
             // 
             // path_label
             // 
-            this.path_label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.path_label.AutoSize = true;
-            this.path_label.Location = new System.Drawing.Point(24, 377);
+            resources.ApplyResources(this.path_label, "path_label");
             this.path_label.Name = "path_label";
-            this.path_label.Size = new System.Drawing.Size(80, 13);
-            this.path_label.TabIndex = 13;
-            this.path_label.Text = "MSD path label";
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(470, 341);
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(216, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "MSD path";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // web_browser
-            // 
-            this.web_browser.Location = new System.Drawing.Point(27, 48);
-            this.web_browser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.web_browser.Name = "web_browser";
-            this.web_browser.Size = new System.Drawing.Size(405, 316);
-            this.web_browser.TabIndex = 15;
-            this.web_browser.Visible = false;
             // 
             // fileSystemWatcher1
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // elementHost1
+            // MapViewStyle
             // 
-            this.elementHost1.Location = new System.Drawing.Point(300, 161);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(234, 174);
-            this.elementHost1.TabIndex = 16;
-            this.elementHost1.Text = "Map";
-            this.elementHost1.Child = this.mapUserControl;
+            this.MapViewStyle.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.MapViewStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.MapViewStyle, "MapViewStyle");
+            this.MapViewStyle.FormattingEnabled = true;
+            this.MapViewStyle.Items.AddRange(new object[] {
+            resources.GetString("MapViewStyle.Items"),
+            resources.GetString("MapViewStyle.Items1"),
+            resources.GetString("MapViewStyle.Items2")});
+            this.MapViewStyle.Name = "MapViewStyle";
+            this.MapViewStyle.SelectedIndexChanged += new System.EventHandler(this.MapViewStype_SelectedIndexChanged);
             // 
-            // splitter1
+            // vroom_logo
             // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 415);
-            this.splitter1.TabIndex = 17;
-            this.splitter1.TabStop = false;
+            resources.ApplyResources(this.vroom_logo, "vroom_logo");
+            this.vroom_logo.Name = "vroom_logo";
+            this.vroom_logo.TabStop = false;
             // 
-            // Form1
+            // elementHost
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this.elementHost, "elementHost");
+            this.elementHost.BackColorTransparent = true;
+            this.elementHost.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.elementHost.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.elementHost.Name = "elementHost";
+            this.elementHost.Child = this.mapUserControl;
+            // 
+            // MainForm
+            // 
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(720, 415);
-            this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.elementHost1);
-            this.Controls.Add(this.web_browser);
+            this.Controls.Add(this.vroom_logo);
+            this.Controls.Add(this.MapViewStyle);
+            this.Controls.Add(this.elementHost);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.path_label);
             this.Controls.Add(this.msd_details);
             this.Controls.Add(this.msd_text_box);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.MinimumSize = new System.Drawing.Size(720, 282);
-            this.Name = "Form1";
-            this.Text = "PSAP Simulation GUI";
+            this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.MSD_File_Watcher)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vroom_logo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,13 +161,11 @@
         public System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label path_label;
-        private System.Windows.Forms.WebBrowser web_browser;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
-        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private System.Windows.Forms.Integration.ElementHost elementHost;
         private MapUserControl mapUserControl;
-        private System.Windows.Forms.Splitter splitter1;
-
-
+        private System.Windows.Forms.ComboBox MapViewStyle;
+        private System.Windows.Forms.PictureBox vroom_logo;
     }
 }
 

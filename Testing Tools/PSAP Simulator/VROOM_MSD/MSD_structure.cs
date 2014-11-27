@@ -21,12 +21,14 @@ namespace VROOM_MSD
         public Byte direction { get; private set; }
         public String optional { get; private set; }
 
+        private DateTime UTC_time_stamp;
         private Dictionary<String,byte[]> MSD_Data_bin;
         private Byte[] MSD;
 
         public MSD_structure()
         {
             MSD_Data_bin = new Dictionary<String, byte[]>();
+            UTC_time_stamp = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
         }
 
         public void AddNewMSD(String key, Byte[] vroom_file_data)
@@ -163,6 +165,11 @@ namespace VROOM_MSD
         public Double GetLongitudeDD()
         {
             return longitude / 3600000.0;
+        }
+
+        public DateTime GetTimeStamp()
+        {
+           return UTC_time_stamp.AddSeconds(UTC_sec).ToLocalTime();
         }
     }
 }

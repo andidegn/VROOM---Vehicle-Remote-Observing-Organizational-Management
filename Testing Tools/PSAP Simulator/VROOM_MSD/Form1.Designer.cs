@@ -82,6 +82,7 @@
             this.msd_details.Name = "msd_details";
             this.msd_details.SelectedIndexChanged += new System.EventHandler(this.msd_details_SelectedIndexChanged);
             this.msd_details.MouseDown += new System.Windows.Forms.MouseEventHandler(this.msd_details_MouseClick);
+            this.msd_details.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.msd_details_MouseDoubleClick);
             // 
             // path_label
             // 
@@ -102,9 +103,9 @@
             // 
             // MapViewStyle
             // 
+            resources.ApplyResources(this.MapViewStyle, "MapViewStyle");
             this.MapViewStyle.BackColor = System.Drawing.SystemColors.ControlLight;
             this.MapViewStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.MapViewStyle, "MapViewStyle");
             this.MapViewStyle.FormattingEnabled = true;
             this.MapViewStyle.Items.AddRange(new object[] {
             resources.GetString("MapViewStyle.Items"),
@@ -141,6 +142,7 @@
             this.Controls.Add(this.msd_text_box);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.HelpButton = true;
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.MSD_File_Watcher)).EndInit();
@@ -163,9 +165,9 @@
         private System.Windows.Forms.Label path_label;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Integration.ElementHost elementHost;
-        private MapUserControl mapUserControl;
         private System.Windows.Forms.ComboBox MapViewStyle;
         private System.Windows.Forms.PictureBox vroom_logo;
+        private MapUserControl mapUserControl;
     }
 }
 

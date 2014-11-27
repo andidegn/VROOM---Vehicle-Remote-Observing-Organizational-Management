@@ -24,8 +24,8 @@ namespace VROOM_MSD
         private int coordinate_idx;
         private SoundPlayer ALARM;
         private Location location;
-        private readonly Location DENMARK = new Location(56.0, 10.4);
-        private readonly double ZOOM = 5.9;
+        private readonly Location DENMARK = new Location(56.0, 10.5);
+        private readonly double ZOOM = 6.35;
 
         public MainForm()
         {
@@ -116,7 +116,6 @@ namespace VROOM_MSD
                 msd_details.Items.Add("======================================================================");
                 msd_details.Items.Add(String.Format("Version:\t\t{0}", _msd.version));
                 msd_details.Items.Add(String.Format("Msg. Identifier:\t{0}", _msd.msg_identifier));
-
                 msd_details.Items.Add("-------------------------------------------------");
                 msd_details.Items.Add(String.Format("Control Byte:\t{0}", _msd.GetControlByteString()));
                 msd_details.Items.Add(" - Auto alarm:\t" + _msd.ControlAutoAlarm());
@@ -124,21 +123,31 @@ namespace VROOM_MSD
                 msd_details.Items.Add(" - Test call:\t" + _msd.ControlTestCall());
                 msd_details.Items.Add(" - Position trusted:\t" + _msd.ControlPositionTrusted());
                 msd_details.Items.Add("-------------------------------------------------");
-
                 msd_details.Items.Add(String.Format("Vehicle Class:\t{0}", _msd.GetVehicleClass()));
                 msd_details.Items.Add(String.Format("VIN:\t\t{0}", _msd.VIN));
                 msd_details.Items.Add(String.Format("Fuel Type:\t{0}", _msd.GetFuelType()));
+                msd_details.Items.Add("-------------------------------------------------");
                 msd_details.Items.Add(String.Format("UTC Seconds:\t{0}", _msd.UTC_sec));
 
+                msd_details.Items.Add(String.Format("UTC Time:\t{0}", _msd.GetTimeStamp()));
                 msd_details.Items.Add("-------------------------------------------------");
                 msd_details.Items.Add(String.Format("Latitude:\t\t{0}", _msd.latutude));
                 msd_details.Items.Add(String.Format("Longitude:\t{0}", _msd.longitude));
                 coordinate_idx = msd_details.Items.Count;
                 msd_details.Items.Add(String.Format("Coordinates DD:\t{0}, {1}", _msd.GetLatitudeDD(), _msd.GetLongitudeDD()));
                 msd_details.Items.Add("-------------------------------------------------");
-
                 msd_details.Items.Add(String.Format("Direction:\t\t{0}°", _msd.direction));
-                msd_details.Items.Add(String.Format("Optional Data:\t{0}", _msd.optional));
+                msd_details.Items.Add("-------------------------------------------------");
+                msd_details.Items.Add("Optional Data:");
+
+                string[] optional_data = _msd.optional.Split('|');
+
+                foreach (string data in optional_data)
+                {
+                    if (data.Trim() == "")
+                        continue;
+                    msd_details.Items.Add(" - " + data.Trim());
+                }
                 msd_details.Items.Add("======================================================================");
             }
             else
@@ -154,8 +163,17 @@ namespace VROOM_MSD
 
         private void msd_details_MouseClick(object sender, MouseEventArgs e)
         {
-            // Right clicked on coordinates tap
-            if (e.Button == MouseButtons.Right && msd_details.SelectedIndex == coordinate_idx)
+            if (e.Button == MouseButtons.Right)
+            { 
+                mapUserControl.Map.SetView(DENMARK, ZOOM);
+                mapUserControl.Map.Focus();
+            }
+        }
+
+        private void msd_details_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // Double clicked on coordinates tap
+            if (msd_details.SelectedIndex == coordinate_idx)
             {
                 mapUserControl.Map.SetView(location, 18);
                 mapUserControl.Map.Focus();
@@ -167,8 +185,29 @@ namespace VROOM_MSD
             // Right clicked on MSD File
             if (e.Button == MouseButtons.Right)
             {
-                MessageBox.Show(_msd.GetMSDHexString(msd_text_box.Text), ".vroom file HEX view", MessageBoxButtons.OK, MessageBoxIcon.None);
+                //MessageBox.Show(_msd.GetMSDHexString(msd_text_box.Text), ".vroom file HEX view", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MSD_HEX_File_ShowDialog(_msd.GetMSDHexString(msd_text_box.Text));
             }
+        }
+
+        private void MSD_HEX_File_ShowDialog(string hex)
+        {
+            Form prompt = new Form();
+            prompt.Width = 580;
+            prompt.Height = 180;
+            prompt.Text = ".vroom file HEX view";
+            prompt.StartPosition = FormStartPosition.CenterScreen; 
+            TextBox text = new TextBox() { 
+                            ReadOnly = true, 
+                            Multiline = true, 
+                            Height = prompt.Height, 
+                            Width = prompt.Width, 
+                            Text = hex, 
+                            Font = new System.Drawing.Font(System.Drawing.FontFamily.GenericMonospace, 9) 
+            };
+
+            prompt.Controls.Add(text);
+            prompt.ShowDialog();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) 

@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* *
+ * *    Author:         Kenneth René Jensen
+ * *    Description:    Test GUI simulating PSAP 
+ * *    Version:        1
+ * */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,10 +28,10 @@ namespace VROOM_MSD
         private string _path;
         private MSD_structure _msd;
         private int coordinate_idx;
-        private SoundPlayer ALARM;
+        private SoundPlayer alarm_sound;
         private Location location;
         private readonly Location DENMARK = new Location(56.0, 10.5);
-        private readonly double ZOOM = 6.35;
+        private readonly double ZOOM = 6.08;
 
         public MainForm()
         {
@@ -39,7 +45,7 @@ namespace VROOM_MSD
             folderBrowserDialog1.ShowNewFolderButton = false;
             folderBrowserDialog1.Description = "Locate MSD folder (*.vroom files)";
             _msd = new MSD_structure();
-            ALARM = new SoundPlayer(Path.GetFullPath("alert.wav"));
+            alarm_sound = new SoundPlayer(Path.GetFullPath("alert.wav"));
 
             String[] items = Directory.GetFiles(MSD_File_Watcher.Path, MSD_File_Watcher.Filter);
 
@@ -69,7 +75,7 @@ namespace VROOM_MSD
             msd_text_box.Items.Add(e.Name);
             _msd.AddNewMSD(e.Name, ReadSelectedFile(_path + e.Name));
 
-            ALARM.Play();
+            alarm_sound.Play();
         }
 
         private void MSD_File_Watcher_Deleted(object sender, System.IO.FileSystemEventArgs e)
@@ -95,60 +101,59 @@ namespace VROOM_MSD
             if (msd_text_box.SelectedItem != null) 
             {
                 _msd.DecodeMSD(msd_text_box.Text);
-               // msd_text_box.SelectedItem.ForeColor = System.Drawing.Color.Black;
-               //(msd_text_box.SelectedItem.Text as Control).ForeColor = Color.Yellow;
-                //msd_text_box.BackColor = 
 
-                mapUserControl.Map.SetView(DENMARK, ZOOM);
+                if (_msd.ControlPositionTrusted())
+                {
+                    location = new Location(_msd.GetLatitudeDD(), _msd.GetLongitudeDD());
+                    Pushpin pin = new Pushpin() {
+                                        Heading = -45,
+                                        Background = new SolidColorBrush(Colors.Red),
+                                        ContentStringFormat = msd_text_box.Text,
+                                        Content = "+",                     
+                                        Location = location,
+                                    };
 
-                Pushpin pin = new Pushpin();
-           //     pin.Content = " ";
-                location = new Location(_msd.GetLatitudeDD(), _msd.GetLongitudeDD());
-                pin.Location = location;
-                pin.Background = new SolidColorBrush(Colors.Red);
-                
-                mapUserControl.Map.Children.Add(pin);
-                mapUserControl.Map.Focus();
+                    mapUserControl.Map.Children.Add(pin);
+                    mapUserControl.Map.Focus();
+                }
 
                 msd_details.Items.Clear();
-                msd_details.Items.Add("======================================================================");
+                msd_details.Items.Add("=======================================");
                 msd_details.Items.Add(msd_text_box.Text);
-                msd_details.Items.Add("======================================================================");
+                msd_details.Items.Add("=======================================");
                 msd_details.Items.Add(String.Format("Version:\t\t{0}", _msd.version));
                 msd_details.Items.Add(String.Format("Msg. Identifier:\t{0}", _msd.msg_identifier));
-                msd_details.Items.Add("-------------------------------------------------");
+                msd_details.Items.Add("---------------------------------------------------------------------");
                 msd_details.Items.Add(String.Format("Control Byte:\t{0}", _msd.GetControlByteString()));
                 msd_details.Items.Add(" - Auto alarm:\t" + _msd.ControlAutoAlarm());
                 msd_details.Items.Add(" - Manual alarm:\t" + _msd.ControlManualAlarm());
                 msd_details.Items.Add(" - Test call:\t" + _msd.ControlTestCall());
                 msd_details.Items.Add(" - Position trusted:\t" + _msd.ControlPositionTrusted());
-                msd_details.Items.Add("-------------------------------------------------");
+                msd_details.Items.Add("---------------------------------------------------------------------");
                 msd_details.Items.Add(String.Format("Vehicle Class:\t{0}", _msd.GetVehicleClass()));
                 msd_details.Items.Add(String.Format("VIN:\t\t{0}", _msd.VIN));
                 msd_details.Items.Add(String.Format("Fuel Type:\t{0}", _msd.GetFuelType()));
-                msd_details.Items.Add("-------------------------------------------------");
+                msd_details.Items.Add("---------------------------------------------------------------------");
                 msd_details.Items.Add(String.Format("UTC Seconds:\t{0}", _msd.UTC_sec));
 
                 msd_details.Items.Add(String.Format("UTC Time:\t{0}", _msd.GetTimeStamp()));
-                msd_details.Items.Add("-------------------------------------------------");
+                msd_details.Items.Add("---------------------------------------------------------------------");
                 msd_details.Items.Add(String.Format("Latitude:\t\t{0}", _msd.latutude));
                 msd_details.Items.Add(String.Format("Longitude:\t{0}", _msd.longitude));
                 coordinate_idx = msd_details.Items.Count;
                 msd_details.Items.Add(String.Format("Coordinates DD:\t{0}, {1}", _msd.GetLatitudeDD(), _msd.GetLongitudeDD()));
-                msd_details.Items.Add("-------------------------------------------------");
+                msd_details.Items.Add("---------------------------------------------------------------------");
                 msd_details.Items.Add(String.Format("Direction:\t\t{0}°", _msd.direction));
-                msd_details.Items.Add("-------------------------------------------------");
+                msd_details.Items.Add("---------------------------------------------------------------------");
                 msd_details.Items.Add("Optional Data:");
 
-                string[] optional_data = _msd.optional.Split('|');
+                var optional_data = _msd.optional.Split('|');
 
-                foreach (string data in optional_data)
+                foreach (var data in optional_data)
                 {
-                    if (data.Trim() == "")
-                        continue;
                     msd_details.Items.Add(" - " + data.Trim());
                 }
-                msd_details.Items.Add("======================================================================");
+                msd_details.Items.Add("=======================================");
             }
             else
             {
@@ -185,7 +190,6 @@ namespace VROOM_MSD
             // Right clicked on MSD File
             if (e.Button == MouseButtons.Right)
             {
-                //MessageBox.Show(_msd.GetMSDHexString(msd_text_box.Text), ".vroom file HEX view", MessageBoxButtons.OK, MessageBoxIcon.None);
                 MSD_HEX_File_ShowDialog(_msd.GetMSDHexString(msd_text_box.Text));
             }
         }

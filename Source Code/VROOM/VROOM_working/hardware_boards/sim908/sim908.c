@@ -145,7 +145,7 @@ void SIM908_start(void)
 	SIM908_cmd(AT_BAUD_115K2, true);
 
 	#ifdef CONFIG_PIN
-	/* wait for +CPIN: SIM PIN */
+	/* wait for +CPIN: SIM PIN - is going to be deleted */
 	_delay_ms(1000);
 	SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN), true);
 	#endif
@@ -153,12 +153,6 @@ void SIM908_start(void)
 	_setup_GSM();
 	_setup_GPRS_FTP();
 	_setup_GPS();
-
-	/* Replace this with check - ToDo in ISR */
-	_wait_for_connection();
-
-	/* Activate PDP context */
-	//SIM908_cmd(AT_GPRS_PDP_ACTIVATE_CONTEXT, true);
 }
 
 /********************************************************************************************************************//**
@@ -191,7 +185,6 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 		*__latitude points to the latitude in MSD structure
 		*__longitude points to the longitude in MSD structure
 		*__course points to the direction in MSD structure
-		*__IPV4 points to sp in MSD structure
  @return void
  ************************************************************************************************************************/
 void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)
@@ -437,7 +430,6 @@ static bool _check_response(const char *defined_response) {
 	uint8_t i;
 
 	for(i = 0; i < strlen(defined_response) && ret != false; i++) {
-	//for(i = 0; i < 2 && ret != false; i++) {
 		c = _char_at(i, _rx_buffer_tail, _rx_response_length);
 		ret = (c == defined_response[i]) ? true : false;
 	}
@@ -452,7 +444,6 @@ static char _char_at(uint8_t __index, uint8_t __tail, uint8_t __length) {
 /* mode, longitude, latitude, altitude, UTC time, TTFF, Satellite in view, speed over ground, course over ground */
 static void _get_GPS_response(void)
 {
-	// _delay_ms(1000); /* Maybe needed */
 	do {
 		SIM908_cmd(AT_GPS_GET_LOCATION, false);
 		_gps_pull_flag = SIM908_FLAG_GPS_PULL;
@@ -573,7 +564,7 @@ void _SIM908_callback(char data)
 	#endif
 
 	_rx_response_length++;
-	_rx_buffer[_rx_buffer_tail = (_rx_buffer_tail + 1) % RX_BUFFER_SIZE] = data; /* Stores received data in buffer. This technically starts from index '1', but as the buffer is circular, it does not matter */
+	_rx_buffer[_rx_buffer_tail = (_rx_buffer_tail + 1) % RX_BUFFER_SIZE] = data;				/* Stores received data in buffer. This technically starts from index '1', but as the buffer is circular, it does not matter */
 
 	if (data == CR) {																			/* Checking and counting for CR and LF */
 		_CR_counter++;
@@ -588,7 +579,7 @@ void _SIM908_callback(char data)
 			_ack_response_flag = SIM908_FLAG_OK;
 		} else if (_check_response(SIM908_RESPONSE_ERROR)) {									/* Error */
 			_ack_response_flag = SIM908_FLAG_ERROR;
-		} else if (_check_response(SIM908_RESPONSE_GPS_PULL)) {								/* GPS pull */
+		} else if (_check_response(SIM908_RESPONSE_GPS_PULL)) {									/* GPS pull */
 			if (_gps_pull_flag == SIM908_FLAG_GPS_PULL) {
 				_gps_response_tail = _rx_buffer_tail;
 				_gps_response_length = _rx_response_length;

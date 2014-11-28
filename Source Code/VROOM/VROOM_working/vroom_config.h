@@ -10,9 +10,10 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST NO
-#define KENNETH_TEST YES
-#define DEBUG_UART_ENABLE
+#define ANDI_TEST		NO
+#define KENNETH_TEST	YES
+#define DEBUG_UART_ENABLE	/* uart1 (PD2/PD3) is used for debugging */
+#define DEBUG_LCD_ENABLE	/* LCD should be connected to PORT L */
 
 /* MSD details */
 #define CONFIG_MSD_FORMAT_VERSION		1

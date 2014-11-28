@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* *
+ * *    Author:         Kenneth René Jensen
+ * *    Description:    Encoding MSD structure
+ * *    Version:        1
+ * */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -159,12 +165,12 @@ namespace VROOM_MSD
 
         public Double GetLatitudeDD()
         {
-            return latutude / 3600000.0;
+            return System.Math.Round(latutude / 3600000.0, 7);
         }
 
         public Double GetLongitudeDD()
         {
-            return longitude / 3600000.0;
+            return System.Math.Round(longitude / 3600000.0, 7);
         }
 
         public DateTime GetTimeStamp()

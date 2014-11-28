@@ -81,12 +81,13 @@
             this.msd_details.FormattingEnabled = true;
             this.msd_details.Name = "msd_details";
             this.msd_details.SelectedIndexChanged += new System.EventHandler(this.msd_details_SelectedIndexChanged);
-            this.msd_details.MouseDown += new System.Windows.Forms.MouseEventHandler(this.msd_details_MouseClick);
             this.msd_details.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.msd_details_MouseDoubleClick);
+            this.msd_details.MouseDown += new System.Windows.Forms.MouseEventHandler(this.msd_details_MouseClick);
             // 
             // path_label
             // 
             resources.ApplyResources(this.path_label, "path_label");
+            this.path_label.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.path_label.Name = "path_label";
             // 
             // button1

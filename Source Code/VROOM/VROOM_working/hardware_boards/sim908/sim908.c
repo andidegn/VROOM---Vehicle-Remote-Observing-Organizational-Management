@@ -132,22 +132,24 @@ void SIM908_init(void)
 void SIM908_start(void)
 {
 	while (_system_running_flag == SIM908_FLAG_WAITING);
-	/* Enable Echo */
+	
+	/* Set baud rate to the host baud rate */
+	SIM908_cmd(AT_BAUD_115K2, true);
+
+	/* Synchronizing baud rate */
+	SIM908_cmd(AT_DIAG_TEST, true);
+	
+	/* Disable Echo */
 	SIM908_cmd(AT_DIAG_ECHO_DISABLE, true);
 
 	/* Enable CREG unsolicited result code */
 	SIM908_cmd(AT_ENABLE_CREG, true);
 
-	/* Synchronizing baud rate */
-	SIM908_cmd(AT_DIAG_TEST, true);
-
-	/* Set baud rate to the host baud rate */
-	SIM908_cmd(AT_BAUD_115K2, true);
 
 	#ifdef CONFIG_PIN
-	/* wait for +CPIN: SIM PIN - is going to be deleted */
-	_delay_ms(1000);
-	SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN), true);
+		/* wait for +CPIN: SIM PIN - is going to be deleted */
+		_delay_ms(1000);
+		SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN), true);
 	#endif
 
 	_setup_GSM();

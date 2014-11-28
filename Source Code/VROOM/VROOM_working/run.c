@@ -117,15 +117,15 @@ int main (void)
 		int16_t x_axis, y_axis, z_axis;
 		float temp;
 
-		car_panel_init();
-		SIM908_init();
-
-		sei();
 		#ifdef DEBUG_LCD_ENABLE
 			lcd_clrscr();
 			lcd_gotoxy(0, 0);
 			lcd_puts("Initializing...");
-		#endif /* DEBUG_LCD_ENABLE */		
+		#endif /* DEBUG_LCD_ENABLE */	
+		
+		car_panel_init();
+		SIM908_init();
+		sei();
 		SIM908_start();
 		scheduler_start(NULL);
 		car_panel_start();

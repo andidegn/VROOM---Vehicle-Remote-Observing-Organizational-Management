@@ -1,4 +1,29 @@
 ============================================
+Version 0.141 - 2014/11/28 by Kenneth
+============================================
+New Features, Improvements
+--------------------------
+* Added DEBUG_LCD define in vroom.config and added check where needed
+* Added template for module_test_car_panel
+* Cleaned for unused code
+
+Fixed Bugs, Changes
+-------------------
+* Baudrate in SIM908 is set as the first thing as the reseting behaviour 
+  of the module is unpredictible (based on experience)
+
+ToDo
+----		
+- MISRA check all files
+- Impl. module test for car panel
+- Impl. unit test for MSD
+- Accident algoritm 
+- Doxygen structure proofing in all files
+- Notes SIM908:
+   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+
+
+============================================
 Version 0.140 - 2014/11/24 by Kenneth
 ============================================
 New Features, Improvements

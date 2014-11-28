@@ -19,6 +19,7 @@ using VROOM_MSD.Properties;
 using System.Reflection;
 using System.Resources;
 using System.Windows.Media;
+using System.Threading;
 using Microsoft.Maps.MapControl.WPF;
 
 namespace VROOM_MSD
@@ -87,12 +88,24 @@ namespace VROOM_MSD
         private Byte[] ReadSelectedFile(String path)
         {
             byte[] data;
-            using(FileStream msd = new FileStream(path, FileMode.Open ))
+
+            while (true)
             {
-                data = new byte[msd.Length];
-                msd.Read(data, 0, (int)msd.Length);
+                try
+                {
+                    using (FileStream msd = new FileStream(path, FileMode.Open))
+                    {
+                        data = new byte[msd.Length];
+                        msd.Read(data, 0, (int)msd.Length);
+                        break;
+                    }
+                }
+                catch (IOException)
+                {
+                    Thread.Sleep(100);
+                }
             }
-      
+
             return data;
         }
 

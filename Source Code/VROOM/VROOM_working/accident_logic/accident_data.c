@@ -83,7 +83,7 @@ void emergency_alarm(void)
  *************************************************************************/
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm)
 {
-	EXT_MSD.control |= __position_can_be_trusted<<4 | __test_call<<5 |  __manual_alarm<<6 | __auto_alarm<<7;
+	EXT_MSD.control = __position_can_be_trusted<<4 | __test_call<<5 |  __manual_alarm<<6 | __auto_alarm<<7;
 }
 
 /**********************************************************************//**

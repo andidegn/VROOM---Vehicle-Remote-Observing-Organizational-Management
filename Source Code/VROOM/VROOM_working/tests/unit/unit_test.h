@@ -18,19 +18,19 @@
 /**********************************************************************//**
  * @ingroup ut
  * @brief macros for unit testing
- * @{
+ * @code
  *************************************************************************/
 #define mu_assert(message, test) do { if (!(test)) return message; } while (0)
 #define mu_run_test(test) do { char *message = test(); tests_run++; return message; } while (0)
-/* @} */
+/** @endcode */
 
 /**********************************************************************//**
  * @ingroup ut
  * @brief extern variable which counts numbers of unit test runs
- * @{
+ * @code
  *************************************************************************/
  extern uint16_t tests_run;
-/* @} */
+/** @endcode */
 
 /**********************************************************************//**
  @ingroup ut

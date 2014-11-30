@@ -98,52 +98,30 @@ $(document).ready(function(){initNavTree('group__cp__priv.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Private<div class="ingroups"><a class="el" href="group__cp.html">Car Panel driver</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga614217d263be1fb1a5f76e2ff7be19a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#ga614217d263be1fb1a5f76e2ff7be19a2">PORT</a>&#160;&#160;&#160;PORTJ</td></tr>
+<tr class="separator:ga614217d263be1fb1a5f76e2ff7be19a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacbe348573e1b5adccdc7bcf157dc6425"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#gacbe348573e1b5adccdc7bcf157dc6425">DDR</a>(x)&#160;&#160;&#160;(*(&amp;x - 1))</td></tr>
+<tr class="separator:gacbe348573e1b5adccdc7bcf157dc6425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga95bf39170557bc06819efbb34f751e02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#ga95bf39170557bc06819efbb34f751e02">BTN_CANCEL</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ga95bf39170557bc06819efbb34f751e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gafe6035149a64d5f448fbda08e9d1b67f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#gafe6035149a64d5f448fbda08e9d1b67f">ISR</a> (PCINT1_vect)</td></tr>
 <tr class="memdesc:gafe6035149a64d5f448fbda08e9d1b67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR for ALARM button When triggered the port pin is determined and based on which pin, if it is the pin where the ALARM button is located, a timed loop is entered to check if the button is pressed and held for at least 3 seconds. If it is, the cancel button check is called, if not, return.  <a href="#gafe6035149a64d5f448fbda08e9d1b67f">More...</a><br/></td></tr>
 <tr class="separator:gafe6035149a64d5f448fbda08e9d1b67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga614217d263be1fb1a5f76e2ff7be19a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#ga614217d263be1fb1a5f76e2ff7be19a2">PORT</a>&#160;&#160;&#160;PORTJ</td></tr>
-<tr class="separator:ga614217d263be1fb1a5f76e2ff7be19a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacbe348573e1b5adccdc7bcf157dc6425"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#gacbe348573e1b5adccdc7bcf157dc6425">DDR</a>(x)&#160;&#160;&#160;(*(&amp;x - 1))</td></tr>
-<tr class="separator:gacbe348573e1b5adccdc7bcf157dc6425"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad7581da21e9fd6fd6f6920dd68d1c782"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#gad7581da21e9fd6fd6f6920dd68d1c782">PIN</a>(x)&#160;&#160;&#160;(*(&amp;x - 2))</td></tr>
-<tr class="separator:gad7581da21e9fd6fd6f6920dd68d1c782"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga95bf39170557bc06819efbb34f751e02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#ga95bf39170557bc06819efbb34f751e02">BTN_CANCEL</a>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:ga95bf39170557bc06819efbb34f751e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1cc187db1404f33530cbb3e730cbc115"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#ga1cc187db1404f33530cbb3e730cbc115">BTN_ALARM</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:ga1cc187db1404f33530cbb3e730cbc115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1e6f3c158f4e04f5916df4e57ace8867"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#ga1e6f3c158f4e04f5916df4e57ace8867">LED_CONTROL</a>&#160;&#160;&#160;3</td></tr>
-<tr class="separator:ga1e6f3c158f4e04f5916df4e57ace8867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabdc724b35b806bd6052292e2a1a0c0f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#gabdc724b35b806bd6052292e2a1a0c0f4">LED_STATUS_RED</a>&#160;&#160;&#160;5</td></tr>
-<tr class="separator:gabdc724b35b806bd6052292e2a1a0c0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga141c37d04950593c2dc4e33eb347792d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#ga141c37d04950593c2dc4e33eb347792d">LED_STATUS_BLUE</a>&#160;&#160;&#160;6</td></tr>
-<tr class="separator:ga141c37d04950593c2dc4e33eb347792d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac19ac50be106ecaa57bd15bc433b00ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#gac19ac50be106ecaa57bd15bc433b00ad">LED_STATUS_GREEN</a>&#160;&#160;&#160;7</td></tr>
-<tr class="separator:gac19ac50be106ecaa57bd15bc433b00ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="ga1cc187db1404f33530cbb3e730cbc115"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define BTN_ALARM&#160;&#160;&#160;1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00043">43</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ga95bf39170557bc06819efbb34f751e02"></a>
 <div class="memitem">
 <div class="memproto">
@@ -155,7 +133,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Defines for the different mask bits </p>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00042">42</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00037">37</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -174,81 +152,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Macros for DDR and PIN registers </p>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00033">33</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga1e6f3c158f4e04f5916df4e57ace8867"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LED_CONTROL&#160;&#160;&#160;3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00044">44</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga141c37d04950593c2dc4e33eb347792d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LED_STATUS_BLUE&#160;&#160;&#160;6</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00046">46</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gac19ac50be106ecaa57bd15bc433b00ad"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LED_STATUS_GREEN&#160;&#160;&#160;7</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00047">47</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gabdc724b35b806bd6052292e2a1a0c0f4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LED_STATUS_RED&#160;&#160;&#160;5</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00045">45</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gad7581da21e9fd6fd6f6920dd68d1c782"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PIN</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;(*(&amp;x - 2))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00034">34</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00030">30</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -265,7 +169,7 @@ Functions</h2></td></tr>
 <p>Define for the port </p>
 <dl class="section note"><dt>Note</dt><dd>Changing port will require changes in the interrupt setup </dd></dl>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00025">25</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00024">24</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -286,7 +190,7 @@ Functions</h2></td></tr>
 
 <p>ISR for ALARM button When triggered the port pin is determined and based on which pin, if it is the pin where the ALARM button is located, a timed loop is entered to check if the button is pressed and held for at least 3 seconds. If it is, the cancel button check is called, if not, return. </p>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00232">232</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00226">226</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -295,7 +199,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -89,7 +89,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_a"><span>a</span></a></li>
       <li><a href="#index_b"><span>b</span></a></li>
       <li><a href="#index_c"><span>c</span></a></li>
-      <li><a href="#index_e"><span>e</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
@@ -134,7 +133,7 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 
 <h3><a class="anchor" id="index__"></a>- _ -</h3><ul>
 <li>__attribute__()
-: <a class="el" href="accident__data_8h.html#ab898071398b359603a35c202e9c65f3b">accident_data.h</a>
+: <a class="el" href="group__ad.html#gab898071398b359603a35c202e9c65f3b">accident_data.h</a>
 </li>
 <li>_PC_callback()
 : <a class="el" href="sim908_8c.html#acd705bbbba4f7490f6b2309fdea0287b">sim908.c</a>
@@ -156,10 +155,18 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 : <a class="el" href="group__acc__pub.html#ga226177d128c1c5e2c1b884fc352747b0">lis331hh.c</a>
 </li>
 <li>acc_init()
-: <a class="el" href="group__acc__pub.html#ga009fbd3e9095f87ca12d7a9b60751a2a">lis331hh.c</a>
+: <a class="el" href="group__acc__pub.html#gad8bcdb9d8538530ea0aa8900aad0e8b8">lis331hh.c</a>
 </li>
 <li>acc_measure()
 : <a class="el" href="group__acc__pub.html#ga4668b3e747265390201d7ff637f31e3b">lis331hh.c</a>
+</li>
+<li>ad_check_for_crash()
+: <a class="el" href="accident__data_8c.html#a21c7ffc49f578e74626c032867cea479">accident_data.c</a>
+, <a class="el" href="accident__data_8h.html#a21c7ffc49f578e74626c032867cea479">accident_data.h</a>
+</li>
+<li>ad_emergency_alarm()
+: <a class="el" href="accident__data_8c.html#aee1bd5118ffcb7994b94088ddc55f67c">accident_data.c</a>
+, <a class="el" href="accident__data_8h.html#aee1bd5118ffcb7994b94088ddc55f67c">accident_data.h</a>
 </li>
 </ul>
 
@@ -211,13 +218,6 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 </ul>
 
 
-<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
-<li>emergency_alarm()
-: <a class="el" href="group__ad__pub.html#gac60d028353a9fb4636957a536a095893">accident_data.c</a>
-</li>
-</ul>
-
-
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
 <li>get_temperature()
 : <a class="el" href="group__tc72.html#ga47f06fefabeb93c38acaface0c1f0a1d">tc72.c</a>
@@ -236,9 +236,9 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 : <a class="el" href="group__timer.html#gaaa3206b11acb2792874f8c85ec9afd6f">timer.c</a>
 </li>
 <li>ISR()
-: <a class="el" href="group__cp__priv.html#gafe6035149a64d5f448fbda08e9d1b67f">car_panel.c</a>
-, <a class="el" href="group__uart__priv.html#ga839a4aa8ec72b5e33abcd61e7d5a5d2a">uart.c</a>
-, <a class="el" href="group__spi__priv.html#ga3c0688f495ba212b5ec3cc36019d6484">spi.c</a>
+: <a class="el" href="group__spi__priv.html#ga3c0688f495ba212b5ec3cc36019d6484">spi.c</a>
+, <a class="el" href="group__uart__priv.html#ga2787a040ccebbf0fbfd09990787fa4fe">uart.c</a>
+, <a class="el" href="group__cp__priv.html#gafe6035149a64d5f448fbda08e9d1b67f">car_panel.c</a>
 , <a class="el" href="timer_8c.html#ad39420cdd896dd12c68e36313139d0a5">timer.c</a>
 </li>
 </ul>
@@ -250,8 +250,8 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 , <a class="el" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd.h</a>
 </li>
 <li>lcd_command()
-: <a class="el" href="group__pfleury__lcd.html#gaea9d14f02df06f948cb5a56776980826">lcd.h</a>
-, <a class="el" href="group__pfleury__lcd.html#gaea9d14f02df06f948cb5a56776980826">lcd.c</a>
+: <a class="el" href="group__pfleury__lcd.html#gaea9d14f02df06f948cb5a56776980826">lcd.c</a>
+, <a class="el" href="group__pfleury__lcd.html#gaea9d14f02df06f948cb5a56776980826">lcd.h</a>
 </li>
 <li>lcd_data()
 : <a class="el" href="group__pfleury__lcd.html#gad0729d2cba627825a089ca1fff12ba29">lcd.c</a>
@@ -273,24 +273,24 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 , <a class="el" href="group__pfleury__lcd.html#ga9af28b2779326b63ff4356e2b1828984">lcd.h</a>
 </li>
 <li>lcd_putc()
-: <a class="el" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd.h</a>
-, <a class="el" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd.c</a>
+: <a class="el" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd.c</a>
+, <a class="el" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd.h</a>
 </li>
 <li>lcd_puts()
-: <a class="el" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd.h</a>
-, <a class="el" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd.c</a>
+: <a class="el" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd.c</a>
+, <a class="el" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd.h</a>
 </li>
 <li>lcd_puts_p()
 : <a class="el" href="group__pfleury__lcd.html#ga9022a24a56a9b15681f62eb6ba77e5de">lcd.c</a>
 , <a class="el" href="group__pfleury__lcd.html#ga9022a24a56a9b15681f62eb6ba77e5de">lcd.h</a>
 </li>
 <li>led_lcd_set()
-: <a class="el" href="btn__led__lcd_8h.html#a2678088e7429541738529177d95445e1">btn_led_lcd.h</a>
-, <a class="el" href="btn__led__lcd_8c.html#a2678088e7429541738529177d95445e1">btn_led_lcd.c</a>
+: <a class="el" href="btn__led__lcd_8c.html#a2678088e7429541738529177d95445e1">btn_led_lcd.c</a>
+, <a class="el" href="btn__led__lcd_8h.html#a2678088e7429541738529177d95445e1">btn_led_lcd.h</a>
 </li>
 <li>led_lcd_toggle()
-: <a class="el" href="btn__led__lcd_8h.html#a090907941f5438dd2199525c1933aaf8">btn_led_lcd.h</a>
-, <a class="el" href="btn__led__lcd_8c.html#a090907941f5438dd2199525c1933aaf8">btn_led_lcd.c</a>
+: <a class="el" href="btn__led__lcd_8c.html#a090907941f5438dd2199525c1933aaf8">btn_led_lcd.c</a>
+, <a class="el" href="btn__led__lcd_8h.html#a090907941f5438dd2199525c1933aaf8">btn_led_lcd.h</a>
 </li>
 </ul>
 
@@ -318,9 +318,13 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 : <a class="el" href="sensor__scheduler_8c.html#afaa128e71cbb4ca2527c4851e9799b57">sensor_scheduler.c</a>
 , <a class="el" href="sensor__scheduler_8h.html#afaa128e71cbb4ca2527c4851e9799b57">sensor_scheduler.h</a>
 </li>
+<li>scheduler_get_last_readings_sum()
+: <a class="el" href="sensor__scheduler_8c.html#a0a35c62dbac79e37cadaa936c292df20">sensor_scheduler.c</a>
+, <a class="el" href="sensor__scheduler_8h.html#a0a35c62dbac79e37cadaa936c292df20">sensor_scheduler.h</a>
+</li>
 <li>scheduler_release()
-: <a class="el" href="sensor__scheduler_8h.html#a08241049a9228fe3dd6943629796b077">sensor_scheduler.h</a>
-, <a class="el" href="sensor__scheduler_8c.html#a08241049a9228fe3dd6943629796b077">sensor_scheduler.c</a>
+: <a class="el" href="sensor__scheduler_8c.html#a08241049a9228fe3dd6943629796b077">sensor_scheduler.c</a>
+, <a class="el" href="sensor__scheduler_8h.html#a08241049a9228fe3dd6943629796b077">sensor_scheduler.h</a>
 </li>
 <li>scheduler_start()
 : <a class="el" href="sensor__scheduler_8c.html#ad7757661991663ae99dbac66880abd9d">sensor_scheduler.c</a>
@@ -342,7 +346,7 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 , <a class="el" href="test__module__sensors_8h.html#a011bc1b58d86e4e944192741f1f5ecc9">test_module_sensors.h</a>
 </li>
 <li>set_MSD_data()
-: <a class="el" href="group__sim908.html#ga24f7f139179d19d71fe646adccee93e5">sim908.c</a>
+: <a class="el" href="group__sim908.html#gaa4354342365be983fac1afb74581bc82">sim908.c</a>
 </li>
 <li>SIM908_cmd()
 : <a class="el" href="group__sim908.html#ga99719f2eb74227cd2a5bd1ed2be6269a">sim908.c</a>
@@ -355,7 +359,6 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 </li>
 <li>spi_master_setup()
 : <a class="el" href="group__spi__pub.html#ga1e56d8b1f6edd8a4c70301efd919d060">spi.c</a>
-, <a class="el" href="group__spi__pub.html#ga68288a01c34bad32ae3d6c696fc99139">spi.h</a>
 </li>
 <li>spi_release()
 : <a class="el" href="group__spi__pub.html#ga5dbbfafb5cc59f5db1f598b319c6010d">spi.c</a>
@@ -423,7 +426,7 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:18 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:58 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

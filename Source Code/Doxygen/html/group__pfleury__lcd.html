@@ -116,7 +116,7 @@ Macros</h2></td></tr>
 Definitions for MCU Clock Frequency</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrp979ab56397d6df9be3f6d47932834ef0"></a>Adapt the MCU clock frequency in Hz to your target. </p>
 </td></tr>
-<tr class="memitem:ga3cad0f9b3c40159bd2fbd7f5e60f2fff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>&#160;&#160;&#160;<a class="el" href="run_8c.html#a43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></td></tr>
+<tr class="memitem:ga3cad0f9b3c40159bd2fbd7f5e60f2fff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>&#160;&#160;&#160;F_CPU</td></tr>
 <tr class="separator:ga3cad0f9b3c40159bd2fbd7f5e60f2fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
@@ -1223,7 +1223,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define XTAL&#160;&#160;&#160;<a class="el" href="run_8c.html#a43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></td>
+          <td class="memname">#define XTAL&#160;&#160;&#160;F_CPU</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1351,6 +1351,10 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none </dd></dl>
+<p>&lt; DDRAM address of first char of line 1</p>
+<p>&lt; DDRAM address of first char of line 2</p>
+<p>&lt; DDRAM address of first char of line 3</p>
+<p>&lt; DDRAM address of first char of line 4 </p>
 
 <p>Definition at line <a class="el" href="lcd_8c_source.html#l00388">388</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
 
@@ -1408,6 +1412,101 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none </dd></dl>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 1</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 1</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 2</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 2</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 3</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for RS line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for RW line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for Enable line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; pin for 4bit data bit 0</p>
+<p>&lt; pin for 4bit data bit 1</p>
+<p>&lt; pin for 4bit data bit 2</p>
+<p>&lt; pin for 4bit data bit 3</p>
+<p>&lt; pin for RS line</p>
+<p>&lt; pin for RW line</p>
+<p>&lt; pin for Enable line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 1</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 1</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 2</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 2</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 3</p>
+<p>&lt; pin for 4bit data bit 0</p>
+<p>&lt; pin for 4bit data bit 1</p>
+<p>&lt; pin for 4bit data bit 2</p>
+<p>&lt; pin for 4bit data bit 3</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for RS line</p>
+<p>&lt; pin for RS line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for RW line</p>
+<p>&lt; pin for RW line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for Enable line</p>
+<p>&lt; pin for Enable line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for RS line</p>
+<p>&lt; pin for RS line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for RW line</p>
+<p>&lt; pin for RW line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for Enable line</p>
+<p>&lt; pin for Enable line</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; pin for 4bit data bit 0</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 1</p>
+<p>&lt; pin for 4bit data bit 1</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 2</p>
+<p>&lt; pin for 4bit data bit 2</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 3</p>
+<p>&lt; pin for 4bit data bit 3</p>
+<p>&lt; clock frequency in Hz, used to calculate delay timer</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 1</p>
+<p>&lt; pin for 4bit data bit 1</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; pin for 4bit data bit 0</p>
+<p>&lt; clock frequency in Hz, used to calculate delay timer</p>
+<p>&lt; clock frequency in Hz, used to calculate delay timer</p>
+<p>&lt; clock frequency in Hz, used to calculate delay timer</p>
+<p>&lt; port for the LCD lines</p>
+<p>&lt; port for 4bit data bit 0</p>
+<p>&lt; pin for 4bit data bit 0</p>
+<p>&lt; clock frequency in Hz, used to calculate delay timer </p>
 
 <p>Definition at line <a class="el" href="lcd_8c_source.html#l00528">528</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
 
@@ -1500,7 +1599,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

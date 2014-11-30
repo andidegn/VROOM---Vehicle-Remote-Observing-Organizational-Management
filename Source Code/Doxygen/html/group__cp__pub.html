@@ -98,12 +98,40 @@ $(document).ready(function(){initNavTree('group__cp__pub.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Public<div class="ingroups"><a class="el" href="group__cp.html">Car Panel driver</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga8b6ca0c1515291c666646a3e520b7813"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__pub.html#ga8b6ca0c1515291c666646a3e520b7813">BUTTON_PRESS_TIME</a>&#160;&#160;&#160;30</td></tr>
+<tr class="memdesc:ga8b6ca0c1515291c666646a3e520b7813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines for the time of button press before activation/deactivation in 1/10 sec.  <a href="#ga8b6ca0c1515291c666646a3e520b7813">More...</a><br/></td></tr>
+<tr class="separator:ga8b6ca0c1515291c666646a3e520b7813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga67a0db04d321a74b7e7fcfd3f1a3f70b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__pub.html#ga67a0db04d321a74b7e7fcfd3f1a3f70b">Status</a> { <br/>
+&#160;&#160;<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70bad1ce58bde099b3c50ad1e244b0ea696b">STATUS_BLUE_TOGGLE</a>, 
+<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba0e26ccaac178fc1c461ba6d41506306d">STATUS_BLUE</a>, 
+<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba8e43b8a191f7ae1324ae723f5b88d4f6">STATUS_RED</a>, 
+<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba2f91de342fc2584dd731cfe5d47271c6">STATUS_GREEN</a>, 
+<br/>
+&#160;&#160;<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70bafcc90fbf3efbcd1a77515325b0a1a827">STATUS_RESET</a>
+<br/>
+ }</td></tr>
+<tr class="memdesc:ga67a0db04d321a74b7e7fcfd3f1a3f70b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the state of status LED.  <a href="group__cp__pub.html#ga67a0db04d321a74b7e7fcfd3f1a3f70b">More...</a><br/></td></tr>
+<tr class="separator:ga67a0db04d321a74b7e7fcfd3f1a3f70b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0da83e35f29c11f7f3c637234f2149f9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__pub.html#ga0da83e35f29c11f7f3c637234f2149f9">Control</a> { <a class="el" href="group__cp__pub.html#gga0da83e35f29c11f7f3c637234f2149f9abcadd3bf3a3263fc9f10f92a2077f916">ALARM_WAITING</a>, 
+<a class="el" href="group__cp__pub.html#gga0da83e35f29c11f7f3c637234f2149f9a4dcc5ca662bb4f5b4012a558c021d83a">ALARM_ACTIVATED</a>, 
+<a class="el" href="group__cp__pub.html#gga0da83e35f29c11f7f3c637234f2149f9a1fe862154e900bf572fd4f60de7d664a">ALARM_NOT_ACTIVATED</a>
+ }</td></tr>
+<tr class="memdesc:ga0da83e35f29c11f7f3c637234f2149f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the state of control LED.  <a href="group__cp__pub.html#ga0da83e35f29c11f7f3c637234f2149f9">More...</a><br/></td></tr>
+<tr class="separator:ga0da83e35f29c11f7f3c637234f2149f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga03156ca934ef40c24593988c03d2b454"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__pub.html#ga03156ca934ef40c24593988c03d2b454">car_panel_init</a> (void)</td></tr>
@@ -127,26 +155,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ga044f42c8895b117b37288520fdb781b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__pub.html#ga044f42c8895b117b37288520fdb781b5">car_panel_set_cancel_button_state</a> (bool state)</td></tr>
 <tr class="memdesc:ga044f42c8895b117b37288520fdb781b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the activation state of the cancel button.  <a href="#ga044f42c8895b117b37288520fdb781b5">More...</a><br/></td></tr>
 <tr class="separator:ga044f42c8895b117b37288520fdb781b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8b6ca0c1515291c666646a3e520b7813"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__pub.html#ga8b6ca0c1515291c666646a3e520b7813">BUTTON_PRESS_TIME</a>&#160;&#160;&#160;30</td></tr>
-<tr class="memdesc:ga8b6ca0c1515291c666646a3e520b7813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines for the time of button press before activation/deactivation in 1/10 sec.  <a href="#ga8b6ca0c1515291c666646a3e520b7813">More...</a><br/></td></tr>
-<tr class="separator:ga8b6ca0c1515291c666646a3e520b7813"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga67a0db04d321a74b7e7fcfd3f1a3f70b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__pub.html#ga67a0db04d321a74b7e7fcfd3f1a3f70b">Status</a> { <br/>
-&#160;&#160;<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70bad1ce58bde099b3c50ad1e244b0ea696b">STATUS_BLUE_TOGGLE</a>, 
-<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba0e26ccaac178fc1c461ba6d41506306d">STATUS_BLUE</a>, 
-<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba8e43b8a191f7ae1324ae723f5b88d4f6">STATUS_RED</a>, 
-<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba2f91de342fc2584dd731cfe5d47271c6">STATUS_GREEN</a>, 
-<br/>
-&#160;&#160;<a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70bafcc90fbf3efbcd1a77515325b0a1a827">STATUS_RESET</a>
-<br/>
- }</td></tr>
-<tr class="memdesc:ga67a0db04d321a74b7e7fcfd3f1a3f70b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the state of status LED.  <a href="group__cp__pub.html#ga67a0db04d321a74b7e7fcfd3f1a3f70b">More...</a><br/></td></tr>
-<tr class="separator:ga67a0db04d321a74b7e7fcfd3f1a3f70b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0da83e35f29c11f7f3c637234f2149f9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__pub.html#ga0da83e35f29c11f7f3c637234f2149f9">Control</a> { <a class="el" href="group__cp__pub.html#gga0da83e35f29c11f7f3c637234f2149f9abcadd3bf3a3263fc9f10f92a2077f916">ALARM_WAITING</a>, 
-<a class="el" href="group__cp__pub.html#gga0da83e35f29c11f7f3c637234f2149f9a4dcc5ca662bb4f5b4012a558c021d83a">ALARM_ACTIVATED</a>, 
-<a class="el" href="group__cp__pub.html#gga0da83e35f29c11f7f3c637234f2149f9a1fe862154e900bf572fd4f60de7d664a">ALARM_NOT_ACTIVATED</a>
- }</td></tr>
-<tr class="memdesc:ga0da83e35f29c11f7f3c637234f2149f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the state of control LED.  <a href="group__cp__pub.html#ga0da83e35f29c11f7f3c637234f2149f9">More...</a><br/></td></tr>
-<tr class="separator:ga0da83e35f29c11f7f3c637234f2149f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -161,9 +169,8 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Defines for the time of button press before activation/deactivation in 1/10 sec. </p>
-<dl class="section note"><dt>Note</dt><dd>NOT YET Complies MISRO 2004 standards </dd></dl>
 
-<p>Definition at line <a class="el" href="car__panel_8h_source.html#l00024">24</a> of file <a class="el" href="car__panel_8h_source.html">car_panel.h</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8h_source.html#l00023">23</a> of file <a class="el" href="car__panel_8h_source.html">car_panel.h</a>.</p>
 
 </div>
 </div>
@@ -188,7 +195,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="car__panel_8h_source.html#l00047">47</a> of file <a class="el" href="car__panel_8h_source.html">car_panel.h</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8h_source.html#l00042">42</a> of file <a class="el" href="car__panel_8h_source.html">car_panel.h</a>.</p>
 
 </div>
 </div>
@@ -216,7 +223,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="car__panel_8h_source.html#l00032">32</a> of file <a class="el" href="car__panel_8h_source.html">car_panel.h</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8h_source.html#l00029">29</a> of file <a class="el" href="car__panel_8h_source.html">car_panel.h</a>.</p>
 
 </div>
 </div>
@@ -245,7 +252,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00058">58</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00052">52</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -273,7 +280,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00202">202</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00196">196</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -301,7 +308,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00215">215</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00209">209</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -329,7 +336,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00126">126</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00120">120</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -357,7 +364,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00092">92</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00086">86</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -385,7 +392,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00081">81</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00075">75</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -413,7 +420,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>bool - true if alarm is canceled else false </dd></dl>
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00149">149</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00143">143</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -422,7 +429,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

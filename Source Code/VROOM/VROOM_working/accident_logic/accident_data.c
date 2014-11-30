@@ -6,8 +6,8 @@
  * @{
 	This is the data for an Accident report.
 	Comply eCall standards for MSD data structure.
+	@note NOT YET Complies MISRO 2004 standards
  * @}
- * @note NOT YET Complies MISRO 2004 standards
  *************************************************************************/
 
 #include "accident_data.h"
@@ -15,18 +15,15 @@
 #include "../vroom_config.h"
 
 /**********************************************************************//**
- * @def BLANK_CHAR
  * @ingroup ad_priv
  * @brief define for the space char ' '
- * @{
  *************************************************************************/
 #define BLANK_CHAR 0x20
-/** @} */
 
 /* Global variables */
-MSD EXT_MSD;
-EMERGENCY_FLAG EXT_EMERGENCY_FLAG = EMERGENCY_NO_ALARM;
-CONNECTION_STATUS_FLAG EXT_CONNECTION_CREG_FLAG = CREG_NOT_REGISTERED;
+AD_MSD EXT_MSD;
+AD_EMERGENCY_FLAG EXT_EMERGENCY_FLAG = EMERGENCY_NO_ALARM;
+AT_CONNECTION_STATUS_FLAG EXT_CONNECTION_CREG_FLAG = CREG_NOT_REG_NOT_SEARCHING;
 
 /* Local variables */
 static bool _confidence_in_position;
@@ -46,18 +43,18 @@ static void _set_optional_data(const char *__s);
  * 3. sent structure over FTP\n
  * 4. call to emergency number
  **************************************************************************/
-void emergency_alarm(void)
+void ad_emergency_alarm(void)
 {
 	EXT_MSD.version = CONFIG_MSD_FORMAT_VERSION;
 	EXT_MSD.vehicle_class = CONFIG_VEHICLE_CLASS;
 	EXT_MSD.fuel_type = CONFIG_FUEL_TYPE;
-	
+
 	set_MSD_data(&EXT_MSD.time_stamp, &EXT_MSD.latitude, &EXT_MSD.longitude, &EXT_MSD.direction);
 	/* ToDo - Can position be trusted ?? */
 	_confidence_in_position = (EXT_MSD.latitude != 0 || EXT_MSD.longitude != 0) ? true : false;
 	_set_control_byte(_confidence_in_position, CONFIG_TEST_CALL, EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM, EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM);
 	_set_VIN(CONFIG_VIN);
-	
+
 	/* ToDo - get optional data */
 	_set_optional_data("ACC [G]: ? | Temp [°C]: ? | Passengers: ? | Speed [km/h]: ?");
 
@@ -66,6 +63,37 @@ void emergency_alarm(void)
 	/*call_PSAP();*/
 
 	EXT_EMERGENCY_FLAG = EMERGENCY_ALARM_SENT;
+}
+
+/**********************************************************************//**
+ * @ingroup ad_pub
+ * Gets the accelerometer data and analysis them to see if a crash has
+ * occurred
+ * Steps in function:\n
+ * 1. Read accelerometer data\n
+ * 2. Analysis data\n
+ * 3. Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected\n
+ **************************************************************************/
+void ad_check_for_crash(void) {
+	volatile bool _alarm = true;
+
+	int16_t *_acc_buffer = malloc(10 * sizeof(int16_t));
+
+	scheduler_get_last_readings_sum(_acc_buffer);
+
+	for (uint8_t i = 0; i < CONFIG_NO_OF_READINGS; i++) {
+		if (*(_acc_buffer + i) < CONFIG_ALARM_TRIGGER_VALUE) {
+			_alarm = false;
+			break;
+		}
+	}
+	free(_acc_buffer);
+
+	if (_alarm && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM) {
+		if (!car_panel_wait_cancel_emmergency()) {
+			EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
+		}
+	}
 }
 
 /**********************************************************************//**

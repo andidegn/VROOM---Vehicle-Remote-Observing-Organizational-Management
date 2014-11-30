@@ -8,6 +8,6 @@ var lis331hh_8c =
     [ "acc_get_x_axis", "lis331hh_8c.html#gadf409ce5a1fdc0d3678e6da552724757", null ],
     [ "acc_get_y_axis", "lis331hh_8c.html#ga8bd2f86e908c41f3552aba1798bb1f23", null ],
     [ "acc_get_z_axis", "lis331hh_8c.html#ga226177d128c1c5e2c1b884fc352747b0", null ],
-    [ "acc_init", "lis331hh_8c.html#ga009fbd3e9095f87ca12d7a9b60751a2a", null ],
+    [ "acc_init", "lis331hh_8c.html#gad8bcdb9d8538530ea0aa8900aad0e8b8", null ],
     [ "acc_measure", "lis331hh_8c.html#ga4668b3e747265390201d7ff637f31e3b", null ]
 ];

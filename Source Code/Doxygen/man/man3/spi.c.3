@@ -1,0 +1,54 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'spi\&.h'\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t __cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
+.br
+.RI "\fISets up the SPI bus as master using supplied parameters\&. \fP"
+.ti -1c
+.RI "int8_t \fBspi_send_byte\fP (int8_t __handle, uint8_t __data)"
+.br
+.RI "\fISends the 'data' on the SPI bus using the parameters corresponding to the 'handle'\&. \fP"
+.ti -1c
+.RI "int8_t \fBspi_send\fP (int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes)"
+.br
+.RI "\fISends the 'data' array on the SPI bus using the parameters corresponding to the 'handle'\&. \fP"
+.ti -1c
+.RI "void \fBspi_release\fP (void)"
+.br
+.RI "\fIReleases the SPI\&. \fP"
+.ti -1c
+.RI "\fBISR\fP (SPI_STC_vect, ISR_BLOCK)"
+.br
+.RI "\fIInterrupt service routine Interrupt service routine for the SPI\&. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed\&. Else the SPI is released\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+: 10-04-2014 12:03:35 : Andi Degn : 0\&.4
+.PP
+This is a driver for the SPI bus on the ATMEGA family processors\&. 
+.PP
+\fBNote:\fP
+.RS 4
+Complies MISRO 2004 standards 
+.RE
+.PP
+
+.PP
+Definition in file \fBspi\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

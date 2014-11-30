@@ -31,6 +31,8 @@ static volatile uint8_t _system_running_flag = SIM908_FLAG_WAITING;
 
 static volatile uint8_t _gps_pull_flag = SIM908_FLAG_WAITING;
 
+static volatile uint8_t _ftp_sending_flag = SIM908_FLAG_WAITING;
+
 static volatile uint8_t _ack_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_ftp_response_flag = SIM908_FLAG_WAITING;
 static volatile uint8_t _ack_gps_response_flag = SIM908_FLAG_WAITING;
@@ -45,19 +47,19 @@ char EXT_MSD_FILENAME[24];
  * @def CR
  * @ingroup sim908_priv
  * @brief define for the carriage return char '\r'
- * @{
+ * @code
  *************************************************************************/
 #define CR	0x0D /* '\r' */
-/* @} */
+/** @endcode */
 
 /**********************************************************************//**
  * @def LF
  * @ingroup sim908_priv
  * @brief define for the line feed char '\n'
- * @{
+ * @code
  *************************************************************************/
 #define LF	0x0A /* '\n' */
-/* @} */
+/** @endcode */
 
 #define DDR(x) (*(&x - 1))
 #define PIN(x) (*(&x - 2))
@@ -132,18 +134,21 @@ void SIM908_init(void)
 void SIM908_start(void)
 {
 	while (_system_running_flag == SIM908_FLAG_WAITING);
-	
+
 	/* Set baud rate to the host baud rate */
 	SIM908_cmd(AT_BAUD_115K2, true);
 
 	/* Synchronizing baud rate */
 	SIM908_cmd(AT_DIAG_TEST, true);
-	
+
 	/* Disable Echo */
 	SIM908_cmd(AT_DIAG_ECHO_DISABLE, true);
 
 	/* Enable CREG unsolicited result code */
 	SIM908_cmd(AT_ENABLE_CREG, true);
+
+	/* Enable automatic answer */
+	SIM908_cmd(AT_DIAG_AUTO_ANSWER("1"), true);
 
 
 	#ifdef CONFIG_PIN
@@ -196,7 +201,7 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	for (uint8_t i = 0; i < 9; i++) {
 		*(output + i) = malloc(18 * sizeof(char));
 	}
-	
+
 	/* GPS raw data: <mode>,<longitude>,<latitude>,<altitude>,<UTC time>,<TTFF>,<num>,<speed>,<course> */
 	_get_GPS_response();
 	_raw_to_array(output);
@@ -256,6 +261,7 @@ void send_MSD(const char *__vroom_id) {
     SIM908_cmd(filename, true);
     free(filename);
 
+	_ftp_sending_flag = SIM908_FLAG_FTP_SENDING;
     while (!SIM908_cmd(AT_FTP_OPEN_BEARER1, true) && _retry_ctr-- > 0) {
         _delay_ms(1000);
     }
@@ -276,23 +282,23 @@ void send_MSD(const char *__vroom_id) {
 
     if (_retry_ctr > -1) {
         _retry_ctr = RETRY_ATTEMPTS;
-	
+
         do {
 			EXT_MSD.msg_identifier = RETRY_ATTEMPTS - _retry_ctr + 1;
 			uart0_send_data((char*)(&EXT_MSD.version), 1);
-			uart0_send_data((char*)(&EXT_MSD.msg_identifier), 1);			
-			uart0_send_data((char*)(&EXT_MSD.control), 1);	
+			uart0_send_data((char*)(&EXT_MSD.msg_identifier), 1);
+			uart0_send_data((char*)(&EXT_MSD.control), 1);
 			uart0_send_data((char*)(&EXT_MSD.vehicle_class), 1);
 			uart0_send_data(&EXT_MSD.VIN[0], 20);
-			uart0_send_data((char*)(&EXT_MSD.fuel_type), 1);			
+			uart0_send_data((char*)(&EXT_MSD.fuel_type), 1);
 			uart0_send_data((char*)(&EXT_MSD.time_stamp), 4);
 			uart0_send_data((char*)(&EXT_MSD.latitude), 4);
 			uart0_send_data((char*)(&EXT_MSD.longitude), 4);
 			uart0_send_data((char*)(&EXT_MSD.direction), 1);
 			uart0_send_data(&EXT_MSD.optional_data[0], 102);
-			
+
 			uart0_send_char(CR);
-			uart0_send_char(LF);	
+			uart0_send_char(LF);
         } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
     }
 
@@ -307,6 +313,7 @@ void send_MSD(const char *__vroom_id) {
     if (_retry_ctr > -1) {
         SIM908_cmd(AT_FTP_CLOSE_BEARER1, true);
     }
+	_ftp_sending_flag = SIM908_FLAG_WAITING;
 }
 
 /********************************************************************************************************************//**
@@ -397,7 +404,7 @@ static void _GPS_enable(void)
 }
 
 static void _wait_for_connection(void) {
-	while (EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED) {
+	while (EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED_HOME_NETWORK && EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED_ROAMING) {
 		_delay_ms(CONNECTION_RETRY_DELAY_IN_MS);
 	}
 }
@@ -576,43 +583,51 @@ void _SIM908_callback(char data)
 
 	if (_CR_counter > 0 && _LF_counter > 0) {
 		_CR_counter = _LF_counter = 0;
-		if (_check_response(SIM908_RESPONSE_CR_LF) || _check_response(SIM908_RESPONSE_LF_CR)) {	/* Skipping empty lines */
-		} else if (_check_response(SIM908_RESPONSE_OK)) {										/* OK */
-			_ack_response_flag = SIM908_FLAG_OK;
-		} else if (_check_response(SIM908_RESPONSE_ERROR)) {									/* Error */
-			_ack_response_flag = SIM908_FLAG_ERROR;
-		} else if (_check_response(SIM908_RESPONSE_GPS_PULL)) {									/* GPS pull */
-			if (_gps_pull_flag == SIM908_FLAG_GPS_PULL) {
+		if (_rx_response_length == 2 &&
+			_check_response(SIM908_RESPONSE_CR_LF) ||
+			_check_response(SIM908_RESPONSE_LF_CR)) {				/* Skipping empty lines */
+		} else if (_rx_response_length == 4 &&
+			_check_response(SIM908_RESPONSE_OK)) {					/* OK */
+				_ack_response_flag = SIM908_FLAG_OK;
+		} else if (_rx_response_length == 7 &&
+			_check_response(SIM908_RESPONSE_ERROR)) {				/* Error */
+				_ack_response_flag = SIM908_FLAG_ERROR;
+		} else if (_gps_pull_flag == SIM908_FLAG_GPS_PULL &&
+			_check_response(SIM908_RESPONSE_GPS_PULL)) {			/* GPS pull */
 				_gps_response_tail = _rx_buffer_tail;
 				_gps_response_length = _rx_response_length;
 				_ack_gps_response_flag = SIM908_FLAG_GPS_PULL_OK;
 				_gps_pull_flag = SIM908_FLAG_WAITING;
-			}
-		} else if (_check_response(SIM908_RESPONSE_CREG)) {										/* CREG */
-			EXT_CONNECTION_CREG_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) == '1' ? CREG_REGISTERED : CREG_NOT_REGISTERED;
-		} else if (_check_response(SIM908_RESPONSE_GPS_READY)) {								/* GPS Ready */
-			_ack_gps_response_flag = SIM908_FLAG_GPS_OK;
-		} else if (_check_response(SIM908_RESPONSE_FTP_PUT)) {									/* FTPPUT */
-			/* 	FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
-				FTP PUT RESPONSE:		"+FTPPUT:2,140"
-				FTP PUT CLOSE SESSION:	"+FTPPUT:1,0"		*/
-			char c1 = _char_at(8, _rx_buffer_tail, _rx_response_length);
-			char c2 = _char_at(10, _rx_buffer_tail, _rx_response_length);
-			char c3 = _char_at(11, _rx_buffer_tail, _rx_response_length);
-			if (c1 == '1' && c2 == '1' && c3 == ',') {
-				_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_OPEN;
-			} else if(c1 == '2' && c2 == '1' && c3 == '4') {
-				_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_SUCCESS;
-			} else if(c1 == '1' && c2 == '0') {
-				_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_CLOSE;
-			} else {
-				_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_ERROR;
-			}
-		} else if (_check_response(SIM908_RESPONSE_RDY)) {									/* System ready */
-			_system_running_flag = SIM908_FLAG_RUNNING;
-		} else if (_check_response(SIM908_RESPONSE_AT)) {									/* Sync AT cmd */
-			_rx_response_length = 0;
-		} 
+		} else if (_rx_response_length == 10 &&
+			_check_response(SIM908_RESPONSE_CREG)) {				/* CREG */
+				EXT_CONNECTION_CREG_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) - '0';	/* Subtracting '0' (0x30) to get the value as an integer */
+		} else if (_rx_response_length == 11 &&
+			_check_response(SIM908_RESPONSE_GPS_READY)) {			/* GPS Ready */
+				_ack_gps_response_flag = SIM908_FLAG_GPS_OK;
+		} else if (_ftp_sending_flag == SIM908_FLAG_FTP_SENDING &&
+			_check_response(SIM908_RESPONSE_FTP_PUT)) {				/* FTPPUT */
+				/* 	FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
+					FTP PUT RESPONSE:		"+FTPPUT:2,140"
+					FTP PUT CLOSE SESSION:	"+FTPPUT:1,0"		*/
+				char c1 = _char_at(8, _rx_buffer_tail, _rx_response_length);
+				char c2 = _char_at(10, _rx_buffer_tail, _rx_response_length);
+				char c3 = _char_at(11, _rx_buffer_tail, _rx_response_length);
+				if (c1 == '1' && c2 == '1' && c3 == ',') {
+					_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_OPEN;
+				} else if(c1 == '2' && c2 == '1' && c3 == '4') {
+					_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_SUCCESS;
+				} else if(c1 == '1' && c2 == '0') {
+					_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_CLOSE;
+				} else {
+					_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_ERROR;
+				}
+		} else if (_rx_response_length == 5 &&
+			_check_response(SIM908_RESPONSE_RDY)) {					/* System ready */
+				_system_running_flag = SIM908_FLAG_RUNNING;
+		} else if (_rx_response_length == 4 &&
+			_check_response(SIM908_RESPONSE_AT)) {					/* Sync AT cmd */
+				_rx_response_length = 0;
+		}
 		_rx_response_length = 0;
 	}
 }

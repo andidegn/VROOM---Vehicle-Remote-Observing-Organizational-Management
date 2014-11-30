@@ -7,10 +7,10 @@
  * @{
 	This is the driver for the car panel in VROOM system.
 	The panel includes two tact switches, a RGB LED and a single LED.
+ 	@note NOT YET Complies MISRO 2004 standards
 	@defgroup cp_priv Private
 	@defgroup cp_pub Public
  * @}
- * @note NOT YET Complies MISRO 2004 standards
  *************************************************************************/
 
 #ifndef CAR_PANEL_H_
@@ -19,15 +19,12 @@
 /**********************************************************************//**
  * @ingroup cp_pub
  * @brief Defines for the time of button press before activation/deactivation in 1/10 sec
- * @{
  *************************************************************************/
 #define BUTTON_PRESS_TIME		30
-/* @} */
 
 /**********************************************************************//**
  * @ingroup cp_pub
  * @brief Defines the state of status LED
- * @{
  *************************************************************************/
 typedef enum
 {
@@ -37,12 +34,10 @@ typedef enum
 	STATUS_GREEN,
 	STATUS_RESET
 } Status;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup cp_pub
  * @brief Defines the state of control LED
- * @{
  *************************************************************************/
 typedef enum
 {
@@ -50,7 +45,6 @@ typedef enum
 	ALARM_ACTIVATED,
 	ALARM_NOT_ACTIVATED
 } Control;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup cp_pub

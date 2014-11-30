@@ -8,6 +8,6 @@ var dir_e5f3a094b1884d447da55fdffbb9d273 =
     [ "Tests", "dir_68ea32aac5a3d19aef2c1430f2b7b4b5.html", "dir_68ea32aac5a3d19aef2c1430f2b7b4b5" ],
     [ "util", "dir_3efe77b6baf66da548681f45cbf6c75d.html", "dir_3efe77b6baf66da548681f45cbf6c75d" ],
     [ "run.c", "run_8c.html", "run_8c" ],
-    [ "vroom_config.h", "vroom__config_8h.html", null ],
+    [ "vroom_config.h", "vroom__config_8h.html", "vroom__config_8h" ],
     [ "VROOM_working.c", "_v_r_o_o_m__working_8c.html", "_v_r_o_o_m__working_8c" ]
 ];

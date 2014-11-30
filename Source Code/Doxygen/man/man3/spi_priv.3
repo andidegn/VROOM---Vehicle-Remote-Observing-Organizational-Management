@@ -1,0 +1,35 @@
+.TH "Private" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Private \- 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBhandle_param\fP"
+.br
+.RI "\fIstruct containing the setup parameters for a single SPI setup \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBISR\fP (SPI_STC_vect, ISR_BLOCK)"
+.br
+.RI "\fIInterrupt service routine Interrupt service routine for the SPI\&. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed\&. Else the SPI is released\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "ISR (SPI_STC_vect, ISR_BLOCK)"
+
+.PP
+Interrupt service routine Interrupt service routine for the SPI\&. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed\&. Else the SPI is released\&. 
+.PP
+Definition at line 271 of file spi\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

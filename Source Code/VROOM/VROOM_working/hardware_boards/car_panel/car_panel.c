@@ -20,24 +20,19 @@
  * @ingroup cp_priv
  * Define for the port
  * @note Changing port will require changes in the interrupt setup
- * @{
  **************************************************************************/
 #define PORT			PORTJ
-/* @} */
 
 /**********************************************************************//**
  * @ingroup cp_priv
  * Macros for DDR and PIN registers
- * @{
  **************************************************************************/
 #define DDR(x) (*(&x - 1))
 #define PIN(x) (*(&x - 2))
-/* @} */
 
 /**********************************************************************//**
  * @ingroup cp_priv
  * Defines for the different mask bits
- * @{
  **************************************************************************/
 #define BTN_CANCEL			0
 #define BTN_ALARM			1
@@ -45,7 +40,6 @@
 #define LED_STATUS_RED		5
 #define LED_STATUS_BLUE		6
 #define LED_STATUS_GREEN	7
-/* @} */
 
 /* Local variables */
 static uint8_t _car_panel_counter;

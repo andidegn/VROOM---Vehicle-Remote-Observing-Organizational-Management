@@ -1,0 +1,50 @@
+.TH "MSD" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MSD \- 
+.PP
+struct containing the \fBMSD\fP for an accident report  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <accident_data\&.h>\fP
+.SH "Detailed Description"
+.PP 
+struct containing the \fBMSD\fP for an accident report 
+
+
+.PP
+\fBNote:\fP
+.RS 4
+According eCall standard EN 15722 the \fBMSD\fP consists of 140 bytes 
+.PP
+.nf
+                                                                          /
+typedef struct __attribute__((packed))
+{
+    uint8_t version;            /* Referring to a public register to determine the meaning and encoding of the optional data */
+    uint8_t msg_identifier;     /* Numbers of re-transmission */
+    uint8_t control;            /* | bit 7: Automatic activation | bit 6: Manual activation | bit 5: Test call | bit 4: Confidence in position | bit 3-0: Reserved | */
+    uint8_t vehicle_class;      /* | bit 7-4 = classification | bit 3-0: category | */
+    char VIN[20];               /* VIN number 17-characters (last 3 char is blank) ISO 3779 */
+    uint8_t fuel_type;
+    uint32_t time_stamp;        /* UTC Seconds */
+    int32_t latitude;           /* Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) ISO 6709 */
+    int32_t longitude;          /* Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) ISO 6709 */
+    uint8_t direction;          /* Direction in degrees\&. The nearest integer of 255\&.0*value/360\&.0 (0 <= value >= 255) */
+    char optional_data[102];    /* Optional\&. Further data (e\&.g\&. crash information, number of passengers) or blank field */
+} AD_MSD;
+
+.fi
+.PP
+ 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

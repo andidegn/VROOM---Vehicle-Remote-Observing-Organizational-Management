@@ -108,93 +108,92 @@ $(document).ready(function(){initNavTree('run_8c_source.html','');});
 </div><!--header-->
 <div class="contents">
 <a href="run_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************/</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/* #define F_CPU 11059200UL */</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="run_8c.html#ad76d1750a6cdeebd506bfcd6752554d2">   10</a></span>&#160;<span class="preprocessor">#define ON 1</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="run_8c.html#a29e413f6725b2ba32d165ffaa35b01e5">   11</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define OFF 0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="run_8c.html#a43bafb28b29491ec7f871319b5a3b2f8">   13</a></span>&#160;<span class="preprocessor">#define F_CPU 11059200UL</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="run_8c.html#a68f824d33c675c8bb6e1337a14812a8d">   15</a></span>&#160;<span class="preprocessor">#define UNIT_TEST                       OFF</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="run_8c.html#adb3478cc38bc8ad2f3c7d331177c0ab4">   16</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MODULE_TEST_SENSORS             OFF</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="run_8c.html#a53bd8810c059159c5e12991274d2a58e">   17</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MODULE_TEST_SIM908              OFF</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="run_8c.html#ad8c2ef4115cbacc2eacd53013ad5dde8">   18</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MODULE_TEST_CAR_PANEL           OFF</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="run_8c.html#ac888b8ab3aafe3d6484f478d378e02b7">   19</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MODULE_TEST_UART                OFF</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="run_8c.html#a7f6d7af3246988d040f9af7bec4bf944">   20</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define INTEGRATION_TEST_SIM908_SENSORS ON</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;avr/interrupt.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;util/delay.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sensor__scheduler_8h.html">sensors/sensor_scheduler.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sim908_8h.html">hardware_boards/sim908/sim908.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="car__panel_8h.html">hardware_boards/car_panel/car_panel.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="accident__data_8h.html">accident_logic/accident_data.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vroom__config_8h.html">vroom_config.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifdef DEBUG_LCD_ENABLE</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #include &quot;<a class="code" href="lcd_8h.html">hardware_boards/lcd_board/lcd/lcd.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define F_CPU 11059200UL</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define ON  1</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define OFF 0</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="run_8c.html#a5096e3547d657d39a5132e7e96a21d49">   22</a></span>&#160;<span class="preprocessor">#define UNIT_TEST_MSD                   OFF</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="lcd_8h.html">hardware_boards/lcd_board/lcd/lcd.h</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sensor__scheduler_8h.html">sensors/sensor_scheduler.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sim908_8h.html">hardware_boards/sim908/sim908.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="car__panel_8h.html">hardware_boards/car_panel/car_panel.h</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="accident__data_8h.html">accident_logic/accident_data.h</a>&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="unit__test_8h.html">tests/unit/unit_test.h</a>&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;avr/io.h&gt;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;avr/interrupt.h&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;util/delay.h&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="run_8c.html#a840291bc02cba5474a4cb46a9b9566fe">   35</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="run_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (<span class="keywordtype">void</span>)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">char</span> buf[20];</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="group__pfleury__lcd.html#ga9af28b2779326b63ff4356e2b1828984">lcd_init</a>(<a class="code" href="group__pfleury__lcd.html#ga5163a96b133868975c0738e180b30cb8">LCD_DISP_ON</a>);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">    #if UNIT_TEST</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor"></span>        <span class="keywordtype">char</span>* result = <a class="code" href="group__ut.html#ga0bcc4f5d430556fa5fc6d0c00d6ac474">run_all_tests</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,0);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(result);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,1);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;Tests run: &quot;</span>);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(<a class="code" href="group__ut.html#ga1d61e35205d61f76e26abaab0011bb7a">tests_run</a>, buf, 10));</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* UNIT_TEST */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">    #if MODULE_TEST_SENSORS</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor"></span><span class="preprocessor">        #include &quot;<a class="code" href="test__module__sensors_8h.html">tests/module/sensors/test_module_sensors.h</a>&quot;</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="test__module__sensors_8c.html#a41e7d1dd0cac7bd20fc32a6ebc87a985">sensors_init</a>();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">while</span> (1)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="test__module__sensors_8c.html#a011bc1b58d86e4e944192741f1f5ecc9">sensors_read_data</a>();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <a class="code" href="test__module__sensors_8c.html#a6c2e124c83dbdfebeeef76f755b86c19">sensors_print_data</a>();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            _delay_ms(500);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* MODULE_TEST_SENSORS */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">    #if MODULE_TEST_SIM908</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span>        <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,0);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;Init...&quot;</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="group__sim908.html#ga270483289f10fccd8f7e31fbca9f4ef4">SIM908_init</a>();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        sei();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="group__sim908.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">SIM908_start</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;...DONE&quot;</span>);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">while</span> (1)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        }</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/* ** Defines what context of the program to be executed ** */</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define UNIT_TEST                       OFF</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define UNIT_TEST_MSD                   OFF</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define MODULE_TEST_SENSORS             OFF</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MODULE_TEST_SIM908              OFF</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MODULE_TEST_CAR_PANEL           OFF</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MODULE_TEST_UART                OFF</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define INTEGRATION_TEST_SIM908_SENSORS ON</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor"></span><span class="comment">/* ******************************************************** */</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="run_8c.html#a840291bc02cba5474a4cb46a9b9566fe">   33</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="run_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">    #ifdef DEBUG_LCD_ENABLE</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor"></span>        <span class="keywordtype">char</span> buf[20];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="group__pfleury__lcd.html#ga9af28b2779326b63ff4356e2b1828984">lcd_init</a>(<a class="code" href="group__pfleury__lcd.html#ga5163a96b133868975c0738e180b30cb8">LCD_DISP_ON</a>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* DEBUG_LCD_ENABLE */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">    #if UNIT_TEST</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span><span class="preprocessor">        #include &quot;<a class="code" href="unit__test_8h.html">tests/unit/unit_test.h</a>&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">char</span>* result = <a class="code" href="group__ut.html#ga0bcc4f5d430556fa5fc6d0c00d6ac474">run_all_tests</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">        #ifdef DEBUG_LCD_ENABLE</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor"></span>            <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,0);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(result);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,1);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;Tests run: &quot;</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(<a class="code" href="unit__test_8c.html#a1d61e35205d61f76e26abaab0011bb7a">tests_run</a>, buf, 10));</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">        #endif </span><span class="comment">/* DEBUG_LCD_ENABLE */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #endif </span><span class="comment">/* UNIT_TEST */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">    #if UNIT_TEST_MSD   </span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor"></span>        <span class="comment">/******************************************************************************</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">        ************************************ ToDo ************************************* </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">        ******************************************************************************/</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="comment">/* Don&#39;t know if it should be integrated in the existing unit test file */</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* UNIT_TEST_MSD */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">    #if MODULE_TEST_SENSORS</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"></span><span class="preprocessor">        #include &quot;<a class="code" href="test__module__sensors_8h.html">tests/module/sensors/test_module_sensors.h</a>&quot;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="test__module__sensors_8c.html#a41e7d1dd0cac7bd20fc32a6ebc87a985">sensors_init</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">while</span> (1)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <a class="code" href="test__module__sensors_8c.html#a011bc1b58d86e4e944192741f1f5ecc9">sensors_read_data</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">            #if DEBUG_LCD_ENABLE</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor"></span>                <a class="code" href="test__module__sensors_8c.html#a6c2e124c83dbdfebeeef76f755b86c19">sensors_print_data</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">            #endif </span><span class="comment">/* DEBUG_LCD_ENABLE */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor"></span>            _delay_ms(500);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* MODULE_TEST_SENSORS */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">    #if MODULE_TEST_SIM908</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor"></span>        <a class="code" href="group__sim908.html#ga270483289f10fccd8f7e31fbca9f4ef4">SIM908_init</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        sei();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <a class="code" href="group__sim908.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">SIM908_start</a>();</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* MODULE_TEST_SIM908 */</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">    #if MODULE_TEST_CAR_PANEL</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span><span class="preprocessor">        #include &quot;<a class="code" href="car__panel_8h.html">hardware_boards/car_panel/car_panel.h</a>&quot;</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="code" href="group__cp__pub.html#ga03156ca934ef40c24593988c03d2b454">car_panel_init</a>();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        sei();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">while</span> (1)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* MODULE_TEST_CAR_PANEL */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">    #if MODULE_TEST_UART</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor"></span><span class="preprocessor">        #include &quot;<a class="code" href="test__module__uart_8h.html">tests/module/uart/test_module_uart.h</a>&quot;</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        sei();</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordtype">char</span> *_test_strings[] = {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="stringliteral">&quot;½1234567890+´qwertyuiopåäsdfghjklæø'&lt;zxcvbnm,.-§!\&quot;#¤%&amp;/()=?`QWERTYUIOPÅÂSDFGHJKLÆØ*&gt;ZXCVBNM;:_@£$€{[]}|€~\µ &quot;,
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span><span class="preprocessor">        #include &quot;<a class="code" href="test__module__car__panel_8h.html">tests/module/car_panel/test_module_car_panel.h</a>&quot;</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="comment">/******************************************************************************</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">            ************************************ ToDo ************************************* </span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">            ******************************************************************************/</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        sei();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* MODULE_TEST_CAR_PANEL */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">    #if MODULE_TEST_UART</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor"></span><span class="preprocessor">        #include &quot;<a class="code" href="test__module__uart_8h.html">tests/module/uart/test_module_uart.h</a>&quot;</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        sei();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordtype">char</span> *_test_strings[] = {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="stringliteral">&quot;½1234567890+´qwertyuiopåäsdfghjklæø'&lt;zxcvbnm,.-§!\&quot;#¤%&amp;/()=?`QWERTYUIOPÅÂSDFGHJKLÆØ*&gt;ZXCVBNM;:_@£$€{[]}|€~\µ &quot;,
             &quot;test_string2&quot;,
             &quot;test_string3&quot;,
             &quot;test_string4&quot;
@@ -206,13 +205,13 @@ $(document).ready(function(){initNavTree('run_8c_source.html','');});
             &quot;fail&quot;,         /* fail */
             &quot;test_string4_&quot; /* fail */
         };
-
+        #ifdef DEBUG_LCD_ENABLE
         for (uint8_t k = 0; k &lt; 4; k++) {
             lcd_puts(test_module_uart_run(_test_strings[k], _compare_strings[k]) ? &quot;PASSED&quot; : &quot;FAILED&quot;);
             lcd_putc(&#39;\n&#39;);
+            
         }
-
-        while (1);
+        #endif /* DEBUG_LCD_ENABLE */
     #endif /* MODULE_TEST_UART */
 
     #if INTEGRATION_TEST_SIM908_SENSORS
@@ -222,126 +221,94 @@ $(document).ready(function(){initNavTree('run_8c_source.html','');});
         int16_t x_axis, y_axis, z_axis;
         float temp;
 
-        sei();
+        #ifdef DEBUG_LCD_ENABLE
+            lcd_clrscr();
+            lcd_gotoxy(0, 0);
+            lcd_puts(&quot;Initializing...&quot;);
+        #endif /* DEBUG_LCD_ENABLE */   
+        
         car_panel_init();
         SIM908_init();
-
+        sei();
         SIM908_start();
         scheduler_start(NULL);
         car_panel_start();
-        _delay_ms(500);
+        
         while (1)
         {
+            ///*************************************************************************
+            //****************** Has to be moved into accident_logic ******************* 
+            //*************************************************************************/
             scheduler_get_last_readings(_acc_buffer);
             x_axis = *_acc_buffer;
             y_axis = *(_acc_buffer + 1);
             z_axis = *(_acc_buffer + 2);
             temp = get_temperature();
-            acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
+            //acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
+//
+            //if (acc_total &gt; 1000 &amp;&amp; EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
+            //{
+                //if (!car_panel_wait_cancel_emmergency())
+                    //EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
+            //}
+            ///**************************************************************************/
 
-            if (acc_total &gt; 1000 &amp;&amp; EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
-            {
-                if (!car_panel_wait_cancel_emmergency())
-                    EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
-            }
-
-            EXT_CONNECTION_STATUS_FLAG == CREG_REGISTERED ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
+            ad_check_for_crash();
+            
+            EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
             if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
             {
-                emergency_alarm();
+                ad_emergency_alarm();
 
                 /* Enable cancel button for reset purpose */
                 car_panel_set_cancel_button_state(true);
             }
 
-            lcd_clrscr();
-            lcd_gotoxy(0, 0);
-            lcd_puts(&quot;x &quot;);
-            lcd_puts(itoa(x_axis, buf, 10));
+            #ifdef DEBUG_LCD_ENABLE
+                lcd_clrscr();
+                lcd_gotoxy(0, 0);
+                lcd_puts(&quot;x &quot;);
+                lcd_puts(itoa(x_axis, buf, 10));
 
-            lcd_gotoxy(8, 0);
-            lcd_puts(&quot;y &quot;);
-            lcd_puts(itoa(y_axis, buf, 10));;
+                lcd_gotoxy(8, 0);
+                lcd_puts(&quot;y &quot;);
+                lcd_puts(itoa(y_axis, buf, 10));;
 
-            lcd_gotoxy(0, 1);
-            lcd_puts(&quot;z &quot;);
-            lcd_puts(itoa(z_axis, buf, 10));
+                lcd_gotoxy(0, 1);
+                lcd_puts(&quot;z &quot;);
+                lcd_puts(itoa(z_axis, buf, 10));
 
-            lcd_gotoxy(8, 1);
-            lcd_puts(dtostrf( temp, 2, 2, buf ));
-            lcd_putc(degree);
-            lcd_putc(&#39;C&#39;);
-
+                lcd_gotoxy(8, 1);
+                lcd_puts(dtostrf( temp, 2, 2, buf ));
+                lcd_putc(degree);
+                lcd_putc(&#39;C&#39;);
+            #endif /* DEBUG_LCD_ENABLE */   
             _delay_ms(200);
         }
     #endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
-    #if UNIT_TEST_MSD
-        emergency_alarm(true, false);
-        while (1)
-        {
-            lcd_clrscr();
-            lcd_gotoxy(0,0);
-            lcd_puts(&quot;Control: &quot;);
-            lcd_puts(itoa(EXT_MSD.control, buf, 16));
-            lcd_gotoxy(0,1);
-            lcd_puts(EXT_MSD.VIN);
-            _delay_ms(5000);
-
-            lcd_clrscr();
-            lcd_gotoxy(0,0);
-            lcd_puts(ultoa(EXT_MSD.time_stamp, buf, 10) );
-            lcd_gotoxy(0,1);
-            lcd_puts(itoa(EXT_MSD.direction, buf, 10));
-            _delay_ms(5000);
-
-            lcd_clrscr();
-            lcd_gotoxy(0,0);
-            lcd_puts(&quot;Long: &quot;);
-            lcd_puts(ltoa(EXT_MSD.longitude, buf, 16));
-            lcd_gotoxy(0,1);
-            lcd_puts(&quot;Lati: &quot;);
-            lcd_puts(ltoa(EXT_MSD.latitude, buf, 16));
-            _delay_ms(5000);
-
-            lcd_clrscr();
-            lcd_gotoxy(0,0);
-            lcd_puts(&quot;SP: &quot;);
-            lcd_puts(itoa(EXT_MSD.sp[0], buf, 10)); lcd_putc(&#39;.&#39;);
-            lcd_puts(itoa(EXT_MSD.sp[1], buf, 10)); lcd_putc(&#39;.&#39;);
-            lcd_puts(itoa(EXT_MSD.sp[2], buf, 10)); lcd_putc(&#39;.&#39;);
-            lcd_puts(itoa(EXT_MSD.sp[3], buf, 10));
-            lcd_gotoxy(0,1);
-            lcd_puts(EXT_MSD.optional_data);
-            _delay_ms(5000);
-        }
-    #endif /* UNIT_TEST_MSD */
-
-    while (1)
-    {
-
-    }
+    while (1);
 }
 &#39;&quot;</span>,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="stringliteral">&quot;test_string2&quot;</span>,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="stringliteral">&quot;test_string3&quot;</span>,</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="stringliteral">&quot;test_string4&quot;</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        };</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordtype">char</span> *_compare_strings[] = {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="stringliteral">&quot;½1234567890+´qwertyuiopåäsdfghjklæø'&lt;zxcvbnm,.-§!\&quot;#¤%&amp;/()=?`QWERTYUIOPÅÂSDFGHJKLÆØ*&gt;ZXCVBNM;:_@£$€{[]}|€~\µ &quot;,  /* pass */
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="stringliteral">&quot;test_string2&quot;</span>,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="stringliteral">&quot;test_string3&quot;</span>,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="stringliteral">&quot;test_string4&quot;</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        };</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordtype">char</span> *_compare_strings[] = {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="stringliteral">&quot;½1234567890+´qwertyuiopåäsdfghjklæø'&lt;zxcvbnm,.-§!\&quot;#¤%&amp;/()=?`QWERTYUIOPÅÂSDFGHJKLÆØ*&gt;ZXCVBNM;:_@£$€{[]}|€~\µ &quot;,  /* pass */
             &quot;test_&quot;,        /* pass */
             &quot;fail&quot;,         /* fail */
             &quot;test_string4_&quot; /* fail */
         };
-
+        #ifdef DEBUG_LCD_ENABLE
         for (uint8_t k = 0; k &lt; 4; k++) {
             lcd_puts(test_module_uart_run(_test_strings[k], _compare_strings[k]) ? &quot;PASSED&quot; : &quot;FAILED&quot;);
             lcd_putc(&#39;\n&#39;);
+            
         }
-
-        while (1);
+        #endif /* DEBUG_LCD_ENABLE */
     #endif /* MODULE_TEST_UART */
 
     #if INTEGRATION_TEST_SIM908_SENSORS
@@ -351,270 +318,201 @@ $(document).ready(function(){initNavTree('run_8c_source.html','');});
         int16_t x_axis, y_axis, z_axis;
         float temp;
 
-        sei();
+        #ifdef DEBUG_LCD_ENABLE
+            lcd_clrscr();
+            lcd_gotoxy(0, 0);
+            lcd_puts(&quot;Initializing...&quot;);
+        #endif /* DEBUG_LCD_ENABLE */   
+        
         car_panel_init();
         SIM908_init();
-
+        sei();
         SIM908_start();
         scheduler_start(NULL);
         car_panel_start();
-        _delay_ms(500);
+        
         while (1)
         {
+            ///*************************************************************************
+            //****************** Has to be moved into accident_logic ******************* 
+            //*************************************************************************/
             scheduler_get_last_readings(_acc_buffer);
             x_axis = *_acc_buffer;
             y_axis = *(_acc_buffer + 1);
             z_axis = *(_acc_buffer + 2);
             temp = get_temperature();
-            acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
+            //acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
+//
+            //if (acc_total &gt; 1000 &amp;&amp; EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
+            //{
+                //if (!car_panel_wait_cancel_emmergency())
+                    //EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
+            //}
+            ///**************************************************************************/
 
-            if (acc_total &gt; 1000 &amp;&amp; EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
-            {
-                if (!car_panel_wait_cancel_emmergency())
-                    EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
-            }
-
-            EXT_CONNECTION_STATUS_FLAG == CREG_REGISTERED ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
+            ad_check_for_crash();
+            
+            EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
             if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
             {
-                emergency_alarm();
+                ad_emergency_alarm();
 
                 /* Enable cancel button for reset purpose */
                 car_panel_set_cancel_button_state(true);
             }
 
-            lcd_clrscr();
-            lcd_gotoxy(0, 0);
-            lcd_puts(&quot;x &quot;);
-            lcd_puts(itoa(x_axis, buf, 10));
+            #ifdef DEBUG_LCD_ENABLE
+                lcd_clrscr();
+                lcd_gotoxy(0, 0);
+                lcd_puts(&quot;x &quot;);
+                lcd_puts(itoa(x_axis, buf, 10));
 
-            lcd_gotoxy(8, 0);
-            lcd_puts(&quot;y &quot;);
-            lcd_puts(itoa(y_axis, buf, 10));;
+                lcd_gotoxy(8, 0);
+                lcd_puts(&quot;y &quot;);
+                lcd_puts(itoa(y_axis, buf, 10));;
 
-            lcd_gotoxy(0, 1);
-            lcd_puts(&quot;z &quot;);
-            lcd_puts(itoa(z_axis, buf, 10));
+                lcd_gotoxy(0, 1);
+                lcd_puts(&quot;z &quot;);
+                lcd_puts(itoa(z_axis, buf, 10));
 
-            lcd_gotoxy(8, 1);
-            lcd_puts(dtostrf( temp, 2, 2, buf ));
-            lcd_putc(degree);
-            lcd_putc(&#39;C&#39;);
-
+                lcd_gotoxy(8, 1);
+                lcd_puts(dtostrf( temp, 2, 2, buf ));
+                lcd_putc(degree);
+                lcd_putc(&#39;C&#39;);
+            #endif /* DEBUG_LCD_ENABLE */   
             _delay_ms(200);
         }
     #endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
-    #if UNIT_TEST_MSD
-        emergency_alarm(true, false);
-        while (1)
-        {
-            lcd_clrscr();
-            lcd_gotoxy(0,0);
-            lcd_puts(&quot;Control: &quot;);
-            lcd_puts(itoa(EXT_MSD.control, buf, 16));
-            lcd_gotoxy(0,1);
-            lcd_puts(EXT_MSD.VIN);
-            _delay_ms(5000);
-
-            lcd_clrscr();
-            lcd_gotoxy(0,0);
-            lcd_puts(ultoa(EXT_MSD.time_stamp, buf, 10) );
-            lcd_gotoxy(0,1);
-            lcd_puts(itoa(EXT_MSD.direction, buf, 10));
-            _delay_ms(5000);
-
-            lcd_clrscr();
-            lcd_gotoxy(0,0);
-            lcd_puts(&quot;Long: &quot;);
-            lcd_puts(ltoa(EXT_MSD.longitude, buf, 16));
-            lcd_gotoxy(0,1);
-            lcd_puts(&quot;Lati: &quot;);
-            lcd_puts(ltoa(EXT_MSD.latitude, buf, 16));
-            _delay_ms(5000);
-
-            lcd_clrscr();
-            lcd_gotoxy(0,0);
-            lcd_puts(&quot;SP: &quot;);
-            lcd_puts(itoa(EXT_MSD.sp[0], buf, 10)); lcd_putc(&#39;.&#39;);
-            lcd_puts(itoa(EXT_MSD.sp[1], buf, 10)); lcd_putc(&#39;.&#39;);
-            lcd_puts(itoa(EXT_MSD.sp[2], buf, 10)); lcd_putc(&#39;.&#39;);
-            lcd_puts(itoa(EXT_MSD.sp[3], buf, 10));
-            lcd_gotoxy(0,1);
-            lcd_puts(EXT_MSD.optional_data);
-            _delay_ms(5000);
-        }
-    #endif /* UNIT_TEST_MSD */
-
-    while (1)
-    {
-
-    }
+    while (1);
 }
 &#39;&quot;</span>, <span class="comment">/* pass */</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="stringliteral">&quot;test_&quot;</span>,        <span class="comment">/* pass */</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="stringliteral">&quot;fail&quot;</span>,         <span class="comment">/* fail */</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="stringliteral">&quot;test_string4_&quot;</span> <span class="comment">/* fail */</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        };</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">for</span> (uint8_t k = 0; k &lt; 4; k++) {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<a class="code" href="group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38">test_module_uart_run</a>(_test_strings[k], _compare_strings[k]) ? <span class="stringliteral">&quot;PASSED&quot;</span> : <span class="stringliteral">&quot;FAILED&quot;</span>);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(<span class="charliteral">&#39;\n&#39;</span>);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">while</span> (1);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* MODULE_TEST_UART */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">    #if INTEGRATION_TEST_SIM908_SENSORS</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor"></span>        int16_t *_acc_buffer = malloc(3 * <span class="keyword">sizeof</span>(int16_t));</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keyword">volatile</span> uint32_t acc_total = 0;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="test__module__sensors_8c.html#abb8bc3abd66191b672c2baa24f41745d">degree</a> = 0b011011111;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        int16_t x_axis, y_axis, z_axis;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">float</span> temp;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        sei();</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <a class="code" href="group__cp__pub.html#ga03156ca934ef40c24593988c03d2b454">car_panel_init</a>();</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <a class="code" href="group__sim908.html#ga270483289f10fccd8f7e31fbca9f4ef4">SIM908_init</a>();</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <a class="code" href="group__sim908.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">SIM908_start</a>();</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <a class="code" href="sensor__scheduler_8c.html#ad7757661991663ae99dbac66880abd9d">scheduler_start</a>(NULL);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <a class="code" href="group__cp__pub.html#ga0c1134d008155bc3a89b083146c50d49">car_panel_start</a>();</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        _delay_ms(500);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">while</span> (1)</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <a class="code" href="sensor__scheduler_8c.html#afaa128e71cbb4ca2527c4851e9799b57">scheduler_get_last_readings</a>(_acc_buffer);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            x_axis = *_acc_buffer;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            y_axis = *(_acc_buffer + 1);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            z_axis = *(_acc_buffer + 2);</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            temp = <a class="code" href="group__tc72.html#ga47f06fefabeb93c38acaface0c1f0a1d">get_temperature</a>();</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordflow">if</span> (acc_total &gt; 1000 &amp;&amp; <a class="code" href="accident__data_8c.html#a6e879d404903a7929366bbbcc6060f91">EXT_EMERGENCY_FLAG</a> == <a class="code" href="group__ad__pub.html#gga1c672888b6953fb65023d66cbb595c4eaa804f424e8340c4c008b9d2a4bc13944">EMERGENCY_NO_ALARM</a>)</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            {</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                <span class="keywordflow">if</span> (!<a class="code" href="group__cp__pub.html#ga99fa023842761c235f9807e21c8f5f30">car_panel_wait_cancel_emmergency</a>())</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                    <a class="code" href="accident__data_8c.html#a6e879d404903a7929366bbbcc6060f91">EXT_EMERGENCY_FLAG</a> = <a class="code" href="group__ad__pub.html#gga1c672888b6953fb65023d66cbb595c4ea30df4dd40fd132added2ec752e70ec5a">EMERGENCY_AUTO_ALARM</a>;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            }</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <a class="code" href="accident__data_8c.html#aadbb129c0c334574869fc52d00ecb5e1">EXT_CONNECTION_STATUS_FLAG</a> == <a class="code" href="group__ad__pub.html#ggaa0adb17c068f341fd97a074dfa40a371a6acc71a0c69990ad88a78ae753412b18">CREG_REGISTERED</a> ? <a class="code" href="group__cp__pub.html#gac29cb31614edaa1033bdc2bf4ef5cefa">car_panel_set_status</a>(<a class="code" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba2f91de342fc2584dd731cfe5d47271c6">STATUS_GREEN</a>) : <a class="code" href="group__cp__pub.html#gac29cb31614edaa1033bdc2bf4ef5cefa">car_panel_set_status</a>(<a class="code" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba8e43b8a191f7ae1324ae723f5b88d4f6">STATUS_RED</a>);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="accident__data_8c.html#a6e879d404903a7929366bbbcc6060f91">EXT_EMERGENCY_FLAG</a> == <a class="code" href="group__ad__pub.html#gga1c672888b6953fb65023d66cbb595c4ea30df4dd40fd132added2ec752e70ec5a">EMERGENCY_AUTO_ALARM</a> ||  <a class="code" href="accident__data_8c.html#a6e879d404903a7929366bbbcc6060f91">EXT_EMERGENCY_FLAG</a> == <a class="code" href="group__ad__pub.html#gga1c672888b6953fb65023d66cbb595c4eafd081379d59643956abdf38d516f0cef">EMERGENCY_MANUAL_ALARM</a>)</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            {</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                <a class="code" href="group__ad__pub.html#gac60d028353a9fb4636957a536a095893">emergency_alarm</a>();</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                <span class="comment">/* Enable cancel button for reset purpose */</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                <a class="code" href="group__cp__pub.html#ga044f42c8895b117b37288520fdb781b5">car_panel_set_cancel_button_state</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            }</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0, 0);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;x &quot;</span>);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(x_axis, buf, 10));</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="stringliteral">&quot;test_&quot;</span>,        <span class="comment">/* pass */</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="stringliteral">&quot;fail&quot;</span>,         <span class="comment">/* fail */</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="stringliteral">&quot;test_string4_&quot;</span> <span class="comment">/* fail */</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        };</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">        #ifdef DEBUG_LCD_ENABLE</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor"></span>        <span class="keywordflow">for</span> (uint8_t k = 0; k &lt; 4; k++) {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<a class="code" href="group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38">test_module_uart_run</a>(_test_strings[k], _compare_strings[k]) ? <span class="stringliteral">&quot;PASSED&quot;</span> : <span class="stringliteral">&quot;FAILED&quot;</span>);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">        #endif </span><span class="comment">/* DEBUG_LCD_ENABLE */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #endif </span><span class="comment">/* MODULE_TEST_UART */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">    #if INTEGRATION_TEST_SIM908_SENSORS</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor"></span>        int16_t *_acc_buffer = malloc(3 * <span class="keyword">sizeof</span>(int16_t));</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keyword">volatile</span> uint32_t acc_total = 0;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="test__module__sensors_8c.html#abb8bc3abd66191b672c2baa24f41745d">degree</a> = 0b011011111;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        int16_t x_axis, y_axis, z_axis;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">float</span> temp;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">        #ifdef DEBUG_LCD_ENABLE</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor"></span>            <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0, 0);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;Initializing...&quot;</span>);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">        #endif </span><span class="comment">/* DEBUG_LCD_ENABLE */</span><span class="preprocessor">   </span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor"></span>        </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <a class="code" href="group__cp__pub.html#ga03156ca934ef40c24593988c03d2b454">car_panel_init</a>();</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <a class="code" href="group__sim908.html#ga270483289f10fccd8f7e31fbca9f4ef4">SIM908_init</a>();</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        sei();</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <a class="code" href="group__sim908.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">SIM908_start</a>();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <a class="code" href="sensor__scheduler_8c.html#ad7757661991663ae99dbac66880abd9d">scheduler_start</a>(NULL);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <a class="code" href="group__cp__pub.html#ga0c1134d008155bc3a89b083146c50d49">car_panel_start</a>();</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">while</span> (1)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="comment">//****************** Has to be moved into accident_logic ******************* </span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="comment">//*************************************************************************/</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <a class="code" href="sensor__scheduler_8c.html#afaa128e71cbb4ca2527c4851e9799b57">scheduler_get_last_readings</a>(_acc_buffer);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            x_axis = *_acc_buffer;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            y_axis = *(_acc_buffer + 1);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            z_axis = *(_acc_buffer + 2);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            temp = <a class="code" href="group__tc72.html#ga47f06fefabeb93c38acaface0c1f0a1d">get_temperature</a>();</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="comment">//acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="comment">//if (acc_total &gt; 1000 &amp;&amp; EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <span class="comment">//{</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                <span class="comment">//if (!car_panel_wait_cancel_emmergency())</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                    <span class="comment">//EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            <span class="comment">//}</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <a class="code" href="accident__data_8c.html#a21c7ffc49f578e74626c032867cea479">ad_check_for_crash</a>();</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <a class="code" href="accident__data_8c.html#add142243425ede2aeae62067ecfb9f57">EXT_CONNECTION_CREG_FLAG</a> == CREG_REGISTERED ? <a class="code" href="group__cp__pub.html#gac29cb31614edaa1033bdc2bf4ef5cefa">car_panel_set_status</a>(<a class="code" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba2f91de342fc2584dd731cfe5d47271c6">STATUS_GREEN</a>) : <a class="code" href="group__cp__pub.html#gac29cb31614edaa1033bdc2bf4ef5cefa">car_panel_set_status</a>(<a class="code" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba8e43b8a191f7ae1324ae723f5b88d4f6">STATUS_RED</a>);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="accident__data_8c.html#a7d9910fe0c51f281dd99d303078b0fd1">EXT_EMERGENCY_FLAG</a> == EMERGENCY_AUTO_ALARM ||  <a class="code" href="accident__data_8c.html#a7d9910fe0c51f281dd99d303078b0fd1">EXT_EMERGENCY_FLAG</a> == EMERGENCY_MANUAL_ALARM)</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <a class="code" href="accident__data_8c.html#aee1bd5118ffcb7994b94088ddc55f67c">ad_emergency_alarm</a>();</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(8, 0);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;y &quot;</span>);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(y_axis, buf, 10));;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                <span class="comment">/* Enable cancel button for reset purpose */</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                <a class="code" href="group__cp__pub.html#ga044f42c8895b117b37288520fdb781b5">car_panel_set_cancel_button_state</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            }</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0, 1);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;z &quot;</span>);</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(z_axis, buf, 10));</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(8, 1);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(dtostrf( temp, 2, 2, buf ));</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(degree);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(<span class="charliteral">&#39;C&#39;</span>);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            _delay_ms(200);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        }</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* INTEGRATION_TEST_SIM908_SENSORS */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="preprocessor">    #if UNIT_TEST_MSD</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor"></span>        <a class="code" href="group__ad__pub.html#gac60d028353a9fb4636957a536a095893">emergency_alarm</a>(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordflow">while</span> (1)</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        {</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,0);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;Control: &quot;</span>);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.control, buf, 16));</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,1);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.VIN);</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            _delay_ms(5000);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,0);</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(ultoa(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.time_stamp, buf, 10) );</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,1);</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.direction, buf, 10));</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            _delay_ms(5000);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,0);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;Long: &quot;</span>);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(ltoa(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.longitude, buf, 16));</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,1);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;Lati: &quot;</span>);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(ltoa(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.latitude, buf, 16));</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            _delay_ms(5000);</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,0);</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;SP: &quot;</span>);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.sp[0], buf, 10)); <a class="code" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(<span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.sp[1], buf, 10)); <a class="code" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(<span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.sp[2], buf, 10)); <a class="code" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(<span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.sp[3], buf, 10));</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0,1);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<a class="code" href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a>.optional_data);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            _delay_ms(5000);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        }</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* UNIT_TEST_MSD */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">while</span> (1)</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    {</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    }</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;}</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">            #ifdef DEBUG_LCD_ENABLE</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor"></span>                <a class="code" href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>();</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0, 0);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;x &quot;</span>);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(x_axis, buf, 10));</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(8, 0);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;y &quot;</span>);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(y_axis, buf, 10));;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(0, 1);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">&quot;z &quot;</span>);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(itoa(z_axis, buf, 10));</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                <a class="code" href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(8, 1);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                <a class="code" href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(dtostrf( temp, 2, 2, buf ));</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                <a class="code" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(degree);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                <a class="code" href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(<span class="charliteral">&#39;C&#39;</span>);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">            #endif </span><span class="comment">/* DEBUG_LCD_ENABLE */</span><span class="preprocessor">   </span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor"></span>            _delay_ms(200);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        }</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">    #endif </span><span class="comment">/* INTEGRATION_TEST_SIM908_SENSORS */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">while</span> (1);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;}</div>
 <div class="ttc" id="test__module__sensors_8h_html"><div class="ttname"><a href="test__module__sensors_8h.html">test_module_sensors.h</a></div></div>
-<div class="ttc" id="group__cp__pub_html_ga044f42c8895b117b37288520fdb781b5"><div class="ttname"><a href="group__cp__pub.html#ga044f42c8895b117b37288520fdb781b5">car_panel_set_cancel_button_state</a></div><div class="ttdeci">void car_panel_set_cancel_button_state(bool state)</div><div class="ttdoc">Sets the activation state of the cancel button. </div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8c_source.html#l00215">car_panel.c:215</a></div></div>
-<div class="ttc" id="accident__data_8c_html_a6e879d404903a7929366bbbcc6060f91"><div class="ttname"><a href="accident__data_8c.html#a6e879d404903a7929366bbbcc6060f91">EXT_EMERGENCY_FLAG</a></div><div class="ttdeci">EMERGENCY_FLAG EXT_EMERGENCY_FLAG</div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8c_source.html#l00028">accident_data.c:28</a></div></div>
-<div class="ttc" id="group__sim908_html_ga7ff0d6f82e2a3ec9b632df1e404f45f8"><div class="ttname"><a href="group__sim908.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">SIM908_start</a></div><div class="ttdeci">void SIM908_start(void)</div><div class="ttdoc">Starts the SIM908 module in following procedure. setup global settings -&gt; setup GSM -&gt; setup GPS -&gt; e...</div><div class="ttdef"><b>Definition:</b> <a href="sim908_8c_source.html#l00131">sim908.c:131</a></div></div>
+<div class="ttc" id="group__cp__pub_html_ga044f42c8895b117b37288520fdb781b5"><div class="ttname"><a href="group__cp__pub.html#ga044f42c8895b117b37288520fdb781b5">car_panel_set_cancel_button_state</a></div><div class="ttdeci">void car_panel_set_cancel_button_state(bool state)</div><div class="ttdoc">Sets the activation state of the cancel button. </div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8c_source.html#l00209">car_panel.c:209</a></div></div>
+<div class="ttc" id="group__sim908_html_ga7ff0d6f82e2a3ec9b632df1e404f45f8"><div class="ttname"><a href="group__sim908.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">SIM908_start</a></div><div class="ttdeci">void SIM908_start(void)</div><div class="ttdoc">Starts the SIM908 module in following procedure. setup global settings -&gt; setup GSM -&gt; setup GPS -&gt; e...</div><div class="ttdef"><b>Definition:</b> <a href="sim908_8c_source.html#l00132">sim908.c:132</a></div></div>
 <div class="ttc" id="test__module__sensors_8c_html_a6c2e124c83dbdfebeeef76f755b86c19"><div class="ttname"><a href="test__module__sensors_8c.html#a6c2e124c83dbdfebeeef76f755b86c19">sensors_print_data</a></div><div class="ttdeci">void sensors_print_data(void)</div><div class="ttdef"><b>Definition:</b> <a href="test__module__sensors_8c_source.html#l00039">test_module_sensors.c:39</a></div></div>
 <div class="ttc" id="group__pfleury__lcd_html_gadbf47a5efdf02367ded1ebf8f9edb5fe"><div class="ttname"><a href="group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a></div><div class="ttdeci">void lcd_gotoxy(uint8_t x, uint8_t y)</div><div class="ttdoc">Set cursor to specified position. </div><div class="ttdef"><b>Definition:</b> <a href="lcd_8c_source.html#l00388">lcd.c:388</a></div></div>
-<div class="ttc" id="run_8c_html_a840291bc02cba5474a4cb46a9b9566fe"><div class="ttname"><a href="run_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a></div><div class="ttdeci">int main(void)</div><div class="ttdef"><b>Definition:</b> <a href="run_8c_source.html#l00035">run.c:35</a></div></div>
-<div class="ttc" id="group__ad__pub_html_gga1c672888b6953fb65023d66cbb595c4eaa804f424e8340c4c008b9d2a4bc13944"><div class="ttname"><a href="group__ad__pub.html#gga1c672888b6953fb65023d66cbb595c4eaa804f424e8340c4c008b9d2a4bc13944">EMERGENCY_NO_ALARM</a></div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8h_source.html#l00048">accident_data.h:48</a></div></div>
-<div class="ttc" id="group__ad__pub_html_ggaa0adb17c068f341fd97a074dfa40a371a6acc71a0c69990ad88a78ae753412b18"><div class="ttname"><a href="group__ad__pub.html#ggaa0adb17c068f341fd97a074dfa40a371a6acc71a0c69990ad88a78ae753412b18">CREG_REGISTERED</a></div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8h_source.html#l00062">accident_data.h:62</a></div></div>
+<div class="ttc" id="accident__data_8c_html_a7d9910fe0c51f281dd99d303078b0fd1"><div class="ttname"><a href="accident__data_8c.html#a7d9910fe0c51f281dd99d303078b0fd1">EXT_EMERGENCY_FLAG</a></div><div class="ttdeci">AD_EMERGENCY_FLAG EXT_EMERGENCY_FLAG</div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8c_source.html#l00025">accident_data.c:25</a></div></div>
+<div class="ttc" id="run_8c_html_a840291bc02cba5474a4cb46a9b9566fe"><div class="ttname"><a href="run_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a></div><div class="ttdeci">int main(void)</div><div class="ttdef"><b>Definition:</b> <a href="run_8c_source.html#l00033">run.c:33</a></div></div>
+<div class="ttc" id="unit__test_8c_html_a1d61e35205d61f76e26abaab0011bb7a"><div class="ttname"><a href="unit__test_8c.html#a1d61e35205d61f76e26abaab0011bb7a">tests_run</a></div><div class="ttdeci">uint16_t tests_run</div><div class="ttdef"><b>Definition:</b> <a href="unit__test_8c_source.html#l00015">unit_test.c:15</a></div></div>
 <div class="ttc" id="group__pfleury__lcd_html_gaf8da853dba4b9d5f2aea4e294444e14d"><div class="ttname"><a href="group__pfleury__lcd.html#gaf8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a></div><div class="ttdeci">void lcd_clrscr(void)</div><div class="ttdoc">Clear display and set cursor to home position. </div><div class="ttdef"><b>Definition:</b> <a href="lcd_8c_source.html#l00424">lcd.c:424</a></div></div>
-<div class="ttc" id="group__sim908_html_ga270483289f10fccd8f7e31fbca9f4ef4"><div class="ttname"><a href="group__sim908.html#ga270483289f10fccd8f7e31fbca9f4ef4">SIM908_init</a></div><div class="ttdeci">void SIM908_init(void)</div><div class="ttdoc">Initiates the SIM908 module. </div><div class="ttdef"><b>Definition:</b> <a href="sim908_8c_source.html#l00096">sim908.c:96</a></div></div>
+<div class="ttc" id="group__sim908_html_ga270483289f10fccd8f7e31fbca9f4ef4"><div class="ttname"><a href="group__sim908.html#ga270483289f10fccd8f7e31fbca9f4ef4">SIM908_init</a></div><div class="ttdeci">void SIM908_init(void)</div><div class="ttdoc">Initiates the SIM908 module. </div><div class="ttdef"><b>Definition:</b> <a href="sim908_8c_source.html#l00097">sim908.c:97</a></div></div>
 <div class="ttc" id="group__tc72_html_ga47f06fefabeb93c38acaface0c1f0a1d"><div class="ttname"><a href="group__tc72.html#ga47f06fefabeb93c38acaface0c1f0a1d">get_temperature</a></div><div class="ttdeci">float get_temperature(void)</div><div class="ttdoc">Function to read the last measured temperature from the tc72 sensor. </div><div class="ttdef"><b>Definition:</b> <a href="tc72_8c_source.html#l00104">tc72.c:104</a></div></div>
-<div class="ttc" id="group__ad__pub_html_gac60d028353a9fb4636957a536a095893"><div class="ttname"><a href="group__ad__pub.html#gac60d028353a9fb4636957a536a095893">emergency_alarm</a></div><div class="ttdeci">void emergency_alarm(void)</div><div class="ttdoc">Function to call when an emergency alarm is triggered. </div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8c_source.html#l00049">accident_data.c:49</a></div></div>
-<div class="ttc" id="group__cp__pub_html_ga0c1134d008155bc3a89b083146c50d49"><div class="ttname"><a href="group__cp__pub.html#ga0c1134d008155bc3a89b083146c50d49">car_panel_start</a></div><div class="ttdeci">void car_panel_start(void)</div><div class="ttdoc">Enable external interrupt on ALARM button PJ1 (PCINT10) </div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8c_source.html#l00081">car_panel.c:81</a></div></div>
-<div class="ttc" id="accident__data_8c_html_a98360402a203ec35429a243917cdb51f"><div class="ttname"><a href="accident__data_8c.html#a98360402a203ec35429a243917cdb51f">EXT_MSD</a></div><div class="ttdeci">MSD EXT_MSD</div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8c_source.html#l00027">accident_data.c:27</a></div></div>
+<div class="ttc" id="group__cp__pub_html_ga0c1134d008155bc3a89b083146c50d49"><div class="ttname"><a href="group__cp__pub.html#ga0c1134d008155bc3a89b083146c50d49">car_panel_start</a></div><div class="ttdeci">void car_panel_start(void)</div><div class="ttdoc">Enable external interrupt on ALARM button PJ1 (PCINT10) </div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8c_source.html#l00075">car_panel.c:75</a></div></div>
+<div class="ttc" id="accident__data_8c_html_aee1bd5118ffcb7994b94088ddc55f67c"><div class="ttname"><a href="accident__data_8c.html#aee1bd5118ffcb7994b94088ddc55f67c">ad_emergency_alarm</a></div><div class="ttdeci">void ad_emergency_alarm(void)</div><div class="ttdoc">Function to call when an emergency alarm is triggered. </div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8c_source.html#l00046">accident_data.c:46</a></div></div>
+<div class="ttc" id="accident__data_8c_html_a21c7ffc49f578e74626c032867cea479"><div class="ttname"><a href="accident__data_8c.html#a21c7ffc49f578e74626c032867cea479">ad_check_for_crash</a></div><div class="ttdeci">void ad_check_for_crash(void)</div><div class="ttdoc">Checks if a crash has occurred. </div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8c_source.html#l00077">accident_data.c:77</a></div></div>
 <div class="ttc" id="sensor__scheduler_8h_html"><div class="ttname"><a href="sensor__scheduler_8h.html">sensor_scheduler.h</a></div></div>
-<div class="ttc" id="accident__data_8c_html_aadbb129c0c334574869fc52d00ecb5e1"><div class="ttname"><a href="accident__data_8c.html#aadbb129c0c334574869fc52d00ecb5e1">EXT_CONNECTION_STATUS_FLAG</a></div><div class="ttdeci">CONNECTION_STATUS_FLAG EXT_CONNECTION_STATUS_FLAG</div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8c_source.html#l00029">accident_data.c:29</a></div></div>
-<div class="ttc" id="group__ut_html_ga0bcc4f5d430556fa5fc6d0c00d6ac474"><div class="ttname"><a href="group__ut.html#ga0bcc4f5d430556fa5fc6d0c00d6ac474">run_all_tests</a></div><div class="ttdeci">char * run_all_tests(void)</div><div class="ttdoc">Run all unit tests. </div><div class="ttdef"><b>Definition:</b> <a href="unit__test_8c_source.html#l00047">unit_test.c:47</a></div></div>
-<div class="ttc" id="group__cp__pub_html_gga67a0db04d321a74b7e7fcfd3f1a3f70ba8e43b8a191f7ae1324ae723f5b88d4f6"><div class="ttname"><a href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba8e43b8a191f7ae1324ae723f5b88d4f6">STATUS_RED</a></div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8h_source.html#l00036">car_panel.h:36</a></div></div>
+<div class="ttc" id="group__ut_html_ga0bcc4f5d430556fa5fc6d0c00d6ac474"><div class="ttname"><a href="group__ut.html#ga0bcc4f5d430556fa5fc6d0c00d6ac474">run_all_tests</a></div><div class="ttdeci">char * run_all_tests(void)</div><div class="ttdoc">Run all unit tests. </div><div class="ttdef"><b>Definition:</b> <a href="unit__test_8c_source.html#l00043">unit_test.c:43</a></div></div>
+<div class="ttc" id="group__cp__pub_html_gga67a0db04d321a74b7e7fcfd3f1a3f70ba8e43b8a191f7ae1324ae723f5b88d4f6"><div class="ttname"><a href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba8e43b8a191f7ae1324ae723f5b88d4f6">STATUS_RED</a></div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8h_source.html#l00033">car_panel.h:33</a></div></div>
 <div class="ttc" id="sensor__scheduler_8c_html_ad7757661991663ae99dbac66880abd9d"><div class="ttname"><a href="sensor__scheduler_8c.html#ad7757661991663ae99dbac66880abd9d">scheduler_start</a></div><div class="ttdeci">void scheduler_start(void(*callback_function_ptr)(char __data))</div><div class="ttdef"><b>Definition:</b> <a href="sensor__scheduler_8c_source.html#l00031">sensor_scheduler.c:31</a></div></div>
+<div class="ttc" id="test__module__car__panel_8h_html"><div class="ttname"><a href="test__module__car__panel_8h.html">test_module_car_panel.h</a></div></div>
+<div class="ttc" id="vroom__config_8h_html"><div class="ttname"><a href="vroom__config_8h.html">vroom_config.h</a></div></div>
 <div class="ttc" id="sim908_8h_html"><div class="ttname"><a href="sim908_8h.html">sim908.h</a></div></div>
-<div class="ttc" id="group__cp__pub_html_ga03156ca934ef40c24593988c03d2b454"><div class="ttname"><a href="group__cp__pub.html#ga03156ca934ef40c24593988c03d2b454">car_panel_init</a></div><div class="ttdeci">void car_panel_init(void)</div><div class="ttdoc">Initiates the Car Panel. </div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8c_source.html#l00058">car_panel.c:58</a></div></div>
-<div class="ttc" id="sensor__scheduler_8c_html_afaa128e71cbb4ca2527c4851e9799b57"><div class="ttname"><a href="sensor__scheduler_8c.html#afaa128e71cbb4ca2527c4851e9799b57">scheduler_get_last_readings</a></div><div class="ttdeci">void scheduler_get_last_readings(int16_t *buffer)</div><div class="ttdef"><b>Definition:</b> <a href="sensor__scheduler_8c_source.html#l00042">sensor_scheduler.c:42</a></div></div>
-<div class="ttc" id="group__ut_html_ga1d61e35205d61f76e26abaab0011bb7a"><div class="ttname"><a href="group__ut.html#ga1d61e35205d61f76e26abaab0011bb7a">tests_run</a></div><div class="ttdeci">uint16_t tests_run</div><div class="ttdoc">extern variable which counts numbers of unit test runs </div><div class="ttdef"><b>Definition:</b> <a href="unit__test_8c_source.html#l00015">unit_test.c:15</a></div></div>
+<div class="ttc" id="group__cp__pub_html_ga03156ca934ef40c24593988c03d2b454"><div class="ttname"><a href="group__cp__pub.html#ga03156ca934ef40c24593988c03d2b454">car_panel_init</a></div><div class="ttdeci">void car_panel_init(void)</div><div class="ttdoc">Initiates the Car Panel. </div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8c_source.html#l00052">car_panel.c:52</a></div></div>
+<div class="ttc" id="sensor__scheduler_8c_html_afaa128e71cbb4ca2527c4851e9799b57"><div class="ttname"><a href="sensor__scheduler_8c.html#afaa128e71cbb4ca2527c4851e9799b57">scheduler_get_last_readings</a></div><div class="ttdeci">void scheduler_get_last_readings(int16_t *buffer)</div><div class="ttdef"><b>Definition:</b> <a href="sensor__scheduler_8c_source.html#l00045">sensor_scheduler.c:45</a></div></div>
 <div class="ttc" id="lcd_8h_html"><div class="ttname"><a href="lcd_8h.html">lcd.h</a></div></div>
-<div class="ttc" id="group__ad__pub_html_gga1c672888b6953fb65023d66cbb595c4eafd081379d59643956abdf38d516f0cef"><div class="ttname"><a href="group__ad__pub.html#gga1c672888b6953fb65023d66cbb595c4eafd081379d59643956abdf38d516f0cef">EMERGENCY_MANUAL_ALARM</a></div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8h_source.html#l00049">accident_data.h:49</a></div></div>
 <div class="ttc" id="unit__test_8h_html"><div class="ttname"><a href="unit__test_8h.html">unit_test.h</a></div></div>
-<div class="ttc" id="group__cp__pub_html_gga67a0db04d321a74b7e7fcfd3f1a3f70ba2f91de342fc2584dd731cfe5d47271c6"><div class="ttname"><a href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba2f91de342fc2584dd731cfe5d47271c6">STATUS_GREEN</a></div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8h_source.html#l00037">car_panel.h:37</a></div></div>
+<div class="ttc" id="group__cp__pub_html_gga67a0db04d321a74b7e7fcfd3f1a3f70ba2f91de342fc2584dd731cfe5d47271c6"><div class="ttname"><a href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70ba2f91de342fc2584dd731cfe5d47271c6">STATUS_GREEN</a></div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8h_source.html#l00034">car_panel.h:34</a></div></div>
 <div class="ttc" id="group__pfleury__lcd_html_ga8ffdfcac7638368ff04364c14984266e"><div class="ttname"><a href="group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e">lcd_puts</a></div><div class="ttdeci">void lcd_puts(const char *s)</div><div class="ttdoc">Display string without auto linefeed. </div><div class="ttdef"><b>Definition:</b> <a href="lcd_8c_source.html#l00491">lcd.c:491</a></div></div>
 <div class="ttc" id="test__module__sensors_8c_html_a41e7d1dd0cac7bd20fc32a6ebc87a985"><div class="ttname"><a href="test__module__sensors_8c.html#a41e7d1dd0cac7bd20fc32a6ebc87a985">sensors_init</a></div><div class="ttdeci">void sensors_init()</div><div class="ttdef"><b>Definition:</b> <a href="test__module__sensors_8c_source.html#l00022">test_module_sensors.c:22</a></div></div>
 <div class="ttc" id="group__pfleury__lcd_html_gafa7e36b95c43d603f510273ad077cbbe"><div class="ttname"><a href="group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe">lcd_putc</a></div><div class="ttdeci">void lcd_putc(char c)</div><div class="ttdoc">Display character at current cursor position. </div><div class="ttdef"><b>Definition:</b> <a href="lcd_8c_source.html#l00444">lcd.c:444</a></div></div>
-<div class="ttc" id="group__ad__pub_html_gga1c672888b6953fb65023d66cbb595c4ea30df4dd40fd132added2ec752e70ec5a"><div class="ttname"><a href="group__ad__pub.html#gga1c672888b6953fb65023d66cbb595c4ea30df4dd40fd132added2ec752e70ec5a">EMERGENCY_AUTO_ALARM</a></div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8h_source.html#l00050">accident_data.h:50</a></div></div>
 <div class="ttc" id="accident__data_8h_html"><div class="ttname"><a href="accident__data_8h.html">accident_data.h</a></div></div>
+<div class="ttc" id="accident__data_8c_html_add142243425ede2aeae62067ecfb9f57"><div class="ttname"><a href="accident__data_8c.html#add142243425ede2aeae62067ecfb9f57">EXT_CONNECTION_CREG_FLAG</a></div><div class="ttdeci">AD_CONNECTION_STATUS_FLAG EXT_CONNECTION_CREG_FLAG</div><div class="ttdef"><b>Definition:</b> <a href="accident__data_8c_source.html#l00026">accident_data.c:26</a></div></div>
 <div class="ttc" id="test__module__uart_8h_html"><div class="ttname"><a href="test__module__uart_8h.html">test_module_uart.h</a></div></div>
-<div class="ttc" id="group__cp__pub_html_ga99fa023842761c235f9807e21c8f5f30"><div class="ttname"><a href="group__cp__pub.html#ga99fa023842761c235f9807e21c8f5f30">car_panel_wait_cancel_emmergency</a></div><div class="ttdeci">bool car_panel_wait_cancel_emmergency(void)</div><div class="ttdoc">Uses nested while loops to create a waiting period and then check if the cancel alarm button is press...</div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8c_source.html#l00149">car_panel.c:149</a></div></div>
 <div class="ttc" id="car__panel_8h_html"><div class="ttname"><a href="car__panel_8h.html">car_panel.h</a></div></div>
 <div class="ttc" id="group__pfleury__lcd_html_ga9af28b2779326b63ff4356e2b1828984"><div class="ttname"><a href="group__pfleury__lcd.html#ga9af28b2779326b63ff4356e2b1828984">lcd_init</a></div><div class="ttdeci">void lcd_init(uint8_t dispAttr)</div><div class="ttdoc">Initialize display and select type of cursor. </div><div class="ttdef"><b>Definition:</b> <a href="lcd_8c_source.html#l00528">lcd.c:528</a></div></div>
 <div class="ttc" id="test__module__sensors_8c_html_abb8bc3abd66191b672c2baa24f41745d"><div class="ttname"><a href="test__module__sensors_8c.html#abb8bc3abd66191b672c2baa24f41745d">degree</a></div><div class="ttdeci">const char degree</div><div class="ttdef"><b>Definition:</b> <a href="test__module__sensors_8c_source.html#l00017">test_module_sensors.c:17</a></div></div>
 <div class="ttc" id="test__module__sensors_8c_html_a011bc1b58d86e4e944192741f1f5ecc9"><div class="ttname"><a href="test__module__sensors_8c.html#a011bc1b58d86e4e944192741f1f5ecc9">sensors_read_data</a></div><div class="ttdeci">void sensors_read_data(void)</div><div class="ttdef"><b>Definition:</b> <a href="test__module__sensors_8c_source.html#l00031">test_module_sensors.c:31</a></div></div>
 <div class="ttc" id="group__test__uart__pub_html_ga5a25c7de5fc1349c1315e2e43c5a8f38"><div class="ttname"><a href="group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38">test_module_uart_run</a></div><div class="ttdeci">bool test_module_uart_run(const char *__uart_test_string, const char *__uart_compare_string)</div><div class="ttdoc">Starts the testing routine for uart0 and uart1. </div><div class="ttdef"><b>Definition:</b> <a href="test__module__uart_8c_source.html#l00026">test_module_uart.c:26</a></div></div>
-<div class="ttc" id="group__cp__pub_html_gac29cb31614edaa1033bdc2bf4ef5cefa"><div class="ttname"><a href="group__cp__pub.html#gac29cb31614edaa1033bdc2bf4ef5cefa">car_panel_set_status</a></div><div class="ttdeci">void car_panel_set_status(Status __s)</div><div class="ttdoc">Set the status LED. </div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8c_source.html#l00092">car_panel.c:92</a></div></div>
+<div class="ttc" id="group__cp__pub_html_gac29cb31614edaa1033bdc2bf4ef5cefa"><div class="ttname"><a href="group__cp__pub.html#gac29cb31614edaa1033bdc2bf4ef5cefa">car_panel_set_status</a></div><div class="ttdeci">void car_panel_set_status(Status __s)</div><div class="ttdoc">Set the status LED. </div><div class="ttdef"><b>Definition:</b> <a href="car__panel_8c_source.html#l00086">car_panel.c:86</a></div></div>
 <div class="ttc" id="group__pfleury__lcd_html_ga5163a96b133868975c0738e180b30cb8"><div class="ttname"><a href="group__pfleury__lcd.html#ga5163a96b133868975c0738e180b30cb8">LCD_DISP_ON</a></div><div class="ttdeci">#define LCD_DISP_ON</div><div class="ttdef"><b>Definition:</b> <a href="lcd_8h_source.html#l00167">lcd.h:167</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -622,7 +520,7 @@ $(document).ready(function(){initNavTree('run_8c_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="run_8c.html">run.c</a></li>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:56 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

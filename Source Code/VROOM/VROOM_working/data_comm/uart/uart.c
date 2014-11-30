@@ -19,20 +19,20 @@
 /**********************************************************************//**
  * @ingroup uart_priv
  * @brief defines for the factor used to calculate baud rate and UBRR0value
- * @{
+ * @code
  *************************************************************************/
 #define UBRR_FACTOR_ASYNC_NORM	16
 #define UBRR_FACTOR_ASYNC_DOUBLE 8
-/* @} */
+/** @endcode */
 
 /**********************************************************************//**
  * @ingroup uart_priv
  * @brief defines for calculating the UBRR0 value
  * @note 0.5F is added to make sure rounding is done rather than truncating
- * @{
+ * @code
  *************************************************************************/
 #define CALC_UBRR(baud_rate, factor) (((F_CPU / (factor * baud_rate)) - 1) + 0.5F)
-/* @} */
+/** @endcode */
 
 /* local variables for UART0 */
 static void (*_callback_function0_ptr)(char __data);

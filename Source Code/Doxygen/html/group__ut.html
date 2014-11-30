@@ -112,67 +112,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga0bcc4f5d430556fa5fc6d0c00d6ac474"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ut.html#ga0bcc4f5d430556fa5fc6d0c00d6ac474">run_all_tests</a> (void)</td></tr>
 <tr class="memdesc:ga0bcc4f5d430556fa5fc6d0c00d6ac474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run all unit tests.  <a href="#ga0bcc4f5d430556fa5fc6d0c00d6ac474">More...</a><br/></td></tr>
 <tr class="separator:ga0bcc4f5d430556fa5fc6d0c00d6ac474"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaad83ba6b11df552879dd0f0a4ce43407"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ut.html#gaad83ba6b11df552879dd0f0a4ce43407">mu_assert</a>(message, test)&#160;&#160;&#160;do { if (!(test)) return message; } while (0)</td></tr>
-<tr class="memdesc:gaad83ba6b11df552879dd0f0a4ce43407"><td class="mdescLeft">&#160;</td><td class="mdescRight">macros for unit testing  <a href="#gaad83ba6b11df552879dd0f0a4ce43407">More...</a><br/></td></tr>
-<tr class="separator:gaad83ba6b11df552879dd0f0a4ce43407"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9c8e76cc15deeca6f9afa206f6caca76"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ut.html#ga9c8e76cc15deeca6f9afa206f6caca76">mu_run_test</a>(test)&#160;&#160;&#160;do { char *message = test(); <a class="el" href="group__ut.html#ga1d61e35205d61f76e26abaab0011bb7a">tests_run</a>++; return message; } while (0)</td></tr>
-<tr class="separator:ga9c8e76cc15deeca6f9afa206f6caca76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1d61e35205d61f76e26abaab0011bb7a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ut.html#ga1d61e35205d61f76e26abaab0011bb7a">tests_run</a></td></tr>
-<tr class="memdesc:ga1d61e35205d61f76e26abaab0011bb7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">extern variable which counts numbers of unit test runs  <a href="#ga1d61e35205d61f76e26abaab0011bb7a">More...</a><br/></td></tr>
-<tr class="separator:ga1d61e35205d61f76e26abaab0011bb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>This is the unit test platform for all relevant functions (including arithmetic) in the VROOM system. </p>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="gaad83ba6b11df552879dd0f0a4ce43407"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define mu_assert</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">message, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">test&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;do { if (!(test)) return message; } while (0)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>macros for unit testing </p>
-<dl class="section note"><dt>Note</dt><dd>Complies MISRO 2004 standards </dd></dl>
-
-<p>Definition at line <a class="el" href="unit__test_8h_source.html#l00023">23</a> of file <a class="el" href="unit__test_8h_source.html">unit_test.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga9c8e76cc15deeca6f9afa206f6caca76"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define mu_run_test</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">test</td><td>)</td>
-          <td>&#160;&#160;&#160;do { char *message = test(); <a class="el" href="group__ut.html#ga1d61e35205d61f76e26abaab0011bb7a">tests_run</a>++; return message; } while (0)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="unit__test_8h_source.html#l00024">24</a> of file <a class="el" href="unit__test_8h_source.html">unit_test.h</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ga0bcc4f5d430556fa5fc6d0c00d6ac474"></a>
 <div class="memitem">
@@ -189,12 +131,25 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Run all unit tests. </p>
+<p>macros for unit testing</p>
+<dl class="section return"><dt>Returns</dt><dd>char* - if all tests pass: "xx-xPASS"<ul>
+<li>if test fail: the error code line where it fails</li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Complies MISRO 2004 standards</dd></dl>
+<div class="fragment"><div class="line">                                                                          /</div>
+<div class="line"><span class="preprocessor">#define mu_assert(message, test) do { if (!(test)) return message; } while (0)</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define mu_run_test(test) do { char *message = test(); tests_run++; return message; } while (0)</span></div>
+</div><!-- fragment --><p>extern variable which counts numbers of unit test runs </p>
+<div class="fragment"><div class="line">                                                                          /</div>
+<div class="line"> <span class="keyword">extern</span> uint16_t <a class="code" href="unit__test_8c.html#a1d61e35205d61f76e26abaab0011bb7a">tests_run</a>;</div>
+</div><!-- fragment --><p>Run all unit tests </p>
 <dl class="section return"><dt>Returns</dt><dd>char* - if all tests pass: "xx-xPASS"<ul>
 <li>if test fail: the error code line where it fails </li>
 </ul>
 </dd></dl>
 
-<p>Definition at line <a class="el" href="unit__test_8c_source.html#l00047">47</a> of file <a class="el" href="unit__test_8c_source.html">unit_test.c</a>.</p>
+<p>Definition at line <a class="el" href="unit__test_8c_source.html#l00043">43</a> of file <a class="el" href="unit__test_8c_source.html">unit_test.c</a>.</p>
 
 </div>
 </div>
@@ -223,30 +178,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="ga1d61e35205d61f76e26abaab0011bb7a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t tests_run</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>extern variable which counts numbers of unit test runs </p>
-<dl class="section note"><dt>Note</dt><dd>Complies MISRO 2004 standards </dd></dl>
-
-<p>Definition at line <a class="el" href="unit__test_8c_source.html#l00015">15</a> of file <a class="el" href="unit__test_8c_source.html">unit_test.c</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

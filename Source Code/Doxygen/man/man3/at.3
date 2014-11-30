@@ -1,0 +1,711 @@
+.TH "AT Commands" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AT Commands \- 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBAT_CONTYPE_GPRS\fP   'GPRS'"
+.br
+.RI "\fIDefines for the Data carrier type\&. \fP"
+.ti -1c
+.RI "#define \fBAT_CONTYPE_CSD\fP   'CSD'"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_TEST\fP   'AT'"
+.br
+.RI "\fIDefines for the diagnostics\&. \fP"
+.ti -1c
+.RI "#define \fBAT_DIAG_ECHO_ENABLE\fP   'ATE1'"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_ECHO_DISABLE\fP   'ATE0'"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_AUTO_ANSWER\fP(NO_OF_RINGS)   'ATS0=' NO_OF_RINGS"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_MODEL_NO\fP   'AT+CGMM'"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_MANUFACTURER\fP   'AT+CGMI'"
+.br
+.ti -1c
+.RI "#define \fBAT_ENABLE_CREG\fP   'AT+CREG=1'"
+.br
+.RI "\fIDefine for the enable +CREG: unsolicited result code\&. \fP"
+.ti -1c
+.RI "#define \fBAT_BAUD_AUTO\fP   'AT+IPR=0'"
+.br
+.RI "\fIDefines for the baud rate\&. \fP"
+.ti -1c
+.RI "#define \fBAT_BAUD_1200\fP   'AT+IPR=1200'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_2400\fP   'AT+IPR=2400'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_4800\fP   'AT+IPR=4800'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_9600\fP   'AT+IPR=9600'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_19K2\fP   'AT+IPR=19200'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_38K4\fP   'AT+IPR=38400'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_57K6\fP   'AT+IPR=57600'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_115K2\fP   'AT+IPR=115200'"
+.br
+.ti -1c
+.RI "#define \fBAT_MINIMUM_FUNCTIONALITY\fP   'AT+CFUN=0'"
+.br
+.RI "\fIDefines for the phone functionality\&. \fP"
+.ti -1c
+.RI "#define \fBAT_FULL_FUNCTIONALITY\fP   'AT+CFUN=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_DISABLE_TX_RX\fP   'AT+CFUN=4'"
+.br
+.ti -1c
+.RI "#define \fBAT_RESET_MODULE\fP   'AT+CFUN=1,1'"
+.br
+.ti -1c
+.RI "#define \fBAT_ENTER_SIM_PIN\fP(\fBPIN\fP)   'AT+CPIN=' PIN"
+.br
+.ti -1c
+.RI "#define \fBAT_ENABLE_INCOMING_CALLS\fP   'AT+GSMBUSY=0'"
+.br
+.RI "\fIDefines for the incoming call allowance setting\&. \fP"
+.ti -1c
+.RI "#define \fBAT_FORBID_INCOMING_CALLS\fP   'AT+GSMBUSY=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FORBID_VOICE_CALLS_ONLY\fP   'AT+GSMBUSY=2'	/* Circuit-Switched Data (CSD) calls enabled */"
+.br
+.ti -1c
+.RI "#define \fBAT_EMERGENCY_CALL_ONLY\fP(NUMBER)   'AT+CWHITELIST=1,1,' NUMBER"
+.br
+.RI "\fIDefine for the calls white list\&. \fP"
+.ti -1c
+.RI "#define \fBAT_NO_FLOW_CONTROL\fP   'AT+IFC=0,0'"
+.br
+.RI "\fIDefines for the flow control\&. \fP"
+.ti -1c
+.RI "#define \fBAT_SOFTWARE_FLOW_CONTROL\fP   'AT+IFC=1,1' /* Should not be used for data calls */"
+.br
+.ti -1c
+.RI "#define \fBAT_HARDWARE_FLOW_CONTROL\fP   'AT+IFC=2,2'"
+.br
+.ti -1c
+.RI "#define \fBAT_STORE_PROFILE0\fP   'AT&W0'"
+.br
+.RI "\fIDefines for the store active profile\&. \fP"
+.ti -1c
+.RI "#define \fBAT_STORE_PROFILE1\fP   'AT&W1'"
+.br
+.ti -1c
+.RI "#define \fBAT_RESTORE_PROFILE0\fP   'ATZ0'"
+.br
+.RI "\fIDefines for the reset to default functionality\&. \fP"
+.ti -1c
+.RI "#define \fBAT_RESTORE_PROFILE1\fP   'ATZ1'"
+.br
+.ti -1c
+.RI "#define \fBAT_MANUFACTURER_DEFAULTS\fP   'AT&F0'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPRS_PDP_ACTIVATE_CONTEXT\fP   'AT+CGACT=1,1'"
+.br
+.RI "\fIDefines GPRS PDP context\&. \fP"
+.ti -1c
+.RI "#define \fBAT_GPRS_PDP_GET_IP\fP   'AT+CGPADDR=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPRS_PDP_SETUP_CONTEXT\fP(APN)   'AT+CGDCONT=1,\\'IP\\',\\'' APN '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_BEARER1_CONTYPE\fP(TYPE)   'AT+SAPBR=3,1,\\'Contype\\',\\'' TYPE '\\''"
+.br
+.RI "\fIDefines FTP setup and communication\&. \fP"
+.ti -1c
+.RI "#define \fBAT_FTP_BEARER1_APN\fP(NAME)   'AT+SAPBR=3,1,\\'APN\\',\\'' NAME '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_SERVER_ADDRESS\fP(ADR)   'AT+FTPSERV=\\'' ADR '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_CONTROL_PORT\fP(\fBPORT\fP)   'AT+FTPPORT=' PORT"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_USER_NAME\fP(NAME)   'AT+FTPUN=\\'' NAME '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_PASSWORD\fP(PW)   'AT+FTPPW=\\'' PW '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_PATH\fP(PATH)   'AT+FTPPUTPATH=\\'' PATH '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_NAME\fP   'AT+FTPPUTNAME=' /* remember to add ''' at either end of the filename */"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_OPEN_BEARER1\fP   'AT+SAPBR=1,1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_CLOSE_BEARER1\fP   'AT+SAPBR=0,1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_USE_PROFILE1\fP   'AT+FTPCID=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_DATA_TYPE_ASCII\fP   'AT+FTPTYPE=\\'A\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_DATA_TYPE_BINARY\fP   'AT+FTPTYPE=\\'I\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_STORING\fP   'AT+FTPPUTOPT=\\'STOR\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_APPENDING\fP   'AT+FTPPUTOPT=\\'APPE\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_UNIQUE\fP   'AT+FTPPUTOPT=\\'STOU\\''		/* Not supported in FileZilla */"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_OPEN_SESSION\fP   'AT+FTPPUT=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_CLOSE_SESSION\fP   'AT+FTPPUT=2,0'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_SIZE\fP(SIZE)   'AT+FTPPUT=2,' SIZE"
+.br
+.ti -1c
+.RI "#define \fBAT_MODULE_DEVICE_STATUS\fP   'AT+CPAS'"
+.br
+.RI "\fIDefine for the module device status The different responses are:
+.br
+0 ready
+.br
+1 unavailable
+.br
+2 unknown
+.br
+3 ringing
+.br
+4 call in progress
+.br
+5 asleep
+.br
+\&. \fP"
+.ti -1c
+.RI "#define \fBAT_CALL_ANSWER\fP   'ATA'"
+.br
+.RI "\fIDefines for the call\&. \fP"
+.ti -1c
+.RI "#define \fBAT_CALL_HANG_UP\fP   'ATH0'"
+.br
+.ti -1c
+.RI "#define \fBAT_CALL_DIAL\fP(NUMBER)   'ATD' NUMBER ';'"
+.br
+.ti -1c
+.RI "#define \fBAT_CALL_REDIAL\fP   'ATDL'"
+.br
+.ti -1c
+.RI "#define \fBAT_CALL_SHOW_NUM\fP   'AT+CNUM'"
+.br
+.ti -1c
+.RI "#define \fBAT_MSG_READ\fP   'AT+CMGR='"
+.br
+.RI "\fIDefines for the message\&. \fP"
+.ti -1c
+.RI "#define \fBAT_MSG_DEL_ALL\fP   'AT+CMGD=1,4'"
+.br
+.ti -1c
+.RI "#define \fBAT_MSG_FORMAT\fP   'AT+CMGF='"
+.br
+.ti -1c
+.RI "#define \fBAT_MSG_SEND\fP   'AT+CMGS\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_GET_RINGER_VOLUME\fP   'AT+CRSL?'"
+.br
+.RI "\fIDefines for the audio setup\&. \fP"
+.ti -1c
+.RI "#define \fBAT_AUDIO_SET_RINGER_VOLUME\fP   'AT+CRSL='"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_GET_SPEAKER_VOLUME\fP   'AT+CLVL?'"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_SET_SPEAKER_VOLUME\fP   'AT+CLVL='"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_GET_CURRENT_ALERT_SOUND\fP   'AT+CALS?'"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_SET_CURRENT_ALERT_SOUND\fP   'AT+CALS='"
+.br
+.ti -1c
+.RI "#define \fBAT_CONN_SIGNAL_STRENGTH\fP   'AT+CSQ'"
+.br
+.RI "\fIDefines for the connection\&. \fP"
+.ti -1c
+.RI "#define \fBAT_CONN_ATTACH_STATUS\fP   'AT+CGATT?'"
+.br
+.ti -1c
+.RI "#define \fBAT_CONN_NETWORK_REGISTRATION_STATUS\fP   'AT+CREG?'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_POWER_STATE\fP   'AT+CGPSPWR?'"
+.br
+.RI "\fIDefines for the GPS\&. \fP"
+.ti -1c
+.RI "#define \fBAT_GPS_POWER_ON\fP   'AT+CGPSPWR=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_POWER_OFF\fP   'AT+CGPSPWR=0'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_RST_MODE\fP   'AT+CGPSRST?'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_RST_COLD\fP   'AT+CGPSRST=0'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_RST_AUTONOMY\fP   'AT+CGPSRST=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_GET_LOCATION\fP   'AT+CGPSINF=0'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_GET_STATUS\fP   'AT+CGPSSTATUS?'"
+.br
+.ti -1c
+.RI "#define \fBAT_CTRL_Z\fP   26"
+.br
+.RI "\fIDefine for the ctrl+Z command\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This is a header containing all the most relevant AT commands for this system 
+.PP
+\fBNote:\fP
+.RS 4
+NOT YET Complies MISRO 2004 standards 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define AT_AUDIO_GET_CURRENT_ALERT_SOUND   'AT+CALS?'"
+
+.PP
+Definition at line 164 of file at_commands\&.h\&.
+.SS "#define AT_AUDIO_GET_RINGER_VOLUME   'AT+CRSL?'"
+
+.PP
+Defines for the audio setup\&. 
+.PP
+Definition at line 160 of file at_commands\&.h\&.
+.SS "#define AT_AUDIO_GET_SPEAKER_VOLUME   'AT+CLVL?'"
+
+.PP
+Definition at line 162 of file at_commands\&.h\&.
+.SS "#define AT_AUDIO_SET_CURRENT_ALERT_SOUND   'AT+CALS='"
+
+.PP
+Definition at line 165 of file at_commands\&.h\&.
+.SS "#define AT_AUDIO_SET_RINGER_VOLUME   'AT+CRSL='"
+
+.PP
+Definition at line 161 of file at_commands\&.h\&.
+.SS "#define AT_AUDIO_SET_SPEAKER_VOLUME   'AT+CLVL='"
+
+.PP
+Definition at line 163 of file at_commands\&.h\&.
+.SS "#define AT_BAUD_115K2   'AT+IPR=115200'"
+
+.PP
+Definition at line 50 of file at_commands\&.h\&.
+.SS "#define AT_BAUD_1200   'AT+IPR=1200'"
+
+.PP
+Definition at line 43 of file at_commands\&.h\&.
+.SS "#define AT_BAUD_19K2   'AT+IPR=19200'"
+
+.PP
+Definition at line 47 of file at_commands\&.h\&.
+.SS "#define AT_BAUD_2400   'AT+IPR=2400'"
+
+.PP
+Definition at line 44 of file at_commands\&.h\&.
+.SS "#define AT_BAUD_38K4   'AT+IPR=38400'"
+
+.PP
+Definition at line 48 of file at_commands\&.h\&.
+.SS "#define AT_BAUD_4800   'AT+IPR=4800'"
+
+.PP
+Definition at line 45 of file at_commands\&.h\&.
+.SS "#define AT_BAUD_57K6   'AT+IPR=57600'"
+
+.PP
+Definition at line 49 of file at_commands\&.h\&.
+.SS "#define AT_BAUD_9600   'AT+IPR=9600'"
+
+.PP
+Definition at line 46 of file at_commands\&.h\&.
+.SS "#define AT_BAUD_AUTO   'AT+IPR=0'"
+
+.PP
+Defines for the baud rate\&. 
+.PP
+\fBNote:\fP
+.RS 4
+autobauding does not support 115200bps 
+.RE
+.PP
+
+.PP
+Definition at line 42 of file at_commands\&.h\&.
+.SS "#define AT_CALL_ANSWER   'ATA'"
+
+.PP
+Defines for the call\&. 
+.PP
+Definition at line 143 of file at_commands\&.h\&.
+.SS "#define AT_CALL_DIAL(NUMBER)   'ATD' NUMBER ';'"
+
+.PP
+Definition at line 145 of file at_commands\&.h\&.
+.SS "#define AT_CALL_HANG_UP   'ATH0'"
+
+.PP
+Definition at line 144 of file at_commands\&.h\&.
+.SS "#define AT_CALL_REDIAL   'ATDL'"
+
+.PP
+Definition at line 146 of file at_commands\&.h\&.
+.SS "#define AT_CALL_SHOW_NUM   'AT+CNUM'"
+
+.PP
+Definition at line 147 of file at_commands\&.h\&.
+.SS "#define AT_CONN_ATTACH_STATUS   'AT+CGATT?'"
+
+.PP
+Definition at line 171 of file at_commands\&.h\&.
+.SS "#define AT_CONN_NETWORK_REGISTRATION_STATUS   'AT+CREG?'"
+
+.PP
+Definition at line 172 of file at_commands\&.h\&.
+.SS "#define AT_CONN_SIGNAL_STRENGTH   'AT+CSQ'"
+
+.PP
+Defines for the connection\&. 
+.PP
+Definition at line 170 of file at_commands\&.h\&.
+.SS "#define AT_CONTYPE_CSD   'CSD'"
+
+.PP
+Definition at line 21 of file at_commands\&.h\&.
+.SS "#define AT_CONTYPE_GPRS   'GPRS'"
+
+.PP
+Defines for the Data carrier type\&. 
+.PP
+Definition at line 20 of file at_commands\&.h\&.
+.SS "#define AT_CTRL_Z   26"
+
+.PP
+Define for the ctrl+Z command\&. 
+.PP
+Definition at line 189 of file at_commands\&.h\&.
+.SS "#define AT_DIAG_AUTO_ANSWER(NO_OF_RINGS)   'ATS0=' NO_OF_RINGS"
+
+.PP
+Definition at line 29 of file at_commands\&.h\&.
+.SS "#define AT_DIAG_ECHO_DISABLE   'ATE0'"
+
+.PP
+Definition at line 28 of file at_commands\&.h\&.
+.SS "#define AT_DIAG_ECHO_ENABLE   'ATE1'"
+
+.PP
+Definition at line 27 of file at_commands\&.h\&.
+.SS "#define AT_DIAG_MANUFACTURER   'AT+CGMI'"
+
+.PP
+Definition at line 31 of file at_commands\&.h\&.
+.SS "#define AT_DIAG_MODEL_NO   'AT+CGMM'"
+
+.PP
+Definition at line 30 of file at_commands\&.h\&.
+.SS "#define AT_DIAG_TEST   'AT'"
+
+.PP
+Defines for the diagnostics\&. 
+.PP
+Definition at line 26 of file at_commands\&.h\&.
+.SS "#define AT_DISABLE_TX_RX   'AT+CFUN=4'"
+
+.PP
+Definition at line 57 of file at_commands\&.h\&.
+.SS "#define AT_EMERGENCY_CALL_ONLY(NUMBER)   'AT+CWHITELIST=1,1,' NUMBER"
+
+.PP
+Define for the calls white list\&. 
+.PP
+Definition at line 71 of file at_commands\&.h\&.
+.SS "#define AT_ENABLE_CREG   'AT+CREG=1'"
+
+.PP
+Define for the enable +CREG: unsolicited result code\&. 
+.PP
+Definition at line 36 of file at_commands\&.h\&.
+.SS "#define AT_ENABLE_INCOMING_CALLS   'AT+GSMBUSY=0'"
+
+.PP
+Defines for the incoming call allowance setting\&. 
+.PP
+Definition at line 64 of file at_commands\&.h\&.
+.SS "#define AT_ENTER_SIM_PIN(\fBPIN\fP)   'AT+CPIN=' PIN"
+
+.PP
+Definition at line 59 of file at_commands\&.h\&.
+.SS "#define AT_FORBID_INCOMING_CALLS   'AT+GSMBUSY=1'"
+
+.PP
+Definition at line 65 of file at_commands\&.h\&.
+.SS "#define AT_FORBID_VOICE_CALLS_ONLY   'AT+GSMBUSY=2'	/* Circuit-Switched Data (CSD) calls enabled */"
+
+.PP
+Definition at line 66 of file at_commands\&.h\&.
+.SS "#define AT_FTP_BEARER1_APN(NAME)   'AT+SAPBR=3,1,\\'APN\\',\\'' NAME '\\''"
+
+.PP
+Definition at line 104 of file at_commands\&.h\&.
+.SS "#define AT_FTP_BEARER1_CONTYPE(TYPE)   'AT+SAPBR=3,1,\\'Contype\\',\\'' TYPE '\\''"
+
+.PP
+Defines FTP setup and communication\&. 
+.PP
+Definition at line 103 of file at_commands\&.h\&.
+.SS "#define AT_FTP_CLOSE_BEARER1   'AT+SAPBR=0,1'"
+
+.PP
+Definition at line 114 of file at_commands\&.h\&.
+.SS "#define AT_FTP_OPEN_BEARER1   'AT+SAPBR=1,1'"
+
+.PP
+Definition at line 113 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_CLOSE_SESSION   'AT+FTPPUT=2,0'"
+
+.PP
+Definition at line 125 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_APPENDING   'AT+FTPPUTOPT=\\'APPE\\''"
+
+.PP
+Definition at line 121 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_NAME   'AT+FTPPUTNAME=' /* remember to add ''' at either end of the filename */"
+
+.PP
+Definition at line 111 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_PATH(PATH)   'AT+FTPPUTPATH=\\'' PATH '\\''"
+
+.PP
+Definition at line 110 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_SIZE(SIZE)   'AT+FTPPUT=2,' SIZE"
+
+.PP
+Definition at line 126 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_STORING   'AT+FTPPUTOPT=\\'STOR\\''"
+
+.PP
+Definition at line 120 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_UNIQUE   'AT+FTPPUTOPT=\\'STOU\\''		/* Not supported in FileZilla */"
+
+.PP
+Definition at line 122 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_OPEN_SESSION   'AT+FTPPUT=1'"
+
+.PP
+Definition at line 124 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_CONTROL_PORT(\fBPORT\fP)   'AT+FTPPORT=' PORT"
+
+.PP
+Definition at line 107 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_DATA_TYPE_ASCII   'AT+FTPTYPE=\\'A\\''"
+
+.PP
+Definition at line 117 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_DATA_TYPE_BINARY   'AT+FTPTYPE=\\'I\\''"
+
+.PP
+Definition at line 118 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_PASSWORD(PW)   'AT+FTPPW=\\'' PW '\\''"
+
+.PP
+Definition at line 109 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_SERVER_ADDRESS(ADR)   'AT+FTPSERV=\\'' ADR '\\''"
+
+.PP
+Definition at line 106 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_USER_NAME(NAME)   'AT+FTPUN=\\'' NAME '\\''"
+
+.PP
+Definition at line 108 of file at_commands\&.h\&.
+.SS "#define AT_FTP_USE_PROFILE1   'AT+FTPCID=1'"
+
+.PP
+Definition at line 115 of file at_commands\&.h\&.
+.SS "#define AT_FULL_FUNCTIONALITY   'AT+CFUN=1'"
+
+.PP
+Definition at line 56 of file at_commands\&.h\&.
+.SS "#define AT_GPRS_PDP_ACTIVATE_CONTEXT   'AT+CGACT=1,1'"
+
+.PP
+Defines GPRS PDP context\&. 
+.PP
+Definition at line 96 of file at_commands\&.h\&.
+.SS "#define AT_GPRS_PDP_GET_IP   'AT+CGPADDR=1'"
+
+.PP
+Definition at line 97 of file at_commands\&.h\&.
+.SS "#define AT_GPRS_PDP_SETUP_CONTEXT(APN)   'AT+CGDCONT=1,\\'IP\\',\\'' APN '\\''"
+
+.PP
+Definition at line 98 of file at_commands\&.h\&.
+.SS "#define AT_GPS_GET_LOCATION   'AT+CGPSINF=0'"
+
+.PP
+Definition at line 183 of file at_commands\&.h\&.
+.SS "#define AT_GPS_GET_STATUS   'AT+CGPSSTATUS?'"
+
+.PP
+Definition at line 184 of file at_commands\&.h\&.
+.SS "#define AT_GPS_POWER_OFF   'AT+CGPSPWR=0'"
+
+.PP
+Definition at line 179 of file at_commands\&.h\&.
+.SS "#define AT_GPS_POWER_ON   'AT+CGPSPWR=1'"
+
+.PP
+Definition at line 178 of file at_commands\&.h\&.
+.SS "#define AT_GPS_POWER_STATE   'AT+CGPSPWR?'"
+
+.PP
+Defines for the GPS\&. 
+.PP
+Definition at line 177 of file at_commands\&.h\&.
+.SS "#define AT_GPS_RST_AUTONOMY   'AT+CGPSRST=1'"
+
+.PP
+Definition at line 182 of file at_commands\&.h\&.
+.SS "#define AT_GPS_RST_COLD   'AT+CGPSRST=0'"
+
+.PP
+Definition at line 181 of file at_commands\&.h\&.
+.SS "#define AT_GPS_RST_MODE   'AT+CGPSRST?'"
+
+.PP
+Definition at line 180 of file at_commands\&.h\&.
+.SS "#define AT_HARDWARE_FLOW_CONTROL   'AT+IFC=2,2'"
+
+.PP
+Definition at line 78 of file at_commands\&.h\&.
+.SS "#define AT_MANUFACTURER_DEFAULTS   'AT&F0'"
+
+.PP
+Definition at line 91 of file at_commands\&.h\&.
+.SS "#define AT_MINIMUM_FUNCTIONALITY   'AT+CFUN=0'"
+
+.PP
+Defines for the phone functionality\&. 
+.PP
+Definition at line 55 of file at_commands\&.h\&.
+.SS "#define AT_MODULE_DEVICE_STATUS   'AT+CPAS'"
+
+.PP
+Define for the module device status The different responses are:
+.br
+0 ready
+.br
+1 unavailable
+.br
+2 unknown
+.br
+3 ringing
+.br
+4 call in progress
+.br
+5 asleep
+.br
+\&. 
+.PP
+Definition at line 138 of file at_commands\&.h\&.
+.SS "#define AT_MSG_DEL_ALL   'AT+CMGD=1,4'"
+
+.PP
+Definition at line 153 of file at_commands\&.h\&.
+.SS "#define AT_MSG_FORMAT   'AT+CMGF='"
+
+.PP
+Definition at line 154 of file at_commands\&.h\&.
+.SS "#define AT_MSG_READ   'AT+CMGR='"
+
+.PP
+Defines for the message\&. 
+.PP
+Definition at line 152 of file at_commands\&.h\&.
+.SS "#define AT_MSG_SEND   'AT+CMGS\\''"
+
+.PP
+Definition at line 155 of file at_commands\&.h\&.
+.SS "#define AT_NO_FLOW_CONTROL   'AT+IFC=0,0'"
+
+.PP
+Defines for the flow control\&. 
+.PP
+Definition at line 76 of file at_commands\&.h\&.
+.SS "#define AT_RESET_MODULE   'AT+CFUN=1,1'"
+
+.PP
+Definition at line 58 of file at_commands\&.h\&.
+.SS "#define AT_RESTORE_PROFILE0   'ATZ0'"
+
+.PP
+Defines for the reset to default functionality\&. 
+.PP
+Definition at line 89 of file at_commands\&.h\&.
+.SS "#define AT_RESTORE_PROFILE1   'ATZ1'"
+
+.PP
+Definition at line 90 of file at_commands\&.h\&.
+.SS "#define AT_SOFTWARE_FLOW_CONTROL   'AT+IFC=1,1' /* Should not be used for data calls */"
+
+.PP
+Definition at line 77 of file at_commands\&.h\&.
+.SS "#define AT_STORE_PROFILE0   'AT&W0'"
+
+.PP
+Defines for the store active profile\&. 
+.PP
+Definition at line 83 of file at_commands\&.h\&.
+.SS "#define AT_STORE_PROFILE1   'AT&W1'"
+
+.PP
+Definition at line 84 of file at_commands\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

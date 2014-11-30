@@ -1,0 +1,49 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/io\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBSIM908_init\fP (void)"
+.br
+.RI "\fIInitiates the SIM908 module\&. \fP"
+.ti -1c
+.RI "void \fBSIM908_start\fP (void)"
+.br
+.RI "\fIStarts the SIM908 module in following procedure\&. setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP\&. \fP"
+.ti -1c
+.RI "bool \fBSIM908_cmd\fP (const char *__cmd, bool __wait_for_ok)"
+.br
+.RI "\fIUsed for sending AT SET commands\&. \fP"
+.ti -1c
+.RI "void \fBset_MSD_data\fP (uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)"
+.br
+.RI "\fISets the MSD with relevant information given from GPS response\&. \fP"
+.ti -1c
+.RI "void \fBcall_PSAP\fP (void)"
+.br
+.RI "\fICalling Public-safety answering point\&. \fP"
+.ti -1c
+.RI "void \fBsend_MSD\fP (const char *__vroom_id)"
+.br
+.RI "\fISends MSD binary file to FTP server 1: Create filename: AT+FTPPUTNAME='<filename>' 2: Open bearer AT+SAPBR=1,1 3: Open FTP PUT session AT+FTPPUT=1 4: Set write data AT+FTPPUT=2,140 5: Write text (140 bytes) 6: End write session AT+FTPPUT=2,0 7: Close bearer AT+SAPBR=0,1\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+: 25-09-2014 13:09:36 : Andi Degn & Kenneth René Jensen : 0\&.5 
+.PP
+Definition in file \fBsim908\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

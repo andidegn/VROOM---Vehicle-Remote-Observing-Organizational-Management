@@ -1,24 +1,18 @@
 var accident__data_8h =
 [
-    [ "CONNECTION_STATUS_FLAG", "accident__data_8h.html#gaa0adb17c068f341fd97a074dfa40a371", [
-      [ "CREG_NOT_REGISTERED", "accident__data_8h.html#ggaa0adb17c068f341fd97a074dfa40a371afb1867e22c3ba1f9b62b8697a2141d10", null ],
-      [ "CREG_REGISTERED", "accident__data_8h.html#ggaa0adb17c068f341fd97a074dfa40a371a6acc71a0c69990ad88a78ae753412b18", null ],
-      [ "CREG_SEARCHING", "accident__data_8h.html#ggaa0adb17c068f341fd97a074dfa40a371a7284fcb6c6c416f7998e565cee7f500b", null ],
-      [ "CREG_REGISTRATION_DENIED", "accident__data_8h.html#ggaa0adb17c068f341fd97a074dfa40a371aae016d24fcfa26c42a345dbf2144e2ac", null ],
-      [ "CREG_UNKNOWN", "accident__data_8h.html#ggaa0adb17c068f341fd97a074dfa40a371ab092c3e39d0f034b4ab05b258db80232", null ],
-      [ "CREG_REGISTERED_ROOMING", "accident__data_8h.html#ggaa0adb17c068f341fd97a074dfa40a371a3a94928ee13f7968f68eaafc52967933", null ]
-    ] ],
-    [ "EMERGENCY_FLAG", "accident__data_8h.html#ga1c672888b6953fb65023d66cbb595c4e", [
-      [ "EMERGENCY_NO_ALARM", "accident__data_8h.html#gga1c672888b6953fb65023d66cbb595c4eaa804f424e8340c4c008b9d2a4bc13944", null ],
-      [ "EMERGENCY_MANUAL_ALARM", "accident__data_8h.html#gga1c672888b6953fb65023d66cbb595c4eafd081379d59643956abdf38d516f0cef", null ],
-      [ "EMERGENCY_AUTO_ALARM", "accident__data_8h.html#gga1c672888b6953fb65023d66cbb595c4ea30df4dd40fd132added2ec752e70ec5a", null ],
-      [ "EMERGENCY_ALARM_SENT", "accident__data_8h.html#gga1c672888b6953fb65023d66cbb595c4ea270e197de87f6b218c4d8a1d98914590", null ]
-    ] ],
-    [ "__attribute__", "accident__data_8h.html#ab898071398b359603a35c202e9c65f3b", null ],
-    [ "emergency_alarm", "accident__data_8h.html#gac60d028353a9fb4636957a536a095893", null ],
-    [ "EXT_CONNECTION_STATUS_FLAG", "accident__data_8h.html#aadbb129c0c334574869fc52d00ecb5e1", null ],
-    [ "EXT_EMERGENCY_FLAG", "accident__data_8h.html#a6e879d404903a7929366bbbcc6060f91", null ],
-    [ "EXT_MSD", "accident__data_8h.html#a98360402a203ec35429a243917cdb51f", null ],
-    [ "EXT_MSD_FILENAME", "accident__data_8h.html#a667db9d0e6ffc7d00db8ace2dae7b228", null ],
-    [ "MSD", "accident__data_8h.html#a0f9185b85bdf1a3366ef57f907fe52c4", null ]
+    [ "AD_FUEL_TYPE_DIESEL", "accident__data_8h.html#ab56dd36e6f90479ef039c5050a018420", null ],
+    [ "AD_FUEL_TYPE_ELECTRIC", "accident__data_8h.html#aaed68534dd7da2e56453c4718c866596", null ],
+    [ "AD_FUEL_TYPE_GASOLINE", "accident__data_8h.html#a66885b2c0028edcb091fa6b4562d332f", null ],
+    [ "AD_FUEL_TYPE_HYDROGEN", "accident__data_8h.html#aa2c38d66415a92e3d9f7ebc8751730a3", null ],
+    [ "AD_FUEL_TYPE_NATURALGAS", "accident__data_8h.html#a8a9a197e4331e6939c2d751e7e6c5b09", null ],
+    [ "AD_FUEL_TYPE_OTHER", "accident__data_8h.html#gae5145cc5eb8ce43ebc169928d1187b64", null ],
+    [ "AD_FUEL_TYPE_PROPANE", "accident__data_8h.html#a3b2fd8ba2756054fcd43088b55944919", null ],
+    [ "__attribute__", "accident__data_8h.html#gab898071398b359603a35c202e9c65f3b", null ],
+    [ "ad_check_for_crash", "accident__data_8h.html#a21c7ffc49f578e74626c032867cea479", null ],
+    [ "ad_emergency_alarm", "accident__data_8h.html#aee1bd5118ffcb7994b94088ddc55f67c", null ],
+    [ "AD_MSD", "accident__data_8h.html#a56fa77a9374969ad7fdb875d7744bb4c", null ],
+    [ "EXT_CONNECTION_CREG_FLAG", "accident__data_8h.html#add142243425ede2aeae62067ecfb9f57", null ],
+    [ "EXT_EMERGENCY_FLAG", "accident__data_8h.html#a7d9910fe0c51f281dd99d303078b0fd1", null ],
+    [ "EXT_MSD", "accident__data_8h.html#a8a97a4af5e816667ef70d3eb67dfd3b7", null ],
+    [ "EXT_MSD_FILENAME", "accident__data_8h.html#a667db9d0e6ffc7d00db8ace2dae7b228", null ]
 ];

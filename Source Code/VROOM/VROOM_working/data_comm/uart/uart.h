@@ -15,8 +15,8 @@
 	 UART1:\n
 	 * RX: PD2\n
 	 * TX: PD3\n
-	 @defgroup uart_priv Private
 	 @defgroup uart_pub Public
+	 @defgroup uart_priv Private
  * @}
  *************************************************************************/
 
@@ -33,23 +33,19 @@
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief defines the size of the transmit buffers \n
- * @{
  *************************************************************************/
 #define UART0_TX_BUFFER_SIZE 8
 #define UART0_RX_BUFFER_SIZE 8
 #define UART1_TX_BUFFER_SIZE 8
 #define UART1_RX_BUFFER_SIZE 256
-/* @} */
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief define for UART return
- * @{
  *************************************************************************/
 #define UART_NO_DATA 0x100U
 #define UART_READ_NOT_ALOWED 0x200U
 #define UART_BUFFER_OVERRUN 0x300U
-/* @} */
 
 /**********************************************************************//**
  * @ingroup uart_pub
@@ -58,18 +54,15 @@
  * * UART_MODE_DOUBLE : Asynchronous at double speed \n
  * * UART_MODE_SYNC   : Synchronous (NOT SUPPORTED YET) \n
  * * UART_MODE_MSPIM  : SPI Master (NOT SUPPORTED YET) \n
- * @{
  *************************************************************************/
 typedef enum {
 	UART_MODE_NORMAL,
 	UART_MODE_DOUBLE
 } UART_MODE;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief defines for the parity bit selection
- * @{
  *************************************************************************/
 typedef enum {
 	UART_PARITY_DISABLED = 0,
@@ -77,23 +70,19 @@ typedef enum {
 	UART_PARITY_EN_EVEN = _BV(5), // UMP01 = UMP11 = 5
 	UART_PARITY_EN_ODD = _BV(4) | _BV(5)
 } UART_PARITY_MODE;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief defines for the stop bit selection
- * @{
  *************************************************************************/
 typedef enum {
 	UART_ONE_STOP_BIT = 0,
 	UART_TWO_STOP_BIT = _BV(3) // USBS0 = USBS1 = 3
 } UART_STOP_BIT;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief defines for the character size
- * @{
  *************************************************************************/
 typedef enum {
 	UART_5_BIT,
@@ -102,12 +91,10 @@ typedef enum {
 	UART_8_BIT,
 	UART_9_BIT
 } UART_CHAR_SIZE;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief defines for the different baud rates
- * @{
  *************************************************************************/
 typedef enum {
 	UART_BAUD_2400 = 2400,
@@ -125,7 +112,6 @@ typedef enum {
 	UART_BAUD_460K8 = 460800,
 	UART_BAUD_921K6 = 921600
 } UART_BAUD;
-/* @} */
 
 
 /**********************************************************************//**

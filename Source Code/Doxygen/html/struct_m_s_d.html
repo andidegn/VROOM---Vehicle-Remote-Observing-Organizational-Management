@@ -115,9 +115,22 @@ $(document).ready(function(){initNavTree('struct_m_s_d.html','');});
 <p><code>#include &lt;<a class="el" href="accident__data_8h_source.html">accident_data.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>struct containing the <a class="el" href="struct_m_s_d.html" title="struct containing the MSD for an accident report ">MSD</a> for an accident report </p>
-<dl class="section note"><dt>Note</dt><dd>NOT YET Complies MISRO 2004 standards</dd>
-<dd>
-According eCall standard EN 15722 the <a class="el" href="struct_m_s_d.html" title="struct containing the MSD for an accident report ">MSD</a> consists of 140 bytes </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>According eCall standard EN 15722 the <a class="el" href="struct_m_s_d.html" title="struct containing the MSD for an accident report ">MSD</a> consists of 140 bytes <div class="fragment"><div class="line">                                                                          /</div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed))</div>
+<div class="line">{</div>
+<div class="line">    uint8_t version;            <span class="comment">/* Referring to a public register to determine the meaning and encoding of the optional data */</span></div>
+<div class="line">    uint8_t msg_identifier;     <span class="comment">/* Numbers of re-transmission */</span></div>
+<div class="line">    uint8_t control;            <span class="comment">/* | bit 7: Automatic activation | bit 6: Manual activation | bit 5: Test call | bit 4: Confidence in position | bit 3-0: Reserved | */</span></div>
+<div class="line">    uint8_t vehicle_class;      <span class="comment">/* | bit 7-4 = classification | bit 3-0: category | */</span></div>
+<div class="line">    <span class="keywordtype">char</span> VIN[20];               <span class="comment">/* VIN number 17-characters (last 3 char is blank) ISO 3779 */</span></div>
+<div class="line">    uint8_t fuel_type;</div>
+<div class="line">    uint32_t time_stamp;        <span class="comment">/* UTC Seconds */</span></div>
+<div class="line">    int32_t latitude;           <span class="comment">/* Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) ISO 6709 */</span></div>
+<div class="line">    int32_t longitude;          <span class="comment">/* Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) ISO 6709 */</span></div>
+<div class="line">    uint8_t direction;          <span class="comment">/* Direction in degrees. The nearest integer of 255.0*value/360.0 (0 &lt;= value &gt;= 255) */</span></div>
+<div class="line">    <span class="keywordtype">char</span> optional_data[102];    <span class="comment">/* Optional. Further data (e.g. crash information, number of passengers) or blank field */</span></div>
+<div class="line">} AD_MSD;</div>
+</div><!-- fragment --> </dd></dl>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/<a class="el" href="accident__data_8h_source.html">accident_data.h</a></li>
 </ul>
@@ -127,7 +140,7 @@ According eCall standard EN 15722 the <a class="el" href="struct_m_s_d.html" tit
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="struct_m_s_d.html">MSD</a></li>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 00:26:06 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

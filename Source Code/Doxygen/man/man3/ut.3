@@ -1,0 +1,94 @@
+.TH "unit_test" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+unit_test \- 
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBtest_tc72_calc\fP (void)"
+.br
+.RI "\fITest of function: \fBcalculate_temperature(uint8_t MSB, uint8_t LSB)\fP in \fBtc72\&.c\fP\&. \fP"
+.ti -1c
+.RI "char * \fBrun_all_tests\fP (void)"
+.br
+.RI "\fIRun all unit tests\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This is the unit test platform for all relevant functions (including arithmetic) in the VROOM system\&. 
+.SH "Function Documentation"
+.PP 
+.SS "char * run_all_tests (void)"
+
+.PP
+Run all unit tests\&. macros for unit testing
+.PP
+\fBReturns:\fP
+.RS 4
+char* - if all tests pass: 'xx-xPASS'
+.IP "\(bu" 2
+if test fail: the error code line where it fails
+.PP
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+Complies MISRO 2004 standards
+.RE
+.PP
+.PP
+.nf
+                                                                          /
+#define mu_assert(message, test) do { if (!(test)) return message; } while (0)
+#define mu_run_test(test) do { char *message = test(); tests_run++; return message; } while (0)
+.fi
+.PP
+.PP
+extern variable which counts numbers of unit test runs 
+.PP
+.nf
+                                                                          /
+ extern uint16_t tests_run;
+
+.fi
+.PP
+.PP
+Run all unit tests 
+.PP
+\fBReturns:\fP
+.RS 4
+char* - if all tests pass: 'xx-xPASS'
+.IP "\(bu" 2
+if test fail: the error code line where it fails 
+.PP
+.RE
+.PP
+
+.PP
+Definition at line 43 of file unit_test\&.c\&.
+.SS "char* test_tc72_calc (void)"
+
+.PP
+Test of function: \fBcalculate_temperature(uint8_t MSB, uint8_t LSB)\fP in \fBtc72\&.c\fP\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+char* - if all tests pass: '01-1PASS'
+.IP "\(bu" 2
+if test fail: the error code line where it fails 
+.PP
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+Test parameters is taken from tc72 datasheet 
+.RE
+.PP
+
+.PP
+Definition at line 23 of file unit_test\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

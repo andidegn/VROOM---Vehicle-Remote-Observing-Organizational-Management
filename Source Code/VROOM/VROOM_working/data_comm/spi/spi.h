@@ -8,10 +8,10 @@
  * @{
 	 This is a driver for the SPI bus
 	 on the ATMEGA family processors.
+	 @note Complies MISRO 2004 standards
 	 @defgroup spi_priv Private
 	 @defgroup spi_pub Public
  * @}
- * @note Complies MISRO 2004 standards
  *************************************************************************/
 
 #ifndef SPI_H_
@@ -25,7 +25,6 @@
  * * SPI_MODE_1: Polarity positive, trigger falling edge \n
  * * SPI_MODE_2: Polarity negative, trigger rising edge \n
  * * SPI_MODE_3: Polarity negative, trigger falling edge \n
- * @{
  *************************************************************************/
 typedef enum {
 	SPI_MODE_0 = 0,
@@ -33,34 +32,28 @@ typedef enum {
 	SPI_MODE_2 = _BV(CPOL),
 	SPI_MODE_3 = _BV(CPOL) | _BV(CPHA)
 } SPI_DATA_MODE;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup spi_pub
  * @brief defines for the data direction
- * @{
  *************************************************************************/
 typedef enum {
 	SPI_MSB_FIRST = 0,
 	SPI_LST_FIRST = _BV(DORD)
 } SPI_DATA_DIRECTION;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup spi_pub
  * @brief defines for the CS/CE pin active level
- * @{
  *************************************************************************/
 typedef enum {
 	SPI_CS_ACTIVE_LOW = 0,
 	SPI_CS_ACTIVE_HIGH = 1
 } SPI_CS_ACTIVE_LEVEL;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup spi_pub
  * @brief defines for the frequency divider
- * @{
  *************************************************************************/
 typedef enum {
 	SPI_DIVIDER_4 = 0,
@@ -71,7 +64,6 @@ typedef enum {
 	SPI_DIVIDER_8 = SPI_DIVIDER_16,
 	SPI_DIVIDER_32 = SPI_DIVIDER_64
 } SPI_DIVIDER;
-/* @} */
 
 /**********************************************************************//**
  * @ingroup spi_priv
@@ -104,7 +96,7 @@ int8_t spi_master_setup(SPI_DATA_MODE __mode,
 						SPI_DIVIDER __freq_divider,
 						uint8_t __cs_pin,
 						SPI_CS_ACTIVE_LEVEL __cs_active_level,
-						void (*__callback_function_ptr)(uint8_t *__cfp));
+						void (*__callback_function_ptr)(uint8_t *__data));
 
 /**********************************************************************//**
  * @ingroup spi_pub

@@ -1,0 +1,130 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'accident_data\&.h'\fP
+.br
+\fC#include '\&.\&./hardware_boards/sim908/sim908\&.h'\fP
+.br
+\fC#include '\&.\&./vroom_config\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBBLANK_CHAR\fP   0x20"
+.br
+.RI "\fIdefine for the space char ' ' \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBad_emergency_alarm\fP (void)"
+.br
+.RI "\fIFunction to call when an emergency alarm is triggered\&. \fP"
+.ti -1c
+.RI "void \fBad_check_for_crash\fP (void)"
+.br
+.RI "\fIChecks if a crash has occurred\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBAD_MSD\fP \fBEXT_MSD\fP"
+.br
+.ti -1c
+.RI "AD_EMERGENCY_FLAG \fBEXT_EMERGENCY_FLAG\fP = EMERGENCY_NO_ALARM"
+.br
+.ti -1c
+.RI "AD_CONNECTION_STATUS_FLAG \fBEXT_CONNECTION_CREG_FLAG\fP = CREG_NOT_REGISTERED"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor:\fP
+.RS 4
+: Kenneth René Jensen : 0\&.7
+.RE
+.PP
+This is the data for an Accident report\&. Comply eCall standards for MSD data structure\&. 
+.PP
+\fBNote:\fP
+.RS 4
+NOT YET Complies MISRO 2004 standards 
+.RE
+.PP
+
+.PP
+Definition in file \fBaccident_data\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void ad_check_for_crash (void)"
+
+.PP
+Checks if a crash has occurred\&. Gets the accelerometer data and analysis them to see if a crash has occurred Steps in function:
+.br
+.IP "1." 4
+Read accelerometer data
+.br
+
+.IP "2." 4
+Analysis data
+.br
+
+.IP "3." 4
+Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected
+.br
+
+.PP
+
+.PP
+Definition at line 77 of file accident_data\&.c\&.
+.SS "void ad_emergency_alarm (void)"
+
+.PP
+Function to call when an emergency alarm is triggered\&. Starts the sequence required for placing an emergency call and send an MSD packet\&. Steps in function:
+.br
+.IP "1." 4
+Record needed data
+.br
+
+.IP "2." 4
+Create MSD structure
+.br
+
+.IP "3." 4
+sent structure over FTP
+.br
+
+.IP "4." 4
+call to emergency number 
+.PP
+
+.PP
+Definition at line 46 of file accident_data\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "AD_CONNECTION_STATUS_FLAG EXT_CONNECTION_CREG_FLAG = CREG_NOT_REGISTERED"
+
+.PP
+Definition at line 26 of file accident_data\&.c\&.
+.SS "AD_EMERGENCY_FLAG EXT_EMERGENCY_FLAG = EMERGENCY_NO_ALARM"
+
+.PP
+Definition at line 25 of file accident_data\&.c\&.
+.SS "\fBAD_MSD\fP EXT_MSD"
+
+.PP
+Definition at line 24 of file accident_data\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

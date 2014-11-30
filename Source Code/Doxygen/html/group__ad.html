@@ -98,7 +98,9 @@ $(document).ready(function(){initNavTree('group__ad.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#groups">Modules</a>  </div>
+<a href="#groups">Modules</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Accident Data</div>  </div>
 </div><!--header-->
@@ -108,17 +110,68 @@ $(document).ready(function(){initNavTree('group__ad.html','');});
 Modules</h2></td></tr>
 <tr class="memitem:group__ad__priv"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ad__priv.html">Private</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__ad__pub"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ad__pub.html">Public</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gae5145cc5eb8ce43ebc169928d1187b64"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ad.html#gae5145cc5eb8ce43ebc169928d1187b64">AD_FUEL_TYPE_OTHER</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:gae5145cc5eb8ce43ebc169928d1187b64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant vehicle fuel type definition.  <a href="#gae5145cc5eb8ce43ebc169928d1187b64">More...</a><br/></td></tr>
+<tr class="separator:gae5145cc5eb8ce43ebc169928d1187b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gab898071398b359603a35c202e9c65f3b"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ad.html#gab898071398b359603a35c202e9c65f3b">__attribute__</a> ((packed))</td></tr>
+<tr class="memdesc:gab898071398b359603a35c202e9c65f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct containing the MSD for an accident report  <a href="#gab898071398b359603a35c202e9c65f3b">More...</a><br/></td></tr>
+<tr class="separator:gab898071398b359603a35c202e9c65f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>This is the data for an Accident report. Comply eCall standards for <a class="el" href="struct_m_s_d.html" title="struct containing the MSD for an accident report ">MSD</a> data structure. </p>
+<p>This is the data for an Accident report. Comply eCall standards for MSD data structure. </p>
+<dl class="section note"><dt>Note</dt><dd>NOT YET Complies MISRO 2004 standards </dd></dl>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="gae5145cc5eb8ce43ebc169928d1187b64"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AD_FUEL_TYPE_OTHER&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constant vehicle fuel type definition. </p>
+<p>FUEL_TYPES </p>
+
+<p>Definition at line <a class="el" href="accident__data_8h_source.html#l00045">45</a> of file <a class="el" href="accident__data_8h_source.html">accident_data.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="gab898071398b359603a35c202e9c65f3b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct __attribute__ </td>
+          <td>(</td>
+          <td class="paramtype">(packed)&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>struct containing the MSD for an accident report </p>
+<dl class="section note"><dt>Note</dt><dd>According eCall standard EN 15722 the MSD consists of 140 bytes </dd></dl>
+
+<p>Definition at line <a class="el" href="accident__data_8h_source.html#l00025">25</a> of file <a class="el" href="accident__data_8h_source.html">accident_data.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

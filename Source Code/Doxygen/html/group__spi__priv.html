@@ -114,142 +114,10 @@ Data Structures</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga3c0688f495ba212b5ec3cc36019d6484"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#ga3c0688f495ba212b5ec3cc36019d6484">ISR</a> (SPI_STC_vect, ISR_BLOCK)</td></tr>
+<tr class="memdesc:ga3c0688f495ba212b5ec3cc36019d6484"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt service routine Interrupt service routine for the SPI. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed. Else the SPI is released.  <a href="#ga3c0688f495ba212b5ec3cc36019d6484">More...</a><br/></td></tr>
 <tr class="separator:ga3c0688f495ba212b5ec3cc36019d6484"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac2909a28e72d56f28c0ad931c4e565af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#gac2909a28e72d56f28c0ad931c4e565af">DDR_SPI</a>&#160;&#160;&#160;DDRB</td></tr>
-<tr class="separator:gac2909a28e72d56f28c0ad931c4e565af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga88f7782e210e61586baf33b93240d905"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#ga88f7782e210e61586baf33b93240d905">SS</a>&#160;&#160;&#160;PB0</td></tr>
-<tr class="separator:ga88f7782e210e61586baf33b93240d905"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2dd443a4430713d325ab86895a4a45eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#ga2dd443a4430713d325ab86895a4a45eb">SCK</a>&#160;&#160;&#160;PB1</td></tr>
-<tr class="separator:ga2dd443a4430713d325ab86895a4a45eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5d3f11f2fdf8a7e27b975291e0c2c8cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#ga5d3f11f2fdf8a7e27b975291e0c2c8cc">MOSI</a>&#160;&#160;&#160;PB2</td></tr>
-<tr class="separator:ga5d3f11f2fdf8a7e27b975291e0c2c8cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7334c540878c8c4d801fd75ed9fd8063"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#ga7334c540878c8c4d801fd75ed9fd8063">MISO</a>&#160;&#160;&#160;PB3</td></tr>
-<tr class="separator:ga7334c540878c8c4d801fd75ed9fd8063"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga23ed8e629c0a28eab14f92c888c8d7ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#ga23ed8e629c0a28eab14f92c888c8d7ef">MAX_HANDLES</a>&#160;&#160;&#160;16U</td></tr>
-<tr class="separator:ga23ed8e629c0a28eab14f92c888c8d7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadabf03ebe69ec2aded974fbc0b4a5d19"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#gadabf03ebe69ec2aded974fbc0b4a5d19">CS_INACTIVE</a>&#160;&#160;&#160;0U</td></tr>
-<tr class="separator:gadabf03ebe69ec2aded974fbc0b4a5d19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6a5014d22500c1cd171b2869157e0f7b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#ga6a5014d22500c1cd171b2869157e0f7b">CS_ACTIVE</a>&#160;&#160;&#160;1U</td></tr>
-<tr class="separator:ga6a5014d22500c1cd171b2869157e0f7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="ga6a5014d22500c1cd171b2869157e0f7b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CS_ACTIVE&#160;&#160;&#160;1U</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00043">43</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gadabf03ebe69ec2aded974fbc0b4a5d19"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CS_INACTIVE&#160;&#160;&#160;0U</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>defines inactive/active level for CS/CE </p>
-
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00042">42</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gac2909a28e72d56f28c0ad931c4e565af"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DDR_SPI&#160;&#160;&#160;DDRB</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section note"><dt>Note</dt><dd>Complies MISRO 2004 standards</dd></dl>
-<p>Defines for the ports and pins used by the SPI </p>
-
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00022">22</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga23ed8e629c0a28eab14f92c888c8d7ef"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MAX_HANDLES&#160;&#160;&#160;16U</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>defines the max number of handles that are able to be handled </p>
-
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00034">34</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga7334c540878c8c4d801fd75ed9fd8063"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MISO&#160;&#160;&#160;PB3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00026">26</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga5d3f11f2fdf8a7e27b975291e0c2c8cc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MOSI&#160;&#160;&#160;PB2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00025">25</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga2dd443a4430713d325ab86895a4a45eb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SCK&#160;&#160;&#160;PB1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00024">24</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga88f7782e210e61586baf33b93240d905"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SS&#160;&#160;&#160;PB0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00023">23</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ga3c0688f495ba212b5ec3cc36019d6484"></a>
 <div class="memitem">
@@ -274,9 +142,10 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Interrupt service routine for the SPI. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed. Else the SPI is released. </p>
 
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00268">268</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+<p>Interrupt service routine Interrupt service routine for the SPI. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed. Else the SPI is released. </p>
+
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00271">271</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -285,7 +154,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

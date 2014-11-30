@@ -24,7 +24,6 @@ var group__spi__pub =
       [ "SPI_DIVIDER_32", "group__spi__pub.html#ggae7170fee003fadf332217ed7a5d2f3c9a959a0d65d96d1f7d3d58e8ad1b82f2b6", null ]
     ] ],
     [ "spi_master_setup", "group__spi__pub.html#ga1e56d8b1f6edd8a4c70301efd919d060", null ],
-    [ "spi_master_setup", "group__spi__pub.html#ga68288a01c34bad32ae3d6c696fc99139", null ],
     [ "spi_release", "group__spi__pub.html#ga5dbbfafb5cc59f5db1f598b319c6010d", null ],
     [ "spi_send", "group__spi__pub.html#gac6b96252159d5e3e5dbcc19dacecaaef", null ],
     [ "spi_send_byte", "group__spi__pub.html#ga69c7184b8c4cf536ddad3c228393e964", null ]

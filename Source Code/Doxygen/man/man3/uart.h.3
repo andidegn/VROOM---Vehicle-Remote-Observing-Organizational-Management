@@ -1,0 +1,135 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/uart/uart.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/uart/uart.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/interrupt\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBUART0_TX_BUFFER_SIZE\fP   8"
+.br
+.RI "\fIdefines the size of the transmit buffers 
+.br
+\fP"
+.ti -1c
+.RI "#define \fBUART0_RX_BUFFER_SIZE\fP   8"
+.br
+.ti -1c
+.RI "#define \fBUART1_TX_BUFFER_SIZE\fP   8"
+.br
+.ti -1c
+.RI "#define \fBUART1_RX_BUFFER_SIZE\fP   256"
+.br
+.ti -1c
+.RI "#define \fBUART_NO_DATA\fP   0x100U"
+.br
+.RI "\fIdefine for UART return \fP"
+.ti -1c
+.RI "#define \fBUART_READ_NOT_ALOWED\fP   0x200U"
+.br
+.ti -1c
+.RI "#define \fBUART_BUFFER_OVERRUN\fP   0x300U"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBUART_MODE\fP { \fBUART_MODE_NORMAL\fP, \fBUART_MODE_DOUBLE\fP }"
+.br
+.RI "\fIdefines for the mode of operations 
+.br
+\fP"
+.ti -1c
+.RI "enum \fBUART_PARITY_MODE\fP { \fBUART_PARITY_DISABLED\fP = 0, \fBUART_PARITY_ENABLED\fP = _BV(4), \fBUART_PARITY_EN_EVEN\fP = _BV(5), \fBUART_PARITY_EN_ODD\fP = _BV(4) | _BV(5) }"
+.br
+.RI "\fIdefines for the parity bit selection \fP"
+.ti -1c
+.RI "enum \fBUART_STOP_BIT\fP { \fBUART_ONE_STOP_BIT\fP = 0, \fBUART_TWO_STOP_BIT\fP = _BV(3) }"
+.br
+.RI "\fIdefines for the stop bit selection \fP"
+.ti -1c
+.RI "enum \fBUART_CHAR_SIZE\fP { \fBUART_5_BIT\fP, \fBUART_6_BIT\fP, \fBUART_7_BIT\fP, \fBUART_8_BIT\fP, \fBUART_9_BIT\fP }"
+.br
+.RI "\fIdefines for the character size \fP"
+.ti -1c
+.RI "enum \fBUART_BAUD\fP { \fBUART_BAUD_2400\fP = 2400, \fBUART_BAUD_4800\fP = 4800, \fBUART_BAUD_7200\fP = 7200, \fBUART_BAUD_9600\fP = 9600, \fBUART_BAUD_14K4\fP = 14400, \fBUART_BAUD_19K2\fP = 19200, \fBUART_BAUD_28K8\fP = 28800, \fBUART_BAUD_38K4\fP = 38400, \fBUART_BAUD_57K6\fP = 57600, \fBUART_BAUD_115K2\fP = 115200, \fBUART_BAUD_128K0\fP = 128000, \fBUART_BAUD_230K4\fP = 230400, \fBUART_BAUD_460K8\fP = 460800, \fBUART_BAUD_921K6\fP = 921600 }"
+.br
+.RI "\fIdefines for the different baud rates \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBuart0_setup_async\fP (\fBUART_MODE\fP __operational_mode, \fBUART_BAUD\fP __baud_rate, \fBUART_PARITY_MODE\fP __paraty_mode, \fBUART_STOP_BIT\fP __stop_bit, \fBUART_CHAR_SIZE\fP __char_size, void(*__callback_function_ptr)(char __data))"
+.br
+.RI "\fISets up the UART0 bus as asynchronous using supplied parameters\&. \fP"
+.ti -1c
+.RI "void \fBuart0_send_char\fP (char __data)"
+.br
+.RI "\fISends 1 (one) char of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart0_send_string\fP (const char *__data)"
+.br
+.RI "\fISends a string (x no\&. of chars) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart0_send_data\fP (const char *__data, uint8_t __length)"
+.br
+.RI "\fISends data (based on length) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "uint16_t \fBuart0_read_char\fP (void)"
+.br
+.RI "\fIReads 1 (one) char of 'data' in the UART buffer\&. \fP"
+.ti -1c
+.RI "void \fBuart1_setup_async\fP (\fBUART_MODE\fP __operational_mode, \fBUART_BAUD\fP __baud_rate, \fBUART_PARITY_MODE\fP __paraty_mode, \fBUART_STOP_BIT\fP __stop_bit, \fBUART_CHAR_SIZE\fP __char_size, void(*__callback_function_ptr)(char __data))"
+.br
+.RI "\fISets up the UART1 bus as asynchronous using supplied parameters\&. \fP"
+.ti -1c
+.RI "void \fBuart1_send_char\fP (char __data)"
+.br
+.RI "\fISends 1 (one) char of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart1_send_string\fP (const char *__data)"
+.br
+.RI "\fISends a string (x no\&. of chars) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart1_send_data\fP (const char *__data, uint8_t __length)"
+.br
+.RI "\fISends data (based on length) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "uint16_t \fBuart1_read_char\fP (void)"
+.br
+.RI "\fIReads 1 (one) char of 'data' in the UART buffer\&. \fP"
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define UART0_RX_BUFFER_SIZE   8"
+
+.PP
+Definition at line 38 of file uart\&.h\&.
+.SS "#define UART1_RX_BUFFER_SIZE   256"
+
+.PP
+Definition at line 40 of file uart\&.h\&.
+.SS "#define UART1_TX_BUFFER_SIZE   8"
+
+.PP
+Definition at line 39 of file uart\&.h\&.
+.SS "#define UART_BUFFER_OVERRUN   0x300U"
+
+.PP
+Definition at line 48 of file uart\&.h\&.
+.SS "#define UART_READ_NOT_ALOWED   0x200U"
+
+.PP
+Definition at line 47 of file uart\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

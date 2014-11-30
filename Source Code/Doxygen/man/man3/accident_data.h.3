@@ -1,0 +1,262 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/io\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBAD_FUEL_TYPE_OTHER\fP   0"
+.br
+.RI "\fIConstant vehicle fuel type definition\&. \fP"
+.ti -1c
+.RI "#define \fBAD_FUEL_TYPE_GASOLINE\fP   1"
+.br
+.ti -1c
+.RI "#define \fBAD_FUEL_TYPE_DIESEL\fP   2"
+.br
+.ti -1c
+.RI "#define \fBAD_FUEL_TYPE_NATURALGAS\fP   3"
+.br
+.ti -1c
+.RI "#define \fBAD_FUEL_TYPE_PROPANE\fP   4"
+.br
+.ti -1c
+.RI "#define \fBAD_FUEL_TYPE_ELECTRIC\fP   5"
+.br
+.ti -1c
+.RI "#define \fBAD_FUEL_TYPE_HYDROGEN\fP   6"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fB__attribute__\fP ((packed))"
+.br
+.RI "\fIstruct containing the MSD for an accident report \fP"
+.ti -1c
+.RI "void \fBad_emergency_alarm\fP (void)"
+.br
+.RI "\fIFunction to call when an emergency alarm is triggered\&. \fP"
+.ti -1c
+.RI "void \fBad_check_for_crash\fP (void)"
+.br
+.RI "\fIChecks if a crash has occurred\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBAD_MSD\fP"
+.br
+.ti -1c
+.RI "char \fBEXT_MSD_FILENAME\fP [24]"
+.br
+.RI "\fIConstant vehicle class type definition\&. \fP"
+.ti -1c
+.RI "\fBAD_MSD\fP \fBEXT_MSD\fP"
+.br
+.ti -1c
+.RI "AD_EMERGENCY_FLAG \fBEXT_EMERGENCY_FLAG\fP"
+.br
+.ti -1c
+.RI "AD_CONNECTION_STATUS_FLAG \fBEXT_CONNECTION_CREG_FLAG\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor:\fP
+.RS 4
+: Kenneth René Jensen : 0\&.7 
+.RE
+.PP
+
+.PP
+Definition in file \fBaccident_data\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define AD_FUEL_TYPE_DIESEL   2"
+
+.PP
+Definition at line 47 of file accident_data\&.h\&.
+.SS "#define AD_FUEL_TYPE_ELECTRIC   5"
+
+.PP
+Definition at line 50 of file accident_data\&.h\&.
+.SS "#define AD_FUEL_TYPE_GASOLINE   1"
+
+.PP
+Definition at line 46 of file accident_data\&.h\&.
+.SS "#define AD_FUEL_TYPE_HYDROGEN   6"
+
+.PP
+Definition at line 51 of file accident_data\&.h\&.
+.SS "#define AD_FUEL_TYPE_NATURALGAS   3"
+
+.PP
+Definition at line 48 of file accident_data\&.h\&.
+.SS "#define AD_FUEL_TYPE_PROPANE   4"
+
+.PP
+Definition at line 49 of file accident_data\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "void ad_check_for_crash (void)"
+
+.PP
+Checks if a crash has occurred\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void
+.RE
+.PP
+Gets the accelerometer data and analysis them to see if a crash has occurred Steps in function:
+.br
+.IP "1." 4
+Read accelerometer data
+.br
+
+.IP "2." 4
+Analysis data
+.br
+
+.IP "3." 4
+Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected
+.br
+
+.PP
+
+.PP
+Definition at line 77 of file accident_data\&.c\&.
+.SS "void ad_emergency_alarm (void)"
+
+.PP
+Function to call when an emergency alarm is triggered\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void
+.RE
+.PP
+Starts the sequence required for placing an emergency call and send an MSD packet\&. Steps in function:
+.br
+.IP "1." 4
+Record needed data
+.br
+
+.IP "2." 4
+Create MSD structure
+.br
+
+.IP "3." 4
+sent structure over FTP
+.br
+
+.IP "4." 4
+call to emergency number 
+.PP
+
+.PP
+Definition at line 46 of file accident_data\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "AD_MSD"
+
+.PP
+Definition at line 38 of file accident_data\&.h\&.
+.SS "AD_CONNECTION_STATUS_FLAG EXT_CONNECTION_CREG_FLAG"
+
+.PP
+Definition at line 26 of file accident_data\&.c\&.
+.SS "AD_EMERGENCY_FLAG EXT_EMERGENCY_FLAG"
+
+.PP
+Definition at line 25 of file accident_data\&.c\&.
+.SS "\fBAD_MSD\fP EXT_MSD"
+
+.PP
+Definition at line 24 of file accident_data\&.c\&.
+.SS "char EXT_MSD_FILENAME[24]"
+
+.PP
+Constant vehicle class type definition\&. 
+.PP
+\fBNote:\fP
+.RS 4
+Upper nibble contains class definition: [SA, L, M, N, O, T, G] @ Lower nibble contains class category definition: [1 - 7] @ Details: http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32007L0046&from=EN 
+.PP
+.nf
+                                                                          /
+#define AD_VEHICLE_CLASS_L(category)    (1<<4 | category)   /* Motor vehicles with less than four wheels */
+#define AD_VEHICLE_CLASS_M(category)    (2<<4 | category)   /* Power-driven vehicles having at least four wheels and used for the carriage of passengers */
+#define AD_VEHICLE_CLASS_N(category)    (3<<4 | category)   /* Power-driven vehicles having at least four wheels and used for the carriage of goods */
+#define AD_VEHICLE_CLASS_O(category)    (4<<4 | category)   /* Trailers (including semi–trailers) */
+#define AD_VEHICLE_CLASS_T(category)    (5<<4 | category)   /* Agricultural and Forestry tractors */
+#define AD_VEHICLE_CLASS_G(category)    (6<<4 | category)   /* Off-road vehicles */
+#define AD_VEHICLE_CLASS_SA(category)   (7<<4 | category)   /* Special purpose vehicles (e\&.g\&. Ambulance, Hearse, Armoured vehicle or Motor caravan) */
+
+.fi
+.PP
+.RE
+.PP
+Flag to detect if an alarm has been triggered 
+.PP
+.nf
+                                                                          /
+typedef enum {  EMERGENCY_NO_ALARM = 0,
+                EMERGENCY_MANUAL_ALARM = 1,
+                EMERGENCY_AUTO_ALARM = 2,
+                EMERGENCY_ALARM_SENT = 3
+} AD_EMERGENCY_FLAG;
+
+.fi
+.PP
+.PP
+Flag to detect the connection status 
+.PP
+\fBNote:\fP
+.RS 4
+Corresponding to CREG response in SIM908 p\&. 77 in AT Commands manual v\&. 1\&.02 
+.PP
+.nf
+                                                                          /
+typedef enum {  CREG_NOT_REGISTERED = 0,
+                CREG_REGISTERED = 1,
+                CREG_SEARCHING = 2,
+                CREG_REGISTRATION_DENIED = 3,
+                CREG_UNKNOWN = 4,
+                CREG_REGISTERED_ROOMING = 5,
+} AD_CONNECTION_STATUS_FLAG;
+
+.fi
+.PP
+ 
+.RE
+.PP
+
+.PP
+Definition at line 42 of file sim908\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

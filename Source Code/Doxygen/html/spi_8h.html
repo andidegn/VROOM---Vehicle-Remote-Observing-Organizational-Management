@@ -105,6 +105,7 @@ $(document).ready(function(){initNavTree('spi_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">spi.h File Reference</div>  </div>
@@ -122,7 +123,6 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ga5b355ede35162c27116a098b13bf2318"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#ga5b355ede35162c27116a098b13bf2318">SPI_DATA_MODE</a> { <a class="el" href="group__spi__pub.html#gga5b355ede35162c27116a098b13bf2318a152359b11fb4b43ed0c5485eb0ab0673">SPI_MODE_0</a> = 0, 
 <a class="el" href="group__spi__pub.html#gga5b355ede35162c27116a098b13bf2318a7c1990cc15e9d69621be8e0e757e634c">SPI_MODE_1</a> = _BV(CPHA), 
 <a class="el" href="group__spi__pub.html#gga5b355ede35162c27116a098b13bf2318a4d350945d895a4acdc45ae96b0b82fc3">SPI_MODE_2</a> = _BV(CPOL), 
@@ -131,19 +131,16 @@ Enumerations</h2></td></tr>
 <tr class="memdesc:ga5b355ede35162c27116a098b13bf2318"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies the available modes for SPI transfer format <br/>
 .  <a href="group__spi__pub.html#ga5b355ede35162c27116a098b13bf2318">More...</a><br/></td></tr>
 <tr class="separator:ga5b355ede35162c27116a098b13bf2318"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:gae844ec3f2cdee431bd9ea5c7156ef478"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#gae844ec3f2cdee431bd9ea5c7156ef478">SPI_DATA_DIRECTION</a> { <a class="el" href="group__spi__pub.html#ggae844ec3f2cdee431bd9ea5c7156ef478a8912f763c0e7854e08dfbe61b7a57cc6">SPI_MSB_FIRST</a> = 0, 
 <a class="el" href="group__spi__pub.html#ggae844ec3f2cdee431bd9ea5c7156ef478a1a2abde5fdd6f818880aa24e67a5eb84">SPI_LST_FIRST</a> = _BV(DORD)
  }</td></tr>
 <tr class="memdesc:gae844ec3f2cdee431bd9ea5c7156ef478"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines for the data direction  <a href="group__spi__pub.html#gae844ec3f2cdee431bd9ea5c7156ef478">More...</a><br/></td></tr>
 <tr class="separator:gae844ec3f2cdee431bd9ea5c7156ef478"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ga96a1793d8e3c7227d6009a535c201cf0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#ga96a1793d8e3c7227d6009a535c201cf0">SPI_CS_ACTIVE_LEVEL</a> { <a class="el" href="group__spi__pub.html#gga96a1793d8e3c7227d6009a535c201cf0a0750a7746a071b255f0da163a80f7f64">SPI_CS_ACTIVE_LOW</a> = 0, 
 <a class="el" href="group__spi__pub.html#gga96a1793d8e3c7227d6009a535c201cf0a76b4ad1254f6a906f9f2ac53a0565176">SPI_CS_ACTIVE_HIGH</a> = 1
  }</td></tr>
 <tr class="memdesc:ga96a1793d8e3c7227d6009a535c201cf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines for the CS/CE pin active level  <a href="group__spi__pub.html#ga96a1793d8e3c7227d6009a535c201cf0">More...</a><br/></td></tr>
 <tr class="separator:ga96a1793d8e3c7227d6009a535c201cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:gae7170fee003fadf332217ed7a5d2f3c9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#gae7170fee003fadf332217ed7a5d2f3c9">SPI_DIVIDER</a> { <br/>
 &#160;&#160;<a class="el" href="group__spi__pub.html#ggae7170fee003fadf332217ed7a5d2f3c9ac42d4aa13a1017ecbf7b19003206ad62">SPI_DIVIDER_4</a> = 0, 
 <a class="el" href="group__spi__pub.html#ggae7170fee003fadf332217ed7a5d2f3c9a08a68517089d3b70bfed27923eaea7ae">SPI_DIVIDER_16</a> = _BV(SPR0), 
@@ -160,9 +157,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga68288a01c34bad32ae3d6c696fc99139"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#ga68288a01c34bad32ae3d6c696fc99139">spi_master_setup</a> (<a class="el" href="group__spi__pub.html#ga5b355ede35162c27116a098b13bf2318">SPI_DATA_MODE</a> __mode, <a class="el" href="group__spi__pub.html#gae844ec3f2cdee431bd9ea5c7156ef478">SPI_DATA_DIRECTION</a> __data_direction, <a class="el" href="group__spi__pub.html#gae7170fee003fadf332217ed7a5d2f3c9">SPI_DIVIDER</a> __freq_divider, uint8_t __cs_pin, <a class="el" href="group__spi__pub.html#ga96a1793d8e3c7227d6009a535c201cf0">SPI_CS_ACTIVE_LEVEL</a> __cs_active_level, void(*__callback_function_ptr)(uint8_t *__cfp))</td></tr>
-<tr class="memdesc:ga68288a01c34bad32ae3d6c696fc99139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the SPI bus as master using supplied parameters.  <a href="group__spi__pub.html#ga68288a01c34bad32ae3d6c696fc99139">More...</a><br/></td></tr>
-<tr class="separator:ga68288a01c34bad32ae3d6c696fc99139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e56d8b1f6edd8a4c70301efd919d060"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#ga1e56d8b1f6edd8a4c70301efd919d060">spi_master_setup</a> (<a class="el" href="group__spi__pub.html#ga5b355ede35162c27116a098b13bf2318">SPI_DATA_MODE</a> __mode, <a class="el" href="group__spi__pub.html#gae844ec3f2cdee431bd9ea5c7156ef478">SPI_DATA_DIRECTION</a> __data_direction, <a class="el" href="group__spi__pub.html#gae7170fee003fadf332217ed7a5d2f3c9">SPI_DIVIDER</a> __freq_divider, uint8_t __cs_pin, <a class="el" href="group__spi__pub.html#ga96a1793d8e3c7227d6009a535c201cf0">SPI_CS_ACTIVE_LEVEL</a> __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))</td></tr>
+<tr class="memdesc:ga1e56d8b1f6edd8a4c70301efd919d060"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the SPI bus as master using supplied parameters.  <a href="group__spi__pub.html#ga1e56d8b1f6edd8a4c70301efd919d060">More...</a><br/></td></tr>
+<tr class="separator:ga1e56d8b1f6edd8a4c70301efd919d060"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga69c7184b8c4cf536ddad3c228393e964"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#ga69c7184b8c4cf536ddad3c228393e964">spi_send_byte</a> (int8_t __handle, uint8_t __data)</td></tr>
 <tr class="memdesc:ga69c7184b8c4cf536ddad3c228393e964"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the 'data' on the SPI bus using the parameters corresponding to the 'handle'.  <a href="group__spi__pub.html#ga69c7184b8c4cf536ddad3c228393e964">More...</a><br/></td></tr>
 <tr class="separator:ga69c7184b8c4cf536ddad3c228393e964"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,7 +180,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_cb4bf8a099fe3a7a175adb1a0192631d.html">data_comm</a></li><li class="navelem"><a class="el" href="dir_e7173126ba00ab4f8dd48a13bfd259ca.html">spi</a></li><li class="navelem"><a class="el" href="spi_8h.html">spi.h</a></li>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

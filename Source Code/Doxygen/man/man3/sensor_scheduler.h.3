@@ -1,0 +1,74 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/sensor_scheduler.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/sensor_scheduler.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'thermometer/tc72\&.h'\fP
+.br
+\fC#include 'accelerometer/lis331hh\&.h'\fP
+.br
+\fC#include '\&.\&./util/timer/timer\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBSCHEDULER_DELAY\fP   0"
+.br
+.ti -1c
+.RI "#define \fBACC_BUFFER_SIZE\fP   25"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBscheduler_start\fP (void(*callback_function_ptr)(char __data))"
+.br
+.ti -1c
+.RI "void \fBscheduler_get_last_readings_sum\fP (int16_t *buffer)"
+.br
+.ti -1c
+.RI "void \fBscheduler_get_last_readings\fP (int16_t *buffer)"
+.br
+.ti -1c
+.RI "void \fBscheduler_release\fP (void)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ACC_BUFFER_SIZE   25"
+
+.PP
+Definition at line 16 of file sensor_scheduler\&.h\&.
+.SS "#define SCHEDULER_DELAY   0"
+collect_sensor_data\&.h
+.PP
+Created: 03-09-2014 13:55:08 Author: Kenneth René Jensen 
+.PP
+Definition at line 15 of file sensor_scheduler\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "void scheduler_get_last_readings (int16_t *buffer)"
+
+.PP
+Definition at line 45 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_get_last_readings_sum (int16_t *buffer)"
+
+.PP
+Definition at line 37 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_release (void)"
+
+.PP
+Definition at line 51 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_start (void(*)(char __data)callback_function_ptr)"
+
+.PP
+Definition at line 31 of file sensor_scheduler\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

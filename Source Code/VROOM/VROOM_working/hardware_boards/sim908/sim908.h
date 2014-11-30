@@ -2,7 +2,7 @@
  * @file: sim908.h
  *
  * @Created: 25-09-2014 13:09:36
- * @Author: Kenneth René Jensen
+ * @Author: Andi Degn & Kenneth René Jensen
  * @Version: 0.5
  * @defgroup sim908 Sim908_GSM
  * @{
@@ -18,6 +18,11 @@
 #include <avr/io.h>
 #include <stdbool.h>
 
+/**********************************************************************//**
+ * @ingroup sim908_pub
+ * @brief Defines the port(s) and pins for the communition to the SIM908 module
+ * @code
+ *************************************************************************/
 /* Uncomment for Arduino default port settings */
 // #define ARDUINO_ATMEGA2560_DEFAULT
 #define STK600
@@ -39,10 +44,14 @@
  #define GPS_ENABLE_PIN			PG5		/* Pin 4 */
  #define CE_PIN					PE3		/* Pin 5 */
 #endif /* ARDUINO_ATMEGA2560_DEFAULT */
+/** @endcode */
 
-/* *************************************************************************** */
-
-/* Flag list for response */
+/**********************************************************************//**
+ * @def SIM908_FLAG
+ * @ingroup sim908_pub
+ * @brief Defines for the flag list responses
+ * @code
+ *************************************************************************/
 #define SIM908_FLAG_WAITING			0
 #define SIM908_FLAG_OK				1
 #define SIM908_FLAG_ERROR			2
@@ -51,23 +60,22 @@
 #define SIM908_FLAG_FTP_PUT_CLOSE	11
 #define SIM908_FLAG_FTP_PUT_SUCCESS 12
 #define SIM908_FLAG_FTP_PUT_ERROR	13
+#define SIM908_FLAG_FTP_SENDING		14
 
 #define SIM908_FLAG_GPS_OK			20
 #define SIM908_FLAG_GPS_PULL		21
 #define SIM908_FLAG_GPS_PULL_OK		22
 
 #define SIM908_FLAG_RUNNING			100
-
-/* AT response compare string literals */
+/** @endcode */
 
 /**********************************************************************//**
- * @def AT_Response
+ * @def SIM908_RESPONSE
  * @ingroup sim908_priv
  * @brief defines the AT response string literals
- * @{
+ * @code
  *************************************************************************/
 #define SIM908_RESPONSE_RDY			"RDY"
-/* @} */
 
 #define SIM908_RESPONSE_SKIP		"AT+"
 #define SIM908_RESPONSE_OK			"OK"
@@ -77,8 +85,9 @@
 #define SIM908_RESPONSE_AT			"AT"
 #define SIM908_RESPONSE_GPS_READY	"GPS"
 #define SIM908_RESPONSE_GPS_PULL	"0,"
-#define SIM908_RESPONSE_FTP_PUT		"+FTPPUT:"
+#define SIM908_RESPONSE_FTP_PUT		"+FTP"
 #define SIM908_RESPONSE_CREG		"+CREG: "		/* +CREG: 1 = connected */
+/** @endcode */
 
 /********************************************************************************************************************//**
  @ingroup sim908

@@ -1,6 +1,34 @@
-============================================
+==================================
+Version 0.150 - 2014/11/29 by Andi
+==================================
+New Features, Improvements
+--------------------------
+* Added scheduler_get_last_readings_sum() function in sensor_scheduler(.h/.c) for getting
+   a predifined number of readings for crash detection. Number is defined in vroom_config.h
+* Added ad_check_for_crash() function in accident_data(.h/.c) containing crash detection
+   logic. Parameters for detection (threashold / no. of readings to check over) is contained
+   in vroom_config.h
+
+Fixed Bugs, Changes
+-------------------
+* Changed the way CREG is read to speed up the ISR in sim908.c. This include changes in
+   the way CREG is checked and the enum in which the different CREG states is held is
+   moved to at_commands.c to conform with convention
+* Fixed false CREG connection status if "AT+CREG?" was sent
+
+ToDo
+----		
+- MISRA check all files
+- Impl. module test for car panel
+- Impl. unit test for MSD
+- Doxygen structure proofing in all files
+- Notes SIM908:
+   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+
+
+=====================================
 Version 0.141 - 2014/11/28 by Kenneth
-============================================
+=====================================
 New Features, Improvements
 --------------------------
 * Added DEBUG_LCD define in vroom.config and added check where needed
@@ -10,7 +38,7 @@ New Features, Improvements
 Fixed Bugs, Changes
 -------------------
 * Baudrate in SIM908 is set as the first thing as the reseting behaviour 
-  of the module is unpredictible (based on experience)
+   of the module is unpredictible (based on experience)
 
 ToDo
 ----		
@@ -23,14 +51,14 @@ ToDo
    - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
-============================================
+=====================================
 Version 0.140 - 2014/11/24 by Kenneth
-============================================
+=====================================
 New Features, Improvements
 --------------------------
 * New structure of MSD: 
-  - Added Version, Message Identifier, Vehicle Class and Fuel Type definitions
-  - Deleted IPV4.
+   - Added Version, Message Identifier, Vehicle Class and Fuel Type definitions
+   - Deleted IPV4.
 * Added parameters for MSD into VROOM.config.h
 
 Fixed Bugs, Changes
@@ -47,9 +75,9 @@ ToDo
    - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
-============================================
+=====================================
 Version 0.131 - 2014/11/21 by Kenneth
-============================================
+=====================================
 New Features, Improvements
 --------------------------
 * Added AT command to activate PDP context. The status must be 'Call Ready' before it can be activated 

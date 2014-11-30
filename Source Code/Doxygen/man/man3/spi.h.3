@@ -1,0 +1,69 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/interrupt\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBhandle_param\fP"
+.br
+.RI "\fIstruct containing the setup parameters for a single SPI setup \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBSPI_DATA_MODE\fP { \fBSPI_MODE_0\fP = 0, \fBSPI_MODE_1\fP = _BV(CPHA), \fBSPI_MODE_2\fP = _BV(CPOL), \fBSPI_MODE_3\fP = _BV(CPOL) | _BV(CPHA) }"
+.br
+.RI "\fISpecifies the available modes for SPI transfer format 
+.br
+\&. \fP"
+.ti -1c
+.RI "enum \fBSPI_DATA_DIRECTION\fP { \fBSPI_MSB_FIRST\fP = 0, \fBSPI_LST_FIRST\fP = _BV(DORD) }"
+.br
+.RI "\fIdefines for the data direction \fP"
+.ti -1c
+.RI "enum \fBSPI_CS_ACTIVE_LEVEL\fP { \fBSPI_CS_ACTIVE_LOW\fP = 0, \fBSPI_CS_ACTIVE_HIGH\fP = 1 }"
+.br
+.RI "\fIdefines for the CS/CE pin active level \fP"
+.ti -1c
+.RI "enum \fBSPI_DIVIDER\fP { \fBSPI_DIVIDER_4\fP = 0, \fBSPI_DIVIDER_16\fP = _BV(SPR0), \fBSPI_DIVIDER_64\fP = _BV(SPR1), \fBSPI_DIVIDER_128\fP = _BV(SPR0) | _BV(SPR1), \fBSPI_DIVIDER_2\fP = SPI_DIVIDER_4, \fBSPI_DIVIDER_8\fP = SPI_DIVIDER_16, \fBSPI_DIVIDER_32\fP = SPI_DIVIDER_64 }"
+.br
+.RI "\fIdefines for the frequency divider \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t __cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
+.br
+.RI "\fISets up the SPI bus as master using supplied parameters\&. \fP"
+.ti -1c
+.RI "int8_t \fBspi_send_byte\fP (int8_t __handle, uint8_t __data)"
+.br
+.RI "\fISends the 'data' on the SPI bus using the parameters corresponding to the 'handle'\&. \fP"
+.ti -1c
+.RI "int8_t \fBspi_send\fP (int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes)"
+.br
+.RI "\fISends the 'data' array on the SPI bus using the parameters corresponding to the 'handle'\&. \fP"
+.ti -1c
+.RI "void \fBspi_release\fP (void)"
+.br
+.RI "\fIReleases the SPI\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+: 10-04-2014 11:44:05 : Andi Degn : 0\&.4 
+.PP
+Definition in file \fBspi\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

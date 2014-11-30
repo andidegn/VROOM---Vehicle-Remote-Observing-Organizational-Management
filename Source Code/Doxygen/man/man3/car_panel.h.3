@@ -1,0 +1,75 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/car_panel/car_panel.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/car_panel/car_panel.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBBUTTON_PRESS_TIME\fP   30"
+.br
+.RI "\fIDefines for the time of button press before activation/deactivation in 1/10 sec\&. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBStatus\fP { \fBSTATUS_BLUE_TOGGLE\fP, \fBSTATUS_BLUE\fP, \fBSTATUS_RED\fP, \fBSTATUS_GREEN\fP, \fBSTATUS_RESET\fP }"
+.br
+.RI "\fIDefines the state of status LED\&. \fP"
+.ti -1c
+.RI "enum \fBControl\fP { \fBALARM_WAITING\fP, \fBALARM_ACTIVATED\fP, \fBALARM_NOT_ACTIVATED\fP }"
+.br
+.RI "\fIDefines the state of control LED\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcar_panel_init\fP (void)"
+.br
+.RI "\fIInitiates the Car Panel\&. \fP"
+.ti -1c
+.RI "void \fBcar_panel_start\fP (void)"
+.br
+.RI "\fIEnable external interrupt on ALARM button PJ1 (PCINT10) \fP"
+.ti -1c
+.RI "void \fBcar_panel_set_status\fP (\fBStatus\fP __s)"
+.br
+.RI "\fISet the status LED\&. \fP"
+.ti -1c
+.RI "void \fBcar_panel_set_control\fP (\fBControl\fP __c)"
+.br
+.RI "\fISet the control LED\&. \fP"
+.ti -1c
+.RI "bool \fBcar_panel_wait_cancel_emmergency\fP (void)"
+.br
+.RI "\fIUses nested while loops to create a waiting period and then check if the cancel alarm button is pressed and held for at least 3 seconds\&. \fP"
+.ti -1c
+.RI "void \fBcar_panel_set_alarm_button_state\fP (bool state)"
+.br
+.RI "\fISets the activation state of the alarm button\&. \fP"
+.ti -1c
+.RI "void \fBcar_panel_set_cancel_button_state\fP (bool state)"
+.br
+.RI "\fISets the activation state of the cancel button\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor:\fP
+.RS 4
+: Kenneth René Jensen : 0\&.4 
+.RE
+.PP
+
+.PP
+Definition in file \fBcar_panel\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

@@ -77,7 +77,7 @@
  * * ACC_LOW_POWER_2	: 2 Hz \n
  * * ACC_LOW_POWER_5	: 5 Hz \n
  * * ACC_LOW_POWER_10	: 10 Hz \n
- * @{
+ * @code
  *************************************************************************/
 typedef enum {
 	ACC_POWER_DOWN		= 0,
@@ -97,7 +97,7 @@ typedef enum {
  * * ACC_ODR_100	:        100 Hz |     74 Hz \n
  * * ACC_ODR_400	:        400 Hz |    292 Hz \n
  * * ACC_ODR_1000	:       1000 Hz |    780 Hz \n
- * @{
+ * @code
  *************************************************************************/
 typedef enum {
 	ACC_ODR_50		= 0,
@@ -110,7 +110,7 @@ typedef enum {
  * @ingroup acc_pub
  * @brief Specifies the available High-pass filter cut-off frequency configuration \n
  * Look in datasheet page 24 for further information.
- * @{
+ * @code
  *************************************************************************/
 typedef enum {
 	ACC_HPcoeff00	= 0,
@@ -126,7 +126,7 @@ typedef enum {
  * * ACC_6G	 :  +-6g
  * * ACC_12G : +-12g
  * * ACC_24G : +-24g
- * @{
+ * @code
  *************************************************************************/
 typedef enum {
 	ACC_6G	= 0,

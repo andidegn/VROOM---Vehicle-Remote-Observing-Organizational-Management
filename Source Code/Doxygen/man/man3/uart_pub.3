@@ -1,0 +1,458 @@
+.TH "Public" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public \- 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBUART0_TX_BUFFER_SIZE\fP   8"
+.br
+.RI "\fIdefines the size of the transmit buffers 
+.br
+\fP"
+.ti -1c
+.RI "#define \fBUART_NO_DATA\fP   0x100U"
+.br
+.RI "\fIdefine for UART return \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBUART_MODE\fP { \fBUART_MODE_NORMAL\fP, \fBUART_MODE_DOUBLE\fP }"
+.br
+.RI "\fIdefines for the mode of operations 
+.br
+\fP"
+.ti -1c
+.RI "enum \fBUART_PARITY_MODE\fP { \fBUART_PARITY_DISABLED\fP = 0, \fBUART_PARITY_ENABLED\fP = _BV(4), \fBUART_PARITY_EN_EVEN\fP = _BV(5), \fBUART_PARITY_EN_ODD\fP = _BV(4) | _BV(5) }"
+.br
+.RI "\fIdefines for the parity bit selection \fP"
+.ti -1c
+.RI "enum \fBUART_STOP_BIT\fP { \fBUART_ONE_STOP_BIT\fP = 0, \fBUART_TWO_STOP_BIT\fP = _BV(3) }"
+.br
+.RI "\fIdefines for the stop bit selection \fP"
+.ti -1c
+.RI "enum \fBUART_CHAR_SIZE\fP { \fBUART_5_BIT\fP, \fBUART_6_BIT\fP, \fBUART_7_BIT\fP, \fBUART_8_BIT\fP, \fBUART_9_BIT\fP }"
+.br
+.RI "\fIdefines for the character size \fP"
+.ti -1c
+.RI "enum \fBUART_BAUD\fP { \fBUART_BAUD_2400\fP = 2400, \fBUART_BAUD_4800\fP = 4800, \fBUART_BAUD_7200\fP = 7200, \fBUART_BAUD_9600\fP = 9600, \fBUART_BAUD_14K4\fP = 14400, \fBUART_BAUD_19K2\fP = 19200, \fBUART_BAUD_28K8\fP = 28800, \fBUART_BAUD_38K4\fP = 38400, \fBUART_BAUD_57K6\fP = 57600, \fBUART_BAUD_115K2\fP = 115200, \fBUART_BAUD_128K0\fP = 128000, \fBUART_BAUD_230K4\fP = 230400, \fBUART_BAUD_460K8\fP = 460800, \fBUART_BAUD_921K6\fP = 921600 }"
+.br
+.RI "\fIdefines for the different baud rates \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBuart0_setup_async\fP (\fBUART_MODE\fP __operational_mode, \fBUART_BAUD\fP __baud_rate, \fBUART_PARITY_MODE\fP __paraty_mode, \fBUART_STOP_BIT\fP __stop_bit, \fBUART_CHAR_SIZE\fP __char_size, void(*__callback_function_ptr)(char __data))"
+.br
+.RI "\fISets up the UART0 bus as asynchronous using supplied parameters\&. \fP"
+.ti -1c
+.RI "void \fBuart0_send_char\fP (char __data)"
+.br
+.RI "\fISends 1 (one) char of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart0_send_string\fP (const char *__data)"
+.br
+.RI "\fISends a string (x no\&. of chars) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart0_send_data\fP (const char *__data, uint8_t __length)"
+.br
+.RI "\fISends data (based on length) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "uint16_t \fBuart0_read_char\fP (void)"
+.br
+.RI "\fIReads 1 (one) char of 'data' in the UART buffer\&. \fP"
+.ti -1c
+.RI "void \fBuart1_setup_async\fP (\fBUART_MODE\fP __operational_mode, \fBUART_BAUD\fP __baud_rate, \fBUART_PARITY_MODE\fP __paraty_mode, \fBUART_STOP_BIT\fP __stop_bit, \fBUART_CHAR_SIZE\fP __char_size, void(*__callback_function_ptr)(char __data))"
+.br
+.RI "\fISets up the UART1 bus as asynchronous using supplied parameters\&. \fP"
+.ti -1c
+.RI "void \fBuart1_send_char\fP (char __data)"
+.br
+.RI "\fISends 1 (one) char of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart1_send_string\fP (const char *__data)"
+.br
+.RI "\fISends a string (x no\&. of chars) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart1_send_data\fP (const char *__data, uint8_t __length)"
+.br
+.RI "\fISends data (based on length) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "uint16_t \fBuart1_read_char\fP (void)"
+.br
+.RI "\fIReads 1 (one) char of 'data' in the UART buffer\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define UART0_TX_BUFFER_SIZE   8"
+
+.PP
+defines the size of the transmit buffers 
+.br
+
+.PP
+Definition at line 37 of file uart\&.h\&.
+.SS "#define UART_NO_DATA   0x100U"
+
+.PP
+define for UART return 
+.PP
+Definition at line 46 of file uart\&.h\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBUART_BAUD\fP"
+
+.PP
+defines for the different baud rates 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIUART_BAUD_2400 \fP\fP
+.TP
+\fB\fIUART_BAUD_4800 \fP\fP
+.TP
+\fB\fIUART_BAUD_7200 \fP\fP
+.TP
+\fB\fIUART_BAUD_9600 \fP\fP
+.TP
+\fB\fIUART_BAUD_14K4 \fP\fP
+.TP
+\fB\fIUART_BAUD_19K2 \fP\fP
+.TP
+\fB\fIUART_BAUD_28K8 \fP\fP
+.TP
+\fB\fIUART_BAUD_38K4 \fP\fP
+.TP
+\fB\fIUART_BAUD_57K6 \fP\fP
+.TP
+\fB\fIUART_BAUD_115K2 \fP\fP
+.TP
+\fB\fIUART_BAUD_128K0 \fP\fP
+.TP
+\fB\fIUART_BAUD_230K4 \fP\fP
+.TP
+\fB\fIUART_BAUD_460K8 \fP\fP
+.TP
+\fB\fIUART_BAUD_921K6 \fP\fP
+.PP
+Definition at line 99 of file uart\&.h\&.
+.SS "enum \fBUART_CHAR_SIZE\fP"
+
+.PP
+defines for the character size 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIUART_5_BIT \fP\fP
+.TP
+\fB\fIUART_6_BIT \fP\fP
+.TP
+\fB\fIUART_7_BIT \fP\fP
+.TP
+\fB\fIUART_8_BIT \fP\fP
+.TP
+\fB\fIUART_9_BIT \fP\fP
+.PP
+Definition at line 87 of file uart\&.h\&.
+.SS "enum \fBUART_MODE\fP"
+
+.PP
+defines for the mode of operations 
+.br
+
+.IP "\(bu" 2
+UART_MODE_NORMAL : Asynchronous at normal speed 
+.br
+
+.IP "\(bu" 2
+UART_MODE_DOUBLE : Asynchronous at double speed 
+.br
+
+.IP "\(bu" 2
+UART_MODE_SYNC : Synchronous (NOT SUPPORTED YET) 
+.br
+
+.IP "\(bu" 2
+UART_MODE_MSPIM : SPI Master (NOT SUPPORTED YET) 
+.br
+
+.PP
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIUART_MODE_NORMAL \fP\fP
+.TP
+\fB\fIUART_MODE_DOUBLE \fP\fP
+.PP
+Definition at line 58 of file uart\&.h\&.
+.SS "enum \fBUART_PARITY_MODE\fP"
+
+.PP
+defines for the parity bit selection 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIUART_PARITY_DISABLED \fP\fP
+.TP
+\fB\fIUART_PARITY_ENABLED \fP\fP
+.TP
+\fB\fIUART_PARITY_EN_EVEN \fP\fP
+.TP
+\fB\fIUART_PARITY_EN_ODD \fP\fP
+.PP
+Definition at line 67 of file uart\&.h\&.
+.SS "enum \fBUART_STOP_BIT\fP"
+
+.PP
+defines for the stop bit selection 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIUART_ONE_STOP_BIT \fP\fP
+.TP
+\fB\fIUART_TWO_STOP_BIT \fP\fP
+.PP
+Definition at line 78 of file uart\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "uint16_t uart0_read_char (void)"
+
+.PP
+Reads 1 (one) char of 'data' in the UART buffer\&. Reads one char
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+uint16_t - next char(byte) in the buffer 
+.RE
+.PP
+
+.PP
+Definition at line 201 of file uart\&.c\&.
+.SS "void uart0_send_char (char__data)"
+
+.PP
+Sends 1 (one) char of 'data' on the UART bus\&. Sends one char
+.PP
+\fBParameters:\fP
+.RS 4
+\fIchar\fP __data - the data to be sent
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 160 of file uart\&.c\&.
+.SS "void uart0_send_data (const char *__data, uint8_t__length)"
+
+.PP
+Sends data (based on length) of 'data' on the UART bus\&. Loops through the 'data' string stores it in a local buffer, then sets the Data Register Empty interrupt bit\&. Does not terminates when zero character is meet
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconst\fP char *__data - data to be sent 
+.br
+\fIuint8_t\fP __length - number of bytes 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+Does not terminates when zero character is meet 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 191 of file uart\&.c\&.
+.SS "void uart0_send_string (const char *__data)"
+
+.PP
+Sends a string (x no\&. of chars) of 'data' on the UART bus\&. Loops through the 'data' string stores it in a local buffer, then sets the Data Register Empty interrupt bit\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconst\fP char *__data - a sting to be sent
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 179 of file uart\&.c\&.
+.SS "void uart0_setup_async (\fBUART_MODE\fP__operational_mode, \fBUART_BAUD\fP__baud_rate, \fBUART_PARITY_MODE\fP__paraty_mode, \fBUART_STOP_BIT\fP__stop_bit, \fBUART_CHAR_SIZE\fP__char_size, void(*)(char __data)__callback_function_ptr)"
+
+.PP
+Sets up the UART0 bus as asynchronous using supplied parameters\&. Takes the supplied UART parameters and sets up the UART accordingly
+.PP
+\fBParameters:\fP
+.RS 4
+\fIUART_MODE\fP __operational_mode - normal speed or double speed mode 
+.br
+\fIUART_BAUD\fP __baud_rate - baud rate of operations 
+.br
+\fIUART_PARITY_MODE\fP __paraty_mode - sets the parity bit mode 
+.br
+\fIUART_STOP_BIT\fP __stop_bit - one or two stop bits 
+.br
+\fIUART_CHAR_SIZE\fP __char_size - the character size between 5 and 9 bits 
+.br
+\fIvoid\fP *__callback_function_ptr - the pointer to the function which should be called when the SPI interrupt is triggered
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+BE SURE TO HAVE SELECTED A CLOCK SPEED FOR THE MCU WITH A LOW ERROR RATE FOR UART USAGE
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+uint8_t - a handle for the setup 
+.RE
+.PP
+
+.PP
+Definition at line 62 of file uart\&.c\&.
+.SS "uint16_t uart1_read_char (void)"
+
+.PP
+Reads 1 (one) char of 'data' in the UART buffer\&. Reads one char
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+uint16_t - next char(byte) in the buffer 
+.RE
+.PP
+
+.PP
+Definition at line 386 of file uart\&.c\&.
+.SS "void uart1_send_char (char__data)"
+
+.PP
+Sends 1 (one) char of 'data' on the UART bus\&. Sends one char
+.PP
+\fBParameters:\fP
+.RS 4
+\fIchar\fP __data - the data to be sent
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 345 of file uart\&.c\&.
+.SS "void uart1_send_data (const char *__data, uint8_t__length)"
+
+.PP
+Sends data (based on length) of 'data' on the UART bus\&. Loops through the 'data' string stores it in a local buffer, then sets the Data Register Empty interrupt bit\&. Does not terminates when zero character is meet
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconst\fP char *__data - data to be sent 
+.br
+\fIuint8_t\fP __length - number of bytes 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+Does not terminates when zero character is meet 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 376 of file uart\&.c\&.
+.SS "void uart1_send_string (const char *__data)"
+
+.PP
+Sends a string (x no\&. of chars) of 'data' on the UART bus\&. Loops through the 'data' string stores it in a local buffer, then sets the Data Register Empty interrupt bit\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconst\fP char *__data - a sting to be sent
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 364 of file uart\&.c\&.
+.SS "void uart1_setup_async (\fBUART_MODE\fP__operational_mode, \fBUART_BAUD\fP__baud_rate, \fBUART_PARITY_MODE\fP__paraty_mode, \fBUART_STOP_BIT\fP__stop_bit, \fBUART_CHAR_SIZE\fP__char_size, void(*)(char __data)__callback_function_ptr)"
+
+.PP
+Sets up the UART1 bus as asynchronous using supplied parameters\&. Takes the supplied UART parameters and sets up the UART accordingly
+.PP
+\fBParameters:\fP
+.RS 4
+\fIUART_MODE\fP __operational_mode - normal speed or double speed mode 
+.br
+\fIUART_BAUD\fP __baud_rate - baud rate of operations 
+.br
+\fIUART_PARITY_MODE\fP __paraty_mode - sets the parity bit mode 
+.br
+\fIUART_STOP_BIT\fP __stop_bit - one or two stop bits 
+.br
+\fIUART_CHAR_SIZE\fP __char_size - the character size between 5 and 9 bits 
+.br
+\fIvoid\fP *__callback_function_ptr - the pointer to the function which should be called when the SPI interrupt is triggered
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+BE SURE TO HAVE SELECTED A CLOCK SPEED FOR THE MCU WITH A LOW ERROR RATE FOR UART USAGE
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+uint8_t - a handle for the setup 
+.RE
+.PP
+
+.PP
+Definition at line 250 of file uart\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

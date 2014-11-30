@@ -1,0 +1,87 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/timer/timer.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/timer/timer.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/interrupt\&.h>\fP
+.br
+\fC#include 'timer\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./sensors/sensor_scheduler\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTOP_VALUE\fP(frequency_in_hz, prescaler)   (F_CPU/(prescaler * frequency_in_hz)-1)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinit_Timer1_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
+.br
+.RI "\fIInitiates timer 1 in CTC mode\&. \fP"
+.ti -1c
+.RI "void \fBinit_Timer3_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
+.br
+.RI "\fIInitiates timer 3 in CTC mode\&. \fP"
+.ti -1c
+.RI "void \fBstart_timer3\fP (void)"
+.br
+.RI "\fIEnables interrupt for timer3\&. \fP"
+.ti -1c
+.RI "void \fBstop_timer3\fP (void)"
+.br
+.RI "\fIDisables interrupt for timer3\&. \fP"
+.ti -1c
+.RI "\fBISR\fP (TIMER1_COMPA_vect)"
+.br
+.ti -1c
+.RI "\fBISR\fP (TIMER3_COMPA_vect)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "uint32_t \fBSIM908_timeout_counter\fP = 0"
+.br
+.RI "\fIextern variable which counts in timer3 ISR \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor:\fP
+.RS 4
+: Kenneth René Jensen : 0\&.3 
+.RE
+.PP
+
+.PP
+Definition in file \fBtimer\&.c\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define TOP_VALUE(frequency_in_hz, prescaler)   (F_CPU/(prescaler * frequency_in_hz)-1)"
+Macro for calculating the value for clock count based on frequency and prescaler 
+.PP
+Definition at line 20 of file timer\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "ISR (TIMER1_COMPA_vect)"
+
+.PP
+Definition at line 150 of file timer\&.c\&.
+.SS "ISR (TIMER3_COMPA_vect)"
+
+.PP
+Definition at line 155 of file timer\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

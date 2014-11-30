@@ -1,0 +1,70 @@
+.TH "handle_param" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+handle_param \- 
+.PP
+struct containing the setup parameters for a single SPI setup  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <spi\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "uint8_t \fBmode\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBdata_direction\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBfreq_divider\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBcs_pin\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBcs_active_level\fP"
+.br
+.ti -1c
+.RI "void(* \fBcallback_function_ptr\fP )(uint8_t *__data)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+struct containing the setup parameters for a single SPI setup 
+.PP
+Definition at line 72 of file spi\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "void(* callback_function_ptr)(uint8_t *__data)"
+
+.PP
+Definition at line 78 of file spi\&.h\&.
+.SS "uint8_t cs_active_level"
+
+.PP
+Definition at line 77 of file spi\&.h\&.
+.SS "uint8_t cs_pin"
+
+.PP
+Definition at line 76 of file spi\&.h\&.
+.SS "uint8_t data_direction"
+
+.PP
+Definition at line 74 of file spi\&.h\&.
+.SS "uint8_t freq_divider"
+
+.PP
+Definition at line 75 of file spi\&.h\&.
+.SS "uint8_t mode"
+
+.PP
+Definition at line 73 of file spi\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

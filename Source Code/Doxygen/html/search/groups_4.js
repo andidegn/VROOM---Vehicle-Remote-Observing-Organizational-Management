@@ -3,7 +3,6 @@ var searchData=
   ['private',['Private',['../group__acc__priv.html',1,'']]],
   ['public',['Public',['../group__acc__pub.html',1,'']]],
   ['private',['Private',['../group__ad__priv.html',1,'']]],
-  ['public',['Public',['../group__ad__pub.html',1,'']]],
   ['private',['Private',['../group__cp__priv.html',1,'']]],
   ['public',['Public',['../group__cp__pub.html',1,'']]],
   ['private',['Private',['../group__sim908__priv.html',1,'']]],

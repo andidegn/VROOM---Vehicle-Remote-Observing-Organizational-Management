@@ -1,0 +1,90 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/timer/timer.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/timer/timer.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/io\&.h>\fP
+.br
+
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBTIMER_PRESCALER\fP { \fBTIMER_PS1\fP = 1, \fBTIMER_PS8\fP = 8, \fBTIMER_PS64\fP = 64, \fBTIMER_PS256\fP = 256, \fBTIMER_PS1024\fP = 1024 }"
+.br
+.RI "\fISpecifies the available clock dividers for Timer 1\&. \fP"
+.ti -1c
+.RI "enum \fBTIMER_FREQUENCY\fP { \fBTIMER_1HZ\fP = 1, \fBTIMER_10HZ\fP = 10, \fBTIMER_50HZ\fP = 50, \fBTIMER_100HZ\fP = 100, \fBTIMER_150HZ\fP = 150, \fBTIMER_200HZ\fP = 200, \fBTIMER_500HZ\fP = 500, \fBTIMER_1KHZ\fP = 1000 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinit_Timer1_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
+.br
+.RI "\fIInitiates timer 1 in CTC mode\&. \fP"
+.ti -1c
+.RI "void \fBinit_Timer3_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
+.br
+.RI "\fIInitiates timer 3 in CTC mode\&. \fP"
+.ti -1c
+.RI "void \fBstart_timer3\fP (void)"
+.br
+.RI "\fIEnables interrupt for timer3\&. \fP"
+.ti -1c
+.RI "void \fBstop_timer3\fP (void)"
+.br
+.RI "\fIDisables interrupt for timer3\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "uint32_t \fBSIM908_timeout_counter\fP"
+.br
+.RI "\fIextern variable which counts in timer3 ISR \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor:\fP
+.RS 4
+: Kenneth René Jensen : 0\&.3 
+.RE
+.PP
+
+.PP
+Definition in file \fBtimer\&.h\fP\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBTIMER_FREQUENCY\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fITIMER_1HZ \fP\fP
+.TP
+\fB\fITIMER_10HZ \fP\fP
+.TP
+\fB\fITIMER_50HZ \fP\fP
+.TP
+\fB\fITIMER_100HZ \fP\fP
+.TP
+\fB\fITIMER_150HZ \fP\fP
+.TP
+\fB\fITIMER_200HZ \fP\fP
+.TP
+\fB\fITIMER_500HZ \fP\fP
+.TP
+\fB\fITIMER_1KHZ \fP\fP
+.PP
+Definition at line 34 of file timer\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

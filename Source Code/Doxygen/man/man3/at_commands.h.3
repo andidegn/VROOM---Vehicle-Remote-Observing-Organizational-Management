@@ -1,0 +1,308 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/at_commands.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/at_commands.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBAT_CONTYPE_GPRS\fP   'GPRS'"
+.br
+.RI "\fIDefines for the Data carrier type\&. \fP"
+.ti -1c
+.RI "#define \fBAT_CONTYPE_CSD\fP   'CSD'"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_TEST\fP   'AT'"
+.br
+.RI "\fIDefines for the diagnostics\&. \fP"
+.ti -1c
+.RI "#define \fBAT_DIAG_ECHO_ENABLE\fP   'ATE1'"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_ECHO_DISABLE\fP   'ATE0'"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_AUTO_ANSWER\fP(NO_OF_RINGS)   'ATS0=' NO_OF_RINGS"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_MODEL_NO\fP   'AT+CGMM'"
+.br
+.ti -1c
+.RI "#define \fBAT_DIAG_MANUFACTURER\fP   'AT+CGMI'"
+.br
+.ti -1c
+.RI "#define \fBAT_ENABLE_CREG\fP   'AT+CREG=1'"
+.br
+.RI "\fIDefine for the enable +CREG: unsolicited result code\&. \fP"
+.ti -1c
+.RI "#define \fBAT_BAUD_AUTO\fP   'AT+IPR=0'"
+.br
+.RI "\fIDefines for the baud rate\&. \fP"
+.ti -1c
+.RI "#define \fBAT_BAUD_1200\fP   'AT+IPR=1200'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_2400\fP   'AT+IPR=2400'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_4800\fP   'AT+IPR=4800'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_9600\fP   'AT+IPR=9600'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_19K2\fP   'AT+IPR=19200'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_38K4\fP   'AT+IPR=38400'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_57K6\fP   'AT+IPR=57600'"
+.br
+.ti -1c
+.RI "#define \fBAT_BAUD_115K2\fP   'AT+IPR=115200'"
+.br
+.ti -1c
+.RI "#define \fBAT_MINIMUM_FUNCTIONALITY\fP   'AT+CFUN=0'"
+.br
+.RI "\fIDefines for the phone functionality\&. \fP"
+.ti -1c
+.RI "#define \fBAT_FULL_FUNCTIONALITY\fP   'AT+CFUN=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_DISABLE_TX_RX\fP   'AT+CFUN=4'"
+.br
+.ti -1c
+.RI "#define \fBAT_RESET_MODULE\fP   'AT+CFUN=1,1'"
+.br
+.ti -1c
+.RI "#define \fBAT_ENTER_SIM_PIN\fP(\fBPIN\fP)   'AT+CPIN=' PIN"
+.br
+.ti -1c
+.RI "#define \fBAT_ENABLE_INCOMING_CALLS\fP   'AT+GSMBUSY=0'"
+.br
+.RI "\fIDefines for the incoming call allowance setting\&. \fP"
+.ti -1c
+.RI "#define \fBAT_FORBID_INCOMING_CALLS\fP   'AT+GSMBUSY=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FORBID_VOICE_CALLS_ONLY\fP   'AT+GSMBUSY=2'	/* Circuit-Switched Data (CSD) calls enabled */"
+.br
+.ti -1c
+.RI "#define \fBAT_EMERGENCY_CALL_ONLY\fP(NUMBER)   'AT+CWHITELIST=1,1,' NUMBER"
+.br
+.RI "\fIDefine for the calls white list\&. \fP"
+.ti -1c
+.RI "#define \fBAT_NO_FLOW_CONTROL\fP   'AT+IFC=0,0'"
+.br
+.RI "\fIDefines for the flow control\&. \fP"
+.ti -1c
+.RI "#define \fBAT_SOFTWARE_FLOW_CONTROL\fP   'AT+IFC=1,1' /* Should not be used for data calls */"
+.br
+.ti -1c
+.RI "#define \fBAT_HARDWARE_FLOW_CONTROL\fP   'AT+IFC=2,2'"
+.br
+.ti -1c
+.RI "#define \fBAT_STORE_PROFILE0\fP   'AT&W0'"
+.br
+.RI "\fIDefines for the store active profile\&. \fP"
+.ti -1c
+.RI "#define \fBAT_STORE_PROFILE1\fP   'AT&W1'"
+.br
+.ti -1c
+.RI "#define \fBAT_RESTORE_PROFILE0\fP   'ATZ0'"
+.br
+.RI "\fIDefines for the reset to default functionality\&. \fP"
+.ti -1c
+.RI "#define \fBAT_RESTORE_PROFILE1\fP   'ATZ1'"
+.br
+.ti -1c
+.RI "#define \fBAT_MANUFACTURER_DEFAULTS\fP   'AT&F0'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPRS_PDP_ACTIVATE_CONTEXT\fP   'AT+CGACT=1,1'"
+.br
+.RI "\fIDefines GPRS PDP context\&. \fP"
+.ti -1c
+.RI "#define \fBAT_GPRS_PDP_GET_IP\fP   'AT+CGPADDR=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPRS_PDP_SETUP_CONTEXT\fP(APN)   'AT+CGDCONT=1,\\'IP\\',\\'' APN '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_BEARER1_CONTYPE\fP(TYPE)   'AT+SAPBR=3,1,\\'Contype\\',\\'' TYPE '\\''"
+.br
+.RI "\fIDefines FTP setup and communication\&. \fP"
+.ti -1c
+.RI "#define \fBAT_FTP_BEARER1_APN\fP(NAME)   'AT+SAPBR=3,1,\\'APN\\',\\'' NAME '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_SERVER_ADDRESS\fP(ADR)   'AT+FTPSERV=\\'' ADR '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_CONTROL_PORT\fP(\fBPORT\fP)   'AT+FTPPORT=' PORT"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_USER_NAME\fP(NAME)   'AT+FTPUN=\\'' NAME '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_PASSWORD\fP(PW)   'AT+FTPPW=\\'' PW '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_PATH\fP(PATH)   'AT+FTPPUTPATH=\\'' PATH '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_NAME\fP   'AT+FTPPUTNAME=' /* remember to add ''' at either end of the filename */"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_OPEN_BEARER1\fP   'AT+SAPBR=1,1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_CLOSE_BEARER1\fP   'AT+SAPBR=0,1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_USE_PROFILE1\fP   'AT+FTPCID=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_DATA_TYPE_ASCII\fP   'AT+FTPTYPE=\\'A\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_DATA_TYPE_BINARY\fP   'AT+FTPTYPE=\\'I\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_STORING\fP   'AT+FTPPUTOPT=\\'STOR\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_APPENDING\fP   'AT+FTPPUTOPT=\\'APPE\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_UNIQUE\fP   'AT+FTPPUTOPT=\\'STOU\\''		/* Not supported in FileZilla */"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_OPEN_SESSION\fP   'AT+FTPPUT=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_CLOSE_SESSION\fP   'AT+FTPPUT=2,0'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_SIZE\fP(SIZE)   'AT+FTPPUT=2,' SIZE"
+.br
+.ti -1c
+.RI "#define \fBAT_MODULE_DEVICE_STATUS\fP   'AT+CPAS'"
+.br
+.RI "\fIDefine for the module device status The different responses are:
+.br
+0 ready
+.br
+1 unavailable
+.br
+2 unknown
+.br
+3 ringing
+.br
+4 call in progress
+.br
+5 asleep
+.br
+\&. \fP"
+.ti -1c
+.RI "#define \fBAT_CALL_ANSWER\fP   'ATA'"
+.br
+.RI "\fIDefines for the call\&. \fP"
+.ti -1c
+.RI "#define \fBAT_CALL_HANG_UP\fP   'ATH0'"
+.br
+.ti -1c
+.RI "#define \fBAT_CALL_DIAL\fP(NUMBER)   'ATD' NUMBER ';'"
+.br
+.ti -1c
+.RI "#define \fBAT_CALL_REDIAL\fP   'ATDL'"
+.br
+.ti -1c
+.RI "#define \fBAT_CALL_SHOW_NUM\fP   'AT+CNUM'"
+.br
+.ti -1c
+.RI "#define \fBAT_MSG_READ\fP   'AT+CMGR='"
+.br
+.RI "\fIDefines for the message\&. \fP"
+.ti -1c
+.RI "#define \fBAT_MSG_DEL_ALL\fP   'AT+CMGD=1,4'"
+.br
+.ti -1c
+.RI "#define \fBAT_MSG_FORMAT\fP   'AT+CMGF='"
+.br
+.ti -1c
+.RI "#define \fBAT_MSG_SEND\fP   'AT+CMGS\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_GET_RINGER_VOLUME\fP   'AT+CRSL?'"
+.br
+.RI "\fIDefines for the audio setup\&. \fP"
+.ti -1c
+.RI "#define \fBAT_AUDIO_SET_RINGER_VOLUME\fP   'AT+CRSL='"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_GET_SPEAKER_VOLUME\fP   'AT+CLVL?'"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_SET_SPEAKER_VOLUME\fP   'AT+CLVL='"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_GET_CURRENT_ALERT_SOUND\fP   'AT+CALS?'"
+.br
+.ti -1c
+.RI "#define \fBAT_AUDIO_SET_CURRENT_ALERT_SOUND\fP   'AT+CALS='"
+.br
+.ti -1c
+.RI "#define \fBAT_CONN_SIGNAL_STRENGTH\fP   'AT+CSQ'"
+.br
+.RI "\fIDefines for the connection\&. \fP"
+.ti -1c
+.RI "#define \fBAT_CONN_ATTACH_STATUS\fP   'AT+CGATT?'"
+.br
+.ti -1c
+.RI "#define \fBAT_CONN_NETWORK_REGISTRATION_STATUS\fP   'AT+CREG?'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_POWER_STATE\fP   'AT+CGPSPWR?'"
+.br
+.RI "\fIDefines for the GPS\&. \fP"
+.ti -1c
+.RI "#define \fBAT_GPS_POWER_ON\fP   'AT+CGPSPWR=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_POWER_OFF\fP   'AT+CGPSPWR=0'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_RST_MODE\fP   'AT+CGPSRST?'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_RST_COLD\fP   'AT+CGPSRST=0'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_RST_AUTONOMY\fP   'AT+CGPSRST=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_GET_LOCATION\fP   'AT+CGPSINF=0'"
+.br
+.ti -1c
+.RI "#define \fBAT_GPS_GET_STATUS\fP   'AT+CGPSSTATUS?'"
+.br
+.ti -1c
+.RI "#define \fBAT_CTRL_Z\fP   26"
+.br
+.RI "\fIDefine for the ctrl+Z command\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+: 01-10-2014 00:20:07 : Andi Degn : 0\&.8 
+.PP
+Definition in file \fBat_commands\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

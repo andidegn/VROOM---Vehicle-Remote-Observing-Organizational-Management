@@ -1,0 +1,52 @@
+.TH "Public" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public \- 
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBacc_init\fP (uint8_t __cs_pin, ACC_POWER_MODE __power_mode, ACC_OUTPUT_DATA_RATE __output_data_rate, ACC_FULL_SCALE __full_scale)"
+.br
+.ti -1c
+.RI "void \fBacc_measure\fP (void)"
+.br
+.ti -1c
+.RI "float \fBacc_get_x_axis\fP (void)"
+.br
+.ti -1c
+.RI "float \fBacc_get_y_axis\fP (void)"
+.br
+.ti -1c
+.RI "float \fBacc_get_z_axis\fP (void)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "float acc_get_x_axis (void)"
+Returns the x axis value multiplied with the scale factor 
+.PP
+Definition at line 137 of file lis331hh\&.c\&.
+.SS "float acc_get_y_axis (void)"
+Returns the y axis value multiplied with the scale factor 
+.PP
+Definition at line 145 of file lis331hh\&.c\&.
+.SS "float acc_get_z_axis (void)"
+Returns the z axis value multiplied with the scale factor 
+.PP
+Definition at line 153 of file lis331hh\&.c\&.
+.SS "void acc_init (uint8_t__cs_pin, ACC_POWER_MODE__power_mode, ACC_OUTPUT_DATA_RATE__output_data_rate, ACC_FULL_SCALE__full_scale)"
+Sets up the SPI and writes the setup parameters to the accelerometer chip 
+.PP
+Definition at line 54 of file lis331hh\&.c\&.
+.SS "void acc_measure (void)"
+Sends a command to the accelerometer with the information to allow multiple byte read 00110111 
+.PP
+Definition at line 99 of file lis331hh\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

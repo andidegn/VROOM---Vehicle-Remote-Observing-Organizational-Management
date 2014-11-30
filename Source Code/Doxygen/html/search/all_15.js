@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['z_5faxis_5fbuffer',['z_axis_buffer',['../sensor__scheduler_8c.html#ae0345a033708faeae4e11c050e4cd082',1,'z_axis_buffer():&#160;sensor_scheduler.c'],['../sensor__scheduler_8h.html#ae0345a033708faeae4e11c050e4cd082',1,'z_axis_buffer():&#160;sensor_scheduler.c']]]
+  ['year',['year',['../struct_f_i_x_e_d___t_i_m_e.html#a57ca98d8f6d4baf0fe41c583c7dcb0d5',1,'FIXED_TIME']]],
+  ['yes',['YES',['../vroom__config_8h.html#a7ebc9a785e5ab85457c98595aac81589',1,'vroom_config.h']]]
 ];

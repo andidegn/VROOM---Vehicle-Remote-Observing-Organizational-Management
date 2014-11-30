@@ -15,11 +15,8 @@
 #define SCHEDULER_DELAY 0
 #define ACC_BUFFER_SIZE 25
 
-extern int16_t x_axis_buffer[ACC_BUFFER_SIZE];
-extern int16_t y_axis_buffer[ACC_BUFFER_SIZE];
-extern int16_t z_axis_buffer[ACC_BUFFER_SIZE];
-
 void scheduler_start(void (*callback_function_ptr)(char __data));
+void scheduler_get_last_readings_sum(int16_t *buffer);
 void scheduler_get_last_readings(int16_t *buffer);
 void scheduler_release(void);
 

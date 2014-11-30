@@ -115,19 +115,6 @@ $(document).ready(function(){initNavTree('uart_8c.html','');});
 </div>
 <p><a href="uart_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:ga06f8ff4cb5ba1ce764ff1d992f8986ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uart__priv.html#ga06f8ff4cb5ba1ce764ff1d992f8986ef">UBRR_FACTOR_ASYNC_NORM</a>&#160;&#160;&#160;16</td></tr>
-<tr class="memdesc:ga06f8ff4cb5ba1ce764ff1d992f8986ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines for the factor used to calculate baud rate and UBRR0value  <a href="group__uart__priv.html#ga06f8ff4cb5ba1ce764ff1d992f8986ef">More...</a><br/></td></tr>
-<tr class="separator:ga06f8ff4cb5ba1ce764ff1d992f8986ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga651098c41452ed554d065eb684640fa6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uart__priv.html#ga651098c41452ed554d065eb684640fa6">UBRR_FACTOR_ASYNC_DOUBLE</a>&#160;&#160;&#160;8</td></tr>
-<tr class="separator:ga651098c41452ed554d065eb684640fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:ga035f6d907ee73b77f8f5be6e4de64dbb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uart__priv.html#ga035f6d907ee73b77f8f5be6e4de64dbb">CALC_UBRR</a>(baud_rate, factor)&#160;&#160;&#160;(((<a class="el" href="run_8c.html#a43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> / (factor * baud_rate)) - 1) + 0.5F)</td></tr>
-<tr class="memdesc:ga035f6d907ee73b77f8f5be6e4de64dbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines for calculating the UBRR0 value  <a href="group__uart__priv.html#ga035f6d907ee73b77f8f5be6e4de64dbb">More...</a><br/></td></tr>
-<tr class="separator:ga035f6d907ee73b77f8f5be6e4de64dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gad15a574ad4bf0d30f348f915b2417453"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uart__pub.html#gad15a574ad4bf0d30f348f915b2417453">uart0_setup_async</a> (<a class="el" href="group__uart__pub.html#gac7d88ca139fc868d44fb0911bb96a5c3">UART_MODE</a> __operational_mode, <a class="el" href="group__uart__pub.html#ga2b50ce1943f24e90a2e2b8fe34f20481">UART_BAUD</a> __baud_rate, <a class="el" href="group__uart__pub.html#gad0c2140bdb33185144f5dfe6f5a97697">UART_PARITY_MODE</a> __paraty_mode, <a class="el" href="group__uart__pub.html#gaa89c21fdb2336f3783a1ec5876246043">UART_STOP_BIT</a> __stop_bit, <a class="el" href="group__uart__pub.html#gab333e4c99296516f9b97ee529a36e647">UART_CHAR_SIZE</a> __char_size, void(*__callback_function_ptr)(char __data))</td></tr>
@@ -175,7 +162,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_cb4bf8a099fe3a7a175adb1a0192631d.html">data_comm</a></li><li class="navelem"><a class="el" href="dir_49beaa8d6454e9bd57771adb6bda2e33.html">uart</a></li><li class="navelem"><a class="el" href="uart_8c.html">uart.c</a></li>
-    <li class="footer">Generated on Thu Nov 20 2014 12:37:17 for VROOM by
+    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

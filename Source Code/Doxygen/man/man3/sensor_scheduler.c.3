@@ -1,0 +1,113 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/sensor_scheduler.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/sensor_scheduler.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <util/delay\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include 'sensor_scheduler\&.h'\fP
+.br
+\fC#include '\&.\&./vroom_config\&.h'\fP
+.br
+
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBSENSOR_STATE\fP { \fBstate_tc72_init\fP, \fBstate_acc_init\fP, \fBstate_timer_init\fP, \fBstate_idle\fP, \fBstate_tc72_read\fP, \fBstate_acc_read\fP, \fBstate_store_in_buffers\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBscheduler_start\fP (void(*callback_function_ptr)(char __data))"
+.br
+.ti -1c
+.RI "void \fBscheduler_get_last_readings_sum\fP (int16_t *buffer)"
+.br
+.ti -1c
+.RI "void \fBscheduler_get_last_readings\fP (int16_t *buffer)"
+.br
+.ti -1c
+.RI "void \fBscheduler_release\fP (void)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "int16_t \fB_x_axis_buffer\fP [\fBACC_BUFFER_SIZE\fP]"
+.br
+.ti -1c
+.RI "int16_t \fB_y_axis_buffer\fP [\fBACC_BUFFER_SIZE\fP]"
+.br
+.ti -1c
+.RI "int16_t \fB_z_axis_buffer\fP [\fBACC_BUFFER_SIZE\fP]"
+.br
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBSENSOR_STATE\fP"
+collect_sensor_data\&.c
+.PP
+Created: 03-09-2014 13:53:18 Author: Kenneth René Jensen 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIstate_tc72_init \fP\fP
+.TP
+\fB\fIstate_acc_init \fP\fP
+.TP
+\fB\fIstate_timer_init \fP\fP
+.TP
+\fB\fIstate_idle \fP\fP
+.TP
+\fB\fIstate_tc72_read \fP\fP
+.TP
+\fB\fIstate_acc_read \fP\fP
+.TP
+\fB\fIstate_store_in_buffers \fP\fP
+.PP
+Definition at line 12 of file sensor_scheduler\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "void scheduler_get_last_readings (int16_t *buffer)"
+
+.PP
+Definition at line 45 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_get_last_readings_sum (int16_t *buffer)"
+
+.PP
+Definition at line 37 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_release (void)"
+
+.PP
+Definition at line 51 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_start (void(*)(char __data)callback_function_ptr)"
+
+.PP
+Definition at line 31 of file sensor_scheduler\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "int16_t _x_axis_buffer[\fBACC_BUFFER_SIZE\fP]"
+
+.PP
+Definition at line 21 of file sensor_scheduler\&.c\&.
+.SS "int16_t _y_axis_buffer[\fBACC_BUFFER_SIZE\fP]"
+
+.PP
+Definition at line 22 of file sensor_scheduler\&.c\&.
+.SS "int16_t _z_axis_buffer[\fBACC_BUFFER_SIZE\fP]"
+
+.PP
+Definition at line 23 of file sensor_scheduler\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,0 +1,75 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'time\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBEPOCH_YR\fP   1970"
+.br
+.ti -1c
+.RI "#define \fBSECS_DAY\fP   (24L * 60L * 60L)"
+.br
+.ti -1c
+.RI "#define \fBLEAPYEAR\fP(year)   (!((year) % 4) && (((year) % 100) || !((year) % 400)))"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "uint32_t \fBcalc_UTC_seconds\fP (\fBFIXED_TIME\fP *buf)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const int \fB_ytab\fP [2][12]"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define EPOCH_YR   1970"
+
+.PP
+Definition at line 11 of file time\&.c\&.
+.SS "#define LEAPYEAR(year)   (!((year) % 4) && (((year) % 100) || !((year) % 400)))"
+
+.PP
+Definition at line 13 of file time\&.c\&.
+.SS "#define SECS_DAY   (24L * 60L * 60L)"
+
+.PP
+Definition at line 12 of file time\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "uint32_t calc_UTC_seconds (\fBFIXED_TIME\fP *buf)"
+
+.PP
+Definition at line 21 of file time\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "const int _ytab[2][12]"
+\fBInitial value:\fP
+.PP
+.nf
+= 
+{
+    {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+    {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+}
+.fi
+.PP
+Definition at line 15 of file time\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

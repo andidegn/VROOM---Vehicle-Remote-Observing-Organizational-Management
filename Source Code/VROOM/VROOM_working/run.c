@@ -50,9 +50,9 @@ int main (void)
 		#endif /* DEBUG_LCD_ENABLE */
 	#endif /* UNIT_TEST */
 
-	#if UNIT_TEST_MSD	
+	#if UNIT_TEST_MSD
 		/******************************************************************************
-		************************************ ToDo ************************************* 
+		************************************ ToDo *************************************
 		******************************************************************************/
 		/* Don't know if it should be integrated in the existing unit test file */
 	#endif /* UNIT_TEST_MSD */
@@ -79,7 +79,7 @@ int main (void)
 	#if MODULE_TEST_CAR_PANEL
 		#include "tests/module/car_panel/test_module_car_panel.h"
 			/******************************************************************************
-			************************************ ToDo ************************************* 
+			************************************ ToDo *************************************
 			******************************************************************************/
 		sei();
 	#endif /* MODULE_TEST_CAR_PANEL */
@@ -105,7 +105,7 @@ int main (void)
 		for (uint8_t k = 0; k < 4; k++) {
 			lcd_puts(test_module_uart_run(_test_strings[k], _compare_strings[k]) ? "PASSED" : "FAILED");
 			lcd_putc('\n');
-			
+
 		}
 		#endif /* DEBUG_LCD_ENABLE */
 	#endif /* MODULE_TEST_UART */
@@ -121,39 +121,41 @@ int main (void)
 			lcd_clrscr();
 			lcd_gotoxy(0, 0);
 			lcd_puts("Initializing...");
-		#endif /* DEBUG_LCD_ENABLE */	
-		
+		#endif /* DEBUG_LCD_ENABLE */
+
 		car_panel_init();
 		SIM908_init();
 		sei();
 		SIM908_start();
 		scheduler_start(NULL);
 		car_panel_start();
-		
+
 		while (1)
 		{
-			/*************************************************************************
-			****************** Has to be moved into accident_logic ******************* 
-			*************************************************************************/
+			///*************************************************************************
+			//****************** Has to be moved into accident_logic *******************
+			//*************************************************************************/
 			scheduler_get_last_readings(_acc_buffer);
 			x_axis = *_acc_buffer;
 			y_axis = *(_acc_buffer + 1);
 			z_axis = *(_acc_buffer + 2);
 			temp = get_temperature();
-			acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
+			//acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
+//
+			//if (acc_total > 1000 && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
+			//{
+				//if (!car_panel_wait_cancel_emmergency())
+					//EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
+			//}
+			///**************************************************************************/
 
-			if (acc_total > 1000 && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
-			{
-				if (!car_panel_wait_cancel_emmergency())
-					EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
-			}
-			/**************************************************************************/
+			ad_check_for_crash();
 
-			EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
+			EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_HOME_NETWORK || EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_ROAMING ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
 			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
-				emergency_alarm();
+				ad_emergency_alarm();
 
 				/* Enable cancel button for reset purpose */
 				car_panel_set_cancel_button_state(true);
@@ -177,7 +179,7 @@ int main (void)
 				lcd_puts(dtostrf( temp, 2, 2, buf ));
 				lcd_putc(degree);
 				lcd_putc('C');
-			#endif /* DEBUG_LCD_ENABLE */	
+			#endif /* DEBUG_LCD_ENABLE */
 			_delay_ms(200);
 		}
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */

@@ -1,0 +1,307 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/io\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBACC_CTRL_REG1\fP   0x20"
+.br
+.ti -1c
+.RI "#define \fBACC_Xen\fP   0"
+.br
+.ti -1c
+.RI "#define \fBACC_Yen\fP   1"
+.br
+.ti -1c
+.RI "#define \fBACC_Zen\fP   2"
+.br
+.ti -1c
+.RI "#define \fBACC_DR0\fP   3"
+.br
+.ti -1c
+.RI "#define \fBACC_DR1\fP   4"
+.br
+.ti -1c
+.RI "#define \fBACC_PM0\fP   5"
+.br
+.ti -1c
+.RI "#define \fBACC_PM1\fP   6"
+.br
+.ti -1c
+.RI "#define \fBACC_PM2\fP   7"
+.br
+.ti -1c
+.RI "#define \fBACC_CTRL_REG2\fP   0x21"
+.br
+.ti -1c
+.RI "#define \fBACC_HPCF0\fP   0"
+.br
+.ti -1c
+.RI "#define \fBACC_HPCF1\fP   1"
+.br
+.ti -1c
+.RI "#define \fBACC_HPen1\fP   2"
+.br
+.ti -1c
+.RI "#define \fBACC_HPen2\fP   3"
+.br
+.ti -1c
+.RI "#define \fBACC_FDS\fP   4"
+.br
+.ti -1c
+.RI "#define \fBACC_HPM0\fP   5"
+.br
+.ti -1c
+.RI "#define \fBACC_HPM1\fP   6"
+.br
+.ti -1c
+.RI "#define \fBACC_BOOT\fP   7"
+.br
+.ti -1c
+.RI "#define \fBACC_CTRL_REG3\fP   0x22"
+.br
+.ti -1c
+.RI "#define \fBACC_I1_CFG0\fP   0"
+.br
+.ti -1c
+.RI "#define \fBACC_I1_CFG1\fP   1"
+.br
+.ti -1c
+.RI "#define \fBACC_LIR1\fP   2"
+.br
+.ti -1c
+.RI "#define \fBACC_I2_CFG0\fP   3"
+.br
+.ti -1c
+.RI "#define \fBACC_I2_CFG1\fP   4"
+.br
+.ti -1c
+.RI "#define \fBACC_LIR2\fP   5"
+.br
+.ti -1c
+.RI "#define \fBACC_PP_OD\fP   6"
+.br
+.ti -1c
+.RI "#define \fBACC_IHL\fP   7"
+.br
+.ti -1c
+.RI "#define \fBACC_CTRL_REG4\fP   0x23"
+.br
+.ti -1c
+.RI "#define \fBACC_SIM\fP   0"
+.br
+.ti -1c
+.RI "#define \fBACC_ST\fP   1"
+.br
+.ti -1c
+.RI "#define \fBACC_STsign\fP   3"
+.br
+.ti -1c
+.RI "#define \fBACC_FS0\fP   4"
+.br
+.ti -1c
+.RI "#define \fBACC_FS1\fP   5"
+.br
+.ti -1c
+.RI "#define \fBACC_BLE\fP   6"
+.br
+.ti -1c
+.RI "#define \fBACC_BDU\fP   7"
+.br
+.ti -1c
+.RI "#define \fBACC_CTRL_REG5\fP   0x24"
+.br
+.ti -1c
+.RI "#define \fBACC_TurnOn0\fP   0"
+.br
+.ti -1c
+.RI "#define \fBACC_TurnOn1\fP   1"
+.br
+.ti -1c
+.RI "#define \fBACC_READ_BIT\fP   7"
+.br
+.ti -1c
+.RI "#define \fBACC_MULTI_BIT\fP   6"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ACC_BDU   7"
+
+.PP
+Definition at line 60 of file lis331hh\&.h\&.
+.SS "#define ACC_BLE   6"
+
+.PP
+Definition at line 59 of file lis331hh\&.h\&.
+.SS "#define ACC_BOOT   7"
+
+.PP
+Definition at line 41 of file lis331hh\&.h\&.
+.SS "#define ACC_CTRL_REG1   0x20"
+
+.PP
+\fBNote:\fP
+.RS 4
+Complies MISRO 2004 standards 
+.RE
+.PP
+
+.PP
+Definition at line 23 of file lis331hh\&.h\&.
+.SS "#define ACC_CTRL_REG2   0x21"
+
+.PP
+Definition at line 33 of file lis331hh\&.h\&.
+.SS "#define ACC_CTRL_REG3   0x22"
+
+.PP
+Definition at line 43 of file lis331hh\&.h\&.
+.SS "#define ACC_CTRL_REG4   0x23"
+
+.PP
+Definition at line 53 of file lis331hh\&.h\&.
+.SS "#define ACC_CTRL_REG5   0x24"
+
+.PP
+Definition at line 62 of file lis331hh\&.h\&.
+.SS "#define ACC_DR0   3"
+
+.PP
+Definition at line 27 of file lis331hh\&.h\&.
+.SS "#define ACC_DR1   4"
+
+.PP
+Definition at line 28 of file lis331hh\&.h\&.
+.SS "#define ACC_FDS   4"
+
+.PP
+Definition at line 38 of file lis331hh\&.h\&.
+.SS "#define ACC_FS0   4"
+
+.PP
+Definition at line 57 of file lis331hh\&.h\&.
+.SS "#define ACC_FS1   5"
+
+.PP
+Definition at line 58 of file lis331hh\&.h\&.
+.SS "#define ACC_HPCF0   0"
+
+.PP
+Definition at line 34 of file lis331hh\&.h\&.
+.SS "#define ACC_HPCF1   1"
+
+.PP
+Definition at line 35 of file lis331hh\&.h\&.
+.SS "#define ACC_HPen1   2"
+
+.PP
+Definition at line 36 of file lis331hh\&.h\&.
+.SS "#define ACC_HPen2   3"
+
+.PP
+Definition at line 37 of file lis331hh\&.h\&.
+.SS "#define ACC_HPM0   5"
+
+.PP
+Definition at line 39 of file lis331hh\&.h\&.
+.SS "#define ACC_HPM1   6"
+
+.PP
+Definition at line 40 of file lis331hh\&.h\&.
+.SS "#define ACC_I1_CFG0   0"
+
+.PP
+Definition at line 44 of file lis331hh\&.h\&.
+.SS "#define ACC_I1_CFG1   1"
+
+.PP
+Definition at line 45 of file lis331hh\&.h\&.
+.SS "#define ACC_I2_CFG0   3"
+
+.PP
+Definition at line 47 of file lis331hh\&.h\&.
+.SS "#define ACC_I2_CFG1   4"
+
+.PP
+Definition at line 48 of file lis331hh\&.h\&.
+.SS "#define ACC_IHL   7"
+
+.PP
+Definition at line 51 of file lis331hh\&.h\&.
+.SS "#define ACC_LIR1   2"
+
+.PP
+Definition at line 46 of file lis331hh\&.h\&.
+.SS "#define ACC_LIR2   5"
+
+.PP
+Definition at line 49 of file lis331hh\&.h\&.
+.SS "#define ACC_MULTI_BIT   6"
+
+.PP
+Definition at line 67 of file lis331hh\&.h\&.
+.SS "#define ACC_PM0   5"
+
+.PP
+Definition at line 29 of file lis331hh\&.h\&.
+.SS "#define ACC_PM1   6"
+
+.PP
+Definition at line 30 of file lis331hh\&.h\&.
+.SS "#define ACC_PM2   7"
+
+.PP
+Definition at line 31 of file lis331hh\&.h\&.
+.SS "#define ACC_PP_OD   6"
+
+.PP
+Definition at line 50 of file lis331hh\&.h\&.
+.SS "#define ACC_READ_BIT   7"
+
+.PP
+Definition at line 66 of file lis331hh\&.h\&.
+.SS "#define ACC_SIM   0"
+
+.PP
+Definition at line 54 of file lis331hh\&.h\&.
+.SS "#define ACC_ST   1"
+
+.PP
+Definition at line 55 of file lis331hh\&.h\&.
+.SS "#define ACC_STsign   3"
+
+.PP
+Definition at line 56 of file lis331hh\&.h\&.
+.SS "#define ACC_TurnOn0   0"
+
+.PP
+Definition at line 63 of file lis331hh\&.h\&.
+.SS "#define ACC_TurnOn1   1"
+
+.PP
+Definition at line 64 of file lis331hh\&.h\&.
+.SS "#define ACC_Xen   0"
+
+.PP
+Definition at line 24 of file lis331hh\&.h\&.
+.SS "#define ACC_Yen   1"
+
+.PP
+Definition at line 25 of file lis331hh\&.h\&.
+.SS "#define ACC_Zen   2"
+
+.PP
+Definition at line 26 of file lis331hh\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,0 +1,300 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/lcd_board/lcd/lcd.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/lcd_board/lcd/lcd.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_PORT\fP   PORTL"
+.br
+.in -1c
+.PP
+.RI "\fBDefinitions for MCU Clock Frequency\fP"
+.br
+Adapt the MCU clock frequency in Hz to your target\&. 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "#define \fBXTAL\fP   F_CPU"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fBDefinition for LCD controller type\fP"
+.br
+Use 0 for HD44780 controller, change to 1 for displays with KS0073 controller\&. 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_CONTROLLER_KS0073\fP   0"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fBDefinitions for Display Size\fP"
+.br
+Change these definitions to adapt setting to your display 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_LINES\fP   4"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_LENGTH\fP   20"
+.br
+.ti -1c
+.RI "#define \fBLCD_LINE_LENGTH\fP   0x40"
+.br
+.ti -1c
+.RI "#define \fBLCD_START_LINE1\fP   0x00"
+.br
+.ti -1c
+.RI "#define \fBLCD_START_LINE2\fP   0x40"
+.br
+.ti -1c
+.RI "#define \fBLCD_START_LINE3\fP   0x14"
+.br
+.ti -1c
+.RI "#define \fBLCD_START_LINE4\fP   0x54"
+.br
+.ti -1c
+.RI "#define \fBLCD_WRAP_LINES\fP   0"
+.br
+.ti -1c
+.RI "#define \fBLCD_IO_MODE\fP   1"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fBDefinitions for 4-bit IO mode\fP"
+.br
+Change LCD_PORT if you want to use a different port for the LCD pins\&.
+.PP
+The four LCD data lines and the three control lines RS, RW, E can be on the same port or on different ports\&. Change LCD_RS_PORT, LCD_RW_PORT, LCD_E_PORT if you want the control lines on different ports\&.
+.PP
+Normally the four data lines should be mapped to bit 0\&.\&.3 on one port, but it is possible to connect these data lines in different order or even on different ports by adapting the LCD_DATAx_PORT and LCD_DATAx_PIN definitions\&. 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_DATA0_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA1_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA2_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA3_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA0_PIN\fP   0"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA1_PIN\fP   1"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA2_PIN\fP   2"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA3_PIN\fP   3"
+.br
+.ti -1c
+.RI "#define \fBLCD_RS_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_RS_PIN\fP   4"
+.br
+.ti -1c
+.RI "#define \fBLCD_RW_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_RW_PIN\fP   5"
+.br
+.ti -1c
+.RI "#define \fBLCD_E_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_E_PIN\fP   6"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fBDefinitions for LCD command instructions\fP"
+.br
+The constants define the various LCD controller instructions which can be passed to the function \fBlcd_command()\fP, see HD44780 data sheet for a complete description\&. 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_CLR\fP   0      /* DB0: clear display                  */"
+.br
+.ti -1c
+.RI "#define \fBLCD_HOME\fP   1      /* DB1: return to home position        */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_MODE\fP   2      /* DB2: set entry mode                 */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_INC\fP   1      /*   DB1: 1=increment, 0=decrement     */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_SHIFT\fP   0      /*   DB2: 1=display shift on           */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ON\fP   3      /* DB3: turn lcd/cursor on             */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ON_DISPLAY\fP   2      /*   DB2: turn display on              */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ON_CURSOR\fP   1      /*   DB1: turn cursor on               */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ON_BLINK\fP   0      /*     DB0: blinking cursor ?          */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE\fP   4      /* DB4: move cursor/display            */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_DISP\fP   3      /*   DB3: move display (0-> cursor) ?  */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_RIGHT\fP   2      /*   DB2: move right (0-> left) ?      */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION\fP   5      /* DB5: function set                   */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_8BIT\fP   4      /*   DB4: set 8BIT mode (0->4BIT mode) */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_2LINES\fP   3      /*   DB3: two lines (0->one line)      */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_10DOTS\fP   2      /*   DB2: 5x10 font (0->5x7 font)      */"
+.br
+.ti -1c
+.RI "#define \fBLCD_CGRAM\fP   6      /* DB6: set CG RAM address             */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DDRAM\fP   7      /* DB7: set DD RAM address             */"
+.br
+.ti -1c
+.RI "#define \fBLCD_BUSY\fP   7      /* DB7: LCD is busy                    */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_DEC\fP   0x04   /* display shift off, dec cursor move dir */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_DEC_SHIFT\fP   0x05   /* display shift on,  dec cursor move dir */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_INC_\fP   0x06   /* display shift off, inc cursor move dir */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_INC_SHIFT\fP   0x07   /* display shift on,  inc cursor move dir */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_OFF\fP   0x08   /* display off                            */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_ON\fP   0x0C   /* display on, cursor off                 */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_ON_BLINK\fP   0x0D   /* display on, cursor off, blink char     */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_ON_CURSOR\fP   0x0E   /* display on, cursor on                  */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_ON_CURSOR_BLINK\fP   0x0F   /* display on, cursor on, blink char      */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_CURSOR_LEFT\fP   0x10   /* move cursor left  (decrement)          */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_CURSOR_RIGHT\fP   0x14   /* move cursor right (increment)          */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_DISP_LEFT\fP   0x18   /* shift display left                     */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_DISP_RIGHT\fP   0x1C   /* shift display right                    */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_4BIT_1LINE\fP   0x20   /* 4-bit interface, single line, 5x7 dots */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_4BIT_2LINES\fP   0x28   /* 4-bit interface, dual line,   5x7 dots */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_8BIT_1LINE\fP   0x30   /* 8-bit interface, single line, 5x7 dots */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_8BIT_2LINES\fP   0x38   /* 8-bit interface, dual line,   5x7 dots */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MODE_DEFAULT\fP   ((1<<\fBLCD_ENTRY_MODE\fP) | (1<<\fBLCD_ENTRY_INC\fP) )"
+.br
+.in -1c
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "#define \fBlcd_puts_P\fP(__s)   \fBlcd_puts_p\fP(PSTR(__s))"
+.br
+.RI "\fImacros for automatically storing string constant in program memory \fP"
+.ti -1c
+.RI "void \fBlcd_init\fP (uint8_t dispAttr)"
+.br
+.RI "\fIInitialize display and select type of cursor\&. \fP"
+.ti -1c
+.RI "void \fBlcd_clrscr\fP (void)"
+.br
+.RI "\fIClear display and set cursor to home position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_home\fP (void)"
+.br
+.RI "\fISet cursor to home position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_gotoxy\fP (uint8_t x, uint8_t y)"
+.br
+.RI "\fISet cursor to specified position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_putc\fP (char c)"
+.br
+.RI "\fIDisplay character at current cursor position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_puts\fP (const char *s)"
+.br
+.RI "\fIDisplay string without auto linefeed\&. \fP"
+.ti -1c
+.RI "void \fBlcd_puts_p\fP (const char *progmem_s)"
+.br
+.RI "\fIDisplay string from program memory without auto linefeed\&. \fP"
+.ti -1c
+.RI "void \fBlcd_command\fP (uint8_t cmd)"
+.br
+.RI "\fISend LCD controller instruction command\&. \fP"
+.ti -1c
+.RI "void \fBlcd_data\fP (uint8_t data)"
+.br
+.RI "\fISend data byte to LCD controller\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

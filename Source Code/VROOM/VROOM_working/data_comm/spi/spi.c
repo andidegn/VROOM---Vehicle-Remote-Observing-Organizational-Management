@@ -7,8 +7,8 @@
  * @{
 	 This is a driver for the SPI bus
 	 on the ATMEGA family processors.
+	 @note Complies MISRO 2004 standards
  * @}
- * @note Complies MISRO 2004 standards
  **************************************************************************/
 
 #include "spi.h"
@@ -17,31 +17,31 @@
 /**********************************************************************//**
  * @ingroup spi_priv
  * Defines for the ports and pins used by the SPI
- * @{
+ * @code{.c}
  **************************************************************************/
 #define DDR_SPI DDRB
 #define SS PB0
 #define SCK PB1
 #define MOSI PB2
 #define MISO PB3
-/** @} */
+/** @endcode */
 
 /**********************************************************************//**
  * @ingroup spi_priv
  * defines the max number of handles that are able to be handled
- * @{
+ * @code{.c}
  **************************************************************************/
 #define MAX_HANDLES 16U
-/* @} */
+/** @endcode */
 
 /**********************************************************************//**
  * @ingroup spi_priv
  * defines inactive/active level for CS/CE
- * @{
+ * @code{.c}
  **************************************************************************/
 #define CS_INACTIVE 0U
 #define CS_ACTIVE 1U
-/* @} */
+/** @endcode */
 
 /* local variables */
 static int8_t _handle_count = 0;
@@ -89,109 +89,6 @@ int8_t spi_master_setup(SPI_DATA_MODE __mode,
 	_set_cs_level(CS_INACTIVE);
 
     return ret;
-}
-
-/**********************************************************************//**
- * @ingroup spi_priv
- * * Sets up the SPI ports as output
- * * Clears the SPRC register before setup to make sure it is clear
- * * Sets up the SPRC register based on the supplied parameters
- * * * SPIE, SPE and master are fixed
- * * Sets up the SPSR register if divider 2, 8 or 32 is chosen
- *
- * SPI mode: | CPOL | CHAP |\n
- * SPI_MODE0 |    0 |    0 |\n
- * SPI_MODE1 |    0 |    1 |\n
- * SPI_MODE2 |    1 |    0 |\n
- * SPI_MODE3 |    1 |    1 |\n
- *\n
- * Data direction: | DORD |\n
- * SPI_MSB_FIRST   |    0 |\n
- * SPI_LSB_FIRST   |    1 |\n
- *\n
- * Frequency divider: | SPI2X | SPR1 | SPR0 |\n
- * SPI_DIVIDER_2	  |     1 |    0 |    0 |\n
- * SPI_DIVIDER_4	  |     0 |    0 |    0 |\n
- * SPI_DIVIDER_8	  |     1 |    0 |    1 |\n
- * SPI_DIVIDER_16	  |     0 |    0 |    1 |\n
- * SPI_DIVIDER_32	  |     1 |    1 |    0 |\n
- * SPI_DIVIDER_64	  |     0 |    1 |    0 |\n
- * SPI_DIVIDER_128	  |     0 |    1 |    1 |\n
- *
- * @param handle_param *__param - a struct containing the parameters for the SPI setup
- *
- * @return void
- **************************************************************************/
-static void _setup_spi(handle_param *__param) {
-	/* saves the current state of the status register and disables global interrupt */
-	uint8_t _sreg = SREG;
-	cli();
-
-	/* Sets the Clock, MOSI and SS as outputs */
-	DDR_SPI |= _BV(SCK) | _BV(MOSI) | _BV(SS);
-	DDR_SPI &= ~_BV(MISO);
-
-	/* Clear the SPCR register before setting values */
-	SPCR = 0x00;
-
-	/* Sets the active CS/CE pin and pin level */
-	_cs_pin = __param->cs_pin;
-	_cs_active_level = __param->cs_active_level;
-	DDR_SPI |= _BV(_cs_pin);
-
-	/* Sets an additional bit if the divider is 2, 8 or 32 */
-	if ((__param->freq_divider == SPI_DIVIDER_2) ||
-		(__param->freq_divider == SPI_DIVIDER_8) ||
-		(__param->freq_divider == SPI_DIVIDER_32)) {
-		SPSR |= _BV(SPI2X);
-	} else {
-		SPSR &= ~_BV(SPI2X);
-	}
-
-	/* Enables SPI, sets it as Master and sets all related bits (p.202)
-				Bit  |  7 |  6 |  5 |  4 |  3 |  2 |  1 |  0 |
-		 0x2C (0x4C) |SPIE| SPE|DORD|MSTR|CPOL|CPHA|SPR1|SPR0| SPCR
-	Read/Write		 | R/W| R/W| R/W| R/W| R/W| R/W| R/W| R/W|
-	*/
-	SPCR |= _BV(SPE) | __param->data_direction | _BV(MSTR) | __param->mode | __param->freq_divider;
-	/* restore the status register */
-	SREG = _sreg;
-}
-
-/**********************************************************************//**
- * @ingroup spi_priv
- * Sets the CS/CE level based on the level
- *
- * @param uint8_t __level - CS_ACTIVE or CS_INACTIVE
- *
- * @return void
- **************************************************************************/
-static inline void _set_cs_level(uint8_t __level) {
-	if (_cs_active_level == SPI_CS_ACTIVE_LOW) {
-		__level = !__level;
-	}
-	if (__level == CS_INACTIVE) {
-		PORTB &= ~_BV(_cs_pin);
-	} else {
-		PORTB |= _BV(_cs_pin);
-	}
-}
-
-/**********************************************************************//**
- * @ingroup spi_priv
- * Sets up the SPI with 'handle' if it is not already the current
- * handle. Then sends the data and returns '1'.
- * If the SPI driver is busy performing another task, the data
- * is not sent and a '0' is returned
- *
- * @param uint8_t __data - the data to be sent
- *
- * @return void
- **************************************************************************/
-static void _send(uint8_t __data) {
-    /* putting data in output register and incrementing the _bytes_sent_ctr counter */
-    SPDR = __data;
-    _bytes_sent_ctr++;
 }
 
 /**********************************************************************//**
@@ -261,6 +158,112 @@ void spi_release(void) {
 
 /**********************************************************************//**
  * @ingroup spi_priv
+ * @brief Sets up the ports for the spi bus
+ * * Sets up the SPI ports as output
+ * * Clears the SPRC register before setup to make sure it is clear
+ * * Sets up the SPRC register based on the supplied parameters
+ * * * SPIE, SPE and master are fixed
+ * * Sets up the SPSR register if divider 2, 8 or 32 is chosen
+ *
+ * SPI mode: | CPOL | CHAP |\n
+ * SPI_MODE0 |    0 |    0 |\n
+ * SPI_MODE1 |    0 |    1 |\n
+ * SPI_MODE2 |    1 |    0 |\n
+ * SPI_MODE3 |    1 |    1 |\n
+ *\n
+ * Data direction: | DORD |\n
+ * SPI_MSB_FIRST   |    0 |\n
+ * SPI_LSB_FIRST   |    1 |\n
+ *\n
+ * Frequency divider: | SPI2X | SPR1 | SPR0 |\n
+ * SPI_DIVIDER_2	  |     1 |    0 |    0 |\n
+ * SPI_DIVIDER_4	  |     0 |    0 |    0 |\n
+ * SPI_DIVIDER_8	  |     1 |    0 |    1 |\n
+ * SPI_DIVIDER_16	  |     0 |    0 |    1 |\n
+ * SPI_DIVIDER_32	  |     1 |    1 |    0 |\n
+ * SPI_DIVIDER_64	  |     0 |    1 |    0 |\n
+ * SPI_DIVIDER_128	  |     0 |    1 |    1 |\n
+ *
+ * @param handle_param *__param - a struct containing the parameters for the SPI setup
+ *
+ * @return void
+ **************************************************************************/
+static void _setup_spi(handle_param *__param) {
+	/* saves the current state of the status register and disables global interrupt */
+	uint8_t _sreg = SREG;
+	cli();
+
+	/* Sets the Clock, MOSI and SS as outputs */
+	DDR_SPI |= _BV(SCK) | _BV(MOSI) | _BV(SS);
+	DDR_SPI &= ~_BV(MISO);
+
+	/* Clear the SPCR register before setting values */
+	SPCR = 0x00;
+
+	/* Sets the active CS/CE pin and pin level */
+	_cs_pin = __param->cs_pin;
+	_cs_active_level = __param->cs_active_level;
+	DDR_SPI |= _BV(_cs_pin);
+
+	/* Sets an additional bit if the divider is 2, 8 or 32 */
+	if ((__param->freq_divider == SPI_DIVIDER_2) ||
+		(__param->freq_divider == SPI_DIVIDER_8) ||
+		(__param->freq_divider == SPI_DIVIDER_32)) {
+		SPSR |= _BV(SPI2X);
+	} else {
+		SPSR &= ~_BV(SPI2X);
+	}
+
+	/* Enables SPI, sets it as Master and sets all related bits (p.202)
+				Bit  |  7 |  6 |  5 |  4 |  3 |  2 |  1 |  0 |
+		 0x2C (0x4C) |SPIE| SPE|DORD|MSTR|CPOL|CPHA|SPR1|SPR0| SPCR
+	Read/Write		 | R/W| R/W| R/W| R/W| R/W| R/W| R/W| R/W|
+	*/
+	SPCR |= _BV(SPE) | __param->data_direction | _BV(MSTR) | __param->mode | __param->freq_divider;
+	/* restore the status register */
+	SREG = _sreg;
+}
+
+/**********************************************************************//**
+ * @ingroup spi_priv
+ * @brief Sets the CS/CE level based on the level
+ *
+ * @param uint8_t __level - CS_ACTIVE or CS_INACTIVE
+ *
+ * @return void
+ **************************************************************************/
+static inline void _set_cs_level(uint8_t __level) {
+	if (_cs_active_level == SPI_CS_ACTIVE_LOW) {
+		__level = !__level;
+	}
+	if (__level == CS_INACTIVE) {
+		PORTB &= ~_BV(_cs_pin);
+	} else {
+		PORTB |= _BV(_cs_pin);
+	}
+}
+
+/**********************************************************************//**
+ * @ingroup spi_priv
+ * @brief Sends up data
+ * Sets up the SPI with 'handle' if it is not already the current
+ * handle. Then sends the data and returns '1'.
+ * If the SPI driver is busy performing another task, the data
+ * is not sent and a '0' is returned
+ *
+ * @param uint8_t __data - the data to be sent
+ *
+ * @return void
+ **************************************************************************/
+static void _send(uint8_t __data) {
+    /* putting data in output register and incrementing the _bytes_sent_ctr counter */
+    SPDR = __data;
+    _bytes_sent_ctr++;
+}
+
+/**********************************************************************//**
+ * @ingroup spi_priv
+ * @brief Interrupt service routine
  * Interrupt service routine for the SPI. If a callback function pointer is
  * supplied when setting up the SPI, a callback to that function is being performed.
  * Else the SPI is released.

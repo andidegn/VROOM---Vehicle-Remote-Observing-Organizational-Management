@@ -1,0 +1,74 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/uart/uart.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/uart/uart.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'uart\&.h'\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <util/delay\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBuart0_setup_async\fP (\fBUART_MODE\fP __operational_mode, \fBUART_BAUD\fP __baud_rate, \fBUART_PARITY_MODE\fP __paraty_mode, \fBUART_STOP_BIT\fP __stop_bit, \fBUART_CHAR_SIZE\fP __char_size, void(*__callback_function_ptr)(char __data))"
+.br
+.RI "\fISets up the UART0 bus as asynchronous using supplied parameters\&. \fP"
+.ti -1c
+.RI "void \fBuart0_send_char\fP (char __data)"
+.br
+.RI "\fISends 1 (one) char of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart0_send_string\fP (const char *__data)"
+.br
+.RI "\fISends a string (x no\&. of chars) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart0_send_data\fP (const char *__data, uint8_t __length)"
+.br
+.RI "\fISends data (based on length) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "uint16_t \fBuart0_read_char\fP (void)"
+.br
+.RI "\fIReads 1 (one) char of 'data' in the UART buffer\&. \fP"
+.ti -1c
+.RI "\fBISR\fP (USART0_UDRE_vect, ISR_BLOCK)"
+.br
+.ti -1c
+.RI "\fBISR\fP (USART0_RX_vect, ISR_BLOCK)"
+.br
+.ti -1c
+.RI "void \fBuart1_setup_async\fP (\fBUART_MODE\fP __operational_mode, \fBUART_BAUD\fP __baud_rate, \fBUART_PARITY_MODE\fP __paraty_mode, \fBUART_STOP_BIT\fP __stop_bit, \fBUART_CHAR_SIZE\fP __char_size, void(*__callback_function_ptr)(char __data))"
+.br
+.RI "\fISets up the UART1 bus as asynchronous using supplied parameters\&. \fP"
+.ti -1c
+.RI "void \fBuart1_send_char\fP (char __data)"
+.br
+.RI "\fISends 1 (one) char of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart1_send_string\fP (const char *__data)"
+.br
+.RI "\fISends a string (x no\&. of chars) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "void \fBuart1_send_data\fP (const char *__data, uint8_t __length)"
+.br
+.RI "\fISends data (based on length) of 'data' on the UART bus\&. \fP"
+.ti -1c
+.RI "uint16_t \fBuart1_read_char\fP (void)"
+.br
+.RI "\fIReads 1 (one) char of 'data' in the UART buffer\&. \fP"
+.ti -1c
+.RI "\fBISR\fP (USART1_UDRE_vect, ISR_BLOCK)"
+.br
+.ti -1c
+.RI "\fBISR\fP (USART1_RX_vect, ISR_BLOCK)"
+.br
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

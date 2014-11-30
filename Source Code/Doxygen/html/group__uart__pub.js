@@ -1,12 +1,7 @@
 var group__uart__pub =
 [
-    [ "UART0_RX_BUFFER_SIZE", "group__uart__pub.html#ga08df86137d0485fe2b32b845d867fd5e", null ],
     [ "UART0_TX_BUFFER_SIZE", "group__uart__pub.html#gaa940408795d26c17246a6eec0d8009e0", null ],
-    [ "UART1_RX_BUFFER_SIZE", "group__uart__pub.html#gaa053ef004867924f9bc26798ebee0513", null ],
-    [ "UART1_TX_BUFFER_SIZE", "group__uart__pub.html#ga2678114a7a8e5e7c25d01c6ada2eafd7", null ],
-    [ "UART_BUFFER_OVERRUN", "group__uart__pub.html#ga09fb02ec71ab52f77a9d552da8a6d128", null ],
     [ "UART_NO_DATA", "group__uart__pub.html#ga77ba544d423ff42d400220a05303f268", null ],
-    [ "UART_READ_NOT_ALOWED", "group__uart__pub.html#ga4e122989fc10abee975f4576d4e58607", null ],
     [ "UART_BAUD", "group__uart__pub.html#ga2b50ce1943f24e90a2e2b8fe34f20481", [
       [ "UART_BAUD_2400", "group__uart__pub.html#gga2b50ce1943f24e90a2e2b8fe34f20481a3230c8483c0207b97301d3812cbf45d0", null ],
       [ "UART_BAUD_4800", "group__uart__pub.html#gga2b50ce1943f24e90a2e2b8fe34f20481aaad68dcdbd1283e461ebcf6371696ae5", null ],

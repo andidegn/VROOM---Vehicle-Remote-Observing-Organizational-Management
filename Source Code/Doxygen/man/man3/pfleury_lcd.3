@@ -1,0 +1,936 @@
+.TH "LCD library" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+LCD library \- 
+.PP
+Basic routines for interfacing a HD44780U-based text LCD display\&.  
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_PORT\fP   PORTL"
+.br
+.in -1c
+.SS "Definitions for MCU Clock Frequency"
+Adapt the MCU clock frequency in Hz to your target\&. 
+.in +1c
+.ti -1c
+.RI "#define \fBXTAL\fP   F_CPU"
+.br
+.in -1c
+.SS "Definition for LCD controller type"
+Use 0 for HD44780 controller, change to 1 for displays with KS0073 controller\&. 
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_CONTROLLER_KS0073\fP   0"
+.br
+.in -1c
+.SS "Definitions for Display Size"
+Change these definitions to adapt setting to your display 
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_LINES\fP   4"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_LENGTH\fP   20"
+.br
+.ti -1c
+.RI "#define \fBLCD_LINE_LENGTH\fP   0x40"
+.br
+.ti -1c
+.RI "#define \fBLCD_START_LINE1\fP   0x00"
+.br
+.ti -1c
+.RI "#define \fBLCD_START_LINE2\fP   0x40"
+.br
+.ti -1c
+.RI "#define \fBLCD_START_LINE3\fP   0x14"
+.br
+.ti -1c
+.RI "#define \fBLCD_START_LINE4\fP   0x54"
+.br
+.ti -1c
+.RI "#define \fBLCD_WRAP_LINES\fP   0"
+.br
+.ti -1c
+.RI "#define \fBLCD_IO_MODE\fP   1"
+.br
+.in -1c
+.SS "Definitions for 4-bit IO mode"
+Change LCD_PORT if you want to use a different port for the LCD pins\&.
+.PP
+The four LCD data lines and the three control lines RS, RW, E can be on the same port or on different ports\&. Change LCD_RS_PORT, LCD_RW_PORT, LCD_E_PORT if you want the control lines on different ports\&.
+.PP
+Normally the four data lines should be mapped to bit 0\&.\&.3 on one port, but it is possible to connect these data lines in different order or even on different ports by adapting the LCD_DATAx_PORT and LCD_DATAx_PIN definitions\&. 
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_DATA0_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA1_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA2_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA3_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA0_PIN\fP   0"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA1_PIN\fP   1"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA2_PIN\fP   2"
+.br
+.ti -1c
+.RI "#define \fBLCD_DATA3_PIN\fP   3"
+.br
+.ti -1c
+.RI "#define \fBLCD_RS_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_RS_PIN\fP   4"
+.br
+.ti -1c
+.RI "#define \fBLCD_RW_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_RW_PIN\fP   5"
+.br
+.ti -1c
+.RI "#define \fBLCD_E_PORT\fP   \fBLCD_PORT\fP"
+.br
+.ti -1c
+.RI "#define \fBLCD_E_PIN\fP   6"
+.br
+.in -1c
+.SS "Definitions for LCD command instructions"
+The constants define the various LCD controller instructions which can be passed to the function \fBlcd_command()\fP, see HD44780 data sheet for a complete description\&. 
+.in +1c
+.ti -1c
+.RI "#define \fBLCD_CLR\fP   0      /* DB0: clear display                  */"
+.br
+.ti -1c
+.RI "#define \fBLCD_HOME\fP   1      /* DB1: return to home position        */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_MODE\fP   2      /* DB2: set entry mode                 */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_INC\fP   1      /*   DB1: 1=increment, 0=decrement     */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_SHIFT\fP   0      /*   DB2: 1=display shift on           */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ON\fP   3      /* DB3: turn lcd/cursor on             */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ON_DISPLAY\fP   2      /*   DB2: turn display on              */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ON_CURSOR\fP   1      /*   DB1: turn cursor on               */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ON_BLINK\fP   0      /*     DB0: blinking cursor ?          */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE\fP   4      /* DB4: move cursor/display            */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_DISP\fP   3      /*   DB3: move display (0-> cursor) ?  */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_RIGHT\fP   2      /*   DB2: move right (0-> left) ?      */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION\fP   5      /* DB5: function set                   */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_8BIT\fP   4      /*   DB4: set 8BIT mode (0->4BIT mode) */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_2LINES\fP   3      /*   DB3: two lines (0->one line)      */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_10DOTS\fP   2      /*   DB2: 5x10 font (0->5x7 font)      */"
+.br
+.ti -1c
+.RI "#define \fBLCD_CGRAM\fP   6      /* DB6: set CG RAM address             */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DDRAM\fP   7      /* DB7: set DD RAM address             */"
+.br
+.ti -1c
+.RI "#define \fBLCD_BUSY\fP   7      /* DB7: LCD is busy                    */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_DEC\fP   0x04   /* display shift off, dec cursor move dir */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_DEC_SHIFT\fP   0x05   /* display shift on,  dec cursor move dir */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_INC_\fP   0x06   /* display shift off, inc cursor move dir */"
+.br
+.ti -1c
+.RI "#define \fBLCD_ENTRY_INC_SHIFT\fP   0x07   /* display shift on,  inc cursor move dir */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_OFF\fP   0x08   /* display off                            */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_ON\fP   0x0C   /* display on, cursor off                 */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_ON_BLINK\fP   0x0D   /* display on, cursor off, blink char     */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_ON_CURSOR\fP   0x0E   /* display on, cursor on                  */"
+.br
+.ti -1c
+.RI "#define \fBLCD_DISP_ON_CURSOR_BLINK\fP   0x0F   /* display on, cursor on, blink char      */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_CURSOR_LEFT\fP   0x10   /* move cursor left  (decrement)          */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_CURSOR_RIGHT\fP   0x14   /* move cursor right (increment)          */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_DISP_LEFT\fP   0x18   /* shift display left                     */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MOVE_DISP_RIGHT\fP   0x1C   /* shift display right                    */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_4BIT_1LINE\fP   0x20   /* 4-bit interface, single line, 5x7 dots */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_4BIT_2LINES\fP   0x28   /* 4-bit interface, dual line,   5x7 dots */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_8BIT_1LINE\fP   0x30   /* 8-bit interface, single line, 5x7 dots */"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_8BIT_2LINES\fP   0x38   /* 8-bit interface, dual line,   5x7 dots */"
+.br
+.ti -1c
+.RI "#define \fBLCD_MODE_DEFAULT\fP   ((1<<\fBLCD_ENTRY_MODE\fP) | (1<<\fBLCD_ENTRY_INC\fP) )"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBlcd_init\fP (uint8_t dispAttr)"
+.br
+.RI "\fIInitialize display and select type of cursor\&. \fP"
+.ti -1c
+.RI "void \fBlcd_clrscr\fP (void)"
+.br
+.RI "\fIClear display and set cursor to home position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_home\fP (void)"
+.br
+.RI "\fISet cursor to home position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_gotoxy\fP (uint8_t x, uint8_t y)"
+.br
+.RI "\fISet cursor to specified position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_putc\fP (char c)"
+.br
+.RI "\fIDisplay character at current cursor position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_puts\fP (const char *s)"
+.br
+.RI "\fIDisplay string without auto linefeed\&. \fP"
+.ti -1c
+.RI "void \fBlcd_puts_p\fP (const char *progmem_s)"
+.br
+.RI "\fIDisplay string from program memory without auto linefeed\&. \fP"
+.ti -1c
+.RI "void \fBlcd_command\fP (uint8_t cmd)"
+.br
+.RI "\fISend LCD controller instruction command\&. \fP"
+.ti -1c
+.RI "void \fBlcd_data\fP (uint8_t data)"
+.br
+.RI "\fISend data byte to LCD controller\&. \fP"
+.ti -1c
+.RI "#define \fBlcd_puts_P\fP(__s)   \fBlcd_puts_p\fP(PSTR(__s))"
+.br
+.RI "\fImacros for automatically storing string constant in program memory \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Basic routines for interfacing a HD44780U-based text LCD display\&. 
+
+
+.PP
+.nf
+#include <lcd\&.h> 
+
+.fi
+.PP
+.PP
+Originally based on Volker Oth's LCD library, changed \fBlcd_init()\fP, added additional constants for \fBlcd_command()\fP, added 4-bit I/O mode, improved and optimized code\&.
+.PP
+Library can be operated in memory mapped mode (LCD_IO_MODE=0) or in 4-bit IO port mode (LCD_IO_MODE=1)\&. 8-bit IO port mode not supported\&.
+.PP
+Memory mapped mode compatible with Kanda STK200, but supports also generation of R/W signal through A8 address line\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+Peter Fleury pfleury@gmx.ch http://jump.to/fleury
+.RE
+.PP
+\fBSee Also:\fP
+.RS 4
+The chapter \fCInterfacing a HD44780 Based LCD to an AVR\fP on my home page\&. 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define LCD_BUSY   7      /* DB7: LCD is busy                    */"
+
+.PP
+Definition at line 157 of file lcd\&.h\&.
+.SS "#define LCD_CGRAM   6      /* DB6: set CG RAM address             */"
+
+.PP
+Definition at line 155 of file lcd\&.h\&.
+.SS "#define LCD_CLR   0      /* DB0: clear display                  */"
+
+.PP
+Definition at line 139 of file lcd\&.h\&.
+.SS "#define LCD_CONTROLLER_KS0073   0"
+Use 0 for HD44780 controller, 1 for KS0073 controller 
+.PP
+Definition at line 56 of file lcd\&.h\&.
+.SS "#define LCD_DATA0_PIN   0"
+pin for 4bit data bit 0 
+.PP
+Definition at line 106 of file lcd\&.h\&.
+.SS "#define LCD_DATA0_PORT   \fBLCD_PORT\fP"
+port for 4bit data bit 0 
+.PP
+Definition at line 102 of file lcd\&.h\&.
+.SS "#define LCD_DATA1_PIN   1"
+pin for 4bit data bit 1 
+.PP
+Definition at line 107 of file lcd\&.h\&.
+.SS "#define LCD_DATA1_PORT   \fBLCD_PORT\fP"
+port for 4bit data bit 1 
+.PP
+Definition at line 103 of file lcd\&.h\&.
+.SS "#define LCD_DATA2_PIN   2"
+pin for 4bit data bit 2 
+.PP
+Definition at line 108 of file lcd\&.h\&.
+.SS "#define LCD_DATA2_PORT   \fBLCD_PORT\fP"
+port for 4bit data bit 2 
+.PP
+Definition at line 104 of file lcd\&.h\&.
+.SS "#define LCD_DATA3_PIN   3"
+pin for 4bit data bit 3 
+.PP
+Definition at line 109 of file lcd\&.h\&.
+.SS "#define LCD_DATA3_PORT   \fBLCD_PORT\fP"
+port for 4bit data bit 3 
+.PP
+Definition at line 105 of file lcd\&.h\&.
+.SS "#define LCD_DDRAM   7      /* DB7: set DD RAM address             */"
+
+.PP
+Definition at line 156 of file lcd\&.h\&.
+.SS "#define LCD_DISP_LENGTH   20"
+visible characters per line of the display 
+.PP
+Definition at line 63 of file lcd\&.h\&.
+.SS "#define LCD_DISP_OFF   0x08   /* display off                            */"
+
+.PP
+Definition at line 166 of file lcd\&.h\&.
+.SS "#define LCD_DISP_ON   0x0C   /* display on, cursor off                 */"
+
+.PP
+Definition at line 167 of file lcd\&.h\&.
+.SS "#define LCD_DISP_ON_BLINK   0x0D   /* display on, cursor off, blink char     */"
+
+.PP
+Definition at line 168 of file lcd\&.h\&.
+.SS "#define LCD_DISP_ON_CURSOR   0x0E   /* display on, cursor on                  */"
+
+.PP
+Definition at line 169 of file lcd\&.h\&.
+.SS "#define LCD_DISP_ON_CURSOR_BLINK   0x0F   /* display on, cursor on, blink char      */"
+
+.PP
+Definition at line 170 of file lcd\&.h\&.
+.SS "#define LCD_E_PIN   6"
+pin for Enable line 
+.PP
+Definition at line 115 of file lcd\&.h\&.
+.SS "#define LCD_E_PORT   \fBLCD_PORT\fP"
+port for Enable line 
+.PP
+Definition at line 114 of file lcd\&.h\&.
+.SS "#define LCD_ENTRY_DEC   0x04   /* display shift off, dec cursor move dir */"
+
+.PP
+Definition at line 160 of file lcd\&.h\&.
+.SS "#define LCD_ENTRY_DEC_SHIFT   0x05   /* display shift on,  dec cursor move dir */"
+
+.PP
+Definition at line 161 of file lcd\&.h\&.
+.SS "#define LCD_ENTRY_INC   1      /*   DB1: 1=increment, 0=decrement     */"
+
+.PP
+Definition at line 142 of file lcd\&.h\&.
+.SS "#define LCD_ENTRY_INC_   0x06   /* display shift off, inc cursor move dir */"
+
+.PP
+Definition at line 162 of file lcd\&.h\&.
+.SS "#define LCD_ENTRY_INC_SHIFT   0x07   /* display shift on,  inc cursor move dir */"
+
+.PP
+Definition at line 163 of file lcd\&.h\&.
+.SS "#define LCD_ENTRY_MODE   2      /* DB2: set entry mode                 */"
+
+.PP
+Definition at line 141 of file lcd\&.h\&.
+.SS "#define LCD_ENTRY_SHIFT   0      /*   DB2: 1=display shift on           */"
+
+.PP
+Definition at line 143 of file lcd\&.h\&.
+.SS "#define LCD_FUNCTION   5      /* DB5: function set                   */"
+
+.PP
+Definition at line 151 of file lcd\&.h\&.
+.SS "#define LCD_FUNCTION_10DOTS   2      /*   DB2: 5x10 font (0->5x7 font)      */"
+
+.PP
+Definition at line 154 of file lcd\&.h\&.
+.SS "#define LCD_FUNCTION_2LINES   3      /*   DB3: two lines (0->one line)      */"
+
+.PP
+Definition at line 153 of file lcd\&.h\&.
+.SS "#define LCD_FUNCTION_4BIT_1LINE   0x20   /* 4-bit interface, single line, 5x7 dots */"
+
+.PP
+Definition at line 179 of file lcd\&.h\&.
+.SS "#define LCD_FUNCTION_4BIT_2LINES   0x28   /* 4-bit interface, dual line,   5x7 dots */"
+
+.PP
+Definition at line 180 of file lcd\&.h\&.
+.SS "#define LCD_FUNCTION_8BIT   4      /*   DB4: set 8BIT mode (0->4BIT mode) */"
+
+.PP
+Definition at line 152 of file lcd\&.h\&.
+.SS "#define LCD_FUNCTION_8BIT_1LINE   0x30   /* 8-bit interface, single line, 5x7 dots */"
+
+.PP
+Definition at line 181 of file lcd\&.h\&.
+.SS "#define LCD_FUNCTION_8BIT_2LINES   0x38   /* 8-bit interface, dual line,   5x7 dots */"
+
+.PP
+Definition at line 182 of file lcd\&.h\&.
+.SS "#define LCD_HOME   1      /* DB1: return to home position        */"
+
+.PP
+Definition at line 140 of file lcd\&.h\&.
+.SS "#define LCD_IO_MODE   1"
+0: memory mapped mode, 1: IO port mode 
+.PP
+Definition at line 71 of file lcd\&.h\&.
+.SS "#define LCD_LINE_LENGTH   0x40"
+internal line length of the display 
+.PP
+Definition at line 64 of file lcd\&.h\&.
+.SS "#define LCD_LINES   4"
+number of visible lines of the display 
+.PP
+Definition at line 62 of file lcd\&.h\&.
+.SS "#define LCD_MODE_DEFAULT   ((1<<\fBLCD_ENTRY_MODE\fP) | (1<<\fBLCD_ENTRY_INC\fP) )"
+
+.PP
+Definition at line 185 of file lcd\&.h\&.
+.SS "#define LCD_MOVE   4      /* DB4: move cursor/display            */"
+
+.PP
+Definition at line 148 of file lcd\&.h\&.
+.SS "#define LCD_MOVE_CURSOR_LEFT   0x10   /* move cursor left  (decrement)          */"
+
+.PP
+Definition at line 173 of file lcd\&.h\&.
+.SS "#define LCD_MOVE_CURSOR_RIGHT   0x14   /* move cursor right (increment)          */"
+
+.PP
+Definition at line 174 of file lcd\&.h\&.
+.SS "#define LCD_MOVE_DISP   3      /*   DB3: move display (0-> cursor) ?  */"
+
+.PP
+Definition at line 149 of file lcd\&.h\&.
+.SS "#define LCD_MOVE_DISP_LEFT   0x18   /* shift display left                     */"
+
+.PP
+Definition at line 175 of file lcd\&.h\&.
+.SS "#define LCD_MOVE_DISP_RIGHT   0x1C   /* shift display right                    */"
+
+.PP
+Definition at line 176 of file lcd\&.h\&.
+.SS "#define LCD_MOVE_RIGHT   2      /*   DB2: move right (0-> left) ?      */"
+
+.PP
+Definition at line 150 of file lcd\&.h\&.
+.SS "#define LCD_ON   3      /* DB3: turn lcd/cursor on             */"
+
+.PP
+Definition at line 144 of file lcd\&.h\&.
+.SS "#define LCD_ON_BLINK   0      /*     DB0: blinking cursor ?          */"
+
+.PP
+Definition at line 147 of file lcd\&.h\&.
+.SS "#define LCD_ON_CURSOR   1      /*   DB1: turn cursor on               */"
+
+.PP
+Definition at line 146 of file lcd\&.h\&.
+.SS "#define LCD_ON_DISPLAY   2      /*   DB2: turn display on              */"
+
+.PP
+Definition at line 145 of file lcd\&.h\&.
+.SS "#define LCD_PORT   PORTL"
+port for the LCD lines 
+.PP
+Definition at line 42 of file lcd\&.h\&.
+.SS "#define lcd_puts_P(__s)   \fBlcd_puts_p\fP(PSTR(__s))"
+
+.PP
+macros for automatically storing string constant in program memory 
+.PP
+Definition at line 277 of file lcd\&.h\&.
+.SS "#define LCD_RS_PIN   4"
+pin for RS line 
+.PP
+Definition at line 111 of file lcd\&.h\&.
+.SS "#define LCD_RS_PORT   \fBLCD_PORT\fP"
+port for RS line 
+.PP
+Definition at line 110 of file lcd\&.h\&.
+.SS "#define LCD_RW_PIN   5"
+pin for RW line 
+.PP
+Definition at line 113 of file lcd\&.h\&.
+.SS "#define LCD_RW_PORT   \fBLCD_PORT\fP"
+port for RW line 
+.PP
+Definition at line 112 of file lcd\&.h\&.
+.SS "#define LCD_START_LINE1   0x00"
+DDRAM address of first char of line 1 
+.PP
+Definition at line 65 of file lcd\&.h\&.
+.SS "#define LCD_START_LINE2   0x40"
+DDRAM address of first char of line 2 
+.PP
+Definition at line 66 of file lcd\&.h\&.
+.SS "#define LCD_START_LINE3   0x14"
+DDRAM address of first char of line 3 
+.PP
+Definition at line 67 of file lcd\&.h\&.
+.SS "#define LCD_START_LINE4   0x54"
+DDRAM address of first char of line 4 
+.PP
+Definition at line 68 of file lcd\&.h\&.
+.SS "#define LCD_WRAP_LINES   0"
+0: no wrap, 1: wrap at end of visible line 
+.PP
+Definition at line 69 of file lcd\&.h\&.
+.SS "#define XTAL   F_CPU"
+clock frequency in Hz, used to calculate delay timer 
+.PP
+Definition at line 49 of file lcd\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "void lcd_clrscr (void)"
+
+.PP
+Clear display and set cursor to home position\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+none 
+.RE
+.PP
+
+.PP
+Definition at line 424 of file lcd\&.c\&.
+.SS "void lcd_command (uint8_tcmd)"
+
+.PP
+Send LCD controller instruction command\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcmd\fP instruction to send to LCD controller, see HD44780 data sheet 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+none 
+.RE
+.PP
+
+.PP
+Definition at line 362 of file lcd\&.c\&.
+.SS "void lcd_data (uint8_tdata)"
+
+.PP
+Send data byte to LCD controller\&. Similar to \fBlcd_putc()\fP, but without interpreting LF 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata\fP byte to send to LCD controller, see HD44780 data sheet 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+none 
+.RE
+.PP
+
+.PP
+Definition at line 374 of file lcd\&.c\&.
+.SS "void lcd_gotoxy (uint8_tx, uint8_ty)"
+
+.PP
+Set cursor to specified position\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx\fP horizontal position
+.br
+ (0: left most position) 
+.br
+\fIy\fP vertical position
+.br
+ (0: first line) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+none 
+.RE
+.PP
+< DDRAM address of first char of line 1
+.PP
+< DDRAM address of first char of line 2
+.PP
+< DDRAM address of first char of line 3
+.PP
+< DDRAM address of first char of line 4 
+.PP
+Definition at line 388 of file lcd\&.c\&.
+.SS "void lcd_home (void)"
+
+.PP
+Set cursor to home position\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+none 
+.RE
+.PP
+
+.PP
+Definition at line 433 of file lcd\&.c\&.
+.SS "void lcd_init (uint8_tdispAttr)"
+
+.PP
+Initialize display and select type of cursor\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdispAttr\fP \fBLCD_DISP_OFF\fP display off
+.br
+ \fBLCD_DISP_ON\fP display on, cursor off
+.br
+ \fBLCD_DISP_ON_CURSOR\fP display on, cursor on
+.br
+ \fBLCD_DISP_ON_CURSOR_BLINK\fP display on, cursor on flashing 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+none 
+.RE
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 1
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 1
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 2
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 2
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 3
+.PP
+< port for the LCD lines
+.PP
+< port for RS line
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< port for the LCD lines
+.PP
+< port for RW line
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< port for the LCD lines
+.PP
+< port for Enable line
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< pin for 4bit data bit 0
+.PP
+< pin for 4bit data bit 1
+.PP
+< pin for 4bit data bit 2
+.PP
+< pin for 4bit data bit 3
+.PP
+< pin for RS line
+.PP
+< pin for RW line
+.PP
+< pin for Enable line
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 1
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 1
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 2
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 2
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 3
+.PP
+< pin for 4bit data bit 0
+.PP
+< pin for 4bit data bit 1
+.PP
+< pin for 4bit data bit 2
+.PP
+< pin for 4bit data bit 3
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< port for the LCD lines
+.PP
+< port for RS line
+.PP
+< pin for RS line
+.PP
+< port for the LCD lines
+.PP
+< port for RW line
+.PP
+< pin for RW line
+.PP
+< port for the LCD lines
+.PP
+< port for Enable line
+.PP
+< pin for Enable line
+.PP
+< port for the LCD lines
+.PP
+< port for RS line
+.PP
+< pin for RS line
+.PP
+< port for the LCD lines
+.PP
+< port for RW line
+.PP
+< pin for RW line
+.PP
+< port for the LCD lines
+.PP
+< port for Enable line
+.PP
+< pin for Enable line
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< pin for 4bit data bit 0
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 1
+.PP
+< pin for 4bit data bit 1
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 2
+.PP
+< pin for 4bit data bit 2
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 3
+.PP
+< pin for 4bit data bit 3
+.PP
+< clock frequency in Hz, used to calculate delay timer
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 1
+.PP
+< pin for 4bit data bit 1
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< pin for 4bit data bit 0
+.PP
+< clock frequency in Hz, used to calculate delay timer
+.PP
+< clock frequency in Hz, used to calculate delay timer
+.PP
+< clock frequency in Hz, used to calculate delay timer
+.PP
+< port for the LCD lines
+.PP
+< port for 4bit data bit 0
+.PP
+< pin for 4bit data bit 0
+.PP
+< clock frequency in Hz, used to calculate delay timer 
+.PP
+Definition at line 528 of file lcd\&.c\&.
+.SS "void lcd_putc (charc)"
+
+.PP
+Display character at current cursor position\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIc\fP character to be displayed 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+none 
+.RE
+.PP
+
+.PP
+Definition at line 444 of file lcd\&.c\&.
+.SS "void lcd_puts (const char *s)"
+
+.PP
+Display string without auto linefeed\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIs\fP string to be displayed 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+none 
+.RE
+.PP
+
+.PP
+Definition at line 491 of file lcd\&.c\&.
+.SS "void lcd_puts_p (const char *progmem_s)"
+
+.PP
+Display string from program memory without auto linefeed\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIs\fP string from program memory be be displayed 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+none 
+.RE
+.PP
+\fBSee Also:\fP
+.RS 4
+\fBlcd_puts_P\fP 
+.RE
+.PP
+
+.PP
+Definition at line 508 of file lcd\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

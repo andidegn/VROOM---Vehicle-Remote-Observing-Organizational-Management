@@ -1,0 +1,159 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/lcd_board/lcd/lcd.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/lcd_board/lcd/lcd.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <inttypes\&.h>\fP
+.br
+\fC#include <avr/io\&.h>\fP
+.br
+\fC#include <avr/pgmspace\&.h>\fP
+.br
+\fC#include 'lcd\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDDR\fP(x)   (*(&x - 1))      /* address of data direction register of port x */"
+.br
+.ti -1c
+.RI "#define \fBPIN\fP(x)   (*(&x - 2))    /* address of input register of port x          */"
+.br
+.ti -1c
+.RI "#define \fBlcd_e_delay\fP()   __asm__ __volatile__( 'rjmp 1f\\n 1:' );"
+.br
+.ti -1c
+.RI "#define \fBlcd_e_high\fP()   \fBLCD_E_PORT\fP  |=  _BV(\fBLCD_E_PIN\fP);"
+.br
+.ti -1c
+.RI "#define \fBlcd_e_low\fP()   \fBLCD_E_PORT\fP  &= ~_BV(\fBLCD_E_PIN\fP);"
+.br
+.ti -1c
+.RI "#define \fBlcd_e_toggle\fP()   toggle_e()"
+.br
+.ti -1c
+.RI "#define \fBlcd_rw_high\fP()   \fBLCD_RW_PORT\fP |=  _BV(\fBLCD_RW_PIN\fP)"
+.br
+.ti -1c
+.RI "#define \fBlcd_rw_low\fP()   \fBLCD_RW_PORT\fP &= ~_BV(\fBLCD_RW_PIN\fP)"
+.br
+.ti -1c
+.RI "#define \fBlcd_rs_high\fP()   \fBLCD_RS_PORT\fP |=  _BV(\fBLCD_RS_PIN\fP)"
+.br
+.ti -1c
+.RI "#define \fBlcd_rs_low\fP()   \fBLCD_RS_PORT\fP &= ~_BV(\fBLCD_RS_PIN\fP)"
+.br
+.ti -1c
+.RI "#define \fBLCD_FUNCTION_DEFAULT\fP   \fBLCD_FUNCTION_4BIT_2LINES\fP"
+.br
+.ti -1c
+.RI "#define \fBdelay\fP(us)   _delayFourCycles( ( ( 1*(\fBXTAL\fP/4000) )*us)/1000 )"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBlcd_command\fP (uint8_t cmd)"
+.br
+.RI "\fISend LCD controller instruction command\&. \fP"
+.ti -1c
+.RI "void \fBlcd_data\fP (uint8_t data)"
+.br
+.RI "\fISend data byte to LCD controller\&. \fP"
+.ti -1c
+.RI "void \fBlcd_gotoxy\fP (uint8_t x, uint8_t y)"
+.br
+.RI "\fISet cursor to specified position\&. \fP"
+.ti -1c
+.RI "int \fBlcd_getxy\fP (void)"
+.br
+.ti -1c
+.RI "void \fBlcd_clrscr\fP (void)"
+.br
+.RI "\fIClear display and set cursor to home position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_home\fP (void)"
+.br
+.RI "\fISet cursor to home position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_putc\fP (char c)"
+.br
+.RI "\fIDisplay character at current cursor position\&. \fP"
+.ti -1c
+.RI "void \fBlcd_puts\fP (const char *s)"
+.br
+.RI "\fIDisplay string without auto linefeed\&. \fP"
+.ti -1c
+.RI "void \fBlcd_puts_p\fP (const char *progmem_s)"
+.br
+.RI "\fIDisplay string from program memory without auto linefeed\&. \fP"
+.ti -1c
+.RI "void \fBlcd_init\fP (uint8_t dispAttr)"
+.br
+.RI "\fIInitialize display and select type of cursor\&. \fP"
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DDR(x)   (*(&x - 1))      /* address of data direction register of port x */"
+
+.PP
+Definition at line 36 of file lcd\&.c\&.
+.SS "#define delay(us)   _delayFourCycles( ( ( 1*(\fBXTAL\fP/4000) )*us)/1000 )"
+
+.PP
+Definition at line 120 of file lcd\&.c\&.
+.SS "#define lcd_e_delay()   __asm__ __volatile__( 'rjmp 1f\\n 1:' );"
+
+.PP
+Definition at line 46 of file lcd\&.c\&.
+.SS "#define lcd_e_high()   \fBLCD_E_PORT\fP  |=  _BV(\fBLCD_E_PIN\fP);"
+
+.PP
+Definition at line 47 of file lcd\&.c\&.
+.SS "#define lcd_e_low()   \fBLCD_E_PORT\fP  &= ~_BV(\fBLCD_E_PIN\fP);"
+
+.PP
+Definition at line 48 of file lcd\&.c\&.
+.SS "#define lcd_e_toggle()   toggle_e()"
+
+.PP
+Definition at line 49 of file lcd\&.c\&.
+.SS "#define LCD_FUNCTION_DEFAULT   \fBLCD_FUNCTION_4BIT_2LINES\fP"
+
+.PP
+Definition at line 60 of file lcd\&.c\&.
+.SS "#define lcd_rs_high()   \fBLCD_RS_PORT\fP |=  _BV(\fBLCD_RS_PIN\fP)"
+
+.PP
+Definition at line 52 of file lcd\&.c\&.
+.SS "#define lcd_rs_low()   \fBLCD_RS_PORT\fP &= ~_BV(\fBLCD_RS_PIN\fP)"
+
+.PP
+Definition at line 53 of file lcd\&.c\&.
+.SS "#define lcd_rw_high()   \fBLCD_RW_PORT\fP |=  _BV(\fBLCD_RW_PIN\fP)"
+
+.PP
+Definition at line 50 of file lcd\&.c\&.
+.SS "#define lcd_rw_low()   \fBLCD_RW_PORT\fP &= ~_BV(\fBLCD_RW_PIN\fP)"
+
+.PP
+Definition at line 51 of file lcd\&.c\&.
+.SS "#define PIN(x)   (*(&x - 2))    /* address of input register of port x          */"
+
+.PP
+Definition at line 41 of file lcd\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "int lcd_getxy (void)"
+
+.PP
+Definition at line 415 of file lcd\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

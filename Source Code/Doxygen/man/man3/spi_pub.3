@@ -1,0 +1,241 @@
+.TH "Public" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public \- 
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBSPI_DATA_MODE\fP { \fBSPI_MODE_0\fP = 0, \fBSPI_MODE_1\fP = _BV(CPHA), \fBSPI_MODE_2\fP = _BV(CPOL), \fBSPI_MODE_3\fP = _BV(CPOL) | _BV(CPHA) }"
+.br
+.RI "\fISpecifies the available modes for SPI transfer format 
+.br
+\&. \fP"
+.ti -1c
+.RI "enum \fBSPI_DATA_DIRECTION\fP { \fBSPI_MSB_FIRST\fP = 0, \fBSPI_LST_FIRST\fP = _BV(DORD) }"
+.br
+.RI "\fIdefines for the data direction \fP"
+.ti -1c
+.RI "enum \fBSPI_CS_ACTIVE_LEVEL\fP { \fBSPI_CS_ACTIVE_LOW\fP = 0, \fBSPI_CS_ACTIVE_HIGH\fP = 1 }"
+.br
+.RI "\fIdefines for the CS/CE pin active level \fP"
+.ti -1c
+.RI "enum \fBSPI_DIVIDER\fP { \fBSPI_DIVIDER_4\fP = 0, \fBSPI_DIVIDER_16\fP = _BV(SPR0), \fBSPI_DIVIDER_64\fP = _BV(SPR1), \fBSPI_DIVIDER_128\fP = _BV(SPR0) | _BV(SPR1), \fBSPI_DIVIDER_2\fP = SPI_DIVIDER_4, \fBSPI_DIVIDER_8\fP = SPI_DIVIDER_16, \fBSPI_DIVIDER_32\fP = SPI_DIVIDER_64 }"
+.br
+.RI "\fIdefines for the frequency divider \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t __cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
+.br
+.RI "\fISets up the SPI bus as master using supplied parameters\&. \fP"
+.ti -1c
+.RI "int8_t \fBspi_send_byte\fP (int8_t __handle, uint8_t __data)"
+.br
+.RI "\fISends the 'data' on the SPI bus using the parameters corresponding to the 'handle'\&. \fP"
+.ti -1c
+.RI "int8_t \fBspi_send\fP (int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes)"
+.br
+.RI "\fISends the 'data' array on the SPI bus using the parameters corresponding to the 'handle'\&. \fP"
+.ti -1c
+.RI "void \fBspi_release\fP (void)"
+.br
+.RI "\fIReleases the SPI\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBSPI_CS_ACTIVE_LEVEL\fP"
+
+.PP
+defines for the CS/CE pin active level 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fISPI_CS_ACTIVE_LOW \fP\fP
+.TP
+\fB\fISPI_CS_ACTIVE_HIGH \fP\fP
+.PP
+Definition at line 49 of file spi\&.h\&.
+.SS "enum \fBSPI_DATA_DIRECTION\fP"
+
+.PP
+defines for the data direction 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fISPI_MSB_FIRST \fP\fP
+.TP
+\fB\fISPI_LST_FIRST \fP\fP
+.PP
+Definition at line 40 of file spi\&.h\&.
+.SS "enum \fBSPI_DATA_MODE\fP"
+
+.PP
+Specifies the available modes for SPI transfer format 
+.br
+\&. 
+.IP "\(bu" 2
+SPI_MODE_0: Polarity positive, trigger rising edge 
+.br
+
+.IP "\(bu" 2
+SPI_MODE_1: Polarity positive, trigger falling edge 
+.br
+
+.IP "\(bu" 2
+SPI_MODE_2: Polarity negative, trigger rising edge 
+.br
+
+.IP "\(bu" 2
+SPI_MODE_3: Polarity negative, trigger falling edge 
+.br
+
+.PP
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fISPI_MODE_0 \fP\fP
+.TP
+\fB\fISPI_MODE_1 \fP\fP
+.TP
+\fB\fISPI_MODE_2 \fP\fP
+.TP
+\fB\fISPI_MODE_3 \fP\fP
+.PP
+Definition at line 29 of file spi\&.h\&.
+.SS "enum \fBSPI_DIVIDER\fP"
+
+.PP
+defines for the frequency divider 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fISPI_DIVIDER_4 \fP\fP
+.TP
+\fB\fISPI_DIVIDER_16 \fP\fP
+.TP
+\fB\fISPI_DIVIDER_64 \fP\fP
+.TP
+\fB\fISPI_DIVIDER_128 \fP\fP
+.TP
+\fB\fISPI_DIVIDER_2 \fP\fP
+.TP
+\fB\fISPI_DIVIDER_8 \fP\fP
+.TP
+\fB\fISPI_DIVIDER_32 \fP\fP
+.PP
+Definition at line 58 of file spi\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "int8_t spi_master_setup (\fBSPI_DATA_MODE\fP__mode, \fBSPI_DATA_DIRECTION\fP__data_direction, \fBSPI_DIVIDER\fP__freq_divider, uint8_t__cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP__cs_active_level, void(*)(uint8_t *__data)__callback_function_ptr)"
+
+.PP
+Sets up the SPI bus as master using supplied parameters\&. Takes the supplied SPI parameters and stores them in a \fBhandle_param\fP array and returns a handle 
+.PP
+\fBNote:\fP
+.RS 4
+Max 16 different handles are available
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fISPI_DATA_MODE\fP __mode - SPI mode 
+.br
+\fISPI_DATA_DIRECTION\fP __data_direction - the data direction (MSB first or LSB first) 
+.br
+\fISPI_DIVIDER\fP __freq_devider - the frequency divider 
+.br
+\fIuint8_t\fP __cs_pin - the pin number of the CS/CE pin 
+.br
+\fISPI_CS_ACTIVE_LEVEL\fP __cs_active_level - the level of which the chip is active (high/low) 
+.br
+\fIvoid\fP *__callback_function_ptr - the pointer to the function which should be called when the SPI interrupt is triggered
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+uint8_t - a handle for the setup 
+.RE
+.PP
+
+.PP
+Definition at line 69 of file spi\&.c\&.
+.SS "void spi_release (void)"
+
+.PP
+Releases the SPI\&. Sets is_busy to 0 indicating that no tasks is being handled by the SPI
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 152 of file spi\&.c\&.
+.SS "int8_t spi_send (int8_t__handle, uint8_t *__data_array, uint8_t__no_of_bytes)"
+
+.PP
+Sends the 'data' array on the SPI bus using the parameters corresponding to the 'handle'\&. Stores the 'data' pointer and the no_of_bytes and calls '_send()' with the first data slot 
+.PP
+\fBNote:\fP
+.RS 4
+This 'data' pointer is being used to store the returning data as well
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP __handle - a handle corresponding to an SPI setup 
+.br
+\fIuint8_t\fP *__data - the data array to be sent 
+.br
+\fIuint8_t\fP __no_of_bytes - the total number of bytes to be sent
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int8_t - '0' if unsuccessful, '1' if successful 
+.RE
+.PP
+
+.PP
+Definition at line 109 of file spi\&.c\&.
+.SS "int8_t spi_send_byte (int8_t__handle, uint8_t__data)"
+
+.PP
+Sends the 'data' on the SPI bus using the parameters corresponding to the 'handle'\&. Sends 1 (one) byte of data by passing __handle and __data to \fBspi_send()\fP and setting length to 1 (one)
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP __handle - a handle corresponding to an SPI setup 
+.br
+\fIuint8_t\fP __data - the data to be sent
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int8_t - '0' if unsuccessful, '1' if successful 
+.RE
+.PP
+
+.PP
+Definition at line 99 of file spi\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

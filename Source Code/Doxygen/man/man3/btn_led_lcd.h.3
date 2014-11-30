@@ -1,0 +1,119 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/lcd_board/button_led/btn_led_lcd.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/lcd_board/button_led/btn_led_lcd.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/io\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBBTN_LED_PORT\fP   PORTK"
+.br
+.ti -1c
+.RI "#define \fBBTN_PIN0\fP   0"
+.br
+.ti -1c
+.RI "#define \fBBTN_PIN1\fP   1"
+.br
+.ti -1c
+.RI "#define \fBBTN_PIN2\fP   2"
+.br
+.ti -1c
+.RI "#define \fBBTN_PIN3\fP   3"
+.br
+.ti -1c
+.RI "#define \fBLED_GREEN\fP   4"
+.br
+.ti -1c
+.RI "#define \fBLED_RED\fP   5"
+.br
+.ti -1c
+.RI "#define \fBLED_ON\fP   1"
+.br
+.ti -1c
+.RI "#define \fBLED_OFF\fP   0"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBbtn_led_lcd_init\fP (void)"
+.br
+.ti -1c
+.RI "bool \fBbtn_lcd_is_pressed\fP (uint8_t pin)"
+.br
+.ti -1c
+.RI "void \fBled_lcd_set\fP (uint8_t led, uint8_t state)"
+.br
+.ti -1c
+.RI "void \fBled_lcd_toggle\fP (uint8_t led)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BTN_LED_PORT   PORTK"
+
+.PP
+Definition at line 15 of file btn_led_lcd\&.h\&.
+.SS "#define BTN_PIN0   0"
+
+.PP
+Definition at line 21 of file btn_led_lcd\&.h\&.
+.SS "#define BTN_PIN1   1"
+
+.PP
+Definition at line 22 of file btn_led_lcd\&.h\&.
+.SS "#define BTN_PIN2   2"
+
+.PP
+Definition at line 23 of file btn_led_lcd\&.h\&.
+.SS "#define BTN_PIN3   3"
+
+.PP
+Definition at line 24 of file btn_led_lcd\&.h\&.
+.SS "#define LED_GREEN   4"
+
+.PP
+Definition at line 26 of file btn_led_lcd\&.h\&.
+.SS "#define LED_OFF   0"
+
+.PP
+Definition at line 30 of file btn_led_lcd\&.h\&.
+.SS "#define LED_ON   1"
+
+.PP
+Definition at line 29 of file btn_led_lcd\&.h\&.
+.SS "#define LED_RED   5"
+
+.PP
+Definition at line 27 of file btn_led_lcd\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "bool btn_lcd_is_pressed (uint8_tpin)"
+
+.PP
+Definition at line 22 of file btn_led_lcd\&.c\&.
+.SS "void btn_led_lcd_init (void)"
+
+.PP
+Definition at line 13 of file btn_led_lcd\&.c\&.
+.SS "void led_lcd_set (uint8_tled, uint8_tstate)"
+
+.PP
+Definition at line 26 of file btn_led_lcd\&.c\&.
+.SS "void led_lcd_toggle (uint8_tled)"
+
+.PP
+Definition at line 36 of file btn_led_lcd\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

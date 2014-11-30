@@ -1,0 +1,46 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/thermometer/tc72.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/thermometer/tc72.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/io\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinit_tc72\fP (uint8_t cs_pin)"
+.br
+.RI "\fIInitiates tc72 using SPI\&. \fP"
+.ti -1c
+.RI "float \fBget_temperature\fP (void)"
+.br
+.RI "\fIFunction to read the last measured temperature from the tc72 sensor\&. \fP"
+.ti -1c
+.RI "void \fBmeasure_temperature\fP (void)"
+.br
+.RI "\fIFunction which starts measuring the temperature\&. \fP"
+.ti -1c
+.RI "float \fBcalculate_temperature\fP (uint8_t MSB, uint8_t LSB)"
+.br
+.RI "\fIFunction to calculate the temperature\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor:\fP
+.RS 4
+: Kenneth René Jensen : 0\&.3 
+.RE
+.PP
+
+.PP
+Definition in file \fBtc72\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,0 +1,99 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/thermometer/tc72.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/thermometer/tc72.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/interrupt\&.h>\fP
+.br
+\fC#include 'tc72\&.h'\fP
+.br
+\fC#include '\&.\&./sensor_scheduler\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./data_comm/spi/spi\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBSDI_Read\fP   0x02U"
+.br
+.ti -1c
+.RI "#define \fBSDI_Write\fP   0x80U"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBTC72_STATE\fP { \fBINIT\fP, \fBRUNNING\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinit_tc72\fP (uint8_t cs_pin)"
+.br
+.RI "\fIInitiates tc72 using SPI\&. \fP"
+.ti -1c
+.RI "float \fBcalculate_temperature\fP (uint8_t MSB, uint8_t LSB)"
+.br
+.RI "\fIFunction to calculate the temperature\&. \fP"
+.ti -1c
+.RI "float \fBget_temperature\fP (void)"
+.br
+.RI "\fIFunction to read the last measured temperature from the tc72 sensor\&. \fP"
+.ti -1c
+.RI "void \fBmeasure_temperature\fP (void)"
+.br
+.RI "\fIFunction which starts measuring the temperature\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor:\fP
+.RS 4
+: Kenneth René Jensen : 0\&.3 
+.RE
+.PP
+
+.PP
+Definition in file \fBtc72\&.c\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define SDI_Read   0x02U"
+
+.PP
+\fBNote:\fP
+.RS 4
+Complies MISRO 2004 standards 
+.RE
+.PP
+
+.PP
+Definition at line 18 of file tc72\&.c\&.
+.SS "#define SDI_Write   0x80U"
+
+.PP
+Definition at line 19 of file tc72\&.c\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBTC72_STATE\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIINIT \fP\fP
+.TP
+\fB\fIRUNNING \fP\fP
+.PP
+Definition at line 22 of file tc72\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

@@ -16,6 +16,7 @@
 #define ACCIDENT_DATA_H_
 
 #include <avr/io.h>
+#include "../vroom_config.h"
 #include "../hardware_boards/sim908/at_commands.h"
 
 /**********************************************************************//**
@@ -25,17 +26,17 @@
  *************************************************************************/
 typedef struct __attribute__((packed))
 {
-	uint8_t version;			/* Referring to a public register to determine the meaning and encoding of the optional data */
-	uint8_t msg_identifier;		/* Numbers of re-transmission */
-	uint8_t control;			/* | bit 7: Automatic activation | bit 6: Manual activation | bit 5: Test call | bit 4: Confidence in position | bit 3-0: Reserved | */
-	uint8_t vehicle_class;		/* | bit 7-4 = classification | bit 3-0: category | */
-	char VIN[20];				/* VIN number 17-characters (last 3 char is blank) ISO 3779 */
+	uint8_t version;									/**< Referring to a public register to determine the meaning and encoding of the optional data */
+	uint8_t msg_identifier;								/**< Numbers of re-transmission */
+	uint8_t control;									/**< | bit 7: Automatic activation | bit 6: Manual activation | bit 5: Test call | bit 4: Confidence in position | bit 3-0: Reserved | */
+	uint8_t vehicle_class;								/**< | bit 7-4 = classification | bit 3-0: category | */
+	char VIN[20];										/**< VIN number 17-characters (last 3 char is blank) ISO 3779 */
 	uint8_t fuel_type;
-	uint32_t time_stamp;		/* UTC Seconds */
-	int32_t latitude;			/* Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) ISO 6709 */
-	int32_t longitude;			/* Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) ISO 6709 */
-	uint8_t direction;			/* Direction in degrees. The nearest integer of 255.0*value/360.0 (0 <= value >= 255) */
-	char optional_data[102];	/* Optional. Further data (e.g. crash information, number of passengers) or blank field */
+	uint32_t time_stamp;								/**< UTC Seconds */
+	int32_t latitude;									/**< Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) ISO 6709 */
+	int32_t longitude;									/**< Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) ISO 6709 */
+	uint8_t direction;									/**< Direction in degrees. The nearest integer of 255.0*value/360.0 (0 <= value >= 255) */
+	char optional_data[CONFIG_MSD_OPTIONAL_DATA_SIZE];	/**< Optional. Further data (e.g. crash information, number of passengers) or blank field */
 } AD_MSD;
 
 /**********************************************************************//**
@@ -94,15 +95,5 @@ extern AT_CONNECTION_STATUS_FLAG EXT_CONNECTION_CREG_FLAG;
  * @return void
  *************************************************************************/
 void ad_emergency_alarm(void);
-
-/**********************************************************************//**
- * @ingroup ad_pub
- * @brief Checks if a crash has occurred.
- *
- * @param void
- *
- * @return void
- *************************************************************************/
-void ad_check_for_crash(void);
 
 #endif /* ACCIDENT_DATA_H_ */

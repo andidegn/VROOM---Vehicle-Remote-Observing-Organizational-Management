@@ -160,11 +160,11 @@ namespace VROOM_MSD
                 msd_details.Items.Add("---------------------------------------------------------------------");
                 msd_details.Items.Add("Optional Data:");
 
-                var optional_data = _msd.optional.Split('|');
+                String[] optional_data = _msd.optional.Split('|');
 
-                foreach (var data in optional_data)
+                foreach (String data in optional_data)
                 {
-                    msd_details.Items.Add(" - " + data.Trim());
+                    msd_details.Items.Add(" - " + data);
                 }
                 msd_details.Items.Add("=======================================");
             }

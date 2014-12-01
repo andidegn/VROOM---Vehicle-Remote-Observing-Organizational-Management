@@ -11,7 +11,7 @@
 #include "hardware_boards/sim908/sim908.h"
 #include "hardware_boards/car_panel/car_panel.h"
 #include "accident_logic/accident_data.h"
-#include "vroom_config.h"
+#include "accident_logic/accident_detection.h"
 #ifdef DEBUG_LCD_ENABLE
 	#include "hardware_boards/lcd_board/lcd/lcd.h"
 #endif
@@ -111,13 +111,10 @@ int main (void)
 	#endif /* MODULE_TEST_UART */
 
 	#if INTEGRATION_TEST_SIM908_SENSORS
-		int16_t *_acc_buffer = malloc(3 * sizeof(int16_t));
-		volatile uint32_t acc_total = 0;
-		const char degree = 0b011011111;
-		int16_t x_axis, y_axis, z_axis;
-		float temp;
 
 		#ifdef DEBUG_LCD_ENABLE
+			int16_t *_acc_buffer = malloc(3 * sizeof(int16_t));
+			const char degree = 0b011011111;
 			lcd_clrscr();
 			lcd_gotoxy(0, 0);
 			lcd_puts("Initializing...");
@@ -125,62 +122,50 @@ int main (void)
 
 		car_panel_init();
 		SIM908_init();
+		accident_detection_init();
 		sei();
 		SIM908_start();
 		scheduler_start(NULL);
 		car_panel_start();
-
+		accident_detection_start();
+		
 		while (1)
 		{
-			///*************************************************************************
-			//****************** Has to be moved into accident_logic *******************
-			//*************************************************************************/
-			scheduler_get_last_readings(_acc_buffer);
-			x_axis = *_acc_buffer;
-			y_axis = *(_acc_buffer + 1);
-			z_axis = *(_acc_buffer + 2);
-			temp = get_temperature();
-			//acc_total = sqrt(pow(x_axis, 2) + pow(y_axis, 2) + pow(z_axis, 2));
-//
-			//if (acc_total > 1000 && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
-			//{
-				//if (!car_panel_wait_cancel_emmergency())
-					//EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
-			//}
-			///**************************************************************************/
-
-			ad_check_for_crash();
-
+			/* Sets the status LED on car panel */
 			EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_HOME_NETWORK || EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_ROAMING ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
+			/* Checks the emergency flags */
 			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
 				ad_emergency_alarm();
-
+				
 				/* Enable cancel button for reset purpose */
 				car_panel_set_cancel_button_state(true);
 			}
-
+	
 			#ifdef DEBUG_LCD_ENABLE
+				scheduler_acc_get_last_readings(_acc_buffer);
+	
 				lcd_clrscr();
 				lcd_gotoxy(0, 0);
 				lcd_puts("x ");
-				lcd_puts(itoa(x_axis, buf, 10));
+				lcd_puts(itoa(*(_acc_buffer), buf, 10));
 
 				lcd_gotoxy(8, 0);
 				lcd_puts("y ");
-				lcd_puts(itoa(y_axis, buf, 10));;
+				lcd_puts(itoa(*(_acc_buffer + 1), buf, 10));;
 
 				lcd_gotoxy(0, 1);
 				lcd_puts("z ");
-				lcd_puts(itoa(z_axis, buf, 10));
+				lcd_puts(itoa(*(_acc_buffer + 2), buf, 10));
 
 				lcd_gotoxy(8, 1);
-				lcd_puts(dtostrf( temp, 2, 2, buf ));
+				lcd_puts(dtostrf( scheduler_temp_get_last_reading(), 2, 2, buf ));
 				lcd_putc(degree);
 				lcd_putc('C');
+				
+				_delay_ms(200);
 			#endif /* DEBUG_LCD_ENABLE */
-			_delay_ms(200);
 		}
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
 

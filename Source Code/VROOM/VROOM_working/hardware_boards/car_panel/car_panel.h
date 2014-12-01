@@ -16,6 +16,8 @@
 #ifndef CAR_PANEL_H_
 #define CAR_PANEL_H_
 
+#include <stdbool.h>
+
 /**********************************************************************//**
  * @ingroup cp_pub
  * @brief Defines for the time of button press before activation/deactivation in 1/10 sec

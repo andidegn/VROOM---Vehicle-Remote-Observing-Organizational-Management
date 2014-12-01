@@ -18,14 +18,15 @@ typedef enum {state_tc72_init,
 			  state_store_in_buffers
 } SENSOR_STATE;
 
-int16_t _x_axis_buffer[ACC_BUFFER_SIZE];
-int16_t _y_axis_buffer[ACC_BUFFER_SIZE];
-int16_t _z_axis_buffer[ACC_BUFFER_SIZE];
-
 /* local variables */
+static int16_t _x_axis_buffer[ACC_BUFFER_SIZE];
+static int16_t _y_axis_buffer[ACC_BUFFER_SIZE];
+static int16_t _z_axis_buffer[ACC_BUFFER_SIZE];
+static float _temperature = 0;
+
 static SENSOR_STATE _state;
 static void (*_callback_function_ptr)(char __data); /* not implemented yet */
-static uint8_t _acc_buffer_head = 0; /* may not be needed */
+// static uint8_t _acc_buffer_head = 0; /* may not be needed */
 static uint8_t _acc_buffer_tail = 0;
 
 void scheduler_start(void (*callback_function_ptr)(char __data)) {
@@ -34,18 +35,23 @@ void scheduler_start(void (*callback_function_ptr)(char __data)) {
 	scheduler_release();
 }
 
-void scheduler_get_last_readings_sum(int16_t *buffer) {
+void scheduler_acc_get_last_readings_sum(int16_t *buffer) {
 	uint8_t _index = 0;
-	for (uint8_t i = 0; i < CONFIG_NO_OF_READINGS; i++) {
-		_index = (ACC_BUFFER_SIZE + _acc_buffer_tail - CONFIG_NO_OF_READINGS + i + 1) % ACC_BUFFER_SIZE;
+	for (uint8_t i = 0; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) {
+		_index = (ACC_BUFFER_SIZE + _acc_buffer_tail - CONFIG_ALARM_CRASH_NO_OF_READINGS + i + 1) % ACC_BUFFER_SIZE;
 		*(buffer + i) = sqrt(pow(_x_axis_buffer[_index], 2) + pow(_y_axis_buffer[_index], 2) + pow(_z_axis_buffer[_index], 2));
 	}
 }
 
-void scheduler_get_last_readings(int16_t *buffer) {
+void scheduler_acc_get_last_readings(int16_t *buffer) {
 	*buffer = _x_axis_buffer[_acc_buffer_tail];
 	*(buffer + 1) = _y_axis_buffer[_acc_buffer_tail];
 	*(buffer + 2) = _z_axis_buffer[_acc_buffer_tail];
+}
+
+float scheduler_temp_get_last_reading(void) 
+{
+	return _temperature;
 }
 
 void scheduler_release(void) {
@@ -85,6 +91,9 @@ void scheduler_release(void) {
 			_y_axis_buffer[_acc_buffer_tail] = (int)(acc_get_y_axis() * 400);
 			_z_axis_buffer[_acc_buffer_tail] = (int)(acc_get_z_axis() * 400);
 			_acc_buffer_tail = (_acc_buffer_tail + 1) % ACC_BUFFER_SIZE;
+			
+			_temperature = get_temperature();
+			
 			_state = state_idle;
 			scheduler_release();
 		break;

@@ -98,8 +98,8 @@ namespace VROOM_MSD
         {
             StringBuilder sb = new StringBuilder();
 
-            for (int i = offset; i < number_of_bytes; i++)
-                sb.Append(Convert.ToChar(MSD[i]));
+            for (int i = 0; i < number_of_bytes; i++)
+                sb.Append(Convert.ToChar(MSD[i+offset]));
 
             return sb.ToString();
         }

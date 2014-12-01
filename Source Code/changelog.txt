@@ -1,4 +1,32 @@
 ==================================
+Version 0.160 - 2014/12/01 by Kenneth
+==================================
+New Features, Improvements
+--------------------------
+* Added accident_detection(.c/.h) and added check_for_fire() function
+* Added scheduler_temp_get_last_reading() function in sensor_scheduler(.h/.c)
+* Added timer to control check of accidents and added parameters in vroom.config.h
+* Added extern variables to record sensor data used for MSD (temperature and acceleration)
+  and changed the structure, so it now sends the values together with MSD
+
+Fixed Bugs, Changes
+-------------------
+* Removed some warnings in several files
+* Renamed function names in sensor_scheduler(.h/.c) and accident_data(.h/.c) 
+  and renamed the defines in vroom_config.h
+* Moved check_for_crash() into accident_detection file
+
+ToDo
+----		
+- MISRA check all files
+- Impl. module test for car panel
+- Impl. unit test for MSD
+- Doxygen structure proofing in all files
+- Notes SIM908:
+   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+
+
+==================================
 Version 0.150 - 2014/11/29 by Andi
 ==================================
 New Features, Improvements

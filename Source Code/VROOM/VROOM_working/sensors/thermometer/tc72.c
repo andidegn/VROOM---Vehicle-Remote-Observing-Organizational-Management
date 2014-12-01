@@ -45,7 +45,8 @@ static void _tc72_callback(uint8_t data[]);
  @param uint8_t cs_pin - chip select pin
  @return void
 ************************************************************************************************************************/
-void init_tc72(uint8_t cs_pin) {
+void init_tc72(uint8_t cs_pin) 
+{
     _send_setup[0] = SDI_Write;
     _send_setup[1] = 0U;
 
@@ -74,7 +75,8 @@ void init_tc72(uint8_t cs_pin) {
 @return Temperature as floating point value
 @note Should only be used for Unit Testing
 ************************************************************************************************************************/
-float calculate_temperature(uint8_t MSB, uint8_t LSB) {
+float calculate_temperature(uint8_t MSB, uint8_t LSB) 
+{
     /****************************************************************************************************************
      Violation on rule 10.5 MISRA C 2004 (if the bitwise operators ~ and << are applied to an operand of underlying type
     'unsigned char' or 'unsigned short', the result shall be immediately cast to the underlying type of the operand)
@@ -88,7 +90,8 @@ float calculate_temperature(uint8_t MSB, uint8_t LSB) {
      Violation on rule 12.7 MISRA C 2004 (bitwise operations shall not be performed on signed integer types)
      ****************************************************************************************************************/
     /* Check if temperature is negative */
-    if (_temp & 0x200U) {
+    if (_temp & 0x200U) 
+	{
         _temp |= 0xFE00U;
     }
 
@@ -101,7 +104,8 @@ float calculate_temperature(uint8_t MSB, uint8_t LSB) {
  @return Temperature as floating point value
  @note TC72 Operation Range: -55°C to 125°C
 ************************************************************************************************************************/
-float get_temperature(void) {
+float get_temperature(void) 
+{
     return calculate_temperature(_MSB, _LSB);
 }
 
@@ -110,7 +114,8 @@ float get_temperature(void) {
  @brief Function which starts measuring the temperature.
  @return void
 ************************************************************************************************************************/
-void measure_temperature(void) {
+void measure_temperature(void) 
+{
     _send_read[0] = SDI_Read;
     _send_read[1] = 0U;
     _send_read[2] = 0U;

@@ -12,9 +12,9 @@
 
 #include <avr/interrupt.h>
 #include <util/delay.h>
-#include <stdbool.h>
 #include "car_panel.h"
 #include "../../accident_logic/accident_data.h"
+#include "../../accident_logic/accident_detection.h"
 
 /**********************************************************************//**
  * @ingroup cp_priv
@@ -225,6 +225,7 @@ void car_panel_set_cancel_button_state(bool state)
  **************************************************************************/
 ISR (PCINT1_vect)
 {
+	/* Check if alarm button is pressed */
 	if(!(PIN(PORT) & (1<<BTN_ALARM)))
 	{
 		_car_panel_counter = 0;
@@ -245,7 +246,10 @@ ISR (PCINT1_vect)
 		{
 			car_panel_set_control(ALARM_NOT_ACTIVATED);
 		}
-    } else if (!(PIN(PORT) & (1 << BTN_CANCEL))) {
+    } 
+	/* Check if cancel button is pressed */
+	else if (!(PIN(PORT) & (1 << BTN_CANCEL))) 
+	{
 		_car_panel_counter = 0;
 		while (_car_panel_counter++ < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<BTN_CANCEL)))
 		{
@@ -260,6 +264,7 @@ ISR (PCINT1_vect)
 			car_panel_set_alarm_button_state(true);
 			car_panel_set_cancel_button_state(false);
 			car_panel_set_control(ALARM_NOT_ACTIVATED);
+			accident_detection_start();
 		}
 	}
 }

@@ -583,9 +583,9 @@ void _SIM908_callback(char data)
 
 	if (_CR_counter > 0 && _LF_counter > 0) {
 		_CR_counter = _LF_counter = 0;
-		if (_rx_response_length == 2 &&
-			_check_response(SIM908_RESPONSE_CR_LF) ||
-			_check_response(SIM908_RESPONSE_LF_CR)) {				/* Skipping empty lines */
+		if (_rx_response_length == 2 && 
+		   (_check_response(SIM908_RESPONSE_CR_LF) ||
+			_check_response(SIM908_RESPONSE_LF_CR))) {				/* Skipping empty lines */
 		} else if (_rx_response_length == 4 &&
 			_check_response(SIM908_RESPONSE_OK)) {					/* OK */
 				_ack_response_flag = SIM908_FLAG_OK;

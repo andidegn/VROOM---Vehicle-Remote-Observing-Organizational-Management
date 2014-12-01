@@ -14,7 +14,6 @@
 
 static char *_uart_compare_string;
 static char *_uart_received_data;
-static char _eol_char = '\n';
 static char _index;
 static uint16_t _timeout_ctr;
 static bool _roundtrip_complete = false;
@@ -27,7 +26,7 @@ bool test_module_uart_run(const char *__uart_test_string, const char *__uart_com
 	volatile bool test_result = false;
 	volatile uint16_t tmp_char = 0;
 
-	_uart_compare_string = __uart_compare_string;
+	_uart_compare_string = (char*) __uart_compare_string;
 
 	/*******************************
 	 **** TESTING WITH CALLBACK ****

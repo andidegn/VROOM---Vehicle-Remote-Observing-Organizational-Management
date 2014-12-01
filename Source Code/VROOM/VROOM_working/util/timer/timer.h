@@ -4,8 +4,8 @@
 @Version: 0.3
 @defgroup timer Timer
 @{
-	Setup of timer 1 to CTC mode for stating the scheduler.
-	Setup of timer 3 to CTC mode for counting etc. used for timeout   
+	Setup of timer 1 to CTC mode for starting the scheduler.
+	Setup of timer 3 to CTC mode for accident check     
 @}
 ************************************************/
 
@@ -67,11 +67,5 @@ void start_timer3(void);
  @brief Disables interrupt for timer3
 ************************************************************************************************************************/
 void stop_timer3(void);
-
-/********************************************************************************************************************//**
-@ingroup timer
-@brief extern variable which counts in timer3 ISR
-************************************************************************************************************************/
-extern uint32_t SIM908_timeout_counter;
 
 #endif /* TIMER_H_ */

@@ -10,7 +10,9 @@
 ************************************************/
 #include <avr/interrupt.h>
 #include "timer.h"
+#include "../../vroom_config.h"
 #include "../../sensors/sensor_scheduler.h"
+#include "../../accident_logic/accident_detection.h"
 
 #ifndef F_CPU
 	#error F_CPU must be defined!!!
@@ -19,8 +21,7 @@
 /*! Macro for calculating the value for clock count based on frequency and prescaler */
 #define TOP_VALUE(frequency_in_hz, prescaler) (F_CPU/(prescaler * frequency_in_hz)-1)
 
-uint32_t SIM908_timeout_counter = 0;
-
+static volatile uint8_t _isr_counter = 0;
 /********************************************************************************************************************//**
  @ingroup timer
  @brief Initiates timer 1 in CTC mode
@@ -122,7 +123,7 @@ void init_Timer3_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 
 		default: break;
 	}
-
+	
 	/* restoring status register */
 	SREG = _sreg;
 }
@@ -133,6 +134,8 @@ void init_Timer3_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 ************************************************************************************************************************/
 void start_timer3(void)
 {
+	TIFR3 |= _BV(OCIE3A);
+	//TIFR |= (1 << OCF1A);
 	/* Enable interrupts */
 	TIMSK3 |= _BV(OCIE3A);
 }
@@ -154,5 +157,15 @@ ISR(TIMER1_COMPA_vect)
 
 ISR(TIMER3_COMPA_vect)
 {
-	SIM908_timeout_counter++;
+	/* saves the current state of the status register and disables global interrupt */
+	uint8_t _sreg = SREG;
+	cli();
+	
+	ad_check_for_crash();
+	
+	if (_isr_counter++%CONFIG_ALARM_FIRE_TRIGGER_TIME == 0)
+		ad_check_for_fire();
+		
+	/* restoring status register */
+	SREG = _sreg;
 }

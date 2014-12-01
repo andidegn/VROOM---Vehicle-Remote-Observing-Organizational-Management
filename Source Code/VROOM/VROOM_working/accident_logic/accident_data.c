@@ -9,10 +9,12 @@
 	@note NOT YET Complies MISRO 2004 standards
  * @}
  *************************************************************************/
-
+#include <stdlib.h>
+#include <string.h>
+#include <util/delay.h>
 #include "accident_data.h"
 #include "../hardware_boards/sim908/sim908.h"
-#include "../vroom_config.h"
+#include "accident_detection.h"
 
 /**********************************************************************//**
  * @ingroup ad_priv
@@ -31,7 +33,7 @@ static bool _confidence_in_position;
 /* Prototypes */
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm);
 static void _set_VIN(const char *__VIN);
-static void _set_optional_data(const char *__s);
+static void _set_optional_data();
 
 /**********************************************************************//**
  * @ingroup ad_pub
@@ -46,54 +48,23 @@ static void _set_optional_data(const char *__s);
 void ad_emergency_alarm(void)
 {
 	EXT_MSD.version = CONFIG_MSD_FORMAT_VERSION;
-	EXT_MSD.vehicle_class = CONFIG_VEHICLE_CLASS;
-	EXT_MSD.fuel_type = CONFIG_FUEL_TYPE;
+	EXT_MSD.vehicle_class = CONFIG_MSD_VEHICLE_CLASS;
+	EXT_MSD.fuel_type = CONFIG_MSD_FUEL_TYPE;
 
 	set_MSD_data(&EXT_MSD.time_stamp, &EXT_MSD.latitude, &EXT_MSD.longitude, &EXT_MSD.direction);
 	/* ToDo - Can position be trusted ?? */
 	_confidence_in_position = (EXT_MSD.latitude != 0 || EXT_MSD.longitude != 0) ? true : false;
-	_set_control_byte(_confidence_in_position, CONFIG_TEST_CALL, EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM, EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM);
-	_set_VIN(CONFIG_VIN);
+	_set_control_byte(_confidence_in_position, CONFIG_MSD_TEST_CALL, EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM, EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM);
+	_set_VIN(CONFIG_MSD_VIN);
 
 	/* ToDo - get optional data */
-	_set_optional_data("ACC [G]: ? | Temp [°C]: ? | Passengers: ? | Speed [km/h]: ?");
+	_set_optional_data();
 
 	send_MSD(CONFIG_VROOM_ID);
 
 	/*call_PSAP();*/
 
 	EXT_EMERGENCY_FLAG = EMERGENCY_ALARM_SENT;
-}
-
-/**********************************************************************//**
- * @ingroup ad_pub
- * Gets the accelerometer data and analysis them to see if a crash has
- * occurred
- * Steps in function:\n
- * 1. Read accelerometer data\n
- * 2. Analysis data\n
- * 3. Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected\n
- **************************************************************************/
-void ad_check_for_crash(void) {
-	volatile bool _alarm = true;
-
-	int16_t *_acc_buffer = malloc(10 * sizeof(int16_t));
-
-	scheduler_get_last_readings_sum(_acc_buffer);
-
-	for (uint8_t i = 0; i < CONFIG_NO_OF_READINGS; i++) {
-		if (*(_acc_buffer + i) < CONFIG_ALARM_TRIGGER_VALUE) {
-			_alarm = false;
-			break;
-		}
-	}
-	free(_acc_buffer);
-
-	if (_alarm && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM) {
-		if (!car_panel_wait_cancel_emmergency()) {
-			EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
-		}
-	}
 }
 
 /**********************************************************************//**
@@ -144,14 +115,23 @@ static void _set_VIN(const char *__VIN)
  * @return void
  * @note May also be blank field
  *************************************************************************/
-static void _set_optional_data(const char *__s)
+static void _set_optional_data()
 {
-	uint8_t i = 0;
-
-	do { EXT_MSD.optional_data[i++] = *__s; }  while (*__s++ != '\0');
-
-    while (i < 102)
-    {
-		EXT_MSD.optional_data[i++] = BLANK_CHAR;
-    }
+	char *buf = malloc(10 * sizeof(char));
+	uint8_t i = 0U;
+	for (i = 0U; i < CONFIG_MSD_OPTIONAL_DATA_SIZE; i++)
+	{
+		EXT_MSD.optional_data[i] = BLANK_CHAR;
+	}
+	
+	strcpy(EXT_MSD.optional_data, "ACC [G]: ");
+	strcat(EXT_MSD.optional_data, dtostrf( EXT_TOTAL_ACCELERATION_AVG, 2, 2, buf ));
+	strcat(EXT_MSD.optional_data, "|Temp [°C]: ");
+	strcat(EXT_MSD.optional_data, dtostrf( EXT_TEMPERATURE, 2, 2, buf ));
+	strcat(EXT_MSD.optional_data, "|Passengers: ");
+	strcat(EXT_MSD.optional_data, "<unknown>");
+	strcat(EXT_MSD.optional_data, "|Speed [km/h]: ");
+	strcat(EXT_MSD.optional_data, "<unknown>");
+	
+	free(buf);
 }

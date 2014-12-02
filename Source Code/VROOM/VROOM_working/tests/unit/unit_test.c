@@ -1,25 +1,26 @@
 /**********************************************************************//**
-@file unit_test.c
-@author: Kenneth René Jensen
-@Version: 0.1
-@defgroup ut unit_test
-@{
-	This is the unit test platform for all relevant functions 
+ * @file unit_test.c
+ * @author: Andi Degn
+ * @author: Kenneth René Jensen
+ * @Version: 0.1
+ * @defgroup ut unit_test
+ * @{
+	This is the unit test platform for all relevant functions
 	(including arithmetic) in the VROOM system.
-@}
-@note Complies MISRO 2004 standards
+ * @}
+ * @note Complies MISRO 2004 standards
  *************************************************************************/
 
 #include "unit_test.h"
 
 uint16_t tests_run = 0U;
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup ut
  @brief Test of function: calculate_temperature(uint8_t MSB, uint8_t LSB) in tc72.c
- @return char* - if all tests pass: "01-1PASS" 
+ @return char* - if all tests pass: "01-1PASS"
 			   - if test fail: the error code line where it fails
  @note Test parameters is taken from tc72 datasheet
- ************************************************************************************************************************/
+ *************************************************************************/
 char* test_tc72_calc(void)
 {
 	mu_assert( "Err-01-100", calculate_temperature(0b11001001, 0b00000000) == -55.00 );
@@ -34,15 +35,15 @@ char* test_tc72_calc(void)
 	return "01-1PASS";
 }
 
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup ut
  @brief Run all unit tests
- @return char* - if all tests pass: "xx-xPASS" 
-			   - if test fail: the error code line where it fails			   
-************************************************************************************************************************/
-char* run_all_tests(void) 
+ @return char* - if all tests pass: "xx-xPASS"
+			   - if test fail: the error code line where it fails
+*************************************************************************/
+char* run_all_tests(void)
 {
 	mu_run_test(test_tc72_calc);
-	
+
 	return "All test passed";
 }

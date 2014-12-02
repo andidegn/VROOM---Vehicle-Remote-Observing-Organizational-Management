@@ -1,26 +1,5 @@
 var searchData=
 [
-  ['config_5fapn',['CONFIG_APN',['../vroom__config_8h.html#a8191380277e75a706ac75bb86ab35e20',1,'vroom_config.h']]],
-  ['config_5fapn_5fcallme',['CONFIG_APN_CALLME',['../vroom__config_8h.html#a780cdfda12460fb2ba3a2c59000cc9d5',1,'vroom_config.h']]],
-  ['config_5fapn_5ftdc',['CONFIG_APN_TDC',['../vroom__config_8h.html#a5f020fd68106c214e598a5765b1330fd',1,'vroom_config.h']]],
-  ['config_5fapn_5ftelenor',['CONFIG_APN_TELENOR',['../vroom__config_8h.html#ad13627553c87abead481525e2eae7fda',1,'vroom_config.h']]],
-  ['config_5fapn_5ftelia',['CONFIG_APN_TELIA',['../vroom__config_8h.html#af1919e727f873d450ac6e36918fd9165',1,'vroom_config.h']]],
-  ['config_5femergency_5fphone_5fnumber',['CONFIG_EMERGENCY_PHONE_NUMBER',['../vroom__config_8h.html#ad574396de2c7b1910e16ef8facc9d10b',1,'vroom_config.h']]],
-  ['config_5fftp_5ffile_5fpath',['CONFIG_FTP_FILE_PATH',['../vroom__config_8h.html#af19994ec819205fa4a120e5d5cdc08f7',1,'vroom_config.h']]],
-  ['config_5fftp_5ffile_5fsize',['CONFIG_FTP_FILE_SIZE',['../vroom__config_8h.html#a93276ba5839102194c42bf083e75a87c',1,'vroom_config.h']]],
-  ['config_5fftp_5fport',['CONFIG_FTP_PORT',['../vroom__config_8h.html#a3fe758e765c81728ec4273cda0bf95b3',1,'vroom_config.h']]],
-  ['config_5fftp_5fpw',['CONFIG_FTP_PW',['../vroom__config_8h.html#af823407acb2c94910b85e2493db6703a',1,'vroom_config.h']]],
-  ['config_5fftp_5fserver_5faddress',['CONFIG_FTP_SERVER_ADDRESS',['../vroom__config_8h.html#a7ae88cf760bfce5bfc936ddb408ed586',1,'vroom_config.h']]],
-  ['config_5fftp_5fuser',['CONFIG_FTP_USER',['../vroom__config_8h.html#a8cf9c4843247f2d46cd5ad8290deb093',1,'vroom_config.h']]],
-  ['config_5ffuel_5ftype',['CONFIG_FUEL_TYPE',['../vroom__config_8h.html#ac39ae0d3c651bde9496c3bd62c5a3ea7',1,'vroom_config.h']]],
-  ['config_5fmsd_5fformat_5fversion',['CONFIG_MSD_FORMAT_VERSION',['../vroom__config_8h.html#a18846e39f8f0aadcb351849a061e248f',1,'vroom_config.h']]],
-  ['config_5fpin',['CONFIG_PIN',['../vroom__config_8h.html#a2b748ca451b83ca70713d19fd920554e',1,'vroom_config.h']]],
-  ['config_5fpsap_5fnumber_5feurope',['CONFIG_PSAP_NUMBER_EUROPE',['../vroom__config_8h.html#a4cb989a292851abe5d65e85d785719a7',1,'vroom_config.h']]],
-  ['config_5fpsap_5fnumber_5ftest_5fandi',['CONFIG_PSAP_NUMBER_TEST_ANDI',['../vroom__config_8h.html#ade837807fc3d25cdbf5d8e255bb40251',1,'vroom_config.h']]],
-  ['config_5fpsap_5fnumber_5ftest_5fkenneth',['CONFIG_PSAP_NUMBER_TEST_KENNETH',['../vroom__config_8h.html#a5eaab40ae39d5a6ba95a4dc96fcaf462',1,'vroom_config.h']]],
-  ['config_5ftest_5fcall',['CONFIG_TEST_CALL',['../vroom__config_8h.html#a355e75f26f24e71493079631035915fd',1,'vroom_config.h']]],
-  ['config_5fvehicle_5fclass',['CONFIG_VEHICLE_CLASS',['../vroom__config_8h.html#a216191e8d50f4a5b4d4d1cbac0af3be0',1,'vroom_config.h']]],
-  ['config_5fvin',['CONFIG_VIN',['../vroom__config_8h.html#abb6acf0196e3280de62bbf840b443233',1,'vroom_config.h']]],
-  ['config_5fvroom_5fid',['CONFIG_VROOM_ID',['../vroom__config_8h.html#a93c1b1078301b5e20f049100c6c2116c',1,'vroom_config.h']]],
-  ['connection_5fretry_5fdelay_5fin_5fms',['CONNECTION_RETRY_DELAY_IN_MS',['../sim908_8c.html#ad7452b52a4f92281985b951c5844dda9',1,'sim908.c']]]
+  ['connection_5fretry_5fdelay_5fin_5fms',['CONNECTION_RETRY_DELAY_IN_MS',['../sim908_8c.html#ad7452b52a4f92281985b951c5844dda9',1,'sim908.c']]],
+  ['cr',['CR',['../sim908_8c.html#a876ce77f3c672c7162658151e648389e',1,'sim908.c']]]
 ];

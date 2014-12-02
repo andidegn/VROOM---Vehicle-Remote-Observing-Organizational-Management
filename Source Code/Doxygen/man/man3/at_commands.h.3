@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/at_commands.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/at_commands.h" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,14 +12,12 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_CONTYPE_GPRS\fP   'GPRS'"
 .br
-.RI "\fIDefines for the Data carrier type\&. \fP"
 .ti -1c
 .RI "#define \fBAT_CONTYPE_CSD\fP   'CSD'"
 .br
 .ti -1c
 .RI "#define \fBAT_DIAG_TEST\fP   'AT'"
 .br
-.RI "\fIDefines for the diagnostics\&. \fP"
 .ti -1c
 .RI "#define \fBAT_DIAG_ECHO_ENABLE\fP   'ATE1'"
 .br
@@ -38,11 +36,9 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_ENABLE_CREG\fP   'AT+CREG=1'"
 .br
-.RI "\fIDefine for the enable +CREG: unsolicited result code\&. \fP"
 .ti -1c
 .RI "#define \fBAT_BAUD_AUTO\fP   'AT+IPR=0'"
 .br
-.RI "\fIDefines for the baud rate\&. \fP"
 .ti -1c
 .RI "#define \fBAT_BAUD_1200\fP   'AT+IPR=1200'"
 .br
@@ -70,7 +66,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_MINIMUM_FUNCTIONALITY\fP   'AT+CFUN=0'"
 .br
-.RI "\fIDefines for the phone functionality\&. \fP"
 .ti -1c
 .RI "#define \fBAT_FULL_FUNCTIONALITY\fP   'AT+CFUN=1'"
 .br
@@ -86,7 +81,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_ENABLE_INCOMING_CALLS\fP   'AT+GSMBUSY=0'"
 .br
-.RI "\fIDefines for the incoming call allowance setting\&. \fP"
 .ti -1c
 .RI "#define \fBAT_FORBID_INCOMING_CALLS\fP   'AT+GSMBUSY=1'"
 .br
@@ -96,11 +90,9 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_EMERGENCY_CALL_ONLY\fP(NUMBER)   'AT+CWHITELIST=1,1,' NUMBER"
 .br
-.RI "\fIDefine for the calls white list\&. \fP"
 .ti -1c
 .RI "#define \fBAT_NO_FLOW_CONTROL\fP   'AT+IFC=0,0'"
 .br
-.RI "\fIDefines for the flow control\&. \fP"
 .ti -1c
 .RI "#define \fBAT_SOFTWARE_FLOW_CONTROL\fP   'AT+IFC=1,1' /* Should not be used for data calls */"
 .br
@@ -110,14 +102,12 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_STORE_PROFILE0\fP   'AT&W0'"
 .br
-.RI "\fIDefines for the store active profile\&. \fP"
 .ti -1c
 .RI "#define \fBAT_STORE_PROFILE1\fP   'AT&W1'"
 .br
 .ti -1c
 .RI "#define \fBAT_RESTORE_PROFILE0\fP   'ATZ0'"
 .br
-.RI "\fIDefines for the reset to default functionality\&. \fP"
 .ti -1c
 .RI "#define \fBAT_RESTORE_PROFILE1\fP   'ATZ1'"
 .br
@@ -127,7 +117,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_GPRS_PDP_ACTIVATE_CONTEXT\fP   'AT+CGACT=1,1'"
 .br
-.RI "\fIDefines GPRS PDP context\&. \fP"
 .ti -1c
 .RI "#define \fBAT_GPRS_PDP_GET_IP\fP   'AT+CGPADDR=1'"
 .br
@@ -137,7 +126,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_FTP_BEARER1_CONTYPE\fP(TYPE)   'AT+SAPBR=3,1,\\'Contype\\',\\'' TYPE '\\''"
 .br
-.RI "\fIDefines FTP setup and communication\&. \fP"
 .ti -1c
 .RI "#define \fBAT_FTP_BEARER1_APN\fP(NAME)   'AT+SAPBR=3,1,\\'APN\\',\\'' NAME '\\''"
 .br
@@ -195,25 +183,9 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_MODULE_DEVICE_STATUS\fP   'AT+CPAS'"
 .br
-.RI "\fIDefine for the module device status The different responses are:
-.br
-0 ready
-.br
-1 unavailable
-.br
-2 unknown
-.br
-3 ringing
-.br
-4 call in progress
-.br
-5 asleep
-.br
-\&. \fP"
 .ti -1c
 .RI "#define \fBAT_CALL_ANSWER\fP   'ATA'"
 .br
-.RI "\fIDefines for the call\&. \fP"
 .ti -1c
 .RI "#define \fBAT_CALL_HANG_UP\fP   'ATH0'"
 .br
@@ -229,7 +201,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_MSG_READ\fP   'AT+CMGR='"
 .br
-.RI "\fIDefines for the message\&. \fP"
 .ti -1c
 .RI "#define \fBAT_MSG_DEL_ALL\fP   'AT+CMGD=1,4'"
 .br
@@ -242,7 +213,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_AUDIO_GET_RINGER_VOLUME\fP   'AT+CRSL?'"
 .br
-.RI "\fIDefines for the audio setup\&. \fP"
 .ti -1c
 .RI "#define \fBAT_AUDIO_SET_RINGER_VOLUME\fP   'AT+CRSL='"
 .br
@@ -261,7 +231,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_CONN_SIGNAL_STRENGTH\fP   'AT+CSQ'"
 .br
-.RI "\fIDefines for the connection\&. \fP"
 .ti -1c
 .RI "#define \fBAT_CONN_ATTACH_STATUS\fP   'AT+CGATT?'"
 .br
@@ -271,7 +240,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_GPS_POWER_STATE\fP   'AT+CGPSPWR?'"
 .br
-.RI "\fIDefines for the GPS\&. \fP"
 .ti -1c
 .RI "#define \fBAT_GPS_POWER_ON\fP   'AT+CGPSPWR=1'"
 .br
@@ -296,7 +264,14 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBAT_CTRL_Z\fP   26"
 .br
-.RI "\fIDefine for the ctrl+Z command\&. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBAT_CONNECTION_STATUS_FLAG\fP { \fBCREG_NOT_REG_NOT_SEARCHING\fP = 0, \fBCREG_REGISTERED_HOME_NETWORK\fP = 1, \fBCREG_NOT_REG_SEARCHING\fP = 2, \fBCREG_REGISTRATION_DENIED\fP = 3, \fBCREG_UNKNOWN\fP = 4, \fBCREG_REGISTERED_ROAMING\fP = 5 }"
+.br
+.RI "\fIFlag to detect the connection status\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 

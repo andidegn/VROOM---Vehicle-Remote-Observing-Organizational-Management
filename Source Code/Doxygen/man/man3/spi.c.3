@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -11,9 +11,49 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 \fC#include <stdlib\&.h>\fP
 .br
 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDDR_SPI\fP   DDRB"
+.br
+.ti -1c
+.RI "#define \fBSS\fP   PB0"
+.br
+.ti -1c
+.RI "#define \fBSCK\fP   PB1"
+.br
+.ti -1c
+.RI "#define \fBMOSI\fP   PB2"
+.br
+.ti -1c
+.RI "#define \fBMISO\fP   PB3"
+.br
+.ti -1c
+.RI "#define \fBMAX_HANDLES\fP   16U"
+.br
+.ti -1c
+.RI "#define \fBCS_INACTIVE\fP   0U"
+.br
+.ti -1c
+.RI "#define \fBCS_ACTIVE\fP   1U"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
+.ti -1c
+.RI "static void \fB_setup_spi\fP (\fBhandle_param\fP *__param)"
+.br
+.RI "\fISets up the ports for the spi bus\&. \fP"
+.ti -1c
+.RI "static void \fB_set_cs_level\fP (uint8_t __level)"
+.br
+.RI "\fISets the CS/CE level based on the level\&. \fP"
+.ti -1c
+.RI "static void \fB_send\fP (uint8_t __data)"
+.br
+.RI "\fISends up data Sets up the SPI with 'handle' if it is not already the current handle\&. Then sends the data and returns '1'\&. If the SPI driver is busy performing another task, the data is not sent and a '0' is returned\&. \fP"
 .ti -1c
 .RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t __cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
 .br
@@ -35,20 +75,75 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fIInterrupt service routine Interrupt service routine for the SPI\&. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed\&. Else the SPI is released\&. \fP"
 .in -1c
-.SH "Detailed Description"
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static int8_t \fB_handle_count\fP = 0"
+.br
+.ti -1c
+.RI "static int8_t \fB_current_handle\fP = -1"
+.br
+.ti -1c
+.RI "static \fBhandle_param\fP \fB_handles\fP [\fBMAX_HANDLES\fP]"
+.br
+.ti -1c
+.RI "static uint8_t \fB_cs_pin\fP"
+.br
+.ti -1c
+.RI "static uint8_t \fB_cs_active_level\fP"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_is_busy\fP = 0"
+.br
+.ti -1c
+.RI "static uint8_t * \fB_data_array\fP"
+.br
+.ti -1c
+.RI "static uint8_t \fB_no_of_bytes\fP"
+.br
+.ti -1c
+.RI "static uint8_t \fB_bytes_sent_ctr\fP"
+.br
+.in -1c
+.SH "Variable Documentation"
 .PP 
-: 10-04-2014 12:03:35 : Andi Degn : 0\&.4
-.PP
-This is a driver for the SPI bus on the ATMEGA family processors\&. 
-.PP
-\fBNote:\fP
-.RS 4
-Complies MISRO 2004 standards 
-.RE
-.PP
+.SS "uint8_t _bytes_sent_ctr\fC [static]\fP"
 
 .PP
-Definition in file \fBspi\&.c\fP\&.
+Definition at line 50 of file spi\&.c\&.
+.SS "uint8_t _cs_active_level\fC [static]\fP"
+
+.PP
+Definition at line 45 of file spi\&.c\&.
+.SS "uint8_t _cs_pin\fC [static]\fP"
+
+.PP
+Definition at line 44 of file spi\&.c\&.
+.SS "int8_t _current_handle = -1\fC [static]\fP"
+
+.PP
+Definition at line 42 of file spi\&.c\&.
+.SS "uint8_t* _data_array\fC [static]\fP"
+
+.PP
+Definition at line 48 of file spi\&.c\&.
+.SS "int8_t _handle_count = 0\fC [static]\fP"
+
+.PP
+Definition at line 41 of file spi\&.c\&.
+.SS "\fBhandle_param\fP _handles[\fBMAX_HANDLES\fP]\fC [static]\fP"
+
+.PP
+Definition at line 43 of file spi\&.c\&.
+.SS "volatile uint8_t _is_busy = 0\fC [static]\fP"
+
+.PP
+Definition at line 46 of file spi\&.c\&.
+.SS "uint8_t _no_of_bytes\fC [static]\fP"
+
+.PP
+Definition at line 49 of file spi\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

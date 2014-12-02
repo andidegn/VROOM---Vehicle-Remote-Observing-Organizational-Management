@@ -128,24 +128,25 @@ int main (void)
 		scheduler_start(NULL);
 		car_panel_start();
 		accident_detection_start();
-		
+
 		while (1)
 		{
 			/* Sets the status LED on car panel */
 			EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_HOME_NETWORK || EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_ROAMING ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
 			/* Checks the emergency flags */
-			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
+			if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM)
+			//if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
 				ad_emergency_alarm();
-				
+
 				/* Enable cancel button for reset purpose */
 				car_panel_set_cancel_button_state(true);
 			}
-	
+
 			#ifdef DEBUG_LCD_ENABLE
 				scheduler_acc_get_last_readings(_acc_buffer);
-	
+
 				lcd_clrscr();
 				lcd_gotoxy(0, 0);
 				lcd_puts("x ");
@@ -163,7 +164,7 @@ int main (void)
 				lcd_puts(dtostrf( scheduler_temp_get_last_reading(), 2, 2, buf ));
 				lcd_putc(degree);
 				lcd_putc('C');
-				
+
 				_delay_ms(200);
 			#endif /* DEBUG_LCD_ENABLE */
 		}

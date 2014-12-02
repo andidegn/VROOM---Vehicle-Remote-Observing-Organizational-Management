@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -35,6 +35,12 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
+.RI "static void \fB_acc_callback\fP (uint8_t *__data)"
+.br
+.ti -1c
+.RI "static void \fB_acc_read_from_reg\fP (uint8_t __reg, uint8_t __no_of_dummy_bytes)"
+.br
+.ti -1c
 .RI "void \fBacc_init\fP (uint8_t __cs_pin, ACC_POWER_MODE __power_mode, ACC_OUTPUT_DATA_RATE __output_data_rate, ACC_FULL_SCALE __full_scale)"
 .br
 .ti -1c
@@ -48,6 +54,31 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .ti -1c
 .RI "float \fBacc_get_z_axis\fP (void)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static int16_t \fB_x_axis\fP = 0"
+.br
+.ti -1c
+.RI "static int16_t \fB_y_axis\fP = 0"
+.br
+.ti -1c
+.RI "static int16_t \fB_z_axis\fP = 0"
+.br
+.ti -1c
+.RI "static int8_t \fB_handle\fP = -1"
+.br
+.ti -1c
+.RI "static uint8_t \fB_send_setup\fP [6]"
+.br
+.ti -1c
+.RI "static uint8_t \fB_send_read\fP [7]"
+.br
+.ti -1c
+.RI "static \fBACC_STATE\fP \fB_state\fP"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -81,6 +112,36 @@ Definition at line 24 of file lis331hh\&.c\&.
 \fB\fIRUNNING \fP\fP
 .PP
 Definition at line 30 of file lis331hh\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "int8_t _handle = -1\fC [static]\fP"
+
+.PP
+Definition at line 40 of file lis331hh\&.c\&.
+.SS "uint8_t _send_read[7]\fC [static]\fP"
+
+.PP
+Definition at line 42 of file lis331hh\&.c\&.
+.SS "uint8_t _send_setup[6]\fC [static]\fP"
+
+.PP
+Definition at line 41 of file lis331hh\&.c\&.
+.SS "\fBACC_STATE\fP _state\fC [static]\fP"
+
+.PP
+Definition at line 44 of file lis331hh\&.c\&.
+.SS "int16_t _x_axis = 0\fC [static]\fP"
+
+.PP
+Definition at line 36 of file lis331hh\&.c\&.
+.SS "int16_t _y_axis = 0\fC [static]\fP"
+
+.PP
+Definition at line 37 of file lis331hh\&.c\&.
+.SS "int16_t _z_axis = 0\fC [static]\fP"
+
+.PP
+Definition at line 38 of file lis331hh\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

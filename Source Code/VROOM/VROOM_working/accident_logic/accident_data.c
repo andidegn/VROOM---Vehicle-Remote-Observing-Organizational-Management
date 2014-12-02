@@ -1,26 +1,15 @@
 /**********************************************************************//**
  * @file accident_data.c
- *
- * @author: Kenneth René Jensen
- * @Version: 0.7
- * @{
-	This is the data for an Accident report.
-	Comply eCall standards for MSD data structure.
-	@note NOT YET Complies MISRO 2004 standards
- * @}
  *************************************************************************/
 #include <stdlib.h>
 #include <string.h>
 #include <util/delay.h>
 #include "accident_data.h"
 #include "../hardware_boards/sim908/sim908.h"
+#include "../util/timer/timer.h"
 #include "accident_detection.h"
 
-/**********************************************************************//**
- * @ingroup ad_priv
- * @brief define for the space char ' '
- *************************************************************************/
-#define BLANK_CHAR 0x20
+#define BLANK_CHAR 0x20	/**> Define for the space char ' ' */
 
 /* Global variables */
 AD_MSD EXT_MSD;
@@ -36,7 +25,7 @@ static void _set_VIN(const char *__VIN);
 static void _set_optional_data();
 
 /**********************************************************************//**
- * @ingroup ad_pub
+ * @ingroup ac_dat_pub
  * Starts the sequence required for placing an emergency call and send
  * an MSD packet.
  * Steps in function:\n
@@ -47,6 +36,7 @@ static void _set_optional_data();
  **************************************************************************/
 void ad_emergency_alarm(void)
 {
+	timer_pause_all();
 	EXT_MSD.version = CONFIG_MSD_FORMAT_VERSION;
 	EXT_MSD.vehicle_class = CONFIG_MSD_VEHICLE_CLASS;
 	EXT_MSD.fuel_type = CONFIG_MSD_FUEL_TYPE;
@@ -65,10 +55,11 @@ void ad_emergency_alarm(void)
 	/*call_PSAP();*/
 
 	EXT_EMERGENCY_FLAG = EMERGENCY_ALARM_SENT;
+	timer_resume_all();
 }
 
 /**********************************************************************//**
- * @ingroup ad_priv
+ * @ingroup ac_dat_priv
  * @brief function to set the control byte
  *	Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |\n
  *	Bit:		  |	       7			 |	       6		 |     5	 |			  4			  | 3 | 2 | 1 | 0 |\n
@@ -80,13 +71,12 @@ void ad_emergency_alarm(void)
  *
  * @return void
  *************************************************************************/
-static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm)
-{
+static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm) {
 	EXT_MSD.control = __position_can_be_trusted<<4 | __test_call<<5 |  __manual_alarm<<6 | __auto_alarm<<7;
 }
 
 /**********************************************************************//**
- * @ingroup ad_priv
+ * @ingroup ac_dat_priv
  * @brief function to set the vehicle identification number
  *
  * @param VIN - an array of 4 bytes
@@ -107,7 +97,7 @@ static void _set_VIN(const char *__VIN)
 }
 
 /**********************************************************************//**
- * @ingroup ad_priv
+ * @ingroup ac_dat_priv
  * @brief function to set further data (e.g. crash information, number of passengers, temperature)
  *
  * @param s - Maximum 102 bytes string allowed
@@ -123,7 +113,7 @@ static void _set_optional_data()
 	{
 		EXT_MSD.optional_data[i] = BLANK_CHAR;
 	}
-	
+
 	strcpy(EXT_MSD.optional_data, "ACC [G]: ");
 	strcat(EXT_MSD.optional_data, dtostrf( EXT_TOTAL_ACCELERATION_AVG, 2, 2, buf ));
 	strcat(EXT_MSD.optional_data, "|Temp [°C]: ");
@@ -132,6 +122,6 @@ static void _set_optional_data()
 	strcat(EXT_MSD.optional_data, "<unknown>");
 	strcat(EXT_MSD.optional_data, "|Speed [km/h]: ");
 	strcat(EXT_MSD.optional_data, "<unknown>");
-	
+
 	free(buf);
 }

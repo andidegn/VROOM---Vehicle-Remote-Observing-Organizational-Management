@@ -84,5 +84,13 @@ var at__commands_8h =
     [ "AT_RESTORE_PROFILE1", "at__commands_8h.html#gae7fc6d08532e28136335e2b83fc6cda5", null ],
     [ "AT_SOFTWARE_FLOW_CONTROL", "at__commands_8h.html#ga0575909ecc4778fe49ecdf271ec1fac2", null ],
     [ "AT_STORE_PROFILE0", "at__commands_8h.html#gac8d0680d4383216ab819928632105db0", null ],
-    [ "AT_STORE_PROFILE1", "at__commands_8h.html#ga4eb3961f035ff7ff62b5f64064f341a4", null ]
+    [ "AT_STORE_PROFILE1", "at__commands_8h.html#ga4eb3961f035ff7ff62b5f64064f341a4", null ],
+    [ "AT_CONNECTION_STATUS_FLAG", "at__commands_8h.html#gae73798f5776cf01d259bbb6111d270fd", [
+      [ "CREG_NOT_REG_NOT_SEARCHING", "at__commands_8h.html#ggae73798f5776cf01d259bbb6111d270fda739b08f0149a0899013933fd4e0b90ea", null ],
+      [ "CREG_REGISTERED_HOME_NETWORK", "at__commands_8h.html#ggae73798f5776cf01d259bbb6111d270fda625a1060a71c390aa9944c0cb7a34701", null ],
+      [ "CREG_NOT_REG_SEARCHING", "at__commands_8h.html#ggae73798f5776cf01d259bbb6111d270fda4141ea8740336c6bb7573a61ec8adf49", null ],
+      [ "CREG_REGISTRATION_DENIED", "at__commands_8h.html#ggae73798f5776cf01d259bbb6111d270fdaae016d24fcfa26c42a345dbf2144e2ac", null ],
+      [ "CREG_UNKNOWN", "at__commands_8h.html#ggae73798f5776cf01d259bbb6111d270fdab092c3e39d0f034b4ab05b258db80232", null ],
+      [ "CREG_REGISTERED_ROAMING", "at__commands_8h.html#ggae73798f5776cf01d259bbb6111d270fdaba5080d50fef01499639919eefb66821", null ]
+    ] ]
 ];

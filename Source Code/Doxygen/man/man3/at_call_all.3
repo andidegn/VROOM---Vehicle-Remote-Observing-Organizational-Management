@@ -1,0 +1,43 @@
+.TH "Call allowance" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Call allowance \- 
+.PP
+Defines for the incoming call allowance setting\&.  
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBAT_ENABLE_INCOMING_CALLS\fP   'AT+GSMBUSY=0'"
+.br
+.ti -1c
+.RI "#define \fBAT_FORBID_INCOMING_CALLS\fP   'AT+GSMBUSY=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FORBID_VOICE_CALLS_ONLY\fP   'AT+GSMBUSY=2'	/* Circuit-Switched Data (CSD) calls enabled */"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines for the incoming call allowance setting\&. 
+
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define AT_ENABLE_INCOMING_CALLS   'AT+GSMBUSY=0'"
+
+.PP
+Definition at line 102 of file at_commands\&.h\&.
+.SS "#define AT_FORBID_INCOMING_CALLS   'AT+GSMBUSY=1'"
+
+.PP
+Definition at line 103 of file at_commands\&.h\&.
+.SS "#define AT_FORBID_VOICE_CALLS_ONLY   'AT+GSMBUSY=2'	/* Circuit-Switched Data (CSD) calls enabled */"
+
+.PP
+Definition at line 104 of file at_commands\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

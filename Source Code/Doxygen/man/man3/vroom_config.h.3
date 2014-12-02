@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/vroom_config.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/vroom_config.h" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,10 +16,10 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBNO\fP   0"
 .br
 .ti -1c
-.RI "#define \fBANDI_TEST\fP   \fBNO\fP"
+.RI "#define \fBANDI_TEST\fP   \fBYES\fP"
 .br
 .ti -1c
-.RI "#define \fBKENNETH_TEST\fP   \fBYES\fP"
+.RI "#define \fBKENNETH_TEST\fP   \fBNO\fP"
 .br
 .ti -1c
 .RI "#define \fBDEBUG_UART_ENABLE\fP   /* uart1 (PD2/PD3) is used for debugging */"
@@ -28,20 +28,52 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBDEBUG_LCD_ENABLE\fP   /* LCD should be connected to \fBPORT\fP L */"
 .br
 .ti -1c
+.RI "#define \fBCONFIG_ALARM_DETECTION_RESOLUTION\fP   10		/**> Time interval between checking for accidents in hz */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP   5		/**> Length of acceleration peek */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_CRASH_TRIGGER_VALUE\fP   800		/**> Total acceleration [G] in 1/100 resolution */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_DEGREE\fP   1		/**> Temperature raise in Celsius degrees */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_TIME\fP   80		/**> Temperature raise time in 1/10 seconds resolution */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP   -100		/**> Used to be sure there are two temperature readings before comparing values */"
+.br
+.ti -1c
 .RI "#define \fBCONFIG_MSD_FORMAT_VERSION\fP   1"
 .br
-.RI "\fIParameters for detecting a crash\&. \fP"
 .ti -1c
-.RI "#define \fBCONFIG_TEST_CALL\fP   true"
+.RI "#define \fBCONFIG_MSD_TEST_CALL\fP   true"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_VEHICLE_CLASS\fP   AD_VEHICLE_CLASS_M(1)	/* M1 = No more than eight seats in addition to the driver’s seat, and having a maximum mass not exceeding 3\&.5 tons */"
+.RI "#define \fBCONFIG_MSD_VEHICLE_CLASS\fP   \fBAD_VEHICLE_CLASS_M\fP(1)	/**> M1 = No more than eight seats in addition to the driver’s seat, and having a maximum mass not exceeding 3\&.5 tons */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_FUEL_TYPE\fP   \fBAD_FUEL_TYPE_GASOLINE\fP"
+.RI "#define \fBCONFIG_MSD_FUEL_TYPE\fP   \fBAD_FUEL_TYPE_GASOLINE\fP"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_VIN\fP   'W0L000036V1940069'"
+.RI "#define \fBCONFIG_MSD_VIN\fP   'W0L000036V1940069'"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_MSD_OPTIONAL_DATA_SIZE\fP   102				/**> Calculated size based on total MSD size - compulsory data */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_EMERGENCY_PHONE_NUMBER\fP   \fBCONFIG_PSAP_NUMBER_TEST_KENNETH\fP"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PSAP_NUMBER_EUROPE\fP   '112'"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PSAP_NUMBER_TEST_KENNETH\fP   '60192949' /* Only for testing */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PSAP_NUMBER_TEST_ANDI\fP   '60257898' /* Only for testing */"
 .br
 .ti -1c
 .RI "#define \fBCONFIG_APN_TELIA\fP   'internet\&.mtelia\&.dk'"
@@ -54,18 +86,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .ti -1c
 .RI "#define \fBCONFIG_APN_TDC\fP   'internet'"
-.br
-.ti -1c
-.RI "#define \fBCONFIG_PSAP_NUMBER_EUROPE\fP   '112'"
-.br
-.ti -1c
-.RI "#define \fBCONFIG_PSAP_NUMBER_TEST_KENNETH\fP   '60192949' /* Only for testing */"
-.br
-.ti -1c
-.RI "#define \fBCONFIG_PSAP_NUMBER_TEST_ANDI\fP   '60257898' /* Only for testing */"
-.br
-.ti -1c
-.RI "#define \fBCONFIG_EMERGENCY_PHONE_NUMBER\fP   \fBCONFIG_PSAP_NUMBER_TEST_KENNETH\fP"
 .br
 .ti -1c
 .RI "#define \fBCONFIG_FTP_SERVER_ADDRESS\fP   'ftp\&.andidegn\&.dk'"
@@ -86,13 +106,10 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBCONFIG_FTP_FILE_SIZE\fP   '140' /* no of bytes */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_PIN\fP   '5130'"
+.RI "#define \fBCONFIG_VROOM_ID\fP   '60257898'"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_VROOM_ID\fP   '60192949'"
-.br
-.ti -1c
-.RI "#define \fBCONFIG_APN\fP   \fBCONFIG_APN_TDC\fP"
+.RI "#define \fBCONFIG_APN\fP   \fBCONFIG_APN_CALLME\fP"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -101,12 +118,9 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .PP
 \fBAuthor:\fP
 .RS 4
-: Kenneth René Jensen : 0\&.1 
-.RE
+: Kenneth René Jensen 
 .PP
-\fBNote:\fP
-.RS 4
-NOT YET Complies MISRO 2004 standards 
+: Andi Degn : 0\&.6 
 .RE
 .PP
 
@@ -114,129 +128,30 @@ NOT YET Complies MISRO 2004 standards
 Definition in file \fBvroom_config\&.h\fP\&.
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define ANDI_TEST   \fBNO\fP"
+.SS "#define ANDI_TEST   \fBYES\fP"
 
 .PP
-Definition at line 13 of file vroom_config\&.h\&.
-.SS "#define CONFIG_APN   \fBCONFIG_APN_TDC\fP"
-
-.PP
-Definition at line 60 of file vroom_config\&.h\&.
-.SS "#define CONFIG_APN_CALLME   'websp'"
-
-.PP
-Definition at line 37 of file vroom_config\&.h\&.
-.SS "#define CONFIG_APN_TDC   'internet'"
-
-.PP
-Definition at line 39 of file vroom_config\&.h\&.
-.SS "#define CONFIG_APN_TELENOR   'internet'"
-
-.PP
-Definition at line 38 of file vroom_config\&.h\&.
-.SS "#define CONFIG_APN_TELIA   'internet\&.mtelia\&.dk'"
-
-.PP
-Definition at line 36 of file vroom_config\&.h\&.
-.SS "#define CONFIG_EMERGENCY_PHONE_NUMBER   \fBCONFIG_PSAP_NUMBER_TEST_KENNETH\fP"
-
-.PP
-Definition at line 46 of file vroom_config\&.h\&.
-.SS "#define CONFIG_FTP_FILE_PATH   '/'"
-
-.PP
-Definition at line 53 of file vroom_config\&.h\&.
-.SS "#define CONFIG_FTP_FILE_SIZE   '140' /* no of bytes */"
-
-.PP
-Definition at line 54 of file vroom_config\&.h\&.
-.SS "#define CONFIG_FTP_PORT   '1404'"
-
-.PP
-Definition at line 50 of file vroom_config\&.h\&.
-.SS "#define CONFIG_FTP_PW   '6198fg(/G6F/&5(!(!8gf87gMF\&.'"
-
-.PP
-Definition at line 52 of file vroom_config\&.h\&.
-.SS "#define CONFIG_FTP_SERVER_ADDRESS   'ftp\&.andidegn\&.dk'"
-
-.PP
-Definition at line 49 of file vroom_config\&.h\&.
-.SS "#define CONFIG_FTP_USER   'VROOM'"
-
-.PP
-Definition at line 51 of file vroom_config\&.h\&.
-.SS "#define CONFIG_FUEL_TYPE   \fBAD_FUEL_TYPE_GASOLINE\fP"
-
-.PP
-Definition at line 32 of file vroom_config\&.h\&.
-.SS "#define CONFIG_MSD_FORMAT_VERSION   1"
-
-.PP
-Parameters for detecting a crash\&. Crash parameters
-.PP
-.PP
-.nf
-                                                                          /
-#define CONFIG_NO_OF_READINGS 2
-#define CONFIG_ALARM_TRIGGER_VALUE 1000
-.fi
-.PP
- 
-.PP
-Definition at line 29 of file vroom_config\&.h\&.
-.SS "#define CONFIG_PIN   '5130'"
-
-.PP
-Definition at line 58 of file vroom_config\&.h\&.
-.SS "#define CONFIG_PSAP_NUMBER_EUROPE   '112'"
-
-.PP
-Definition at line 42 of file vroom_config\&.h\&.
-.SS "#define CONFIG_PSAP_NUMBER_TEST_ANDI   '60257898' /* Only for testing */"
-
-.PP
-Definition at line 44 of file vroom_config\&.h\&.
-.SS "#define CONFIG_PSAP_NUMBER_TEST_KENNETH   '60192949' /* Only for testing */"
-
-.PP
-Definition at line 43 of file vroom_config\&.h\&.
-.SS "#define CONFIG_TEST_CALL   true"
-
-.PP
-Definition at line 30 of file vroom_config\&.h\&.
-.SS "#define CONFIG_VEHICLE_CLASS   AD_VEHICLE_CLASS_M(1)	/* M1 = No more than eight seats in addition to the driver’s seat, and having a maximum mass not exceeding 3\&.5 tons */"
-
-.PP
-Definition at line 31 of file vroom_config\&.h\&.
-.SS "#define CONFIG_VIN   'W0L000036V1940069'"
-
-.PP
-Definition at line 33 of file vroom_config\&.h\&.
-.SS "#define CONFIG_VROOM_ID   '60192949'"
-
-.PP
-Definition at line 59 of file vroom_config\&.h\&.
+Definition at line 19 of file vroom_config\&.h\&.
 .SS "#define DEBUG_LCD_ENABLE   /* LCD should be connected to \fBPORT\fP L */"
 
 .PP
-Definition at line 16 of file vroom_config\&.h\&.
+Definition at line 22 of file vroom_config\&.h\&.
 .SS "#define DEBUG_UART_ENABLE   /* uart1 (PD2/PD3) is used for debugging */"
 
 .PP
-Definition at line 15 of file vroom_config\&.h\&.
-.SS "#define KENNETH_TEST   \fBYES\fP"
+Definition at line 21 of file vroom_config\&.h\&.
+.SS "#define KENNETH_TEST   \fBNO\fP"
 
 .PP
-Definition at line 14 of file vroom_config\&.h\&.
+Definition at line 20 of file vroom_config\&.h\&.
 .SS "#define NO   0"
 
 .PP
-Definition at line 12 of file vroom_config\&.h\&.
+Definition at line 18 of file vroom_config\&.h\&.
 .SS "#define YES   1"
 
 .PP
-Definition at line 11 of file vroom_config\&.h\&.
+Definition at line 17 of file vroom_config\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -8,8 +8,8 @@
 	This is the driver for the car panel in VROOM system.
 	The panel includes two tact switches, a RGB LED and a single LED.
  	@note NOT YET Complies MISRO 2004 standards
+ 	@defgroup cp_pub Public
 	@defgroup cp_priv Private
-	@defgroup cp_pub Public
  * @}
  *************************************************************************/
 
@@ -21,8 +21,11 @@
 /**********************************************************************//**
  * @ingroup cp_pub
  * @brief Defines for the time of button press before activation/deactivation in 1/10 sec
+ * @defgroup cp_btn_time Button press time
+ * @{
  *************************************************************************/
 #define BUTTON_PRESS_TIME		30
+/** @} */
 
 /**********************************************************************//**
  * @ingroup cp_pub

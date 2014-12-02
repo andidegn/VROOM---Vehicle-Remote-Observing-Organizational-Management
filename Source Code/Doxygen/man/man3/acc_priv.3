@@ -1,11 +1,76 @@
-.TH "Private" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 Private \- 
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fB_acc_read_from_reg\fP (uint8_t __reg, uint8_t __no_of_dummy_bytes)"
+.br
+.ti -1c
+.RI "static void \fB_acc_callback\fP (uint8_t *__data)"
+.br
+.in -1c
 .SH "Detailed Description"
 .PP 
 
+.SH "Function Documentation"
+.PP 
+.SS "static void _acc_callback (uint8_t *__data)\fC [static]\fP"
+Handles the callback from the SPI driver by storing the returned data locally
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP *data - a pointer to an array of the same size as was passed to the SPI driver
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 166 of file lis331hh\&.c\&.
+.SS "static void _acc_read_from_reg (uint8_treg, uint8_tno_of_dummy_bytes)\fC [static]\fP"
+Sends seven bytes to the SPI\&. First byte with the command\&. The command is a constructed like so: Bit0 - RW: Read/Write
+.IP "\(bu" 2
+Read: 1
+.IP "\(bu" 2
+Write: 0
+.PP
+.PP
+Bit1 - MS: Multi/Single
+.IP "\(bu" 2
+Multi: 1
+.IP "\(bu" 2
+SIngle:0
+.PP
+.PP
+Bit2-7 - Address |bit7|bit6|bit5|bit4|bit3|bit2|bit1|bit0| | RW | MS |ADR5|ADR4|ADR3|ADR2|ADR1|ADR0|
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP reg - the register in the acc to write to 
+.br
+\fIuint8_t\fP no_of_dummy_bytes - the number of dummy bytes to send 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+The number of bytes for the SPI is the total number of bytes, ie\&. no_of_dummy_bytes + 1 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 124 of file lis331hh\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

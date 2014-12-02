@@ -1,4 +1,4 @@
-.TH "Public" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -170,7 +170,7 @@ uint8_t - a handle for the setup
 .PP
 
 .PP
-Definition at line 69 of file spi\&.c\&.
+Definition at line 63 of file spi\&.c\&.
 .SS "void spi_release (void)"
 
 .PP
@@ -188,7 +188,7 @@ void
 .PP
 
 .PP
-Definition at line 152 of file spi\&.c\&.
+Definition at line 146 of file spi\&.c\&.
 .SS "int8_t spi_send (int8_t__handle, uint8_t *__data_array, uint8_t__no_of_bytes)"
 
 .PP
@@ -215,7 +215,48 @@ int8_t - '0' if unsuccessful, '1' if successful
 .PP
 
 .PP
-Definition at line 109 of file spi\&.c\&.
+.RS 4
+checking if the SPI driver is in use, if so it checks if it is the current handle that is using it 
+.RE
+.PP
+.PP
+.RS 4
+saves the current state of the status register and disables global interrupt 
+.RE
+.PP
+.PP
+.RS 4
+checks if the device calling the SPI is the same as is already registered\&. If not, set it up 
+.RE
+.PP
+.PP
+.RS 4
+setting the SPI in busy mode 
+.RE
+.PP
+.PP
+.RS 4
+activating chip select on the slave 
+.RE
+.PP
+.PP
+.RS 4
+enabling SPI interrupt 
+.RE
+.PP
+.PP
+.RS 4
+sending the data 
+.RE
+.PP
+.PP
+.RS 4
+restore status register 
+.RE
+.PP
+
+.PP
+Definition at line 103 of file spi\&.c\&.
 .SS "int8_t spi_send_byte (int8_t__handle, uint8_t__data)"
 
 .PP
@@ -235,7 +276,7 @@ int8_t - '0' if unsuccessful, '1' if successful
 .PP
 
 .PP
-Definition at line 99 of file spi\&.c\&.
+Definition at line 93 of file spi\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

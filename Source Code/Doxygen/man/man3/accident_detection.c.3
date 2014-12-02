@@ -1,0 +1,86 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_detection.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_detection.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include 'accident_detection\&.h'\fP
+.br
+\fC#include 'accident_data\&.h'\fP
+.br
+\fC#include '\&.\&./vroom_config\&.h'\fP
+.br
+\fC#include '\&.\&./util/timer/timer\&.h'\fP
+.br
+\fC#include '\&.\&./hardware_boards/car_panel/car_panel\&.h'\fP
+.br
+\fC#include '\&.\&./sensors/sensor_scheduler\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBaccident_detection_init\fP (void)"
+.br
+.RI "\fIInit detection for accidents\&. \fP"
+.ti -1c
+.RI "void \fBad_check_for_crash\fP (void)"
+.br
+.RI "\fIChecks if a crash has occurred\&. \fP"
+.ti -1c
+.RI "void \fBad_check_for_fire\fP (void)"
+.br
+.RI "\fIChecks for fire\&. \fP"
+.ti -1c
+.RI "void \fBaccident_detection_start\fP (void)"
+.br
+.RI "\fIStarts detection for accidents\&. \fP"
+.ti -1c
+.RI "void \fBaccident_detection_stop\fP (void)"
+.br
+.RI "\fIStops detection for accidents\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "float \fBEXT_TEMPERATURE\fP = 0"
+.br
+.ti -1c
+.RI "float \fBEXT_TOTAL_ACCELERATION_AVG\fP = 0"
+.br
+.ti -1c
+.RI "static volatile float \fBcur_temp\fP = 0\&.0F"
+.br
+.ti -1c
+.RI "static volatile float \fBprev_temp\fP = \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP"
+.br
+.in -1c
+.SH "Variable Documentation"
+.PP 
+.SS "volatile float cur_temp = 0\&.0F\fC [static]\fP"
+
+.PP
+Definition at line 18 of file accident_detection\&.c\&.
+.SS "float EXT_TEMPERATURE = 0"
+
+.PP
+Definition at line 14 of file accident_detection\&.c\&.
+.SS "float EXT_TOTAL_ACCELERATION_AVG = 0"
+
+.PP
+Definition at line 15 of file accident_detection\&.c\&.
+.SS "volatile float prev_temp = \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP\fC [static]\fP"
+
+.PP
+Definition at line 19 of file accident_detection\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

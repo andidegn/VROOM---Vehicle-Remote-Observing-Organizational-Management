@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('uart_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,7 +104,9 @@ $(document).ready(function(){initNavTree('uart_8c.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">uart.c File Reference</div>  </div>
 </div><!--header-->
@@ -115,6 +117,15 @@ $(document).ready(function(){initNavTree('uart_8c.html','');});
 </div>
 <p><a href="uart_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga06f8ff4cb5ba1ce764ff1d992f8986ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uart__baud__factor.html#ga06f8ff4cb5ba1ce764ff1d992f8986ef">UBRR_FACTOR_ASYNC_NORM</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:ga06f8ff4cb5ba1ce764ff1d992f8986ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga651098c41452ed554d065eb684640fa6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uart__baud__factor.html#ga651098c41452ed554d065eb684640fa6">UBRR_FACTOR_ASYNC_DOUBLE</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:ga651098c41452ed554d065eb684640fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga035f6d907ee73b77f8f5be6e4de64dbb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uart__baud__equation.html#ga035f6d907ee73b77f8f5be6e4de64dbb">CALC_UBRR</a>(baud_rate, factor)&#160;&#160;&#160;(((<a class="el" href="run_8c.html#a43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a> / (factor * baud_rate)) - 1) + 0.5F)</td></tr>
+<tr class="separator:ga035f6d907ee73b77f8f5be6e4de64dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gad15a574ad4bf0d30f348f915b2417453"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uart__pub.html#gad15a574ad4bf0d30f348f915b2417453">uart0_setup_async</a> (<a class="el" href="group__uart__pub.html#gac7d88ca139fc868d44fb0911bb96a5c3">UART_MODE</a> __operational_mode, <a class="el" href="group__uart__pub.html#ga2b50ce1943f24e90a2e2b8fe34f20481">UART_BAUD</a> __baud_rate, <a class="el" href="group__uart__pub.html#gad0c2140bdb33185144f5dfe6f5a97697">UART_PARITY_MODE</a> __paraty_mode, <a class="el" href="group__uart__pub.html#gaa89c21fdb2336f3783a1ec5876246043">UART_STOP_BIT</a> __stop_bit, <a class="el" href="group__uart__pub.html#gab333e4c99296516f9b97ee529a36e647">UART_CHAR_SIZE</a> __char_size, void(*__callback_function_ptr)(char __data))</td></tr>
@@ -155,14 +166,354 @@ Functions</h2></td></tr>
 <tr class="separator:ga58b2da6106c960191b248d3cce1832b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga839a4aa8ec72b5e33abcd61e7d5a5d2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uart__priv.html#ga839a4aa8ec72b5e33abcd61e7d5a5d2a">ISR</a> (USART1_RX_vect, ISR_BLOCK)</td></tr>
 <tr class="separator:ga839a4aa8ec72b5e33abcd61e7d5a5d2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ae87fa9cbff6178098c89a27671bc991d"><td class="memItemLeft" align="right" valign="top">static void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#ae87fa9cbff6178098c89a27671bc991d">_callback_function0_ptr</a> )(char __data)</td></tr>
+<tr class="separator:ae87fa9cbff6178098c89a27671bc991d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aab1b103148d9f0ad2dc7be91d09966"><td class="memItemLeft" align="right" valign="top">static volatile char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a6aab1b103148d9f0ad2dc7be91d09966">_tx_buffer0</a> [<a class="el" href="group__uart__buf.html#gaa940408795d26c17246a6eec0d8009e0">UART0_TX_BUFFER_SIZE</a>]</td></tr>
+<tr class="separator:a6aab1b103148d9f0ad2dc7be91d09966"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67601ac8a3ffd88e19b7a65d7f78a97d"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a67601ac8a3ffd88e19b7a65d7f78a97d">_tx_buffer0_head</a> = 0U</td></tr>
+<tr class="separator:a67601ac8a3ffd88e19b7a65d7f78a97d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363703ccfbbab2509770512b704cd018"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a363703ccfbbab2509770512b704cd018">_tx_buffer0_tail</a> = 0U</td></tr>
+<tr class="separator:a363703ccfbbab2509770512b704cd018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb92c8a66ed4bbf77e394f0c39559fe8"><td class="memItemLeft" align="right" valign="top">static volatile char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#acb92c8a66ed4bbf77e394f0c39559fe8">_rx_buffer0</a> [<a class="el" href="group__uart__buf.html#ga08df86137d0485fe2b32b845d867fd5e">UART0_RX_BUFFER_SIZE</a>]</td></tr>
+<tr class="separator:acb92c8a66ed4bbf77e394f0c39559fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acae80b47ab4ad219bb69b47a0211fde5"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#acae80b47ab4ad219bb69b47a0211fde5">_rx_buffer0_head</a> = 0U</td></tr>
+<tr class="separator:acae80b47ab4ad219bb69b47a0211fde5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0db7ee3e8b5627d10d2e323f2b229c4"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#aa0db7ee3e8b5627d10d2e323f2b229c4">_rx_buffer0_tail</a> = 0U</td></tr>
+<tr class="separator:aa0db7ee3e8b5627d10d2e323f2b229c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a255abfa13770f2a48f0f40a192237e9f"><td class="memItemLeft" align="right" valign="top">static void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a255abfa13770f2a48f0f40a192237e9f">_callback_function1_ptr</a> )(char __data)</td></tr>
+<tr class="separator:a255abfa13770f2a48f0f40a192237e9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a513bdebd21a1799fa7204f6feb73211a"><td class="memItemLeft" align="right" valign="top">static volatile char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a513bdebd21a1799fa7204f6feb73211a">_tx_buffer1</a> [<a class="el" href="group__uart__buf.html#ga2678114a7a8e5e7c25d01c6ada2eafd7">UART1_TX_BUFFER_SIZE</a>]</td></tr>
+<tr class="separator:a513bdebd21a1799fa7204f6feb73211a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae31ecf6f95b39794d7911355660a103e"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#ae31ecf6f95b39794d7911355660a103e">_tx_buffer1_head</a> = 0U</td></tr>
+<tr class="separator:ae31ecf6f95b39794d7911355660a103e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a79bb0fedcae6168ec9d09d5753acf6"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a4a79bb0fedcae6168ec9d09d5753acf6">_tx_buffer1_tail</a> = 0U</td></tr>
+<tr class="separator:a4a79bb0fedcae6168ec9d09d5753acf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2af3e7274d10639ee2ec9c9a39576060"><td class="memItemLeft" align="right" valign="top">static volatile char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a2af3e7274d10639ee2ec9c9a39576060">_rx_buffer1</a> [<a class="el" href="group__uart__buf.html#gaa053ef004867924f9bc26798ebee0513">UART1_RX_BUFFER_SIZE</a>]</td></tr>
+<tr class="separator:a2af3e7274d10639ee2ec9c9a39576060"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67972bf307d4a1414f6eeba21c0cdb12"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a67972bf307d4a1414f6eeba21c0cdb12">_rx_buffer1_head</a> = 0U</td></tr>
+<tr class="separator:a67972bf307d4a1414f6eeba21c0cdb12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa82a0e9b21f598f74ba73b4cf12030b1"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#aa82a0e9b21f598f74ba73b4cf12030b1">_rx_buffer1_tail</a> = 0U</td></tr>
+<tr class="separator:aa82a0e9b21f598f74ba73b4cf12030b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="ae87fa9cbff6178098c89a27671bc991d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* _callback_function0_ptr)(char __data)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00030">30</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a255abfa13770f2a48f0f40a192237e9f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* _callback_function1_ptr)(char __data)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00039">39</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acb92c8a66ed4bbf77e394f0c39559fe8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile char _rx_buffer0[<a class="el" href="group__uart__buf.html#ga08df86137d0485fe2b32b845d867fd5e">UART0_RX_BUFFER_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00034">34</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acae80b47ab4ad219bb69b47a0211fde5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _rx_buffer0_head = 0U</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00035">35</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa0db7ee3e8b5627d10d2e323f2b229c4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _rx_buffer0_tail = 0U</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00036">36</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2af3e7274d10639ee2ec9c9a39576060"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile char _rx_buffer1[<a class="el" href="group__uart__buf.html#gaa053ef004867924f9bc26798ebee0513">UART1_RX_BUFFER_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00043">43</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a67972bf307d4a1414f6eeba21c0cdb12"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _rx_buffer1_head = 0U</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00044">44</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa82a0e9b21f598f74ba73b4cf12030b1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _rx_buffer1_tail = 0U</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00045">45</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6aab1b103148d9f0ad2dc7be91d09966"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile char _tx_buffer0[<a class="el" href="group__uart__buf.html#gaa940408795d26c17246a6eec0d8009e0">UART0_TX_BUFFER_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00031">31</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a67601ac8a3ffd88e19b7a65d7f78a97d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _tx_buffer0_head = 0U</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00032">32</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a363703ccfbbab2509770512b704cd018"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _tx_buffer0_tail = 0U</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00033">33</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a513bdebd21a1799fa7204f6feb73211a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile char _tx_buffer1[<a class="el" href="group__uart__buf.html#ga2678114a7a8e5e7c25d01c6ada2eafd7">UART1_TX_BUFFER_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00040">40</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae31ecf6f95b39794d7911355660a103e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _tx_buffer1_head = 0U</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00041">41</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4a79bb0fedcae6168ec9d09d5753acf6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _tx_buffer1_tail = 0U</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00042">42</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_cb4bf8a099fe3a7a175adb1a0192631d.html">data_comm</a></li><li class="navelem"><a class="el" href="dir_49beaa8d6454e9bd57771adb6bda2e33.html">uart</a></li><li class="navelem"><a class="el" href="uart_8c.html">uart.c</a></li>
-    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
+    <li class="footer">Generated on Tue Dec 2 2014 05:08:08 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

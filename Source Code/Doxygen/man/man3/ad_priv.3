@@ -1,4 +1,4 @@
-.TH "Private" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -11,6 +11,26 @@ Private \-
 .br
 .RI "\fIdefine for the space char ' ' \fP"
 .in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fB_set_control_byte\fP (bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm)"
+.br
+.RI "\fIfunction to set the control byte Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |
+.br
+ Bit: | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+.br
+\fP"
+.ti -1c
+.RI "static void \fB_set_VIN\fP (const char *__VIN)"
+.br
+.RI "\fIfunction to set the vehicle identification number \fP"
+.ti -1c
+.RI "static void \fB_set_optional_data\fP ()"
+.br
+.RI "\fIfunction to set further data (e\&.g\&. crash information, number of passengers, temperature) \fP"
+.in -1c
 .SH "Detailed Description"
 .PP 
 
@@ -21,7 +41,89 @@ Private \-
 .PP
 define for the space char ' ' 
 .PP
-Definition at line 21 of file accident_data\&.c\&.
+Definition at line 16 of file accident_data\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "static void _set_control_byte (bool__position_can_be_trusted, bool__test_call, bool__manual_alarm, bool__auto_alarm)\fC [static]\fP"
+
+.PP
+function to set the control byte Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |
+.br
+ Bit: | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+.br
+
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbool\fP position_can_be_trusted - confidence in position 
+.br
+\fIbool\fP test_call - Flag for testing purposes 
+.br
+\fIbool\fP manual_alarm - Flag to show if it is a manual activated alarm 
+.br
+\fIbool\fP auto_alarm - Flag to show if it is an automatic activated alarm
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 78 of file accident_data\&.c\&.
+.SS "static void _set_optional_data ()\fC [static]\fP"
+
+.PP
+function to set further data (e\&.g\&. crash information, number of passengers, temperature) 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIs\fP - Maximum 102 bytes string allowed
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+May also be blank field 
+.RE
+.PP
+
+.PP
+.RS 4
+Calculated size based on total MSD size - compulsory data 
+.RE
+.PP
+
+.PP
+Definition at line 112 of file accident_data\&.c\&.
+.SS "static void _set_VIN (const char *__VIN)\fC [static]\fP"
+
+.PP
+function to set the vehicle identification number 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIVIN\fP - an array of 4 bytes
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+The number consist of 17 characters not including the letters I, O or Q\&. 
+.RE
+.PP
+
+.PP
+Definition at line 91 of file accident_data\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

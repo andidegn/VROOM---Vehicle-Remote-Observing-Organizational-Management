@@ -1,8 +1,20 @@
-.TH "Private" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 Private \- 
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBUART baud rate factor\fP"
+.br
+.RI "\fIdefines for the factor used to calculate baud rate and UBRR0value \fP"
+.ti -1c
+.RI "\fBUART baud rate equation\fP"
+.br
+.RI "\fIdefines for calculating the UBRR0 value \fP"
+.in -1c
 .SS "Functions"
 
 .in +1c
@@ -27,19 +39,19 @@ Private \-
 .SS "ISR (USART0_UDRE_vect, ISR_BLOCK)"
 Interrupt service routine for the UART transmit\&. 
 .PP
-Definition at line 217 of file uart\&.c\&.
+Definition at line 209 of file uart\&.c\&.
 .SS "ISR (USART0_RX_vect, ISR_BLOCK)"
 Interrupt service routine for the UART receive\&. If a callback function pointer is supplied when setting up the UART, a callback to that function is being performed 
 .PP
-Definition at line 230 of file uart\&.c\&.
+Definition at line 222 of file uart\&.c\&.
 .SS "ISR (USART1_UDRE_vect, ISR_BLOCK)"
 Interrupt service routine for the UART transmit\&. 
 .PP
-Definition at line 402 of file uart\&.c\&.
+Definition at line 394 of file uart\&.c\&.
 .SS "ISR (USART1_RX_vect, ISR_BLOCK)"
 Interrupt service routine for the UART\&. If a callback function pointer is supplied when setting up the UART, a callback to that function is being performed 
 .PP
-Definition at line 415 of file uart\&.c\&.
+Definition at line 407 of file uart\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

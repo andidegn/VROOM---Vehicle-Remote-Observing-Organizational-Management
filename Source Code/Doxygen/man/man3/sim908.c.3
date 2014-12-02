@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -20,6 +20,8 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 \fC#include '\&.\&./\&.\&./accident_logic/accident_data\&.h'\fP
 .br
+\fC#include '\&.\&./\&.\&./accident_logic/accident_detection\&.h'\fP
+.br
 \fC#include '\&.\&./\&.\&./util/time\&.h'\fP
 .br
 \fC#include '\&.\&./\&.\&./vroom_config\&.h'\fP
@@ -29,7 +31,82 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
+.RI "#define \fBSIM908_FLAG_WAITING\fP   0"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_OK\fP   1"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_ERROR\fP   2"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_FTP_PUT_OPEN\fP   10"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_FTP_PUT_CLOSE\fP   11"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_FTP_PUT_SUCCESS\fP   12"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_FTP_PUT_ERROR\fP   13"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_FTP_SENDING\fP   14"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_GPS_OK\fP   20"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_GPS_PULL\fP   21"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_GPS_PULL_OK\fP   22"
+.br
+.ti -1c
+.RI "#define \fBSIM908_FLAG_RUNNING\fP   100"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_RDY\fP   'RDY'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_SKIP\fP   'AT+'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_OK\fP   'OK'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_ERROR\fP   'ERR'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_CR_LF\fP   '\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_LF_CR\fP   '\\n\\r'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_AT\fP   'AT'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_GPS_READY\fP   'GPS'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_GPS_PULL\fP   '0,'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_FTP_PUT\fP   '+FTP'"
+.br
+.ti -1c
+.RI "#define \fBSIM908_RESPONSE_CREG\fP   '+CREG: '		/* +CREG: 1 = connected */"
+.br
+.ti -1c
 .RI "#define \fBRX_BUFFER_SIZE\fP   128"
+.br
+.ti -1c
+.RI "#define \fBCR\fP   0x0D /* '\\r' */"
+.br
+.ti -1c
+.RI "#define \fBLF\fP   0x0A /* '\\n' */"
 .br
 .ti -1c
 .RI "#define \fBDDR\fP(x)   (*(&x - 1))"
@@ -41,18 +118,80 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBRETRY_ATTEMPTS\fP   10"
 .br
 .ti -1c
-.RI "#define \fBCONNECTION_RETRY_DELAY_IN_MS\fP   50"
+.RI "#define \fBCONNECTION_RETRY_DELAY_IN_MS\fP   500"
 .br
 .in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
+.RI "static void \fB_setup_GSM\fP (void)"
+.br
+.RI "\fIGSM settings on SIM908 module\&. \fP"
+.ti -1c
+.RI "static void \fB_setup_GPS\fP (void)"
+.br
+.RI "\fIGPS settings on SIM908 module\&. \fP"
+.ti -1c
+.RI "static void \fB_setup_GPRS_FTP\fP (void)"
+.br
+.RI "\fISettings up GPRS - FTP on SIM908 module\&. \fP"
+.ti -1c
+.RI "static void \fB_GSM_enable\fP (void)"
+.br
+.RI "\fIEnable communication with GSM module\&. \fP"
+.ti -1c
+.RI "static void \fB_GPS_enable\fP (void)"
+.br
+.RI "\fIEnable communication with GPS module\&. \fP"
+.ti -1c
+.RI "static void \fB_wait_for_connection\fP (void)"
+.br
+.RI "\fIWaiting for network connection\&. \fP"
+.ti -1c
+.RI "static bool \fB_wait_response\fP (volatile uint8_t *__flag, uint8_t __ok_def)"
+.br
+.RI "\fIWaiting for response\&. \fP"
+.ti -1c
+.RI "static bool \fB_check_response\fP (const char *__defined_response)"
+.br
+.RI "\fIChecking if the last response is the same as the defined response\&. \fP"
+.ti -1c
+.RI "static void \fB_get_GPS_response\fP (void)"
+.br
+.RI "\fISends the get gps info command and waits for the response\&. \fP"
+.ti -1c
+.RI "static char \fB_char_at\fP (uint8_t __index, uint8_t __tail, uint8_t __length)"
+.br
+.RI "\fIReturns the character at a specific location in the rx buffer\&. \fP"
+.ti -1c
+.RI "static void \fB_raw_to_array\fP (char **__output)"
+.br
+.RI "\fICuts up the gps response and puts it into memory with a pointer to each value\&. \fP"
+.ti -1c
+.RI "static uint32_t \fB_set_UTC_sec\fP (const char *__utc_raw)"
+.br
+.RI "\fISet the timestamp in MSD structure\&. \fP"
+.ti -1c
+.RI "static int32_t \fB_get_lat_long\fP (const char *__lat_long_raw)"
+.br
+.RI "\fIGets the latitude or longitude in an 32bit integer from a string\&. \fP"
+.ti -1c
+.RI "static uint8_t \fB_set_direction\fP (const char *__direction_raw)"
+.br
+.RI "\fISet the direction in MSD structure\&. \fP"
+.ti -1c
+.RI "static void \fB_set_MSD_filename\fP (const char *__UTC_raw)"
+.br
+.RI "\fISet the filename of the MSD\&. \fP"
+.ti -1c
 .RI "void \fB_SIM908_callback\fP (char data)"
 .br
+.RI "\fICallback function to handle all communication from the sim908 module Procedure: \fP"
 .ti -1c
 .RI "void \fB_PC_callback\fP (char data)"
 .br
+.RI "\fICallback function to handle debug comminication with pc on uart1 When receiving data it is echoed to both uart0 (sim908) and back to pc on uart1\&. \fP"
 .ti -1c
 .RI "void \fBSIM908_init\fP (void)"
 .br
@@ -60,9 +199,9 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "void \fBSIM908_start\fP (void)"
 .br
-.RI "\fIStarts the SIM908 module in following procedure\&. setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP\&. \fP"
+.RI "\fIStarts the SIM908 module\&. \fP"
 .ti -1c
-.RI "bool \fBSIM908_cmd\fP (const char *__cmd, bool __wait_for_ok)"
+.RI "bool \fBSIM908_cmd\fP (const char *cmd, bool __wait_for_ok)"
 .br
 .RI "\fIUsed for sending AT SET commands\&. \fP"
 .ti -1c
@@ -76,134 +215,149 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "void \fBsend_MSD\fP (const char *__vroom_id)"
 .br
-.RI "\fISends MSD binary file to FTP server 1: Create filename: AT+FTPPUTNAME='<filename>' 2: Open bearer AT+SAPBR=1,1 3: Open FTP PUT session AT+FTPPUT=1 4: Set write data AT+FTPPUT=2,140 5: Write text (140 bytes) 6: End write session AT+FTPPUT=2,0 7: Close bearer AT+SAPBR=0,1\&. \fP"
+.RI "\fISends MSD binary file to FTP server\&. \fP"
 .in -1c
 .SS "Variables"
 
 .in +1c
 .ti -1c
+.RI "static volatile uint8_t \fB_CR_counter\fP = 0"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_LF_counter\fP = 0"
+.br
+.ti -1c
+.RI "static volatile char \fB_rx_buffer\fP [\fBRX_BUFFER_SIZE\fP]"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_rx_buffer_tail\fP = 0"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_rx_response_length\fP = 0"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_system_running_flag\fP = \fBSIM908_FLAG_WAITING\fP"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_wait_for_ok_flag\fP = \fBSIM908_FLAG_WAITING\fP"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_gps_pull_flag\fP = \fBSIM908_FLAG_WAITING\fP"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_ftp_sending_flag\fP = \fBSIM908_FLAG_WAITING\fP"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_ack_response_flag\fP = \fBSIM908_FLAG_WAITING\fP"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_ack_ftp_response_flag\fP = \fBSIM908_FLAG_WAITING\fP"
+.br
+.ti -1c
+.RI "static volatile uint8_t \fB_ack_gps_response_flag\fP = \fBSIM908_FLAG_WAITING\fP"
+.br
+.ti -1c
+.RI "static uint8_t \fB_gps_response_tail\fP = 0"
+.br
+.ti -1c
+.RI "static uint8_t \fB_gps_response_length\fP = 0"
+.br
+.ti -1c
 .RI "char \fBEXT_MSD_FILENAME\fP [24]"
 .br
-.RI "\fIConstant vehicle class type definition\&. \fP"
 .in -1c
-.SH "Detailed Description"
-.PP 
-
-.PP
-\fBAuthor:\fP
-.RS 4
-: Kenneth René Jensen : 0\&.5 
-.PP
-.nf
-This is the driver for GSM/GPRS/GPS module sim908
-.fi
-.PP
-.RE
-.PP
-
-.PP
-Definition in file \fBsim908\&.c\fP\&.
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define CONNECTION_RETRY_DELAY_IN_MS   50"
+.SS "#define CONNECTION_RETRY_DELAY_IN_MS   500"
 
 .PP
-Definition at line 66 of file sim908\&.c\&.
+Definition at line 93 of file sim908\&.c\&.
+.SS "#define CR   0x0D /* '\\r' */"
+
+.PP
+Definition at line 86 of file sim908\&.c\&.
 .SS "#define DDR(x)   (*(&x - 1))"
 
 .PP
-Definition at line 62 of file sim908\&.c\&.
+Definition at line 89 of file sim908\&.c\&.
+.SS "#define LF   0x0A /* '\\n' */"
+
+.PP
+Definition at line 87 of file sim908\&.c\&.
 .SS "#define PIN(x)   (*(&x - 2))"
 
 .PP
-Definition at line 63 of file sim908\&.c\&.
+Definition at line 90 of file sim908\&.c\&.
 .SS "#define RETRY_ATTEMPTS   10"
 
 .PP
-Definition at line 65 of file sim908\&.c\&.
+Definition at line 92 of file sim908\&.c\&.
 .SS "#define RX_BUFFER_SIZE   128"
 
 .PP
-\fBNote:\fP
-.RS 4
-NOT YET Complies MISRO 2004 standards 
-.RE
-.PP
-
-.PP
-Definition at line 20 of file sim908\&.c\&.
-.SH "Function Documentation"
-.PP 
-.SS "void _PC_callback (chardata)"
-
-.PP
-Definition at line 624 of file sim908\&.c\&.
-.SS "void _SIM908_callback (chardata)"
-
-.PP
-Definition at line 565 of file sim908\&.c\&.
+Definition at line 58 of file sim908\&.c\&.
 .SH "Variable Documentation"
 .PP 
+.SS "volatile uint8_t _ack_ftp_response_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
+
+.PP
+Definition at line 77 of file sim908\&.c\&.
+.SS "volatile uint8_t _ack_gps_response_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
+
+.PP
+Definition at line 78 of file sim908\&.c\&.
+.SS "volatile uint8_t _ack_response_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
+
+.PP
+Definition at line 76 of file sim908\&.c\&.
+.SS "volatile uint8_t _CR_counter = 0\fC [static]\fP"
+
+.PP
+Definition at line 61 of file sim908\&.c\&.
+.SS "volatile uint8_t _ftp_sending_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
+
+.PP
+Definition at line 74 of file sim908\&.c\&.
+.SS "volatile uint8_t _gps_pull_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
+
+.PP
+Definition at line 72 of file sim908\&.c\&.
+.SS "uint8_t _gps_response_length = 0\fC [static]\fP"
+
+.PP
+Definition at line 81 of file sim908\&.c\&.
+.SS "uint8_t _gps_response_tail = 0\fC [static]\fP"
+
+.PP
+Definition at line 80 of file sim908\&.c\&.
+.SS "volatile uint8_t _LF_counter = 0\fC [static]\fP"
+
+.PP
+Definition at line 62 of file sim908\&.c\&.
+.SS "volatile char _rx_buffer[\fBRX_BUFFER_SIZE\fP]\fC [static]\fP"
+
+.PP
+Definition at line 64 of file sim908\&.c\&.
+.SS "volatile uint8_t _rx_buffer_tail = 0\fC [static]\fP"
+
+.PP
+Definition at line 65 of file sim908\&.c\&.
+.SS "volatile uint8_t _rx_response_length = 0\fC [static]\fP"
+
+.PP
+Definition at line 66 of file sim908\&.c\&.
+.SS "volatile uint8_t _system_running_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
+
+.PP
+Definition at line 68 of file sim908\&.c\&.
+.SS "volatile uint8_t _wait_for_ok_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
+
+.PP
+Definition at line 70 of file sim908\&.c\&.
 .SS "char EXT_MSD_FILENAME[24]"
 
 .PP
-Constant vehicle class type definition\&. 
-.PP
-\fBNote:\fP
-.RS 4
-Upper nibble contains class definition: [SA, L, M, N, O, T, G] @ Lower nibble contains class category definition: [1 - 7] @ Details: http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32007L0046&from=EN 
-.PP
-.nf
-                                                                          /
-#define AD_VEHICLE_CLASS_L(category)    (1<<4 | category)   /* Motor vehicles with less than four wheels */
-#define AD_VEHICLE_CLASS_M(category)    (2<<4 | category)   /* Power-driven vehicles having at least four wheels and used for the carriage of passengers */
-#define AD_VEHICLE_CLASS_N(category)    (3<<4 | category)   /* Power-driven vehicles having at least four wheels and used for the carriage of goods */
-#define AD_VEHICLE_CLASS_O(category)    (4<<4 | category)   /* Trailers (including semi–trailers) */
-#define AD_VEHICLE_CLASS_T(category)    (5<<4 | category)   /* Agricultural and Forestry tractors */
-#define AD_VEHICLE_CLASS_G(category)    (6<<4 | category)   /* Off-road vehicles */
-#define AD_VEHICLE_CLASS_SA(category)   (7<<4 | category)   /* Special purpose vehicles (e\&.g\&. Ambulance, Hearse, Armoured vehicle or Motor caravan) */
-
-.fi
-.PP
-.RE
-.PP
-Flag to detect if an alarm has been triggered 
-.PP
-.nf
-                                                                          /
-typedef enum {  EMERGENCY_NO_ALARM = 0,
-                EMERGENCY_MANUAL_ALARM = 1,
-                EMERGENCY_AUTO_ALARM = 2,
-                EMERGENCY_ALARM_SENT = 3
-} AD_EMERGENCY_FLAG;
-
-.fi
-.PP
-.PP
-Flag to detect the connection status 
-.PP
-\fBNote:\fP
-.RS 4
-Corresponding to CREG response in SIM908 p\&. 77 in AT Commands manual v\&. 1\&.02 
-.PP
-.nf
-                                                                          /
-typedef enum {  CREG_NOT_REGISTERED = 0,
-                CREG_REGISTERED = 1,
-                CREG_SEARCHING = 2,
-                CREG_REGISTRATION_DENIED = 3,
-                CREG_UNKNOWN = 4,
-                CREG_REGISTERED_ROOMING = 5,
-} AD_CONNECTION_STATUS_FLAG;
-
-.fi
-.PP
- 
-.RE
-.PP
-
-.PP
-Definition at line 42 of file sim908\&.c\&.
+Definition at line 84 of file sim908\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

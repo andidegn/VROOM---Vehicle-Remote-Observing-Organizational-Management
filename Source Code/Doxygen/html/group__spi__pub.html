@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__spi__pub.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -334,7 +334,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint8_t - a handle for the setup </dd></dl>
 
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00069">69</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00063">63</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -362,7 +362,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00152">152</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00146">146</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -408,8 +408,32 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int8_t - '0' if unsuccessful, '1' if successful </dd></dl>
+<blockquote class="doxtable">
+<p>checking if the SPI driver is in use, if so it checks if it is the current handle that is using it </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>saves the current state of the status register and disables global interrupt </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>checks if the device calling the SPI is the same as is already registered. If not, set it up </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>setting the SPI in busy mode </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>activating chip select on the slave </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>enabling SPI interrupt </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>sending the data </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>restore status register </p>
+</blockquote>
 
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00109">109</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00103">103</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -448,7 +472,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int8_t - '0' if unsuccessful, '1' if successful </dd></dl>
 
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00099">99</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00093">93</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -457,7 +481,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
+    <li class="footer">Generated on Tue Dec 2 2014 05:08:09 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

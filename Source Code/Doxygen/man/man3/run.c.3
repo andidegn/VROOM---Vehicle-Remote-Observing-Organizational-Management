@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/run.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/run.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,7 +14,51 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 \fC#include 'sensors/sensor_scheduler\&.h'\fP
 .br
+\fC#include 'hardware_boards/sim908/sim908\&.h'\fP
+.br
+\fC#include 'hardware_boards/car_panel/car_panel\&.h'\fP
+.br
+\fC#include 'accident_logic/accident_data\&.h'\fP
+.br
+\fC#include 'accident_logic/accident_detection\&.h'\fP
+.br
+\fC#include 'hardware_boards/lcd_board/lcd/lcd\&.h'\fP
+.br
 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBF_CPU\fP   11059200UL"
+.br
+.ti -1c
+.RI "#define \fBON\fP   1"
+.br
+.ti -1c
+.RI "#define \fBOFF\fP   0"
+.br
+.ti -1c
+.RI "#define \fBUNIT_TEST\fP   \fBOFF\fP"
+.br
+.ti -1c
+.RI "#define \fBUNIT_TEST_MSD\fP   \fBOFF\fP"
+.br
+.ti -1c
+.RI "#define \fBMODULE_TEST_SENSORS\fP   \fBOFF\fP"
+.br
+.ti -1c
+.RI "#define \fBMODULE_TEST_SIM908\fP   \fBOFF\fP"
+.br
+.ti -1c
+.RI "#define \fBMODULE_TEST_CAR_PANEL\fP   \fBOFF\fP"
+.br
+.ti -1c
+.RI "#define \fBMODULE_TEST_UART\fP   \fBOFF\fP"
+.br
+.ti -1c
+.RI "#define \fBINTEGRATION_TEST_SIM908_SENSORS\fP   \fBON\fP"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
@@ -22,13 +66,54 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "int \fBmain\fP (void)"
 .br
 .in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define F_CPU   11059200UL"
+Acc_test_fresh\&.c
+.PP
+Created: 05-09-2014 08:13:16 Author: Andi Degn 
+.PP
+Definition at line 18 of file run\&.c\&.
+.SS "#define INTEGRATION_TEST_SIM908_SENSORS   \fBON\fP"
+
+.PP
+Definition at line 31 of file run\&.c\&.
+.SS "#define MODULE_TEST_CAR_PANEL   \fBOFF\fP"
+
+.PP
+Definition at line 28 of file run\&.c\&.
+.SS "#define MODULE_TEST_SENSORS   \fBOFF\fP"
+
+.PP
+Definition at line 26 of file run\&.c\&.
+.SS "#define MODULE_TEST_SIM908   \fBOFF\fP"
+
+.PP
+Definition at line 27 of file run\&.c\&.
+.SS "#define MODULE_TEST_UART   \fBOFF\fP"
+
+.PP
+Definition at line 29 of file run\&.c\&.
+.SS "#define OFF   0"
+
+.PP
+Definition at line 20 of file run\&.c\&.
+.SS "#define ON   1"
+
+.PP
+Definition at line 19 of file run\&.c\&.
+.SS "#define UNIT_TEST   \fBOFF\fP"
+
+.PP
+Definition at line 23 of file run\&.c\&.
+.SS "#define UNIT_TEST_MSD   \fBOFF\fP"
+
+.PP
+Definition at line 24 of file run\&.c\&.
 .SH "Function Documentation"
 .PP 
 .SS "int main (void)"
 
-.PP
-.PP
-**************************************************************************/ 
 .PP
 Definition at line 33 of file run\&.c\&.
 .SH "Author"

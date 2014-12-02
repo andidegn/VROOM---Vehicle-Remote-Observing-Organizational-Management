@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/timer/timer.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/timer/timer.h" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -24,29 +24,29 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "void \fBinit_Timer1_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
+.RI "void \fBtimer1_init_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
 .br
 .RI "\fIInitiates timer 1 in CTC mode\&. \fP"
 .ti -1c
-.RI "void \fBinit_Timer3_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
+.RI "void \fBtimer3_init_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
 .br
 .RI "\fIInitiates timer 3 in CTC mode\&. \fP"
 .ti -1c
-.RI "void \fBstart_timer3\fP (void)"
+.RI "void \fBtimer3_start\fP (void)"
 .br
 .RI "\fIEnables interrupt for timer3\&. \fP"
 .ti -1c
-.RI "void \fBstop_timer3\fP (void)"
+.RI "void \fBtimer3_stop\fP (void)"
 .br
 .RI "\fIDisables interrupt for timer3\&. \fP"
-.in -1c
-.SS "Variables"
-
-.in +1c
 .ti -1c
-.RI "uint32_t \fBSIM908_timeout_counter\fP"
+.RI "void \fBtimer_pause_all\fP (void)"
 .br
-.RI "\fIextern variable which counts in timer3 ISR \fP"
+.RI "\fIDisables interrupt for timer1 and timer3\&. \fP"
+.ti -1c
+.RI "void \fBtimer_resume_all\fP (void)"
+.br
+.RI "\fIEnables interrupt for timer1 and timer3\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 

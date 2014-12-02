@@ -1,19 +1,57 @@
 ==================================
-Version 0.160 - 2014/12/01 by Kenneth
+Version 0.161 - 2014/12/01 by Andi
 ==================================
+New Features, Improvements
+--------------------------
+* Following files has been doxygen commented/proofed and should be ready for MISRA check:
+   - accident_data(.c/.h)
+   - accident_detection(.c/h)
+   - spi(.c/.h)
+   - uart(.c/.h)
+   - car_panel(.c/.h)
+   - at_commands.h
+   - sim908(.c/.h)
+   - vroom_config.h
+
+
+Fixed Bugs, Changes
+-------------------
+* Removed ISR block and global interrupt disable in car_panel.c to fix blocking bug if 
+   alarm is triggered before connection to isp is established
+* Minor stability changes in sim908.c
+* Moved and renamed TEMPERATURE_INITIAL to vroom_config.h\CONFIG_ALARM_FIRE_TEMP_INIT
+   to fix first read = 0, which sometimes triggered alarm on startup
+* Fixed unstable and unreliable communication with sim908 module by pausing timers 
+   when waiting for AT reaponse
+* Changed accident_detection_start/stop to start/stop both timers (same fucntion is 
+   used to fix unreliable communication with sim908 module)
+
+ToDo
+----		
+- MISRA check all files
+- Impl. module test for car panel
+- Impl. unit test for MSD
+- Doxygen structure proofing in all files
+- Notes SIM908:
+   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+
+
+=====================================
+Version 0.160 - 2014/12/01 by Kenneth
+=====================================
 New Features, Improvements
 --------------------------
 * Added accident_detection(.c/.h) and added check_for_fire() function
 * Added scheduler_temp_get_last_reading() function in sensor_scheduler(.h/.c)
 * Added timer to control check of accidents and added parameters in vroom.config.h
 * Added extern variables to record sensor data used for MSD (temperature and acceleration)
-  and changed the structure, so it now sends the values together with MSD
+   and changed the structure, so it now sends the values together with MSD
 
 Fixed Bugs, Changes
 -------------------
 * Removed some warnings in several files
 * Renamed function names in sensor_scheduler(.h/.c) and accident_data(.h/.c) 
-  and renamed the defines in vroom_config.h
+   and renamed the defines in vroom_config.h
 * Moved check_for_crash() into accident_detection file
 
 ToDo

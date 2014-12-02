@@ -1,7 +1,7 @@
 var group__uart__pub =
 [
-    [ "UART0_TX_BUFFER_SIZE", "group__uart__pub.html#gaa940408795d26c17246a6eec0d8009e0", null ],
-    [ "UART_NO_DATA", "group__uart__pub.html#ga77ba544d423ff42d400220a05303f268", null ],
+    [ "UART buffer size", "group__uart__buf.html", "group__uart__buf" ],
+    [ "UART error codes", "group__uart__err.html", "group__uart__err" ],
     [ "UART_BAUD", "group__uart__pub.html#ga2b50ce1943f24e90a2e2b8fe34f20481", [
       [ "UART_BAUD_2400", "group__uart__pub.html#gga2b50ce1943f24e90a2e2b8fe34f20481a3230c8483c0207b97301d3812cbf45d0", null ],
       [ "UART_BAUD_4800", "group__uart__pub.html#gga2b50ce1943f24e90a2e2b8fe34f20481aaad68dcdbd1283e461ebcf6371696ae5", null ],

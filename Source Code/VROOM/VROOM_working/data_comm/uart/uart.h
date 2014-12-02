@@ -33,19 +33,25 @@
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief defines the size of the transmit buffers \n
+ * @defgroup uart_buf UART buffer size
+ * @{
  *************************************************************************/
-#define UART0_TX_BUFFER_SIZE 8
-#define UART0_RX_BUFFER_SIZE 8
-#define UART1_TX_BUFFER_SIZE 8
+#define UART0_TX_BUFFER_SIZE 256
+#define UART0_RX_BUFFER_SIZE 256
+#define UART1_TX_BUFFER_SIZE 256
 #define UART1_RX_BUFFER_SIZE 256
+/** @} */
 
 /**********************************************************************//**
  * @ingroup uart_pub
  * @brief define for UART return
+ * @defgroup uart_err UART error codes
+ * @{
  *************************************************************************/
 #define UART_NO_DATA 0x100U
 #define UART_READ_NOT_ALOWED 0x200U
 #define UART_BUFFER_OVERRUN 0x300U
+/** @} */
 
 /**********************************************************************//**
  * @ingroup uart_pub

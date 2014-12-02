@@ -12,6 +12,7 @@ var lcd_8c =
     [ "lcd_rw_high", "lcd_8c.html#ad0ce3cd9b481370ad4de36eff08440c8", null ],
     [ "lcd_rw_low", "lcd_8c.html#a7f5ebe0ca71b1298a7d3423850cc82b1", null ],
     [ "PIN", "lcd_8c.html#ad7581da21e9fd6fd6f6920dd68d1c782", null ],
+    [ "_delayFourCycles", "lcd_8c.html#aefcdb888ba5cb63b7ba5c1a74f7738be", null ],
     [ "lcd_clrscr", "lcd_8c.html#gaf8da853dba4b9d5f2aea4e294444e14d", null ],
     [ "lcd_command", "lcd_8c.html#gaea9d14f02df06f948cb5a56776980826", null ],
     [ "lcd_data", "lcd_8c.html#gad0729d2cba627825a089ca1fff12ba29", null ],
@@ -19,7 +20,13 @@ var lcd_8c =
     [ "lcd_gotoxy", "lcd_8c.html#gadbf47a5efdf02367ded1ebf8f9edb5fe", null ],
     [ "lcd_home", "lcd_8c.html#ga3aabf730aa4e0393bb5c959583c00a8e", null ],
     [ "lcd_init", "lcd_8c.html#ga9af28b2779326b63ff4356e2b1828984", null ],
+    [ "lcd_newline", "lcd_8c.html#aa905930e4947d59421e0a8033d971676", null ],
     [ "lcd_putc", "lcd_8c.html#gafa7e36b95c43d603f510273ad077cbbe", null ],
     [ "lcd_puts", "lcd_8c.html#ga8ffdfcac7638368ff04364c14984266e", null ],
-    [ "lcd_puts_p", "lcd_8c.html#ga9022a24a56a9b15681f62eb6ba77e5de", null ]
+    [ "lcd_puts_p", "lcd_8c.html#ga9022a24a56a9b15681f62eb6ba77e5de", null ],
+    [ "lcd_read", "lcd_8c.html#a48a16fff03a1164f27b460a49e702dc4", null ],
+    [ "lcd_waitbusy", "lcd_8c.html#a4ca4373275e11ba1a2d2cbd242cbf1a4", null ],
+    [ "lcd_write", "lcd_8c.html#a6aa4fa5c8ba19268338fa4215fa1807e", null ],
+    [ "toggle_e", "lcd_8c.html#a762d0af9ccb3c9507af12cd7617e047d", null ],
+    [ "_last_pos", "lcd_8c.html#ad11321b18c94d48fea8bda8a25488df9", null ]
 ];

@@ -1,0 +1,96 @@
+.TH "Public" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public \- 
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBFule types\fP"
+.br
+.RI "\fIConstant vehicle fuel type definition\&. \fP"
+.ti -1c
+.RI "\fBVehicle class\fP"
+.br
+.RI "\fIConstant vehicle class type definition\&. \fP"
+.in -1c
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBpacked\fP"
+.br
+.RI "\fIstruct containing the MSD for an accident report \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBpacked\fP \fBAD_MSD\fP"
+.br
+.RI "\fIstruct containing the MSD for an accident report \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBad_emergency_alarm\fP (void)"
+.br
+.RI "\fIFunction to call when an emergency alarm is triggered\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBpacked\fP  \fBAD_MSD\fP"
+
+.PP
+struct containing the MSD for an accident report 
+.PP
+\fBNote:\fP
+.RS 4
+According eCall standard EN 15722 the MSD consists of 140 bytes 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "void ad_emergency_alarm (void)"
+
+.PP
+Function to call when an emergency alarm is triggered\&. Starts the sequence required for placing an emergency call and send an MSD packet\&. Steps in function:
+.br
+.IP "1." 4
+Record needed data
+.br
+
+.IP "2." 4
+Create MSD structure
+.br
+
+.IP "3." 4
+sent structure over FTP
+.br
+
+.IP "4." 4
+call to emergency number
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 37 of file accident_data\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

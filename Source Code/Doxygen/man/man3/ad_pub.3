@@ -1,15 +1,15 @@
-.TH "Public" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 Public \- 
-.SS "Macros"
+.SS "Modules"
 
 .in +1c
 .ti -1c
-.RI "#define \fBCONFIG_MSD_FORMAT_VERSION\fP   1"
+.RI "\fBFule types\fP"
 .br
-.RI "\fIParameters for detecting a crash\&. \fP"
+.RI "\fIConstant vehicle fuel type definition\&. \fP"
 .in -1c
 .SS "Functions"
 
@@ -18,10 +18,6 @@ Public \-
 .RI "void \fBad_emergency_alarm\fP (void)"
 .br
 .RI "\fIFunction to call when an emergency alarm is triggered\&. \fP"
-.ti -1c
-.RI "void \fBad_check_for_crash\fP (void)"
-.br
-.RI "\fIChecks if a crash has occurred\&. \fP"
 .ti -1c
 .RI "struct \fB__attribute__\fP ((packed))"
 .br
@@ -33,28 +29,11 @@ Public \-
 .ti -1c
 .RI "char \fBEXT_MSD_FILENAME\fP [24]"
 .br
-.RI "\fIConstant vehicle fuel type definition\&. \fP"
+.RI "\fIConstant vehicle class type definition\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
 
-.SH "Macro Definition Documentation"
-.PP 
-.SS "#define CONFIG_MSD_FORMAT_VERSION   1"
-
-.PP
-Parameters for detecting a crash\&. Crash parameters
-.PP
-.PP
-.nf
-                                                                          /
-#define CONFIG_NO_OF_READINGS 2
-#define CONFIG_ALARM_TRIGGER_VALUE 1000
-.fi
-.PP
- 
-.PP
-Definition at line 29 of file vroom_config\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "struct __attribute__ ((packed))"
@@ -69,40 +48,63 @@ According eCall standard EN 15722 the MSD consists of 140 bytes
 .PP
 
 .PP
-Definition at line 26 of file accident_data\&.h\&.
-.SS "void ad_check_for_crash (void)"
-
-.PP
-Checks if a crash has occurred\&. Gets the accelerometer data and analysis them to see if a crash has occurred Steps in function:
-.br
-.IP "1." 4
-Read accelerometer data
-.br
-
-.IP "2." 4
-Analysis data
-.br
-
-.IP "3." 4
-Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected
-.br
- 
-.PP
-\fBParameters:\fP
 .RS 4
-\fIvoid\fP 
+Referring to a public register to determine the meaning and encoding of the optional data 
 .RE
 .PP
-\fBReturns:\fP
+.PP
 .RS 4
-void 
+Numbers of re-transmission 
+.RE
+.PP
+.PP
+.RS 4
+| bit 7: Automatic activation | bit 6: Manual activation | bit 5: Test call | bit 4: Confidence in position | bit 3-0: Reserved | 
+.RE
+.PP
+.PP
+.RS 4
+| bit 7-4 = classification | bit 3-0: category | 
+.RE
+.PP
+.PP
+.RS 4
+VIN number 17-characters (last 3 char is blank) ISO 3779 
+.RE
+.PP
+.PP
+.RS 4
+UTC Seconds 
+.RE
+.PP
+.PP
+.RS 4
+Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) ISO 6709 
+.RE
+.PP
+.PP
+.RS 4
+Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) ISO 6709 
+.RE
+.PP
+.PP
+.RS 4
+Direction in degrees\&. The nearest integer of 255\&.0*value/360\&.0 (0 <= value >= 255) 
+.RE
+.PP
+.PP
+.RS 4
+Calculated size based on total MSD size - compulsory data 
+.RE
+.PP
+.PP
+.RS 4
+Optional\&. Further data (e\&.g\&. crash information, number of passengers) or blank field 
 .RE
 .PP
 
 .PP
-
-.PP
-Definition at line 79 of file accident_data\&.c\&.
+Definition at line 28 of file accident_data\&.h\&.
 .SS "void ad_emergency_alarm (void)"
 
 .PP
@@ -136,28 +138,19 @@ void
 .PP
 
 .PP
-Definition at line 48 of file accident_data\&.c\&.
+.RS 4
+M1 = No more than eight seats in addition to the driver’s seat, and having a maximum mass not exceeding 3\&.5 tons 
+.RE
+.PP
+
+.PP
+Definition at line 41 of file accident_data\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "char EXT_MSD_FILENAME[24]"
 
 .PP
-Constant vehicle fuel type definition\&. FUEL_TYPES
-.PP
-.PP
-.nf
-                                                                          /
-#define AD_FUEL_TYPE_OTHER          0
-#define AD_FUEL_TYPE_GASOLINE       1
-#define AD_FUEL_TYPE_DIESEL         2
-#define AD_FUEL_TYPE_NATURALGAS     3
-#define AD_FUEL_TYPE_PROPANE        4
-#define AD_FUEL_TYPE_ELECTRIC       5
-#define AD_FUEL_TYPE_HYDROGEN       6
-.fi
-.PP
-.PP
-Constant vehicle class type definition 
+Constant vehicle class type definition\&. 
 .PP
 \fBNote:\fP
 .RS 4
@@ -189,31 +182,9 @@ typedef enum {  EMERGENCY_NO_ALARM = 0,
 
 .fi
 .PP
-.PP
-Flag to detect the connection status 
-.PP
-\fBNote:\fP
-.RS 4
-Corresponding to CREG response in SIM908 p\&. 77 in AT Commands manual v\&. 1\&.02 
-.PP
-.nf
-                                                                          /
-typedef enum {  CREG_NOT_REGISTERED = 0,
-                CREG_REGISTERED = 1,
-                CREG_SEARCHING = 2,
-                CREG_REGISTRATION_DENIED = 3,
-                CREG_UNKNOWN = 4,
-                CREG_REGISTERED_ROOMING = 5,
-} AD_CONNECTION_STATUS_FLAG;
-
-.fi
-.PP
  
-.RE
 .PP
-
-.PP
-Definition at line 42 of file sim908\&.c\&.
+Definition at line 47 of file sim908\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

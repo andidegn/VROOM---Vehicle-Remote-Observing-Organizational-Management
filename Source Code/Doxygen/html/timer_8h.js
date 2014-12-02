@@ -17,9 +17,10 @@ var timer_8h =
       [ "TIMER_PS256", "timer_8h.html#ga7e6cbe0bc6f3395283c560bdc0690447ac2293b4cb70af3617f30860e029bf4a3", null ],
       [ "TIMER_PS1024", "timer_8h.html#ga7e6cbe0bc6f3395283c560bdc0690447a08abac5f3ad9c0f90a3dcc41ee668127", null ]
     ] ],
-    [ "init_Timer1_CTC", "timer_8h.html#ga2ae627c49542bbdd3ba05bbf13716505", null ],
-    [ "init_Timer3_CTC", "timer_8h.html#gaaa3206b11acb2792874f8c85ec9afd6f", null ],
-    [ "start_timer3", "timer_8h.html#ga957fa0bcf3f553e759881fb864f13b92", null ],
-    [ "stop_timer3", "timer_8h.html#ga90a59176511b8408d712cd6dc7435e76", null ],
-    [ "SIM908_timeout_counter", "timer_8h.html#ga306be740dc20fa25c3cf3064b3510357", null ]
+    [ "timer1_init_CTC", "timer_8h.html#ga857c19ab6c2a6baa76ff29ba64531a1e", null ],
+    [ "timer3_init_CTC", "timer_8h.html#ga73893cdd4c08e4e02f77a514ff6a9a1c", null ],
+    [ "timer3_start", "timer_8h.html#ga4d48d8159faa76d37a64326b037cdcf1", null ],
+    [ "timer3_stop", "timer_8h.html#ga831aa99548aedfe5888e2be339728a18", null ],
+    [ "timer_pause_all", "timer_8h.html#gacf1507ccebc4c8e9506327dd8659a056", null ],
+    [ "timer_resume_all", "timer_8h.html#ga2094c0da94a7d5d1a65974c6e9b7b2ad", null ]
 ];

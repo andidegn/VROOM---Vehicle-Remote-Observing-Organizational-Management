@@ -7,9 +7,13 @@ var searchData=
   ['lcd_5fgotoxy',['lcd_gotoxy',['../group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe',1,'lcd_gotoxy(uint8_t x, uint8_t y):&#160;lcd.c'],['../group__pfleury__lcd.html#gadbf47a5efdf02367ded1ebf8f9edb5fe',1,'lcd_gotoxy(uint8_t x, uint8_t y):&#160;lcd.c']]],
   ['lcd_5fhome',['lcd_home',['../group__pfleury__lcd.html#ga3aabf730aa4e0393bb5c959583c00a8e',1,'lcd_home(void):&#160;lcd.c'],['../group__pfleury__lcd.html#ga3aabf730aa4e0393bb5c959583c00a8e',1,'lcd_home(void):&#160;lcd.c']]],
   ['lcd_5finit',['lcd_init',['../group__pfleury__lcd.html#ga9af28b2779326b63ff4356e2b1828984',1,'lcd_init(uint8_t dispAttr):&#160;lcd.c'],['../group__pfleury__lcd.html#ga9af28b2779326b63ff4356e2b1828984',1,'lcd_init(uint8_t dispAttr):&#160;lcd.c']]],
+  ['lcd_5fnewline',['lcd_newline',['../lcd_8c.html#aa905930e4947d59421e0a8033d971676',1,'lcd.c']]],
   ['lcd_5fputc',['lcd_putc',['../group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe',1,'lcd_putc(char c):&#160;lcd.c'],['../group__pfleury__lcd.html#gafa7e36b95c43d603f510273ad077cbbe',1,'lcd_putc(char c):&#160;lcd.c']]],
   ['lcd_5fputs',['lcd_puts',['../group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e',1,'lcd_puts(const char *s):&#160;lcd.c'],['../group__pfleury__lcd.html#ga8ffdfcac7638368ff04364c14984266e',1,'lcd_puts(const char *s):&#160;lcd.c']]],
   ['lcd_5fputs_5fp',['lcd_puts_p',['../group__pfleury__lcd.html#ga9022a24a56a9b15681f62eb6ba77e5de',1,'lcd_puts_p(const char *progmem_s):&#160;lcd.c'],['../group__pfleury__lcd.html#ga9022a24a56a9b15681f62eb6ba77e5de',1,'lcd_puts_p(const char *progmem_s):&#160;lcd.c']]],
+  ['lcd_5fread',['lcd_read',['../lcd_8c.html#a48a16fff03a1164f27b460a49e702dc4',1,'lcd.c']]],
+  ['lcd_5fwaitbusy',['lcd_waitbusy',['../lcd_8c.html#a4ca4373275e11ba1a2d2cbd242cbf1a4',1,'lcd.c']]],
+  ['lcd_5fwrite',['lcd_write',['../lcd_8c.html#a6aa4fa5c8ba19268338fa4215fa1807e',1,'lcd.c']]],
   ['led_5flcd_5fset',['led_lcd_set',['../btn__led__lcd_8c.html#a2678088e7429541738529177d95445e1',1,'led_lcd_set(uint8_t led, uint8_t state):&#160;btn_led_lcd.c'],['../btn__led__lcd_8h.html#a2678088e7429541738529177d95445e1',1,'led_lcd_set(uint8_t led, uint8_t state):&#160;btn_led_lcd.c']]],
   ['led_5flcd_5ftoggle',['led_lcd_toggle',['../btn__led__lcd_8c.html#a090907941f5438dd2199525c1933aaf8',1,'led_lcd_toggle(uint8_t led):&#160;btn_led_lcd.c'],['../btn__led__lcd_8h.html#a090907941f5438dd2199525c1933aaf8',1,'led_lcd_toggle(uint8_t led):&#160;btn_led_lcd.c']]]
 ];

@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('sim908_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -118,6 +118,7 @@ $(document).ready(function(){initNavTree('sim908_8c.html','');});
 <code>#include &quot;<a class="el" href="at__commands_8h_source.html">at_commands.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="uart_8h_source.html">../../data_comm/uart/uart.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="accident__data_8h_source.html">../../accident_logic/accident_data.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="accident__detection_8h_source.html">../../accident_logic/accident_detection.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="time_8h_source.html">../../util/time.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="vroom__config_8h_source.html">../../vroom_config.h</a>&quot;</code><br/>
 </div>
@@ -125,64 +126,198 @@ $(document).ready(function(){initNavTree('sim908_8c.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ga8808428696af327b76d0e474e527e356"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ga8808428696af327b76d0e474e527e356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3325898d60f3675256789d21cb121dda"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#ga3325898d60f3675256789d21cb121dda">SIM908_FLAG_OK</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga3325898d60f3675256789d21cb121dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab20bbec7daa37e8b9e9b22d581762875"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#gab20bbec7daa37e8b9e9b22d581762875">SIM908_FLAG_ERROR</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:gab20bbec7daa37e8b9e9b22d581762875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaee69d93e27bc994f2d2f064d5dc92aed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#gaee69d93e27bc994f2d2f064d5dc92aed">SIM908_FLAG_FTP_PUT_OPEN</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:gaee69d93e27bc994f2d2f064d5dc92aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeca7e2f2e883283a40eb7b98283ea093"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#gaeca7e2f2e883283a40eb7b98283ea093">SIM908_FLAG_FTP_PUT_CLOSE</a>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:gaeca7e2f2e883283a40eb7b98283ea093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4044d4a2d8d84e5bed815a7bc0660daa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#ga4044d4a2d8d84e5bed815a7bc0660daa">SIM908_FLAG_FTP_PUT_SUCCESS</a>&#160;&#160;&#160;12</td></tr>
+<tr class="separator:ga4044d4a2d8d84e5bed815a7bc0660daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacabc0894e61c847401a461a0901837bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#gacabc0894e61c847401a461a0901837bd">SIM908_FLAG_FTP_PUT_ERROR</a>&#160;&#160;&#160;13</td></tr>
+<tr class="separator:gacabc0894e61c847401a461a0901837bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa04586fb043f351adbd88293ba1d6659"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#gaa04586fb043f351adbd88293ba1d6659">SIM908_FLAG_FTP_SENDING</a>&#160;&#160;&#160;14</td></tr>
+<tr class="separator:gaa04586fb043f351adbd88293ba1d6659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7bc4770d544f525fbe1bd50e3a388d4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#ga7bc4770d544f525fbe1bd50e3a388d4f">SIM908_FLAG_GPS_OK</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:ga7bc4770d544f525fbe1bd50e3a388d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8b4496d741fab974041f9ace7a4b1ab8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#ga8b4496d741fab974041f9ace7a4b1ab8">SIM908_FLAG_GPS_PULL</a>&#160;&#160;&#160;21</td></tr>
+<tr class="separator:ga8b4496d741fab974041f9ace7a4b1ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab23069a8c9ca71107b9eb1ff4f260648"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#gab23069a8c9ca71107b9eb1ff4f260648">SIM908_FLAG_GPS_PULL_OK</a>&#160;&#160;&#160;22</td></tr>
+<tr class="separator:gab23069a8c9ca71107b9eb1ff4f260648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9a51b87315eebb7394dbb31857660d1d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__flag.html#ga9a51b87315eebb7394dbb31857660d1d">SIM908_FLAG_RUNNING</a>&#160;&#160;&#160;100</td></tr>
+<tr class="separator:ga9a51b87315eebb7394dbb31857660d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga46cd433dcba361d2f4644827c532b41e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#ga46cd433dcba361d2f4644827c532b41e">SIM908_RESPONSE_RDY</a>&#160;&#160;&#160;&quot;RDY&quot;</td></tr>
+<tr class="separator:ga46cd433dcba361d2f4644827c532b41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga59efe73407ca2b6e2d49f68c2e3f59fc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#ga59efe73407ca2b6e2d49f68c2e3f59fc">SIM908_RESPONSE_SKIP</a>&#160;&#160;&#160;&quot;AT+&quot;</td></tr>
+<tr class="separator:ga59efe73407ca2b6e2d49f68c2e3f59fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga08447d16e28d231a583064a4bf3844c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#ga08447d16e28d231a583064a4bf3844c6">SIM908_RESPONSE_OK</a>&#160;&#160;&#160;&quot;OK&quot;</td></tr>
+<tr class="separator:ga08447d16e28d231a583064a4bf3844c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac35615b18cec2196d47c68a2bb05ee80"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#gac35615b18cec2196d47c68a2bb05ee80">SIM908_RESPONSE_ERROR</a>&#160;&#160;&#160;&quot;ERR&quot;</td></tr>
+<tr class="separator:gac35615b18cec2196d47c68a2bb05ee80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5c00acac07fa8872d17af41c78b968fc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#ga5c00acac07fa8872d17af41c78b968fc">SIM908_RESPONSE_CR_LF</a>&#160;&#160;&#160;&quot;\r\n&quot;</td></tr>
+<tr class="separator:ga5c00acac07fa8872d17af41c78b968fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga14772d891a2919932fe012496828dfcf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#ga14772d891a2919932fe012496828dfcf">SIM908_RESPONSE_LF_CR</a>&#160;&#160;&#160;&quot;\n\r&quot;</td></tr>
+<tr class="separator:ga14772d891a2919932fe012496828dfcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad7e2ca67eca59f92f5e3048fe2988745"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#gad7e2ca67eca59f92f5e3048fe2988745">SIM908_RESPONSE_AT</a>&#160;&#160;&#160;&quot;AT&quot;</td></tr>
+<tr class="separator:gad7e2ca67eca59f92f5e3048fe2988745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad7da2952628c54286566075019bfc582"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#gad7da2952628c54286566075019bfc582">SIM908_RESPONSE_GPS_READY</a>&#160;&#160;&#160;&quot;GPS&quot;</td></tr>
+<tr class="separator:gad7da2952628c54286566075019bfc582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9582a0a122f43220f03937972f106caa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#ga9582a0a122f43220f03937972f106caa">SIM908_RESPONSE_GPS_PULL</a>&#160;&#160;&#160;&quot;0,&quot;</td></tr>
+<tr class="separator:ga9582a0a122f43220f03937972f106caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac13144a935d7c3c9a0e18b9e80caa844"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#gac13144a935d7c3c9a0e18b9e80caa844">SIM908_RESPONSE_FTP_PUT</a>&#160;&#160;&#160;&quot;+FTP&quot;</td></tr>
+<tr class="separator:gac13144a935d7c3c9a0e18b9e80caa844"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga18b8f91081bd7b8ed776db928a878940"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__response.html#ga18b8f91081bd7b8ed776db928a878940">SIM908_RESPONSE_CREG</a>&#160;&#160;&#160;&quot;+CREG: &quot;		/* +CREG: 1 = connected */</td></tr>
+<tr class="separator:ga18b8f91081bd7b8ed776db928a878940"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a739a2a1a0047c98ac1b18ecd25dac092"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a739a2a1a0047c98ac1b18ecd25dac092">RX_BUFFER_SIZE</a>&#160;&#160;&#160;128</td></tr>
 <tr class="separator:a739a2a1a0047c98ac1b18ecd25dac092"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a876ce77f3c672c7162658151e648389e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a876ce77f3c672c7162658151e648389e">CR</a>&#160;&#160;&#160;0x0D /* '\r' */</td></tr>
+<tr class="separator:a876ce77f3c672c7162658151e648389e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a350c9d6cb81908d59427ee96844d1a9c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a350c9d6cb81908d59427ee96844d1a9c">LF</a>&#160;&#160;&#160;0x0A /* '\n' */</td></tr>
+<tr class="separator:a350c9d6cb81908d59427ee96844d1a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbe348573e1b5adccdc7bcf157dc6425"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#acbe348573e1b5adccdc7bcf157dc6425">DDR</a>(x)&#160;&#160;&#160;(*(&amp;x - 1))</td></tr>
 <tr class="separator:acbe348573e1b5adccdc7bcf157dc6425"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7581da21e9fd6fd6f6920dd68d1c782"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#ad7581da21e9fd6fd6f6920dd68d1c782">PIN</a>(x)&#160;&#160;&#160;(*(&amp;x - 2))</td></tr>
 <tr class="separator:ad7581da21e9fd6fd6f6920dd68d1c782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9123ba8868e963d3825693772bfc9d7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#ae9123ba8868e963d3825693772bfc9d7">RETRY_ATTEMPTS</a>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:ae9123ba8868e963d3825693772bfc9d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7452b52a4f92281985b951c5844dda9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#ad7452b52a4f92281985b951c5844dda9">CONNECTION_RETRY_DELAY_IN_MS</a>&#160;&#160;&#160;50</td></tr>
+<tr class="memitem:ad7452b52a4f92281985b951c5844dda9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#ad7452b52a4f92281985b951c5844dda9">CONNECTION_RETRY_DELAY_IN_MS</a>&#160;&#160;&#160;500</td></tr>
 <tr class="separator:ad7452b52a4f92281985b951c5844dda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af7ea7247442a045e87b943845972d854"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#af7ea7247442a045e87b943845972d854">_SIM908_callback</a> (char data)</td></tr>
-<tr class="separator:af7ea7247442a045e87b943845972d854"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd705bbbba4f7490f6b2309fdea0287b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#acd705bbbba4f7490f6b2309fdea0287b">_PC_callback</a> (char data)</td></tr>
-<tr class="separator:acd705bbbba4f7490f6b2309fdea0287b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga270483289f10fccd8f7e31fbca9f4ef4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908.html#ga270483289f10fccd8f7e31fbca9f4ef4">SIM908_init</a> (void)</td></tr>
-<tr class="memdesc:ga270483289f10fccd8f7e31fbca9f4ef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiates the SIM908 module.  <a href="group__sim908.html#ga270483289f10fccd8f7e31fbca9f4ef4">More...</a><br/></td></tr>
+<tr class="memitem:gad21f6a70443b36b20da98f5b4f97a167"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#gad21f6a70443b36b20da98f5b4f97a167">_setup_GSM</a> (void)</td></tr>
+<tr class="memdesc:gad21f6a70443b36b20da98f5b4f97a167"><td class="mdescLeft">&#160;</td><td class="mdescRight">GSM settings on SIM908 module.  <a href="group__sim908__priv.html#gad21f6a70443b36b20da98f5b4f97a167">More...</a><br/></td></tr>
+<tr class="separator:gad21f6a70443b36b20da98f5b4f97a167"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga342868d77aaae493b2ace2d4019bff01"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#ga342868d77aaae493b2ace2d4019bff01">_setup_GPS</a> (void)</td></tr>
+<tr class="memdesc:ga342868d77aaae493b2ace2d4019bff01"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPS settings on SIM908 module.  <a href="group__sim908__priv.html#ga342868d77aaae493b2ace2d4019bff01">More...</a><br/></td></tr>
+<tr class="separator:ga342868d77aaae493b2ace2d4019bff01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga127cbb50c85d3c39692756b19cdc14be"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#ga127cbb50c85d3c39692756b19cdc14be">_setup_GPRS_FTP</a> (void)</td></tr>
+<tr class="memdesc:ga127cbb50c85d3c39692756b19cdc14be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Settings up GPRS - FTP on SIM908 module.  <a href="group__sim908__priv.html#ga127cbb50c85d3c39692756b19cdc14be">More...</a><br/></td></tr>
+<tr class="separator:ga127cbb50c85d3c39692756b19cdc14be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga02f683d7f7f5e27900db7b93d0ca0328"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#ga02f683d7f7f5e27900db7b93d0ca0328">_GSM_enable</a> (void)</td></tr>
+<tr class="memdesc:ga02f683d7f7f5e27900db7b93d0ca0328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable communication with GSM module.  <a href="group__sim908__priv.html#ga02f683d7f7f5e27900db7b93d0ca0328">More...</a><br/></td></tr>
+<tr class="separator:ga02f683d7f7f5e27900db7b93d0ca0328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2e4ef963a0f9fa4de73f98b1e95c13de"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#ga2e4ef963a0f9fa4de73f98b1e95c13de">_GPS_enable</a> (void)</td></tr>
+<tr class="memdesc:ga2e4ef963a0f9fa4de73f98b1e95c13de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable communication with GPS module.  <a href="group__sim908__priv.html#ga2e4ef963a0f9fa4de73f98b1e95c13de">More...</a><br/></td></tr>
+<tr class="separator:ga2e4ef963a0f9fa4de73f98b1e95c13de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga372589075cc4e9f0a515efa165352060"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#ga372589075cc4e9f0a515efa165352060">_wait_for_connection</a> (void)</td></tr>
+<tr class="memdesc:ga372589075cc4e9f0a515efa165352060"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waiting for network connection.  <a href="group__sim908__priv.html#ga372589075cc4e9f0a515efa165352060">More...</a><br/></td></tr>
+<tr class="separator:ga372589075cc4e9f0a515efa165352060"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac8a8fdfe3c884fd1ca12d058a998490d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#gac8a8fdfe3c884fd1ca12d058a998490d">_wait_response</a> (volatile uint8_t *__flag, uint8_t __ok_def)</td></tr>
+<tr class="memdesc:gac8a8fdfe3c884fd1ca12d058a998490d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waiting for response.  <a href="group__sim908__priv.html#gac8a8fdfe3c884fd1ca12d058a998490d">More...</a><br/></td></tr>
+<tr class="separator:gac8a8fdfe3c884fd1ca12d058a998490d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0341ba913c02bc2758633f4c351942f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#gac0341ba913c02bc2758633f4c351942f">_check_response</a> (const char *__defined_response)</td></tr>
+<tr class="memdesc:gac0341ba913c02bc2758633f4c351942f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checking if the last response is the same as the defined response.  <a href="group__sim908__priv.html#gac0341ba913c02bc2758633f4c351942f">More...</a><br/></td></tr>
+<tr class="separator:gac0341ba913c02bc2758633f4c351942f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga559ff1bcf901a9534e2ab406e904d18d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#ga559ff1bcf901a9534e2ab406e904d18d">_get_GPS_response</a> (void)</td></tr>
+<tr class="memdesc:ga559ff1bcf901a9534e2ab406e904d18d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the get gps info command and waits for the response.  <a href="group__sim908__priv.html#ga559ff1bcf901a9534e2ab406e904d18d">More...</a><br/></td></tr>
+<tr class="separator:ga559ff1bcf901a9534e2ab406e904d18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga71109bd4f36d9f02c931bc168e4c7571"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#ga71109bd4f36d9f02c931bc168e4c7571">_char_at</a> (uint8_t __index, uint8_t __tail, uint8_t __length)</td></tr>
+<tr class="memdesc:ga71109bd4f36d9f02c931bc168e4c7571"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the character at a specific location in the rx buffer.  <a href="group__sim908__priv.html#ga71109bd4f36d9f02c931bc168e4c7571">More...</a><br/></td></tr>
+<tr class="separator:ga71109bd4f36d9f02c931bc168e4c7571"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8f6e8abc3cdc3e1a50179142e001d007"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#ga8f6e8abc3cdc3e1a50179142e001d007">_raw_to_array</a> (char **__output)</td></tr>
+<tr class="memdesc:ga8f6e8abc3cdc3e1a50179142e001d007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cuts up the gps response and puts it into memory with a pointer to each value.  <a href="group__sim908__priv.html#ga8f6e8abc3cdc3e1a50179142e001d007">More...</a><br/></td></tr>
+<tr class="separator:ga8f6e8abc3cdc3e1a50179142e001d007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae7a59f3daa65e05c1fcab504ce740fc6"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#gae7a59f3daa65e05c1fcab504ce740fc6">_set_UTC_sec</a> (const char *__utc_raw)</td></tr>
+<tr class="memdesc:gae7a59f3daa65e05c1fcab504ce740fc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the timestamp in MSD structure.  <a href="group__sim908__priv.html#gae7a59f3daa65e05c1fcab504ce740fc6">More...</a><br/></td></tr>
+<tr class="separator:gae7a59f3daa65e05c1fcab504ce740fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae5315d2e7f8cba9d7c9cb2afb718a6fe"><td class="memItemLeft" align="right" valign="top">static int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#gae5315d2e7f8cba9d7c9cb2afb718a6fe">_get_lat_long</a> (const char *__lat_long_raw)</td></tr>
+<tr class="memdesc:gae5315d2e7f8cba9d7c9cb2afb718a6fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the latitude or longitude in an 32bit integer from a string.  <a href="group__sim908__priv.html#gae5315d2e7f8cba9d7c9cb2afb718a6fe">More...</a><br/></td></tr>
+<tr class="separator:gae5315d2e7f8cba9d7c9cb2afb718a6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9df3f4fc8c158c61402f3c7971f5dd2b"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#ga9df3f4fc8c158c61402f3c7971f5dd2b">_set_direction</a> (const char *__direction_raw)</td></tr>
+<tr class="memdesc:ga9df3f4fc8c158c61402f3c7971f5dd2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the direction in MSD structure.  <a href="group__sim908__priv.html#ga9df3f4fc8c158c61402f3c7971f5dd2b">More...</a><br/></td></tr>
+<tr class="separator:ga9df3f4fc8c158c61402f3c7971f5dd2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaad171996bb9cb55c9129d80f54e2de08"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#gaad171996bb9cb55c9129d80f54e2de08">_set_MSD_filename</a> (const char *__UTC_raw)</td></tr>
+<tr class="memdesc:gaad171996bb9cb55c9129d80f54e2de08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the filename of the MSD.  <a href="group__sim908__priv.html#gaad171996bb9cb55c9129d80f54e2de08">More...</a><br/></td></tr>
+<tr class="separator:gaad171996bb9cb55c9129d80f54e2de08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf7ea7247442a045e87b943845972d854"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#gaf7ea7247442a045e87b943845972d854">_SIM908_callback</a> (char data)</td></tr>
+<tr class="memdesc:gaf7ea7247442a045e87b943845972d854"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function to handle all communication from the sim908 module Procedure:  <a href="group__sim908__priv.html#gaf7ea7247442a045e87b943845972d854">More...</a><br/></td></tr>
+<tr class="separator:gaf7ea7247442a045e87b943845972d854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacd705bbbba4f7490f6b2309fdea0287b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__priv.html#gacd705bbbba4f7490f6b2309fdea0287b">_PC_callback</a> (char data)</td></tr>
+<tr class="memdesc:gacd705bbbba4f7490f6b2309fdea0287b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function to handle debug comminication with pc on uart1 When receiving data it is echoed to both uart0 (sim908) and back to pc on uart1.  <a href="group__sim908__priv.html#gacd705bbbba4f7490f6b2309fdea0287b">More...</a><br/></td></tr>
+<tr class="separator:gacd705bbbba4f7490f6b2309fdea0287b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga270483289f10fccd8f7e31fbca9f4ef4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__pub.html#ga270483289f10fccd8f7e31fbca9f4ef4">SIM908_init</a> (void)</td></tr>
+<tr class="memdesc:ga270483289f10fccd8f7e31fbca9f4ef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiates the SIM908 module.  <a href="group__sim908__pub.html#ga270483289f10fccd8f7e31fbca9f4ef4">More...</a><br/></td></tr>
 <tr class="separator:ga270483289f10fccd8f7e31fbca9f4ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7ff0d6f82e2a3ec9b632df1e404f45f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">SIM908_start</a> (void)</td></tr>
-<tr class="memdesc:ga7ff0d6f82e2a3ec9b632df1e404f45f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the SIM908 module in following procedure. setup global settings -&gt; setup GSM -&gt; setup GPS -&gt; enable GSM communication -&gt; setup FTP.  <a href="group__sim908.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">More...</a><br/></td></tr>
+<tr class="memitem:ga7ff0d6f82e2a3ec9b632df1e404f45f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__pub.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">SIM908_start</a> (void)</td></tr>
+<tr class="memdesc:ga7ff0d6f82e2a3ec9b632df1e404f45f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the SIM908 module.  <a href="group__sim908__pub.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8">More...</a><br/></td></tr>
 <tr class="separator:ga7ff0d6f82e2a3ec9b632df1e404f45f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga99719f2eb74227cd2a5bd1ed2be6269a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908.html#ga99719f2eb74227cd2a5bd1ed2be6269a">SIM908_cmd</a> (const char *__cmd, bool __wait_for_ok)</td></tr>
-<tr class="memdesc:ga99719f2eb74227cd2a5bd1ed2be6269a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for sending AT SET commands.  <a href="group__sim908.html#ga99719f2eb74227cd2a5bd1ed2be6269a">More...</a><br/></td></tr>
-<tr class="separator:ga99719f2eb74227cd2a5bd1ed2be6269a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa4354342365be983fac1afb74581bc82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908.html#gaa4354342365be983fac1afb74581bc82">set_MSD_data</a> (uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)</td></tr>
-<tr class="memdesc:gaa4354342365be983fac1afb74581bc82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the MSD with relevant information given from GPS response.  <a href="group__sim908.html#gaa4354342365be983fac1afb74581bc82">More...</a><br/></td></tr>
+<tr class="memitem:gabdb3613d6d6f16a9c330a6fb40b17a9c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__pub.html#gabdb3613d6d6f16a9c330a6fb40b17a9c">SIM908_cmd</a> (const char *cmd, bool __wait_for_ok)</td></tr>
+<tr class="memdesc:gabdb3613d6d6f16a9c330a6fb40b17a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for sending AT SET commands.  <a href="group__sim908__pub.html#gabdb3613d6d6f16a9c330a6fb40b17a9c">More...</a><br/></td></tr>
+<tr class="separator:gabdb3613d6d6f16a9c330a6fb40b17a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa4354342365be983fac1afb74581bc82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__pub.html#gaa4354342365be983fac1afb74581bc82">set_MSD_data</a> (uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)</td></tr>
+<tr class="memdesc:gaa4354342365be983fac1afb74581bc82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the MSD with relevant information given from GPS response.  <a href="group__sim908__pub.html#gaa4354342365be983fac1afb74581bc82">More...</a><br/></td></tr>
 <tr class="separator:gaa4354342365be983fac1afb74581bc82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf97d0165475186a839eabd66ea177f58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908.html#gaf97d0165475186a839eabd66ea177f58">call_PSAP</a> (void)</td></tr>
-<tr class="memdesc:gaf97d0165475186a839eabd66ea177f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calling Public-safety answering point.  <a href="group__sim908.html#gaf97d0165475186a839eabd66ea177f58">More...</a><br/></td></tr>
+<tr class="memitem:gaf97d0165475186a839eabd66ea177f58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__pub.html#gaf97d0165475186a839eabd66ea177f58">call_PSAP</a> (void)</td></tr>
+<tr class="memdesc:gaf97d0165475186a839eabd66ea177f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calling Public-safety answering point.  <a href="group__sim908__pub.html#gaf97d0165475186a839eabd66ea177f58">More...</a><br/></td></tr>
 <tr class="separator:gaf97d0165475186a839eabd66ea177f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaebecffeacebdebbbd47ef4948bb7ad6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908.html#gaebecffeacebdebbbd47ef4948bb7ad6e">send_MSD</a> (const char *__vroom_id)</td></tr>
-<tr class="memdesc:gaebecffeacebdebbbd47ef4948bb7ad6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends MSD binary file to FTP server 1: Create filename: AT+FTPPUTNAME="&lt;filename&gt;" 2: Open bearer AT+SAPBR=1,1 3: Open FTP PUT session AT+FTPPUT=1 4: Set write data AT+FTPPUT=2,140 5: Write text (140 bytes) 6: End write session AT+FTPPUT=2,0 7: Close bearer AT+SAPBR=0,1.  <a href="group__sim908.html#gaebecffeacebdebbbd47ef4948bb7ad6e">More...</a><br/></td></tr>
+<tr class="memitem:gaebecffeacebdebbbd47ef4948bb7ad6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sim908__pub.html#gaebecffeacebdebbbd47ef4948bb7ad6e">send_MSD</a> (const char *__vroom_id)</td></tr>
+<tr class="memdesc:gaebecffeacebdebbbd47ef4948bb7ad6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends MSD binary file to FTP server.  <a href="group__sim908__pub.html#gaebecffeacebdebbbd47ef4948bb7ad6e">More...</a><br/></td></tr>
 <tr class="separator:gaebecffeacebdebbbd47ef4948bb7ad6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a1ef884508a85af51361a70a6e33099bc"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a1ef884508a85af51361a70a6e33099bc">_CR_counter</a> = 0</td></tr>
+<tr class="separator:a1ef884508a85af51361a70a6e33099bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4259870221ceec42664c656ada12b6db"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a4259870221ceec42664c656ada12b6db">_LF_counter</a> = 0</td></tr>
+<tr class="separator:a4259870221ceec42664c656ada12b6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf4b92a64424afc744aaeee1e1a2f650"><td class="memItemLeft" align="right" valign="top">static volatile char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#acf4b92a64424afc744aaeee1e1a2f650">_rx_buffer</a> [<a class="el" href="sim908_8c.html#a739a2a1a0047c98ac1b18ecd25dac092">RX_BUFFER_SIZE</a>]</td></tr>
+<tr class="separator:acf4b92a64424afc744aaeee1e1a2f650"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad21efc6d64dac2569b97cc8be8fff8de"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#ad21efc6d64dac2569b97cc8be8fff8de">_rx_buffer_tail</a> = 0</td></tr>
+<tr class="separator:ad21efc6d64dac2569b97cc8be8fff8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e62851a2d853ea03b971309aa770e49"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a9e62851a2d853ea03b971309aa770e49">_rx_response_length</a> = 0</td></tr>
+<tr class="separator:a9e62851a2d853ea03b971309aa770e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accf582d30f94ac085da946d1f3e15ee8"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#accf582d30f94ac085da946d1f3e15ee8">_system_running_flag</a> = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td></tr>
+<tr class="separator:accf582d30f94ac085da946d1f3e15ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe79e5c7c8304566b4c9312c4731a74d"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#afe79e5c7c8304566b4c9312c4731a74d">_wait_for_ok_flag</a> = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td></tr>
+<tr class="separator:afe79e5c7c8304566b4c9312c4731a74d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a942f3bc5b5fb175c9e80e3cfb96a6016"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a942f3bc5b5fb175c9e80e3cfb96a6016">_gps_pull_flag</a> = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td></tr>
+<tr class="separator:a942f3bc5b5fb175c9e80e3cfb96a6016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a723c0b7a5caf668e156cc243094f804e"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a723c0b7a5caf668e156cc243094f804e">_ftp_sending_flag</a> = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td></tr>
+<tr class="separator:a723c0b7a5caf668e156cc243094f804e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8af85b6cae768e415e6320f4a29e5cbd"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a8af85b6cae768e415e6320f4a29e5cbd">_ack_response_flag</a> = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td></tr>
+<tr class="separator:a8af85b6cae768e415e6320f4a29e5cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a367de3c499fd1987916044e3ff47b368"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a367de3c499fd1987916044e3ff47b368">_ack_ftp_response_flag</a> = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td></tr>
+<tr class="separator:a367de3c499fd1987916044e3ff47b368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afadb0cc3fb3503bfe8438aa09ebd8281"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#afadb0cc3fb3503bfe8438aa09ebd8281">_ack_gps_response_flag</a> = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td></tr>
+<tr class="separator:afadb0cc3fb3503bfe8438aa09ebd8281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943f71cbb339537d13534f628fb8193b"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a943f71cbb339537d13534f628fb8193b">_gps_response_tail</a> = 0</td></tr>
+<tr class="separator:a943f71cbb339537d13534f628fb8193b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a49e52d453ccdd74c43d7a32a8921c1"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a0a49e52d453ccdd74c43d7a32a8921c1">_gps_response_length</a> = 0</td></tr>
+<tr class="separator:a0a49e52d453ccdd74c43d7a32a8921c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a667db9d0e6ffc7d00db8ace2dae7b228"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sim908_8c.html#a667db9d0e6ffc7d00db8ace2dae7b228">EXT_MSD_FILENAME</a> [24]</td></tr>
-<tr class="memdesc:a667db9d0e6ffc7d00db8ace2dae7b228"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant vehicle class type definition.  <a href="#a667db9d0e6ffc7d00db8ace2dae7b228">More...</a><br/></td></tr>
 <tr class="separator:a667db9d0e6ffc7d00db8ace2dae7b228"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>: Kenneth René Jensen : 0.5 <pre class="fragment">This is the driver for GSM/GPRS/GPS module sim908</pre></dd></dl>
-
-<p>Definition in file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ad7452b52a4f92281985b951c5844dda9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CONNECTION_RETRY_DELAY_IN_MS&#160;&#160;&#160;50</td>
+          <td class="memname">#define CONNECTION_RETRY_DELAY_IN_MS&#160;&#160;&#160;500</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00066">66</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00093">93</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a876ce77f3c672c7162658151e648389e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CR&#160;&#160;&#160;0x0D /* '\r' */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00086">86</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -200,7 +335,21 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00062">62</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00089">89</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a350c9d6cb81908d59427ee96844d1a9c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LF&#160;&#160;&#160;0x0A /* '\n' */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00087">87</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -218,7 +367,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00063">63</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00090">90</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -232,7 +381,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00065">65</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00092">92</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -245,50 +394,320 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section note"><dt>Note</dt><dd>NOT YET Complies MISRO 2004 standards </dd></dl>
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00020">20</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="acd705bbbba4f7490f6b2309fdea0287b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void _PC_callback </td>
-          <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00624">624</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af7ea7247442a045e87b943845972d854"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void _SIM908_callback </td>
-          <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00565">565</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00058">58</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="a367de3c499fd1987916044e3ff47b368"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _ack_ftp_response_flag = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00077">77</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afadb0cc3fb3503bfe8438aa09ebd8281"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _ack_gps_response_flag = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00078">78</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8af85b6cae768e415e6320f4a29e5cbd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _ack_response_flag = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00076">76</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1ef884508a85af51361a70a6e33099bc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _CR_counter = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00061">61</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a723c0b7a5caf668e156cc243094f804e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _ftp_sending_flag = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00074">74</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a942f3bc5b5fb175c9e80e3cfb96a6016"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _gps_pull_flag = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00072">72</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0a49e52d453ccdd74c43d7a32a8921c1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t _gps_response_length = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00081">81</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a943f71cbb339537d13534f628fb8193b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t _gps_response_tail = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00080">80</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4259870221ceec42664c656ada12b6db"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _LF_counter = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00062">62</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acf4b92a64424afc744aaeee1e1a2f650"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile char _rx_buffer[<a class="el" href="sim908_8c.html#a739a2a1a0047c98ac1b18ecd25dac092">RX_BUFFER_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00064">64</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad21efc6d64dac2569b97cc8be8fff8de"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _rx_buffer_tail = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00065">65</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9e62851a2d853ea03b971309aa770e49"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _rx_response_length = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00066">66</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="accf582d30f94ac085da946d1f3e15ee8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _system_running_flag = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00068">68</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afe79e5c7c8304566b4c9312c4731a74d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t _wait_for_ok_flag = <a class="el" href="group__sim908__flag.html#ga8808428696af327b76d0e474e527e356">SIM908_FLAG_WAITING</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00070">70</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a667db9d0e6ffc7d00db8ace2dae7b228"></a>
 <div class="memitem">
 <div class="memproto">
@@ -299,35 +718,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constant vehicle class type definition. </p>
-<dl class="section note"><dt>Note</dt><dd>Upper nibble contains class definition: [SA, L, M, N, O, T, G] @ Lower nibble contains class category definition: [1 - 7] @ Details: <a href="http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32007L0046&from=EN">http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32007L0046&amp;from=EN</a> <div class="fragment"><div class="line">                                                                          /</div>
-<div class="line"><span class="preprocessor">#define AD_VEHICLE_CLASS_L(category)    (1&lt;&lt;4 | category)   </span><span class="comment">/* Motor vehicles with less than four wheels */</span><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define AD_VEHICLE_CLASS_M(category)    (2&lt;&lt;4 | category)   </span><span class="comment">/* Power-driven vehicles having at least four wheels and used for the carriage of passengers */</span><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define AD_VEHICLE_CLASS_N(category)    (3&lt;&lt;4 | category)   </span><span class="comment">/* Power-driven vehicles having at least four wheels and used for the carriage of goods */</span><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define AD_VEHICLE_CLASS_O(category)    (4&lt;&lt;4 | category)   </span><span class="comment">/* Trailers (including semi–trailers) */</span><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define AD_VEHICLE_CLASS_T(category)    (5&lt;&lt;4 | category)   </span><span class="comment">/* Agricultural and Forestry tractors */</span><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define AD_VEHICLE_CLASS_G(category)    (6&lt;&lt;4 | category)   </span><span class="comment">/* Off-road vehicles */</span><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define AD_VEHICLE_CLASS_SA(category)   (7&lt;&lt;4 | category)   </span><span class="comment">/* Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan) */</span><span class="preprocessor"></span></div>
-</div><!-- fragment --></dd></dl>
-<p>Flag to detect if an alarm has been triggered </p>
-<div class="fragment"><div class="line">                                                                          /</div>
-<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> {  EMERGENCY_NO_ALARM = 0,</div>
-<div class="line">                EMERGENCY_MANUAL_ALARM = 1,</div>
-<div class="line">                EMERGENCY_AUTO_ALARM = 2,</div>
-<div class="line">                EMERGENCY_ALARM_SENT = 3</div>
-<div class="line">} AD_EMERGENCY_FLAG;</div>
-</div><!-- fragment --><p>Flag to detect the connection status </p>
-<dl class="section note"><dt>Note</dt><dd>Corresponding to CREG response in SIM908 p. 77 in AT Commands manual v. 1.02 <div class="fragment"><div class="line">                                                                          /</div>
-<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> {  CREG_NOT_REGISTERED = 0,</div>
-<div class="line">                CREG_REGISTERED = 1,</div>
-<div class="line">                CREG_SEARCHING = 2,</div>
-<div class="line">                CREG_REGISTRATION_DENIED = 3,</div>
-<div class="line">                CREG_UNKNOWN = 4,</div>
-<div class="line">                CREG_REGISTERED_ROOMING = 5,</div>
-<div class="line">} AD_CONNECTION_STATUS_FLAG;</div>
-</div><!-- fragment --> </dd></dl>
-
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00042">42</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00084">84</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -337,7 +728,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_345297ba67263627175aa07c8865357f.html">hardware_boards</a></li><li class="navelem"><a class="el" href="dir_ca39cf18b0686819b4a8fe795b292eb1.html">sim908</a></li><li class="navelem"><a class="el" href="sim908_8c.html">sim908.c</a></li>
-    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
+    <li class="footer">Generated on Tue Dec 2 2014 05:08:09 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

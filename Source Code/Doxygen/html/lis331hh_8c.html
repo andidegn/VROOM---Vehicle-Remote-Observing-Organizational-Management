@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('lis331hh_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -106,7 +106,8 @@ $(document).ready(function(){initNavTree('lis331hh_8c.html','');});
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">lis331hh.c File Reference</div>  </div>
 </div><!--header-->
@@ -133,6 +134,10 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga6afd77df9203ea4e2308c8aa55b73d46"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__acc__priv.html#ga6afd77df9203ea4e2308c8aa55b73d46">_acc_callback</a> (uint8_t *__data)</td></tr>
+<tr class="separator:ga6afd77df9203ea4e2308c8aa55b73d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga85d03c7d81520413a209755beae60d0a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__acc__priv.html#ga85d03c7d81520413a209755beae60d0a">_acc_read_from_reg</a> (uint8_t __reg, uint8_t __no_of_dummy_bytes)</td></tr>
+<tr class="separator:ga85d03c7d81520413a209755beae60d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad8bcdb9d8538530ea0aa8900aad0e8b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__acc__pub.html#gad8bcdb9d8538530ea0aa8900aad0e8b8">acc_init</a> (uint8_t __cs_pin, ACC_POWER_MODE __power_mode, ACC_OUTPUT_DATA_RATE __output_data_rate, ACC_FULL_SCALE __full_scale)</td></tr>
 <tr class="separator:gad8bcdb9d8538530ea0aa8900aad0e8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4668b3e747265390201d7ff637f31e3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__acc__pub.html#ga4668b3e747265390201d7ff637f31e3b">acc_measure</a> (void)</td></tr>
@@ -143,6 +148,23 @@ Functions</h2></td></tr>
 <tr class="separator:ga8bd2f86e908c41f3552aba1798bb1f23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga226177d128c1c5e2c1b884fc352747b0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__acc__pub.html#ga226177d128c1c5e2c1b884fc352747b0">acc_get_z_axis</a> (void)</td></tr>
 <tr class="separator:ga226177d128c1c5e2c1b884fc352747b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a8dcef7b358d03a3c2450abe3ccdc7b79"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lis331hh_8c.html#a8dcef7b358d03a3c2450abe3ccdc7b79">_x_axis</a> = 0</td></tr>
+<tr class="separator:a8dcef7b358d03a3c2450abe3ccdc7b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af40276049ad1cf394d69b0240f1d030d"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lis331hh_8c.html#af40276049ad1cf394d69b0240f1d030d">_y_axis</a> = 0</td></tr>
+<tr class="separator:af40276049ad1cf394d69b0240f1d030d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa591f7a2ea8c0c45ef3372f46bd96c71"><td class="memItemLeft" align="right" valign="top">static int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lis331hh_8c.html#aa591f7a2ea8c0c45ef3372f46bd96c71">_z_axis</a> = 0</td></tr>
+<tr class="separator:aa591f7a2ea8c0c45ef3372f46bd96c71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2103532bb09d8ea4da8cea75e67ddd5"><td class="memItemLeft" align="right" valign="top">static int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lis331hh_8c.html#aa2103532bb09d8ea4da8cea75e67ddd5">_handle</a> = -1</td></tr>
+<tr class="separator:aa2103532bb09d8ea4da8cea75e67ddd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a146e3ff156b85168161d6c5787d1db35"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lis331hh_8c.html#a146e3ff156b85168161d6c5787d1db35">_send_setup</a> [6]</td></tr>
+<tr class="separator:a146e3ff156b85168161d6c5787d1db35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35c6145fca843783a9307d576f62c59e"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lis331hh_8c.html#a35c6145fca843783a9307d576f62c59e">_send_read</a> [7]</td></tr>
+<tr class="separator:a35c6145fca843783a9307d576f62c59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a3e6b78047ca6ce8f1567eba7faec89"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="lis331hh_8c.html#a1def46ff4d7db5a804863f407b38d360">ACC_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lis331hh_8c.html#a2a3e6b78047ca6ce8f1567eba7faec89">_state</a></td></tr>
+<tr class="separator:a2a3e6b78047ca6ce8f1567eba7faec89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>: 01-09-2014 09:22:18 : Andi Degn : 0.2 </p>
@@ -185,13 +207,168 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="aa2103532bb09d8ea4da8cea75e67ddd5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t _handle = -1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00040">40</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a35c6145fca843783a9307d576f62c59e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t _send_read[7]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00042">42</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a146e3ff156b85168161d6c5787d1db35"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t _send_setup[6]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00041">41</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2a3e6b78047ca6ce8f1567eba7faec89"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lis331hh_8c.html#a1def46ff4d7db5a804863f407b38d360">ACC_STATE</a> _state</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00044">44</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8dcef7b358d03a3c2450abe3ccdc7b79"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t _x_axis = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00036">36</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af40276049ad1cf394d69b0240f1d030d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t _y_axis = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00037">37</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa591f7a2ea8c0c45ef3372f46bd96c71"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t _z_axis = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00038">38</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_0c3b12cb3bb6383a6cbe47ce3477a452.html">sensors</a></li><li class="navelem"><a class="el" href="dir_725ed12e8ea3f6a21dcec8b26fefdcd7.html">accelerometer</a></li><li class="navelem"><a class="el" href="lis331hh_8c.html">lis331hh.c</a></li>
-    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
+    <li class="footer">Generated on Tue Dec 2 2014 05:08:09 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

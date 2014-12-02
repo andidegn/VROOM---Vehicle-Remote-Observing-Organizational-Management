@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/uart/uart.h" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/uart/uart.h" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -13,16 +13,13 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "#define \fBUART0_TX_BUFFER_SIZE\fP   8"
-.br
-.RI "\fIdefines the size of the transmit buffers 
-.br
-\fP"
-.ti -1c
-.RI "#define \fBUART0_RX_BUFFER_SIZE\fP   8"
+.RI "#define \fBUART0_TX_BUFFER_SIZE\fP   256"
 .br
 .ti -1c
-.RI "#define \fBUART1_TX_BUFFER_SIZE\fP   8"
+.RI "#define \fBUART0_RX_BUFFER_SIZE\fP   256"
+.br
+.ti -1c
+.RI "#define \fBUART1_TX_BUFFER_SIZE\fP   256"
 .br
 .ti -1c
 .RI "#define \fBUART1_RX_BUFFER_SIZE\fP   256"
@@ -30,7 +27,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "#define \fBUART_NO_DATA\fP   0x100U"
 .br
-.RI "\fIdefine for UART return \fP"
 .ti -1c
 .RI "#define \fBUART_READ_NOT_ALOWED\fP   0x200U"
 .br
@@ -108,28 +104,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fIReads 1 (one) char of 'data' in the UART buffer\&. \fP"
 .in -1c
-.SH "Macro Definition Documentation"
-.PP 
-.SS "#define UART0_RX_BUFFER_SIZE   8"
-
-.PP
-Definition at line 38 of file uart\&.h\&.
-.SS "#define UART1_RX_BUFFER_SIZE   256"
-
-.PP
-Definition at line 40 of file uart\&.h\&.
-.SS "#define UART1_TX_BUFFER_SIZE   8"
-
-.PP
-Definition at line 39 of file uart\&.h\&.
-.SS "#define UART_BUFFER_OVERRUN   0x300U"
-
-.PP
-Definition at line 48 of file uart\&.h\&.
-.SS "#define UART_READ_NOT_ALOWED   0x200U"
-
-.PP
-Definition at line 47 of file uart\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

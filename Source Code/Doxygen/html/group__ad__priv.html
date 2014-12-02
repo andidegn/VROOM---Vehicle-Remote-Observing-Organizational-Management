@@ -98,7 +98,8 @@ $(document).ready(function(){initNavTree('group__ad__priv.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Private<div class="ingroups"><a class="el" href="group__ad.html">Accident Data</a></div></div>  </div>
 </div><!--header-->
@@ -109,6 +110,20 @@ Macros</h2></td></tr>
 <tr class="memitem:ga033d40218769d27a5a83bb6dc8809a61"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ad__priv.html#ga033d40218769d27a5a83bb6dc8809a61">BLANK_CHAR</a>&#160;&#160;&#160;0x20</td></tr>
 <tr class="memdesc:ga033d40218769d27a5a83bb6dc8809a61"><td class="mdescLeft">&#160;</td><td class="mdescRight">define for the space char ' '  <a href="#ga033d40218769d27a5a83bb6dc8809a61">More...</a><br/></td></tr>
 <tr class="separator:ga033d40218769d27a5a83bb6dc8809a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga726540811906b8469e4774fc81253924"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ad__priv.html#ga726540811906b8469e4774fc81253924">_set_control_byte</a> (bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm)</td></tr>
+<tr class="memdesc:ga726540811906b8469e4774fc81253924"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to set the control byte Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |&mdash;Reserved&mdash; |<br/>
+ Bit: | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |<br/>
+ <a href="#ga726540811906b8469e4774fc81253924">More...</a><br/></td></tr>
+<tr class="separator:ga726540811906b8469e4774fc81253924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaae0af9c67ab8587d6c48dd8475d5bf27"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ad__priv.html#gaae0af9c67ab8587d6c48dd8475d5bf27">_set_VIN</a> (const char *__VIN)</td></tr>
+<tr class="memdesc:gaae0af9c67ab8587d6c48dd8475d5bf27"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to set the vehicle identification number  <a href="#gaae0af9c67ab8587d6c48dd8475d5bf27">More...</a><br/></td></tr>
+<tr class="separator:gaae0af9c67ab8587d6c48dd8475d5bf27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3545f7d665bd05e01c0be7b54ea6cfbe"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ad__priv.html#ga3545f7d665bd05e01c0be7b54ea6cfbe">_set_optional_data</a> ()</td></tr>
+<tr class="memdesc:ga3545f7d665bd05e01c0be7b54ea6cfbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to set further data (e.g. crash information, number of passengers, temperature)  <a href="#ga3545f7d665bd05e01c0be7b54ea6cfbe">More...</a><br/></td></tr>
+<tr class="separator:ga3545f7d665bd05e01c0be7b54ea6cfbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -124,7 +139,144 @@ Macros</h2></td></tr>
 
 <p>define for the space char ' ' </p>
 
-<p>Definition at line <a class="el" href="accident__data_8c_source.html#l00021">21</a> of file <a class="el" href="accident__data_8c_source.html">accident_data.c</a>.</p>
+<p>Definition at line <a class="el" href="accident__data_8c_source.html#l00016">16</a> of file <a class="el" href="accident__data_8c_source.html">accident_data.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ga726540811906b8469e4774fc81253924"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void _set_control_byte </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>__position_can_be_trusted</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>__test_call</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>__manual_alarm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>__auto_alarm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>function to set the control byte Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |&mdash;Reserved&mdash; |<br/>
+ Bit: | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |<br/>
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bool</td><td>position_can_be_trusted - confidence in position </td></tr>
+    <tr><td class="paramname">bool</td><td>test_call - Flag for testing purposes </td></tr>
+    <tr><td class="paramname">bool</td><td>manual_alarm - Flag to show if it is a manual activated alarm </td></tr>
+    <tr><td class="paramname">bool</td><td>auto_alarm - Flag to show if it is an automatic activated alarm</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p>Definition at line <a class="el" href="accident__data_8c_source.html#l00078">78</a> of file <a class="el" href="accident__data_8c_source.html">accident_data.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga3545f7d665bd05e01c0be7b54ea6cfbe"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void _set_optional_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>function to set further data (e.g. crash information, number of passengers, temperature) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>- Maximum 102 bytes string allowed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>May also be blank field </dd></dl>
+<blockquote class="doxtable">
+<p>Calculated size based on total MSD size - compulsory data </p>
+</blockquote>
+
+<p>Definition at line <a class="el" href="accident__data_8c_source.html#l00112">112</a> of file <a class="el" href="accident__data_8c_source.html">accident_data.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaae0af9c67ab8587d6c48dd8475d5bf27"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void _set_VIN </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>__VIN</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>function to set the vehicle identification number </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">VIN</td><td>- an array of 4 bytes</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The number consist of 17 characters not including the letters I, O or Q. </dd></dl>
+
+<p>Definition at line <a class="el" href="accident__data_8c_source.html#l00091">91</a> of file <a class="el" href="accident__data_8c_source.html">accident_data.c</a>.</p>
 
 </div>
 </div>
@@ -133,7 +285,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
+    <li class="footer">Generated on Tue Dec 2 2014 02:30:31 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

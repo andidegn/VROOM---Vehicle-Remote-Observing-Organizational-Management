@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/Tests/module/sensors/test_module_sensors.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/Tests/module/sensors/test_module_sensors.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -33,6 +33,21 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .in +1c
 .ti -1c
 .RI "const char \fBdegree\fP = 0b011011111"
+.br
+.ti -1c
+.RI "static int \fBx_axis\fP"
+.br
+.ti -1c
+.RI "static int \fBy_axis\fP"
+.br
+.ti -1c
+.RI "static int \fBz_axis\fP"
+.br
+.ti -1c
+.RI "static float \fBtemp\fP"
+.br
+.ti -1c
+.RI "static char \fBbuf\fP [10]"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -70,6 +85,10 @@ Definition at line 39 of file test_module_sensors\&.c\&.
 Definition at line 31 of file test_module_sensors\&.c\&.
 .SH "Variable Documentation"
 .PP 
+.SS "char buf[10]\fC [static]\fP"
+
+.PP
+Definition at line 20 of file test_module_sensors\&.c\&.
 .SS "const char degree = 0b011011111"
 
 .PP
@@ -81,6 +100,22 @@ NOT YET Complies MISRO 2004 standards
 
 .PP
 Definition at line 17 of file test_module_sensors\&.c\&.
+.SS "float temp\fC [static]\fP"
+
+.PP
+Definition at line 19 of file test_module_sensors\&.c\&.
+.SS "int x_axis\fC [static]\fP"
+
+.PP
+Definition at line 18 of file test_module_sensors\&.c\&.
+.SS "int y_axis\fC [static]\fP"
+
+.PP
+Definition at line 18 of file test_module_sensors\&.c\&.
+.SS "int z_axis\fC [static]\fP"
+
+.PP
+Definition at line 18 of file test_module_sensors\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,15 +1,5 @@
 /**********************************************************************//**
  * @file: UART0_Driver.c
- *
- * @Created: 12-09-2014 20:34:20
- * @Author: Andi Degn
- * @Version: 0.5
- * @defgroup uart UART Driver
- * @{
-	 This is a driver for the UART on the ATMEGA family processors
-	 @defgroup uart_priv Private
-	 @defgroup uart_pub Public
- * @}
  *************************************************************************/
 
 #include "uart.h"
@@ -19,20 +9,22 @@
 /**********************************************************************//**
  * @ingroup uart_priv
  * @brief defines for the factor used to calculate baud rate and UBRR0value
- * @code
+ * @defgroup uart_baud_factor UART baud rate factor
+ * @{
  *************************************************************************/
 #define UBRR_FACTOR_ASYNC_NORM	16
 #define UBRR_FACTOR_ASYNC_DOUBLE 8
-/** @endcode */
+/** @} */
 
 /**********************************************************************//**
  * @ingroup uart_priv
  * @brief defines for calculating the UBRR0 value
  * @note 0.5F is added to make sure rounding is done rather than truncating
- * @code
+ * @defgroup uart_baud_equation UART baud rate equation
+ * @{
  *************************************************************************/
 #define CALC_UBRR(baud_rate, factor) (((F_CPU / (factor * baud_rate)) - 1) + 0.5F)
-/** @endcode */
+/** @} */
 
 /* local variables for UART0 */
 static void (*_callback_function0_ptr)(char __data);
@@ -85,7 +77,7 @@ void uart0_setup_async(UART_MODE __operational_mode,
 	}
 
 	/* setting up bits for the character size. It is done here as it was
-	not possible to	differentiate between UART0_8_BIT and UART0_9_BIT in an enum */
+	not possible to differentiate between UART0_8_BIT and UART0_9_BIT in an enum */
 	uint8_t _char_size = 0U;
 	switch (__char_size) {
 		case UART_6_BIT:

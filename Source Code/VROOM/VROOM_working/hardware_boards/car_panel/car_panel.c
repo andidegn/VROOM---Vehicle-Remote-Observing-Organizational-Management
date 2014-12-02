@@ -1,13 +1,5 @@
 /**********************************************************************//**
  * @file car_panel.c
- *
- * @author: Kenneth René Jensen
- * @Version: 0.4
- * @{
-	This is the driver for the car panel in VROOM system.
-	The panel includes two tact switches, a RGB LED and a single LED.
- * @}
- * @note NOT YET Complies MISRO 2004 standards
  *************************************************************************/
 
 #include <avr/interrupt.h>
@@ -20,19 +12,27 @@
  * @ingroup cp_priv
  * Define for the port
  * @note Changing port will require changes in the interrupt setup
+ * @defgroup cp_port Port
+ * @{
  **************************************************************************/
 #define PORT			PORTJ
+/** @} */
 
 /**********************************************************************//**
  * @ingroup cp_priv
  * Macros for DDR and PIN registers
+ * @defgroup cp_port Port
+ * @{
  **************************************************************************/
 #define DDR(x) (*(&x - 1))
 #define PIN(x) (*(&x - 2))
+/** @} */
 
 /**********************************************************************//**
  * @ingroup cp_priv
  * Defines for the different mask bits
+ * @defgroup cp_mask Mask bits
+ * @{
  **************************************************************************/
 #define BTN_CANCEL			0
 #define BTN_ALARM			1
@@ -40,6 +40,7 @@
 #define LED_STATUS_RED		5
 #define LED_STATUS_BLUE		6
 #define LED_STATUS_GREEN	7
+/** @} */
 
 /* Local variables */
 static uint8_t _car_panel_counter;
@@ -142,9 +143,6 @@ void car_panel_set_control(Control __c)
  **************************************************************************/
 bool car_panel_wait_cancel_emmergency(void)
 {
-	/* Saves the current state of the status register and disables global interrupt */
-	uint8_t SREG_cpy = SREG;
-	cli();
 	car_panel_set_alarm_button_state(false);
 
 	_alarm_cancelled = false;
@@ -183,8 +181,6 @@ bool car_panel_wait_cancel_emmergency(void)
 		car_panel_set_control(ALARM_ACTIVATED);
 		car_panel_set_status(STATUS_BLUE);
 	}
-	/* Restore interrupt */
-	SREG = SREG_cpy;
 
 	return _alarm_cancelled;
 }
@@ -222,8 +218,10 @@ void car_panel_set_cancel_button_state(bool state)
  * it is the pin where the ALARM button is located, a timed loop is entered
  * to check if the button is pressed and held for at least 3 seconds. If
  * it is, the cancel button check is called, if not, return
+ * @note This ISR does NOT block other ISR. The reason for this is that the
+ * system needs to be able to update status etc. to function correctly
  **************************************************************************/
-ISR (PCINT1_vect)
+ISR (PCINT1_vect, ISR_NOBLOCK)
 {
 	/* Check if alarm button is pressed */
 	if(!(PIN(PORT) & (1<<BTN_ALARM)))
@@ -246,9 +244,9 @@ ISR (PCINT1_vect)
 		{
 			car_panel_set_control(ALARM_NOT_ACTIVATED);
 		}
-    } 
+    }
 	/* Check if cancel button is pressed */
-	else if (!(PIN(PORT) & (1 << BTN_CANCEL))) 
+	else if (!(PIN(PORT) & (1 << BTN_CANCEL)))
 	{
 		_car_panel_counter = 0;
 		while (_car_panel_counter++ < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<BTN_CANCEL)))

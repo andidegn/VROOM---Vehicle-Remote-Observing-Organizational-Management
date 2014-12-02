@@ -1,4 +1,4 @@
-.TH "LCD library" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "LCD library" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -17,7 +17,7 @@ Basic routines for interfacing a HD44780U-based text LCD display\&.
 Adapt the MCU clock frequency in Hz to your target\&. 
 .in +1c
 .ti -1c
-.RI "#define \fBXTAL\fP   F_CPU"
+.RI "#define \fBXTAL\fP   \fBF_CPU\fP"
 .br
 .in -1c
 .SS "Definition for LCD controller type"
@@ -552,7 +552,7 @@ Definition at line 68 of file lcd\&.h\&.
 0: no wrap, 1: wrap at end of visible line 
 .PP
 Definition at line 69 of file lcd\&.h\&.
-.SS "#define XTAL   F_CPU"
+.SS "#define XTAL   \fBF_CPU\fP"
 clock frequency in Hz, used to calculate delay timer 
 .PP
 Definition at line 49 of file lcd\&.h\&.
@@ -633,13 +633,7 @@ Set cursor to specified position\&.
 none 
 .RE
 .PP
-< DDRAM address of first char of line 1
-.PP
-< DDRAM address of first char of line 2
-.PP
-< DDRAM address of first char of line 3
-.PP
-< DDRAM address of first char of line 4 
+
 .PP
 Definition at line 388 of file lcd\&.c\&.
 .SS "void lcd_home (void)"
@@ -681,195 +675,7 @@ Initialize display and select type of cursor\&.
 none 
 .RE
 .PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 1
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 1
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 2
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 2
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 3
-.PP
-< port for the LCD lines
-.PP
-< port for RS line
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< port for the LCD lines
-.PP
-< port for RW line
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< port for the LCD lines
-.PP
-< port for Enable line
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< pin for 4bit data bit 0
-.PP
-< pin for 4bit data bit 1
-.PP
-< pin for 4bit data bit 2
-.PP
-< pin for 4bit data bit 3
-.PP
-< pin for RS line
-.PP
-< pin for RW line
-.PP
-< pin for Enable line
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 1
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 1
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 2
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 2
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 3
-.PP
-< pin for 4bit data bit 0
-.PP
-< pin for 4bit data bit 1
-.PP
-< pin for 4bit data bit 2
-.PP
-< pin for 4bit data bit 3
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< port for the LCD lines
-.PP
-< port for RS line
-.PP
-< pin for RS line
-.PP
-< port for the LCD lines
-.PP
-< port for RW line
-.PP
-< pin for RW line
-.PP
-< port for the LCD lines
-.PP
-< port for Enable line
-.PP
-< pin for Enable line
-.PP
-< port for the LCD lines
-.PP
-< port for RS line
-.PP
-< pin for RS line
-.PP
-< port for the LCD lines
-.PP
-< port for RW line
-.PP
-< pin for RW line
-.PP
-< port for the LCD lines
-.PP
-< port for Enable line
-.PP
-< pin for Enable line
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< pin for 4bit data bit 0
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 1
-.PP
-< pin for 4bit data bit 1
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 2
-.PP
-< pin for 4bit data bit 2
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 3
-.PP
-< pin for 4bit data bit 3
-.PP
-< clock frequency in Hz, used to calculate delay timer
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 1
-.PP
-< pin for 4bit data bit 1
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< pin for 4bit data bit 0
-.PP
-< clock frequency in Hz, used to calculate delay timer
-.PP
-< clock frequency in Hz, used to calculate delay timer
-.PP
-< clock frequency in Hz, used to calculate delay timer
-.PP
-< port for the LCD lines
-.PP
-< port for 4bit data bit 0
-.PP
-< pin for 4bit data bit 0
-.PP
-< clock frequency in Hz, used to calculate delay timer 
+
 .PP
 Definition at line 528 of file lcd\&.c\&.
 .SS "void lcd_putc (charc)"

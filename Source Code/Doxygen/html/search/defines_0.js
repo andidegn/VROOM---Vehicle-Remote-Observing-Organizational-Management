@@ -3,7 +3,6 @@ var searchData=
   ['acc_5fbdu',['ACC_BDU',['../lis331hh_8h.html#a01c85170d03198cc22168c985042df3d',1,'lis331hh.h']]],
   ['acc_5fble',['ACC_BLE',['../lis331hh_8h.html#a86e8143e8058d6d6525d2a9068a520bc',1,'lis331hh.h']]],
   ['acc_5fboot',['ACC_BOOT',['../lis331hh_8h.html#afddd846f99e0cadce7eb5f6d1445ccd5',1,'lis331hh.h']]],
-  ['acc_5fbuffer_5fsize',['ACC_BUFFER_SIZE',['../sensor__scheduler_8h.html#aec9546fd2cfe62ea7bb4f0e5fbe04e96',1,'sensor_scheduler.h']]],
   ['acc_5fctrl_5freg1',['ACC_CTRL_REG1',['../lis331hh_8h.html#a4261ed5ff8ba2ae0b2000c312f46d5ad',1,'lis331hh.h']]],
   ['acc_5fctrl_5freg2',['ACC_CTRL_REG2',['../lis331hh_8h.html#af5a95249673943fa5854de188d587321',1,'lis331hh.h']]],
   ['acc_5fctrl_5freg3',['ACC_CTRL_REG3',['../lis331hh_8h.html#ac1c8c158e10232578e7fb02bd616c4d7',1,'lis331hh.h']]],
@@ -42,11 +41,5 @@ var searchData=
   ['acc_5fxen',['ACC_Xen',['../lis331hh_8h.html#a14b61731d10a97cefff03b55a36941b5',1,'lis331hh.h']]],
   ['acc_5fyen',['ACC_Yen',['../lis331hh_8h.html#a84c9d115df23a5e4a9f0da39f18e8327',1,'lis331hh.h']]],
   ['acc_5fzen',['ACC_Zen',['../lis331hh_8h.html#aedbe2fe8153366b7d88d5e3d61310a76',1,'lis331hh.h']]],
-  ['ad_5ffuel_5ftype_5fdiesel',['AD_FUEL_TYPE_DIESEL',['../accident__data_8h.html#ab56dd36e6f90479ef039c5050a018420',1,'accident_data.h']]],
-  ['ad_5ffuel_5ftype_5felectric',['AD_FUEL_TYPE_ELECTRIC',['../accident__data_8h.html#aaed68534dd7da2e56453c4718c866596',1,'accident_data.h']]],
-  ['ad_5ffuel_5ftype_5fgasoline',['AD_FUEL_TYPE_GASOLINE',['../accident__data_8h.html#a66885b2c0028edcb091fa6b4562d332f',1,'accident_data.h']]],
-  ['ad_5ffuel_5ftype_5fhydrogen',['AD_FUEL_TYPE_HYDROGEN',['../accident__data_8h.html#aa2c38d66415a92e3d9f7ebc8751730a3',1,'accident_data.h']]],
-  ['ad_5ffuel_5ftype_5fnaturalgas',['AD_FUEL_TYPE_NATURALGAS',['../accident__data_8h.html#a8a9a197e4331e6939c2d751e7e6c5b09',1,'accident_data.h']]],
-  ['ad_5ffuel_5ftype_5fpropane',['AD_FUEL_TYPE_PROPANE',['../accident__data_8h.html#a3b2fd8ba2756054fcd43088b55944919',1,'accident_data.h']]],
   ['andi_5ftest',['ANDI_TEST',['../vroom__config_8h.html#ad56e8220dfc6b15d9542e87207fefc9e',1,'vroom_config.h']]]
 ];

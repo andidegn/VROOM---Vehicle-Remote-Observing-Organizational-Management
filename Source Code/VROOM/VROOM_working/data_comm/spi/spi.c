@@ -1,14 +1,5 @@
 /**********************************************************************//**
  * @file: spi.c
- *
- * @Created: 10-04-2014 12:03:35
- * @Author: Andi Degn
- * @Version: 0.4
- * @{
-	 This is a driver for the SPI bus
-	 on the ATMEGA family processors.
-	 @note Complies MISRO 2004 standards
- * @}
  **************************************************************************/
 
 #include "spi.h"
@@ -17,31 +8,34 @@
 /**********************************************************************//**
  * @ingroup spi_priv
  * Defines for the ports and pins used by the SPI
- * @code{.c}
+ * @defgroup spi_ports SPI Ports
+ * @{
  **************************************************************************/
 #define DDR_SPI DDRB
 #define SS PB0
 #define SCK PB1
 #define MOSI PB2
 #define MISO PB3
-/** @endcode */
+/** @} */
 
 /**********************************************************************//**
  * @ingroup spi_priv
  * defines the max number of handles that are able to be handled
- * @code{.c}
+ * @defgroup spi_max_handles SPI max handles
+ * @{
  **************************************************************************/
 #define MAX_HANDLES 16U
-/** @endcode */
+/** @} */
 
 /**********************************************************************//**
  * @ingroup spi_priv
  * defines inactive/active level for CS/CE
- * @code{.c}
+ * @defgroup spi_level SPI Active Level
+ * @{
  **************************************************************************/
 #define CS_INACTIVE 0U
 #define CS_ACTIVE 1U
-/** @endcode */
+/** @} */
 
 /* local variables */
 static int8_t _handle_count = 0;
@@ -109,35 +103,35 @@ int8_t spi_send_byte(int8_t __handle, uint8_t __data) {
 int8_t spi_send(int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes) {
 	int8_t ret = -1;
 
-	/* checking if the SPI driver is in use, if so it checks if it is the current handle that is using it */
+	/**> checking if the SPI driver is in use, if so it checks if it is the current handle that is using it */
 	if (!_is_busy || (__handle == _current_handle)) {
 		_data_array = __data_array;
 		_no_of_bytes = __no_of_bytes;
 		_bytes_sent_ctr = 0U;
 
-		/* saves the current state of the status register and disables global interrupt */
+		/**> saves the current state of the status register and disables global interrupt */
 		uint8_t _sreg = SREG;
 		cli();
 
-		/* checks if the device calling the SPI is the same as is already registered. If not, set it up */
+		/**> checks if the device calling the SPI is the same as is already registered. If not, set it up */
 		if (_current_handle != __handle) {
 			_current_handle = __handle;
 			_setup_spi(&_handles[_current_handle]);
 		}
 
-		/* setting the SPI in busy mode */
+		/**> setting the SPI in busy mode */
 		_is_busy = 1U;
 
-		/* activating chip select on the slave */
+		/**> activating chip select on the slave */
 		_set_cs_level(CS_ACTIVE);
 
-		/* enabling SPI interrupt */
+		/**> enabling SPI interrupt */
 		SPCR |= _BV(SPIE);
 
-		/* sending the data */
+		/**> sending the data */
 		_send(*_data_array);
 
-		/* restore status register */
+		/**> restore status register */
 		SREG = _sreg;
 
 		ret = 1;

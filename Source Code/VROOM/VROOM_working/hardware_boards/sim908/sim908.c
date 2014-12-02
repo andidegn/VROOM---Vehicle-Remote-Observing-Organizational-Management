@@ -1,11 +1,5 @@
 /**********************************************************************//**
-@file sim908.c
-@author: Kenneth René Jensen
-@Version: 0.5
-@{
-	This is the driver for GSM/GPRS/GPS module sim908
-@}
-@note NOT YET Complies MISRO 2004 standards
+ * @file sim908.c
  *************************************************************************/
 #include <stdlib.h>
 #include <string.h>
@@ -14,8 +8,52 @@
 #include "at_commands.h"
 #include "../../data_comm/uart/uart.h"
 #include "../../accident_logic/accident_data.h"
+#include "../../accident_logic/accident_detection.h"
 #include "../../util/time.h"
 #include "../../vroom_config.h"
+
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Defines for the flag list responses
+ * @defgroup sim908_flag Flag codes
+ * @{
+ *************************************************************************/
+#define SIM908_FLAG_WAITING			0
+#define SIM908_FLAG_OK				1
+#define SIM908_FLAG_ERROR			2
+
+#define SIM908_FLAG_FTP_PUT_OPEN	10
+#define SIM908_FLAG_FTP_PUT_CLOSE	11
+#define SIM908_FLAG_FTP_PUT_SUCCESS 12
+#define SIM908_FLAG_FTP_PUT_ERROR	13
+#define SIM908_FLAG_FTP_SENDING		14
+
+#define SIM908_FLAG_GPS_OK			20
+#define SIM908_FLAG_GPS_PULL		21
+#define SIM908_FLAG_GPS_PULL_OK		22
+
+#define SIM908_FLAG_RUNNING			100
+/** @} */
+
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief defines the AT response string literals
+ * @defgroup sim908_response Response litterals
+ * @{
+ *************************************************************************/
+#define SIM908_RESPONSE_RDY			"RDY"
+
+#define SIM908_RESPONSE_SKIP		"AT+"
+#define SIM908_RESPONSE_OK			"OK"
+#define SIM908_RESPONSE_ERROR		"ERR"
+#define SIM908_RESPONSE_CR_LF		"\r\n"
+#define SIM908_RESPONSE_LF_CR		"\n\r"
+#define SIM908_RESPONSE_AT			"AT"
+#define SIM908_RESPONSE_GPS_READY	"GPS"
+#define SIM908_RESPONSE_GPS_PULL	"0,"
+#define SIM908_RESPONSE_FTP_PUT		"+FTP"
+#define SIM908_RESPONSE_CREG		"+CREG: "		/* +CREG: 1 = connected */
+/** @} */
 
 #define RX_BUFFER_SIZE 128
 
@@ -28,6 +66,8 @@ static volatile uint8_t _rx_buffer_tail = 0;
 static volatile uint8_t _rx_response_length = 0;
 
 static volatile uint8_t _system_running_flag = SIM908_FLAG_WAITING;
+
+static volatile uint8_t _wait_for_ok_flag = SIM908_FLAG_WAITING;
 
 static volatile uint8_t _gps_pull_flag = SIM908_FLAG_WAITING;
 
@@ -43,29 +83,14 @@ static uint8_t _gps_response_length = 0;
 /* External from accident_data */
 char EXT_MSD_FILENAME[24];
 
-/**********************************************************************//**
- * @def CR
- * @ingroup sim908_priv
- * @brief define for the carriage return char '\r'
- * @code
- *************************************************************************/
 #define CR	0x0D /* '\r' */
-/** @endcode */
-
-/**********************************************************************//**
- * @def LF
- * @ingroup sim908_priv
- * @brief define for the line feed char '\n'
- * @code
- *************************************************************************/
 #define LF	0x0A /* '\n' */
-/** @endcode */
 
 #define DDR(x) (*(&x - 1))
 #define PIN(x) (*(&x - 2))
 
 #define RETRY_ATTEMPTS 10
-#define CONNECTION_RETRY_DELAY_IN_MS 50
+#define CONNECTION_RETRY_DELAY_IN_MS 500
 
 /* Prototypes */
 static void _setup_GSM(void);
@@ -75,12 +100,12 @@ static void _GSM_enable(void);
 static void _GPS_enable(void);
 static void _wait_for_connection(void);
 static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def);
-static bool _check_response(const char *defined_response);
+static bool _check_response(const char *__defined_response);
 static void _get_GPS_response(void);
 static char _char_at(uint8_t __index, uint8_t __tail, uint8_t __length);
 static void _raw_to_array(char **__output);
 static uint32_t _set_UTC_sec(const char *__utc_raw);
-static int32_t _set_lat_long(const char *__lat_long_raw);
+static int32_t _get_lat_long(const char *__lat_long_raw);
 static uint8_t _set_direction(const char *__direction_raw);
 static void _set_MSD_filename(const char *__UTC_raw);
 
@@ -90,12 +115,12 @@ void _SIM908_callback(char data);
 void _PC_callback(char data);
 #endif
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Initiates the SIM908 module
- @return void
- @note UART0 is used to communicate with the module.
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_pub
+ * Procedure. setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP
+ *
+ * @note UART0 is used to communicate with the module.
+ *************************************************************************/
 void SIM908_init(void)
 {
 	/* Saves the current state of the status register and disables global interrupt */
@@ -125,12 +150,10 @@ void SIM908_init(void)
 	#endif
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Starts the SIM908 module in following procedure.
-		setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP
- @return void
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_pub
+ * setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP
+ *************************************************************************/
 void SIM908_start(void)
 {
 	while (_system_running_flag == SIM908_FLAG_WAITING);
@@ -162,14 +185,14 @@ void SIM908_start(void)
 	_setup_GPS();
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Used for sending AT SET commands.
- @param *cmd is the AT command as a string
- @return true if successful else false
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_pub
+ *************************************************************************/
 bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 {
+	/* Saves the current state of the status register and disables global interrupt */
+	uint8_t SREG_cpy = SREG;
+	cli();
 	/* Implement number of retries functionality / parameter*/
 	_ack_response_flag = _ack_ftp_response_flag = _ack_gps_response_flag = SIM908_FLAG_WAITING;
 
@@ -181,19 +204,15 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 		uart1_send_char(CR);
 		uart1_send_char(LF);
 	#endif
+	/* Restore interrupt */
+	SREG = SREG_cpy;
 
 	return __wait_for_ok ? _wait_response(&_ack_response_flag, SIM908_FLAG_OK) : true;
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Sets the MSD with relevant information given from GPS response
- @param *__UTC_sec points to the timestamp in MSD structure
-		*__latitude points to the latitude in MSD structure
-		*__longitude points to the longitude in MSD structure
-		*__course points to the direction in MSD structure
- @return void
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_pub
+ *************************************************************************/
 void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)
 {
 	char **output;
@@ -206,8 +225,8 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	_get_GPS_response();
 	_raw_to_array(output);
 
-	*__longitude = _set_lat_long(*(output + 1));
-	*__latitude = _set_lat_long(*(output + 2));
+	*__longitude = _get_lat_long(*(output + 1));
+	*__latitude = _get_lat_long(*(output + 2));
 	*__UTC_sec = _set_UTC_sec(*(output + 4));
 	*__course = _set_direction(*(output + 8));
 
@@ -219,11 +238,10 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 	free(output);
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Calling Public-safety answering point
- @return void
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_pub
+ * Enables incomming calls and calles emergency number
+ *************************************************************************/
 void call_PSAP(void)
 {
 	/* Enable incoming calls */
@@ -232,19 +250,17 @@ void call_PSAP(void)
 	SIM908_cmd(AT_CALL_DIAL(CONFIG_EMERGENCY_PHONE_NUMBER), true);
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Sends MSD binary file to FTP server
-	*   1:	Create filename:		AT+FTPPUTNAME="<filename>"
-	*   2:	Open bearer				AT+SAPBR=1,1
-	*   3:	Open FTP PUT session	AT+FTPPUT=1
-	*	4:  Set write data			AT+FTPPUT=2,140
-	*	5:	Write text (140 bytes)
-	*	6:	End write session		AT+FTPPUT=2,0
-	*	7:  Close bearer			AT+SAPBR=0,1
- @param const char array with the VROOM ID (defined in vroom_config.h)
- @return void
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_pub
+ * Procedure:
+ * 1.	Create filename:		AT+FTPPUTNAME="<filename>"
+ * 2.	Open bearer				AT+SAPBR=1,1
+ * 3.	Open FTP PUT session	AT+FTPPUT=1
+ * 4.	Set write data			AT+FTPPUT=2,140
+ * 5.	Write text (140 bytes)
+ * 6.	End write session		AT+FTPPUT=2,0
+ * 7.	Close bearer			AT+SAPBR=0,1
+ *************************************************************************/
 void send_MSD(const char *__vroom_id) {
     _wait_for_connection();
 
@@ -316,11 +332,14 @@ void send_MSD(const char *__vroom_id) {
 	_ftp_sending_flag = SIM908_FLAG_WAITING;
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief GSM settings on SIM908 module
- @return void
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief GSM settings on SIM908 module
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
 static void _setup_GSM(void)
 {
 	/* Setup phone functionality */
@@ -330,11 +349,14 @@ static void _setup_GSM(void)
 	SIM908_cmd(AT_FORBID_INCOMING_CALLS, true);
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief GPS settings on SIM908 module
- @return void
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief GPS settings on SIM908 module
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
 static void _setup_GPS(void)
 {
 	while(_ack_gps_response_flag == SIM908_FLAG_WAITING);
@@ -345,21 +367,28 @@ static void _setup_GPS(void)
 	SIM908_cmd(AT_GPS_RST_AUTONOMY, true);
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Settings up GPRS - FTP on SIM908 module
-	*	1:	Set bearer parameter	AT+SAPBR=3,1,"Contype","GPRS"
-	*								AT+SAPBR=3,1,"APN","<APN>"
-	*	2:	Use bearer profile		AT+FTPCID=1
-	*   3:	FTP login				AT+FTPSERV="<Server add>"
-	*								AT+FTPPORT=<Server port>
-	*								AT+FTPUN="<Username>"
-	*								AT+FTPPW=<Password>
-	*   4:  Configure put			AT+FTPPUTPATH="<Path>"
-	*		- Binary				AT+FTPTYPE="I"
-	*		- Store file			AT+FTPPUTOPT="STOR"
- @return void
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Settings up GPRS - FTP on SIM908 module
+ * 1.	Set bearer parameter:
+ *		* AT+SAPBR=3,1,"Contype","GPRS"
+ *		* AT+SAPBR=3,1,"APN","<APN>"
+ * 2.	Use bearer profile:
+ *		* AT+FTPCID=1
+ * 3.	FTP login:
+ *		* AT+FTPSERV="<Server add>"
+ *		* AT+FTPPORT=<Server port>
+ *		* AT+FTPUN="<Username>"
+ *		* AT+FTPPW=<Password>
+ * 4.  Configure put
+ *		* AT+FTPPUTPATH="<Path>"
+ *		* AT+FTPTYPE="I" - (binary)
+ *		* AT+FTPPUTOPT="STOR"
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
 static void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
@@ -381,43 +410,68 @@ static void _setup_GPRS_FTP(void)
 	SIM908_cmd(AT_FTP_PUT_FILE_PATH(CONFIG_FTP_FILE_PATH), true);
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Enable communication with GSM module
- @return void
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Enable communication with GSM module
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
 static void _GSM_enable(void)
 {
 	GPS_PORT |= (1<<GPS_ENABLE_PIN);
 	GSM_PORT &= ~(1<<GSM_ENABLE_PIN);
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Enable communication with GPS module
- @return void
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Enable communication with GPS module
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
 static void _GPS_enable(void)
 {
 	GPS_PORT &= ~(1<<GPS_ENABLE_PIN);
 	GSM_PORT |= (1<<GSM_ENABLE_PIN);
 }
 
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Waiting for network connection
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
 static void _wait_for_connection(void) {
 	while (EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED_HOME_NETWORK && EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED_ROAMING) {
 		_delay_ms(CONNECTION_RETRY_DELAY_IN_MS);
 	}
 }
 
-static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def)
-{
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Waiting for response
+ *
+ * @param volatile uint8_t *__flag - the flag to check on
+ * @param uint8_t __ok_def - the definition of an 'OK' response
+ *
+ * @return bool - true if 'OK' else false
+ *************************************************************************/
+static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def) {
+	accident_detection_stop();
+	volatile bool _ret = false;
 	while(*__flag == SIM908_FLAG_WAITING) {
 		_delay_ms(100);
 	}
 	if (*__flag == __ok_def) {
-		return true;
+		_ret = true;
 	}
-	return false;
+	accident_detection_start();
+	return _ret;
 }
 
 /* AT test command echo and expected response:
@@ -433,38 +487,67 @@ static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def)
 	0x0d = <CR>
 	0x0a = <LF>
 */
-static bool _check_response(const char *defined_response) {
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Checking if the last response is the same as the defined response
+ *
+ * @param const char *__defined_response - the string litteral to check on
+ *
+ * @return bool - true if response is considered the same else false
+ *************************************************************************/
+static bool _check_response(const char *__defined_response) {
 	char c;
 	bool ret = true;
 	uint8_t i;
 
-	for(i = 0; i < strlen(defined_response) && ret != false; i++) {
+	for(i = 0; i < strlen(__defined_response) && ret != false; i++) {
 		c = _char_at(i, _rx_buffer_tail, _rx_response_length);
-		ret = (c == defined_response[i]) ? true : false;
+		ret = (c == __defined_response[i]) ? true : false;
 	}
 	return ret;
 }
 
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Returns the character at a specific location in the rx buffer
+ *
+ * @param uint8_t __index - index of the char to return
+ * @param uint8_t __tail - index of the last char of the response
+ * @param uint8_t __length - the length of the response
+ *
+ * @return char - the character at the desired location
+ *************************************************************************/
 static char _char_at(uint8_t __index, uint8_t __tail, uint8_t __length) {
 	volatile uint8_t i = (RX_BUFFER_SIZE + __tail - __length + __index + 1) % RX_BUFFER_SIZE;
 	return _rx_buffer[i];
 }
 
 /* mode, longitude, latitude, altitude, UTC time, TTFF, Satellite in view, speed over ground, course over ground */
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Sends the get gps info command and waits for the response
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
 static void _get_GPS_response(void)
 {
+	int i = 0; /* This counter is ONLY used to test for massive communication bugs */
 	do {
-		SIM908_cmd(AT_GPS_GET_LOCATION, false);
 		_gps_pull_flag = SIM908_FLAG_GPS_PULL;
-	} while (!_wait_response(&_ack_gps_response_flag, SIM908_FLAG_GPS_PULL_OK));
+		SIM908_cmd(AT_GPS_GET_LOCATION, false);
+	} while (!_wait_response(&_ack_gps_response_flag, SIM908_FLAG_GPS_PULL_OK) || i++ < 0);
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Set the timestamp in MSD structure.
- @param const char array of the timestamp string from GPS response
- @return 4 bytes unsigned in UTC seconds (time in seconds since 1970)
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Set the timestamp in MSD structure
+ *
+ * @param const char *__utc_raw - pointer to array of the timestamp string from GPS response
+ *
+ * @return uint32_t - 4 bytes unsigned in UTC seconds (time in seconds since 1970)
+ *************************************************************************/
 static uint32_t _set_UTC_sec(const char *__utc_raw)
 {
 	char year[5] = {__utc_raw[0],  __utc_raw[1], __utc_raw[2], __utc_raw[3], '\0'};
@@ -485,7 +568,15 @@ static uint32_t _set_UTC_sec(const char *__utc_raw)
 	return calc_UTC_seconds(&t);
 }
 
-static int32_t _set_lat_long(const char *__lat_long_raw) {
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Gets the latitude or longitude in an 32bit integer from a string
+ *
+ * @param const char *__lat_long_raw - pointer to string containing the coordinate
+ *
+ * @return int32_t - coordinate in a milliarcsecond format
+ *************************************************************************/
+static int32_t _get_lat_long(const char *__lat_long_raw) {
     int8_t lat_long_i = 0;
     uint8_t i;
     char lat_long_deg[3];
@@ -508,18 +599,28 @@ static int32_t _set_lat_long(const char *__lat_long_raw) {
     return (__decimal_degree * 3600000);
 }
 
-/********************************************************************************************************************//**
- @ingroup sim908
- @brief Set the direction in MSD structure.
- @param const char array of the course over ground string from GPS response
- @return 1 byte unsigned direction in degrees
- ************************************************************************************************************************/
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Set the direction in MSD structure
+ *
+ * @param const char *__direction_raw - pointer to array of the course over ground string from GPS response
+ *
+ * @return uint8_t - direction in degrees
+ *************************************************************************/
 static uint8_t _set_direction(const char *__direction_raw)
 {
 	/* (0 <= __direction_raw >= 255) */
 	return (255.0*atoi(__direction_raw)/360.0);
 }
 
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Cuts up the gps response and puts it into memory with a pointer to each value
+ *
+ * @param char **__output - pointer to reserved memory where the data is going to be stored
+ *
+ * @return void
+ *************************************************************************/
 static void _raw_to_array(char **__output) {
 	uint8_t i, j = 0, ij = 0;
 	for (i = 0; i < _gps_response_length; i++) {
@@ -534,9 +635,11 @@ static void _raw_to_array(char **__output) {
 }
 
 /**********************************************************************//**
- * @ingroup sim908
+ * @ingroup sim908_priv
  * @brief Set the filename of the MSD
- * @param const char array of the timestamp string from GPS response
+ *
+ * @param const char *__UTC_raw - pointer to array of the timestamp string from GPS response
+ *
  * @return void
  * @note Format: 2014-10-12_13.17.34
  *************************************************************************/
@@ -566,12 +669,20 @@ static void _set_MSD_filename(const char *__UTC_raw)
 	EXT_MSD_FILENAME[i] = '\0';
 }
 
-void _SIM908_callback(char data)
-{
-	#ifdef DEBUG_UART_ENABLE
-		uart1_send_char(data);																	/* Mirroring communication from sim908 to uart1 */
-	#endif
-
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Callback function to handle all communication from the sim908 module
+ * Procedure:
+ * 1.	Store in circular buffer
+ * 2.	Check for carriage return/line feed characters
+ * 3.	If there has been one carriage return and one line feed, check for response
+ * 4.	If UART_DEBUG is defined, echo data char to uart1
+ *
+ * @param char data - single char received via uart from the sim908 module
+ *
+ * @return void
+ *************************************************************************/
+void _SIM908_callback(char data) {
 	_rx_response_length++;
 	_rx_buffer[_rx_buffer_tail = (_rx_buffer_tail + 1) % RX_BUFFER_SIZE] = data;				/* Stores received data in buffer. This technically starts from index '1', but as the buffer is circular, it does not matter */
 
@@ -583,28 +694,34 @@ void _SIM908_callback(char data)
 
 	if (_CR_counter > 0 && _LF_counter > 0) {
 		_CR_counter = _LF_counter = 0;
-		if (_rx_response_length == 2 && 
+		if (_rx_response_length == 2 &&
 		   (_check_response(SIM908_RESPONSE_CR_LF) ||
 			_check_response(SIM908_RESPONSE_LF_CR))) {				/* Skipping empty lines */
-		} else if (_rx_response_length == 4 &&
+		} else
+		if (_rx_response_length == 4 &&
 			_check_response(SIM908_RESPONSE_OK)) {					/* OK */
 				_ack_response_flag = SIM908_FLAG_OK;
-		} else if (_rx_response_length == 7 &&
+		} else
+		if (_rx_response_length == 7 &&
 			_check_response(SIM908_RESPONSE_ERROR)) {				/* Error */
 				_ack_response_flag = SIM908_FLAG_ERROR;
-		} else if (_gps_pull_flag == SIM908_FLAG_GPS_PULL &&
+		} else
+		if (_gps_pull_flag == SIM908_FLAG_GPS_PULL &&
 			_check_response(SIM908_RESPONSE_GPS_PULL)) {			/* GPS pull */
 				_gps_response_tail = _rx_buffer_tail;
 				_gps_response_length = _rx_response_length;
 				_ack_gps_response_flag = SIM908_FLAG_GPS_PULL_OK;
 				_gps_pull_flag = SIM908_FLAG_WAITING;
-		} else if (_rx_response_length == 10 &&
+		} else
+		if (_rx_response_length == 10 &&
 			_check_response(SIM908_RESPONSE_CREG)) {				/* CREG */
 				EXT_CONNECTION_CREG_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) - '0';	/* Subtracting '0' (0x30) to get the value as an integer */
-		} else if (_rx_response_length == 11 &&
+		} else
+		if (_rx_response_length == 11 &&
 			_check_response(SIM908_RESPONSE_GPS_READY)) {			/* GPS Ready */
 				_ack_gps_response_flag = SIM908_FLAG_GPS_OK;
-		} else if (_ftp_sending_flag == SIM908_FLAG_FTP_SENDING &&
+		} else
+		if (_ftp_sending_flag == SIM908_FLAG_FTP_SENDING &&
 			_check_response(SIM908_RESPONSE_FTP_PUT)) {				/* FTPPUT */
 				/* 	FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
 					FTP PUT RESPONSE:		"+FTPPUT:2,140"
@@ -621,18 +738,34 @@ void _SIM908_callback(char data)
 				} else {
 					_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_ERROR;
 				}
-		} else if (_rx_response_length == 5 &&
+		} else
+		if (_system_running_flag == SIM908_FLAG_WAITING &&
+			_rx_response_length == 5 &&
 			_check_response(SIM908_RESPONSE_RDY)) {					/* System ready */
 				_system_running_flag = SIM908_FLAG_RUNNING;
-		} else if (_rx_response_length == 4 &&
+		}
+		else if (_rx_response_length == 4 &&
 			_check_response(SIM908_RESPONSE_AT)) {					/* Sync AT cmd */
 				_rx_response_length = 0;
 		}
 		_rx_response_length = 0;
 	}
+	#ifdef DEBUG_UART_ENABLE
+		uart1_send_char(data);																	/* Mirroring communication from sim908 to uart1 */
+	#endif
 }
 
 #ifdef DEBUG_UART_ENABLE
+/**********************************************************************//**
+ * @ingroup sim908_priv
+ * @brief Callback function to handle debug comminication with pc on uart1
+ * When receiving data it is echoed to both uart0 (sim908) and back to pc
+ * on uart1
+ *
+ * @param char data - single char received via uart from pc
+ *
+ * @return void
+ *************************************************************************/
 void _PC_callback(char data)
 {
 	uart0_send_char(data);

@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/car_panel/car_panel.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/car_panel/car_panel.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,11 +10,11 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 \fC#include <util/delay\&.h>\fP
 .br
-\fC#include <stdbool\&.h>\fP
-.br
 \fC#include 'car_panel\&.h'\fP
 .br
 \fC#include '\&.\&./\&.\&./accident_logic/accident_data\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./accident_logic/accident_detection\&.h'\fP
 .br
 
 .SS "Macros"
@@ -80,48 +80,30 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fISets the activation state of the cancel button\&. \fP"
 .ti -1c
-.RI "\fBISR\fP (PCINT1_vect)"
+.RI "\fBISR\fP (PCINT1_vect, ISR_NOBLOCK)"
 .br
 .RI "\fIISR for ALARM button When triggered the port pin is determined and based on which pin, if it is the pin where the ALARM button is located, a timed loop is entered to check if the button is pressed and held for at least 3 seconds\&. If it is, the cancel button check is called, if not, return\&. \fP"
 .in -1c
-.SH "Detailed Description"
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static uint8_t \fB_car_panel_counter\fP"
+.br
+.ti -1c
+.RI "static bool \fB_alarm_cancelled\fP"
+.br
+.in -1c
+.SH "Variable Documentation"
 .PP 
+.SS "bool _alarm_cancelled\fC [static]\fP"
 
 .PP
-\fBAuthor:\fP
-.RS 4
-: Kenneth René Jensen : 0\&.4
-.RE
-.PP
-This is the driver for the car panel in VROOM system\&. The panel includes two tact switches, a RGB LED and a single LED\&. 
-.PP
-Definition in file \fBcar_panel\&.c\fP\&.
-.SH "Macro Definition Documentation"
-.PP 
-.SS "#define BTN_ALARM   1"
+Definition at line 47 of file car_panel\&.c\&.
+.SS "uint8_t _car_panel_counter\fC [static]\fP"
 
 .PP
-Definition at line 38 of file car_panel\&.c\&.
-.SS "#define LED_CONTROL   3"
-
-.PP
-Definition at line 39 of file car_panel\&.c\&.
-.SS "#define LED_STATUS_BLUE   6"
-
-.PP
-Definition at line 41 of file car_panel\&.c\&.
-.SS "#define LED_STATUS_GREEN   7"
-
-.PP
-Definition at line 42 of file car_panel\&.c\&.
-.SS "#define LED_STATUS_RED   5"
-
-.PP
-Definition at line 40 of file car_panel\&.c\&.
-.SS "#define PIN(x)   (*(&x - 2))"
-
-.PP
-Definition at line 31 of file car_panel\&.c\&.
+Definition at line 46 of file car_panel\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

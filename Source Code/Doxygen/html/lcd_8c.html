@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('lcd_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -105,7 +105,8 @@ $(document).ready(function(){initNavTree('lcd_8c.html','');});
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">lcd.c File Reference</div>  </div>
 </div><!--header-->
@@ -129,7 +130,7 @@ Macros</h2></td></tr>
 <tr class="separator:a36e38738cd00287b6fb42ff683029aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ca48e29e8aab0646fc0e23c59f6485d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#a5ca48e29e8aab0646fc0e23c59f6485d">lcd_e_low</a>()&#160;&#160;&#160;<a class="el" href="group__pfleury__lcd.html#gaf97f97ff3832d1289bbcb471090ea297">LCD_E_PORT</a>  &amp;= ~_BV(<a class="el" href="group__pfleury__lcd.html#gae644d776392a8d47899d9910c2b8feb6">LCD_E_PIN</a>);</td></tr>
 <tr class="separator:a5ca48e29e8aab0646fc0e23c59f6485d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52d741874ca8c3c1a30a4955e8794e36"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#a52d741874ca8c3c1a30a4955e8794e36">lcd_e_toggle</a>()&#160;&#160;&#160;toggle_e()</td></tr>
+<tr class="memitem:a52d741874ca8c3c1a30a4955e8794e36"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#a52d741874ca8c3c1a30a4955e8794e36">lcd_e_toggle</a>()&#160;&#160;&#160;<a class="el" href="lcd_8c.html#a762d0af9ccb3c9507af12cd7617e047d">toggle_e</a>()</td></tr>
 <tr class="separator:a52d741874ca8c3c1a30a4955e8794e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0ce3cd9b481370ad4de36eff08440c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#ad0ce3cd9b481370ad4de36eff08440c8">lcd_rw_high</a>()&#160;&#160;&#160;<a class="el" href="group__pfleury__lcd.html#gae8772bdf31db863b81805c837bdc2da2">LCD_RW_PORT</a> |=  _BV(<a class="el" href="group__pfleury__lcd.html#ga3ac938dd5fc02a9a232df6605b5f6aa8">LCD_RW_PIN</a>)</td></tr>
 <tr class="separator:ad0ce3cd9b481370ad4de36eff08440c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,11 +142,23 @@ Macros</h2></td></tr>
 <tr class="separator:a6edb13d59460246fb4cc32ada1c9f4a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e90d5d09ca0b33d440049c09b5ab244"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#a3e90d5d09ca0b33d440049c09b5ab244">LCD_FUNCTION_DEFAULT</a>&#160;&#160;&#160;<a class="el" href="group__pfleury__lcd.html#gab35032ab368a8bc90798e0c547fb24c2">LCD_FUNCTION_4BIT_2LINES</a></td></tr>
 <tr class="separator:a3e90d5d09ca0b33d440049c09b5ab244"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adeb129e484b57c960e4a118fab9cdb21"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#adeb129e484b57c960e4a118fab9cdb21">delay</a>(us)&#160;&#160;&#160;_delayFourCycles( ( ( 1*(<a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>/4000) )*us)/1000 )</td></tr>
+<tr class="memitem:adeb129e484b57c960e4a118fab9cdb21"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#adeb129e484b57c960e4a118fab9cdb21">delay</a>(us)&#160;&#160;&#160;<a class="el" href="lcd_8c.html#aefcdb888ba5cb63b7ba5c1a74f7738be">_delayFourCycles</a>( ( ( 1*(<a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>/4000) )*us)/1000 )</td></tr>
 <tr class="separator:adeb129e484b57c960e4a118fab9cdb21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a762d0af9ccb3c9507af12cd7617e047d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#a762d0af9ccb3c9507af12cd7617e047d">toggle_e</a> (void)</td></tr>
+<tr class="separator:a762d0af9ccb3c9507af12cd7617e047d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefcdb888ba5cb63b7ba5c1a74f7738be"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#aefcdb888ba5cb63b7ba5c1a74f7738be">_delayFourCycles</a> (unsigned int __count)</td></tr>
+<tr class="separator:aefcdb888ba5cb63b7ba5c1a74f7738be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aa4fa5c8ba19268338fa4215fa1807e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#a6aa4fa5c8ba19268338fa4215fa1807e">lcd_write</a> (uint8_t data, uint8_t rs)</td></tr>
+<tr class="separator:a6aa4fa5c8ba19268338fa4215fa1807e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48a16fff03a1164f27b460a49e702dc4"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#a48a16fff03a1164f27b460a49e702dc4">lcd_read</a> (uint8_t rs)</td></tr>
+<tr class="separator:a48a16fff03a1164f27b460a49e702dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ca4373275e11ba1a2d2cbd242cbf1a4"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#a4ca4373275e11ba1a2d2cbd242cbf1a4">lcd_waitbusy</a> (void)</td></tr>
+<tr class="separator:a4ca4373275e11ba1a2d2cbd242cbf1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa905930e4947d59421e0a8033d971676"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#aa905930e4947d59421e0a8033d971676">lcd_newline</a> (uint8_t pos)</td></tr>
+<tr class="separator:aa905930e4947d59421e0a8033d971676"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaea9d14f02df06f948cb5a56776980826"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#gaea9d14f02df06f948cb5a56776980826">lcd_command</a> (uint8_t cmd)</td></tr>
 <tr class="memdesc:gaea9d14f02df06f948cb5a56776980826"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send LCD controller instruction command.  <a href="group__pfleury__lcd.html#gaea9d14f02df06f948cb5a56776980826">More...</a><br/></td></tr>
 <tr class="separator:gaea9d14f02df06f948cb5a56776980826"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +188,11 @@ Functions</h2></td></tr>
 <tr class="memitem:ga9af28b2779326b63ff4356e2b1828984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#ga9af28b2779326b63ff4356e2b1828984">lcd_init</a> (uint8_t dispAttr)</td></tr>
 <tr class="memdesc:ga9af28b2779326b63ff4356e2b1828984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize display and select type of cursor.  <a href="group__pfleury__lcd.html#ga9af28b2779326b63ff4356e2b1828984">More...</a><br/></td></tr>
 <tr class="separator:ga9af28b2779326b63ff4356e2b1828984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ad11321b18c94d48fea8bda8a25488df9"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#ad11321b18c94d48fea8bda8a25488df9">_last_pos</a></td></tr>
+<tr class="separator:ad11321b18c94d48fea8bda8a25488df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="acbe348573e1b5adccdc7bcf157dc6425"></a>
@@ -204,7 +222,7 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">us</td><td>)</td>
-          <td>&#160;&#160;&#160;_delayFourCycles( ( ( 1*(<a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>/4000) )*us)/1000 )</td>
+          <td>&#160;&#160;&#160;<a class="el" href="lcd_8c.html#aefcdb888ba5cb63b7ba5c1a74f7738be">_delayFourCycles</a>( ( ( 1*(<a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>/4000) )*us)/1000 )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -272,7 +290,7 @@ Functions</h2></td></tr>
           <td class="memname">#define lcd_e_toggle</td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>&#160;&#160;&#160;toggle_e()</td>
+          <td>&#160;&#160;&#160;<a class="el" href="lcd_8c.html#a762d0af9ccb3c9507af12cd7617e047d">toggle_e</a>()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -382,6 +400,32 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aefcdb888ba5cb63b7ba5c1a74f7738be"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void _delayFourCycles </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>__count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lcd_8c_source.html#l00102">102</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="adb21ec2be5713b0540c4c273c33dfd7f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -400,13 +444,176 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa905930e4947d59421e0a8033d971676"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void lcd_newline </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lcd_8c_source.html#l00313">313</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a48a16fff03a1164f27b460a49e702dc4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t lcd_read </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>rs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lcd_8c_source.html#l00223">223</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4ca4373275e11ba1a2d2cbd242cbf1a4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t lcd_waitbusy </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lcd_8c_source.html#l00292">292</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6aa4fa5c8ba19268338fa4215fa1807e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void lcd_write </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>rs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lcd_8c_source.html#l00142">142</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a762d0af9ccb3c9507af12cd7617e047d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void toggle_e </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lcd_8c_source.html#l00125">125</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="ad11321b18c94d48fea8bda8a25488df9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t _last_pos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="lcd_8c_source.html#l00090">90</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_345297ba67263627175aa07c8865357f.html">hardware_boards</a></li><li class="navelem"><a class="el" href="dir_2ebdcaf211e1f28bc9bc8624251c3dc9.html">lcd_board</a></li><li class="navelem"><a class="el" href="dir_1edee6abb1f7131cf7bbe010c86b3609.html">lcd</a></li><li class="navelem"><a class="el" href="lcd_8c.html">lcd.c</a></li>
-    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
+    <li class="footer">Generated on Tue Dec 2 2014 05:08:08 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

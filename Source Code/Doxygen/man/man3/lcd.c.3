@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/lcd_board/lcd/lcd.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/lcd_board/lcd/lcd.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -34,7 +34,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBlcd_e_low\fP()   \fBLCD_E_PORT\fP  &= ~_BV(\fBLCD_E_PIN\fP);"
 .br
 .ti -1c
-.RI "#define \fBlcd_e_toggle\fP()   toggle_e()"
+.RI "#define \fBlcd_e_toggle\fP()   \fBtoggle_e\fP()"
 .br
 .ti -1c
 .RI "#define \fBlcd_rw_high\fP()   \fBLCD_RW_PORT\fP |=  _BV(\fBLCD_RW_PIN\fP)"
@@ -52,12 +52,30 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBLCD_FUNCTION_DEFAULT\fP   \fBLCD_FUNCTION_4BIT_2LINES\fP"
 .br
 .ti -1c
-.RI "#define \fBdelay\fP(us)   _delayFourCycles( ( ( 1*(\fBXTAL\fP/4000) )*us)/1000 )"
+.RI "#define \fBdelay\fP(us)   \fB_delayFourCycles\fP( ( ( 1*(\fBXTAL\fP/4000) )*us)/1000 )"
 .br
 .in -1c
 .SS "Functions"
 
 .in +1c
+.ti -1c
+.RI "static void \fBtoggle_e\fP (void)"
+.br
+.ti -1c
+.RI "static void \fB_delayFourCycles\fP (unsigned int __count)"
+.br
+.ti -1c
+.RI "static void \fBlcd_write\fP (uint8_t data, uint8_t rs)"
+.br
+.ti -1c
+.RI "static uint8_t \fBlcd_read\fP (uint8_t rs)"
+.br
+.ti -1c
+.RI "static uint8_t \fBlcd_waitbusy\fP (void)"
+.br
+.ti -1c
+.RI "static void \fBlcd_newline\fP (uint8_t pos)"
+.br
 .ti -1c
 .RI "void \fBlcd_command\fP (uint8_t cmd)"
 .br
@@ -98,13 +116,20 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fIInitialize display and select type of cursor\&. \fP"
 .in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static uint8_t \fB_last_pos\fP"
+.br
+.in -1c
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define DDR(x)   (*(&x - 1))      /* address of data direction register of port x */"
 
 .PP
 Definition at line 36 of file lcd\&.c\&.
-.SS "#define delay(us)   _delayFourCycles( ( ( 1*(\fBXTAL\fP/4000) )*us)/1000 )"
+.SS "#define delay(us)   \fB_delayFourCycles\fP( ( ( 1*(\fBXTAL\fP/4000) )*us)/1000 )"
 
 .PP
 Definition at line 120 of file lcd\&.c\&.
@@ -120,7 +145,7 @@ Definition at line 47 of file lcd\&.c\&.
 
 .PP
 Definition at line 48 of file lcd\&.c\&.
-.SS "#define lcd_e_toggle()   toggle_e()"
+.SS "#define lcd_e_toggle()   \fBtoggle_e\fP()"
 
 .PP
 Definition at line 49 of file lcd\&.c\&.
@@ -150,10 +175,40 @@ Definition at line 51 of file lcd\&.c\&.
 Definition at line 41 of file lcd\&.c\&.
 .SH "Function Documentation"
 .PP 
+.SS "static void _delayFourCycles (unsigned int__count)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 102 of file lcd\&.c\&.
 .SS "int lcd_getxy (void)"
 
 .PP
 Definition at line 415 of file lcd\&.c\&.
+.SS "static void lcd_newline (uint8_tpos)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 313 of file lcd\&.c\&.
+.SS "static uint8_t lcd_read (uint8_trs)\fC [static]\fP"
+
+.PP
+Definition at line 223 of file lcd\&.c\&.
+.SS "static uint8_t lcd_waitbusy (void)\fC [static]\fP"
+
+.PP
+Definition at line 292 of file lcd\&.c\&.
+.SS "static void lcd_write (uint8_tdata, uint8_trs)\fC [static]\fP"
+
+.PP
+Definition at line 142 of file lcd\&.c\&.
+.SS "static void toggle_e (void)\fC [static]\fP"
+
+.PP
+Definition at line 125 of file lcd\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "uint8_t _last_pos\fC [static]\fP"
+
+.PP
+Definition at line 90 of file lcd\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

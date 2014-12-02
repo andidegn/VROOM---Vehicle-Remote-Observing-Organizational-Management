@@ -1,68 +1,44 @@
-.TH "Private" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 Private \- 
-.SS "Macros"
+.SS "Modules"
 
 .in +1c
 .ti -1c
-.RI "#define \fBPORT\fP   PORTJ"
+.RI "\fBPort\fP"
 .br
 .ti -1c
-.RI "#define \fBDDR\fP(x)   (*(&x - 1))"
-.br
-.ti -1c
-.RI "#define \fBBTN_CANCEL\fP   0"
+.RI "\fBMask bits\fP"
 .br
 .in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "\fBISR\fP (PCINT1_vect)"
+.RI "\fBISR\fP (PCINT1_vect, ISR_NOBLOCK)"
 .br
 .RI "\fIISR for ALARM button When triggered the port pin is determined and based on which pin, if it is the pin where the ALARM button is located, a timed loop is entered to check if the button is pressed and held for at least 3 seconds\&. If it is, the cancel button check is called, if not, return\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
 
-.SH "Macro Definition Documentation"
-.PP 
-.SS "#define BTN_CANCEL   0"
-Defines for the different mask bits 
-.PP
-Definition at line 37 of file car_panel\&.c\&.
-.SS "#define DDR(x)   (*(&x - 1))"
-Macros for DDR and PIN registers 
-.PP
-Definition at line 30 of file car_panel\&.c\&.
-.SS "#define PORT   PORTJ"
-
-.PP
-\fBNote:\fP
-.RS 4
-NOT YET Complies MISRO 2004 standards
-.RE
-.PP
-Define for the port 
-.PP
-\fBNote:\fP
-.RS 4
-Changing port will require changes in the interrupt setup 
-.RE
-.PP
-
-.PP
-Definition at line 24 of file car_panel\&.c\&.
 .SH "Function Documentation"
 .PP 
-.SS "ISR (PCINT1_vect)"
+.SS "ISR (PCINT1_vect, ISR_NOBLOCK)"
 
 .PP
 ISR for ALARM button When triggered the port pin is determined and based on which pin, if it is the pin where the ALARM button is located, a timed loop is entered to check if the button is pressed and held for at least 3 seconds\&. If it is, the cancel button check is called, if not, return\&. 
 .PP
-Definition at line 226 of file car_panel\&.c\&.
+\fBNote:\fP
+.RS 4
+This ISR does NOT block other ISR\&. The reason for this is that the system needs to be able to update status etc\&. to function correctly 
+.RE
+.PP
+
+.PP
+Definition at line 224 of file car_panel\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

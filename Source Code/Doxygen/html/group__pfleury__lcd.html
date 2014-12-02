@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__pfleury__lcd.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -116,7 +116,7 @@ Macros</h2></td></tr>
 Definitions for MCU Clock Frequency</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrp979ab56397d6df9be3f6d47932834ef0"></a>Adapt the MCU clock frequency in Hz to your target. </p>
 </td></tr>
-<tr class="memitem:ga3cad0f9b3c40159bd2fbd7f5e60f2fff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>&#160;&#160;&#160;F_CPU</td></tr>
+<tr class="memitem:ga3cad0f9b3c40159bd2fbd7f5e60f2fff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>&#160;&#160;&#160;<a class="el" href="run_8c.html#a43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></td></tr>
 <tr class="separator:ga3cad0f9b3c40159bd2fbd7f5e60f2fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
@@ -1223,7 +1223,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define XTAL&#160;&#160;&#160;F_CPU</td>
+          <td class="memname">#define XTAL&#160;&#160;&#160;<a class="el" href="run_8c.html#a43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1351,10 +1351,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none </dd></dl>
-<p>&lt; DDRAM address of first char of line 1</p>
-<p>&lt; DDRAM address of first char of line 2</p>
-<p>&lt; DDRAM address of first char of line 3</p>
-<p>&lt; DDRAM address of first char of line 4 </p>
 
 <p>Definition at line <a class="el" href="lcd_8c_source.html#l00388">388</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
 
@@ -1412,101 +1408,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none </dd></dl>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 1</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 1</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 2</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 2</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 3</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for RS line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for RW line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for Enable line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; pin for 4bit data bit 0</p>
-<p>&lt; pin for 4bit data bit 1</p>
-<p>&lt; pin for 4bit data bit 2</p>
-<p>&lt; pin for 4bit data bit 3</p>
-<p>&lt; pin for RS line</p>
-<p>&lt; pin for RW line</p>
-<p>&lt; pin for Enable line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 1</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 1</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 2</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 2</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 3</p>
-<p>&lt; pin for 4bit data bit 0</p>
-<p>&lt; pin for 4bit data bit 1</p>
-<p>&lt; pin for 4bit data bit 2</p>
-<p>&lt; pin for 4bit data bit 3</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for RS line</p>
-<p>&lt; pin for RS line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for RW line</p>
-<p>&lt; pin for RW line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for Enable line</p>
-<p>&lt; pin for Enable line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for RS line</p>
-<p>&lt; pin for RS line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for RW line</p>
-<p>&lt; pin for RW line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for Enable line</p>
-<p>&lt; pin for Enable line</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; pin for 4bit data bit 0</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 1</p>
-<p>&lt; pin for 4bit data bit 1</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 2</p>
-<p>&lt; pin for 4bit data bit 2</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 3</p>
-<p>&lt; pin for 4bit data bit 3</p>
-<p>&lt; clock frequency in Hz, used to calculate delay timer</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 1</p>
-<p>&lt; pin for 4bit data bit 1</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; pin for 4bit data bit 0</p>
-<p>&lt; clock frequency in Hz, used to calculate delay timer</p>
-<p>&lt; clock frequency in Hz, used to calculate delay timer</p>
-<p>&lt; clock frequency in Hz, used to calculate delay timer</p>
-<p>&lt; port for the LCD lines</p>
-<p>&lt; port for 4bit data bit 0</p>
-<p>&lt; pin for 4bit data bit 0</p>
-<p>&lt; clock frequency in Hz, used to calculate delay timer </p>
 
 <p>Definition at line <a class="el" href="lcd_8c_source.html#l00528">528</a> of file <a class="el" href="lcd_8c_source.html">lcd.c</a>.</p>
 
@@ -1599,7 +1500,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
+    <li class="footer">Generated on Tue Dec 2 2014 05:08:09 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

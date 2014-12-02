@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('car__panel_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -105,39 +105,40 @@ $(document).ready(function(){initNavTree('car__panel_8c.html','');});
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">car_panel.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;avr/interrupt.h&gt;</code><br/>
 <code>#include &lt;util/delay.h&gt;</code><br/>
-<code>#include &lt;stdbool.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="car__panel_8h_source.html">car_panel.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="accident__data_8h_source.html">../../accident_logic/accident_data.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="accident__detection_8h_source.html">../../accident_logic/accident_detection.h</a>&quot;</code><br/>
 </div>
 <p><a href="car__panel_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga614217d263be1fb1a5f76e2ff7be19a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#ga614217d263be1fb1a5f76e2ff7be19a2">PORT</a>&#160;&#160;&#160;PORTJ</td></tr>
+<tr class="memitem:ga614217d263be1fb1a5f76e2ff7be19a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__port.html#ga614217d263be1fb1a5f76e2ff7be19a2">PORT</a>&#160;&#160;&#160;PORTJ</td></tr>
 <tr class="separator:ga614217d263be1fb1a5f76e2ff7be19a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacbe348573e1b5adccdc7bcf157dc6425"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#gacbe348573e1b5adccdc7bcf157dc6425">DDR</a>(x)&#160;&#160;&#160;(*(&amp;x - 1))</td></tr>
+<tr class="memitem:gacbe348573e1b5adccdc7bcf157dc6425"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__port.html#gacbe348573e1b5adccdc7bcf157dc6425">DDR</a>(x)&#160;&#160;&#160;(*(&amp;x - 1))</td></tr>
 <tr class="separator:gacbe348573e1b5adccdc7bcf157dc6425"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7581da21e9fd6fd6f6920dd68d1c782"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="car__panel_8c.html#ad7581da21e9fd6fd6f6920dd68d1c782">PIN</a>(x)&#160;&#160;&#160;(*(&amp;x - 2))</td></tr>
-<tr class="separator:ad7581da21e9fd6fd6f6920dd68d1c782"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga95bf39170557bc06819efbb34f751e02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#ga95bf39170557bc06819efbb34f751e02">BTN_CANCEL</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:gad7581da21e9fd6fd6f6920dd68d1c782"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__port.html#gad7581da21e9fd6fd6f6920dd68d1c782">PIN</a>(x)&#160;&#160;&#160;(*(&amp;x - 2))</td></tr>
+<tr class="separator:gad7581da21e9fd6fd6f6920dd68d1c782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga95bf39170557bc06819efbb34f751e02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__mask.html#ga95bf39170557bc06819efbb34f751e02">BTN_CANCEL</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:ga95bf39170557bc06819efbb34f751e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cc187db1404f33530cbb3e730cbc115"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="car__panel_8c.html#a1cc187db1404f33530cbb3e730cbc115">BTN_ALARM</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:a1cc187db1404f33530cbb3e730cbc115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e6f3c158f4e04f5916df4e57ace8867"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="car__panel_8c.html#a1e6f3c158f4e04f5916df4e57ace8867">LED_CONTROL</a>&#160;&#160;&#160;3</td></tr>
-<tr class="separator:a1e6f3c158f4e04f5916df4e57ace8867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abdc724b35b806bd6052292e2a1a0c0f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="car__panel_8c.html#abdc724b35b806bd6052292e2a1a0c0f4">LED_STATUS_RED</a>&#160;&#160;&#160;5</td></tr>
-<tr class="separator:abdc724b35b806bd6052292e2a1a0c0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a141c37d04950593c2dc4e33eb347792d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="car__panel_8c.html#a141c37d04950593c2dc4e33eb347792d">LED_STATUS_BLUE</a>&#160;&#160;&#160;6</td></tr>
-<tr class="separator:a141c37d04950593c2dc4e33eb347792d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac19ac50be106ecaa57bd15bc433b00ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="car__panel_8c.html#ac19ac50be106ecaa57bd15bc433b00ad">LED_STATUS_GREEN</a>&#160;&#160;&#160;7</td></tr>
-<tr class="separator:ac19ac50be106ecaa57bd15bc433b00ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1cc187db1404f33530cbb3e730cbc115"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__mask.html#ga1cc187db1404f33530cbb3e730cbc115">BTN_ALARM</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga1cc187db1404f33530cbb3e730cbc115"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e6f3c158f4e04f5916df4e57ace8867"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__mask.html#ga1e6f3c158f4e04f5916df4e57ace8867">LED_CONTROL</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:ga1e6f3c158f4e04f5916df4e57ace8867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabdc724b35b806bd6052292e2a1a0c0f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__mask.html#gabdc724b35b806bd6052292e2a1a0c0f4">LED_STATUS_RED</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:gabdc724b35b806bd6052292e2a1a0c0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga141c37d04950593c2dc4e33eb347792d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__mask.html#ga141c37d04950593c2dc4e33eb347792d">LED_STATUS_BLUE</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:ga141c37d04950593c2dc4e33eb347792d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac19ac50be106ecaa57bd15bc433b00ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__mask.html#gac19ac50be106ecaa57bd15bc433b00ad">LED_STATUS_GREEN</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:gac19ac50be106ecaa57bd15bc433b00ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -162,101 +163,59 @@ Functions</h2></td></tr>
 <tr class="memitem:ga044f42c8895b117b37288520fdb781b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__pub.html#ga044f42c8895b117b37288520fdb781b5">car_panel_set_cancel_button_state</a> (bool state)</td></tr>
 <tr class="memdesc:ga044f42c8895b117b37288520fdb781b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the activation state of the cancel button.  <a href="group__cp__pub.html#ga044f42c8895b117b37288520fdb781b5">More...</a><br/></td></tr>
 <tr class="separator:ga044f42c8895b117b37288520fdb781b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafe6035149a64d5f448fbda08e9d1b67f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#gafe6035149a64d5f448fbda08e9d1b67f">ISR</a> (PCINT1_vect)</td></tr>
-<tr class="memdesc:gafe6035149a64d5f448fbda08e9d1b67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR for ALARM button When triggered the port pin is determined and based on which pin, if it is the pin where the ALARM button is located, a timed loop is entered to check if the button is pressed and held for at least 3 seconds. If it is, the cancel button check is called, if not, return.  <a href="group__cp__priv.html#gafe6035149a64d5f448fbda08e9d1b67f">More...</a><br/></td></tr>
-<tr class="separator:gafe6035149a64d5f448fbda08e9d1b67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf13ccf104d621ee50c363a2d2af46e96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cp__priv.html#gaf13ccf104d621ee50c363a2d2af46e96">ISR</a> (PCINT1_vect, ISR_NOBLOCK)</td></tr>
+<tr class="memdesc:gaf13ccf104d621ee50c363a2d2af46e96"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR for ALARM button When triggered the port pin is determined and based on which pin, if it is the pin where the ALARM button is located, a timed loop is entered to check if the button is pressed and held for at least 3 seconds. If it is, the cancel button check is called, if not, return.  <a href="group__cp__priv.html#gaf13ccf104d621ee50c363a2d2af46e96">More...</a><br/></td></tr>
+<tr class="separator:gaf13ccf104d621ee50c363a2d2af46e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a29f15ae4f167ab9d159a6957a528604b"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="car__panel_8c.html#a29f15ae4f167ab9d159a6957a528604b">_car_panel_counter</a></td></tr>
+<tr class="separator:a29f15ae4f167ab9d159a6957a528604b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1746609de17c5c50d835afc7c84717cc"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="car__panel_8c.html#a1746609de17c5c50d835afc7c84717cc">_alarm_cancelled</a></td></tr>
+<tr class="separator:a1746609de17c5c50d835afc7c84717cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>: Kenneth René Jensen : 0.4</dd></dl>
-<p>This is the driver for the car panel in VROOM system. The panel includes two tact switches, a RGB LED and a single LED. </p>
-
-<p>Definition in file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="a1cc187db1404f33530cbb3e730cbc115"></a>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="a1746609de17c5c50d835afc7c84717cc"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">#define BTN_ALARM&#160;&#160;&#160;1</td>
+          <td class="memname">bool _alarm_cancelled</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00038">38</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00047">47</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1e6f3c158f4e04f5916df4e57ace8867"></a>
+<a class="anchor" id="a29f15ae4f167ab9d159a6957a528604b"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">#define LED_CONTROL&#160;&#160;&#160;3</td>
+          <td class="memname">uint8_t _car_panel_counter</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00039">39</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a141c37d04950593c2dc4e33eb347792d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LED_STATUS_BLUE&#160;&#160;&#160;6</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00041">41</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac19ac50be106ecaa57bd15bc433b00ad"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LED_STATUS_GREEN&#160;&#160;&#160;7</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00042">42</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="abdc724b35b806bd6052292e2a1a0c0f4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LED_STATUS_RED&#160;&#160;&#160;5</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00040">40</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad7581da21e9fd6fd6f6920dd68d1c782"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PIN</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;(*(&amp;x - 2))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00031">31</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
+<p>Definition at line <a class="el" href="car__panel_8c_source.html#l00046">46</a> of file <a class="el" href="car__panel_8c_source.html">car_panel.c</a>.</p>
 
 </div>
 </div>
@@ -266,7 +225,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_345297ba67263627175aa07c8865357f.html">hardware_boards</a></li><li class="navelem"><a class="el" href="dir_d62638900584296475eccf6367740f5b.html">car_panel</a></li><li class="navelem"><a class="el" href="car__panel_8c.html">car_panel.c</a></li>
-    <li class="footer">Generated on Sun Nov 30 2014 01:38:57 for VROOM by
+    <li class="footer">Generated on Tue Dec 2 2014 05:08:08 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -19,10 +19,10 @@ typedef enum {state_tc72_init,
 } SENSOR_STATE;
 
 /* local variables */
-static int16_t _x_axis_buffer[ACC_BUFFER_SIZE];
-static int16_t _y_axis_buffer[ACC_BUFFER_SIZE];
-static int16_t _z_axis_buffer[ACC_BUFFER_SIZE];
-static float _temperature = 0;
+static int16_t _x_axis_buffer[CONFIG_ALARM_CRASH_NO_OF_READINGS];
+static int16_t _y_axis_buffer[CONFIG_ALARM_CRASH_NO_OF_READINGS];
+static int16_t _z_axis_buffer[CONFIG_ALARM_CRASH_NO_OF_READINGS];
+static float _temperature = CONFIG_ALARM_FIRE_TEMP_INIT;
 
 static SENSOR_STATE _state;
 static void (*_callback_function_ptr)(char __data); /* not implemented yet */
@@ -38,7 +38,7 @@ void scheduler_start(void (*callback_function_ptr)(char __data)) {
 void scheduler_acc_get_last_readings_sum(int16_t *buffer) {
 	uint8_t _index = 0;
 	for (uint8_t i = 0; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) {
-		_index = (ACC_BUFFER_SIZE + _acc_buffer_tail - CONFIG_ALARM_CRASH_NO_OF_READINGS + i + 1) % ACC_BUFFER_SIZE;
+		_index = (_acc_buffer_tail + i + 1) % CONFIG_ALARM_CRASH_NO_OF_READINGS;
 		*(buffer + i) = sqrt(pow(_x_axis_buffer[_index], 2) + pow(_y_axis_buffer[_index], 2) + pow(_z_axis_buffer[_index], 2));
 	}
 }
@@ -49,7 +49,7 @@ void scheduler_acc_get_last_readings(int16_t *buffer) {
 	*(buffer + 2) = _z_axis_buffer[_acc_buffer_tail];
 }
 
-float scheduler_temp_get_last_reading(void) 
+float scheduler_temp_get_last_reading(void)
 {
 	return _temperature;
 }
@@ -68,7 +68,7 @@ void scheduler_release(void) {
 
 		case state_timer_init :
 			_state = state_tc72_read;
-			init_Timer1_CTC(TIMER_PS256, TIMER_100HZ);
+			timer1_init_CTC(TIMER_PS256, TIMER_50HZ);
 		break;
 
 		/* reoccurring */
@@ -90,10 +90,10 @@ void scheduler_release(void) {
 			_x_axis_buffer[_acc_buffer_tail] = (int)(acc_get_x_axis() * 400);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
 			_y_axis_buffer[_acc_buffer_tail] = (int)(acc_get_y_axis() * 400);
 			_z_axis_buffer[_acc_buffer_tail] = (int)(acc_get_z_axis() * 400);
-			_acc_buffer_tail = (_acc_buffer_tail + 1) % ACC_BUFFER_SIZE;
-			
+			_acc_buffer_tail = (_acc_buffer_tail + 1) % CONFIG_ALARM_CRASH_NO_OF_READINGS;
+
 			_temperature = get_temperature();
-			
+
 			_state = state_idle;
 			scheduler_release();
 		break;

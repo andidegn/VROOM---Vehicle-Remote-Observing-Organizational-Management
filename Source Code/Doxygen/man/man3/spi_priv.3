@@ -1,8 +1,21 @@
-.TH "Private" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 Private \- 
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBSPI Ports\fP"
+.br
+.ti -1c
+.RI "\fBSPI max handles\fP"
+.br
+.ti -1c
+.RI "\fBSPI Active Level\fP"
+.br
+.in -1c
 .SS "Data Structures"
 
 .in +1c
@@ -15,6 +28,18 @@ Private \-
 
 .in +1c
 .ti -1c
+.RI "static void \fB_setup_spi\fP (\fBhandle_param\fP *__param)"
+.br
+.RI "\fISets up the ports for the spi bus\&. \fP"
+.ti -1c
+.RI "static void \fB_set_cs_level\fP (uint8_t __level)"
+.br
+.RI "\fISets the CS/CE level based on the level\&. \fP"
+.ti -1c
+.RI "static void \fB_send\fP (uint8_t __data)"
+.br
+.RI "\fISends up data Sets up the SPI with 'handle' if it is not already the current handle\&. Then sends the data and returns '1'\&. If the SPI driver is busy performing another task, the data is not sent and a '0' is returned\&. \fP"
+.ti -1c
 .RI "\fBISR\fP (SPI_STC_vect, ISR_BLOCK)"
 .br
 .RI "\fIInterrupt service routine Interrupt service routine for the SPI\&. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed\&. Else the SPI is released\&. \fP"
@@ -24,12 +49,115 @@ Private \-
 
 .SH "Function Documentation"
 .PP 
+.SS "static void _send (uint8_t__data)\fC [static]\fP"
+
+.PP
+Sends up data Sets up the SPI with 'handle' if it is not already the current handle\&. Then sends the data and returns '1'\&. If the SPI driver is busy performing another task, the data is not sent and a '0' is returned\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP __data - the data to be sent
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 252 of file spi\&.c\&.
+.SS "static void _set_cs_level (uint8_t__level)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Sets the CS/CE level based on the level\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP __level - CS_ACTIVE or CS_INACTIVE
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 229 of file spi\&.c\&.
+.SS "static void _setup_spi (\fBhandle_param\fP *__param)\fC [static]\fP"
+
+.PP
+Sets up the ports for the spi bus\&. 
+.IP "\(bu" 2
+Sets up the SPI ports as output
+.IP "\(bu" 2
+Clears the SPRC register before setup to make sure it is clear
+.IP "\(bu" 2
+Sets up the SPRC register based on the supplied parameters
+.IP "\(bu" 2
+* SPIE, SPE and master are fixed
+.IP "\(bu" 2
+Sets up the SPSR register if divider 2, 8 or 32 is chosen
+.PP
+.PP
+SPI mode: | CPOL | CHAP |
+.br
+ SPI_MODE0 | 0 | 0 |
+.br
+ SPI_MODE1 | 0 | 1 |
+.br
+ SPI_MODE2 | 1 | 0 |
+.br
+ SPI_MODE3 | 1 | 1 |
+.br
+
+.br
+ Data direction: | DORD |
+.br
+ SPI_MSB_FIRST | 0 |
+.br
+ SPI_LSB_FIRST | 1 |
+.br
+
+.br
+ Frequency divider: | SPI2X | SPR1 | SPR0 |
+.br
+ SPI_DIVIDER_2 | 1 | 0 | 0 |
+.br
+ SPI_DIVIDER_4 | 0 | 0 | 0 |
+.br
+ SPI_DIVIDER_8 | 1 | 0 | 1 |
+.br
+ SPI_DIVIDER_16 | 0 | 0 | 1 |
+.br
+ SPI_DIVIDER_32 | 1 | 1 | 0 |
+.br
+ SPI_DIVIDER_64 | 0 | 1 | 0 |
+.br
+ SPI_DIVIDER_128 | 0 | 1 | 1 |
+.br
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBhandle_param\fP\fP *__param - a struct containing the parameters for the SPI setup
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 185 of file spi\&.c\&.
 .SS "ISR (SPI_STC_vect, ISR_BLOCK)"
 
 .PP
 Interrupt service routine Interrupt service routine for the SPI\&. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed\&. Else the SPI is released\&. 
 .PP
-Definition at line 271 of file spi\&.c\&.
+Definition at line 265 of file spi\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

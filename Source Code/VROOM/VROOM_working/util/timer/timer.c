@@ -22,13 +22,13 @@
 #define TOP_VALUE(frequency_in_hz, prescaler) (F_CPU/(prescaler * frequency_in_hz)-1)
 
 static volatile uint8_t _isr_counter = 0;
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup timer
  @brief Initiates timer 1 in CTC mode
  @param TIMER_PRESCALER enum, TIMER_FREQUENCY enum
  @note Enables interrupt
-************************************************************************************************************************/
-void init_Timer1_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
+*************************************************************************/
+void timer1_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 {
 	/* saves the current state of the status register and disables global interrupt */
 	uint8_t _sreg = SREG;
@@ -77,12 +77,12 @@ void init_Timer1_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 	SREG = _sreg;
 }
 
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup timer
- @brief Initiates timer 3 in CTC mode. 
+ @brief Initiates timer 3 in CTC mode.
  @param TIMER_PRESCALER enum, TIMER_FREQUENCY enum
-************************************************************************************************************************/
-void init_Timer3_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
+*************************************************************************/
+void timer3_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 {
 	/* saves the current state of the status register and disables global interrupt */
 	uint8_t _sreg = SREG;
@@ -123,16 +123,16 @@ void init_Timer3_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 
 		default: break;
 	}
-	
+
 	/* restoring status register */
 	SREG = _sreg;
 }
 
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup timer
  @brief Enables interrupt for timer3
-************************************************************************************************************************/
-void start_timer3(void)
+*************************************************************************/
+void timer3_start(void)
 {
 	TIFR3 |= _BV(OCIE3A);
 	//TIFR |= (1 << OCF1A);
@@ -140,14 +140,32 @@ void start_timer3(void)
 	TIMSK3 |= _BV(OCIE3A);
 }
 
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup timer
  @brief Disables interrupt for timer3
-************************************************************************************************************************/
-void stop_timer3(void)
+*************************************************************************/
+void timer3_stop(void)
 {
 	/* Disable interrupts */
 	TIMSK3 &= ~_BV(OCIE3A);
+}
+
+/**********************************************************************//**
+ @ingroup timer
+ @brief Disables interrupt for timer1 and timer3
+*************************************************************************/
+void timer_pause_all(void) {
+	TIMSK3 &= ~_BV(OCIE3A);
+	TIMSK1 &= ~_BV(OCIE1A);
+}
+
+/**********************************************************************//**
+ @ingroup timer
+ @brief Enables interrupt for timer1 and timer3
+*************************************************************************/
+void timer_resume_all(void) {
+	TIMSK3 |= _BV(OCIE3A);
+	TIMSK1 |= _BV(OCIE1A);
 }
 
 ISR(TIMER1_COMPA_vect)
@@ -160,12 +178,12 @@ ISR(TIMER3_COMPA_vect)
 	/* saves the current state of the status register and disables global interrupt */
 	uint8_t _sreg = SREG;
 	cli();
-	
+
 	ad_check_for_crash();
-	
+
 	if (_isr_counter++%CONFIG_ALARM_FIRE_TRIGGER_TIME == 0)
 		ad_check_for_fire();
-		
+
 	/* restoring status register */
 	SREG = _sreg;
 }

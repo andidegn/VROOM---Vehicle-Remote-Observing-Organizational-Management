@@ -1,0 +1,155 @@
+.TH "FTP communication" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+FTP communication \- 
+.PP
+Defines FTP setup and communication\&.  
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBAT_FTP_BEARER1_CONTYPE\fP(TYPE)   'AT+SAPBR=3,1,\\'Contype\\',\\'' TYPE '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_BEARER1_APN\fP(NAME)   'AT+SAPBR=3,1,\\'APN\\',\\'' NAME '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_SERVER_ADDRESS\fP(ADR)   'AT+FTPSERV=\\'' ADR '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_CONTROL_PORT\fP(\fBPORT\fP)   'AT+FTPPORT=' PORT"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_USER_NAME\fP(NAME)   'AT+FTPUN=\\'' NAME '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_PASSWORD\fP(PW)   'AT+FTPPW=\\'' PW '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_PATH\fP(PATH)   'AT+FTPPUTPATH=\\'' PATH '\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_NAME\fP   'AT+FTPPUTNAME=' /* remember to add ''' at either end of the filename */"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_OPEN_BEARER1\fP   'AT+SAPBR=1,1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_CLOSE_BEARER1\fP   'AT+SAPBR=0,1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_USE_PROFILE1\fP   'AT+FTPCID=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_DATA_TYPE_ASCII\fP   'AT+FTPTYPE=\\'A\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_SET_DATA_TYPE_BINARY\fP   'AT+FTPTYPE=\\'I\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_STORING\fP   'AT+FTPPUTOPT=\\'STOR\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_APPENDING\fP   'AT+FTPPUTOPT=\\'APPE\\''"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_UNIQUE\fP   'AT+FTPPUTOPT=\\'STOU\\''		/* Not supported in FileZilla */"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_OPEN_SESSION\fP   'AT+FTPPUT=1'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_CLOSE_SESSION\fP   'AT+FTPPUT=2,0'"
+.br
+.ti -1c
+.RI "#define \fBAT_FTP_PUT_FILE_SIZE\fP(SIZE)   'AT+FTPPUT=2,' SIZE"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines FTP setup and communication\&. 
+
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define AT_FTP_BEARER1_APN(NAME)   'AT+SAPBR=3,1,\\'APN\\',\\'' NAME '\\''"
+
+.PP
+Definition at line 158 of file at_commands\&.h\&.
+.SS "#define AT_FTP_BEARER1_CONTYPE(TYPE)   'AT+SAPBR=3,1,\\'Contype\\',\\'' TYPE '\\''"
+
+.PP
+Definition at line 157 of file at_commands\&.h\&.
+.SS "#define AT_FTP_CLOSE_BEARER1   'AT+SAPBR=0,1'"
+
+.PP
+Definition at line 168 of file at_commands\&.h\&.
+.SS "#define AT_FTP_OPEN_BEARER1   'AT+SAPBR=1,1'"
+
+.PP
+Definition at line 167 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_CLOSE_SESSION   'AT+FTPPUT=2,0'"
+
+.PP
+Definition at line 179 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_APPENDING   'AT+FTPPUTOPT=\\'APPE\\''"
+
+.PP
+Definition at line 175 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_NAME   'AT+FTPPUTNAME=' /* remember to add ''' at either end of the filename */"
+
+.PP
+Definition at line 165 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_PATH(PATH)   'AT+FTPPUTPATH=\\'' PATH '\\''"
+
+.PP
+Definition at line 164 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_SIZE(SIZE)   'AT+FTPPUT=2,' SIZE"
+
+.PP
+Definition at line 180 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_STORING   'AT+FTPPUTOPT=\\'STOR\\''"
+
+.PP
+Definition at line 174 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_FILE_UNIQUE   'AT+FTPPUTOPT=\\'STOU\\''		/* Not supported in FileZilla */"
+
+.PP
+Definition at line 176 of file at_commands\&.h\&.
+.SS "#define AT_FTP_PUT_OPEN_SESSION   'AT+FTPPUT=1'"
+
+.PP
+Definition at line 178 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_CONTROL_PORT(\fBPORT\fP)   'AT+FTPPORT=' PORT"
+
+.PP
+Definition at line 161 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_DATA_TYPE_ASCII   'AT+FTPTYPE=\\'A\\''"
+
+.PP
+Definition at line 171 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_DATA_TYPE_BINARY   'AT+FTPTYPE=\\'I\\''"
+
+.PP
+Definition at line 172 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_PASSWORD(PW)   'AT+FTPPW=\\'' PW '\\''"
+
+.PP
+Definition at line 163 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_SERVER_ADDRESS(ADR)   'AT+FTPSERV=\\'' ADR '\\''"
+
+.PP
+Definition at line 160 of file at_commands\&.h\&.
+.SS "#define AT_FTP_SET_USER_NAME(NAME)   'AT+FTPUN=\\'' NAME '\\''"
+
+.PP
+Definition at line 162 of file at_commands\&.h\&.
+.SS "#define AT_FTP_USE_PROFILE1   'AT+FTPCID=1'"
+
+.PP
+Definition at line 169 of file at_commands\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,10 +1,10 @@
 var group__sim908__pub =
 [
-    [ "CE_PIN", "group__sim908__pub.html#gabb388c9dfbdca89b280a12c4af1a030f", null ],
-    [ "DRIVER_PORT", "group__sim908__pub.html#ga6fab749f6f8d112e6bf40aba3ae275c4", null ],
-    [ "GPS_ENABLE_PIN", "group__sim908__pub.html#ga68947b1590f9a900eb3bccac24bb69f3", null ],
-    [ "GPS_PORT", "group__sim908__pub.html#gaadc3350bde387ed833289a87ce806a8c", null ],
-    [ "GSM_ENABLE_PIN", "group__sim908__pub.html#gaa6c046d8eb24715c2995a6a700650681", null ],
-    [ "GSM_PORT", "group__sim908__pub.html#gac6587c214249a70dbbd8a6fa228ffbc9", null ],
-    [ "STK600", "group__sim908__pub.html#gac106e87e12d57fa7192e80f670d14619", null ]
+    [ "Port", "group__sim908__port.html", "group__sim908__port" ],
+    [ "call_PSAP", "group__sim908__pub.html#gaf97d0165475186a839eabd66ea177f58", null ],
+    [ "send_MSD", "group__sim908__pub.html#gaebecffeacebdebbbd47ef4948bb7ad6e", null ],
+    [ "set_MSD_data", "group__sim908__pub.html#gaa4354342365be983fac1afb74581bc82", null ],
+    [ "SIM908_cmd", "group__sim908__pub.html#gabdb3613d6d6f16a9c330a6fb40b17a9c", null ],
+    [ "SIM908_init", "group__sim908__pub.html#ga270483289f10fccd8f7e31fbca9f4ef4", null ],
+    [ "SIM908_start", "group__sim908__pub.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8", null ]
 ];

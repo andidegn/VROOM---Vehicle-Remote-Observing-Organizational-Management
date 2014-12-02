@@ -1,0 +1,168 @@
+.TH "packed" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+packed \- 
+.PP
+struct containing the MSD for an accident report  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <accident_data\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "uint8_t \fBversion\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBmsg_identifier\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBcontrol\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBvehicle_class\fP"
+.br
+.ti -1c
+.RI "char \fBVIN\fP [20]"
+.br
+.ti -1c
+.RI "uint8_t \fBfuel_type\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBtime_stamp\fP"
+.br
+.ti -1c
+.RI "int32_t \fBlatitude\fP"
+.br
+.ti -1c
+.RI "int32_t \fBlongitude\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBdirection\fP"
+.br
+.ti -1c
+.RI "char \fBoptional_data\fP [\fBCONFIG_MSD_OPTIONAL_DATA_SIZE\fP]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+struct containing the MSD for an accident report 
+
+
+.PP
+\fBNote:\fP
+.RS 4
+According eCall standard EN 15722 the MSD consists of 140 bytes 
+.RE
+.PP
+
+.PP
+Definition at line 28 of file accident_data\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "uint8_t control"
+
+.PP
+.RS 4
+Numbers of re-transmission 
+.RE
+.PP
+
+.PP
+Definition at line 32 of file accident_data\&.h\&.
+.SS "uint8_t direction"
+
+.PP
+.RS 4
+Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) ISO 6709 
+.RE
+.PP
+
+.PP
+Definition at line 39 of file accident_data\&.h\&.
+.SS "uint8_t fuel_type"
+
+.PP
+.RS 4
+VIN number 17-characters (last 3 char is blank) ISO 3779 
+.RE
+.PP
+
+.PP
+Definition at line 35 of file accident_data\&.h\&.
+.SS "int32_t latitude"
+
+.PP
+.RS 4
+UTC Seconds 
+.RE
+.PP
+
+.PP
+Definition at line 37 of file accident_data\&.h\&.
+.SS "int32_t longitude"
+
+.PP
+.RS 4
+Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) ISO 6709 
+.RE
+.PP
+
+.PP
+Definition at line 38 of file accident_data\&.h\&.
+.SS "uint8_t msg_identifier"
+
+.PP
+.RS 4
+Referring to a public register to determine the meaning and encoding of the optional data 
+.RE
+.PP
+
+.PP
+Definition at line 31 of file accident_data\&.h\&.
+.SS "char optional_data[\fBCONFIG_MSD_OPTIONAL_DATA_SIZE\fP]"
+
+.PP
+.RS 4
+Direction in degrees\&. The nearest integer of 255\&.0*value/360\&.0 (0 <= value >= 255) 
+.RE
+.PP
+
+.PP
+Definition at line 40 of file accident_data\&.h\&.
+.SS "uint32_t time_stamp"
+
+.PP
+Definition at line 36 of file accident_data\&.h\&.
+.SS "uint8_t vehicle_class"
+
+.PP
+.RS 4
+| bit 7: Automatic activation | bit 6: Manual activation | bit 5: Test call | bit 4: Confidence in position | bit 3-0: Reserved | 
+.RE
+.PP
+
+.PP
+Definition at line 33 of file accident_data\&.h\&.
+.SS "uint8_t version"
+
+.PP
+Definition at line 30 of file accident_data\&.h\&.
+.SS "char VIN[20]"
+
+.PP
+.RS 4
+| bit 7-4 = classification | bit 3-0: category | 
+.RE
+.PP
+
+.PP
+Definition at line 34 of file accident_data\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

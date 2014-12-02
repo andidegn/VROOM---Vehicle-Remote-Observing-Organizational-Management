@@ -1,0 +1,45 @@
+.TH "Port" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Port \- 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBPORT\fP   PORTJ"
+.br
+.ti -1c
+.RI "#define \fBDDR\fP(x)   (*(&x - 1))"
+.br
+.ti -1c
+.RI "#define \fBPIN\fP(x)   (*(&x - 2))"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Define for the port 
+.PP
+\fBNote:\fP
+.RS 4
+Changing port will require changes in the interrupt setup
+.RE
+.PP
+Macros for DDR and PIN registers 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DDR(x)   (*(&x - 1))"
+
+.PP
+Definition at line 27 of file car_panel\&.c\&.
+.SS "#define PIN(x)   (*(&x - 2))"
+
+.PP
+Definition at line 28 of file car_panel\&.c\&.
+.SS "#define PORT   PORTJ"
+
+.PP
+Definition at line 18 of file car_panel\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,9 +1,460 @@
-.TH "Private" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 Private \- 
+.SS "Modules"
 
+.in +1c
+.ti -1c
+.RI "\fBFlag codes\fP"
+.br
+.RI "\fIDefines for the flag list responses\&. \fP"
+.ti -1c
+.RI "\fBResponse litterals\fP"
+.br
+.RI "\fIdefines the AT response string literals \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fB_setup_GSM\fP (void)"
+.br
+.RI "\fIGSM settings on SIM908 module\&. \fP"
+.ti -1c
+.RI "static void \fB_setup_GPS\fP (void)"
+.br
+.RI "\fIGPS settings on SIM908 module\&. \fP"
+.ti -1c
+.RI "static void \fB_setup_GPRS_FTP\fP (void)"
+.br
+.RI "\fISettings up GPRS - FTP on SIM908 module\&. \fP"
+.ti -1c
+.RI "static void \fB_GSM_enable\fP (void)"
+.br
+.RI "\fIEnable communication with GSM module\&. \fP"
+.ti -1c
+.RI "static void \fB_GPS_enable\fP (void)"
+.br
+.RI "\fIEnable communication with GPS module\&. \fP"
+.ti -1c
+.RI "static void \fB_wait_for_connection\fP (void)"
+.br
+.RI "\fIWaiting for network connection\&. \fP"
+.ti -1c
+.RI "static bool \fB_wait_response\fP (volatile uint8_t *__flag, uint8_t __ok_def)"
+.br
+.RI "\fIWaiting for response\&. \fP"
+.ti -1c
+.RI "static bool \fB_check_response\fP (const char *__defined_response)"
+.br
+.RI "\fIChecking if the last response is the same as the defined response\&. \fP"
+.ti -1c
+.RI "static char \fB_char_at\fP (uint8_t __index, uint8_t __tail, uint8_t __length)"
+.br
+.RI "\fIReturns the character at a specific location in the rx buffer\&. \fP"
+.ti -1c
+.RI "static void \fB_get_GPS_response\fP (void)"
+.br
+.RI "\fISends the get gps info command and waits for the response\&. \fP"
+.ti -1c
+.RI "static uint32_t \fB_set_UTC_sec\fP (const char *__utc_raw)"
+.br
+.RI "\fISet the timestamp in MSD structure\&. \fP"
+.ti -1c
+.RI "static int32_t \fB_get_lat_long\fP (const char *__lat_long_raw)"
+.br
+.RI "\fIGets the latitude or longitude in an 32bit integer from a string\&. \fP"
+.ti -1c
+.RI "static uint8_t \fB_set_direction\fP (const char *__direction_raw)"
+.br
+.RI "\fISet the direction in MSD structure\&. \fP"
+.ti -1c
+.RI "static void \fB_raw_to_array\fP (char **__output)"
+.br
+.RI "\fICuts up the gps response and puts it into memory with a pointer to each value\&. \fP"
+.ti -1c
+.RI "static void \fB_set_MSD_filename\fP (const char *__UTC_raw)"
+.br
+.RI "\fISet the filename of the MSD\&. \fP"
+.ti -1c
+.RI "void \fB_SIM908_callback\fP (char data)"
+.br
+.RI "\fICallback function to handle all communication from the sim908 module Procedure: \fP"
+.ti -1c
+.RI "void \fB_PC_callback\fP (char data)"
+.br
+.RI "\fICallback function to handle debug comminication with pc on uart1 When receiving data it is echoed to both uart0 (sim908) and back to pc on uart1\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "static char _char_at (uint8_t__index, uint8_t__tail, uint8_t__length)\fC [static]\fP"
+
+.PP
+Returns the character at a specific location in the rx buffer\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP __index - index of the char to return 
+.br
+\fIuint8_t\fP __tail - index of the last char of the response 
+.br
+\fIuint8_t\fP __length - the length of the response
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+char - the character at the desired location 
+.RE
+.PP
+
+.PP
+Definition at line 520 of file sim908\&.c\&.
+.SS "static bool _check_response (const char *__defined_response)\fC [static]\fP"
+
+.PP
+Checking if the last response is the same as the defined response\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconst\fP char *__defined_response - the string litteral to check on
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+bool - true if response is considered the same else false 
+.RE
+.PP
+
+.PP
+Definition at line 498 of file sim908\&.c\&.
+.SS "static void _get_GPS_response (void)\fC [static]\fP"
+
+.PP
+Sends the get gps info command and waits for the response\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 534 of file sim908\&.c\&.
+.SS "static int32_t _get_lat_long (const char *__lat_long_raw)\fC [static]\fP"
+
+.PP
+Gets the latitude or longitude in an 32bit integer from a string\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconst\fP char *__lat_long_raw - pointer to string containing the coordinate
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int32_t - coordinate in a milliarcsecond format 
+.RE
+.PP
+
+.PP
+Definition at line 579 of file sim908\&.c\&.
+.SS "static void _GPS_enable (void)\fC [static]\fP"
+
+.PP
+Enable communication with GPS module\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 435 of file sim908\&.c\&.
+.SS "static void _GSM_enable (void)\fC [static]\fP"
+
+.PP
+Enable communication with GSM module\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 421 of file sim908\&.c\&.
+.SS "void _PC_callback (chardata)"
+
+.PP
+Callback function to handle debug comminication with pc on uart1 When receiving data it is echoed to both uart0 (sim908) and back to pc on uart1\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIchar\fP data - single char received via uart from pc
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 769 of file sim908\&.c\&.
+.SS "static void _raw_to_array (char **__output)\fC [static]\fP"
+
+.PP
+Cuts up the gps response and puts it into memory with a pointer to each value\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIchar\fP **__output - pointer to reserved memory where the data is going to be stored
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 624 of file sim908\&.c\&.
+.SS "static uint8_t _set_direction (const char *__direction_raw)\fC [static]\fP"
+
+.PP
+Set the direction in MSD structure\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconst\fP char *__direction_raw - pointer to array of the course over ground string from GPS response
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+uint8_t - direction in degrees 
+.RE
+.PP
+
+.PP
+Definition at line 610 of file sim908\&.c\&.
+.SS "static void _set_MSD_filename (const char *__UTC_raw)\fC [static]\fP"
+
+.PP
+Set the filename of the MSD\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconst\fP char *__UTC_raw - pointer to array of the timestamp string from GPS response
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+Format: 2014-10-12_13\&.17\&.34 
+.RE
+.PP
+
+.PP
+Definition at line 646 of file sim908\&.c\&.
+.SS "static uint32_t _set_UTC_sec (const char *__utc_raw)\fC [static]\fP"
+
+.PP
+Set the timestamp in MSD structure\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconst\fP char *__utc_raw - pointer to array of the timestamp string from GPS response
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+uint32_t - 4 bytes unsigned in UTC seconds (time in seconds since 1970) 
+.RE
+.PP
+
+.PP
+Definition at line 551 of file sim908\&.c\&.
+.SS "static void _setup_GPRS_FTP (void)\fC [static]\fP"
+
+.PP
+Settings up GPRS - FTP on SIM908 module\&. 
+.IP "1." 4
+Set bearer parameter:
+.IP "  \(bu" 4
+AT+SAPBR=3,1,'Contype','GPRS'
+.IP "  \(bu" 4
+AT+SAPBR=3,1,'APN','<APN>'
+.PP
+
+.IP "2." 4
+Use bearer profile:
+.IP "  \(bu" 4
+AT+FTPCID=1
+.PP
+
+.IP "3." 4
+FTP login:
+.IP "  \(bu" 4
+AT+FTPSERV='<Server add>'
+.IP "  \(bu" 4
+AT+FTPPORT=<Server port>=''>
+.IP "  \(bu" 4
+AT+FTPUN='<Username>'
+.IP "  \(bu" 4
+AT+FTPPW=<Password>
+.PP
+
+.IP "4." 4
+Configure put
+.IP "  \(bu" 4
+AT+FTPPUTPATH='<Path>'
+.IP "  \(bu" 4
+AT+FTPTYPE='I' - (binary)
+.IP "  \(bu" 4
+AT+FTPPUTOPT='STOR'
+.PP
+
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 392 of file sim908\&.c\&.
+.SS "static void _setup_GPS (void)\fC [static]\fP"
+
+.PP
+GPS settings on SIM908 module\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 360 of file sim908\&.c\&.
+.SS "static void _setup_GSM (void)\fC [static]\fP"
+
+.PP
+GSM settings on SIM908 module\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 343 of file sim908\&.c\&.
+.SS "void _SIM908_callback (chardata)"
+
+.PP
+Callback function to handle all communication from the sim908 module Procedure: 
+.IP "1." 4
+Store in circular buffer
+.IP "2." 4
+Check for carriage return/line feed characters
+.IP "3." 4
+If there has been one carriage return and one line feed, check for response
+.IP "4." 4
+If UART_DEBUG is defined, echo data char to uart1
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIchar\fP data - single char received via uart from the sim908 module
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 685 of file sim908\&.c\&.
+.SS "static void _wait_for_connection (void)\fC [static]\fP"
+
+.PP
+Waiting for network connection\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 449 of file sim908\&.c\&.
+.SS "static bool _wait_response (volatile uint8_t *__flag, uint8_t__ok_def)\fC [static]\fP"
+
+.PP
+Waiting for response\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvolatile\fP uint8_t *__flag - the flag to check on 
+.br
+\fIuint8_t\fP __ok_def - the definition of an 'OK' response
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+bool - true if 'OK' else false 
+.RE
+.PP
+
+.PP
+Definition at line 464 of file sim908\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

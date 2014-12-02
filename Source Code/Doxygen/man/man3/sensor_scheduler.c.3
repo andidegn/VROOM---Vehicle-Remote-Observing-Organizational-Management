@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/sensor_scheduler.c" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/sensor_scheduler.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -29,10 +29,13 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "void \fBscheduler_start\fP (void(*callback_function_ptr)(char __data))"
 .br
 .ti -1c
-.RI "void \fBscheduler_get_last_readings_sum\fP (int16_t *buffer)"
+.RI "void \fBscheduler_acc_get_last_readings_sum\fP (int16_t *buffer)"
 .br
 .ti -1c
-.RI "void \fBscheduler_get_last_readings\fP (int16_t *buffer)"
+.RI "void \fBscheduler_acc_get_last_readings\fP (int16_t *buffer)"
+.br
+.ti -1c
+.RI "float \fBscheduler_temp_get_last_reading\fP (void)"
 .br
 .ti -1c
 .RI "void \fBscheduler_release\fP (void)"
@@ -42,13 +45,25 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "int16_t \fB_x_axis_buffer\fP [\fBACC_BUFFER_SIZE\fP]"
+.RI "static int16_t \fB_x_axis_buffer\fP [\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]"
 .br
 .ti -1c
-.RI "int16_t \fB_y_axis_buffer\fP [\fBACC_BUFFER_SIZE\fP]"
+.RI "static int16_t \fB_y_axis_buffer\fP [\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]"
 .br
 .ti -1c
-.RI "int16_t \fB_z_axis_buffer\fP [\fBACC_BUFFER_SIZE\fP]"
+.RI "static int16_t \fB_z_axis_buffer\fP [\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]"
+.br
+.ti -1c
+.RI "static float \fB_temperature\fP = \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP"
+.br
+.ti -1c
+.RI "static \fBSENSOR_STATE\fP \fB_state\fP"
+.br
+.ti -1c
+.RI "static void(* \fB_callback_function_ptr\fP )(char __data)"
+.br
+.ti -1c
+.RI "static uint8_t \fB_acc_buffer_tail\fP = 0"
 .br
 .in -1c
 .SH "Enumeration Type Documentation"
@@ -78,36 +93,58 @@ Created: 03-09-2014 13:53:18 Author: Kenneth René Jensen
 Definition at line 12 of file sensor_scheduler\&.c\&.
 .SH "Function Documentation"
 .PP 
-.SS "void scheduler_get_last_readings (int16_t *buffer)"
+.SS "void scheduler_acc_get_last_readings (int16_t *buffer)"
 
 .PP
-Definition at line 45 of file sensor_scheduler\&.c\&.
-.SS "void scheduler_get_last_readings_sum (int16_t *buffer)"
+Definition at line 46 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_acc_get_last_readings_sum (int16_t *buffer)"
 
 .PP
-Definition at line 37 of file sensor_scheduler\&.c\&.
+Definition at line 38 of file sensor_scheduler\&.c\&.
 .SS "void scheduler_release (void)"
 
 .PP
-Definition at line 51 of file sensor_scheduler\&.c\&.
+Definition at line 57 of file sensor_scheduler\&.c\&.
 .SS "void scheduler_start (void(*)(char __data)callback_function_ptr)"
+collect_sensor_data\&.h
+.PP
+Created: 03-09-2014 13:55:08 Author: Kenneth René Jensen 
+.PP
+Definition at line 32 of file sensor_scheduler\&.c\&.
+.SS "float scheduler_temp_get_last_reading (void)"
 
 .PP
-Definition at line 31 of file sensor_scheduler\&.c\&.
+Definition at line 52 of file sensor_scheduler\&.c\&.
 .SH "Variable Documentation"
 .PP 
-.SS "int16_t _x_axis_buffer[\fBACC_BUFFER_SIZE\fP]"
+.SS "uint8_t _acc_buffer_tail = 0\fC [static]\fP"
 
 .PP
-Definition at line 21 of file sensor_scheduler\&.c\&.
-.SS "int16_t _y_axis_buffer[\fBACC_BUFFER_SIZE\fP]"
+Definition at line 30 of file sensor_scheduler\&.c\&.
+.SS "void(* _callback_function_ptr)(char __data)\fC [static]\fP"
+
+.PP
+Definition at line 28 of file sensor_scheduler\&.c\&.
+.SS "\fBSENSOR_STATE\fP _state\fC [static]\fP"
+
+.PP
+Definition at line 27 of file sensor_scheduler\&.c\&.
+.SS "float _temperature = \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP\fC [static]\fP"
+
+.PP
+Definition at line 25 of file sensor_scheduler\&.c\&.
+.SS "int16_t _x_axis_buffer[\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]\fC [static]\fP"
 
 .PP
 Definition at line 22 of file sensor_scheduler\&.c\&.
-.SS "int16_t _z_axis_buffer[\fBACC_BUFFER_SIZE\fP]"
+.SS "int16_t _y_axis_buffer[\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]\fC [static]\fP"
 
 .PP
 Definition at line 23 of file sensor_scheduler\&.c\&.
+.SS "int16_t _z_axis_buffer[\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]\fC [static]\fP"
+
+.PP
+Definition at line 24 of file sensor_scheduler\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

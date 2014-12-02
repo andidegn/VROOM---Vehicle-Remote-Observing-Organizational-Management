@@ -9,11 +9,16 @@ var sensor__scheduler_8c =
       [ "state_acc_read", "sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32ba310c4b124c47de0cbde30bc4b3491426", null ],
       [ "state_store_in_buffers", "sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32ba633e136b95011070673da9aebee2f231", null ]
     ] ],
-    [ "scheduler_get_last_readings", "sensor__scheduler_8c.html#afaa128e71cbb4ca2527c4851e9799b57", null ],
-    [ "scheduler_get_last_readings_sum", "sensor__scheduler_8c.html#a0a35c62dbac79e37cadaa936c292df20", null ],
+    [ "scheduler_acc_get_last_readings", "sensor__scheduler_8c.html#aee2c5df646a261fb0133fca41b718a6d", null ],
+    [ "scheduler_acc_get_last_readings_sum", "sensor__scheduler_8c.html#a6e6772726cede68956e7dbb89c758c05", null ],
     [ "scheduler_release", "sensor__scheduler_8c.html#a08241049a9228fe3dd6943629796b077", null ],
     [ "scheduler_start", "sensor__scheduler_8c.html#ad7757661991663ae99dbac66880abd9d", null ],
-    [ "_x_axis_buffer", "sensor__scheduler_8c.html#abe084c94aeaae7f19cf41c9855b206af", null ],
-    [ "_y_axis_buffer", "sensor__scheduler_8c.html#abce8c64fb15919720be66b95a90b70e1", null ],
-    [ "_z_axis_buffer", "sensor__scheduler_8c.html#a6ed25b6edb49dd8c57edca5ba138a220", null ]
+    [ "scheduler_temp_get_last_reading", "sensor__scheduler_8c.html#a050a2bb492b620922ab7b0ade776c88a", null ],
+    [ "_acc_buffer_tail", "sensor__scheduler_8c.html#ade848b8d314b4981b746a1bbc9b54c37", null ],
+    [ "_callback_function_ptr", "sensor__scheduler_8c.html#a971390504483293313915163f6779580", null ],
+    [ "_state", "sensor__scheduler_8c.html#a7acad3c3d42a01545d83d432d435ea82", null ],
+    [ "_temperature", "sensor__scheduler_8c.html#af51952d76cfce48b60dabe4940208238", null ],
+    [ "_x_axis_buffer", "sensor__scheduler_8c.html#a5a6131eea443aa666cddd77881c8932a", null ],
+    [ "_y_axis_buffer", "sensor__scheduler_8c.html#a29d84eac32003e1e4094d9109fe4bcc5", null ],
+    [ "_z_axis_buffer", "sensor__scheduler_8c.html#aac88409aceedd154cbf0ed34996344e8", null ]
 ];

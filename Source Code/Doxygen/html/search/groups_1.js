@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['car_20panel_20driver',['Car Panel driver',['../group__cp.html',1,'']]]
+  ['baud_20rate',['Baud rate',['../group__at__baud.html',1,'']]],
+  ['button_20press_20time',['Button press time',['../group__cp__btn__time.html',1,'']]]
 ];

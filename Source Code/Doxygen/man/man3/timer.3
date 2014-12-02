@@ -1,4 +1,4 @@
-.TH "Timer" 3 "Sun Nov 30 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Timer" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,33 +15,35 @@ Timer \-
 
 .in +1c
 .ti -1c
-.RI "void \fBinit_Timer1_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
+.RI "void \fBtimer1_init_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
 .br
 .RI "\fIInitiates timer 1 in CTC mode\&. \fP"
 .ti -1c
-.RI "void \fBinit_Timer3_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
+.RI "void \fBtimer3_init_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
 .br
 .RI "\fIInitiates timer 3 in CTC mode\&. \fP"
 .ti -1c
-.RI "void \fBstart_timer3\fP (void)"
+.RI "void \fBtimer3_start\fP (void)"
 .br
 .RI "\fIEnables interrupt for timer3\&. \fP"
 .ti -1c
-.RI "void \fBstop_timer3\fP (void)"
+.RI "void \fBtimer3_stop\fP (void)"
 .br
 .RI "\fIDisables interrupt for timer3\&. \fP"
-.in -1c
-.SS "Variables"
-
-.in +1c
 .ti -1c
-.RI "uint32_t \fBSIM908_timeout_counter\fP"
+.RI "void \fBtimer_pause_all\fP (void)"
 .br
-.RI "\fIextern variable which counts in timer3 ISR \fP"
+.RI "\fIDisables interrupt for timer1 and timer3\&. \fP"
+.ti -1c
+.RI "void \fBtimer_resume_all\fP (void)"
+.br
+.RI "\fIEnables interrupt for timer1 and timer3\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
-Setup of timer 1 to CTC mode for stating the scheduler\&. Setup of timer 3 to CTC mode for counting etc\&. used for timeout 
+Setup of timer 1 to CTC mode for stating the scheduler\&. Setup of timer 3 to CTC mode for counting etc\&. used for timeout
+.PP
+Setup of timer 1 to CTC mode for starting the scheduler\&. Setup of timer 3 to CTC mode for accident check 
 .SH "Enumeration Type Documentation"
 .PP 
 .SS "enum \fBTIMER_PRESCALER\fP"
@@ -65,7 +67,7 @@ Specifies the available clock dividers for Timer 1\&.
 Definition at line 22 of file timer\&.h\&.
 .SH "Function Documentation"
 .PP 
-.SS "void init_Timer1_CTC (\fBTIMER_PRESCALER\fPprescaler, \fBTIMER_FREQUENCY\fPhz)"
+.SS "void timer1_init_CTC (\fBTIMER_PRESCALER\fPprescaler, \fBTIMER_FREQUENCY\fPhz)"
 
 .PP
 Initiates timer 1 in CTC mode\&. 
@@ -82,8 +84,8 @@ Enables interrupt
 .PP
 
 .PP
-Definition at line 30 of file timer\&.c\&.
-.SS "void init_Timer3_CTC (\fBTIMER_PRESCALER\fPprescaler, \fBTIMER_FREQUENCY\fPhz)"
+Definition at line 31 of file timer\&.c\&.
+.SS "void timer3_init_CTC (\fBTIMER_PRESCALER\fPprescaler, \fBTIMER_FREQUENCY\fPhz)"
 
 .PP
 Initiates timer 3 in CTC mode\&. 
@@ -95,27 +97,31 @@ Initiates timer 3 in CTC mode\&.
 .PP
 
 .PP
-Definition at line 84 of file timer\&.c\&.
-.SS "void start_timer3 (void)"
+Definition at line 85 of file timer\&.c\&.
+.SS "void timer3_start (void)"
 
 .PP
 Enables interrupt for timer3\&. 
 .PP
-Definition at line 134 of file timer\&.c\&.
-.SS "void stop_timer3 (void)"
+Definition at line 135 of file timer\&.c\&.
+.SS "void timer3_stop (void)"
 
 .PP
 Disables interrupt for timer3\&. 
 .PP
-Definition at line 144 of file timer\&.c\&.
-.SH "Variable Documentation"
-.PP 
-.SS "uint32_t SIM908_timeout_counter"
+Definition at line 147 of file timer\&.c\&.
+.SS "void timer_pause_all (void)"
 
 .PP
-extern variable which counts in timer3 ISR 
+Disables interrupt for timer1 and timer3\&. 
 .PP
-Definition at line 22 of file timer\&.c\&.
+Definition at line 157 of file timer\&.c\&.
+.SS "void timer_resume_all (void)"
+
+.PP
+Enables interrupt for timer1 and timer3\&. 
+.PP
+Definition at line 166 of file timer\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -5,7 +5,7 @@
 @defgroup timer Timer
 @{
 	Setup of timer 1 to CTC mode for starting the scheduler.
-	Setup of timer 3 to CTC mode for accident check     
+	Setup of timer 3 to CTC mode for accident check
 @}
 ************************************************/
 
@@ -41,31 +41,43 @@ typedef enum { TIMER_1HZ = 1,
 			   TIMER_1KHZ = 1000
 			 } TIMER_FREQUENCY;
 
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup timer
  @brief Initiates timer 1 in CTC mode
  @param TIMER_PRESCALER enum, TIMER_FREQUENCY enum
  @note Enables interrupt
-************************************************************************************************************************/
-void init_Timer1_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz);
+*************************************************************************/
+void timer1_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz);
 
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup timer
- @brief Initiates timer 3 in CTC mode. 
+ @brief Initiates timer 3 in CTC mode.
  @param TIMER_PRESCALER enum, TIMER_FREQUENCY enum
-************************************************************************************************************************/
-void init_Timer3_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz);
+*************************************************************************/
+void timer3_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz);
 
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup timer
  @brief Enables interrupt for timer3
-************************************************************************************************************************/
-void start_timer3(void);
+*************************************************************************/
+void timer3_start(void);
 
-/********************************************************************************************************************//**
+/**********************************************************************//**
  @ingroup timer
  @brief Disables interrupt for timer3
-************************************************************************************************************************/
-void stop_timer3(void);
+*************************************************************************/
+void timer3_stop(void);
+
+/**********************************************************************//**
+ @ingroup timer
+ @brief Disables interrupt for timer1 and timer3
+*************************************************************************/
+void timer_pause_all(void);
+
+/**********************************************************************//**
+ @ingroup timer
+ @brief Enables interrupt for timer1 and timer3
+*************************************************************************/
+void timer_resume_all(void);
 
 #endif /* TIMER_H_ */

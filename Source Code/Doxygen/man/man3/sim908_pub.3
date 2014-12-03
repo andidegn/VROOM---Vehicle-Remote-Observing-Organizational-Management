@@ -1,4 +1,4 @@
-.TH "Public" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -61,25 +61,25 @@ void
 .PP
 
 .PP
-Definition at line 245 of file sim908\&.c\&.
+Definition at line 246 of file sim908\&.c\&.
 .SS "void send_MSD (const char *__vroom_id)"
 
 .PP
 Sends MSD binary file to FTP server\&. Procedure:
 .IP "1." 4
-Create filename: AT+FTPPUTNAME='<filename>'
+Create filename: (AT+FTPPUTNAME='<filename>')
 .IP "2." 4
-Open bearer AT+SAPBR=1,1
+Open bearer: (AT+SAPBR=1,1)
 .IP "3." 4
-Open FTP PUT session AT+FTPPUT=1
+Open FTP PUT session: (AT+FTPPUT=1)
 .IP "4." 4
-Set write data AT+FTPPUT=2,140
+Set write data: (AT+FTPPUT=2,140)
 .IP "5." 4
-Write text (140 bytes)
+Write text: (140 bytes)
 .IP "6." 4
-End write session AT+FTPPUT=2,0
+End write session: (AT+FTPPUT=2,0)
 .IP "7." 4
-Close bearer AT+SAPBR=0,1
+Close bearer: (AT+SAPBR=0,1)
 .PP
 .PP
 \fBParameters:\fP
@@ -94,11 +94,11 @@ void
 .PP
 
 .PP
-Definition at line 264 of file sim908\&.c\&.
+Definition at line 265 of file sim908\&.c\&.
 .SS "void set_MSD_data (uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)"
 
 .PP
-Sets the MSD with relevant information given from GPS response\&. 
+Sets the MSD with relevant information given from GPS response\&. Sets the parameters of the MSD data set
 .PP
 \fBParameters:\fP
 .RS 4
@@ -118,15 +118,15 @@ void
 .PP
 
 .PP
-Definition at line 216 of file sim908\&.c\&.
-.SS "bool SIM908_cmd (const char *cmd, bool__wait_for_ok)"
+Definition at line 217 of file sim908\&.c\&.
+.SS "bool SIM908_cmd (const char *__cmd, bool__wait_for_ok)"
 
 .PP
-Used for sending AT SET commands\&. 
+Used for sending AT SET commands\&. Sends a command via uart\&. If '__wait_for_ok' it waits and returns a bool\&. True if successful, false if not
 .PP
 \fBParameters:\fP
 .RS 4
-\fI*cmd\fP is the AT command as a string 
+\fI*cmd\fP is the AT command as a string
 .RE
 .PP
 \fBReturns:\fP
@@ -140,12 +140,7 @@ Definition at line 191 of file sim908\&.c\&.
 .SS "void SIM908_init (void)"
 
 .PP
-Initiates the SIM908 module\&. Procedure\&. setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP
-.PP
-\fBNote:\fP
-.RS 4
-UART0 is used to communicate with the module\&.
-.RE
+Initiates the SIM908 module\&. Sets up ports and uart communication
 .PP
 \fBParameters:\fP
 .RS 4
@@ -164,11 +159,11 @@ UART0 is used to communicate with the module\&.
 .PP
 
 .PP
-Definition at line 124 of file sim908\&.c\&.
+Definition at line 122 of file sim908\&.c\&.
 .SS "void SIM908_start (void)"
 
 .PP
-Starts the SIM908 module\&. setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP
+Starts the SIM908 module\&. Sends initialization commands to the module\&.
 .PP
 \fBParameters:\fP
 .RS 4
@@ -182,7 +177,7 @@ void
 .PP
 
 .PP
-Definition at line 157 of file sim908\&.c\&.
+Definition at line 155 of file sim908\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

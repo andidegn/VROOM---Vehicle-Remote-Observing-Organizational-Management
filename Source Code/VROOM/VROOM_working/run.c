@@ -1,8 +1,9 @@
 /**********************************************************************//**
- * Acc_test_fresh.c
+ * @file run.c
  *
- * Created: 05-09-2014 08:13:16
- *  Author: Andi Degn
+ * @created 05-09-2014 08:13:16
+ * @author Andi Degn
+ * @defgroup main Main file
  *************************************************************************/
 #include <avr/interrupt.h>
 #include <util/delay.h>
@@ -135,8 +136,8 @@ int main (void)
 			EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_HOME_NETWORK || EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_ROAMING ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
 			/* Checks the emergency flags */
-			if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM)
-			//if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
+			//if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM) /* Keeps sending after 1 alarm has been triggered. ONLY FOR STABILITY TESTING */
+			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
 				ad_emergency_alarm();
 

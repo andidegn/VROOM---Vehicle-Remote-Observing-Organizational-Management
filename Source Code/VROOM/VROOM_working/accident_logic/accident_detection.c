@@ -24,17 +24,17 @@ static volatile float prev_temp = CONFIG_ALARM_FIRE_TEMP_INIT;
  **************************************************************************/
 void accident_detection_init(void)
 {
-	timer3_init_CTC(TIMER_PS256, CONFIG_ALARM_DETECTION_RESOLUTION);
+	timer3_init_CTC(TIMER_PS256, CONFIG_ALARM_DETECTION_FREQUENCY);
 }
 
 /**********************************************************************//**
  * @ingroup ac_det_pub
  * Gets the accelerometer data and analysis them to see if a crash has
  * occurred
- * Steps in function:\n
- * 1. Read accelerometer data\n
- * 2. Analysis data\n
- * 3. Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected\n
+ * Steps in function:
+ * 1. Read accelerometer data
+ * 2. Analysis data
+ * 3. Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected
  **************************************************************************/
 void ad_check_for_crash(void) {
 	volatile bool _alarm = true;
@@ -67,10 +67,10 @@ void ad_check_for_crash(void) {
  * @ingroup ac_det_pub
  * Gets the temperature and compare to last read value to see if temperature
  * has raised to a critical level
- * Steps in function:\n
- * 1. Read temperature\n
- * 2. Compare current value with last reading\n
- * 3. Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if fire is detected\n
+ * Steps in function:
+ * 1. Read temperature
+ * 2. Compare current value with last reading
+ * 3. Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if fire is detected
  **************************************************************************/
 void ad_check_for_fire(void)
 {

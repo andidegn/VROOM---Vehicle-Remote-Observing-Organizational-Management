@@ -1,29 +1,93 @@
+/**
+@mainpage Vroom Project
+
+@section Introduction
+@subsection Background
+Nowadays people pay a very steep price for mobility. In Europe alone around 40,000 people die on the roads every year. [ ] Many of the fatalities are not only caused by the crashes themselves, but by the time it takes for help to arrive.
+The first problem is that someone has to notify the authorities. More often than not the involved people are incapacitated and therefore incapable of doing this, so a third party has to do this. Time is wasted.
+Next problem arises when the emergency operator needs to collect the required information; it can be challenging for the operator to retrieve the information from a random caller. A protocol is needed. Lastly, the operator needs to dispatch the proper emergency response.
+A pan-European project called HeERO [ ], addresses an in-vehicle emergency call services based on the common European Emergency number, 112. HeERO is a group of European pilots who develop, implement and tests the infrastructure and standards. This becomes both the service and an IVS (In-Vehicle System) called eCall. At this moment HeERO is in the final stage of phase 2, where Denmark is one out of 15 countries involved in testing and validating the standards in real conditions. eCall addresses standards for third parties as well, but as HeERO project is not yet completed, things might change and some are still undefined.
+The 13th of June 2013 the EU passed a legislation that will ensure that from October 2015 all new passenger cars and light duty vehicles will be fitted with eCall.[ ]
+The IVS in this project will make it possible for people with pre-2015 cars to have the same opportunity and the same safety net as eCall provides with an aftermarket solution.
+
+@section Changelog
+
+==================================
+Version 0.162 - 2014/12/03 by Andi
+==================================
+New Features, Improvements
+--------------------------
+- Following files has been doxygen commented/proofed and should be ready for MISRA check:
+   + accident_data.h
+   + accident_data.c
+   + accident_detection.h
+   + accident_detection.c
+   + spi.h
+   + spi.c
+   + uart.h
+   + uart.c
+   + car_panel.h
+   + car_panel.c
+   + at_commands.h
+   + sim908.h
+   + sim908.c
+   + lis331hh.h
+   + lis331hh.c
+   + tc72.h
+   + tc72.c
+   + sensor_acheduler.h
+   + vroom_config.h
+
+
+Fixed Bugs, Changes
+-------------------
+- Added additional debug option in sim908.c. Can be enabled in vroom_config.h
+- Tweaked uart communication with sim908 module for smooth and error free operation
+- Tested different sensor reading/accident detection frequencies, 50Hz seems to be stable
+- Running endurance test sending crash report (~2500 successful reports so far)
+
+ToDo
+----		
+- MISRA check all files
+- Impl. module test for car panel
+- Impl. unit test for MSD
+- Doxygen structure proofing in all files
+- Notes SIM908:
+   + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+
+
 ==================================
 Version 0.161 - 2014/12/01 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-* Following files has been doxygen commented/proofed and should be ready for MISRA check:
-   - accident_data(.c/.h)
-   - accident_detection(.c/h)
-   - spi(.c/.h)
-   - uart(.c/.h)
-   - car_panel(.c/.h)
-   - at_commands.h
-   - sim908(.c/.h)
-   - vroom_config.h
+- Following files has been doxygen commented/proofed and should be ready for MISRA check:
+   + accident_data.h
+   + accident_data.c
+   + accident_detection.h
+   + accident_detection.c
+   + spi.h
+   + spi.c
+   + uart.h
+   + uart.c
+   + car_panel.h
+   + car_panel.c
+   + at_commands.h
+   + sim908.h
+   + sim908.c
+   + vroom_config.h
 
 
 Fixed Bugs, Changes
 -------------------
-* Removed ISR block and global interrupt disable in car_panel.c to fix blocking bug if 
+- Removed ISR block and global interrupt disable in car_panel.c to fix blocking bug if 
    alarm is triggered before connection to isp is established
-* Minor stability changes in sim908.c
-* Moved and renamed TEMPERATURE_INITIAL to vroom_config.h\CONFIG_ALARM_FIRE_TEMP_INIT
+- Minor stability changes in sim908.c
+- Moved and renamed TEMPERATURE_INITIAL to vroom_config.h\CONFIG_ALARM_FIRE_TEMP_INIT
    to fix first read = 0, which sometimes triggered alarm on startup
-* Fixed unstable and unreliable communication with sim908 module by pausing timers 
+- Fixed unstable and unreliable communication with sim908 module by pausing timers 
    when waiting for AT reaponse
-* Changed accident_detection_start/stop to start/stop both timers (same fucntion is 
+- Changed accident_detection_start/stop to start/stop both timers (same fucntion is 
    used to fix unreliable communication with sim908 module)
 
 ToDo
@@ -33,7 +97,7 @@ ToDo
 - Impl. unit test for MSD
 - Doxygen structure proofing in all files
 - Notes SIM908:
-   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+   + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
 =====================================
@@ -41,18 +105,18 @@ Version 0.160 - 2014/12/01 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added accident_detection(.c/.h) and added check_for_fire() function
-* Added scheduler_temp_get_last_reading() function in sensor_scheduler(.h/.c)
-* Added timer to control check of accidents and added parameters in vroom.config.h
-* Added extern variables to record sensor data used for MSD (temperature and acceleration)
+- Added accident_detection.h/ accident_detection.c and added check_for_fire() function
+- Added scheduler_temp_get_last_reading() function in sensor_scheduler.h/ sensor_scheduler.c
+- Added timer to control check of accidents and added parameters in vroom.config.h
+- Added extern variables to record sensor data used for MSD (temperature and acceleration)
    and changed the structure, so it now sends the values together with MSD
 
 Fixed Bugs, Changes
 -------------------
-* Removed some warnings in several files
-* Renamed function names in sensor_scheduler(.h/.c) and accident_data(.h/.c) 
+- Removed some warnings in several files
+- Renamed function names in sensor_scheduler.h/ sensor_scheduler.c and accident_data.h/ accident_data.c
    and renamed the defines in vroom_config.h
-* Moved check_for_crash() into accident_detection file
+- Moved check_for_crash() into accident_detection file
 
 ToDo
 ----		
@@ -61,7 +125,7 @@ ToDo
 - Impl. unit test for MSD
 - Doxygen structure proofing in all files
 - Notes SIM908:
-   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+   + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
 ==================================
@@ -69,18 +133,18 @@ Version 0.150 - 2014/11/29 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-* Added scheduler_get_last_readings_sum() function in sensor_scheduler(.h/.c) for getting
+- Added scheduler_get_last_readings_sum() function in sensor_scheduler.h/ sensor_scheduler.c for getting
    a predifined number of readings for crash detection. Number is defined in vroom_config.h
-* Added ad_check_for_crash() function in accident_data(.h/.c) containing crash detection
+- Added ad_check_for_crash() function in accident_data.h/ accident_data.c containing crash detection
    logic. Parameters for detection (threashold / no. of readings to check over) is contained
    in vroom_config.h
 
 Fixed Bugs, Changes
 -------------------
-* Changed the way CREG is read to speed up the ISR in sim908.c. This include changes in
+- Changed the way CREG is read to speed up the ISR in sim908.c. This include changes in
    the way CREG is checked and the enum in which the different CREG states is held is
    moved to at_commands.c to conform with convention
-* Fixed false CREG connection status if "AT+CREG?" was sent
+- Fixed false CREG connection status if "AT+CREG?" was sent
 
 ToDo
 ----		
@@ -89,7 +153,7 @@ ToDo
 - Impl. unit test for MSD
 - Doxygen structure proofing in all files
 - Notes SIM908:
-   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+   + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
 =====================================
@@ -97,13 +161,13 @@ Version 0.141 - 2014/11/28 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added DEBUG_LCD define in vroom.config and added check where needed
-* Added template for module_test_car_panel
-* Cleaned for unused code
+- Added DEBUG_LCD define in vroom.config and added check where needed
+- Added template for module_test_car_panel
+- Cleaned for unused code
 
 Fixed Bugs, Changes
 -------------------
-* Baudrate in SIM908 is set as the first thing as the reseting behaviour 
+- Baudrate in SIM908 is set as the first thing as the reseting behaviour 
    of the module is unpredictible (based on experience)
 
 ToDo
@@ -114,7 +178,7 @@ ToDo
 - Accident algoritm 
 - Doxygen structure proofing in all files
 - Notes SIM908:
-   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+   + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
 =====================================
@@ -122,14 +186,14 @@ Version 0.140 - 2014/11/24 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* New structure of MSD: 
-   - Added Version, Message Identifier, Vehicle Class and Fuel Type definitions
-   - Deleted IPV4.
-* Added parameters for MSD into VROOM.config.h
+- New structure of MSD: 
+   + Added Version, Message Identifier, Vehicle Class and Fuel Type definitions
+   + Deleted IPV4.
+- Added parameters for MSD into VROOM.config.h
 
 Fixed Bugs, Changes
 -------------------
-* IP is no longer relevant as new eCall standard for MSD has deleminated this
+- IP is no longer relevant as new eCall standard for MSD has deleminated this
 
 ToDo
 ----		
@@ -138,7 +202,7 @@ ToDo
 - Module test for car panel needed
 - Doxygen structure proofing in all files
 - Notes SIM908:
-   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+   + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
 =====================================
@@ -146,12 +210,12 @@ Version 0.131 - 2014/11/21 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added AT command to activate PDP context. The status must be 'Call Ready' before it can be activated 
-* Added AT command to get the sevice provider IPV4. Needs to be added in MSD
+- Added AT command to activate PDP context. The status must be 'Call Ready' before it can be activated 
+- Added AT command to get the sevice provider IPV4. Needs to be added in MSD
 
 Fixed Bugs, Changes
 -------------------
-* Fixed bug in _check_response in sim908  (strlen() used instead of sizeof() in array). 
+- Fixed bug in _check_response in sim908  (strlen() used instead of sizeof() in array). 
   
 ToDo
 ----		
@@ -160,11 +224,11 @@ ToDo
 - Module test for car panel needed
 - Doxygen structure proofing in all files
 - ToDo in SIM908:
-   - Get the IP from response
-   - Check for "Call Ready" response
+   + Get the IP from response
+   + Check for "Call Ready" response
 - Problems in SIM908:
-   - Sometimes 'O' is missing in the "OK" response (Don't know if this is fixed yet)
-   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+   + Sometimes 'O' is missing in the "OK" response (Don't know if this is fixed yet)
+   + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
 ============================================
@@ -172,12 +236,12 @@ Version 0.130 - 2014/11/20 by Andi & Kenneth
 ============================================
 New Features, Improvements
 --------------------------
-* Added reset functionality after emergency call in case of false alarm
+- Added reset functionality after emergency call in case of false alarm
 
 Fixed Bugs, Changes
 -------------------
-* Chaneged car_panel functionality structure
-* Added doxygen comments in some files
+- Chaneged car_panel functionality structure
+- Added doxygen comments in some files
 
 ToDo
 ----		
@@ -186,9 +250,9 @@ ToDo
 - Module test for car panel needed
 - Doxygen structure proofing in all files
 - Problems in SIM908:
-   - Sometimes 'O' is missing in the "OK" response
-   - CREG is sometimes detected as not connected, even though +CREG: 1
-   - If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+   + Sometimes 'O' is missing in the "OK" response
+   + CREG is sometimes detected as not connected, even though +CREG: 1
+   + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 
 
 ==================================
@@ -196,20 +260,24 @@ Version 0.126 - 2014/11/19 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-* Added UART module test for testing with minunit macro
-* Added UART module test section in run.c\main
-* Added/proofed Doxygen comments in:
-   - accident_data(.c/.h)
-   - spi(.c/.h)
-   - uart(.c/.h)
-   - car_panel(.c/.h)
-   - at_commands.h
+- Added UART module test for testing with minunit macro
+- Added UART module test section in run.c\main
+- Added/proofed Doxygen comments in:
+   + accident_data.h
+   + accident_data.c
+   + spi.h
+   + spi.c
+   + uart.h
+   + uart.c
+   + car_panel.h
+   + car_panel.c
+   + at_commands.h
 
 Fixed Bugs, Changes
 -------------------
-* Tweaked startup procedure in sim908.c. Module starts up much faster now
-* Added system-ready check in sim908.c so that startup delay is not nessesary
-* Minor change in uart.c. uartX_read_char() do not try to read from the buffer if a callback is defined
+- Tweaked startup procedure in sim908.c. Module starts up much faster now
+- Added system-ready check in sim908.c so that startup delay is not nessesary
+- Minor change in uart.c. uartX_read_char() do not try to read from the buffer if a callback is defined
 
 ToDo
 ----		
@@ -224,17 +292,17 @@ Version 0.125 - 2014/11/17 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Car panel init function changed so that it does not enable interrupts. car panel start function added instead
-* Doxygen comments added in car_panel(.c/.h), sim908(.c/.h) and accident_data(.c/.h)
+- Car panel init function changed so that it does not enable interrupts. car panel start function added instead
+- Doxygen comments added in car_panel.h/ car_panel.c, sim908.h/ sim908.c and accident_data.h/ accident_data.c
 
 Fixed Bugs, Changes
 -------------------
-* Deleted unused files (ab-encoder, Andi's version of sim908 driver, led_on_plane)
-* Deleted unused code in main
-* Changed naming on extern variables
-* Changed naming on enums in accident data
-* Removed unused defines in SIM908.h
-* Added volatile parameter for flag in _wait_response in SIM908 to to avoid warning
+- Deleted unused files (ab-encoder, Andi's version of sim908 driver, led_on_plane)
+- Deleted unused code in main
+- Changed naming on extern variables
+- Changed naming on enums in accident data
+- Removed unused defines in SIM908.h
+- Added volatile parameter for flag in _wait_response in SIM908 to to avoid warning
 
 ToDo
 ----	
@@ -252,18 +320,18 @@ Version 0.120 - 2014/11/14 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-* Moved a lot of defines into vroom_config.h
-* Added schedular_get_last_readings() function in sensor_scheduler
+- Moved a lot of defines into vroom_config.h
+- Added schedular_get_last_readings() function in sensor_scheduler
 
 Fixed Bugs, Changes
 -------------------
-* Changed a lot of defines into macros for generality in sim908.h
-* Updated corrosponding code in sim908.h
-* Fixed naming in spi, uart and sensor_scheduler
-* Updated comments in spi and uart
-* Fixed simple alarm-trigger test in run.c, axis^2 became too large.
-   - Changed acc_total to uint32_t instead of int32_t
-   - Changed multiplier in sensor_scheduler to accommodate for smaller value
+- Changed a lot of defines into macros for generality in sim908.h
+- Updated corrosponding code in sim908.h
+- Fixed naming in spi, uart and sensor_scheduler
+- Updated comments in spi and uart
+- Fixed simple alarm-trigger test in run.c, axis^2 became too large.
+   + Changed acc_total to uint32_t instead of int32_t
+   + Changed multiplier in sensor_scheduler to accommodate for smaller value
 
 ToDo
 ----	
@@ -277,13 +345,13 @@ Version 0.111 - 2014/11/13 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-* Added circular buffer in sensor_scheduler for accelerometer readings
-* Made x, y and z axis buffers in sensor_scheduler extern so that reading can
+- Added circular buffer in sensor_scheduler for accelerometer readings
+- Made x, y and z axis buffers in sensor_scheduler extern so that reading can
    happen independent of the scheduler
 
 Fixed Bugs, Changes
 -------------------
-* Fixed accelerometer. Setup, scale and sensibility now works
+- Fixed accelerometer. Setup, scale and sensibility now works
 
 ToDo
 ----	
@@ -297,13 +365,13 @@ Version 0.110 - 2014/11/11 by Kenneth & Andi
 ============================================
 New Features, Improvements
 --------------------------
-* Memory leak in MSD optional data fixed
-* Implemented function to get GPS response and split it into sub-strings
-* Implemented check for CREG status
-* Added connection_status_flag which is set at anytime CREG changes
-* Implemented MSD filename based on time stamp for GPS response
-* Car panel driver finetuned
-* Main and SIM908 cleaned for unused code
+- Memory leak in MSD optional data fixed
+- Implemented function to get GPS response and split it into sub-strings
+- Implemented check for CREG status
+- Added connection_status_flag which is set at anytime CREG changes
+- Implemented MSD filename based on time stamp for GPS response
+- Car panel driver finetuned
+- Main and SIM908 cleaned for unused code
 
 Fixed Bugs, Changes
 -------------------
@@ -320,14 +388,14 @@ Version 0.104 - 2014/11/10 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Implemented functions to convert (a hardcoded) GPS response into MSD data structure.
-* Added emergency flag (Needed to do that because it locks in the car_panel ISR, when alarm is manually set)
-* Added appended string for file naming MSD file, including a VROOM_ID defined in the config header (just set to phone number).
+- Implemented functions to convert (a hardcoded) GPS response into MSD data structure.
+- Added emergency flag (Needed to do that because it locks in the car_panel ISR, when alarm is manually set)
+- Added appended string for file naming MSD file, including a VROOM_ID defined in the config header (just set to phone number).
 
 Fixed Bugs, Changes
 -------------------
-* Fixed bug in function for calculating course
-* Changed latitude/longitude function so that it stores the data in milliarcseconds
+- Fixed bug in function for calculating course
+- Changed latitude/longitude function so that it stores the data in milliarcseconds
 
 ToDo
 ----	
@@ -344,11 +412,11 @@ Version 0.103 - 2014/11/07 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added prototype for _get_GPS_response function in SIM908.c
-* Added function _set_MSD_filename(char *__UTC_raw); in SIM908 (Replaces the functing UTC_string in accident_data.c)
-* Added prototype for set_MSD_data function in SIM908
-* Implemented emergency_alarm function in accident_data and changed the structure completly
-* Added vroom_config header file for configuration
+- Added prototype for _get_GPS_response function in SIM908.c
+- Added function _set_MSD_filename(char *__UTC_raw); in SIM908 (Replaces the functing UTC_string in accident_data.c)
+- Added prototype for set_MSD_data function in SIM908
+- Implemented emergency_alarm function in accident_data and changed the structure completly
+- Added vroom_config header file for configuration
 
 Fixed Bugs, Changes
 -------------------
@@ -366,16 +434,16 @@ Version 0.100 - 2014/11/07 by Andi
 ===================================
 New Features, Improvements
 --------------------------
-* Implemented validation check on SIM908 module
-* Implemented response capability on SIM908
-* Implemented circular buffer for response in SIM908 driver
-* Implemented a _char_at(int index) function for the circular buffer
+- Implemented validation check on SIM908 module
+- Implemented response capability on SIM908
+- Implemented circular buffer for response in SIM908 driver
+- Implemented a _char_at(int index) function for the circular buffer
 
 Fixed Bugs, Changes
 -------------------
-* Fixed startup procedure so that module resets more reliably when uploading software
-* Fixed latitude and longitude binary bug by creating new function: 
-   - uartX_send_data(uint8_t data, uint8_t length). Problem was that uartX_send_string skips
+- Fixed startup procedure so that module resets more reliably when uploading software
+- Fixed latitude and longitude binary bug by creating new function: 
+   + uartX_send_data(uint8_t data, uint8_t length). Problem was that uartX_send_string skips
      zero (0x00) bytes as it is detected as the null char ('\0')
 
 ToDo
@@ -394,9 +462,9 @@ New Features, Improvements
 
 Fixed Bugs, Changes
 -------------------
-* Implemented cancel_emmergency function in car_panel
-* Fixed minor bug in accident_data
-* Added uart_send_byte function in uart, to be able to send 4 bytes "small numbers"
+- Implemented cancel_emmergency function in car_panel
+- Fixed minor bug in accident_data
+- Added uart_send_byte function in uart, to be able to send 4 bytes "small numbers"
 
 ToDo
 ----	
@@ -415,8 +483,8 @@ New Features, Improvements
 
 Fixed Bugs, Changes
 -------------------
-* Removed timer from car_panel and substituded a delay instead
-* Renamed functions to car_panel_XXXX to make it easier to use
+- Removed timer from car_panel and substituded a delay instead
+- Renamed functions to car_panel_XXXX to make it easier to use
 
 ToDo
 ----	
@@ -432,12 +500,12 @@ Version 0.098 - 2014/10/27 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Send MSD function implemnted. Now sends 140 bytes binary to FTP server
-* Added car_panel driver. Not yet tested (ISR is not yet implented)
+- Send MSD function implemnted. Now sends 140 bytes binary to FTP server
+- Added car_panel driver. Not yet tested (ISR is not yet implented)
 
 Fixed Bugs, Changes
 -------------------
-* Fixed bug caused by memory padding (used __attribute__((packed)) 
+- Fixed bug caused by memory padding (used __attribute__((packed)) 
    in order to tell compiler that structure should be packed 
 
 ToDo
@@ -455,15 +523,15 @@ Version 0.096 - 2014/10/21 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Finished structure of MSD
-* Started implementing send_msb() function, which starts a session 
+- Finished structure of MSD
+- Started implementing send_msb() function, which starts a session 
    and sends the MSB struct over FTP (not a pretty solution so far)
-* Added an integration test in main, which sends MSB to FTP server when temperature > 28 degrees.
+- Added an integration test in main, which sends MSB to FTP server when temperature > 28 degrees.
    This resulted in the problem descriped under ToDo
 
 Fixed Bugs, Changes
 -------------------
-* FTP put file name is now the modified string of GPS UTC time (UTC_string)
+- FTP put file name is now the modified string of GPS UTC time (UTC_string)
 
 ToDo
 ----	
@@ -478,8 +546,8 @@ Version 0.095 - 2014/10/20 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added time(.h/.c) to get UTC time in milliseconds
-* Started implementing structire of MSD
+- Added time.h/ time.c to get UTC time in milliseconds
+- Started implementing structire of MSD
 
 Fixed Bugs, Changes
 -------------------
@@ -495,7 +563,7 @@ Version 0.09 - 2014/10/15 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added working setup function for data communication in SIM908 module.
+- Added working setup function for data communication in SIM908 module.
    For testing purposses it is set to append an existing .txt file on the FTP server.
 ! Note: Sending/writing to FTP are still not implemented, but is tested manually. 
 
@@ -514,16 +582,16 @@ Version 0.083 - 2014/10/13 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added integration test for sensor module and SIM908 module in main function
-* Added loop-back to PC option in SIM908 driver using UART1
-* Added relevant AT commands for GPRS in header file
+- Added integration test for sensor module and SIM908 module in main function
+- Added loop-back to PC option in SIM908 driver using UART1
+- Added relevant AT commands for GPRS in header file
 
 Fixed Bugs, Changes
 -------------------
-* Renamed SIM908_gsm to SIM908, as this driver will be for the whole module
-* SIM908_init() structure changes, so that it only initiates the module
-* SIM908_start() function added to setup the module
-* GPS started and reset in SIM908_start();
+- Renamed SIM908_gsm to SIM908, as this driver will be for the whole module
+- SIM908_init() structure changes, so that it only initiates the module
+- SIM908_start() function added to setup the module
+- GPS started and reset in SIM908_start();
 
 ToDo
 ----	
@@ -537,17 +605,17 @@ Version 0.082 - 2014/10/07 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added timeout check in call_PSAP function in SIM908 driver
-* Added timeout check for AT response in SIM908 driver
-* New structure/optimized the driver, so that no busy waiting in SIM908_cmd function is needed 
-* Added some relevant AT commands in header file
-* Added baud sync and setup commands in SIM908 init function
-* Added doxygen comments in SIM908 driver and Timer
+- Added timeout check in call_PSAP function in SIM908 driver
+- Added timeout check for AT response in SIM908 driver
+- New structure/optimized the driver, so that no busy waiting in SIM908_cmd function is needed 
+- Added some relevant AT commands in header file
+- Added baud sync and setup commands in SIM908 init function
+- Added doxygen comments in SIM908 driver and Timer
 
 Fixed Bugs, Changes
 -------------------
-* Removed timeout in SIM908 init function
-* Removed unit test of _SIM908_check_response function in SIM908 driver, as it didn't maked sense anymore
+- Removed timeout in SIM908 init function
+- Removed unit test of _SIM908_check_response function in SIM908 driver, as it didn't maked sense anymore
 
 ToDo
 ----	
@@ -561,16 +629,16 @@ Version 0.081 - 2014/10/01 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* In timer.c: Added timer 3 in CTC mode for counting a value used in timeout check
-* In SIM908 driver: Added timeout check in init function
-* Added call_PSAP() function in SIM908 driver to repeatedly make the call until it gets the correct response
-* Added module test for sensors
+- In timer.c: Added timer 3 in CTC mode for counting a value used in timeout check
+- In SIM908 driver: Added timeout check in init function
+- Added call_PSAP() function in SIM908 driver to repeatedly make the call until it gets the correct response
+- Added module test for sensors
 
 Fixed Bugs, Changes
 -------------------
-* Changed filename for module test for sensors
-* Changed structure of SIM908 driver so that it has a callback 
-* Rearanged/cleaned up main (Only KENNETH_TEST)
+- Changed filename for module test for sensors
+- Changed structure of SIM908 driver so that it has a callback 
+- Rearanged/cleaned up main (Only KENNETH_TEST)
 
 ToDo
 ----	
@@ -585,10 +653,10 @@ Version 0.08 - 2014/09/30 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* In SIM908 driver: Added response and command check for AT SET commands
-* In SIM908 driver: Added self-reset in case of no response in init function 
-* In Unit Test: Added unit test function for the command and response check
-* Started implementing module test for sensors
+- In SIM908 driver: Added response and command check for AT SET commands
+- In SIM908 driver: Added self-reset in case of no response in init function 
+- In Unit Test: Added unit test function for the command and response check
+- Started implementing module test for sensors
 
 Fixed Bugs, Changes
 -------------------
@@ -606,10 +674,10 @@ Version 0.071a - 2014/09/26 by Andi
 ===================================
 New Features, Improvements
 --------------------------
-* Added read function in UART so that it is not required to use callback
+- Added read function in UART so that it is not required to use callback
    to read from the uart bus
-* Added a module test for the UART
-* Added testing templet for module tests in run.c
+- Added a module test for the UART
+- Added testing templet for module tests in run.c
 
 Fixed Bugs, Changes
 -------------------
@@ -628,8 +696,8 @@ Version 0.071 - 2014/09/26 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added condition to avoid empty strings when writing to UART (was already there)
-* Added simple GSM driver for initiating sim908 and sending AT commands
+- Added condition to avoid empty strings when writing to UART (was already there)
+- Added simple GSM driver for initiating sim908 and sending AT commands
 
 ToDo
 ----	
@@ -645,9 +713,9 @@ Version 0.07 - 2014/09/21 by Andi
 =================================
 New Features, Improvements
 --------------------------
-* Added initial gsm files with simple init and other functions for testing
-* Updated main to test gsm communication
-* Added UART pass-through to be able to monitor communication between MCU
+- Added initial gsm files with simple init and other functions for testing
+- Updated main to test gsm communication
+- Added UART pass-through to be able to monitor communication between MCU
    and gsm/gps shield from terminal
 
 Fixed Bugs, Changes
@@ -668,7 +736,7 @@ New Features, Improvements
 
 Fixed Bugs, Changes
 -------------------
-* Added callback option in sensor_scheduler for the UART
+- Added callback option in sensor_scheduler for the UART
 
 ToDo
 ----	
@@ -687,8 +755,8 @@ Version 0.06d - 2014/09/20 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-* Improved UART driver to be more userfriendly
-* Upgraded the buffer inside the UART driver to be circular
+- Improved UART driver to be more userfriendly
+- Upgraded the buffer inside the UART driver to be circular
    so that it needs less memory to work properly
 
 Fixed Bugs, Changes
@@ -707,9 +775,9 @@ Version 0.06c - 2014/09/18 by Andi
 ==================================
 New Features, Improvements
 --------------------------
-* Added cs pin parameter in the init functions of the tc72 and accelerometer driver to accommodate
+- Added cs pin parameter in the init functions of the tc72 and accelerometer driver to accommodate
    SPI splitter hardware
-* Updated MemoryMap file
+- Updated MemoryMap file
 
 Fixed Bugs, Changes
 -------------------
@@ -727,15 +795,15 @@ Version 0.06b - 2014/09/17 by Andi & Kenneth
 ============================================
 New Features, Improvements
 --------------------------
-* Improved sensor_scheduler to work autonomously from the main program using a timer and a 
+- Improved sensor_scheduler to work autonomously from the main program using a timer and a 
    state-machine
-* Updated main to work properly with analysis tool by sending accelerometer data at a working
+- Updated main to work properly with analysis tool by sending accelerometer data at a working
    rate for analysis to be conducted in real-time without any latency. Test was conducted at 
    ~110Hz
 
 Fixed Bugs, Changes
 -------------------
-* fixed minor errors
+- fixed minor errors
 
 ToDo
 ----	
@@ -749,7 +817,7 @@ Version 0.06 - 2014/09/16 by Andi
 =================================
 New Features, Improvements
 --------------------------
-* Improvements in usart0-1:
+- Improvements in usart0-1:
 	- USART_CHAR_SIZE enum changed and switch-case added in usartN_setup_async(...) function
 	  as the identifier in USART_8_BIT and USART_9_BIT was the same
 	- Added "+0.5F" to the CALC_UBRRn macro to make sure it rounds off rather than truncating
@@ -761,11 +829,11 @@ New Features, Improvements
 	- "operational_mode" bit(s) are no longer being written to UCSRnC register as synchronous		  
 	  and master SPI modes are not implemented
 	- Name changed to UART as only the asynchronous modes are implemented
-* Updated main to work properly with analysis tool
+- Updated main to work properly with analysis tool
 
 Fixed Bugs, Changes
 -------------------
-* fixed minor errors
+- fixed minor errors
 
 ToDo
 ----	
@@ -779,20 +847,20 @@ Version 0.05 - 2014/09/15 by Andi
 =================================
 New Features, Improvements
 --------------------------
-* added usart driver for USART0 and USART1
-* re-added state machine in accelerometer and tc72 to avoid return of garbage data in the callback    
+- added usart driver for USART0 and USART1
+- re-added state machine in accelerometer and tc72 to avoid return of garbage data in the callback    
    routine
-* setup usart transmission for testing with pc. it sends the accelerometer data
-* re-written the accelerometer driver to be able to take setup parameters
-* added LED driver for LEDs on aircraft on PORTB
-* added LED and switch driver for the LCD board on PORTK (no available ISR for rotary encoder)
-* added memory map file with port/pin information from all drivers
-* completed doxygen documentation in usart0-1 and accelerometer
-* updated main to include tests
+- setup usart transmission for testing with pc. it sends the accelerometer data
+- re-written the accelerometer driver to be able to take setup parameters
+- added LED driver for LEDs on aircraft on PORTB
+- added LED and switch driver for the LCD board on PORTK (no available ISR for rotary encoder)
+- added memory map file with port/pin information from all drivers
+- completed doxygen documentation in usart0-1 and accelerometer
+- updated main to include tests
 
 Fixed Bugs, Changes
 -------------------
-* fixed minor errors
+- fixed minor errors
 
 ToDo
 ----	
@@ -806,12 +874,12 @@ Version 0.04 - 2014/09/11 by Kenneth
 ====================================
 New Features, Improvements
 --------------------------
-* Added a structure with doxygen documentation of the accident report 
+- Added a structure with doxygen documentation of the accident report 
    according to eCall and EN 15722 standards for MSD.
 
 Fixed Bugs, Changes
 -------------------
-* Clean up in multiple files (mostly in comments)
+- Clean up in multiple files (mostly in comments)
 
 ToDo
 ----	
@@ -823,11 +891,11 @@ Version 0.031 - 2014/09/08 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
-* Added the Unit Test, which was missing in v0.03 and added the test in main
+- Added the Unit Test, which was missing in v0.03 and added the test in main
 
 Fixed Bugs, Changes
 -------------------
-* Fixed comments style in SPI and Accelerometer driver (*/ instead of //)
+- Fixed comments style in SPI and Accelerometer driver (/** */ instead of //)
 
 ToDo
 ----	
@@ -844,23 +912,23 @@ Version 0.03 - 2014/09/05 by Andi
 =================================
 New Features, Improvements
 --------------------------
-* Completed doxygen documentation in spi and acc driver
-* Added sensors_init() function in sensor_scheduler 
-* Updated sensor_scheduler to work with current content
-* Added scheduler_release() call in the tc72 and acc callback driver to accomodate for the
+- Completed doxygen documentation in spi and acc driver
+- Added sensors_init() function in sensor_scheduler 
+- Updated sensor_scheduler to work with current content
+- Added scheduler_release() call in the tc72 and acc callback driver to accomodate for the
    sequential sensors read structure
-* Defined scheduler delay for control of the reading period
+- Defined scheduler delay for control of the reading period
  
 Fixed Bugs, Changes
 -------------------
-* Changed the structure of the SPI driver to make it work properly
-* Assembled everything in a fresh project to fix unknown accelerometer data error
-* Fixed error where array went out of scope in tc72 driver under setup (moved array
+- Changed the structure of the SPI driver to make it work properly
+- Assembled everything in a fresh project to fix unknown accelerometer data error
+- Fixed error where array went out of scope in tc72 driver under setup (moved array
    decleration out of the function). Was causing corrupt memory
-* Renamed collect_sensors_sata to sensor_scheduler
-* Renamed function read_sensors() to scheduler_release() as it's not being called from the
+- Renamed collect_sensors_sata to sensor_scheduler
+- Renamed function read_sensors() to scheduler_release() as it's not being called from the
    drivers callback functions when they are done reading
-* Cleaned up drivers in general
+- Cleaned up drivers in general
  
 ToDo
 ----	
@@ -874,12 +942,12 @@ Version 0.02 - 2014/09/05 by Kenneth
 ====================================
 New Features, Improvements
 --------------------------
-* unit test included for tc72 (use #define UNIT_TEST to run test)
-* tc72 pass MISRA standards, except violation on some rules when calculating temperature
+- unit test included for tc72 (use #define UNIT_TEST to run test)
+- tc72 pass MISRA standards, except violation on some rules when calculating temperature
  
 Fixed Bugs, Changes
 -------------------
-* Fixed temperature conversion so that negative values is represented correctly 
+- Fixed temperature conversion so that negative values is represented correctly 
 
 ToDo
 ----	
@@ -892,7 +960,7 @@ Version 0.01 - 2014/09/03 by Kenneth
 ====================================
 New Features, Improvements
 --------------------------
-* First working version of tc72 driver with shared SPI and timer
+- First working version of tc72 driver with shared SPI and timer
  
 Fixed Bugs, Changes
 -------------------
@@ -900,3 +968,5 @@ Fixed Bugs, Changes
 ToDo
 ----	
 - Needs to be checked for MISRA standards
+
+*/

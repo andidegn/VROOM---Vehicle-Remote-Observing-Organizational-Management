@@ -1,4 +1,4 @@
-.TH "Accident detection parameters" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Accident detection parameters" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,22 +10,25 @@ Parameters for detecting an accident\&.
 
 .in +1c
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_DETECTION_RESOLUTION\fP   10		/**> Time interval between checking for accidents in hz */"
+.RI "#define \fBCONFIG_ALARM_SENSOR_READ_FREQUENCY\fP   \fBTIMER_50HZ\fP	/**> Frequency of which the sensors are read in Hz */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP   5		/**> Length of acceleration peek */"
+.RI "#define \fBCONFIG_ALARM_DETECTION_FREQUENCY\fP   \fBTIMER_50HZ\fP	/**> Time interval between checking for accidents in Hz */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_CRASH_TRIGGER_VALUE\fP   800		/**> Total acceleration [G] in 1/100 resolution */"
+.RI "#define \fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP   5			/**> Length of acceleration peek */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_DEGREE\fP   1		/**> Temperature raise in Celsius degrees */"
+.RI "#define \fBCONFIG_ALARM_CRASH_TRIGGER_VALUE\fP   800			/**> Total acceleration [G] in 1/100 resolution */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_TIME\fP   80		/**> Temperature raise time in 1/10 seconds resolution */"
+.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_DEGREE\fP   1			/**> Temperature raise in Celsius degrees */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP   -100		/**> Used to be sure there are two temperature readings before comparing values */"
+.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_TIME\fP   80			/**> Temperature raise time in 1/10 seconds resolution */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP   -100			/**> Used to be sure there are two temperature readings before comparing values */"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -35,30 +38,34 @@ Parameters for detecting an accident\&.
 
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define CONFIG_ALARM_CRASH_NO_OF_READINGS   5		/**> Length of acceleration peek */"
+.SS "#define CONFIG_ALARM_CRASH_NO_OF_READINGS   5			/**> Length of acceleration peek */"
 
 .PP
-Definition at line 32 of file vroom_config\&.h\&.
-.SS "#define CONFIG_ALARM_CRASH_TRIGGER_VALUE   800		/**> Total acceleration [G] in 1/100 resolution */"
+Definition at line 44 of file vroom_config\&.h\&.
+.SS "#define CONFIG_ALARM_CRASH_TRIGGER_VALUE   800			/**> Total acceleration [G] in 1/100 resolution */"
 
 .PP
-Definition at line 33 of file vroom_config\&.h\&.
-.SS "#define CONFIG_ALARM_DETECTION_RESOLUTION   10		/**> Time interval between checking for accidents in hz */"
+Definition at line 45 of file vroom_config\&.h\&.
+.SS "#define CONFIG_ALARM_DETECTION_FREQUENCY   \fBTIMER_50HZ\fP	/**> Time interval between checking for accidents in Hz */"
 
 .PP
-Definition at line 30 of file vroom_config\&.h\&.
-.SS "#define CONFIG_ALARM_FIRE_TEMP_INIT   -100		/**> Used to be sure there are two temperature readings before comparing values */"
+Definition at line 42 of file vroom_config\&.h\&.
+.SS "#define CONFIG_ALARM_FIRE_TEMP_INIT   -100			/**> Used to be sure there are two temperature readings before comparing values */"
 
 .PP
-Definition at line 38 of file vroom_config\&.h\&.
-.SS "#define CONFIG_ALARM_FIRE_TRIGGER_DEGREE   1		/**> Temperature raise in Celsius degrees */"
+Definition at line 50 of file vroom_config\&.h\&.
+.SS "#define CONFIG_ALARM_FIRE_TRIGGER_DEGREE   1			/**> Temperature raise in Celsius degrees */"
 
 .PP
-Definition at line 35 of file vroom_config\&.h\&.
-.SS "#define CONFIG_ALARM_FIRE_TRIGGER_TIME   80		/**> Temperature raise time in 1/10 seconds resolution */"
+Definition at line 47 of file vroom_config\&.h\&.
+.SS "#define CONFIG_ALARM_FIRE_TRIGGER_TIME   80			/**> Temperature raise time in 1/10 seconds resolution */"
 
 .PP
-Definition at line 36 of file vroom_config\&.h\&.
+Definition at line 48 of file vroom_config\&.h\&.
+.SS "#define CONFIG_ALARM_SENSOR_READ_FREQUENCY   \fBTIMER_50HZ\fP	/**> Frequency of which the sensors are read in Hz */"
+
+.PP
+Definition at line 41 of file vroom_config\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

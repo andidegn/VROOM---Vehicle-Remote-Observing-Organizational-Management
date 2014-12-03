@@ -1,16 +1,17 @@
 /**********************************************************************//**
- * @file: spi.h
+ * @file spi.h
  *
- * @Created: 10-04-2014 11:44:05
- * @Author: Andi Degn
- * @Version: 0.4
+ * @created 10-04-2014 11:44:05
+ * @author Andi Degn
+ * @version 0.4
  * @defgroup spi SPI Driver
  * @{
-	 This is a driver for the SPI bus
-	 on the ATMEGA family processors.
-	 @note Complies MISRO 2004 standards
-	 @defgroup spi_pub Public
-	 @defgroup spi_priv Private
+	@ingroup data_communication
+	@brief This is a driver for the SPI bus
+	on the ATMEGA family processors.
+	@note Complies MISRO 2004 standards
+	@defgroup spi_pub Public
+	@defgroup spi_priv Private
  * @}
  *************************************************************************/
 
@@ -20,11 +21,11 @@
 
 /**********************************************************************//**
  * @ingroup spi_pub
- * @brief Specifies the available modes for SPI transfer format \n
- * * SPI_MODE_0: Polarity positive, trigger rising edge \n
- * * SPI_MODE_1: Polarity positive, trigger falling edge \n
- * * SPI_MODE_2: Polarity negative, trigger rising edge \n
- * * SPI_MODE_3: Polarity negative, trigger falling edge \n
+ * @brief Specifies the available modes for SPI transfer format
+ * - SPI_MODE_0: Polarity positive, trigger rising edge
+ * - SPI_MODE_1: Polarity positive, trigger falling edge
+ * - SPI_MODE_2: Polarity negative, trigger rising edge
+ * - SPI_MODE_3: Polarity negative, trigger falling edge
  *************************************************************************/
 typedef enum {
 	SPI_MODE_0 = 0,

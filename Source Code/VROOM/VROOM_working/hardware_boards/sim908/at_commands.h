@@ -1,14 +1,15 @@
 /**********************************************************************//**
- * @file: at_commands.h
+ * @file at_commands.h
  *
- * @Created: 01-10-2014 00:20:07
- * @Author: Andi Degn
- * @Version: 0.8
+ * @created 01-10-2014 00:20:07
+ * @author Andi Degn
+ * @version 0.8
  * @defgroup at AT Commands
  * @{
-	 This is a header containing all the most
-	 relevant AT commands for this system
-	 @note NOT YET Complies MISRO 2004 standards
+	@ingroup hardware_boards
+	@brief This is a header containing all the most
+	relevant AT commands for this system
+	@note NOT YET Complies MISRO 2004 standards
  * @}
  *************************************************************************/
 

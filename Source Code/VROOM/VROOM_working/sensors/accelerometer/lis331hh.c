@@ -1,17 +1,5 @@
 /**********************************************************************//**
  * @file: lis331hh.c
- *
- * @Created: 01-09-2014 09:22:18
- * @Author: Andi Degn
- * @Version: 0.2
- * @defgroup acc LIS331HH
- * @{
-	 This is a driver for the accelerometer LIS331HH
-	 on the ATMEGA family processors.
-	 @defgroup acc_priv Private
-	 @defgroup acc_pub Public
- * @}
- * @note Complies MISRO 2004 standards
  *************************************************************************/
 #include <avr/interrupt.h>
 
@@ -20,11 +8,18 @@
 #include "../sensor_scheduler.h"
 #include <util/delay.h>
 
-/* visually calibrated */
+/**********************************************************************//**
+ * @ingroup acc_priv
+ * @brief Define for the scale factor to get calibrated output for 1g gravity
+ * This is visually calibrated to stationary have unit vector (1g).
+ * The mathematically calculated value is:
+ * Full-scale g/(2^16) = 12/(2^16) = 0.00018310546875
+ *
+ * @defgroup acc_scale_factor Scale Factor
+ * @{
+ *************************************************************************/
 #define ACC_SCALE_FACTOR 0.00017
-
-/* Full-scale g/(2^16) = 12/(2^16) */
-//#define ACC_SCALE_FACTOR 0.00018310546875
+/** @} */
 
 /* states for state machine */
 typedef enum {
@@ -33,6 +28,8 @@ typedef enum {
 } ACC_STATE;
 
 /* local variables */
+static uint8_t _scale_multiplier = 1;	/* Multiplier for the scale factor */
+
 static int16_t _x_axis = 0;
 static int16_t _y_axis = 0;
 static int16_t _z_axis = 0;
@@ -50,6 +47,11 @@ static void _acc_read_from_reg(uint8_t __reg, uint8_t __no_of_dummy_bytes);
 /**********************************************************************//**
  * @ingroup acc_pub
  * Sets up the SPI and writes the setup parameters to the accelerometer chip
+ * Sending configuration data to the accelerometer using multi-write.
+ * index 0 : address and multiple byte data bit
+ * index 1-5 : data for the different control registers
+ *
+ * @Note: Further information can be found on pages 24-28 in the datasheet
  **************************************************************************/
 void acc_init(uint8_t __cs_pin, ACC_POWER_MODE __power_mode, ACC_OUTPUT_DATA_RATE __output_data_rate, ACC_FULL_SCALE __full_scale) {
 
@@ -76,11 +78,11 @@ void acc_init(uint8_t __cs_pin, ACC_POWER_MODE __power_mode, ACC_OUTPUT_DATA_RAT
 	_send_setup[4] = 0;
 	_send_setup[5] = 0;
 
-	/* sending configuration data to the accelerometer using multi-write.
-		index 0 : address and multiple byte data bit
-		index 1-5 : data for the different control registers
-		Note: Further information can be found on pages 24-28 in the datasheet
-	*/
+	if (__full_scale == ACC_12G) {
+		_scale_multiplier = 2;
+	} else if (__full_scale == ACC_24G) {
+		_scale_multiplier = 4;
+	}
 
 	_send_setup[0] = ACC_CTRL_REG1 | _BV(ACC_MULTI_BIT);
 	_send_setup[1] = __power_mode | __output_data_rate | _BV(ACC_Xen) | _BV(ACC_Yen) | _BV(ACC_Zen);
@@ -105,15 +107,17 @@ void acc_measure(void) {
  * Sends seven bytes to the SPI. First byte with the command.
  * The command is a constructed like so:
  * Bit0 - RW: Read/Write
- * * Read: 1
- * * Write: 0
+ * - Read: 1
+ * - Write: 0
  *
  * Bit1 - MS: Multi/Single
- * * Multi: 1
- * * SIngle:0
+ * - Multi: 1
+ * - SIngle:0
  *
  * Bit2-7 - Address
+ * ----------------
  * |bit7|bit6|bit5|bit4|bit3|bit2|bit1|bit0|
+ * |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
  * | RW | MS |ADR5|ADR4|ADR3|ADR2|ADR1|ADR0|
  *
  * @param uint8_t reg - the register in the acc to write to
@@ -135,7 +139,7 @@ static void _acc_read_from_reg(uint8_t reg, uint8_t no_of_dummy_bytes) {
  * Returns the x axis value multiplied with the scale factor
  **************************************************************************/
 float acc_get_x_axis(void) {
-	return _x_axis * ACC_SCALE_FACTOR;
+	return _x_axis * ACC_SCALE_FACTOR * _scale_multiplier;
 }
 
 /**********************************************************************//**
@@ -143,7 +147,7 @@ float acc_get_x_axis(void) {
  * Returns the y axis value multiplied with the scale factor
  **************************************************************************/
 float acc_get_y_axis(void) {
-	return _y_axis * ACC_SCALE_FACTOR;
+	return _y_axis * ACC_SCALE_FACTOR * _scale_multiplier;
 }
 
 /**********************************************************************//**
@@ -151,7 +155,7 @@ float acc_get_y_axis(void) {
  * Returns the z axis value multiplied with the scale factor
  **************************************************************************/
 float acc_get_z_axis(void) {
-	return _z_axis * ACC_SCALE_FACTOR;
+	return _z_axis * ACC_SCALE_FACTOR * _scale_multiplier;
 }
 
 /**********************************************************************//**

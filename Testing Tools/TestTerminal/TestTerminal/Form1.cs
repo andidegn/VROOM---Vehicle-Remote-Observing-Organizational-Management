@@ -185,26 +185,28 @@ namespace TestTerminal {
                       select c).Count();
 
             if (cnt == 8 && p[3] != '.') {
-                string[] sloc_arr = p.Split(',');
+                try {
+                    string[] sloc_arr = p.Split(',');
 
-                String longitude_deg_st = sloc_arr[2].Substring(0, sloc_arr[2].IndexOf('.') - 2);
-                String latitude_deg_st = sloc_arr[1].Substring(0, sloc_arr[1].IndexOf('.') - 2);
+                    String longitude_deg_st = sloc_arr[2].Substring(0, sloc_arr[2].IndexOf('.') - 2);
+                    String latitude_deg_st = sloc_arr[1].Substring(0, sloc_arr[1].IndexOf('.') - 2);
 
-                double longitude_min_dec = double.Parse(sloc_arr[2].Substring(sloc_arr[2].IndexOf('.') - 2), CultureInfo.CreateSpecificCulture("en-US"));
-                double latitude_min_dec = double.Parse(sloc_arr[1].Substring(sloc_arr[1].IndexOf('.') - 2), CultureInfo.CreateSpecificCulture("en-US"));
-                
-                int long_deg = int.Parse(longitude_deg_st);
-                int lat_deg = int.Parse(latitude_deg_st);
+                    double longitude_min_dec = double.Parse(sloc_arr[2].Substring(sloc_arr[2].IndexOf('.') - 2), CultureInfo.CreateSpecificCulture("en-US"));
+                    double latitude_min_dec = double.Parse(sloc_arr[1].Substring(sloc_arr[1].IndexOf('.') - 2), CultureInfo.CreateSpecificCulture("en-US"));
 
-                double long_rl = long_deg + longitude_min_dec / 60;
-                double lat_rl = lat_deg + latitude_min_dec / 60;
+                    int long_deg = int.Parse(longitude_deg_st);
+                    int lat_deg = int.Parse(latitude_deg_st);
 
-                tbx_long.Text = long_rl.ToString();
-                tbx_lat.Text = lat_rl.ToString();
+                    double long_rl = long_deg + longitude_min_dec / 60;
+                    double lat_rl = lat_deg + latitude_min_dec / 60;
 
-                if (chk_map.Checked) {
-                    _update_map();
-                }
+                    tbx_long.Text = long_rl.ToString();
+                    tbx_lat.Text = lat_rl.ToString();
+
+                    if (chk_map.Checked) {
+                        _update_map();
+                    }
+                } catch {}
             }
 
             
@@ -231,7 +233,11 @@ namespace TestTerminal {
 
             } else if (_skip_no_of_receptions <= 0) {
                 rtb_terminal.AppendText((p != "\r" ? DateTime.Now.ToString("[dd-MM-yyyy HH:mm:ss] ") : ""), _color_timestamp);
-                rtb_terminal.AppendText(p, _color_text);
+                if (p.StartsWith("rx:> NOT")) {
+                    rtb_terminal.AppendText(p, Color.Red);
+                } else {
+                    rtb_terminal.AppendText(p, _color_text);
+                }
                 rtb_terminal.ScrollToCaret();
 
                 if (p.Contains("RING")) {

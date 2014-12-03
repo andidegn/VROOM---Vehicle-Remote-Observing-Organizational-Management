@@ -1,17 +1,18 @@
 /**********************************************************************//**
- * @file: accelerometer.h
+ * @file accelerometer.h
  *
- * @Created: 01-09-2014 09:22:18
- * @Author: Andi Degn
- * @Version: 0.2
+ * @created 01-09-2014 09:22:18
+ * @author Andi Degn
+ * @version 0.3
  * @defgroup acc LIS331HH
  * @{
-	 This is a driver for the accelerometer LIS331HH
-	 on the ATMEGA family processors.
-	 @defgroup acc_priv Private
-	 @defgroup acc_pub Public
+	@ingroup sensors
+	@brief This is a driver for the accelerometer LIS331HH
+	on the ATMEGA family processors.
+	@note Complies MISRO 2004 standards
+	@defgroup acc_pub Public
+	@defgroup acc_priv Private
  * @}
- * @note Complies MISRO 2004 standards
  *************************************************************************/
 
 #ifndef AIRCRAFT_H_
@@ -19,7 +20,12 @@
 
 #include <avr/io.h>
 
-/* @define Defines all the control registers and the specific pins */
+/**********************************************************************//**
+ * @ingroup acc_pub
+ * @brief Defines for all the control registers and the specific bits
+ * @defgroup ctrl_reg Control Registers
+ * @{
+ *************************************************************************/
 #define ACC_CTRL_REG1	0x20
 #define ACC_Xen			0
 #define ACC_Yen			1
@@ -63,21 +69,22 @@
 #define ACC_TurnOn0		0
 #define ACC_TurnOn1		1
 
-#define ACC_READ_BIT 7
-#define ACC_MULTI_BIT 6
+#define ACC_READ_BIT	7
+#define ACC_MULTI_BIT	6
+/** @} */
 
 /**********************************************************************//**
  * @ingroup acc_pub
- * @brief Specifies the available power modes \n
- *							Output data rate: \n
- * * ACC_POWER_DOWN		: -- \n
- * * ACC_NORMAL_MODE	: ODR \n
- * * ACC_LOW_POWER_0_5	: 0.5 Hz \n
- * * ACC_LOW_POWER_1	: 1 Hz \n
- * * ACC_LOW_POWER_2	: 2 Hz \n
- * * ACC_LOW_POWER_5	: 5 Hz \n
- * * ACC_LOW_POWER_10	: 10 Hz \n
- * @code
+ * @brief Specifies the available power modes
+ * |Output data rate  |  frq  |
+ * |:-----------------|:-----:|
+ * |ACC_POWER_DOWN	  |  ---  |
+ * |ACC_NORMAL_MODE	  |  ODR  |
+ * |ACC_LOW_POWER_0_5 |0.5 Hz |
+ * |ACC_LOW_POWER_1	  |  1 Hz |
+ * |ACC_LOW_POWER_2	  |  2 Hz |
+ * |ACC_LOW_POWER_5	  |  5 Hz |
+ * |ACC_LOW_POWER_10  | 10 Hz |
  *************************************************************************/
 typedef enum {
 	ACC_POWER_DOWN		= 0,
@@ -91,13 +98,13 @@ typedef enum {
 
 /**********************************************************************//**
  * @ingroup acc_pub
- * @brief Specifies the available Data Output Rates \n
- *					Output data rate| LP Cut-off \n
- * * ACC_ODR_50		:         50 Hz |     37 Hz \n
- * * ACC_ODR_100	:        100 Hz |     74 Hz \n
- * * ACC_ODR_400	:        400 Hz |    292 Hz \n
- * * ACC_ODR_1000	:       1000 Hz |    780 Hz \n
- * @code
+ * @brief Specifies the available Data Output Rates
+ * |             |Output data rate| LP Cut-off|
+ * |:------------|:--------------:|:---------:|
+ * |ACC_ODR_50	 |          50 Hz |     37 Hz |
+ * |ACC_ODR_100	 |         100 Hz |     74 Hz |
+ * |ACC_ODR_400	 |         400 Hz |    292 Hz |
+ * |ACC_ODR_1000 |        1000 Hz |    780 Hz |
  *************************************************************************/
 typedef enum {
 	ACC_ODR_50		= 0,
@@ -110,7 +117,6 @@ typedef enum {
  * @ingroup acc_pub
  * @brief Specifies the available High-pass filter cut-off frequency configuration \n
  * Look in datasheet page 24 for further information.
- * @code
  *************************************************************************/
 typedef enum {
 	ACC_HPcoeff00	= 0,
@@ -126,7 +132,6 @@ typedef enum {
  * * ACC_6G	 :  +-6g
  * * ACC_12G : +-12g
  * * ACC_24G : +-24g
- * @code
  *************************************************************************/
 typedef enum {
 	ACC_6G	= 0,
@@ -137,6 +142,7 @@ typedef enum {
 /**********************************************************************//**
  * @ingroup acc_pub
  * @brief Initializes the driver
+ *
  * @param uint8_t cs_pin - chip select pin
  * @param ACC_POWER_MODE power_mode - accelerometer power mode
  * @param ACC_OUTPUT_DATA_RATE output_data_rate - the rate the data is updated
@@ -144,11 +150,16 @@ typedef enum {
  *
  * @return void
  *************************************************************************/
-void acc_init(uint8_t cs_pin, ACC_POWER_MODE power_mode, ACC_OUTPUT_DATA_RATE output_data_rate, ACC_FULL_SCALE full_scale);
+void acc_init(uint8_t cs_pin,
+			  ACC_POWER_MODE power_mode,
+			  ACC_OUTPUT_DATA_RATE output_data_rate,
+			  ACC_FULL_SCALE full_scale);
 
 /**********************************************************************//**
  * @ingroup acc_pub
  * @brief Starts one measure routine
+ *
+ * @param void
  *
  * @return void
  *************************************************************************/
@@ -158,6 +169,8 @@ void acc_measure(void);
  * @ingroup acc_pub
  * @brief Gets the latest measured x axis value
  *
+ * @param void
+ *
  * @return float - the acceleration in g [N/Kg] Range: -1 < x < 1
  *************************************************************************/
 float acc_get_x_axis(void);
@@ -166,6 +179,8 @@ float acc_get_x_axis(void);
  * @ingroup acc_pub
  * @brief Gets the latest measured y axis value
  *
+ * @param void
+ *
  * @return float - the acceleration in g [N/Kg] Range: -1 < x < 1
  *************************************************************************/
 float acc_get_y_axis(void);
@@ -173,6 +188,8 @@ float acc_get_y_axis(void);
 /**********************************************************************//**
  * @ingroup acc_pub
  * @brief Gets the latest measured z axis value
+ *
+ * @param void
  *
  * @return float - the acceleration in g [N/Kg] Range: -1 < x < 1
  *************************************************************************/

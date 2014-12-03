@@ -1,4 +1,4 @@
-.TH "Public" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -23,9 +23,7 @@ Public \-
 .ti -1c
 .RI "enum \fBUART_MODE\fP { \fBUART_MODE_NORMAL\fP, \fBUART_MODE_DOUBLE\fP }"
 .br
-.RI "\fIdefines for the mode of operations 
-.br
-\fP"
+.RI "\fIdefines for the mode of operations \fP"
 .ti -1c
 .RI "enum \fBUART_PARITY_MODE\fP { \fBUART_PARITY_DISABLED\fP = 0, \fBUART_PARITY_ENABLED\fP = _BV(4), \fBUART_PARITY_EN_EVEN\fP = _BV(5), \fBUART_PARITY_EN_ODD\fP = _BV(4) | _BV(5) }"
 .br
@@ -128,7 +126,7 @@ defines for the different baud rates
 .TP
 \fB\fIUART_BAUD_921K6 \fP\fP
 .PP
-Definition at line 105 of file uart\&.h\&.
+Definition at line 107 of file uart\&.h\&.
 .SS "enum \fBUART_CHAR_SIZE\fP"
 
 .PP
@@ -147,29 +145,19 @@ defines for the character size
 .TP
 \fB\fIUART_9_BIT \fP\fP
 .PP
-Definition at line 93 of file uart\&.h\&.
+Definition at line 95 of file uart\&.h\&.
 .SS "enum \fBUART_MODE\fP"
 
 .PP
 defines for the mode of operations 
-.br
-
 .IP "\(bu" 2
-UART_MODE_NORMAL : Asynchronous at normal speed 
-.br
-
+UART_MODE_NORMAL : Asynchronous at normal speed
 .IP "\(bu" 2
-UART_MODE_DOUBLE : Asynchronous at double speed 
-.br
-
+UART_MODE_DOUBLE : Asynchronous at double speed
 .IP "\(bu" 2
-UART_MODE_SYNC : Synchronous (NOT SUPPORTED YET) 
-.br
-
+UART_MODE_SYNC : Synchronous (NOT SUPPORTED YET)
 .IP "\(bu" 2
 UART_MODE_MSPIM : SPI Master (NOT SUPPORTED YET) 
-.br
-
 .PP
 
 .PP
@@ -180,7 +168,7 @@ UART_MODE_MSPIM : SPI Master (NOT SUPPORTED YET)
 .TP
 \fB\fIUART_MODE_DOUBLE \fP\fP
 .PP
-Definition at line 64 of file uart\&.h\&.
+Definition at line 66 of file uart\&.h\&.
 .SS "enum \fBUART_PARITY_MODE\fP"
 
 .PP
@@ -197,7 +185,7 @@ defines for the parity bit selection
 .TP
 \fB\fIUART_PARITY_EN_ODD \fP\fP
 .PP
-Definition at line 73 of file uart\&.h\&.
+Definition at line 75 of file uart\&.h\&.
 .SS "enum \fBUART_STOP_BIT\fP"
 
 .PP
@@ -210,7 +198,7 @@ defines for the stop bit selection
 .TP
 \fB\fIUART_TWO_STOP_BIT \fP\fP
 .PP
-Definition at line 84 of file uart\&.h\&.
+Definition at line 86 of file uart\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "uint16_t uart0_read_char (void)"
@@ -230,7 +218,7 @@ uint16_t - next char(byte) in the buffer
 .PP
 
 .PP
-Definition at line 193 of file uart\&.c\&.
+Definition at line 200 of file uart\&.c\&.
 .SS "void uart0_send_char (char__data)"
 
 .PP
@@ -248,7 +236,7 @@ void
 .PP
 
 .PP
-Definition at line 152 of file uart\&.c\&.
+Definition at line 159 of file uart\&.c\&.
 .SS "void uart0_send_data (const char *__data, uint8_t__length)"
 
 .PP
@@ -258,7 +246,12 @@ Sends data (based on length) of 'data' on the UART bus\&. Loops through the 'dat
 .RS 4
 \fIconst\fP char *__data - data to be sent 
 .br
-\fIuint8_t\fP __length - number of bytes 
+\fIuint8_t\fP __length - number of bytes
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void
 .RE
 .PP
 \fBNote:\fP
@@ -266,14 +259,9 @@ Sends data (based on length) of 'data' on the UART bus\&. Loops through the 'dat
 Does not terminates when zero character is meet 
 .RE
 .PP
-\fBReturns:\fP
-.RS 4
-void 
-.RE
-.PP
 
 .PP
-Definition at line 183 of file uart\&.c\&.
+Definition at line 190 of file uart\&.c\&.
 .SS "void uart0_send_string (const char *__data)"
 
 .PP
@@ -291,11 +279,47 @@ void
 .PP
 
 .PP
-Definition at line 171 of file uart\&.c\&.
+Definition at line 178 of file uart\&.c\&.
 .SS "void uart0_setup_async (\fBUART_MODE\fP__operational_mode, \fBUART_BAUD\fP__baud_rate, \fBUART_PARITY_MODE\fP__paraty_mode, \fBUART_STOP_BIT\fP__stop_bit, \fBUART_CHAR_SIZE\fP__char_size, void(*)(char __data)__callback_function_ptr)"
 
 .PP
 Sets up the UART0 bus as asynchronous using supplied parameters\&. Takes the supplied UART parameters and sets up the UART accordingly
+.PP
+.SS "Register: UCSR0B "
+.PP
+Bit 7 6 5 4 3 2 1 0 (0xC1) RXCIE0TXCIE0UDRIE0RXEN0TXEN0UCSZ02RXB80TXB80UCSR0B Direction R/W R/W R/W R/W R/W R/W R/W R/W 
+.IP "\(bu" 2
+Bit 7 - RXCIE0: RX Complete Interrupt Enable
+.IP "\(bu" 2
+Bit 6 - TXCIE0: TX Complete Interrupt Enable
+.IP "\(bu" 2
+Bit 5 - UDRIE0: UART Data Register Empty Interrupt Enable
+.IP "\(bu" 2
+Bit 4 - RXEN0: Receiver Enable
+.IP "\(bu" 2
+Bit 3 - TXEN0: Transmitter Enable
+.IP "\(bu" 2
+Bit 2 - UCSZ02: Character Size
+.IP "\(bu" 2
+Bit 1 - RXB80: Receive Data Bit 8
+.IP "\(bu" 2
+Bit 0 - TXB80: Transmit Data Bit 8
+.PP
+.PP
+.SS "Register: UCSR0C "
+.PP
+Bit 7 6 5 4 3 2 1 0 (0xC2) UMSEL01UMSEL00UPM01UPM00USBS0UCSZ01UCSZ00UCPOL0UCSR0C Direction R/W R/W R/W R/W R/W R/W R/W R/W 
+.IP "\(bu" 2
+Bits 7:6 - UMSEL01:0 UART Mode Select
+.IP "\(bu" 2
+Bits 5:4 - UPM01:0: Parity Mode
+.IP "\(bu" 2
+Bit 3 - USBS0: Stop Bit Select
+.IP "\(bu" 2
+Bits 2:1 - UCSZ01:0: Character Size
+.IP "\(bu" 2
+Bit 0 - UCPOL0: Clock Polarity
+.PP
 .PP
 \fBParameters:\fP
 .RS 4
@@ -324,7 +348,7 @@ uint8_t - a handle for the setup
 .PP
 
 .PP
-Definition at line 54 of file uart\&.c\&.
+Definition at line 83 of file uart\&.c\&.
 .SS "uint16_t uart1_read_char (void)"
 
 .PP
@@ -342,7 +366,7 @@ uint16_t - next char(byte) in the buffer
 .PP
 
 .PP
-Definition at line 378 of file uart\&.c\&.
+Definition at line 390 of file uart\&.c\&.
 .SS "void uart1_send_char (char__data)"
 
 .PP
@@ -360,7 +384,7 @@ void
 .PP
 
 .PP
-Definition at line 337 of file uart\&.c\&.
+Definition at line 349 of file uart\&.c\&.
 .SS "void uart1_send_data (const char *__data, uint8_t__length)"
 
 .PP
@@ -370,12 +394,7 @@ Sends data (based on length) of 'data' on the UART bus\&. Loops through the 'dat
 .RS 4
 \fIconst\fP char *__data - data to be sent 
 .br
-\fIuint8_t\fP __length - number of bytes 
-.RE
-.PP
-\fBNote:\fP
-.RS 4
-Does not terminates when zero character is meet 
+\fIuint8_t\fP __length - number of bytes
 .RE
 .PP
 \fBReturns:\fP
@@ -383,9 +402,14 @@ Does not terminates when zero character is meet
 void 
 .RE
 .PP
+\fBNote:\fP
+.RS 4
+Does not terminate when zero character is meet 
+.RE
+.PP
 
 .PP
-Definition at line 368 of file uart\&.c\&.
+Definition at line 380 of file uart\&.c\&.
 .SS "void uart1_send_string (const char *__data)"
 
 .PP
@@ -403,11 +427,46 @@ void
 .PP
 
 .PP
-Definition at line 356 of file uart\&.c\&.
+Definition at line 368 of file uart\&.c\&.
 .SS "void uart1_setup_async (\fBUART_MODE\fP__operational_mode, \fBUART_BAUD\fP__baud_rate, \fBUART_PARITY_MODE\fP__paraty_mode, \fBUART_STOP_BIT\fP__stop_bit, \fBUART_CHAR_SIZE\fP__char_size, void(*)(char __data)__callback_function_ptr)"
 
 .PP
-Sets up the UART1 bus as asynchronous using supplied parameters\&. Takes the supplied UART parameters and sets up the UART accordingly
+Sets up the UART1 bus as asynchronous using supplied parameters\&. Takes the supplied UART parameters and sets up the UART accordingly 
+.SS "Register: UCSR1B "
+.PP
+Bit 7 6 5 4 3 2 1 0 (0xC9) RXCIE1TXCIE1UDRIE1RXEN1TXEN1UCSZ12RXB81TXB81UCSR1B Direction R/W R/W R/W R/W R/W R/W R/W R/W 
+.IP "\(bu" 2
+Bit 7 - RXCIE1: RX Complete Interrupt Enable
+.IP "\(bu" 2
+Bit 6 - TXCIE1: TX Complete Interrupt Enable
+.IP "\(bu" 2
+Bit 5 - UDRIE1: UART Data Register Empty Interrupt Enable
+.IP "\(bu" 2
+Bit 4 - RXEN1: Receiver Enable
+.IP "\(bu" 2
+Bit 3 - TXEN1: Transmitter Enable
+.IP "\(bu" 2
+Bit 2 - UCSZ12: Character Size
+.IP "\(bu" 2
+Bit 1 - RXB81: Receive Data Bit 8
+.IP "\(bu" 2
+Bit 0 - TXB81: Transmit Data Bit 8
+.PP
+.PP
+.SS "Register: UCSR1C "
+.PP
+Bit 7 6 5 4 3 2 1 0 (0xCA) UMSEL11UMSEL10UPM11UPM10USBS1UCSZ11UCSZ10UCPOL1UCSR1C Direction R/W R/W R/W R/W R/W R/W R/W R/W 
+.IP "\(bu" 2
+Bits 7:6 - UMSEL11:0 UART Mode Select
+.IP "\(bu" 2
+Bits 5:4 - UPM11:0: Parity Mode
+.IP "\(bu" 2
+Bit 3 - USBS1: Stop Bit Select
+.IP "\(bu" 2
+Bits 2:1 - UCSZ11:0: Character Size
+.IP "\(bu" 2
+Bit 0 - UCPOL1: Clock Polarity
+.PP
 .PP
 \fBParameters:\fP
 .RS 4
@@ -436,7 +495,7 @@ uint8_t - a handle for the setup
 .PP
 
 .PP
-Definition at line 242 of file uart\&.c\&.
+Definition at line 277 of file uart\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

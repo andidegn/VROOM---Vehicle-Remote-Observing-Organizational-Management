@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>VROOM: Main Page</title>
+<title>VROOM: Vroom Project</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('index.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -98,15 +98,857 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">VROOM Documentation</div>  </div>
+<div class="title">Vroom Project </div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><h1><a class="anchor" id="Introduction"></a>
+Introduction</h1>
+<h2><a class="anchor" id="Background"></a>
+Background</h2>
+<p>Nowadays people pay a very steep price for mobility. In Europe alone around 40,000 people die on the roads every year. [ ] Many of the fatalities are not only caused by the crashes themselves, but by the time it takes for help to arrive. The first problem is that someone has to notify the authorities. More often than not the involved people are incapacitated and therefore incapable of doing this, so a third party has to do this. Time is wasted. Next problem arises when the emergency operator needs to collect the required information; it can be challenging for the operator to retrieve the information from a random caller. A protocol is needed. Lastly, the operator needs to dispatch the proper emergency response. A pan-European project called HeERO [ ], addresses an in-vehicle emergency call services based on the common European Emergency number, 112. HeERO is a group of European pilots who develop, implement and tests the infrastructure and standards. This becomes both the service and an IVS (In-Vehicle System) called eCall. At this moment HeERO is in the final stage of phase 2, where Denmark is one out of 15 countries involved in testing and validating the standards in real conditions. eCall addresses standards for third parties as well, but as HeERO project is not yet completed, things might change and some are still undefined. The 13th of June 2013 the EU passed a legislation that will ensure that from October 2015 all new passenger cars and light duty vehicles will be fitted with eCall.[ ] The IVS in this project will make it possible for people with pre-2015 cars to have the same opportunity and the same safety net as eCall provides with an aftermarket solution.</p>
+<h1><a class="anchor" id="Changelog"></a>
+Changelog</h1>
+<hr/>
+ <h1>Version 0.162 - 2014/12/03 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Following files has been doxygen commented/proofed and should be ready for MISRA check:<ul>
+<li><a class="el" href="accident__data_8h.html">accident_data.h</a></li>
+<li><a class="el" href="accident__data_8c.html">accident_data.c</a></li>
+<li><a class="el" href="accident__detection_8h.html">accident_detection.h</a></li>
+<li><a class="el" href="accident__detection_8c.html">accident_detection.c</a></li>
+<li><a class="el" href="spi_8h.html">spi.h</a></li>
+<li><a class="el" href="spi_8c.html">spi.c</a></li>
+<li><a class="el" href="uart_8h.html">uart.h</a></li>
+<li><a class="el" href="uart_8c.html">uart.c</a></li>
+<li><a class="el" href="car__panel_8h.html">car_panel.h</a></li>
+<li><a class="el" href="car__panel_8c.html">car_panel.c</a></li>
+<li><a class="el" href="at__commands_8h.html">at_commands.h</a></li>
+<li><a class="el" href="sim908_8h.html">sim908.h</a></li>
+<li><a class="el" href="sim908_8c.html">sim908.c</a></li>
+<li><a class="el" href="lis331hh_8h.html">lis331hh.h</a></li>
+<li><a class="el" href="lis331hh_8c.html">lis331hh.c</a></li>
+<li><a class="el" href="tc72_8h.html">tc72.h</a></li>
+<li><a class="el" href="tc72_8c.html">tc72.c</a></li>
+<li>sensor_acheduler.h</li>
+<li><a class="el" href="vroom__config_8h.html">vroom_config.h</a></li>
+</ul>
+</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Added additional debug option in <a class="el" href="sim908_8c.html">sim908.c</a>. Can be enabled in <a class="el" href="vroom__config_8h.html">vroom_config.h</a></li>
+<li>Tweaked uart communication with sim908 module for smooth and error free operation</li>
+<li>Tested different sensor reading/accident detection frequencies, 50Hz seems to be stable</li>
+<li>Running endurance test sending crash report (~2500 successful reports so far)</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Impl. module test for car panel</li>
+<li>Impl. unit test for MSD</li>
+<li>Doxygen structure proofing in all files</li>
+<li>Notes SIM908:<ul>
+<li>If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)</li>
+</ul>
+</li>
+</ul>
+<hr/>
+ <h1>Version 0.161 - 2014/12/01 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Following files has been doxygen commented/proofed and should be ready for MISRA check:<ul>
+<li><a class="el" href="accident__data_8h.html">accident_data.h</a></li>
+<li><a class="el" href="accident__data_8c.html">accident_data.c</a></li>
+<li><a class="el" href="accident__detection_8h.html">accident_detection.h</a></li>
+<li><a class="el" href="accident__detection_8c.html">accident_detection.c</a></li>
+<li><a class="el" href="spi_8h.html">spi.h</a></li>
+<li><a class="el" href="spi_8c.html">spi.c</a></li>
+<li><a class="el" href="uart_8h.html">uart.h</a></li>
+<li><a class="el" href="uart_8c.html">uart.c</a></li>
+<li><a class="el" href="car__panel_8h.html">car_panel.h</a></li>
+<li><a class="el" href="car__panel_8c.html">car_panel.c</a></li>
+<li><a class="el" href="at__commands_8h.html">at_commands.h</a></li>
+<li><a class="el" href="sim908_8h.html">sim908.h</a></li>
+<li><a class="el" href="sim908_8c.html">sim908.c</a></li>
+<li><a class="el" href="vroom__config_8h.html">vroom_config.h</a></li>
+</ul>
+</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Removed ISR block and global interrupt disable in <a class="el" href="car__panel_8c.html">car_panel.c</a> to fix blocking bug if alarm is triggered before connection to isp is established</li>
+<li>Minor stability changes in <a class="el" href="sim908_8c.html">sim908.c</a></li>
+<li>Moved and renamed TEMPERATURE_INITIAL to <a class="el" href="vroom__config_8h.html">vroom_config.h</a> to fix first read = 0, which sometimes triggered alarm on startup</li>
+<li>Fixed unstable and unreliable communication with sim908 module by pausing timers when waiting for AT reaponse</li>
+<li>Changed accident_detection_start/stop to start/stop both timers (same fucntion is used to fix unreliable communication with sim908 module)</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Impl. module test for car panel</li>
+<li>Impl. unit test for MSD</li>
+<li>Doxygen structure proofing in all files</li>
+<li>Notes SIM908:<ul>
+<li>If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)</li>
+</ul>
+</li>
+</ul>
+<hr/>
+ <h1>Version 0.160 - 2014/12/01 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added <a class="el" href="accident__detection_8h.html">accident_detection.h</a>/ <a class="el" href="accident__detection_8c.html">accident_detection.c</a> and added check_for_fire() function</li>
+<li>Added <a class="el" href="group__ss__pub.html#ga050a2bb492b620922ab7b0ade776c88a" title="Returns the last temperature reading. ">scheduler_temp_get_last_reading()</a> function in <a class="el" href="sensor__scheduler_8h.html">sensor_scheduler.h</a>/ <a class="el" href="sensor__scheduler_8c.html">sensor_scheduler.c</a></li>
+<li>Added timer to control check of accidents and added parameters in vroom.config.h</li>
+<li>Added extern variables to record sensor data used for MSD (temperature and acceleration) and changed the structure, so it now sends the values together with MSD</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Removed some warnings in several files</li>
+<li>Renamed function names in <a class="el" href="sensor__scheduler_8h.html">sensor_scheduler.h</a>/ <a class="el" href="sensor__scheduler_8c.html">sensor_scheduler.c</a> and <a class="el" href="accident__data_8h.html">accident_data.h</a>/ <a class="el" href="accident__data_8c.html">accident_data.c</a> and renamed the defines in <a class="el" href="vroom__config_8h.html">vroom_config.h</a></li>
+<li>Moved check_for_crash() into accident_detection file</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Impl. module test for car panel</li>
+<li>Impl. unit test for MSD</li>
+<li>Doxygen structure proofing in all files</li>
+<li>Notes SIM908:<ul>
+<li>If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)</li>
+</ul>
+</li>
+</ul>
+<hr/>
+ <h1>Version 0.150 - 2014/11/29 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added scheduler_get_last_readings_sum() function in <a class="el" href="sensor__scheduler_8h.html">sensor_scheduler.h</a>/ <a class="el" href="sensor__scheduler_8c.html">sensor_scheduler.c</a> for getting a predifined number of readings for crash detection. Number is defined in <a class="el" href="vroom__config_8h.html">vroom_config.h</a></li>
+<li>Added <a class="el" href="group__ac__det__pub.html#ga21c7ffc49f578e74626c032867cea479" title="Checks if a crash has occurred. ">ad_check_for_crash()</a> function in <a class="el" href="accident__data_8h.html">accident_data.h</a>/ <a class="el" href="accident__data_8c.html">accident_data.c</a> containing crash detection logic. Parameters for detection (threashold / no. of readings to check over) is contained in <a class="el" href="vroom__config_8h.html">vroom_config.h</a></li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Changed the way CREG is read to speed up the ISR in <a class="el" href="sim908_8c.html">sim908.c</a>. This include changes in the way CREG is checked and the enum in which the different CREG states is held is moved to at_commands.c to conform with convention</li>
+<li>Fixed false CREG connection status if "AT+CREG?" was sent</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Impl. module test for car panel</li>
+<li>Impl. unit test for MSD</li>
+<li>Doxygen structure proofing in all files</li>
+<li>Notes SIM908:<ul>
+<li>If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)</li>
+</ul>
+</li>
+</ul>
+<hr/>
+ <h1>Version 0.141 - 2014/11/28 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added DEBUG_LCD define in vroom.config and added check where needed</li>
+<li>Added template for module_test_car_panel</li>
+<li>Cleaned for unused code</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Baudrate in SIM908 is set as the first thing as the reseting behaviour of the module is unpredictible (based on experience)</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Impl. module test for car panel</li>
+<li>Impl. unit test for MSD</li>
+<li>Accident algoritm</li>
+<li>Doxygen structure proofing in all files</li>
+<li>Notes SIM908:<ul>
+<li>If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)</li>
+</ul>
+</li>
+</ul>
+<hr/>
+ <h1>Version 0.140 - 2014/11/24 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>New structure of MSD:<ul>
+<li>Added Version, Message Identifier, Vehicle Class and Fuel Type definitions</li>
+<li>Deleted IPV4.</li>
+</ul>
+</li>
+<li>Added parameters for MSD into VROOM.config.h</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>IP is no longer relevant as new eCall standard for MSD has deleminated this</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Split up module test in individual files</li>
+<li>Module test for car panel needed</li>
+<li>Doxygen structure proofing in all files</li>
+<li>Notes SIM908:<ul>
+<li>If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)</li>
+</ul>
+</li>
+</ul>
+<hr/>
+ <h1>Version 0.131 - 2014/11/21 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added AT command to activate PDP context. The status must be 'Call Ready' before it can be activated</li>
+<li>Added AT command to get the sevice provider IPV4. Needs to be added in MSD</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Fixed bug in _check_response in sim908 (strlen() used instead of sizeof() in array).</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Split up module test in individual files</li>
+<li>Module test for car panel needed</li>
+<li>Doxygen structure proofing in all files</li>
+<li>ToDo in SIM908:<ul>
+<li>Get the IP from response</li>
+<li>Check for "Call Ready" response</li>
+</ul>
+</li>
+<li>Problems in SIM908:<ul>
+<li>Sometimes 'O' is missing in the "OK" response (Don't know if this is fixed yet)</li>
+<li>If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)</li>
+</ul>
+</li>
+</ul>
+<hr/>
+ <h1>Version 0.130 - 2014/11/20 by Andi &amp; Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added reset functionality after emergency call in case of false alarm</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Chaneged car_panel functionality structure</li>
+<li>Added doxygen comments in some files</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Split up module test in individual files</li>
+<li>Module test for car panel needed</li>
+<li>Doxygen structure proofing in all files</li>
+<li>Problems in SIM908:<ul>
+<li>Sometimes 'O' is missing in the "OK" response</li>
+<li>CREG is sometimes detected as not connected, even though +CREG: 1</li>
+<li>If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)</li>
+</ul>
+</li>
+</ul>
+<hr/>
+ <h1>Version 0.126 - 2014/11/19 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added UART module test for testing with minunit macro</li>
+<li>Added UART module test section in <a class="el" href="run_8c.html">run.c</a></li>
+<li>Added/proofed Doxygen comments in:<ul>
+<li><a class="el" href="accident__data_8h.html">accident_data.h</a></li>
+<li><a class="el" href="accident__data_8c.html">accident_data.c</a></li>
+<li><a class="el" href="spi_8h.html">spi.h</a></li>
+<li><a class="el" href="spi_8c.html">spi.c</a></li>
+<li><a class="el" href="uart_8h.html">uart.h</a></li>
+<li><a class="el" href="uart_8c.html">uart.c</a></li>
+<li><a class="el" href="car__panel_8h.html">car_panel.h</a></li>
+<li><a class="el" href="car__panel_8c.html">car_panel.c</a></li>
+<li><a class="el" href="at__commands_8h.html">at_commands.h</a></li>
+</ul>
+</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Tweaked startup procedure in <a class="el" href="sim908_8c.html">sim908.c</a>. Module starts up much faster now</li>
+<li>Added system-ready check in <a class="el" href="sim908_8c.html">sim908.c</a> so that startup delay is not nessesary</li>
+<li>Minor change in <a class="el" href="uart_8c.html">uart.c</a>. uartX_read_char() do not try to read from the buffer if a callback is defined</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Split up module test in individual files</li>
+<li>Module test for car panel needed</li>
+<li>Doxygen structure proofing in all files</li>
+</ul>
+<hr/>
+ <h1>Version 0.125 - 2014/11/17 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Car panel init function changed so that it does not enable interrupts. car panel start function added instead</li>
+<li>Doxygen comments added in <a class="el" href="car__panel_8h.html">car_panel.h</a>/ <a class="el" href="car__panel_8c.html">car_panel.c</a>, <a class="el" href="sim908_8h.html">sim908.h</a>/ <a class="el" href="sim908_8c.html">sim908.c</a> and <a class="el" href="accident__data_8h.html">accident_data.h</a>/ <a class="el" href="accident__data_8c.html">accident_data.c</a></li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Deleted unused files (ab-encoder, Andi's version of sim908 driver, led_on_plane)</li>
+<li>Deleted unused code in main</li>
+<li>Changed naming on extern variables</li>
+<li>Changed naming on enums in accident data</li>
+<li>Removed unused defines in <a class="el" href="sim908_8h.html">SIM908.h</a></li>
+<li>Added volatile parameter for flag in _wait_response in SIM908 to to avoid warning</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>Split up module test in individual files</li>
+<li>Module test for car panel needed</li>
+<li>Integrate the UART test in the unit test platform</li>
+<li>Doxygen structure proofing in all files</li>
+<li>Comments in SIM908 ISR</li>
+<li>Include file for all common libraries</li>
+</ul>
+<hr/>
+ <h1>Version 0.120 - 2014/11/14 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Moved a lot of defines into <a class="el" href="vroom__config_8h.html">vroom_config.h</a></li>
+<li>Added schedular_get_last_readings() function in sensor_scheduler</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Changed a lot of defines into macros for generality in <a class="el" href="sim908_8h.html">sim908.h</a></li>
+<li>Updated corrosponding code in <a class="el" href="sim908_8h.html">sim908.h</a></li>
+<li>Fixed naming in spi, uart and sensor_scheduler</li>
+<li>Updated comments in spi and uart</li>
+<li>Fixed simple alarm-trigger test in <a class="el" href="run_8c.html">run.c</a>, axis^2 became too large.<ul>
+<li>Changed acc_total to uint32_t instead of int32_t</li>
+<li>Changed multiplier in sensor_scheduler to accommodate for smaller value</li>
+</ul>
+</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane and a lot of others</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+</ul>
+<hr/>
+ <h1>Version 0.111 - 2014/11/13 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added circular buffer in sensor_scheduler for accelerometer readings</li>
+<li>Made x, y and z axis buffers in sensor_scheduler extern so that reading can happen independent of the scheduler</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Fixed accelerometer. Setup, scale and sensibility now works</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane and a lot of others</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+</ul>
+<hr/>
+ <h1>Version 0.110 - 2014/11/11 by Kenneth &amp; Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Memory leak in MSD optional data fixed</li>
+<li>Implemented function to get GPS response and split it into sub-strings</li>
+<li>Implemented check for CREG status</li>
+<li>Added connection_status_flag which is set at anytime CREG changes</li>
+<li>Implemented MSD filename based on time stamp for GPS response</li>
+<li>Car panel driver finetuned</li>
+<li>Main and SIM908 cleaned for unused code</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+</ul>
+<hr/>
+ <h1>Version 0.104 - 2014/11/10 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Implemented functions to convert (a hardcoded) GPS response into MSD data structure.</li>
+<li>Added emergency flag (Needed to do that because it locks in the car_panel ISR, when alarm is manually set)</li>
+<li>Added appended string for file naming MSD file, including a VROOM_ID defined in the config header (just set to phone number).</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Fixed bug in function for calculating course</li>
+<li>Changed latitude/longitude function so that it stores the data in milliarcseconds</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+<li>Needs to store the GPS response somehow</li>
+<li>Needs to check for CREG</li>
+<li>INFO: System needs to send data before making the phone call as the system is busy when calling</li>
+</ul>
+<hr/>
+ <h1>Version 0.103 - 2014/11/07 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added prototype for _get_GPS_response function in <a class="el" href="sim908_8c.html">SIM908.c</a></li>
+<li>Added function _set_MSD_filename(char *__UTC_raw); in SIM908 (Replaces the functing UTC_string in <a class="el" href="accident__data_8c.html">accident_data.c</a>)</li>
+<li>Added prototype for set_MSD_data function in SIM908</li>
+<li>Implemented emergency_alarm function in accident_data and changed the structure completly</li>
+<li>Added vroom_config header file for configuration</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+<li>PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes</li>
+</ul>
+<hr/>
+ <h1>Version 0.100 - 2014/11/07 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Implemented validation check on SIM908 module</li>
+<li>Implemented response capability on SIM908</li>
+<li>Implemented circular buffer for response in SIM908 driver</li>
+<li>Implemented a _char_at(int index) function for the circular buffer</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Fixed startup procedure so that module resets more reliably when uploading software</li>
+<li>Fixed latitude and longitude binary bug by creating new function:<ul>
+<li>uartX_send_data(uint8_t data, uint8_t length). Problem was that uartX_send_string skips zero (0x00) bytes as it is detected as the null char ('\0')</li>
+</ul>
+</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+<li>PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes</li>
+</ul>
+<hr/>
+ <h1>Version 0.099 - 2014/11/03 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Implemented cancel_emmergency function in car_panel</li>
+<li>Fixed minor bug in accident_data</li>
+<li>Added uart_send_byte function in uart, to be able to send 4 bytes "small numbers"</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+<li>PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes</li>
+<li>PROBLEM: latitude and longitude are not correct when sent binary</li>
+</ul>
+<hr/>
+ <h1>Version 0.098b - 2014/11/01 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Removed timer from car_panel and substituded a delay instead</li>
+<li>Renamed functions to car_panel_XXXX to make it easier to use</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+<li>PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes</li>
+<li>PROBLEM: latitude and longitude are not correct when sent binary</li>
+</ul>
+<hr/>
+ <h1>Version 0.098 - 2014/10/27 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Send MSD function implemnted. Now sends 140 bytes binary to FTP server</li>
+<li>Added car_panel driver. Not yet tested (ISR is not yet implented)</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Fixed bug caused by memory padding (used <b>attribute</b>((packed)) in order to tell compiler that structure should be packed</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+<li>PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes</li>
+<li>PROBLEM: latitude and longitude are not correct when sent binary</li>
+<li>Implement ISR in in car_panel</li>
+</ul>
+<hr/>
+ <h1>Version 0.096 - 2014/10/21 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Finished structure of MSD</li>
+<li>Started implementing send_msb() function, which starts a session and sends the MSB struct over FTP (not a pretty solution so far)</li>
+<li>Added an integration test in main, which sends MSB to FTP server when temperature &gt; 28 degrees. This resulted in the problem descriped under ToDo</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>FTP put file name is now the modified string of GPS UTC time (UTC_string)</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+<li>PROBLEM: When sensor reading routine (sensor scheduler) get interrupted, it freezes</li>
+</ul>
+<hr/>
+ <h1>Version 0.095 - 2014/10/20 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added <a class="el" href="time_8h.html">time.h</a>/ <a class="el" href="time_8c.html">time.c</a> to get UTC time in milliseconds</li>
+<li>Started implementing structire of MSD</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main <hr/>
+ <h1>Version 0.09 - 2014/10/15 by Kenneth </h1>
+</li>
+</ul>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added working setup function for data communication in SIM908 module. For testing purposses it is set to append an existing .txt file on the FTP server. ! Note: Sending/writing to FTP are still not implemented, but is tested manually.</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+</ul>
+<hr/>
+ <h1>Version 0.083 - 2014/10/13 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added integration test for sensor module and SIM908 module in main function</li>
+<li>Added loop-back to PC option in SIM908 driver using UART1</li>
+<li>Added relevant AT commands for GPRS in header file</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Renamed SIM908_gsm to SIM908, as this driver will be for the whole module</li>
+<li><a class="el" href="group__sim908__pub.html#ga270483289f10fccd8f7e31fbca9f4ef4" title="Initiates the SIM908 module. ">SIM908_init()</a> structure changes, so that it only initiates the module</li>
+<li><a class="el" href="group__sim908__pub.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8" title="Starts the SIM908 module. ">SIM908_start()</a> function added to setup the module</li>
+<li>GPS started and reset in <a class="el" href="group__sim908__pub.html#ga7ff0d6f82e2a3ec9b632df1e404f45f8" title="Starts the SIM908 module. ">SIM908_start()</a>;</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+</ul>
+<hr/>
+ <h1>Version 0.082 - 2014/10/07 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added timeout check in call_PSAP function in SIM908 driver</li>
+<li>Added timeout check for AT response in SIM908 driver</li>
+<li>New structure/optimized the driver, so that no busy waiting in SIM908_cmd function is needed</li>
+<li>Added some relevant AT commands in header file</li>
+<li>Added baud sync and setup commands in SIM908 init function</li>
+<li>Added doxygen comments in SIM908 driver and Timer</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Removed timeout in SIM908 init function</li>
+<li>Removed unit test of _SIM908_check_response function in SIM908 driver, as it didn't maked sense anymore</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+</ul>
+<hr/>
+ <h1>Version 0.081 - 2014/10/01 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>In <a class="el" href="timer_8c.html">timer.c</a>: Added timer 3 in CTC mode for counting a value used in timeout check</li>
+<li>In SIM908 driver: Added timeout check in init function</li>
+<li>Added <a class="el" href="group__sim908__pub.html#gaf97d0165475186a839eabd66ea177f58" title="Calling Public-safety answering point. ">call_PSAP()</a> function in SIM908 driver to repeatedly make the call until it gets the correct response</li>
+<li>Added module test for sensors</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Changed filename for module test for sensors</li>
+<li>Changed structure of SIM908 driver so that it has a callback</li>
+<li>Rearanged/cleaned up main (Only KENNETH_TEST)</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+<li>Unit Test does not store result for all tests</li>
+</ul>
+<hr/>
+ <h1>Version 0.08 - 2014/09/30 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>In SIM908 driver: Added response and command check for AT SET commands</li>
+<li>In SIM908 driver: Added self-reset in case of no response in init function</li>
+<li>In Unit Test: Added unit test function for the command and response check</li>
+<li>Started implementing module test for sensors</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check all files</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+<li>Unit Test does not store result for all tests</li>
+</ul>
+<hr/>
+ <h1>Version 0.071a - 2014/09/26 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added read function in UART so that it is not required to use callback to read from the uart bus</li>
+<li>Added a module test for the UART</li>
+<li>Added testing templet for module tests in <a class="el" href="run_8c.html">run.c</a></li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>In GSM add check for response and act if error</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+</ul>
+<hr/>
+ <h1>Version 0.071 - 2014/09/26 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added condition to avoid empty strings when writing to UART (was already there)</li>
+<li>Added simple GSM driver for initiating sim908 and sending AT commands</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+<li>In GSM add check for response and act if error</li>
+<li>Split up module test in individual file, instead of having it in main</li>
+</ul>
+<hr/>
+ <h1>Version 0.07 - 2014/09/21 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added initial gsm files with simple init and other functions for testing</li>
+<li>Updated main to test gsm communication</li>
+<li>Added UART pass-through to be able to monitor communication between MCU and gsm/gps shield from terminal</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+</ul>
+<hr/>
+ <h1>Version 0.06e - 2014/09/21 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Added callback option in sensor_scheduler for the UART</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+</ul>
+<h2>Note </h2>
+<ul>
+<li>Analysis functionality now working from sensor_scheduler. Problem was baud rate too high and minor errors in UART driver (Was fixed in 0.06d)</li>
+</ul>
+<hr/>
+ <h1>Version 0.06d - 2014/09/20 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Improved UART driver to be more userfriendly</li>
+<li>Upgraded the buffer inside the UART driver to be circular so that it needs less memory to work properly</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Changed UART drivers to be in one file instead of two</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+</ul>
+<hr/>
+ <h1>Version 0.06c - 2014/09/18 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added cs pin parameter in the init functions of the tc72 and accelerometer driver to accommodate SPI splitter hardware</li>
+<li>Updated MemoryMap file</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>fixed minor errors</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+</ul>
+<hr/>
+ <h1>Version 0.06b - 2014/09/17 by Andi &amp; Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Improved sensor_scheduler to work autonomously from the main program using a timer and a state-machine</li>
+<li>Updated main to work properly with analysis tool by sending accelerometer data at a working rate for analysis to be conducted in real-time without any latency. Test was conducted at ~110Hz</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>fixed minor errors</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+</ul>
+<hr/>
+ <h1>Version 0.06 - 2014/09/16 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Improvements in usart0-1:<ul>
+<li>USART_CHAR_SIZE enum changed and switch-case added in usartN_setup_async(...) function as the identifier in USART_8_BIT and USART_9_BIT was the same</li>
+<li>Added "+0.5F" to the CALC_UBRRn macro to make sure it rounds off rather than truncating</li>
+<li>Changed sending functionality to use an ISR instead of waiting for empty transmition register</li>
+<li>Added a local buffer for transmit data to accommodate transmission of strings. It is possible to keep adding to this buffer witout loss of data if the buffer is not empty at the time of transmission</li>
+<li>"operational_mode" bit(s) are no longer being written to UCSRnC register as synchronous and master SPI modes are not implemented</li>
+<li>Name changed to UART as only the asynchronous modes are implemented</li>
+</ul>
+</li>
+<li>Updated main to work properly with analysis tool</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>fixed minor errors</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+</ul>
+<hr/>
+ <h1>Version 0.05 - 2014/09/15 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>added usart driver for USART0 and USART1</li>
+<li>re-added state machine in accelerometer and tc72 to avoid return of garbage data in the callback routine</li>
+<li>setup usart transmission for testing with pc. it sends the accelerometer data</li>
+<li>re-written the accelerometer driver to be able to take setup parameters</li>
+<li>added LED driver for LEDs on aircraft on PORTB</li>
+<li>added LED and switch driver for the LCD board on PORTK (no available ISR for rotary encoder)</li>
+<li>added memory map file with port/pin information from all drivers</li>
+<li>completed doxygen documentation in usart0-1 and accelerometer</li>
+<li>updated main to include tests</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>fixed minor errors</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA check on usart0-1, accelerometer, btn_led_lcd and led_on_plane</li>
+<li>missing commenting in btn_led_lcd and led_on_plane</li>
+</ul>
+<hr/>
+ <h1>Version 0.04 - 2014/09/11 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added a structure with doxygen documentation of the accident report according to eCall and EN 15722 standards for MSD.</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Clean up in multiple files (mostly in comments)</li>
+</ul>
+<h2>ToDo </h2>
+<hr/>
+ <h1>Version 0.031 - 2014/09/08 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Added the Unit Test, which was missing in v0.03 and added the test in main</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Fixed comments style in SPI and Accelerometer driver (/** instead of //)</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>Add state machine for call back in acc and tc72</li>
+</ul>
+<h2>Note </h2>
+<ul>
+<li>sprintf and printf have a huge overhead and are not recommended in embedded systems.</li>
+</ul>
+<hr/>
+ <h1>Version 0.03 - 2014/09/05 by Andi </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>Completed doxygen documentation in spi and acc driver</li>
+<li>Added <a class="el" href="test__module__sensors_8c.html#a41e7d1dd0cac7bd20fc32a6ebc87a985">sensors_init()</a> function in sensor_scheduler</li>
+<li>Updated sensor_scheduler to work with current content</li>
+<li>Added <a class="el" href="group__ss__pub.html#ga08241049a9228fe3dd6943629796b077" title="Releases the scheduler. ">scheduler_release()</a> call in the tc72 and acc callback driver to accomodate for the sequential sensors read structure</li>
+<li>Defined scheduler delay for control of the reading period</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Changed the structure of the SPI driver to make it work properly</li>
+<li>Assembled everything in a fresh project to fix unknown accelerometer data error</li>
+<li>Fixed error where array went out of scope in tc72 driver under setup (moved array decleration out of the function). Was causing corrupt memory</li>
+<li>Renamed collect_sensors_sata to sensor_scheduler</li>
+<li>Renamed function read_sensors() to <a class="el" href="group__ss__pub.html#ga08241049a9228fe3dd6943629796b077" title="Releases the scheduler. ">scheduler_release()</a> as it's not being called from the drivers callback functions when they are done reading</li>
+<li>Cleaned up drivers in general</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>Minor ajustments might still be needed in multiple files</li>
+<li>Missing documentation in some files</li>
+</ul>
+<hr/>
+ <h1>Version 0.02 - 2014/09/05 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>unit test included for tc72 (use #define UNIT_TEST to run test)</li>
+<li>tc72 pass MISRA standards, except violation on some rules when calculating temperature</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<ul>
+<li>Fixed temperature conversion so that negative values is represented correctly</li>
+</ul>
+<h2>ToDo </h2>
+<ul>
+<li>MISRA not testet for SPI and timer</li>
+</ul>
+<hr/>
+ <h1>Version 0.01 - 2014/09/03 by Kenneth </h1>
+<h2>New Features, Improvements </h2>
+<ul>
+<li>First working version of tc72 driver with shared SPI and timer</li>
+</ul>
+<h2>Fixed Bugs, Changes </h2>
+<h2>ToDo </h2>
+<ul>
+<li>Needs to be checked for MISRA standards </li>
+</ul>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 2 2014 05:08:10 for VROOM by
+    <li class="footer">Generated on Wed Dec 3 2014 06:37:21 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.h" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -23,9 +23,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "enum \fBSPI_DATA_MODE\fP { \fBSPI_MODE_0\fP = 0, \fBSPI_MODE_1\fP = _BV(CPHA), \fBSPI_MODE_2\fP = _BV(CPOL), \fBSPI_MODE_3\fP = _BV(CPOL) | _BV(CPHA) }"
 .br
-.RI "\fISpecifies the available modes for SPI transfer format 
-.br
-\&. \fP"
+.RI "\fISpecifies the available modes for SPI transfer format\&. \fP"
 .ti -1c
 .RI "enum \fBSPI_DATA_DIRECTION\fP { \fBSPI_MSB_FIRST\fP = 0, \fBSPI_LST_FIRST\fP = _BV(DORD) }"
 .br
@@ -43,7 +41,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t __cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
+.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t \fB__cs_pin\fP, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
 .br
 .RI "\fISets up the SPI bus as master using supplied parameters\&. \fP"
 .ti -1c
@@ -61,7 +59,19 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .in -1c
 .SH "Detailed Description"
 .PP 
-: 10-04-2014 11:44:05 : Andi Degn : 0\&.4 
+10-04-2014 11:44:05 
+.PP
+\fBAuthor:\fP
+.RS 4
+Andi Degn 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.4 
+.RE
+.PP
+
 .PP
 Definition in file \fBspi\&.h\fP\&.
 .SH "Author"

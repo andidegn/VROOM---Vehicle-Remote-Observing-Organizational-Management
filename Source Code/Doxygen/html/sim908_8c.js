@@ -36,7 +36,6 @@ var sim908_8c =
     [ "_get_lat_long", "sim908_8c.html#gae5315d2e7f8cba9d7c9cb2afb718a6fe", null ],
     [ "_GPS_enable", "sim908_8c.html#ga2e4ef963a0f9fa4de73f98b1e95c13de", null ],
     [ "_GSM_enable", "sim908_8c.html#ga02f683d7f7f5e27900db7b93d0ca0328", null ],
-    [ "_PC_callback", "sim908_8c.html#gacd705bbbba4f7490f6b2309fdea0287b", null ],
     [ "_raw_to_array", "sim908_8c.html#ga8f6e8abc3cdc3e1a50179142e001d007", null ],
     [ "_set_direction", "sim908_8c.html#ga9df3f4fc8c158c61402f3c7971f5dd2b", null ],
     [ "_set_MSD_filename", "sim908_8c.html#gaad171996bb9cb55c9129d80f54e2de08", null ],

@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -55,7 +55,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fISends up data Sets up the SPI with 'handle' if it is not already the current handle\&. Then sends the data and returns '1'\&. If the SPI driver is busy performing another task, the data is not sent and a '0' is returned\&. \fP"
 .ti -1c
-.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t __cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
+.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t \fB__cs_pin\fP, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
 .br
 .RI "\fISets up the SPI bus as master using supplied parameters\&. \fP"
 .ti -1c
@@ -88,7 +88,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "static \fBhandle_param\fP \fB_handles\fP [\fBMAX_HANDLES\fP]"
 .br
 .ti -1c
-.RI "static uint8_t \fB_cs_pin\fP"
+.RI "static uint8_t \fB__cs_pin\fP"
 .br
 .ti -1c
 .RI "static uint8_t \fB_cs_active_level\fP"
@@ -108,6 +108,10 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .in -1c
 .SH "Variable Documentation"
 .PP 
+.SS "uint8_t __cs_pin\fC [static]\fP"
+
+.PP
+Definition at line 44 of file spi\&.c\&.
 .SS "uint8_t _bytes_sent_ctr\fC [static]\fP"
 
 .PP
@@ -116,10 +120,6 @@ Definition at line 50 of file spi\&.c\&.
 
 .PP
 Definition at line 45 of file spi\&.c\&.
-.SS "uint8_t _cs_pin\fC [static]\fP"
-
-.PP
-Definition at line 44 of file spi\&.c\&.
 .SS "int8_t _current_handle = -1\fC [static]\fP"
 
 .PP

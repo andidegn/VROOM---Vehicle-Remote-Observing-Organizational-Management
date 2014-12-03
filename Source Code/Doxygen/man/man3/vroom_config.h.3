@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/vroom_config.h" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/vroom_config.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -22,28 +22,25 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBKENNETH_TEST\fP   \fBNO\fP"
 .br
 .ti -1c
-.RI "#define \fBDEBUG_UART_ENABLE\fP   /* uart1 (PD2/PD3) is used for debugging */"
+.RI "#define \fBCONFIG_ALARM_SENSOR_READ_FREQUENCY\fP   \fBTIMER_50HZ\fP	/**> Frequency of which the sensors are read in Hz */"
 .br
 .ti -1c
-.RI "#define \fBDEBUG_LCD_ENABLE\fP   /* LCD should be connected to \fBPORT\fP L */"
+.RI "#define \fBCONFIG_ALARM_DETECTION_FREQUENCY\fP   \fBTIMER_50HZ\fP	/**> Time interval between checking for accidents in Hz */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_DETECTION_RESOLUTION\fP   10		/**> Time interval between checking for accidents in hz */"
+.RI "#define \fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP   5			/**> Length of acceleration peek */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP   5		/**> Length of acceleration peek */"
+.RI "#define \fBCONFIG_ALARM_CRASH_TRIGGER_VALUE\fP   800			/**> Total acceleration [G] in 1/100 resolution */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_CRASH_TRIGGER_VALUE\fP   800		/**> Total acceleration [G] in 1/100 resolution */"
+.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_DEGREE\fP   1			/**> Temperature raise in Celsius degrees */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_DEGREE\fP   1		/**> Temperature raise in Celsius degrees */"
+.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_TIME\fP   80			/**> Temperature raise time in 1/10 seconds resolution */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_TIME\fP   80		/**> Temperature raise time in 1/10 seconds resolution */"
-.br
-.ti -1c
-.RI "#define \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP   -100		/**> Used to be sure there are two temperature readings before comparing values */"
+.RI "#define \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP   -100			/**> Used to be sure there are two temperature readings before comparing values */"
 .br
 .ti -1c
 .RI "#define \fBCONFIG_MSD_FORMAT_VERSION\fP   1"
@@ -118,9 +115,9 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .PP
 \fBAuthor:\fP
 .RS 4
-: Kenneth René Jensen 
+: Andi Degn 
 .PP
-: Andi Degn : 0\&.6 
+: Kenneth René Jensen : 0\&.6 
 .RE
 .PP
 
@@ -131,27 +128,19 @@ Definition in file \fBvroom_config\&.h\fP\&.
 .SS "#define ANDI_TEST   \fBYES\fP"
 
 .PP
-Definition at line 19 of file vroom_config\&.h\&.
-.SS "#define DEBUG_LCD_ENABLE   /* LCD should be connected to \fBPORT\fP L */"
-
-.PP
-Definition at line 22 of file vroom_config\&.h\&.
-.SS "#define DEBUG_UART_ENABLE   /* uart1 (PD2/PD3) is used for debugging */"
-
-.PP
-Definition at line 21 of file vroom_config\&.h\&.
+Definition at line 27 of file vroom_config\&.h\&.
 .SS "#define KENNETH_TEST   \fBNO\fP"
 
 .PP
-Definition at line 20 of file vroom_config\&.h\&.
+Definition at line 28 of file vroom_config\&.h\&.
 .SS "#define NO   0"
 
 .PP
-Definition at line 18 of file vroom_config\&.h\&.
+Definition at line 26 of file vroom_config\&.h\&.
 .SS "#define YES   1"
 
 .PP
-Definition at line 17 of file vroom_config\&.h\&.
+Definition at line 25 of file vroom_config\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,9 +1,10 @@
-/*
- * btn_led_lcd.h
+/**********************************************************************//**
+ * @file btn_led_lcd.h
  *
- * Created: 14-09-2014 22:43:41
- *  Author: Andi Degn
- */
+ * @created 14-09-2014 22:43:41
+ * @author Andi Degn
+ * @ingroup hardware_boards
+ *************************************************************************/
 
 
 #ifndef BTN_LED_LCD_H_

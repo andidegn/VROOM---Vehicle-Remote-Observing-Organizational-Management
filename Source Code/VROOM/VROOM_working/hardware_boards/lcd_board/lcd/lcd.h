@@ -11,6 +11,7 @@
 #include <stdio.h>
 /**
  @defgroup pfleury_lcd LCD library
+ @ingroup hardware_boards
  @code #include <lcd.h> @endcode
 
  @brief Basic routines for interfacing a HD44780U-based text LCD display

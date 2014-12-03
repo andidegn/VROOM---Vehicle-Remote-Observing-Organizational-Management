@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__acc__priv.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -98,12 +98,19 @@ $(document).ready(function(){initNavTree('group__acc__priv.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Modules</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Private<div class="ingroups"><a class="el" href="group__acc.html">LIS331HH</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__acc__scale__factor"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__acc__scale__factor.html">Scale Factor</a></td></tr>
+<tr class="memdesc:group__acc__scale__factor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define for the scale factor to get calibrated output for 1g gravity This is visually calibrated to stationary have unit vector (1g). The mathematically calculated value is: Full-scale g/(2^16) = 12/(2^16) = 0.00018310546875. <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga85d03c7d81520413a209755beae60d0a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__acc__priv.html#ga85d03c7d81520413a209755beae60d0a">_acc_read_from_reg</a> (uint8_t __reg, uint8_t __no_of_dummy_bytes)</td></tr>
@@ -143,7 +150,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00166">166</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
+<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00170">170</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
 
 </div>
 </div>
@@ -188,7 +195,13 @@ Functions</h2></td></tr>
 <li>Multi: 1</li>
 <li>SIngle:0</li>
 </ul>
-<p>Bit2-7 - Address |bit7|bit6|bit5|bit4|bit3|bit2|bit1|bit0| | RW | MS |ADR5|ADR4|ADR3|ADR2|ADR1|ADR0|</p>
+<h2>Bit2-7 - Address </h2>
+<table class="doxtable">
+<tr>
+<th align="center">bit7</th><th align="center">bit6</th><th align="center">bit5</th><th align="center">bit4</th><th align="center">bit3</th><th align="center">bit2</th><th align="center">bit1</th><th align="center">bit0  </th></tr>
+<tr>
+<td align="center">RW </td><td align="center">MS </td><td align="center">ADR5</td><td align="center">ADR4</td><td align="center">ADR3</td><td align="center">ADR2</td><td align="center">ADR1</td><td align="center">ADR0 </td></tr>
+</table>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uint8_t</td><td>reg - the register in the acc to write to </td></tr>
@@ -199,7 +212,7 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>The number of bytes for the SPI is the total number of bytes, ie. no_of_dummy_bytes + 1 </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00124">124</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
+<p>Definition at line <a class="el" href="lis331hh_8c_source.html#l00128">128</a> of file <a class="el" href="lis331hh_8c_source.html">lis331hh.c</a>.</p>
 
 </div>
 </div>
@@ -208,7 +221,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 2 2014 05:08:09 for VROOM by
+    <li class="footer">Generated on Wed Dec 3 2014 06:37:21 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

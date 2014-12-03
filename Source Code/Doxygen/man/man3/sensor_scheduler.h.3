@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/sensor_scheduler.h" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/sensor_scheduler.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -19,43 +19,24 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "void \fBscheduler_start\fP (void(*callback_function_ptr)(char __data))"
 .br
+.RI "\fIInitializes the scheduler\&. \fP"
 .ti -1c
-.RI "void \fBscheduler_acc_get_last_readings_sum\fP (int16_t *buffer)"
+.RI "void \fBscheduler_acc_get_last_readings_sum\fP (int16_t *__buffer)"
 .br
+.RI "\fIFills up the supplied memory with vector lengths from the accelerometer\&. \fP"
 .ti -1c
-.RI "void \fBscheduler_acc_get_last_readings\fP (int16_t *buffer)"
+.RI "void \fBscheduler_acc_get_last_readings\fP (int16_t *__buffer)"
 .br
+.RI "\fIFills up the supplied memory with the last readings from the accelerometer (x, y, z) \fP"
 .ti -1c
 .RI "float \fBscheduler_temp_get_last_reading\fP (void)"
 .br
+.RI "\fIReturns the last temperature reading\&. \fP"
 .ti -1c
 .RI "void \fBscheduler_release\fP (void)"
 .br
+.RI "\fIReleases the scheduler\&. \fP"
 .in -1c
-.SH "Function Documentation"
-.PP 
-.SS "void scheduler_acc_get_last_readings (int16_t *buffer)"
-
-.PP
-Definition at line 46 of file sensor_scheduler\&.c\&.
-.SS "void scheduler_acc_get_last_readings_sum (int16_t *buffer)"
-
-.PP
-Definition at line 38 of file sensor_scheduler\&.c\&.
-.SS "void scheduler_release (void)"
-
-.PP
-Definition at line 57 of file sensor_scheduler\&.c\&.
-.SS "void scheduler_start (void(*)(char __data)callback_function_ptr)"
-collect_sensor_data\&.h
-.PP
-Created: 03-09-2014 13:55:08 Author: Kenneth René Jensen 
-.PP
-Definition at line 32 of file sensor_scheduler\&.c\&.
-.SS "float scheduler_temp_get_last_reading (void)"
-
-.PP
-Definition at line 52 of file sensor_scheduler\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

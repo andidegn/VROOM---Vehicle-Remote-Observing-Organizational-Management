@@ -65,5 +65,6 @@ var searchData=
   ['unit_5ftest_2ed',['unit_test.d',['../unit__test_8d.html',1,'']]],
   ['unit_5ftest_2eh',['unit_test.h',['../unit__test_8h.html',1,'']]],
   ['unit_5ftest_5fmsd',['UNIT_TEST_MSD',['../run_8c.html#a5096e3547d657d39a5132e7e96a21d49',1,'run.c']]],
-  ['unit_5ftest',['unit_test',['../group__ut.html',1,'']]]
+  ['unit_5ftest',['unit_test',['../group__ut.html',1,'']]],
+  ['utility',['Utility',['../group__util.html',1,'']]]
 ];

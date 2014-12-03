@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -34,11 +34,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "static void \fB_set_control_byte\fP (bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm)"
 .br
-.RI "\fIfunction to set the control byte Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |
-.br
- Bit: | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
-.br
-\fP"
+.RI "\fIfunction to set the control byte Control byte Automatic activation Manual activation Test call Confidence in position ResResResRes  Bit 7 6 5 4 3 2 1 0 \fP"
 .ti -1c
 .RI "static void \fB_set_VIN\fP (const char *__VIN)"
 .br

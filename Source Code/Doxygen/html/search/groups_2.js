@@ -6,5 +6,6 @@ var searchData=
   ['creg_20enable',['CREG enable',['../group__at__creg__en.html',1,'']]],
   ['ctrl_2bz',['Ctrl+Z',['../group__at__ctrl__z.html',1,'']]],
   ['connection_20type',['Connection type',['../group__at__data.html',1,'']]],
-  ['car_20panel_20driver',['Car Panel driver',['../group__cp.html',1,'']]]
+  ['car_20panel_20driver',['Car Panel driver',['../group__cp.html',1,'']]],
+  ['control_20registers',['Control Registers',['../group__ctrl__reg.html',1,'']]]
 ];

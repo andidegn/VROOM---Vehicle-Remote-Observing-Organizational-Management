@@ -1,11 +1,12 @@
 /**********************************************************************//**
  * @file car_panel.h
  *
- * @author: Kenneth René Jensen
- * @Version: 0.4
+ * @author Kenneth René Jensen
+ * @cersion 0.4
  * @defgroup cp Car Panel driver
  * @{
-	This is the driver for the car panel in VROOM system.
+	@ingroup hardware_boards
+	@brief This is the driver for the car panel in VROOM system.
 	The panel includes two tact switches, a RGB LED and a single LED.
  	@note NOT YET Complies MISRO 2004 standards
  	@defgroup cp_pub Public

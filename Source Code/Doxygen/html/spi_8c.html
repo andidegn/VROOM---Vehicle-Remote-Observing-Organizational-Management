@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('spi_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -146,7 +146,7 @@ Functions</h2></td></tr>
 <tr class="memitem:gabddcb9317f7bc6255e6811eec522efaf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__priv.html#gabddcb9317f7bc6255e6811eec522efaf">_send</a> (uint8_t __data)</td></tr>
 <tr class="memdesc:gabddcb9317f7bc6255e6811eec522efaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends up data Sets up the SPI with 'handle' if it is not already the current handle. Then sends the data and returns '1'. If the SPI driver is busy performing another task, the data is not sent and a '0' is returned.  <a href="group__spi__priv.html#gabddcb9317f7bc6255e6811eec522efaf">More...</a><br/></td></tr>
 <tr class="separator:gabddcb9317f7bc6255e6811eec522efaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1e56d8b1f6edd8a4c70301efd919d060"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#ga1e56d8b1f6edd8a4c70301efd919d060">spi_master_setup</a> (<a class="el" href="group__spi__pub.html#ga5b355ede35162c27116a098b13bf2318">SPI_DATA_MODE</a> __mode, <a class="el" href="group__spi__pub.html#gae844ec3f2cdee431bd9ea5c7156ef478">SPI_DATA_DIRECTION</a> __data_direction, <a class="el" href="group__spi__pub.html#gae7170fee003fadf332217ed7a5d2f3c9">SPI_DIVIDER</a> __freq_divider, uint8_t __cs_pin, <a class="el" href="group__spi__pub.html#ga96a1793d8e3c7227d6009a535c201cf0">SPI_CS_ACTIVE_LEVEL</a> __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))</td></tr>
+<tr class="memitem:ga1e56d8b1f6edd8a4c70301efd919d060"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#ga1e56d8b1f6edd8a4c70301efd919d060">spi_master_setup</a> (<a class="el" href="group__spi__pub.html#ga5b355ede35162c27116a098b13bf2318">SPI_DATA_MODE</a> __mode, <a class="el" href="group__spi__pub.html#gae844ec3f2cdee431bd9ea5c7156ef478">SPI_DATA_DIRECTION</a> __data_direction, <a class="el" href="group__spi__pub.html#gae7170fee003fadf332217ed7a5d2f3c9">SPI_DIVIDER</a> __freq_divider, uint8_t <a class="el" href="spi_8c.html#a2d09bf3fa2ca132f9cf977144cab6c43">__cs_pin</a>, <a class="el" href="group__spi__pub.html#ga96a1793d8e3c7227d6009a535c201cf0">SPI_CS_ACTIVE_LEVEL</a> __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))</td></tr>
 <tr class="memdesc:ga1e56d8b1f6edd8a4c70301efd919d060"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the SPI bus as master using supplied parameters.  <a href="group__spi__pub.html#ga1e56d8b1f6edd8a4c70301efd919d060">More...</a><br/></td></tr>
 <tr class="separator:ga1e56d8b1f6edd8a4c70301efd919d060"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga69c7184b8c4cf536ddad3c228393e964"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__spi__pub.html#ga69c7184b8c4cf536ddad3c228393e964">spi_send_byte</a> (int8_t __handle, uint8_t __data)</td></tr>
@@ -170,8 +170,8 @@ Variables</h2></td></tr>
 <tr class="separator:a96dff8ac88a748c69bdecbaf8698efcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51900bf33c798e8ffcf275962166c775"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structhandle__param.html">handle_param</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8c.html#a51900bf33c798e8ffcf275962166c775">_handles</a> [<a class="el" href="group__spi__max__handles.html#ga23ed8e629c0a28eab14f92c888c8d7ef">MAX_HANDLES</a>]</td></tr>
 <tr class="separator:a51900bf33c798e8ffcf275962166c775"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d1ec6333b265b4dd659ee605a2421de"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8c.html#a1d1ec6333b265b4dd659ee605a2421de">_cs_pin</a></td></tr>
-<tr class="separator:a1d1ec6333b265b4dd659ee605a2421de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d09bf3fa2ca132f9cf977144cab6c43"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8c.html#a2d09bf3fa2ca132f9cf977144cab6c43">__cs_pin</a></td></tr>
+<tr class="separator:a2d09bf3fa2ca132f9cf977144cab6c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05d1db4e9746eebd76bdef947d5d1b7c"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8c.html#a05d1db4e9746eebd76bdef947d5d1b7c">_cs_active_level</a></td></tr>
 <tr class="separator:a05d1db4e9746eebd76bdef947d5d1b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30165d128d0d1ccb716ab3b7f6d325c1"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8c.html#a30165d128d0d1ccb716ab3b7f6d325c1">_is_busy</a> = 0</td></tr>
@@ -184,6 +184,28 @@ Variables</h2></td></tr>
 <tr class="separator:a75487bdd058725e560fc4f23a0c21eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="a2d09bf3fa2ca132f9cf977144cab6c43"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t __cs_pin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00044">44</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a75487bdd058725e560fc4f23a0c21eb5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -225,28 +247,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Definition at line <a class="el" href="spi_8c_source.html#l00045">45</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1d1ec6333b265b4dd659ee605a2421de"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t _cs_pin</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00044">44</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -388,7 +388,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_cb4bf8a099fe3a7a175adb1a0192631d.html">data_comm</a></li><li class="navelem"><a class="el" href="dir_e7173126ba00ab4f8dd48a13bfd259ca.html">spi</a></li><li class="navelem"><a class="el" href="spi_8c.html">spi.c</a></li>
-    <li class="footer">Generated on Tue Dec 2 2014 05:08:08 for VROOM by
+    <li class="footer">Generated on Wed Dec 3 2014 06:37:19 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

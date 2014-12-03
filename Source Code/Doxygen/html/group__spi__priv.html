@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__spi__priv.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -169,7 +169,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00252">252</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00258">258</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -204,7 +204,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00229">229</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00235">235</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -234,29 +234,63 @@ Functions</h2></td></tr>
 <ul>
 <li>Sets up the SPI ports as output</li>
 <li>Clears the SPRC register before setup to make sure it is clear</li>
-<li>Sets up the SPRC register based on the supplied parameters</li>
-<li>* SPIE, SPE and master are fixed</li>
+<li>Sets up the SPRC register based on the supplied parameters<ul>
+<li>SPIE, SPE and master are fixed</li>
+</ul>
+</li>
 <li>Sets up the SPSR register if divider 2, 8 or 32 is chosen</li>
 </ul>
-<p>SPI mode: | CPOL | CHAP |<br/>
- SPI_MODE0 | 0 | 0 |<br/>
- SPI_MODE1 | 0 | 1 |<br/>
- SPI_MODE2 | 1 | 0 |<br/>
- SPI_MODE3 | 1 | 1 |<br/>
-<br/>
- Data direction: | DORD |<br/>
- SPI_MSB_FIRST | 0 |<br/>
- SPI_LSB_FIRST | 1 |<br/>
-<br/>
- Frequency divider: | SPI2X | SPR1 | SPR0 |<br/>
- SPI_DIVIDER_2 | 1 | 0 | 0 |<br/>
- SPI_DIVIDER_4 | 0 | 0 | 0 |<br/>
- SPI_DIVIDER_8 | 1 | 0 | 1 |<br/>
- SPI_DIVIDER_16 | 0 | 0 | 1 |<br/>
- SPI_DIVIDER_32 | 1 | 1 | 0 |<br/>
- SPI_DIVIDER_64 | 0 | 1 | 0 |<br/>
- SPI_DIVIDER_128 | 0 | 1 | 1 |<br/>
- </p>
+<table class="doxtable">
+<tr>
+<th align="left">SPI mode: </th><th align="center">CPOL </th><th align="center">CHAP  </th></tr>
+<tr>
+<td align="left">SPI_MODE0 </td><td align="center">0 </td><td align="center">0 </td></tr>
+<tr>
+<td align="left">SPI_MODE1 </td><td align="center">0 </td><td align="center">1 </td></tr>
+<tr>
+<td align="left">SPI_MODE2 </td><td align="center">1 </td><td align="center">0 </td></tr>
+<tr>
+<td align="left">SPI_MODE3 </td><td align="center">1 </td><td align="center">1 </td></tr>
+</table>
+<p><br/>
+</p>
+<table class="doxtable">
+<tr>
+<th align="left">Data direction: </th><th align="center">DORD  </th></tr>
+<tr>
+<td align="left">SPI_MSB_FIRST </td><td align="center">0 </td></tr>
+<tr>
+<td align="left">SPI_LSB_FIRST </td><td align="center">1 </td></tr>
+</table>
+<p><br/>
+</p>
+<table class="doxtable">
+<tr>
+<th align="left">Frequency divider: </th><th align="center">SPI2X </th><th align="center">SPR1 </th><th align="center">SPR0  </th></tr>
+<tr>
+<td align="left">SPI_DIVIDER_2 </td><td align="center">1 </td><td align="center">0 </td><td align="center">0 </td></tr>
+<tr>
+<td align="left">SPI_DIVIDER_4 </td><td align="center">0 </td><td align="center">0 </td><td align="center">0 </td></tr>
+<tr>
+<td align="left">SPI_DIVIDER_8 </td><td align="center">1 </td><td align="center">0 </td><td align="center">1 </td></tr>
+<tr>
+<td align="left">SPI_DIVIDER_16 </td><td align="center">0 </td><td align="center">0 </td><td align="center">1 </td></tr>
+<tr>
+<td align="left">SPI_DIVIDER_32 </td><td align="center">1 </td><td align="center">1 </td><td align="center">0 </td></tr>
+<tr>
+<td align="left">SPI_DIVIDER_64 </td><td align="center">0 </td><td align="center">1 </td><td align="center">0 </td></tr>
+<tr>
+<td align="left">SPI_DIVIDER_128 </td><td align="center">0 </td><td align="center">1 </td><td align="center">1 </td></tr>
+</table>
+<p>Enables SPI, sets it as Master and sets all related bits (p.202) </p>
+<table class="doxtable">
+<tr>
+<th align="left">Bit </th><th align="center">7 </th><th align="center">6 </th><th align="center">5 </th><th align="center">4 </th><th align="center">3 </th><th align="center">2 </th><th align="center">1 </th><th align="center">0 </th><th align="center"></th></tr>
+<tr>
+<td align="left">0x2C (0x4C) </td><td align="center">SPIE</td><td align="center">SPE</td><td align="center">DORD</td><td align="center">MSTR</td><td align="center">CPOL</td><td align="center">CPHA</td><td align="center">SPR1</td><td align="center">SPR0</td><td align="center">SPCR </td></tr>
+<tr>
+<td align="left">Direction </td><td align="center">R/W</td><td align="center">R/W</td><td align="center">R/W</td><td align="center">R/W</td><td align="center">R/W</td><td align="center">R/W</td><td align="center">R/W</td><td align="center">R/W</td><td align="center"></td></tr>
+</table>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname"><a class="el" href="structhandle__param.html" title="struct containing the setup parameters for a single SPI setup ">handle_param</a></td><td>*__param - a struct containing the parameters for the SPI setup</td></tr>
@@ -265,7 +299,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00185">185</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00196">196</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -295,7 +329,7 @@ Functions</h2></td></tr>
 
 <p>Interrupt service routine Interrupt service routine for the SPI. If a callback function pointer is supplied when setting up the SPI, a callback to that function is being performed. Else the SPI is released. </p>
 
-<p>Definition at line <a class="el" href="spi_8c_source.html#l00265">265</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
+<p>Definition at line <a class="el" href="spi_8c_source.html#l00271">271</a> of file <a class="el" href="spi_8c_source.html">spi.c</a>.</p>
 
 </div>
 </div>
@@ -304,7 +338,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 2 2014 05:08:09 for VROOM by
+    <li class="footer">Generated on Wed Dec 3 2014 06:37:20 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

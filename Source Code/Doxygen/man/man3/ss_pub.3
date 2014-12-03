@@ -1,0 +1,142 @@
+.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public \- 
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBscheduler_start\fP (void(*callback_function_ptr)(char __data))"
+.br
+.RI "\fIInitializes the scheduler\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_acc_get_last_readings_sum\fP (int16_t *__buffer)"
+.br
+.RI "\fIFills up the supplied memory with vector lengths from the accelerometer\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_acc_get_last_readings\fP (int16_t *__buffer)"
+.br
+.RI "\fIFills up the supplied memory with the last readings from the accelerometer (x, y, z) \fP"
+.ti -1c
+.RI "float \fBscheduler_temp_get_last_reading\fP (void)"
+.br
+.RI "\fIReturns the last temperature reading\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_release\fP (void)"
+.br
+.RI "\fIReleases the scheduler\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "void scheduler_acc_get_last_readings (int16_t *__buffer)"
+
+.PP
+Fills up the supplied memory with the last readings from the accelerometer (x, y, z) 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIint16_t\fP *__buffer - supplied pointer to memory
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+*__buffer must have reserved memory of 3 * sizeof(int16_t) 
+.RE
+.PP
+
+.PP
+Definition at line 43 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_acc_get_last_readings_sum (int16_t *__buffer)"
+
+.PP
+Fills up the supplied memory with vector lengths from the accelerometer\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIint16_t\fP *__buffer - supplied pointer to memory
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+*__buffer must have reserved memory corresponding to 'CONFIG_ALARM_CRASH_NO_OF_READINGS' 
+.RE
+.PP
+
+.PP
+Definition at line 35 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_release (void)"
+
+.PP
+Releases the scheduler\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+Should be called every time the scheduler is done with a task 
+.RE
+.PP
+
+.PP
+Definition at line 54 of file sensor_scheduler\&.c\&.
+.SS "void scheduler_start (void(*)(char __data)callback_function_ptr)"
+
+.PP
+Initializes the scheduler\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP (*callback_function_ptr)(char __data) - callback function
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 29 of file sensor_scheduler\&.c\&.
+.SS "float scheduler_temp_get_last_reading (void)"
+
+.PP
+Returns the last temperature reading\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+float - temperature in floating point value 
+.RE
+.PP
+
+.PP
+Definition at line 49 of file sensor_scheduler\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

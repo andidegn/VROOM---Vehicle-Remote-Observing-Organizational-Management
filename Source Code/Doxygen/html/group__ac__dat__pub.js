@@ -16,5 +16,11 @@ var group__ac__dat__pub =
       [ "VIN", "structpacked.html#a23f189389a1756547f78a8f7865afb18", null ]
     ] ],
     [ "AD_MSD", "group__ac__dat__pub.html#ga054b4800a07163c985b6a952278d76e2", null ],
+    [ "AD_EMERGENCY_FLAG", "group__ac__dat__pub.html#ga149a79e50f1d6eb62f4dc777abf3d5a6", [
+      [ "EMERGENCY_NO_ALARM", "group__ac__dat__pub.html#gga149a79e50f1d6eb62f4dc777abf3d5a6aa804f424e8340c4c008b9d2a4bc13944", null ],
+      [ "EMERGENCY_MANUAL_ALARM", "group__ac__dat__pub.html#gga149a79e50f1d6eb62f4dc777abf3d5a6afd081379d59643956abdf38d516f0cef", null ],
+      [ "EMERGENCY_AUTO_ALARM", "group__ac__dat__pub.html#gga149a79e50f1d6eb62f4dc777abf3d5a6a30df4dd40fd132added2ec752e70ec5a", null ],
+      [ "EMERGENCY_ALARM_SENT", "group__ac__dat__pub.html#gga149a79e50f1d6eb62f4dc777abf3d5a6a270e197de87f6b218c4d8a1d98914590", null ]
+    ] ],
     [ "ad_emergency_alarm", "group__ac__dat__pub.html#gaee1bd5118ffcb7994b94088ddc55f67c", null ]
 ];

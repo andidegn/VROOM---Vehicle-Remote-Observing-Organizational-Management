@@ -1,4 +1,4 @@
-.TH "Public" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -90,19 +90,13 @@ Definition at line 108 of file accident_detection\&.c\&.
 
 .PP
 Checks if a crash has occurred\&. Gets the accelerometer data and analysis them to see if a crash has occurred Steps in function:
-.br
 .IP "1." 4
 Read accelerometer data
-.br
-
 .IP "2." 4
 Analysis data
-.br
-
 .IP "3." 4
 Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected
-.br
- 
+.PP
 .PP
 \fBParameters:\fP
 .RS 4
@@ -113,8 +107,6 @@ Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected
 .RS 4
 void 
 .RE
-.PP
-
 .PP
 
 .PP
@@ -123,19 +115,13 @@ Definition at line 39 of file accident_detection\&.c\&.
 
 .PP
 Checks for fire\&. Gets the temperature and compare to last read value to see if temperature has raised to a critical level Steps in function:
-.br
 .IP "1." 4
 Read temperature
-.br
-
 .IP "2." 4
 Compare current value with last reading
-.br
-
 .IP "3." 4
 Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if fire is detected
-.br
- 
+.PP
 .PP
 \fBParameters:\fP
 .RS 4
@@ -146,8 +132,6 @@ Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if fire is detected
 .RS 4
 void 
 .RE
-.PP
-
 .PP
 
 .PP

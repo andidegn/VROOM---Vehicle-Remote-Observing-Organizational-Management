@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__sim908__pub.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -158,7 +158,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00245">245</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00246">246</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -179,13 +179,13 @@ Functions</h2></td></tr>
 <p>Sends MSD binary file to FTP server. </p>
 <p>Procedure:</p>
 <ol type="1">
-<li>Create filename: AT+FTPPUTNAME="&lt;filename&gt;"</li>
-<li>Open bearer AT+SAPBR=1,1</li>
-<li>Open FTP PUT session AT+FTPPUT=1</li>
-<li>Set write data AT+FTPPUT=2,140</li>
-<li>Write text (140 bytes)</li>
-<li>End write session AT+FTPPUT=2,0</li>
-<li>Close bearer AT+SAPBR=0,1</li>
+<li>Create filename: (AT+FTPPUTNAME="&lt;filename&gt;")</li>
+<li>Open bearer: (AT+SAPBR=1,1)</li>
+<li>Open FTP PUT session: (AT+FTPPUT=1)</li>
+<li>Set write data: (AT+FTPPUT=2,140)</li>
+<li>Write text: (140 bytes)</li>
+<li>End write session: (AT+FTPPUT=2,0)</li>
+<li>Close bearer: (AT+SAPBR=0,1)</li>
 </ol>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -195,7 +195,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00264">264</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00265">265</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -236,6 +236,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sets the MSD with relevant information given from GPS response. </p>
+<p>Sets the parameters of the MSD data set</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">uint32_t</td><td>*__UTC_sec - pointer to the timestamp in MSD structure </td></tr>
@@ -247,7 +248,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00216">216</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00217">217</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -259,7 +260,7 @@ Functions</h2></td></tr>
           <td class="memname">bool SIM908_cmd </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>cmd</em>, </td>
+          <td class="paramname"><em>__cmd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -276,9 +277,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Used for sending AT SET commands. </p>
+<p>Sends a command via uart. If '__wait_for_ok' it waits and returns a bool. True if successful, false if not</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">*cmd</td><td>is the AT command as a string </td></tr>
+    <tr><td class="paramname">*cmd</td><td>is the AT command as a string</td></tr>
   </table>
   </dd>
 </dl>
@@ -303,8 +305,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initiates the SIM908 module. </p>
-<p>Procedure. setup global settings -&gt; setup GSM -&gt; setup GPS -&gt; enable GSM communication -&gt; setup FTP</p>
-<dl class="section note"><dt>Note</dt><dd>UART0 is used to communicate with the module.</dd></dl>
+<p>Sets up ports and uart communication</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">void</td><td></td></tr>
@@ -314,7 +315,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>UART0 is used to communicate with the module. </dd></dl>
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00124">124</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00122">122</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -333,7 +334,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Starts the SIM908 module. </p>
-<p>setup global settings -&gt; setup GSM -&gt; setup GPS -&gt; enable GSM communication -&gt; setup FTP</p>
+<p>Sends initialization commands to the module.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">void</td><td></td></tr>
@@ -342,7 +343,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Definition at line <a class="el" href="sim908_8c_source.html#l00157">157</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
+<p>Definition at line <a class="el" href="sim908_8c_source.html#l00155">155</a> of file <a class="el" href="sim908_8c_source.html">sim908.c</a>.</p>
 
 </div>
 </div>
@@ -351,7 +352,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 2 2014 05:08:09 for VROOM by
+    <li class="footer">Generated on Wed Dec 3 2014 06:37:21 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

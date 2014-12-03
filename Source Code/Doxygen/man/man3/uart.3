@@ -1,8 +1,11 @@
-.TH "UART Driver" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "UART Driver" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 UART Driver \- 
+.PP
+This is a driver for the UART0-1 on the ATMEGA family processors\&.  
+
 .SS "Modules"
 
 .in +1c
@@ -15,22 +18,26 @@ UART Driver \-
 .in -1c
 .SH "Detailed Description"
 .PP 
-This is a driver for the UART0-1 on the ATMEGA family processors\&.
-.br
- UART0:
-.br
- RX: PE0
-.br
- TX: PE1
-.br
- 
-.br
- UART1:
-.br
- RX: PD2
-.br
- TX: PD3
-.br
+This is a driver for the UART0-1 on the ATMEGA family processors\&. 
+
+
+.IP "\(bu" 2
+UART0 pins:
+.IP "  \(bu" 4
+RX: PE0
+.IP "  \(bu" 4
+TX: PE1
+.PP
+
+.IP "\(bu" 2
+UART1 pins:
+.IP "  \(bu" 4
+RX: PD2
+.IP "  \(bu" 4
+TX: PD3 
+.PP
+
+.PP
 
 .SH "Author"
 .PP 

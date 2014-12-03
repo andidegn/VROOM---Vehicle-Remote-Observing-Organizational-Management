@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/thermometer/tc72.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/thermometer/tc72.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -36,15 +36,15 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "static void \fB_tc72_callback\fP (uint8_t data[])"
+.RI "static void \fB_tc72_callback\fP (uint8_t __data[])"
 .br
 .RI "\fICallback Function from SPI\&. \fP"
 .ti -1c
-.RI "void \fBinit_tc72\fP (uint8_t cs_pin)"
+.RI "void \fBinit_tc72\fP (uint8_t \fB__cs_pin\fP)"
 .br
 .RI "\fIInitiates tc72 using SPI\&. \fP"
 .ti -1c
-.RI "float \fBcalculate_temperature\fP (uint8_t MSB, uint8_t LSB)"
+.RI "float \fBcalculate_temperature\fP (uint8_t __msb, uint8_t __lsb)"
 .br
 .RI "\fIFunction to calculate the temperature\&. \fP"
 .ti -1c
@@ -63,10 +63,10 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "static int8_t \fB_handle_ID\fP = -1"
 .br
 .ti -1c
-.RI "static uint8_t \fB_LSB\fP = 0U"
+.RI "static uint8_t \fB_lsb\fP = 0U"
 .br
 .ti -1c
-.RI "static uint8_t \fB_MSB\fP = 0U"
+.RI "static uint8_t \fB_msb\fP = 0U"
 .br
 .ti -1c
 .RI "static uint8_t \fB_ID\fP = 0U"
@@ -84,35 +84,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "static \fBTC72_STATE\fP \fB_state\fP"
 .br
 .in -1c
-.SH "Detailed Description"
-.PP 
-
-.PP
-\fBAuthor:\fP
-.RS 4
-: Kenneth René Jensen : 0\&.3 
-.RE
-.PP
-
-.PP
-Definition in file \fBtc72\&.c\fP\&.
-.SH "Macro Definition Documentation"
-.PP 
-.SS "#define SDI_Read   0x02U"
-
-.PP
-\fBNote:\fP
-.RS 4
-Complies MISRO 2004 standards 
-.RE
-.PP
-
-.PP
-Definition at line 18 of file tc72\&.c\&.
-.SS "#define SDI_Write   0x80U"
-
-.PP
-Definition at line 19 of file tc72\&.c\&.
 .SH "Enumeration Type Documentation"
 .PP 
 .SS "enum \fBTC72_STATE\fP"
@@ -125,17 +96,17 @@ Definition at line 19 of file tc72\&.c\&.
 .TP
 \fB\fIRUNNING \fP\fP
 .PP
-Definition at line 22 of file tc72\&.c\&.
+Definition at line 20 of file tc72\&.c\&.
 .SH "Function Documentation"
 .PP 
-.SS "static void _tc72_callback (uint8_tdata[])\fC [static]\fP"
+.SS "static void _tc72_callback (uint8_t__data[])\fC [static]\fP"
 
 .PP
 Callback Function from SPI\&. 
 .PP
 \fBParameters:\fP
 .RS 4
-\fIdata\fP sent from SPI 
+\fIuint8_t\fP data - data sent from SPI
 .RE
 .PP
 \fBReturns:\fP
@@ -145,41 +116,41 @@ void
 .PP
 
 .PP
-Definition at line 133 of file tc72\&.c\&.
+Definition at line 130 of file tc72\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "int8_t _handle_ID = -1\fC [static]\fP"
 
 .PP
-Definition at line 28 of file tc72\&.c\&.
+Definition at line 26 of file tc72\&.c\&.
 .SS "uint8_t _ID = 0U\fC [static]\fP"
 
 .PP
-Definition at line 32 of file tc72\&.c\&.
-.SS "uint8_t _LSB = 0U\fC [static]\fP"
-
-.PP
 Definition at line 30 of file tc72\&.c\&.
-.SS "uint8_t _MSB = 0U\fC [static]\fP"
+.SS "uint8_t _lsb = 0U\fC [static]\fP"
 
 .PP
-Definition at line 31 of file tc72\&.c\&.
+Definition at line 28 of file tc72\&.c\&.
+.SS "uint8_t _msb = 0U\fC [static]\fP"
+
+.PP
+Definition at line 29 of file tc72\&.c\&.
 .SS "uint8_t _send_read[4]\fC [static]\fP"
 
 .PP
-Definition at line 35 of file tc72\&.c\&.
+Definition at line 33 of file tc72\&.c\&.
 .SS "uint8_t _send_setup[2]\fC [static]\fP"
 
 .PP
-Definition at line 36 of file tc72\&.c\&.
+Definition at line 34 of file tc72\&.c\&.
 .SS "\fBTC72_STATE\fP _state\fC [static]\fP"
 
 .PP
-Definition at line 37 of file tc72\&.c\&.
+Definition at line 35 of file tc72\&.c\&.
 .SS "int16_t _temp = 0U\fC [static]\fP"
 
 .PP
-Definition at line 34 of file tc72\&.c\&.
+Definition at line 32 of file tc72\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,4 +1,4 @@
-.TH "Public" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -9,9 +9,7 @@ Public \-
 .ti -1c
 .RI "enum \fBSPI_DATA_MODE\fP { \fBSPI_MODE_0\fP = 0, \fBSPI_MODE_1\fP = _BV(CPHA), \fBSPI_MODE_2\fP = _BV(CPOL), \fBSPI_MODE_3\fP = _BV(CPOL) | _BV(CPHA) }"
 .br
-.RI "\fISpecifies the available modes for SPI transfer format 
-.br
-\&. \fP"
+.RI "\fISpecifies the available modes for SPI transfer format\&. \fP"
 .ti -1c
 .RI "enum \fBSPI_DATA_DIRECTION\fP { \fBSPI_MSB_FIRST\fP = 0, \fBSPI_LST_FIRST\fP = _BV(DORD) }"
 .br
@@ -29,7 +27,7 @@ Public \-
 
 .in +1c
 .ti -1c
-.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t __cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
+.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t \fB__cs_pin\fP, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
 .br
 .RI "\fISets up the SPI bus as master using supplied parameters\&. \fP"
 .ti -1c
@@ -62,7 +60,7 @@ defines for the CS/CE pin active level
 .TP
 \fB\fISPI_CS_ACTIVE_HIGH \fP\fP
 .PP
-Definition at line 49 of file spi\&.h\&.
+Definition at line 50 of file spi\&.h\&.
 .SS "enum \fBSPI_DATA_DIRECTION\fP"
 
 .PP
@@ -75,29 +73,19 @@ defines for the data direction
 .TP
 \fB\fISPI_LST_FIRST \fP\fP
 .PP
-Definition at line 40 of file spi\&.h\&.
+Definition at line 41 of file spi\&.h\&.
 .SS "enum \fBSPI_DATA_MODE\fP"
 
 .PP
-Specifies the available modes for SPI transfer format 
-.br
-\&. 
+Specifies the available modes for SPI transfer format\&. 
 .IP "\(bu" 2
-SPI_MODE_0: Polarity positive, trigger rising edge 
-.br
-
+SPI_MODE_0: Polarity positive, trigger rising edge
 .IP "\(bu" 2
-SPI_MODE_1: Polarity positive, trigger falling edge 
-.br
-
+SPI_MODE_1: Polarity positive, trigger falling edge
 .IP "\(bu" 2
-SPI_MODE_2: Polarity negative, trigger rising edge 
-.br
-
+SPI_MODE_2: Polarity negative, trigger rising edge
 .IP "\(bu" 2
 SPI_MODE_3: Polarity negative, trigger falling edge 
-.br
-
 .PP
 
 .PP
@@ -112,7 +100,7 @@ SPI_MODE_3: Polarity negative, trigger falling edge
 .TP
 \fB\fISPI_MODE_3 \fP\fP
 .PP
-Definition at line 29 of file spi\&.h\&.
+Definition at line 30 of file spi\&.h\&.
 .SS "enum \fBSPI_DIVIDER\fP"
 
 .PP
@@ -135,13 +123,13 @@ defines for the frequency divider
 .TP
 \fB\fISPI_DIVIDER_32 \fP\fP
 .PP
-Definition at line 58 of file spi\&.h\&.
+Definition at line 59 of file spi\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "int8_t spi_master_setup (\fBSPI_DATA_MODE\fP__mode, \fBSPI_DATA_DIRECTION\fP__data_direction, \fBSPI_DIVIDER\fP__freq_divider, uint8_t__cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP__cs_active_level, void(*)(uint8_t *__data)__callback_function_ptr)"
 
 .PP
-Sets up the SPI bus as master using supplied parameters\&. Takes the supplied SPI parameters and stores them in a \fBhandle_param\fP array and returns a handle 
+Sets up the SPI bus as master using supplied parameters\&. Takes the supplied SPI parameters and stores them in a \fBhandle_param\fP array and returns a handle
 .PP
 \fBNote:\fP
 .RS 4
@@ -170,7 +158,7 @@ uint8_t - a handle for the setup
 .PP
 
 .PP
-Definition at line 63 of file spi\&.c\&.
+Definition at line 64 of file spi\&.c\&.
 .SS "void spi_release (void)"
 
 .PP
@@ -188,11 +176,11 @@ void
 .PP
 
 .PP
-Definition at line 146 of file spi\&.c\&.
+Definition at line 148 of file spi\&.c\&.
 .SS "int8_t spi_send (int8_t__handle, uint8_t *__data_array, uint8_t__no_of_bytes)"
 
 .PP
-Sends the 'data' array on the SPI bus using the parameters corresponding to the 'handle'\&. Stores the 'data' pointer and the no_of_bytes and calls '_send()' with the first data slot 
+Sends the 'data' array on the SPI bus using the parameters corresponding to the 'handle'\&. Stores the 'data' pointer and the no_of_bytes and calls '_send()' with the first data slot
 .PP
 \fBNote:\fP
 .RS 4
@@ -256,7 +244,7 @@ restore status register
 .PP
 
 .PP
-Definition at line 103 of file spi\&.c\&.
+Definition at line 105 of file spi\&.c\&.
 .SS "int8_t spi_send_byte (int8_t__handle, uint8_t__data)"
 
 .PP
@@ -276,7 +264,7 @@ int8_t - '0' if unsuccessful, '1' if successful
 .PP
 
 .PP
-Definition at line 93 of file spi\&.c\&.
+Definition at line 94 of file spi\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

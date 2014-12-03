@@ -1,125 +1,33 @@
-.TH "TC72_driver" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "TC72_driver" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 TC72_driver \- 
-.SS "Functions"
+.PP
+This is the driver for the temperature sensor tc72 on the ATMEGA family processors\&.  
+
+.SS "Modules"
 
 .in +1c
 .ti -1c
-.RI "void \fBinit_tc72\fP (uint8_t cs_pin)"
+.RI "\fBPublic\fP"
 .br
-.RI "\fIInitiates tc72 using SPI\&. \fP"
 .ti -1c
-.RI "float \fBcalculate_temperature\fP (uint8_t MSB, uint8_t LSB)"
+.RI "\fBPrivate\fP"
 .br
-.RI "\fIFunction to calculate the temperature\&. \fP"
-.ti -1c
-.RI "float \fBget_temperature\fP (void)"
-.br
-.RI "\fIFunction to read the last measured temperature from the tc72 sensor\&. \fP"
-.ti -1c
-.RI "void \fBmeasure_temperature\fP (void)"
-.br
-.RI "\fIFunction which starts measuring the temperature\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
 This is the driver for the temperature sensor tc72 on the ATMEGA family processors\&. 
-.SH "Function Documentation"
-.PP 
-.SS "float calculate_temperature (uint8_tMSB, uint8_tLSB)"
 
-.PP
-Function to calculate the temperature\&. 
-.PP
-\fBReturns:\fP
-.RS 4
-Temperature as floating point value 
-.RE
+
 .PP
 \fBNote:\fP
 .RS 4
-Should only be used for Unit Testing
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-Temperature as floating point value 
-.RE
-.PP
-\fBNote:\fP
-.RS 4
-Should only be used in Unit Testing 
+Complies MISRO 2004 standards 
 .RE
 .PP
 
-.PP
-Definition at line 78 of file tc72\&.c\&.
-.SS "float get_temperature (void)"
-
-.PP
-Function to read the last measured temperature from the tc72 sensor\&. 
-.PP
-\fBReturns:\fP
-.RS 4
-Temperature as floating point value 
-.RE
-.PP
-\fBNote:\fP
-.RS 4
-TC72 Operation Range: -55°C to 125°C 
-.RE
-.PP
-
-.PP
-Definition at line 107 of file tc72\&.c\&.
-.SS "void init_tc72 (uint8_tcs_pin)"
-
-.PP
-Initiates tc72 using SPI\&. 
-.PP
-\fBParameters:\fP
-.RS 4
-\fIuint8_t\fP cs_pin - chip select pin 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-void
-.RE
-.PP
-\fBNote:\fP
-.RS 4
-Complies MISRO 2004 standards
-.RE
-.PP
-\fBParameters:\fP
-.RS 4
-\fIuint8_t\fP cs_pin - chip select pin 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-void 
-.RE
-.PP
-
-.PP
-Definition at line 48 of file tc72\&.c\&.
-.SS "void measure_temperature (void)"
-
-.PP
-Function which starts measuring the temperature\&. 
-.PP
-\fBReturns:\fP
-.RS 4
-void 
-.RE
-.PP
-
-.PP
-Definition at line 117 of file tc72\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

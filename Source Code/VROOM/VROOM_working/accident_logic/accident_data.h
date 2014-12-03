@@ -1,11 +1,12 @@
 /**********************************************************************//**
  * @file accident_data.h
  *
- * @author: Kenneth René Jensen
- * @Version: 0.7
- * @addtogroup ac_dat Accident Data
+ * @author Kenneth René Jensen
+ * @version 0.7
+ * @defgroup ac_dat Accident Data
  * @{
-	This is the data for an Accident report.
+	@ingroup accident_logic
+	@brief This is the data for an Accident report.
 	Comply eCall standards for MSD data structure.
 	@note NOT YET Complies MISRO 2004 standards
 	@defgroup ac_dat_pub Public
@@ -58,9 +59,10 @@ typedef struct __attribute__((packed))
 /**********************************************************************//**
  * @ingroup ac_dat_pub
  * @brief Constant vehicle class type definition
- * @note Upper nibble contains class definition: [SA, L, M, N, O, T, G]
- * @	 Lower nibble contains class category definition: [1 - 7]
- * @	 Details: http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32007L0046&from=EN
+ * @note\n
+ * - Upper nibble contains class definition: [SA, L, M, N, O, T, G]\n
+ * - Lower nibble contains class category definition: [1 - 7]\n
+ * - Details: http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32007L0046&from=EN
  * @defgroup ac_dat_vehicle_class Vehicle class
  * @{
  *************************************************************************/
@@ -76,14 +78,12 @@ typedef struct __attribute__((packed))
 /**********************************************************************//**
  * @ingroup ac_dat_pub
  * @brief Flag to detect if an alarm has been triggered
- * @}
  *************************************************************************/
 typedef enum {	EMERGENCY_NO_ALARM = 0,
 				EMERGENCY_MANUAL_ALARM = 1,
 				EMERGENCY_AUTO_ALARM = 2,
 				EMERGENCY_ALARM_SENT = 3
 } AD_EMERGENCY_FLAG;
-/** @} */
 
 extern char EXT_MSD_FILENAME[24];
 extern AD_MSD EXT_MSD;

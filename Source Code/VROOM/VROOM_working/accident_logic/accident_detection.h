@@ -1,15 +1,16 @@
 /**********************************************************************//**
  * @file accident_detection.h
  *
- * @author: Andi Degn
- * @author: Kenneth René Jensen
- * @Version: 0.1
+ * @author Andi Degn
+ * @author Kenneth René Jensen
+ * @version 0.1
  * @defgroup ac_det Accident Detection
  * @{
-		This file holds the logic for detecting an accident
-		@note NOT YET Complies MISRO 2004 standards
-		@defgroup ac_det_pub Public
-		@defgroup ac_det_priv Private
+	@ingroup accident_logic
+	@brief This file holds the logic for detecting an accident
+	@note NOT YET Complies MISRO 2004 standards
+	@defgroup ac_det_pub Public
+	@defgroup ac_det_priv Private
  * @}
  *************************************************************************/
 

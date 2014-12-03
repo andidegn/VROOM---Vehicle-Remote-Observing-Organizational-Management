@@ -1,0 +1,122 @@
+.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public \- 
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinit_tc72\fP (uint8_t \fB__cs_pin\fP)"
+.br
+.RI "\fIInitiates tc72 using SPI\&. \fP"
+.ti -1c
+.RI "float \fBcalculate_temperature\fP (uint8_t __msb, uint8_t __lsb)"
+.br
+.RI "\fIFunction to calculate the temperature\&. \fP"
+.ti -1c
+.RI "float \fBget_temperature\fP (void)"
+.br
+.RI "\fIFunction to read the last measured temperature from the tc72 sensor\&. \fP"
+.ti -1c
+.RI "void \fBmeasure_temperature\fP (void)"
+.br
+.RI "\fIFunction which starts measuring the temperature\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "float calculate_temperature (uint8_t__msb, uint8_t__lsb)"
+
+.PP
+Function to calculate the temperature\&. Merges together __msb and __lsb and returns the temperature as a floating point
+.PP
+\fBNote:\fP
+.RS 4
+Should only be used directly for Unit Testing, else only used locally
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP __msb - most significant byte 
+.br
+\fIuint8_t\fP __lsb - least significant byte
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Temperature as floating point value 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+Should only be used in Unit Testing 
+.RE
+.PP
+
+.PP
+Definition at line 76 of file tc72\&.c\&.
+.SS "float get_temperature (void)"
+
+.PP
+Function to read the last measured temperature from the tc72 sensor\&. Returns last recorded temperature
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Temperature as floating point value
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+TC72 Operation Range: -55°C to 125°C 
+.RE
+.PP
+
+.PP
+Definition at line 103 of file tc72\&.c\&.
+.SS "void init_tc72 (uint8_t__cs_pin)"
+
+.PP
+Initiates tc72 using SPI\&. Sets up the spi communication and sends the setup data to the tc72 chip
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP cs_pin - chip select pin
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 44 of file tc72\&.c\&.
+.SS "void measure_temperature (void)"
+
+.PP
+Function which starts measuring the temperature\&. Sends the read adr\&. and 3 dummy bytes
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 112 of file tc72\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

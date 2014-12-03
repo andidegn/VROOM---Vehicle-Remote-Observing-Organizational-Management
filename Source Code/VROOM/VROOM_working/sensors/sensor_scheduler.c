@@ -1,8 +1,5 @@
 /**********************************************************************//**
- * collect_sensor_data.c
- *
- * Created: 03-09-2014 13:53:18
- *  Author: Kenneth René Jensen
+ * @file collect_sensor_data.c
  *************************************************************************/
 #include <util/delay.h>
 #include <math.h>
@@ -35,18 +32,18 @@ void scheduler_start(void (*callback_function_ptr)(char __data)) {
 	scheduler_release();
 }
 
-void scheduler_acc_get_last_readings_sum(int16_t *buffer) {
+void scheduler_acc_get_last_readings_sum(int16_t *__buffer) {
 	uint8_t _index = 0;
 	for (uint8_t i = 0; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) {
 		_index = (_acc_buffer_tail + i + 1) % CONFIG_ALARM_CRASH_NO_OF_READINGS;
-		*(buffer + i) = sqrt(pow(_x_axis_buffer[_index], 2) + pow(_y_axis_buffer[_index], 2) + pow(_z_axis_buffer[_index], 2));
+		*(__buffer + i) = sqrt(pow(_x_axis_buffer[_index], 2) + pow(_y_axis_buffer[_index], 2) + pow(_z_axis_buffer[_index], 2));
 	}
 }
 
-void scheduler_acc_get_last_readings(int16_t *buffer) {
-	*buffer = _x_axis_buffer[_acc_buffer_tail];
-	*(buffer + 1) = _y_axis_buffer[_acc_buffer_tail];
-	*(buffer + 2) = _z_axis_buffer[_acc_buffer_tail];
+void scheduler_acc_get_last_readings(int16_t *__buffer) {
+	*__buffer = _x_axis_buffer[_acc_buffer_tail];
+	*(__buffer + 1) = _y_axis_buffer[_acc_buffer_tail];
+	*(__buffer + 2) = _z_axis_buffer[_acc_buffer_tail];
 }
 
 float scheduler_temp_get_last_reading(void)
@@ -68,7 +65,7 @@ void scheduler_release(void) {
 
 		case state_timer_init :
 			_state = state_tc72_read;
-			timer1_init_CTC(TIMER_PS256, TIMER_50HZ);
+			timer1_init_CTC(TIMER_PS256, CONFIG_ALARM_SENSOR_READ_FREQUENCY);
 		break;
 
 		/* reoccurring */
@@ -87,9 +84,9 @@ void scheduler_release(void) {
 		break;
 		case state_store_in_buffers :
 			_state = state_idle;
-			_x_axis_buffer[_acc_buffer_tail] = (int)(acc_get_x_axis() * 400);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
-			_y_axis_buffer[_acc_buffer_tail] = (int)(acc_get_y_axis() * 400);
-			_z_axis_buffer[_acc_buffer_tail] = (int)(acc_get_z_axis() * 400);
+			_x_axis_buffer[_acc_buffer_tail] = (int)(acc_get_x_axis() * 100);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
+			_y_axis_buffer[_acc_buffer_tail] = (int)(acc_get_y_axis() * 100);
+			_z_axis_buffer[_acc_buffer_tail] = (int)(acc_get_z_axis() * 100);
 			_acc_buffer_tail = (_acc_buffer_tail + 1) % CONFIG_ALARM_CRASH_NO_OF_READINGS;
 
 			_temperature = get_temperature();

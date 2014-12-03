@@ -1,6 +1,12 @@
 var NAVTREE =
 [
   [ "VROOM", "index.html", [
+    [ "Vroom Project", "index.html", [
+      [ "Introduction", "index.html#Introduction", [
+        [ "Background", "index.html#Background", null ]
+      ] ],
+      [ "Changelog", "index.html#Changelog", null ]
+    ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Data Structures", null, [
       [ "Data Structures", "annotated.html", "annotated" ],
@@ -29,10 +35,11 @@ var NAVTREEINDEX =
 [
 "_v_r_o_o_m__working_8c.html",
 "dir_7f0f200ae98be3cb55f4b41b2ab2a9b4.html",
-"group__cp__pub.html#ga67a0db04d321a74b7e7fcfd3f1a3f70b",
-"group__uart__pub.html#gga2b50ce1943f24e90a2e2b8fe34f20481aaad68dcdbd1283e461ebcf6371696ae5",
-"sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32ba2baa505f23037076b362e32e8431432b",
-"test__module__uart_8c.html#a65cc11b887118e7f1055ae44c9e556da"
+"group__at__profile.html#gac8d0680d4383216ab819928632105db0",
+"group__spi__pub.html#gga96a1793d8e3c7227d6009a535c201cf0a76b4ad1254f6a906f9f2ac53a0565176",
+"lcd_8h.html#gaf8da853dba4b9d5f2aea4e294444e14d",
+"spi_8c.html#ga69c7184b8c4cf536ddad3c228393e964",
+"uart_8h.html#gga2b50ce1943f24e90a2e2b8fe34f20481a6d32146eb9f489076a294ada8594ced8"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

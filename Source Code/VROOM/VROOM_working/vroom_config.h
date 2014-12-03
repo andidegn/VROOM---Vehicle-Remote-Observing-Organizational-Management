@@ -1,8 +1,16 @@
 /**********************************************************************//**
  * @file vroom_config.h
- * @author: Kenneth René Jensen
  * @author: Andi Degn
+ * @author: Kenneth René Jensen
  * @Version: 0.6
+ *
+ * @defgroup accident_logic Accident Logic
+ * @defgroup data_communication Data Communication
+ * @defgroup hardware_boards Hardware Boards
+ * @defgroup sensors Sensors
+ * @defgroup test Test
+ * @defgroup util Utility
+ *
  * @defgroup vroom_cfg Vroom Config
  * @{
 	 Configuration file containing all adjustment and setup parameters
@@ -19,6 +27,9 @@
 #define ANDI_TEST		YES
 #define KENNETH_TEST	NO
 #define DEBUG_UART_ENABLE	/* uart1 (PD2/PD3) is used for debugging */
+#define DEBUG_UART_ECHO
+//#define DEBUG_SIM908_CALLBACK
+//#define DEBUG_SIM908_CALLBACK_NOT_CAUGHT
 #define DEBUG_LCD_ENABLE	/* LCD should be connected to PORT L */
 
 /**********************************************************************//**
@@ -27,15 +38,16 @@
  * @defgroup vc_adp Accident detection parameters
  * @{
  *************************************************************************/
-#define CONFIG_ALARM_DETECTION_RESOLUTION	10		/**> Time interval between checking for accidents in hz */
+#define CONFIG_ALARM_SENSOR_READ_FREQUENCY	TIMER_50HZ	/**> Frequency of which the sensors are read in Hz */
+#define CONFIG_ALARM_DETECTION_FREQUENCY	TIMER_50HZ	/**> Time interval between checking for accidents in Hz */
 
-#define CONFIG_ALARM_CRASH_NO_OF_READINGS	5		/**> Length of acceleration peek */
-#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	800		/**> Total acceleration [G] in 1/100 resolution */
+#define CONFIG_ALARM_CRASH_NO_OF_READINGS	5			/**> Length of acceleration peek */
+#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	800			/**> Total acceleration [G] in 1/100 resolution */
 
-#define CONFIG_ALARM_FIRE_TRIGGER_DEGREE	1		/**> Temperature raise in Celsius degrees */
-#define CONFIG_ALARM_FIRE_TRIGGER_TIME		80		/**> Temperature raise time in 1/10 seconds resolution */
+#define CONFIG_ALARM_FIRE_TRIGGER_DEGREE	1			/**> Temperature raise in Celsius degrees */
+#define CONFIG_ALARM_FIRE_TRIGGER_TIME		80			/**> Temperature raise time in 1/10 seconds resolution */
 
-#define CONFIG_ALARM_FIRE_TEMP_INIT			-100		/**> Used to be sure there are two temperature readings before comparing values */
+#define CONFIG_ALARM_FIRE_TEMP_INIT			-100			/**> Used to be sure there are two temperature readings before comparing values */
 /** @} */
 
 /**********************************************************************//**

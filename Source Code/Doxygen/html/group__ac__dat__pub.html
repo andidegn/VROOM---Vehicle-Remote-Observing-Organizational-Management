@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__ac__dat__pub.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -101,6 +101,7 @@ $(document).ready(function(){initNavTree('group__ac__dat__pub.html','');});
 <a href="#groups">Modules</a> &#124;
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Public<div class="ingroups"><a class="el" href="group__ac__dat.html">Accident Data</a></div></div>  </div>
@@ -128,6 +129,16 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:ga054b4800a07163c985b6a952278d76e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct containing the MSD for an accident report  <a href="#ga054b4800a07163c985b6a952278d76e2">More...</a><br/></td></tr>
 <tr class="separator:ga054b4800a07163c985b6a952278d76e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga149a79e50f1d6eb62f4dc777abf3d5a6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__pub.html#ga149a79e50f1d6eb62f4dc777abf3d5a6">AD_EMERGENCY_FLAG</a> { <a class="el" href="group__ac__dat__pub.html#gga149a79e50f1d6eb62f4dc777abf3d5a6aa804f424e8340c4c008b9d2a4bc13944">EMERGENCY_NO_ALARM</a> = 0, 
+<a class="el" href="group__ac__dat__pub.html#gga149a79e50f1d6eb62f4dc777abf3d5a6afd081379d59643956abdf38d516f0cef">EMERGENCY_MANUAL_ALARM</a> = 1, 
+<a class="el" href="group__ac__dat__pub.html#gga149a79e50f1d6eb62f4dc777abf3d5a6a30df4dd40fd132added2ec752e70ec5a">EMERGENCY_AUTO_ALARM</a> = 2, 
+<a class="el" href="group__ac__dat__pub.html#gga149a79e50f1d6eb62f4dc777abf3d5a6a270e197de87f6b218c4d8a1d98914590">EMERGENCY_ALARM_SENT</a> = 3
+ }</td></tr>
+<tr class="memdesc:ga149a79e50f1d6eb62f4dc777abf3d5a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to detect if an alarm has been triggered.  <a href="group__ac__dat__pub.html#ga149a79e50f1d6eb62f4dc777abf3d5a6">More...</a><br/></td></tr>
+<tr class="separator:ga149a79e50f1d6eb62f4dc777abf3d5a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gaee1bd5118ffcb7994b94088ddc55f67c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__pub.html#gaee1bd5118ffcb7994b94088ddc55f67c">ad_emergency_alarm</a> (void)</td></tr>
@@ -148,6 +159,33 @@ Functions</h2></td></tr>
 
 <p>struct containing the MSD for an accident report </p>
 <dl class="section note"><dt>Note</dt><dd>According eCall standard EN 15722 the MSD consists of 140 bytes </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="ga149a79e50f1d6eb62f4dc777abf3d5a6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__ac__dat__pub.html#ga149a79e50f1d6eb62f4dc777abf3d5a6">AD_EMERGENCY_FLAG</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flag to detect if an alarm has been triggered. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="gga149a79e50f1d6eb62f4dc777abf3d5a6aa804f424e8340c4c008b9d2a4bc13944"></a>EMERGENCY_NO_ALARM</em>&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="gga149a79e50f1d6eb62f4dc777abf3d5a6afd081379d59643956abdf38d516f0cef"></a>EMERGENCY_MANUAL_ALARM</em>&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="gga149a79e50f1d6eb62f4dc777abf3d5a6a30df4dd40fd132added2ec752e70ec5a"></a>EMERGENCY_AUTO_ALARM</em>&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="gga149a79e50f1d6eb62f4dc777abf3d5a6a270e197de87f6b218c4d8a1d98914590"></a>EMERGENCY_ALARM_SENT</em>&#160;</td><td class="fielddoc">
+</td></tr>
+</table>
+
+<p>Definition at line <a class="el" href="accident__data_8h_source.html#l00082">82</a> of file <a class="el" href="accident__data_8h_source.html">accident_data.h</a>.</p>
 
 </div>
 </div>
@@ -195,7 +233,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 2 2014 05:08:09 for VROOM by
+    <li class="footer">Generated on Wed Dec 3 2014 06:37:20 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

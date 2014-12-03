@@ -1,5 +1,5 @@
 /**********************************************************************//**
- * @file: UART0_Driver.c
+ * @file uart.c
  *************************************************************************/
 
 #include "uart.h"
@@ -50,6 +50,35 @@ static volatile uint8_t _rx_buffer1_tail = 0U;
 /**********************************************************************//**
  * @ingroup uart_pub
  * Takes the supplied UART parameters and sets up the UART accordingly
+ *
+ * Register: UCSR0B
+ * ----------------
+ * |     Bit  |   7  |   6  |   5  |   4  |   3  |   2  |   1  |   0  |        |
+ * |:--------:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:------:|
+ * |  (0xC1)  |RXCIE0|TXCIE0|UDRIE0| RXEN0| TXEN0|UCSZ02| RXB80| TXB80| UCSR0B |
+ * |Direction |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |        |
+ *
+ * - Bit 7 - RXCIE0: RX Complete Interrupt Enable
+ * - Bit 6 - TXCIE0: TX Complete Interrupt Enable
+ * - Bit 5 - UDRIE0: UART Data Register Empty Interrupt Enable
+ * - Bit 4 - RXEN0: Receiver Enable
+ * - Bit 3 - TXEN0: Transmitter Enable
+ * - Bit 2 - UCSZ02: Character Size
+ * - Bit 1 - RXB80: Receive Data Bit 8
+ * - Bit 0 - TXB80: Transmit Data Bit 8
+ *
+ * Register: UCSR0C
+ * ----------------
+ * |     Bit  |   7   |   6   |   5  |   4  |   3  |   2  |   1  |   0  |        |
+ * |:--------:|:-----:|:-----:|:----:|:----:|:----:|:----:|:----:|:----:|:------:|
+ * |  (0xC2)  |UMSEL01|UMSEL00| UPM01| UPM00| USBS0|UCSZ01|UCSZ00|UCPOL0| UCSR0C |
+ * |Direction |  R/W  |  R/W  |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |        |
+ *
+ * - Bits 7:6 - UMSEL01:0 UART Mode Select
+ * - Bits 5:4 - UPM01:0: Parity Mode
+ * - Bit 3    - USBS0: Stop Bit Select
+ * - Bits 2:1 - UCSZ01:0: Character Size
+ * - Bit 0    - UCPOL0: Clock Polarity
  **************************************************************************/
 void uart0_setup_async(UART_MODE __operational_mode,
 						 UART_BAUD __baud_rate,
@@ -98,35 +127,13 @@ void uart0_setup_async(UART_MODE __operational_mode,
 	}
 
 	/* sets various setup bits (p.223-226) */
-	/*    Bit  |   7  |   6  |   5  |   4  |   3  |   2  |   1  |   0  |
-		       |RXCIE0|TXCIE0|UDRIE0| RXEN0| TXEN0|UCSZ02| RXB80| TXB80| UCSR0B
-	Read/Write |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |
-
-	Bit 7 - RXCIE0: RX Complete Interrupt Enable
-	Bit 6 - TXCIE0: TX Complete Interrupt Enable
-	Bit 5 - UDRIE0: UART Data Register Empty Interrupt Enable
-	Bit 4 - RXEN0: Receiver Enable
-	Bit 3 - TXEN0: Transmitter Enable
-	Bit 2 - UCSZ02: Character Size
-	Bit 1 - RXB80: Receive Data Bit 8
-	Bit 0 - TXB80: Transmit Data Bit 8
-	*/
 	UCSR0B = 0;
 	UCSR0B |= _BV(RXCIE0) |
 			  _BV(RXEN0) |
 			  _BV(TXEN0) |
 			  (__char_size == UART_9_BIT ? _BV(UCSZ02) : 0);
 
-	/*    Bit  |   7  |   6  |   5  |   4  |   3  |   2  |   1  |   0  |
-		       |UMSEL01UMSEL00 UPM01| UPM00| USBS0|UCSZ01|UCSZ00|UCPOL0| UCSR0C
-	Read/Write |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |
 
-	Bits 7:6 - UMSEL01:0 UART Mode Select
-	Bits 5:4 - UPM01:0: Parity Mode
-	Bit 3    - USBS0: Stop Bit Select
-	Bits 2:1 - UCSZ01:0: Character Size
-	Bit 0    - UCPOL0: Clock Polarity
-	*/
 	/* add "operational_mode" here if support of synchronous
 	and/or master SPI is to be implemented */
 	UCSR0C = 0;
@@ -238,6 +245,34 @@ ISR(USART0_RX_vect, ISR_BLOCK) {
 /**********************************************************************//**
  * @ingroup uart_pub
  * Takes the supplied UART parameters and sets up the UART accordingly
+ * Register: UCSR1B
+ * ----------------
+ * |     Bit  |   7  |   6  |   5  |   4  |   3  |   2  |   1  |   0  |        |
+ * |:--------:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:------:|
+ * |  (0xC9)  |RXCIE1|TXCIE1|UDRIE1| RXEN1| TXEN1|UCSZ12| RXB81| TXB81| UCSR1B |
+ * |Direction |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |        |
+ *
+ * - Bit 7 - RXCIE1: RX Complete Interrupt Enable
+ * - Bit 6 - TXCIE1: TX Complete Interrupt Enable
+ * - Bit 5 - UDRIE1: UART Data Register Empty Interrupt Enable
+ * - Bit 4 - RXEN1: Receiver Enable
+ * - Bit 3 - TXEN1: Transmitter Enable
+ * - Bit 2 - UCSZ12: Character Size
+ * - Bit 1 - RXB81: Receive Data Bit 8
+ * - Bit 0 - TXB81: Transmit Data Bit 8
+ *
+ * Register: UCSR1C
+ * ----------------
+ * |     Bit  |   7   |   6   |   5  |   4  |   3  |   2  |   1  |   0  |        |
+ * |:--------:|:-----:|:-----:|:----:|:----:|:----:|:----:|:----:|:----:|:------:|
+ * |  (0xCA)  |UMSEL11|UMSEL10| UPM11| UPM10| USBS1|UCSZ11|UCSZ10|UCPOL1| UCSR1C |
+ * |Direction |  R/W  |  R/W  |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |        |
+ *
+ * - Bits 7:6 - UMSEL11:0 UART Mode Select
+ * - Bits 5:4 - UPM11:0: Parity Mode
+ * - Bit 3    - USBS1: Stop Bit Select
+ * - Bits 2:1 - UCSZ11:0: Character Size
+ * - Bit 0    - UCPOL1: Clock Polarity
  **************************************************************************/
 void uart1_setup_async(UART_MODE __operational_mode,
 						 UART_BAUD __baud_rate,
@@ -286,35 +321,12 @@ void uart1_setup_async(UART_MODE __operational_mode,
 	}
 
 	/* sets various setup bits (p.223-226) */
-	/*    Bit  |   7  |   6  |   5  |   4  |   3  |   2  |   1  |   0  |
-		       |RXCIE1|TXCIE1|UDRIE1| RXEN1| TXEN1|UCSZ12| RXB81| TXB81| UCSR1B
-	Read/Write |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |
-
-	Bit 7 - RXCIE1: RX Complete Interrupt Enable
-	Bit 6 - TXCIE1: TX Complete Interrupt Enable
-	Bit 5 - UDRIE1: UART Data Register Empty Interrupt Enable
-	Bit 4 - RXEN1: Receiver Enable
-	Bit 3 - TXEN1: Transmitter Enable
-	Bit 2 - UCSZ12: Character Size
-	Bit 1 - RXB81: Receive Data Bit 8
-	Bit 0 - TXB81: Transmit Data Bit 8
-	*/
 	UCSR1B = 0;
 	UCSR1B |= _BV(RXCIE1) |
 			  _BV(RXEN1) |
 			  _BV(TXEN1) |
 			  (__char_size == UART_9_BIT ? _BV(UCSZ12) : 0);
 
-	/*    Bit  |   7  |   6  |   5  |   4  |   3  |   2  |   1  |   0  |
-		       |UMSEL11UMSEL10 UPM11| UPM10| USBS1|UCSZ11|UCSZ10|UCPOL1| UCSR1C
-	Read/Write |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |  R/W |
-
-	Bits 7:6 - UMSEL11:0 UART Mode Select
-	Bits 5:4 - UPM11:0: Parity Mode
-	Bit 3    - USBS1: Stop Bit Select
-	Bits 2:1 - UCSZ11:0: Character Size
-	Bit 0    - UCPOL1: Clock Polarity
-	*/
 	/* add "operational_mode" here if support of synchronous
 	and/or master SPI is to be implemented */
 	UCSR1C = 0;

@@ -1,8 +1,16 @@
-.TH "Private" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 Private \- 
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBScale Factor\fP"
+.br
+.RI "\fIDefine for the scale factor to get calibrated output for 1g gravity This is visually calibrated to stationary have unit vector (1g)\&. The mathematically calculated value is: Full-scale g/(2^16) = 12/(2^16) = 0\&.00018310546875\&. \fP"
+.in -1c
 .SS "Functions"
 
 .in +1c
@@ -33,7 +41,7 @@ void
 .PP
 
 .PP
-Definition at line 166 of file lis331hh\&.c\&.
+Definition at line 170 of file lis331hh\&.c\&.
 .SS "static void _acc_read_from_reg (uint8_treg, uint8_tno_of_dummy_bytes)\fC [static]\fP"
 Sends seven bytes to the SPI\&. First byte with the command\&. The command is a constructed like so: Bit0 - RW: Read/Write
 .IP "\(bu" 2
@@ -49,7 +57,9 @@ Multi: 1
 SIngle:0
 .PP
 .PP
-Bit2-7 - Address |bit7|bit6|bit5|bit4|bit3|bit2|bit1|bit0| | RW | MS |ADR5|ADR4|ADR3|ADR2|ADR1|ADR0|
+.SS "Bit2-7 - Address "
+.PP
+bit7bit6bit5bit4bit3bit2bit1bit0  RW MS ADR5ADR4ADR3ADR2ADR1ADR0 
 .PP
 \fBParameters:\fP
 .RS 4
@@ -70,7 +80,7 @@ void
 .PP
 
 .PP
-Definition at line 124 of file lis331hh\&.c\&.
+Definition at line 128 of file lis331hh\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

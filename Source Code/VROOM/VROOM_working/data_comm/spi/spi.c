@@ -1,5 +1,5 @@
 /**********************************************************************//**
- * @file: spi.c
+ * @file spi.c
  **************************************************************************/
 
 #include "spi.h"
@@ -41,7 +41,7 @@
 static int8_t _handle_count = 0;
 static int8_t _current_handle = -1;
 static handle_param _handles[MAX_HANDLES];
-static uint8_t _cs_pin;
+static uint8_t __cs_pin;
 static uint8_t _cs_active_level;
 static volatile uint8_t _is_busy = 0;
 
@@ -58,6 +58,7 @@ static void _send(uint8_t __data);
  * @ingroup spi_pub
  * Takes the supplied SPI parameters and stores them in a
  * handle_param array and returns a handle
+ *
  * @note Max 16 different handles are available
  **************************************************************************/
 int8_t spi_master_setup(SPI_DATA_MODE __mode,
@@ -77,7 +78,7 @@ int8_t spi_master_setup(SPI_DATA_MODE __mode,
 	    _handles[_handle_count].callback_function_ptr = __callback_function_ptr;
 	    ret = _handle_count++;
     }
-	_cs_pin = __cs_pin;
+	__cs_pin = __cs_pin;
 	_cs_active_level = __cs_active_level;
 	DDR_SPI |= __cs_pin;
 	_set_cs_level(CS_INACTIVE);
@@ -98,6 +99,7 @@ int8_t spi_send_byte(int8_t __handle, uint8_t __data) {
  * @ingroup spi_pub
  * Stores the "data" pointer and the no_of_bytes and calls "_send()"
  * with the first data slot
+ *
  * @note This "data" pointer is being used to store the returning data as well
  **************************************************************************/
 int8_t spi_send(int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes) {
@@ -153,30 +155,39 @@ void spi_release(void) {
 /**********************************************************************//**
  * @ingroup spi_priv
  * @brief Sets up the ports for the spi bus
- * * Sets up the SPI ports as output
- * * Clears the SPRC register before setup to make sure it is clear
- * * Sets up the SPRC register based on the supplied parameters
- * * * SPIE, SPE and master are fixed
- * * Sets up the SPSR register if divider 2, 8 or 32 is chosen
+ * - Sets up the SPI ports as output
+ * - Clears the SPRC register before setup to make sure it is clear
+ * - Sets up the SPRC register based on the supplied parameters
+ *    + SPIE, SPE and master are fixed
+ * - Sets up the SPSR register if divider 2, 8 or 32 is chosen
  *
- * SPI mode: | CPOL | CHAP |\n
- * SPI_MODE0 |    0 |    0 |\n
- * SPI_MODE1 |    0 |    1 |\n
- * SPI_MODE2 |    1 |    0 |\n
- * SPI_MODE3 |    1 |    1 |\n
+ * |SPI mode: | CPOL | CHAP |
+ * |:---------|:----:|:----:|
+ * |SPI_MODE0 |    0 |    0 |
+ * |SPI_MODE1 |    0 |    1 |
+ * |SPI_MODE2 |    1 |    0 |
+ * |SPI_MODE3 |    1 |    1 |
  *\n
- * Data direction: | DORD |\n
- * SPI_MSB_FIRST   |    0 |\n
- * SPI_LSB_FIRST   |    1 |\n
+ * |Data direction: | DORD |
+ * |:---------------|:----:|
+ * |SPI_MSB_FIRST   |    0 |
+ * |SPI_LSB_FIRST   |    1 |
  *\n
- * Frequency divider: | SPI2X | SPR1 | SPR0 |\n
- * SPI_DIVIDER_2	  |     1 |    0 |    0 |\n
- * SPI_DIVIDER_4	  |     0 |    0 |    0 |\n
- * SPI_DIVIDER_8	  |     1 |    0 |    1 |\n
- * SPI_DIVIDER_16	  |     0 |    0 |    1 |\n
- * SPI_DIVIDER_32	  |     1 |    1 |    0 |\n
- * SPI_DIVIDER_64	  |     0 |    1 |    0 |\n
- * SPI_DIVIDER_128	  |     0 |    1 |    1 |\n
+ * |Frequency divider: | SPI2X | SPR1 | SPR0 |
+ * |:------------------|:-----:|:----:|:----:|
+ * |SPI_DIVIDER_2	   |     1 |    0 |    0 |
+ * |SPI_DIVIDER_4	   |     0 |    0 |    0 |
+ * |SPI_DIVIDER_8	   |     1 |    0 |    1 |
+ * |SPI_DIVIDER_16	   |     0 |    0 |    1 |
+ * |SPI_DIVIDER_32	   |     1 |    1 |    0 |
+ * |SPI_DIVIDER_64	   |     0 |    1 |    0 |
+ * |SPI_DIVIDER_128	   |     0 |    1 |    1 |
+ *
+ * Enables SPI, sets it as Master and sets all related bits (p.202)
+ * |        Bit  |  7 |  6 |  5 |  4 |  3 |  2 |  1 |  0 |      |
+ * |:------------|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:----:|
+ * | 0x2C (0x4C) |SPIE| SPE|DORD|MSTR|CPOL|CPHA|SPR1|SPR0| SPCR |
+ * | Direction   | R/W| R/W| R/W| R/W| R/W| R/W| R/W| R/W|      |
  *
  * @param handle_param *__param - a struct containing the parameters for the SPI setup
  *
@@ -195,9 +206,9 @@ static void _setup_spi(handle_param *__param) {
 	SPCR = 0x00;
 
 	/* Sets the active CS/CE pin and pin level */
-	_cs_pin = __param->cs_pin;
+	__cs_pin = __param->cs_pin;
 	_cs_active_level = __param->cs_active_level;
-	DDR_SPI |= _BV(_cs_pin);
+	DDR_SPI |= _BV(__cs_pin);
 
 	/* Sets an additional bit if the divider is 2, 8 or 32 */
 	if ((__param->freq_divider == SPI_DIVIDER_2) ||
@@ -208,11 +219,6 @@ static void _setup_spi(handle_param *__param) {
 		SPSR &= ~_BV(SPI2X);
 	}
 
-	/* Enables SPI, sets it as Master and sets all related bits (p.202)
-				Bit  |  7 |  6 |  5 |  4 |  3 |  2 |  1 |  0 |
-		 0x2C (0x4C) |SPIE| SPE|DORD|MSTR|CPOL|CPHA|SPR1|SPR0| SPCR
-	Read/Write		 | R/W| R/W| R/W| R/W| R/W| R/W| R/W| R/W|
-	*/
 	SPCR |= _BV(SPE) | __param->data_direction | _BV(MSTR) | __param->mode | __param->freq_divider;
 	/* restore the status register */
 	SREG = _sreg;
@@ -231,9 +237,9 @@ static inline void _set_cs_level(uint8_t __level) {
 		__level = !__level;
 	}
 	if (__level == CS_INACTIVE) {
-		PORTB &= ~_BV(_cs_pin);
+		PORTB &= ~_BV(__cs_pin);
 	} else {
-		PORTB |= _BV(_cs_pin);
+		PORTB |= _BV(__cs_pin);
 	}
 }
 

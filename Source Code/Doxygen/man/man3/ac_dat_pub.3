@@ -1,4 +1,4 @@
-.TH "Public" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -31,6 +31,14 @@ Public \-
 .br
 .RI "\fIstruct containing the MSD for an accident report \fP"
 .in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBAD_EMERGENCY_FLAG\fP { \fBEMERGENCY_NO_ALARM\fP = 0, \fBEMERGENCY_MANUAL_ALARM\fP = 1, \fBEMERGENCY_AUTO_ALARM\fP = 2, \fBEMERGENCY_ALARM_SENT\fP = 3 }"
+.br
+.RI "\fIFlag to detect if an alarm has been triggered\&. \fP"
+.in -1c
 .SS "Functions"
 
 .in +1c
@@ -55,6 +63,25 @@ According eCall standard EN 15722 the MSD consists of 140 bytes
 .RE
 .PP
 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBAD_EMERGENCY_FLAG\fP"
+
+.PP
+Flag to detect if an alarm has been triggered\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIEMERGENCY_NO_ALARM \fP\fP
+.TP
+\fB\fIEMERGENCY_MANUAL_ALARM \fP\fP
+.TP
+\fB\fIEMERGENCY_AUTO_ALARM \fP\fP
+.TP
+\fB\fIEMERGENCY_ALARM_SENT \fP\fP
+.PP
+Definition at line 82 of file accident_data\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "void ad_emergency_alarm (void)"

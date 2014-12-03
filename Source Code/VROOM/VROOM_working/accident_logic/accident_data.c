@@ -61,8 +61,9 @@ void ad_emergency_alarm(void)
 /**********************************************************************//**
  * @ingroup ac_dat_priv
  * @brief function to set the control byte
- *	Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |\n
- *	Bit:		  |	       7			 |	       6		 |     5	 |			  4			  | 3 | 2 | 1 | 0 |\n
+ * |Control byte  | Automatic activation | Manual activation | Test call | Confidence in position |Res|Res|Res|Res|
+ * |:-------------|:--------------------:|:-----------------:|:---------:|:----------------------:|:-:|:-:|:-:|:-:|
+ * |Bit           |           7          |         6         |     5     |            4           | 3 | 2 | 1 | 0 |
  *
  * @param bool position_can_be_trusted - confidence in position
  * @param bool test_call - Flag for testing purposes

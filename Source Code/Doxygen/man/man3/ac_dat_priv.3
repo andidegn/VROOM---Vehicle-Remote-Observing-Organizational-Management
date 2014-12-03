@@ -1,4 +1,4 @@
-.TH "Private" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -9,11 +9,7 @@ Private \-
 .ti -1c
 .RI "static void \fB_set_control_byte\fP (bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm)"
 .br
-.RI "\fIfunction to set the control byte Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |
-.br
- Bit: | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
-.br
-\fP"
+.RI "\fIfunction to set the control byte Control byte Automatic activation Manual activation Test call Confidence in position ResResResRes  Bit 7 6 5 4 3 2 1 0 \fP"
 .ti -1c
 .RI "static void \fB_set_VIN\fP (const char *__VIN)"
 .br
@@ -31,11 +27,7 @@ Private \-
 .SS "static void _set_control_byte (bool__position_can_be_trusted, bool__test_call, bool__manual_alarm, bool__auto_alarm)\fC [static]\fP"
 
 .PP
-function to set the control byte Control byte: | Automatic activation | Manual activation | Test call | Confidence in position |---Reserved--- |
-.br
- Bit: | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
-.br
-
+function to set the control byte Control byte Automatic activation Manual activation Test call Confidence in position ResResResRes  Bit 7 6 5 4 3 2 1 0 
 .PP
 \fBParameters:\fP
 .RS 4
@@ -55,7 +47,7 @@ void
 .PP
 
 .PP
-Definition at line 74 of file accident_data\&.c\&.
+Definition at line 75 of file accident_data\&.c\&.
 .SS "static void _set_optional_data ()\fC [static]\fP"
 
 .PP
@@ -78,7 +70,7 @@ May also be blank field
 .PP
 
 .PP
-Definition at line 108 of file accident_data\&.c\&.
+Definition at line 109 of file accident_data\&.c\&.
 .SS "static void _set_VIN (const char *__VIN)\fC [static]\fP"
 
 .PP
@@ -101,7 +93,7 @@ The number consist of 17 characters not including the letters I, O or Q\&.
 .PP
 
 .PP
-Definition at line 87 of file accident_data\&.c\&.
+Definition at line 88 of file accident_data\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

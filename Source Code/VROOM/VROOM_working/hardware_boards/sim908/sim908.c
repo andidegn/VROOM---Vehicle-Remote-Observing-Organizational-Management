@@ -38,7 +38,7 @@
 /**********************************************************************//**
  * @ingroup sim908_priv
  * @brief defines the AT response string literals
- * @defgroup sim908_response Response litterals
+ * @defgroup sim908_response Response literals
  * @{
  *************************************************************************/
 #define SIM908_RESPONSE_RDY			"RDY"
@@ -51,7 +51,7 @@
 #define SIM908_RESPONSE_AT			"AT"
 #define SIM908_RESPONSE_GPS_READY	"GPS"
 #define SIM908_RESPONSE_GPS_PULL	"0,"
-#define SIM908_RESPONSE_FTP_PUT		"+FTP"
+#define SIM908_RESPONSE_FTP_PUT		"+F"
 #define SIM908_RESPONSE_CREG		"+CREG: "		/* +CREG: 1 = connected */
 /** @} */
 
@@ -117,9 +117,7 @@ void _PC_callback(char data);
 
 /**********************************************************************//**
  * @ingroup sim908_pub
- * Procedure. setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP
- *
- * @note UART0 is used to communicate with the module.
+ * Sets up ports and uart communication
  *************************************************************************/
 void SIM908_init(void)
 {
@@ -152,7 +150,7 @@ void SIM908_init(void)
 
 /**********************************************************************//**
  * @ingroup sim908_pub
- * setup global settings -> setup GSM -> setup GPS -> enable GSM communication -> setup FTP
+ * Sends initialization commands to the module.
  *************************************************************************/
 void SIM908_start(void)
 {
@@ -187,6 +185,8 @@ void SIM908_start(void)
 
 /**********************************************************************//**
  * @ingroup sim908_pub
+ * Sends a command via uart. If '__wait_for_ok' it waits and returns a
+ * bool. True if successful, false if not
  *************************************************************************/
 bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 {
@@ -199,7 +199,7 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 	uart0_send_string(__cmd);
 	uart0_send_char(CR);
 	uart0_send_char(LF);
-	#ifdef DEBUG_UART_ENABLE
+	#ifdef DEBUG_UART_ECHO
 		uart1_send_string(__cmd);
 		uart1_send_char(CR);
 		uart1_send_char(LF);
@@ -212,6 +212,7 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 
 /**********************************************************************//**
  * @ingroup sim908_pub
+ * Sets the parameters of the MSD data set
  *************************************************************************/
 void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude, uint8_t *__course)
 {
@@ -253,20 +254,20 @@ void call_PSAP(void)
 /**********************************************************************//**
  * @ingroup sim908_pub
  * Procedure:
- * 1.	Create filename:		AT+FTPPUTNAME="<filename>"
- * 2.	Open bearer				AT+SAPBR=1,1
- * 3.	Open FTP PUT session	AT+FTPPUT=1
- * 4.	Set write data			AT+FTPPUT=2,140
- * 5.	Write text (140 bytes)
- * 6.	End write session		AT+FTPPUT=2,0
- * 7.	Close bearer			AT+SAPBR=0,1
+ * 1. Create filename:		(AT+FTPPUTNAME="<filename>")
+ * 2. Open bearer:			(AT+SAPBR=1,1)
+ * 3. Open FTP PUT session:	(AT+FTPPUT=1)
+ * 4. Set write data:		(AT+FTPPUT=2,140)
+ * 5. Write text:			(140 bytes)
+ * 6. End write session:	(AT+FTPPUT=2,0)
+ * 7. Close bearer:			(AT+SAPBR=0,1)
  *************************************************************************/
 void send_MSD(const char *__vroom_id) {
     _wait_for_connection();
 
     uint8_t _retry_ctr = RETRY_ATTEMPTS;
     char *filename = malloc(60 * sizeof(char));
-    /* 2014-10-12_13.17.34-(60192949).vroom */
+    /* Format: 2014-10-12_13.17.34-(60192949).vroom */
     strcpy(filename, AT_FTP_PUT_FILE_NAME);
     strcat(filename, "\"");
     strcat(filename, EXT_MSD_FILENAME);
@@ -370,20 +371,20 @@ static void _setup_GPS(void)
 /**********************************************************************//**
  * @ingroup sim908_priv
  * @brief Settings up GPRS - FTP on SIM908 module
- * 1.	Set bearer parameter:
- *		* AT+SAPBR=3,1,"Contype","GPRS"
- *		* AT+SAPBR=3,1,"APN","<APN>"
- * 2.	Use bearer profile:
- *		* AT+FTPCID=1
- * 3.	FTP login:
- *		* AT+FTPSERV="<Server add>"
- *		* AT+FTPPORT=<Server port>
- *		* AT+FTPUN="<Username>"
- *		* AT+FTPPW=<Password>
- * 4.  Configure put
- *		* AT+FTPPUTPATH="<Path>"
- *		* AT+FTPTYPE="I" - (binary)
- *		* AT+FTPPUTOPT="STOR"
+ * 1. Set bearer parameter:
+ *	  + AT+SAPBR=3,1,"Contype","GPRS"
+ *	  + AT+SAPBR=3,1,"APN","<APN>"
+ * 2. Use bearer profile:
+ *	  + AT+FTPCID=1
+ * 3. FTP login:
+ *	  + AT+FTPSERV="<Server add>"
+ *	  + AT+FTPPORT=<Server port>
+ *	  + AT+FTPUN="<Username>"
+ *	  + AT+FTPPW=<Password>
+ * 4. Configure put
+ *	  + AT+FTPPUTPATH="<Path>"
+ *	  + AT+FTPTYPE="I" - (binary)
+ *	  + AT+FTPPUTOPT="STOR"
  *
  * @param void
  *
@@ -491,7 +492,7 @@ static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def) {
  * @ingroup sim908_priv
  * @brief Checking if the last response is the same as the defined response
  *
- * @param const char *__defined_response - the string litteral to check on
+ * @param const char *__defined_response - the string literal to check on
  *
  * @return bool - true if response is considered the same else false
  *************************************************************************/
@@ -673,86 +674,124 @@ static void _set_MSD_filename(const char *__UTC_raw)
  * @ingroup sim908_priv
  * @brief Callback function to handle all communication from the sim908 module
  * Procedure:
- * 1.	Store in circular buffer
- * 2.	Check for carriage return/line feed characters
- * 3.	If there has been one carriage return and one line feed, check for response
- * 4.	If UART_DEBUG is defined, echo data char to uart1
+ * 1. Store in circular buffer
+ * 2. Check for carriage return/line feed characters
+ * 3. If there has been one carriage return and one line feed, check for response
+ * 4. If UART_DEBUG is defined, echo data char to uart1
  *
  * @param char data - single char received via uart from the sim908 module
  *
  * @return void
  *************************************************************************/
 void _SIM908_callback(char data) {
+	#ifdef DEBUG_UART_ECHO
+		uart1_send_char(data);																	/* Mirroring communication from sim908 to uart1 */
+	#endif
 	_rx_response_length++;
 	_rx_buffer[_rx_buffer_tail = (_rx_buffer_tail + 1) % RX_BUFFER_SIZE] = data;				/* Stores received data in buffer. This technically starts from index '1', but as the buffer is circular, it does not matter */
 
-	if (data == CR) {																			/* Checking and counting for CR and LF */
-		_CR_counter++;
-	} else if (data == LF) {
-		_LF_counter++;
-	}
+	//if (data == CR) {																			/* Checking and counting for CR and LF */
+		//_CR_counter++;
+	//} else if (data == LF) {
+		//_LF_counter++;
+	//}
 
-	if (_CR_counter > 0 && _LF_counter > 0) {
-		_CR_counter = _LF_counter = 0;
-		if (_rx_response_length == 2 &&
-		   (_check_response(SIM908_RESPONSE_CR_LF) ||
-			_check_response(SIM908_RESPONSE_LF_CR))) {				/* Skipping empty lines */
-		} else
-		if (_rx_response_length == 4 &&
-			_check_response(SIM908_RESPONSE_OK)) {					/* OK */
-				_ack_response_flag = SIM908_FLAG_OK;
-		} else
-		if (_rx_response_length == 7 &&
-			_check_response(SIM908_RESPONSE_ERROR)) {				/* Error */
-				_ack_response_flag = SIM908_FLAG_ERROR;
-		} else
-		if (_gps_pull_flag == SIM908_FLAG_GPS_PULL &&
-			_check_response(SIM908_RESPONSE_GPS_PULL)) {			/* GPS pull */
-				_gps_response_tail = _rx_buffer_tail;
-				_gps_response_length = _rx_response_length;
-				_ack_gps_response_flag = SIM908_FLAG_GPS_PULL_OK;
-				_gps_pull_flag = SIM908_FLAG_WAITING;
-		} else
-		if (_rx_response_length == 10 &&
-			_check_response(SIM908_RESPONSE_CREG)) {				/* CREG */
-				EXT_CONNECTION_CREG_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) - '0';	/* Subtracting '0' (0x30) to get the value as an integer */
-		} else
-		if (_rx_response_length == 11 &&
-			_check_response(SIM908_RESPONSE_GPS_READY)) {			/* GPS Ready */
-				_ack_gps_response_flag = SIM908_FLAG_GPS_OK;
-		} else
-		if (_ftp_sending_flag == SIM908_FLAG_FTP_SENDING &&
-			_check_response(SIM908_RESPONSE_FTP_PUT)) {				/* FTPPUT */
-				/* 	FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
-					FTP PUT RESPONSE:		"+FTPPUT:2,140"
-					FTP PUT CLOSE SESSION:	"+FTPPUT:1,0"		*/
-				char c1 = _char_at(8, _rx_buffer_tail, _rx_response_length);
-				char c2 = _char_at(10, _rx_buffer_tail, _rx_response_length);
-				char c3 = _char_at(11, _rx_buffer_tail, _rx_response_length);
-				if (c1 == '1' && c2 == '1' && c3 == ',') {
-					_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_OPEN;
-				} else if(c1 == '2' && c2 == '1' && c3 == '4') {
-					_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_SUCCESS;
-				} else if(c1 == '1' && c2 == '0') {
-					_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_CLOSE;
-				} else {
-					_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_ERROR;
+	if (data == LF) {
+		//_CR_counter = _LF_counter = 0;
+		if (_rx_response_length > 2) {				/* Skipping empty lines */
+			if (_ftp_sending_flag == SIM908_FLAG_FTP_SENDING &&
+				_check_response(SIM908_RESPONSE_FTP_PUT)) {				/* FTPPUT */
+					/* 	FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
+						FTP PUT RESPONSE:		"+FTPPUT:2,140"
+						FTP PUT CLOSE SESSION:	"+FTPPUT:1,0"		*/
+					char c1 = _char_at(8, _rx_buffer_tail, _rx_response_length);
+					char c2 = _char_at(10, _rx_buffer_tail, _rx_response_length);
+					char c3 = _char_at(11, _rx_buffer_tail, _rx_response_length);
+					if (c1 == '1' && c2 == '1' && c3 == ',') {
+						_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_OPEN;
+						#ifdef DEBUG_SIM908_CALLBACK
+						uart1_send_string("rx:> ftp put open\r\n");
+						#endif
+					} else if(c1 == '2' && c2 == '1' && c3 == '4') {
+						_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_SUCCESS;
+						#ifdef DEBUG_SIM908_CALLBACK
+						uart1_send_string("rx:> ftp put success\r\n");
+						#endif
+					} else if(c1 == '1' && c2 == '0') {
+						_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_CLOSE;
+						#ifdef DEBUG_SIM908_CALLBACK
+						uart1_send_string("rx:> ftp put close\r\n");
+						#endif
+					} else {
+						_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_ERROR;
+						#ifdef DEBUG_SIM908_CALLBACK
+						uart1_send_string("rx:> ftp put error\r\n");
+						#endif
+					}
+			} else
+			if (_gps_pull_flag == SIM908_FLAG_GPS_PULL &&
+				_check_response(SIM908_RESPONSE_GPS_PULL)) {			/* GPS pull */
+					_gps_response_tail = _rx_buffer_tail;
+					_gps_response_length = _rx_response_length;
+					_ack_gps_response_flag = SIM908_FLAG_GPS_PULL_OK;
+					_gps_pull_flag = SIM908_FLAG_WAITING;
+					#ifdef DEBUG_SIM908_CALLBACK
+					uart1_send_string("rx:> gps pull\r\n");
+					#endif
+			} else
+			if (_rx_response_length == 4 &&
+				_check_response(SIM908_RESPONSE_OK)) {					/* OK */
+					_ack_response_flag = SIM908_FLAG_OK;
+					#ifdef DEBUG_SIM908_CALLBACK
+					uart1_send_string("rx:> ok\r\n");
+					#endif
+			} else
+			if (_rx_response_length == 7 &&
+				_check_response(SIM908_RESPONSE_ERROR)) {				/* Error */
+					_ack_response_flag = SIM908_FLAG_ERROR;
+					#ifdef DEBUG_SIM908_CALLBACK
+					uart1_send_string("rx:> error\r\n");
+					#endif
+			} else
+			if (_rx_response_length == 10 &&
+				_check_response(SIM908_RESPONSE_CREG)) {				/* CREG */
+					EXT_CONNECTION_CREG_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) - '0';	/* Subtracting '0' (0x30) to get the value as an integer */
+					#ifdef DEBUG_SIM908_CALLBACK
+					uart1_send_string("rx:> creg\r\n");
+					#endif
+			} else
+			if (_rx_response_length == 11 &&
+				_check_response(SIM908_RESPONSE_GPS_READY)) {			/* GPS Ready */
+					_ack_gps_response_flag = SIM908_FLAG_GPS_OK;
+					#ifdef DEBUG_SIM908_CALLBACK
+					uart1_send_string("rx:> gps ready\r\n");
+					#endif
+			} else
+			if (_system_running_flag == SIM908_FLAG_WAITING &&
+				_rx_response_length == 5 &&
+				_check_response(SIM908_RESPONSE_RDY)) {					/* System ready */
+					_system_running_flag = SIM908_FLAG_RUNNING;
+					#ifdef DEBUG_SIM908_CALLBACK
+					uart1_send_string("rx:> rdy\r\n");
+					#endif
+			}
+			else if (_rx_response_length == 4 &&
+				_check_response(SIM908_RESPONSE_AT)) {					/* Sync AT cmd */
+					_rx_response_length = 0;
+					#ifdef DEBUG_SIM908_CALLBACK
+					uart1_send_string("rx:> at\r\n");
+					#endif
+			} else {
+				#ifdef DEBUG_SIM908_CALLBACK_NOT_CAUGHT
+				uart1_send_string("rx:> NOT CAUGHT: >>");
+				for (uint8_t i = 0; i < _rx_response_length; i++) {
+					uart1_send_char(_char_at(i, _rx_buffer_tail, _rx_response_length));
 				}
-		} else
-		if (_system_running_flag == SIM908_FLAG_WAITING &&
-			_rx_response_length == 5 &&
-			_check_response(SIM908_RESPONSE_RDY)) {					/* System ready */
-				_system_running_flag = SIM908_FLAG_RUNNING;
-		}
-		else if (_rx_response_length == 4 &&
-			_check_response(SIM908_RESPONSE_AT)) {					/* Sync AT cmd */
-				_rx_response_length = 0;
+				#endif
+			}
 		}
 		_rx_response_length = 0;
 	}
-	#ifdef DEBUG_UART_ENABLE
-		uart1_send_char(data);																	/* Mirroring communication from sim908 to uart1 */
-	#endif
 }
 
 #ifdef DEBUG_UART_ENABLE

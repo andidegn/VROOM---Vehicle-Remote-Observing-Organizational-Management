@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/thermometer/tc72.h" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/thermometer/tc72.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -13,7 +13,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "void \fBinit_tc72\fP (uint8_t cs_pin)"
+.RI "void \fBinit_tc72\fP (uint8_t \fB__cs_pin\fP)"
 .br
 .RI "\fIInitiates tc72 using SPI\&. \fP"
 .ti -1c
@@ -25,7 +25,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fIFunction which starts measuring the temperature\&. \fP"
 .ti -1c
-.RI "float \fBcalculate_temperature\fP (uint8_t MSB, uint8_t LSB)"
+.RI "float \fBcalculate_temperature\fP (uint8_t __msb, uint8_t __lsb)"
 .br
 .RI "\fIFunction to calculate the temperature\&. \fP"
 .in -1c
@@ -35,7 +35,12 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .PP
 \fBAuthor:\fP
 .RS 4
-: Kenneth René Jensen : 0\&.3 
+Kenneth René Jensen 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.3 
 .RE
 .PP
 

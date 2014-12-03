@@ -1,14 +1,16 @@
 /**********************************************************************//**
  * @file: sim908.h
  *
- * @Created: 25-09-2014 13:09:36
- * @Author: Andi Degn & Kenneth René Jensen
- * @Version: 0.5
+ * @created 25-09-2014 13:09:36
+ * @author Andi Degn
+ * @author Kenneth René Jensen
+ * @version 0.5
  * @defgroup sim908 SIM908 GSM/GPRS/GPS
  * @{
-	 This is the driver for GSM/GPRS/GPS module sim908
-	 @defgroup sim908_pub Public
-	 @defgroup sim908_priv Private
+	@ingroup hardware_boards
+	@brief This is the driver for GSM/GPRS/GPS module sim908
+	@defgroup sim908_pub Public
+	@defgroup sim908_priv Private
  * @}
  *************************************************************************/
 
@@ -72,7 +74,9 @@ void SIM908_start(void);
 /**********************************************************************//**
  * @ingroup sim908_pub
  * @brief Used for sending AT SET commands.
+ *
  * @param *cmd is the AT command as a string
+ *
  * @return bool - true if successful else false
  *************************************************************************/
 bool SIM908_cmd(const char *cmd, bool __wait_for_ok);

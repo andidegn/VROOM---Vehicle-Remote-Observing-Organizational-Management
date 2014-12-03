@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.c" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -94,7 +94,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBSIM908_RESPONSE_GPS_PULL\fP   '0,'"
 .br
 .ti -1c
-.RI "#define \fBSIM908_RESPONSE_FTP_PUT\fP   '+FTP'"
+.RI "#define \fBSIM908_RESPONSE_FTP_PUT\fP   '+F'"
 .br
 .ti -1c
 .RI "#define \fBSIM908_RESPONSE_CREG\fP   '+CREG: '		/* +CREG: 1 = connected */"
@@ -188,10 +188,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "void \fB_SIM908_callback\fP (char data)"
 .br
 .RI "\fICallback function to handle all communication from the sim908 module Procedure: \fP"
-.ti -1c
-.RI "void \fB_PC_callback\fP (char data)"
-.br
-.RI "\fICallback function to handle debug comminication with pc on uart1 When receiving data it is echoed to both uart0 (sim908) and back to pc on uart1\&. \fP"
 .ti -1c
 .RI "void \fBSIM908_init\fP (void)"
 .br

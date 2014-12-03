@@ -1,22 +1,24 @@
 /**********************************************************************//**
- * @file: UART_Driver.h
+ * @file uart.h
  *
- * @Created: 12-09-2014 20:34:36
- * @Author: Andi Degn
- * @Version: 0.5
+ * @created 12-09-2014 20:34:36
+ * @author Andi Degn
+ * @version 0.5
  * @defgroup uart UART Driver
  * @{
-	 This is a driver for the UART0-1
-	 on the ATMEGA family processors.\n
-	 UART0:\n
-	 * RX: PE0\n
-	 * TX: PE1\n
-	 \n
-	 UART1:\n
-	 * RX: PD2\n
-	 * TX: PD3\n
-	 @defgroup uart_pub Public
-	 @defgroup uart_priv Private
+	@ingroup data_communication
+	@brief This is a driver for the UART0-1
+	on the ATMEGA family processors.
+
+	- UART0 pins:
+		+ RX: PE0
+		+ TX: PE1
+
+	- UART1 pins:
+		+ RX: PD2
+		+ TX: PD3
+	@defgroup uart_pub Public
+	@defgroup uart_priv Private
  * @}
  *************************************************************************/
 
@@ -55,11 +57,11 @@
 
 /**********************************************************************//**
  * @ingroup uart_pub
- * @brief defines for the mode of operations \n
- * * UART_MODE_NORMAL : Asynchronous at normal speed \n
- * * UART_MODE_DOUBLE : Asynchronous at double speed \n
- * * UART_MODE_SYNC   : Synchronous (NOT SUPPORTED YET) \n
- * * UART_MODE_MSPIM  : SPI Master (NOT SUPPORTED YET) \n
+ * @brief defines for the mode of operations
+ * - UART_MODE_NORMAL : Asynchronous at normal speed
+ * - UART_MODE_DOUBLE : Asynchronous at double speed
+ * - UART_MODE_SYNC   : Synchronous (NOT SUPPORTED YET)
+ * - UART_MODE_MSPIM  : SPI Master (NOT SUPPORTED YET)
  *************************************************************************/
 typedef enum {
 	UART_MODE_NORMAL,
@@ -169,8 +171,10 @@ void uart0_send_string(const char *__data);
  *
  * @param const char *__data - data to be sent
  * @param uint8_t __length - number of bytes
- * @note Does not terminates when zero character is meet
+ *
  * @return void
+ *
+ * @note Does not terminates when zero character is meet
  *************************************************************************/
 void uart0_send_data(const char *__data, uint8_t __length);
 
@@ -233,8 +237,9 @@ void uart1_send_string(const char *__data);
  *
  * @param const char *__data - data to be sent
  * @param uint8_t __length - number of bytes
- * @note Does not terminates when zero character is meet
+ *
  * @return void
+ * @note Does not terminate when zero character is meet
  *************************************************************************/
 void uart1_send_data(const char *__data, uint8_t __length);
 

@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.h" 3 "Tue Dec 2 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -133,175 +133,54 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBACC_MULTI_BIT\fP   6"
 .br
 .in -1c
-.SH "Macro Definition Documentation"
-.PP 
-.SS "#define ACC_BDU   7"
+.SS "Enumerations"
 
-.PP
-Definition at line 60 of file lis331hh\&.h\&.
-.SS "#define ACC_BLE   6"
+.in +1c
+.ti -1c
+.RI "enum \fBACC_POWER_MODE\fP { \fBACC_POWER_DOWN\fP = 0, \fBACC_NORMAL_MODE\fP = _BV(ACC_PM0), \fBACC_LOW_POWER_0_5\fP = _BV(ACC_PM1), \fBACC_LOW_POWER_1\fP = _BV(ACC_PM1) | _BV(ACC_PM0), \fBACC_LOW_POWER_2\fP = _BV(ACC_PM2), \fBACC_LOW_POWER_5\fP = _BV(ACC_PM2) | _BV(ACC_PM0), \fBACC_LOW_POWER_10\fP = _BV(ACC_PM2) | _BV(ACC_PM1) }"
+.br
+.RI "\fISpecifies the available power modes Output data rate frq  ACC_POWER_DOWN --- ACC_NORMAL_MODE ODR ACC_LOW_POWER_0_5 0\&.5 Hz ACC_LOW_POWER_1 1 Hz ACC_LOW_POWER_2 2 Hz ACC_LOW_POWER_5 5 Hz ACC_LOW_POWER_10 10 Hz \fP"
+.ti -1c
+.RI "enum \fBACC_OUTPUT_DATA_RATE\fP { \fBACC_ODR_50\fP = 0, \fBACC_ODR_100\fP = _BV(ACC_DR0), \fBACC_ODR_400\fP = _BV(ACC_DR1), \fBACC_ODR_1000\fP = _BV(ACC_DR1) | _BV(ACC_DR0) }"
+.br
+.RI "\fISpecifies the available Data Output Rates Output data rateLP Cut-off  ACC_ODR_50 50 Hz 37 Hz ACC_ODR_100 100 Hz 74 Hz ACC_ODR_400 400 Hz 292 Hz ACC_ODR_1000 1000 Hz 780 Hz \fP"
+.ti -1c
+.RI "enum \fBACC_High_Pass_CUT_OFF\fP { \fBACC_HPcoeff00\fP = 0, \fBACC_HPcoeff01\fP = _BV(ACC_HPCF0), \fBACC_HPcoeff10\fP = _BV(ACC_HPCF1), \fBACC_HPcoeff11\fP = _BV(ACC_HPCF1) | _BV(ACC_HPCF0) }"
+.br
+.RI "\fISpecifies the available High-pass filter cut-off frequency configuration 
+.br
+Look in datasheet page 24 for further information\&. \fP"
+.ti -1c
+.RI "enum \fBACC_FULL_SCALE\fP { \fBACC_6G\fP = 0, \fBACC_12G\fP = _BV(ACC_FS0), \fBACC_24G\fP = _BV(ACC_FS1) | _BV(ACC_FS0) }"
+.br
+.RI "\fISpecifies the available Full-scale selections 
+.br
+\&. \fP"
+.in -1c
+.SS "Functions"
 
-.PP
-Definition at line 59 of file lis331hh\&.h\&.
-.SS "#define ACC_BOOT   7"
-
-.PP
-Definition at line 41 of file lis331hh\&.h\&.
-.SS "#define ACC_CTRL_REG1   0x20"
-
-.PP
-\fBNote:\fP
-.RS 4
-Complies MISRO 2004 standards 
-.RE
-.PP
-
-.PP
-Definition at line 23 of file lis331hh\&.h\&.
-.SS "#define ACC_CTRL_REG2   0x21"
-
-.PP
-Definition at line 33 of file lis331hh\&.h\&.
-.SS "#define ACC_CTRL_REG3   0x22"
-
-.PP
-Definition at line 43 of file lis331hh\&.h\&.
-.SS "#define ACC_CTRL_REG4   0x23"
-
-.PP
-Definition at line 53 of file lis331hh\&.h\&.
-.SS "#define ACC_CTRL_REG5   0x24"
-
-.PP
-Definition at line 62 of file lis331hh\&.h\&.
-.SS "#define ACC_DR0   3"
-
-.PP
-Definition at line 27 of file lis331hh\&.h\&.
-.SS "#define ACC_DR1   4"
-
-.PP
-Definition at line 28 of file lis331hh\&.h\&.
-.SS "#define ACC_FDS   4"
-
-.PP
-Definition at line 38 of file lis331hh\&.h\&.
-.SS "#define ACC_FS0   4"
-
-.PP
-Definition at line 57 of file lis331hh\&.h\&.
-.SS "#define ACC_FS1   5"
-
-.PP
-Definition at line 58 of file lis331hh\&.h\&.
-.SS "#define ACC_HPCF0   0"
-
-.PP
-Definition at line 34 of file lis331hh\&.h\&.
-.SS "#define ACC_HPCF1   1"
-
-.PP
-Definition at line 35 of file lis331hh\&.h\&.
-.SS "#define ACC_HPen1   2"
-
-.PP
-Definition at line 36 of file lis331hh\&.h\&.
-.SS "#define ACC_HPen2   3"
-
-.PP
-Definition at line 37 of file lis331hh\&.h\&.
-.SS "#define ACC_HPM0   5"
-
-.PP
-Definition at line 39 of file lis331hh\&.h\&.
-.SS "#define ACC_HPM1   6"
-
-.PP
-Definition at line 40 of file lis331hh\&.h\&.
-.SS "#define ACC_I1_CFG0   0"
-
-.PP
-Definition at line 44 of file lis331hh\&.h\&.
-.SS "#define ACC_I1_CFG1   1"
-
-.PP
-Definition at line 45 of file lis331hh\&.h\&.
-.SS "#define ACC_I2_CFG0   3"
-
-.PP
-Definition at line 47 of file lis331hh\&.h\&.
-.SS "#define ACC_I2_CFG1   4"
-
-.PP
-Definition at line 48 of file lis331hh\&.h\&.
-.SS "#define ACC_IHL   7"
-
-.PP
-Definition at line 51 of file lis331hh\&.h\&.
-.SS "#define ACC_LIR1   2"
-
-.PP
-Definition at line 46 of file lis331hh\&.h\&.
-.SS "#define ACC_LIR2   5"
-
-.PP
-Definition at line 49 of file lis331hh\&.h\&.
-.SS "#define ACC_MULTI_BIT   6"
-
-.PP
-Definition at line 67 of file lis331hh\&.h\&.
-.SS "#define ACC_PM0   5"
-
-.PP
-Definition at line 29 of file lis331hh\&.h\&.
-.SS "#define ACC_PM1   6"
-
-.PP
-Definition at line 30 of file lis331hh\&.h\&.
-.SS "#define ACC_PM2   7"
-
-.PP
-Definition at line 31 of file lis331hh\&.h\&.
-.SS "#define ACC_PP_OD   6"
-
-.PP
-Definition at line 50 of file lis331hh\&.h\&.
-.SS "#define ACC_READ_BIT   7"
-
-.PP
-Definition at line 66 of file lis331hh\&.h\&.
-.SS "#define ACC_SIM   0"
-
-.PP
-Definition at line 54 of file lis331hh\&.h\&.
-.SS "#define ACC_ST   1"
-
-.PP
-Definition at line 55 of file lis331hh\&.h\&.
-.SS "#define ACC_STsign   3"
-
-.PP
-Definition at line 56 of file lis331hh\&.h\&.
-.SS "#define ACC_TurnOn0   0"
-
-.PP
-Definition at line 63 of file lis331hh\&.h\&.
-.SS "#define ACC_TurnOn1   1"
-
-.PP
-Definition at line 64 of file lis331hh\&.h\&.
-.SS "#define ACC_Xen   0"
-
-.PP
-Definition at line 24 of file lis331hh\&.h\&.
-.SS "#define ACC_Yen   1"
-
-.PP
-Definition at line 25 of file lis331hh\&.h\&.
-.SS "#define ACC_Zen   2"
-
-.PP
-Definition at line 26 of file lis331hh\&.h\&.
+.in +1c
+.ti -1c
+.RI "void \fBacc_init\fP (uint8_t cs_pin, \fBACC_POWER_MODE\fP power_mode, \fBACC_OUTPUT_DATA_RATE\fP output_data_rate, \fBACC_FULL_SCALE\fP full_scale)"
+.br
+.RI "\fIInitializes the driver\&. \fP"
+.ti -1c
+.RI "void \fBacc_measure\fP (void)"
+.br
+.RI "\fIStarts one measure routine\&. \fP"
+.ti -1c
+.RI "float \fBacc_get_x_axis\fP (void)"
+.br
+.RI "\fIGets the latest measured x axis value\&. \fP"
+.ti -1c
+.RI "float \fBacc_get_y_axis\fP (void)"
+.br
+.RI "\fIGets the latest measured y axis value\&. \fP"
+.ti -1c
+.RI "float \fBacc_get_z_axis\fP (void)"
+.br
+.RI "\fIGets the latest measured z axis value\&. \fP"
+.in -1c
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

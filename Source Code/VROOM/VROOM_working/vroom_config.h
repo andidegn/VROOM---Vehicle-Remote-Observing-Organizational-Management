@@ -41,7 +41,7 @@
  * @{
  *************************************************************************/
 #define CONFIG_ALARM_SENSOR_READ_FREQUENCY	TIMER_50HZ	/**> Frequency of which the sensors are read in Hz */
-#define CONFIG_ALARM_DETECTION_FREQUENCY	TIMER_10HZ	/**> Time interval between checking for accidents in Hz */
+#define CONFIG_ALARM_DETECTION_FREQUENCY	TIMER_50HZ	/**> Time interval between checking for accidents in Hz */
 
 #define CONFIG_ALARM_CRASH_NO_OF_READINGS	5			/**> Length of acceleration peek */
 #define CONFIG_ALARM_CRASH_TRIGGER_VALUE	400			/**> 800 Total acceleration [G] in 1/100 resolution */

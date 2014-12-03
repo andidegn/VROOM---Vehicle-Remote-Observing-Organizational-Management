@@ -22,6 +22,7 @@ New Features, Improvements
 - Moved recording of optional data values (acceleration and temperature) to MSD optional data function, as it is redundant 
   to calculate everytime it checks for accidents.
 - Added module test for Car Panel: test_module_car_panel
+- Minor (renaming) buf fixed in SPI driver
 
 Fixed Bugs, Changes
 -------------------
@@ -36,12 +37,9 @@ Fixed Bugs, Changes
 ToDo
 ----		
 - MISRA check all files
-- Impl. module test for car panel
-- Impl. unit test for MSD
 - Doxygen structure proofing in all files
 - Notes SIM908:
    + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
-
 
 
 ==================================

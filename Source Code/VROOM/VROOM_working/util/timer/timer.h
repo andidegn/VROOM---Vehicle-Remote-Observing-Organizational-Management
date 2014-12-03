@@ -4,7 +4,7 @@
 @Version: 0.3
 @defgroup timer Timer
 @{
-	Setup of timer 1 to CTC mode for starting the scheduler.
+	Setup of timer 1 to CTC mode for starting sensor scheduler.
 	Setup of timer 3 to CTC mode for accident check
 @}
 ************************************************/
@@ -23,7 +23,7 @@ typedef enum { TIMER_PS1 = 1,
 			   TIMER_PS8 = 8,
 			   TIMER_PS64 = 64,
 			   TIMER_PS256 = 256,
-			   TIMER_PS1024 = 1024 // DOES NOT WORK?
+			   TIMER_PS1024 = 1024 /* DOES NOT WORK? */
 			 } TIMER_PRESCALER;
 
 /********************************************************************//**
@@ -58,18 +58,6 @@ void timer3_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz);
 
 /**********************************************************************//**
  @ingroup timer
- @brief Enables interrupt for timer3
-*************************************************************************/
-void timer3_start(void);
-
-/**********************************************************************//**
- @ingroup timer
- @brief Disables interrupt for timer3
-*************************************************************************/
-void timer3_stop(void);
-
-/**********************************************************************//**
- @ingroup timer
  @brief Disables interrupt for timer1 and timer3
 *************************************************************************/
 void timer_pause_all(void);
@@ -79,5 +67,17 @@ void timer_pause_all(void);
  @brief Enables interrupt for timer1 and timer3
 *************************************************************************/
 void timer_resume_all(void);
+
+/**********************************************************************//**
+ @ingroup timer
+ @brief Enables interrupt for timer1 and timer3
+*************************************************************************/
+void timer_stop_all(void);
+
+/**********************************************************************//**
+ @ingroup timer
+ @brief Disables interrupt for timer1 and timer3
+*************************************************************************/
+void timer_start_all(void);
 
 #endif /* TIMER_H_ */

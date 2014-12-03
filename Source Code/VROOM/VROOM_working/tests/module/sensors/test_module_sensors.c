@@ -18,22 +18,22 @@ const char degree = 0b011011111;
 static int x_axis, y_axis, z_axis;
 static float temp;
 static char buf[10];
- 
+int16_t _acc_buffer[3];
+
 void sensors_init()
 {
-	x_axis = 0;
-	y_axis = 0;
-	z_axis = 0;
+	x_axis, y_axis, z_axis = 0;
 	temp = 0.0;
 	scheduler_start(NULL);
 }
 
 void sensors_read_data(void)
 {
-	x_axis = (int)(acc_get_x_axis()*100);
-	y_axis = (int)(acc_get_y_axis()*100);
-	z_axis = (int)(acc_get_z_axis()*100);
-	temp = get_temperature();
+	scheduler_acc_get_last_readings(_acc_buffer);
+	x_axis = _acc_buffer[0];
+	y_axis = _acc_buffer[1];
+	z_axis = _acc_buffer[2];
+	temp = scheduler_temp_get_last_reading();
 }
 
 void sensors_print_data(void)

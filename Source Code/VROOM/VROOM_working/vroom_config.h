@@ -24,13 +24,15 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST		YES
-#define KENNETH_TEST	NO
+#define ANDI_TEST		NO
+#define KENNETH_TEST	YES
 #define DEBUG_UART_ENABLE	/* uart1 (PD2/PD3) is used for debugging */
 #define DEBUG_UART_ECHO
 //#define DEBUG_SIM908_CALLBACK
 //#define DEBUG_SIM908_CALLBACK_NOT_CAUGHT
 #define DEBUG_LCD_ENABLE	/* LCD should be connected to PORT L */
+
+// #define CONFIG_ENABLE_EMERGENCY_PHONE_CALL
 
 /**********************************************************************//**
  * @ingroup vroom_cfg
@@ -39,15 +41,15 @@
  * @{
  *************************************************************************/
 #define CONFIG_ALARM_SENSOR_READ_FREQUENCY	TIMER_50HZ	/**> Frequency of which the sensors are read in Hz */
-#define CONFIG_ALARM_DETECTION_FREQUENCY	TIMER_50HZ	/**> Time interval between checking for accidents in Hz */
+#define CONFIG_ALARM_DETECTION_FREQUENCY	TIMER_10HZ	/**> Time interval between checking for accidents in Hz */
 
 #define CONFIG_ALARM_CRASH_NO_OF_READINGS	5			/**> Length of acceleration peek */
-#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	800			/**> Total acceleration [G] in 1/100 resolution */
+#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	400			/**> 800 Total acceleration [G] in 1/100 resolution */
 
 #define CONFIG_ALARM_FIRE_TRIGGER_DEGREE	1			/**> Temperature raise in Celsius degrees */
 #define CONFIG_ALARM_FIRE_TRIGGER_TIME		80			/**> Temperature raise time in 1/10 seconds resolution */
 
-#define CONFIG_ALARM_FIRE_TEMP_INIT			-100			/**> Used to be sure there are two temperature readings before comparing values */
+#define CONFIG_ALARM_FIRE_TEMP_INIT			-100		/**> Used to be sure there are two temperature readings before comparing values */
 /** @} */
 
 /**********************************************************************//**
@@ -56,12 +58,12 @@
  * @defgroup vc_mcp MSD config parameters
  * @{
  *************************************************************************/
-#define CONFIG_MSD_FORMAT_VERSION		1
+#define CONFIG_MSD_FORMAT_VERSION		2
 #define CONFIG_MSD_TEST_CALL			true
 #define CONFIG_MSD_VEHICLE_CLASS		AD_VEHICLE_CLASS_M(1)	/**> M1 = No more than eight seats in addition to the driver’s seat, and having a maximum mass not exceeding 3.5 tons */
 #define CONFIG_MSD_FUEL_TYPE			AD_FUEL_TYPE_GASOLINE
 #define CONFIG_MSD_VIN					"W0L000036V1940069"
-#define CONFIG_MSD_OPTIONAL_DATA_SIZE	102				/**> Calculated size based on total MSD size - compulsory data */
+#define CONFIG_MSD_OPTIONAL_DATA_SIZE	102						/**> Calculated size based on total MSD size - compulsory data */
 /** @} */
 
 /**********************************************************************//**

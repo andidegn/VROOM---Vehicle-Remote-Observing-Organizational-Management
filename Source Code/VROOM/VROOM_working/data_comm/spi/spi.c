@@ -41,7 +41,7 @@
 static int8_t _handle_count = 0;
 static int8_t _current_handle = -1;
 static handle_param _handles[MAX_HANDLES];
-static uint8_t __cs_pin;
+static uint8_t _cs_pin;
 static uint8_t _cs_active_level;
 static volatile uint8_t _is_busy = 0;
 
@@ -78,7 +78,7 @@ int8_t spi_master_setup(SPI_DATA_MODE __mode,
 	    _handles[_handle_count].callback_function_ptr = __callback_function_ptr;
 	    ret = _handle_count++;
     }
-	__cs_pin = __cs_pin;
+	_cs_pin = __cs_pin;
 	_cs_active_level = __cs_active_level;
 	DDR_SPI |= __cs_pin;
 	_set_cs_level(CS_INACTIVE);
@@ -206,9 +206,9 @@ static void _setup_spi(handle_param *__param) {
 	SPCR = 0x00;
 
 	/* Sets the active CS/CE pin and pin level */
-	__cs_pin = __param->cs_pin;
+	_cs_pin = __param->cs_pin;
 	_cs_active_level = __param->cs_active_level;
-	DDR_SPI |= _BV(__cs_pin);
+	DDR_SPI |= _BV(_cs_pin);
 
 	/* Sets an additional bit if the divider is 2, 8 or 32 */
 	if ((__param->freq_divider == SPI_DIVIDER_2) ||
@@ -237,9 +237,9 @@ static inline void _set_cs_level(uint8_t __level) {
 		__level = !__level;
 	}
 	if (__level == CS_INACTIVE) {
-		PORTB &= ~_BV(__cs_pin);
+		PORTB &= ~_BV(_cs_pin);
 	} else {
-		PORTB |= _BV(__cs_pin);
+		PORTB |= _BV(_cs_pin);
 	}
 }
 

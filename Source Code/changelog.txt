@@ -12,6 +12,38 @@ The IVS in this project will make it possible for people with pre-2015 cars to h
 
 @section Changelog
 
+
+=====================================
+Version 0.163 - 2014/12/03 by Kenneth
+=====================================
+New Features, Improvements
+--------------------------
+- Added functions in timer.c to store interrupt flag registers and pause all timers and then restore the registers when resuming
+- Moved recording of optional data values (acceleration and temperature) to MSD optional data function, as it is redundant 
+  to calculate everytime it checks for accidents.
+- Added module test for Car Panel: test_module_car_panel
+
+Fixed Bugs, Changes
+-------------------
+- Fixed bug in starting timer when an automatically accident has triggered
+- MSD version 2: Changed structure of encoding optional data, so that only values is sent
+- Added check for emmergency flags, when setting the status LED on car panel. This is done so that it lights up red while sending
+  and green when it is done sending.
+- Renamed UnitTest to test_unit_temperature
+- Discarded unit test implementation for MSD as all the functions to set MSD are static and it did not maked any sense anyway
+  
+
+ToDo
+----		
+- MISRA check all files
+- Impl. module test for car panel
+- Impl. unit test for MSD
+- Doxygen structure proofing in all files
+- Notes SIM908:
+   + If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+
+
+
 ==================================
 Version 0.162 - 2014/12/03 by Andi
 ==================================
@@ -35,7 +67,7 @@ New Features, Improvements
    + lis331hh.c
    + tc72.h
    + tc72.c
-   + sensor_acheduler.h
+   + sensor_scheduler.h
    + vroom_config.h
 
 

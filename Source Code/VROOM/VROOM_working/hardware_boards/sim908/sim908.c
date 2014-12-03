@@ -463,7 +463,6 @@ static void _wait_for_connection(void) {
  * @return bool - true if 'OK' else false
  *************************************************************************/
 static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def) {
-	accident_detection_stop();
 	volatile bool _ret = false;
 	while(*__flag == SIM908_FLAG_WAITING) {
 		_delay_ms(100);
@@ -471,7 +470,7 @@ static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def) {
 	if (*__flag == __ok_def) {
 		_ret = true;
 	}
-	accident_detection_start();
+
 	return _ret;
 }
 
@@ -690,14 +689,14 @@ void _SIM908_callback(char data) {
 	_rx_response_length++;
 	_rx_buffer[_rx_buffer_tail = (_rx_buffer_tail + 1) % RX_BUFFER_SIZE] = data;				/* Stores received data in buffer. This technically starts from index '1', but as the buffer is circular, it does not matter */
 
-	//if (data == CR) {																			/* Checking and counting for CR and LF */
-		//_CR_counter++;
-	//} else if (data == LF) {
-		//_LF_counter++;
-	//}
+	if (data == CR) {																			/* Checking and counting for CR and LF */
+		_CR_counter++;
+	} else if (data == LF) {
+		_LF_counter++;
+	}
 
-	if (data == LF) {
-		//_CR_counter = _LF_counter = 0;
+	if (_CR_counter > 0 && _LF_counter > 0) {
+		_CR_counter = _LF_counter = 0;
 		if (_rx_response_length > 2) {				/* Skipping empty lines */
 			if (_ftp_sending_flag == SIM908_FLAG_FTP_SENDING &&
 				_check_response(SIM908_RESPONSE_FTP_PUT)) {				/* FTPPUT */
@@ -793,6 +792,81 @@ void _SIM908_callback(char data) {
 		_rx_response_length = 0;
 	}
 }
+
+
+
+//void _SIM908_callback(char data)
+//{
+	//#ifdef DEBUG_UART_ENABLE
+		//uart1_send_char(data);																	/* Mirroring communication from sim908 to uart1 */
+	//#endif
+//
+	//_rx_response_length++;
+	//_rx_buffer[_rx_buffer_tail = (_rx_buffer_tail + 1) % RX_BUFFER_SIZE] = data;				/* Stores received data in buffer. This technically starts from index '1', but as the buffer is circular, it does not matter */
+//
+	//if (data == CR) {																			/* Checking and counting for CR and LF */
+		//_CR_counter++;
+	//} else if (data == LF) {
+		//_LF_counter++;
+	//}
+//
+	//if (_CR_counter > 0 && _LF_counter > 0) {
+		//_CR_counter = _LF_counter = 0;
+		//if (_rx_response_length == 2 && 
+		   //(_check_response(SIM908_RESPONSE_CR_LF) ||
+			//_check_response(SIM908_RESPONSE_LF_CR))) {				/* Skipping empty lines */
+		//} else if (_rx_response_length == 4 &&
+			//_check_response(SIM908_RESPONSE_OK)) {					/* OK */
+				//_ack_response_flag = SIM908_FLAG_OK;
+		//} else if (_rx_response_length == 7 &&
+			//_check_response(SIM908_RESPONSE_ERROR)) {				/* Error */
+				//_ack_response_flag = SIM908_FLAG_ERROR;
+		//} else if (_gps_pull_flag == SIM908_FLAG_GPS_PULL &&
+			//_check_response(SIM908_RESPONSE_GPS_PULL)) {			/* GPS pull */
+				//_gps_response_tail = _rx_buffer_tail;
+				//_gps_response_length = _rx_response_length;
+				//_ack_gps_response_flag = SIM908_FLAG_GPS_PULL_OK;
+				//_gps_pull_flag = SIM908_FLAG_WAITING;
+		//} else if (_rx_response_length == 10 &&
+			//_check_response(SIM908_RESPONSE_CREG)) {				/* CREG */
+				//EXT_CONNECTION_CREG_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) - '0';	/* Subtracting '0' (0x30) to get the value as an integer */
+		//} else if (_rx_response_length == 11 &&
+			//_check_response(SIM908_RESPONSE_GPS_READY)) {			/* GPS Ready */
+				//_ack_gps_response_flag = SIM908_FLAG_GPS_OK;
+		//} else if (_ftp_sending_flag == SIM908_FLAG_FTP_SENDING &&
+			//_check_response(SIM908_RESPONSE_FTP_PUT)) {				/* FTPPUT */
+				///* 	FTP PUT OPEN SESSION:	"+FTPPUT:1,1,1260"
+					//FTP PUT RESPONSE:		"+FTPPUT:2,140"
+					//FTP PUT CLOSE SESSION:	"+FTPPUT:1,0"		*/
+				//char c1 = _char_at(8, _rx_buffer_tail, _rx_response_length);
+				//char c2 = _char_at(10, _rx_buffer_tail, _rx_response_length);
+				//char c3 = _char_at(11, _rx_buffer_tail, _rx_response_length);
+				//if (c1 == '1' && c2 == '1' && c3 == ',') {
+					//_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_OPEN;
+				//} else if(c1 == '2' && c2 == '1' && c3 == '4') {
+					//_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_SUCCESS;
+				//} else if(c1 == '1' && c2 == '0') {
+					//_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_CLOSE;
+				//} else {
+					//_ack_ftp_response_flag = SIM908_FLAG_FTP_PUT_ERROR;
+				//}
+		//} else if (_rx_response_length == 5 &&
+			//_check_response(SIM908_RESPONSE_RDY)) {					/* System ready */
+				//_system_running_flag = SIM908_FLAG_RUNNING;
+		//} else if (_rx_response_length == 4 &&
+			//_check_response(SIM908_RESPONSE_AT)) {					/* Sync AT cmd */
+				//_rx_response_length = 0;
+		//}
+		//_rx_response_length = 0;
+	//}
+//}
+//
+//
+
+
+
+
+
 
 #ifdef DEBUG_UART_ENABLE
 /**********************************************************************//**

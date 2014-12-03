@@ -48,6 +48,11 @@ namespace VROOM_MSD
             _msd = new MSD_structure();
             alarm_sound = new SoundPlayer(Path.GetFullPath("alert.wav"));
 
+            LoadFiles();
+        }
+
+        private void LoadFiles()
+        {
             String[] items = Directory.GetFiles(MSD_File_Watcher.Path, MSD_File_Watcher.Filter);
 
             foreach (String file in items)
@@ -58,7 +63,6 @@ namespace VROOM_MSD
             }
 
             msd_text_box.SelectedIndex = msd_text_box.Items.Count - 1;
-       
         }
 
         private void SetupBingMap()
@@ -160,13 +164,27 @@ namespace VROOM_MSD
                 msd_details.Items.Add("---------------------------------------------------------------------");
                 msd_details.Items.Add("Optional Data:");
 
-                String[] optional_data = _msd.optional.Split('|');
-
-                foreach (String data in optional_data)
+                /* Old version of MSD optional data encoding */
+                if (_msd.version == 1)
                 {
-                    msd_details.Items.Add(" - " + data);
+                   String[] optional_data = _msd.optional.Split('|');
+                    foreach (String data in optional_data)
+                        msd_details.Items.Add(" - " + data);
+                }  
+
+                /* New version of MSD optional data encoding (*/
+                else if (_msd.version == 2)
+                {
+                    String[] optional_data = _msd.optional.Split('\n');
+
+                    msd_details.Items.Add(String.Format(" - Acceleration [G]:\t{0}", optional_data[0]));
+                    msd_details.Items.Add(String.Format(" - Temperature [°C]:\t{0}", optional_data[1]));
+                    msd_details.Items.Add(String.Format(" - Passengers:\t{0}", optional_data[2]));
+                    msd_details.Items.Add(String.Format(" - Speed:\t\t{0}", optional_data[3]));
                 }
+ 
                 msd_details.Items.Add("=======================================");
+
             }
             else
             {
@@ -241,13 +259,9 @@ namespace VROOM_MSD
                 MSD_File_Watcher.Path = _path = folderBrowserDialog1.SelectedPath + "\\";
                 msd_text_box.Items.Clear();
                 msd_details.Items.Clear();
+                _msd = new MSD_structure();
 
-                String[] items = Directory.GetFiles(MSD_File_Watcher.Path, MSD_File_Watcher.Filter);
-
-                foreach (String file in items)
-                {
-                    msd_text_box.Items.Add(Path.GetFileName(file));
-                }
+                LoadFiles();
 
                 path_label.Text = _path;
             } 

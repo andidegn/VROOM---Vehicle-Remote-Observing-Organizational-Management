@@ -22,6 +22,9 @@
 #define TOP_VALUE(frequency_in_hz, prescaler) (F_CPU/(prescaler * frequency_in_hz)-1)
 
 static volatile uint8_t _isr_counter = 0;
+static uint8_t _TIFR1_cpy = 0;
+static uint8_t _TIFR3_cpy = 0;
+
 /**********************************************************************//**
  @ingroup timer
  @brief Initiates timer 1 in CTC mode
@@ -130,31 +133,13 @@ void timer3_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 
 /**********************************************************************//**
  @ingroup timer
- @brief Enables interrupt for timer3
-*************************************************************************/
-void timer3_start(void)
-{
-	TIFR3 |= _BV(OCIE3A);
-	//TIFR |= (1 << OCF1A);
-	/* Enable interrupts */
-	TIMSK3 |= _BV(OCIE3A);
-}
-
-/**********************************************************************//**
- @ingroup timer
- @brief Disables interrupt for timer3
-*************************************************************************/
-void timer3_stop(void)
-{
-	/* Disable interrupts */
-	TIMSK3 &= ~_BV(OCIE3A);
-}
-
-/**********************************************************************//**
- @ingroup timer
  @brief Disables interrupt for timer1 and timer3
 *************************************************************************/
-void timer_pause_all(void) {
+void timer_pause_all(void) 
+{
+	_TIFR3_cpy = TIFR3;
+	_TIFR1_cpy = TIFR1;
+	
 	TIMSK3 &= ~_BV(OCIE3A);
 	TIMSK1 &= ~_BV(OCIE1A);
 }
@@ -163,7 +148,25 @@ void timer_pause_all(void) {
  @ingroup timer
  @brief Enables interrupt for timer1 and timer3
 *************************************************************************/
-void timer_resume_all(void) {
+void timer_resume_all(void) 
+{	
+	TIFR3 = _TIFR3_cpy;
+	TIFR1 = _TIFR1_cpy;
+		
+	TIMSK3 |= _BV(OCIE3A);
+	TIMSK1 |= _BV(OCIE1A);
+}
+
+void timer_stop_all(void) 
+{
+	TIMSK3 &= ~_BV(OCIE3A);
+	TIMSK1 &= ~_BV(OCIE1A);
+}
+
+void timer_start_all(void) 
+{
+	TIFR3 |= _BV(OCIE3A);
+	TIFR1 |= _BV(OCIE1A);
 	TIMSK3 |= _BV(OCIE3A);
 	TIMSK1 |= _BV(OCIE1A);
 }
@@ -175,15 +178,8 @@ ISR(TIMER1_COMPA_vect)
 
 ISR(TIMER3_COMPA_vect)
 {
-	/* saves the current state of the status register and disables global interrupt */
-	uint8_t _sreg = SREG;
-	cli();
+	check_for_crash();
 
-	ad_check_for_crash();
-
-	if (_isr_counter++%CONFIG_ALARM_FIRE_TRIGGER_TIME == 0)
-		ad_check_for_fire();
-
-	/* restoring status register */
-	SREG = _sreg;
+	if (_isr_counter++%(CONFIG_ALARM_FIRE_TRIGGER_TIME*CONFIG_ALARM_DETECTION_FREQUENCY) == 0)
+		check_for_fire();
 }

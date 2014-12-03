@@ -26,7 +26,7 @@
  * @brief struct containing the MSD for an accident report
  * @note According eCall standard EN 15722 the MSD consists of 140 bytes
  *************************************************************************/
-typedef struct __attribute__((packed))
+typedef struct 
 {
 	uint8_t version;									/**> Referring to a public register to determine the meaning and encoding of the optional data */
 	uint8_t msg_identifier;								/**> Numbers of re-transmission */
@@ -35,9 +35,9 @@ typedef struct __attribute__((packed))
 	char VIN[20];										/**> VIN number 17-characters (last 3 char is blank) ISO 3779 */
 	uint8_t fuel_type;
 	uint32_t time_stamp;								/**> UTC Seconds */
-	int32_t latitude;									/**> Latitude (WGS-84) in milliarcseconds (-324000000 ? value ? 324000000) ISO 6709 */
-	int32_t longitude;									/**> Longitude (WGS-84) in milliarcseconds (-648000000 ? value ? 648000000) ISO 6709 */
-	uint8_t direction;									/**> Direction in degrees. The nearest integer of 255.0*value/360.0 (0 <= value >= 255) */
+	int32_t latitude;									/**> Latitude (WGS-84) in milliarcseconds (-324000000 >= value <= 324000000) ISO 6709 */
+	int32_t longitude;									/**> Longitude (WGS-84) in milliarcseconds (-648000000 >= value <= 648000000) ISO 6709 */
+	uint8_t direction;									/**> Direction in degrees. The nearest integer of 255.0*value/360.0 (0 <= value <= 255) */
 	char optional_data[CONFIG_MSD_OPTIONAL_DATA_SIZE];	/**> Optional. Further data (e.g. crash information, number of passengers) or blank field */
 } AD_MSD;
 
@@ -66,13 +66,13 @@ typedef struct __attribute__((packed))
  * @defgroup ac_dat_vehicle_class Vehicle class
  * @{
  *************************************************************************/
-#define AD_VEHICLE_CLASS_L(category)	(1<<4 | category)	/* Motor vehicles with less than four wheels */
-#define AD_VEHICLE_CLASS_M(category)	(2<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of passengers */
-#define AD_VEHICLE_CLASS_N(category)	(3<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of goods */
-#define AD_VEHICLE_CLASS_O(category)	(4<<4 | category)	/* Trailers (including semi–trailers) */
-#define AD_VEHICLE_CLASS_T(category)	(5<<4 | category)	/* Agricultural and Forestry tractors */
-#define AD_VEHICLE_CLASS_G(category)	(6<<4 | category)	/* Off-road vehicles */
-#define AD_VEHICLE_CLASS_SA(category)	(7<<4 | category)	/* Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/
+#define AD_VEHICLE_CLASS_L(category)	(1<<4 | category)	/**> Motor vehicles with less than four wheels */
+#define AD_VEHICLE_CLASS_M(category)	(2<<4 | category)	/**> Power-driven vehicles having at least four wheels and used for the carriage of passengers */
+#define AD_VEHICLE_CLASS_N(category)	(3<<4 | category)	/**> Power-driven vehicles having at least four wheels and used for the carriage of goods */
+#define AD_VEHICLE_CLASS_O(category)	(4<<4 | category)	/**> Trailers (including semi–trailers) */
+#define AD_VEHICLE_CLASS_T(category)	(5<<4 | category)	/**> Agricultural and Forestry tractors */
+#define AD_VEHICLE_CLASS_G(category)	(6<<4 | category)	/**> Off-road vehicles */
+#define AD_VEHICLE_CLASS_SA(category)	(7<<4 | category)	/**> Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/
 /** @} */
 
 /**********************************************************************//**
@@ -89,6 +89,8 @@ extern char EXT_MSD_FILENAME[24];
 extern AD_MSD EXT_MSD;
 extern AD_EMERGENCY_FLAG EXT_EMERGENCY_FLAG;
 extern AT_CONNECTION_STATUS_FLAG EXT_CONNECTION_CREG_FLAG;
+extern float EXT_TEMPERATURE;
+extern float EXT_TOTAL_ACCELERATION_AVG;
 
 /**********************************************************************//**
  * @ingroup ac_dat_pub

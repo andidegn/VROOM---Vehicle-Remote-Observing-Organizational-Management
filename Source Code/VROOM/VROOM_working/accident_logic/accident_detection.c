@@ -11,9 +11,6 @@
 #include "../hardware_boards/car_panel/car_panel.h"
 #include "../sensors/sensor_scheduler.h"
 
-float EXT_TEMPERATURE = 0;
-float EXT_TOTAL_ACCELERATION_AVG = 0;
-
 /* Local variables */
 static volatile float cur_temp = 0.0F;
 static volatile float prev_temp = CONFIG_ALARM_FIRE_TEMP_INIT;
@@ -36,26 +33,25 @@ void accident_detection_init(void)
  * 2. Analysis data
  * 3. Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected
  **************************************************************************/
-void ad_check_for_crash(void) {
+void check_for_crash(void) {
 	volatile bool _alarm = true;
-	EXT_TOTAL_ACCELERATION_AVG = 0;
+	uint8_t i = 0;
 	int16_t *_acc_buffer = malloc(CONFIG_ALARM_CRASH_NO_OF_READINGS * sizeof(int16_t));
 
 	scheduler_acc_get_last_readings_sum(_acc_buffer);
 
-	for (uint8_t i = 0; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) {
+	for (i = 0; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) {
 		if (*(_acc_buffer + i) < CONFIG_ALARM_CRASH_TRIGGER_VALUE) {
 			_alarm = false;
 			break;
 		}
-		EXT_TOTAL_ACCELERATION_AVG += *(_acc_buffer + i);
 	}
-	free(_acc_buffer);
 
+	free(_acc_buffer);
+	
 	if (_alarm && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM) {
 		accident_detection_stop();
 		if (!car_panel_wait_cancel_emmergency()) {
-			EXT_TOTAL_ACCELERATION_AVG /= (CONFIG_ALARM_CRASH_NO_OF_READINGS*100);
 			EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
 		}else {
 			accident_detection_start();
@@ -72,9 +68,9 @@ void ad_check_for_crash(void) {
  * 2. Compare current value with last reading
  * 3. Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if fire is detected
  **************************************************************************/
-void ad_check_for_fire(void)
+void check_for_fire(void)
 {
-	cur_temp = EXT_TEMPERATURE = scheduler_temp_get_last_reading();
+	cur_temp = scheduler_temp_get_last_reading();
 
 	if (prev_temp != CONFIG_ALARM_FIRE_TEMP_INIT && (cur_temp - prev_temp) > CONFIG_ALARM_FIRE_TRIGGER_DEGREE && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
 	{
@@ -98,7 +94,7 @@ void ad_check_for_fire(void)
  **************************************************************************/
 void accident_detection_start(void)
 {
-	timer_resume_all();
+	timer_start_all();
 }
 
 /**********************************************************************//**
@@ -107,5 +103,5 @@ void accident_detection_start(void)
  **************************************************************************/
 void accident_detection_stop(void)
 {
-	timer_pause_all();
+	timer_stop_all();
 }

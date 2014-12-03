@@ -6,7 +6,6 @@
 #include <util/delay.h>
 #include "car_panel.h"
 #include "../../accident_logic/accident_data.h"
-#include "../../accident_logic/accident_detection.h"
 
 /**********************************************************************//**
  * @ingroup cp_priv
@@ -262,7 +261,6 @@ ISR (PCINT1_vect, ISR_NOBLOCK)
 			car_panel_set_alarm_button_state(true);
 			car_panel_set_cancel_button_state(false);
 			car_panel_set_control(ALARM_NOT_ACTIVATED);
-			accident_detection_start();
 		}
 	}
 }

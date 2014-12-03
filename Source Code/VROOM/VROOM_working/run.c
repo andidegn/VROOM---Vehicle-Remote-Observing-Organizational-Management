@@ -20,9 +20,10 @@
 #define ON	1
 #define OFF 0
 
+/* ******************************************************** */
 /* ** Defines what context of the program to be executed ** */
+/* ******************************************************** */
 #define UNIT_TEST						OFF
-#define UNIT_TEST_MSD					OFF
 
 #define MODULE_TEST_SENSORS				OFF
 #define MODULE_TEST_SIM908				OFF
@@ -39,35 +40,30 @@ int main (void)
 	#endif /* DEBUG_LCD_ENABLE */
 
 	#if UNIT_TEST
-		#include "tests/unit/unit_test.h"
-		char* result = run_all_tests();
+		#include "tests/unit/test_unit.h"
+		char* result = run_all_test();	
+			
 		#ifdef DEBUG_LCD_ENABLE
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
 			lcd_puts(result);
 			lcd_gotoxy(0,1);
-			lcd_puts("Tests run: ");
+			lcd_puts("Tests run");
 			lcd_puts(itoa(tests_run, buf, 10));
-		#endif /* DEBUG_LCD_ENABLE */
-	#endif /* UNIT_TEST */
-
-	#if UNIT_TEST_MSD
-		/******************************************************************************
-		************************************ ToDo *************************************
-		******************************************************************************/
-		/* Don't know if it should be integrated in the existing unit test file */
-	#endif /* UNIT_TEST_MSD */
+		#endif /* DEBUG_LCD_ENABLE */		
+	#endif /* UNIT_TEST_TEMPERATURE */
 
 	#if MODULE_TEST_SENSORS
 		#include "tests/module/sensors/test_module_sensors.h"
 		sensors_init();
+		sei();
 		while (1)
 		{
 			sensors_read_data();
-			#if DEBUG_LCD_ENABLE
+			#ifdef DEBUG_LCD_ENABLE
 				sensors_print_data();
 			#endif /* DEBUG_LCD_ENABLE */
-			_delay_ms(500);
+			_delay_ms(200);
 		}
 	#endif /* MODULE_TEST_SENSORS */
 
@@ -79,10 +75,26 @@ int main (void)
 
 	#if MODULE_TEST_CAR_PANEL
 		#include "tests/module/car_panel/test_module_car_panel.h"
-			/******************************************************************************
-			************************************ ToDo *************************************
-			******************************************************************************/
+		init_module_test_car_panel();
 		sei();
+		
+		#ifdef DEBUG_LCD_ENABLE
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts("Test status LED");
+			lcd_gotoxy(0,1);
+			lcd_puts("<B - G - R>");
+		#endif /* DEBUG_LCD_ENABLE */
+		test_status_LED(10);
+		
+		#ifdef DEBUG_LCD_ENABLE
+			lcd_clrscr();
+			lcd_gotoxy(0,0);
+			lcd_puts("Test control LED");
+			lcd_gotoxy(0,1);
+			lcd_puts("<blinking>");
+		#endif /* DEBUG_LCD_ENABLE */
+		test_control_LED(10);	
 	#endif /* MODULE_TEST_CAR_PANEL */
 
 	#if MODULE_TEST_UART
@@ -106,7 +118,6 @@ int main (void)
 		for (uint8_t k = 0; k < 4; k++) {
 			lcd_puts(test_module_uart_run(_test_strings[k], _compare_strings[k]) ? "PASSED" : "FAILED");
 			lcd_putc('\n');
-
 		}
 		#endif /* DEBUG_LCD_ENABLE */
 	#endif /* MODULE_TEST_UART */
@@ -133,7 +144,9 @@ int main (void)
 		while (1)
 		{
 			/* Sets the status LED on car panel */
-			EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_HOME_NETWORK || EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_ROAMING ? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
+			(EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_HOME_NETWORK || EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_ROAMING) 
+			&& (EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM || EXT_EMERGENCY_FLAG == EMERGENCY_ALARM_SENT) 
+			? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
 			/* Checks the emergency flags */
 			//if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM) /* Keeps sending after 1 alarm has been triggered. ONLY FOR STABILITY TESTING */
@@ -143,6 +156,8 @@ int main (void)
 
 				/* Enable cancel button for reset purpose */
 				car_panel_set_cancel_button_state(true);
+							
+				accident_detection_start();
 			}
 
 			#ifdef DEBUG_LCD_ENABLE

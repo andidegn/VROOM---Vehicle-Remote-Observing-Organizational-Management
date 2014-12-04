@@ -22,7 +22,7 @@ New Features, Improvements
 - Moved recording of optional data values (acceleration and temperature) to MSD optional data function, as it is redundant 
   to calculate everytime it checks for accidents.
 - Added module test for Car Panel: test_module_car_panel
-- Minor (renaming) buf fixed in SPI driver
+- Minor (renaming of local variable) bug fixed in SPI driver
 
 Fixed Bugs, Changes
 -------------------
@@ -30,8 +30,8 @@ Fixed Bugs, Changes
 - MSD version 2: Changed structure of encoding optional data, so that only values is sent
 - Added check for emmergency flags, when setting the status LED on car panel. This is done so that it lights up red while sending
   and green when it is done sending.
-- Renamed UnitTest to test_unit_temperature
-- Discarded unit test implementation for MSD as all the functions to set MSD are static and it did not maked any sense anyway
+- Renamed UnitTest to test_unit
+- Discarded unit test implementation for MSD as all the functions to set MSD are static
   
 
 ToDo

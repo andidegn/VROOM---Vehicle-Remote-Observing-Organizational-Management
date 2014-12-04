@@ -6,11 +6,11 @@
 #include <util/delay.h>
 #include "sim908.h"
 #include "at_commands.h"
+#include "../../vroom_config.h"
 #include "../../data_comm/uart/uart.h"
 #include "../../accident_logic/accident_data.h"
-#include "../../accident_logic/accident_detection.h"
 #include "../../util/time.h"
-#include "../../vroom_config.h"
+#include "../../util/timer/timer.h"
 
 /**********************************************************************//**
  * @ingroup sim908_priv
@@ -262,7 +262,8 @@ void call_PSAP(void)
  * 6. End write session:	(AT+FTPPUT=2,0)
  * 7. Close bearer:			(AT+SAPBR=0,1)
  *************************************************************************/
-void send_MSD(const char *__vroom_id) {
+void send_MSD(const char *__vroom_id) 
+{
     _wait_for_connection();
 
     uint8_t _retry_ctr = RETRY_ATTEMPTS;
@@ -463,6 +464,7 @@ static void _wait_for_connection(void) {
  * @return bool - true if 'OK' else false
  *************************************************************************/
 static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def) {
+	timer_pause_all();
 	volatile bool _ret = false;
 	while(*__flag == SIM908_FLAG_WAITING) {
 		_delay_ms(100);
@@ -470,6 +472,7 @@ static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def) {
 	if (*__flag == __ok_def) {
 		_ret = true;
 	}
+	timer_resume_all();
 
 	return _ret;
 }

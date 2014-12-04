@@ -15,14 +15,16 @@
 #include "../../../sensors/sensor_scheduler.h"
 
 const char degree = 0b011011111;
-static int x_axis, y_axis, z_axis;
+static int16_t x_axis, y_axis, z_axis;
 static float temp;
 static char buf[10];
-int16_t _acc_buffer[3];
+static int16_t _acc_buffer[3];
 
 void sensors_init()
 {
-	x_axis, y_axis, z_axis = 0;
+	x_axis = 0;
+	y_axis = 0;
+	z_axis = 0;
 	temp = 0.0;
 	scheduler_start(NULL);
 }

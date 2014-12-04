@@ -58,25 +58,25 @@ void timer3_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz);
 
 /**********************************************************************//**
  @ingroup timer
- @brief Disables interrupt for timer1 and timer3
+ @brief Stores the mask and interrupt register for Timer 1 and Timer 3 and disables interrupts
 *************************************************************************/
 void timer_pause_all(void);
 
 /**********************************************************************//**
  @ingroup timer
- @brief Enables interrupt for timer1 and timer3
+ @brief Restores the mask and interrupt register for Timer 1 and Timer 3 and enables interrupts
 *************************************************************************/
 void timer_resume_all(void);
 
 /**********************************************************************//**
  @ingroup timer
- @brief Enables interrupt for timer1 and timer3
+ @brief Disables interrupt for timer1 and timer3
 *************************************************************************/
 void timer_stop_all(void);
 
 /**********************************************************************//**
  @ingroup timer
- @brief Disables interrupt for timer1 and timer3
+ @brief Enables interrupt for timer1 and timer3
 *************************************************************************/
 void timer_start_all(void);
 

@@ -24,6 +24,8 @@
 static volatile uint8_t _isr_counter = 0;
 static uint8_t _TIFR1_cpy = 0;
 static uint8_t _TIFR3_cpy = 0;
+static uint8_t _TIMSK1_cpy = 0;
+static uint8_t _TIMSK3_cpy = 0;
 
 /**********************************************************************//**
  @ingroup timer
@@ -133,13 +135,36 @@ void timer3_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 
 /**********************************************************************//**
  @ingroup timer
- @brief Disables interrupt for timer1 and timer3
+ @brief Stores the mask and interrupt register for Timer 1 and Timer 3 and disables interrupts
 *************************************************************************/
 void timer_pause_all(void) 
 {
-	_TIFR3_cpy = TIFR3;
 	_TIFR1_cpy = TIFR1;
-	
+	_TIFR3_cpy = TIFR3;
+	_TIMSK1_cpy = TIMSK1;
+	_TIMSK3_cpy = TIMSK3;
+	TIMSK1 &= ~_BV(OCIE1A);
+	TIMSK3 &= ~_BV(OCIE3A);
+}
+
+/**********************************************************************//**
+ @ingroup timer
+ @brief Restores the mask and interrupt register for Timer 1 and Timer 3 and enables interrupts
+*************************************************************************/
+void timer_resume_all(void) 
+{
+	TIFR1 = _TIFR1_cpy;
+	TIFR3 = _TIFR3_cpy;
+	TIMSK1 = _TIMSK1_cpy;		
+	TIMSK3 = _TIMSK3_cpy;
+}
+
+/**********************************************************************//**
+ @ingroup timer
+ @brief Disables interrupt for timer1 and timer3
+*************************************************************************/
+void timer_stop_all(void) 
+{
 	TIMSK3 &= ~_BV(OCIE3A);
 	TIMSK1 &= ~_BV(OCIE1A);
 }
@@ -148,21 +173,6 @@ void timer_pause_all(void)
  @ingroup timer
  @brief Enables interrupt for timer1 and timer3
 *************************************************************************/
-void timer_resume_all(void) 
-{	
-	TIFR3 = _TIFR3_cpy;
-	TIFR1 = _TIFR1_cpy;
-		
-	TIMSK3 |= _BV(OCIE3A);
-	TIMSK1 |= _BV(OCIE1A);
-}
-
-void timer_stop_all(void) 
-{
-	TIMSK3 &= ~_BV(OCIE3A);
-	TIMSK1 &= ~_BV(OCIE1A);
-}
-
 void timer_start_all(void) 
 {
 	TIFR3 |= _BV(OCIE3A);

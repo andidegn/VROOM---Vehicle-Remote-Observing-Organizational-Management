@@ -1,23 +1,14 @@
 ﻿/* *
  * *    Author:         Kenneth René Jensen
  * *    Description:    Test GUI simulating PSAP 
- * *    Version:        1
+ * *    Version:        2
  * */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 using VROOM_MSD.Properties;
-using System.Reflection;
-using System.Resources;
 using System.Windows.Media;
 using System.Threading;
 using Microsoft.Maps.MapControl.WPF;
@@ -39,16 +30,24 @@ namespace VROOM_MSD
             InitializeComponent();
             SetupBingMap();
 
-            _path = Settings.Default.LastPath;
-            path_label.Text = _path;
-            MSD_File_Watcher.Path = _path;
-            folderBrowserDialog1.SelectedPath = _path;
             folderBrowserDialog1.ShowNewFolderButton = false;
             folderBrowserDialog1.Description = "Locate MSD folder (*.vroom files)";
-            _msd = new MSD_structure();
-            alarm_sound = new SoundPlayer(Path.GetFullPath("alert.wav"));
 
-            LoadFiles();
+            try
+            {
+                _path = Settings.Default.LastPath;
+                folderBrowserDialog1.SelectedPath = _path;
+                path_label.Text = _path;
+                MSD_File_Watcher.Path = _path;
+                _msd = new MSD_structure();
+                LoadFiles();
+            }
+            catch(Exception e) 
+            {
+                path_label.Text = "Last path not found...";
+            }
+
+            alarm_sound = new SoundPlayer(Path.GetFullPath("alert.wav"));
         }
 
         private void LoadFiles()
@@ -79,13 +78,15 @@ namespace VROOM_MSD
         {
             msd_text_box.Items.Add(e.Name);
             _msd.AddNewMSD(e.Name, ReadSelectedFile(_path + e.Name));
-
             alarm_sound.Play();
         }
 
         private void MSD_File_Watcher_Deleted(object sender, System.IO.FileSystemEventArgs e)
         {
             msd_text_box.Items.Remove(e.Name);
+            path_label.Text = _msd.GetLocation().Latitude + ", " + _msd.GetLocation().Longitude;
+            mapUserControl.Map.Children.Remove(_msd.GetPin(e.Name));
+            _msd.DeletePin(e.Name);
             _msd.DeleteMSD(e.Name);
         }
 
@@ -121,16 +122,15 @@ namespace VROOM_MSD
 
                 if (_msd.ControlPositionTrusted())
                 {
-                    location = new Location(_msd.GetLatitudeDD(), _msd.GetLongitudeDD());
-                    Pushpin pin = new Pushpin() {
-                                        Heading = -45,
-                                        Background = new SolidColorBrush(Colors.Red),
-                                        ContentStringFormat = msd_text_box.Text,
-                                        Content = "+",                     
-                                        Location = location,
-                                    };
+                    location = _msd.GetLocation();
 
-                    mapUserControl.Map.Children.Add(pin);
+                    if (_msd.GetPin(msd_text_box.Text) == null)
+                    {
+                        _msd.CreatePin(msd_text_box.Text);
+
+                        mapUserControl.Map.Children.Add(_msd.GetPin(msd_text_box.Text));
+                    }
+
                     mapUserControl.Map.Focus();
                 }
 
@@ -260,7 +260,7 @@ namespace VROOM_MSD
                 msd_text_box.Items.Clear();
                 msd_details.Items.Clear();
                 _msd = new MSD_structure();
-
+                mapUserControl.Map.Children.Clear();
                 LoadFiles();
 
                 path_label.Text = _path;

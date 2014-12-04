@@ -1,15 +1,14 @@
 ﻿/* *
  * *    Author:         Kenneth René Jensen
  * *    Description:    Encoding MSD structure
- * *    Version:        1
+ * *    Version:        2
  * */
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
+using Microsoft.Maps.MapControl.WPF;
+using System.Windows.Media;
 
 namespace VROOM_MSD
 {
@@ -30,11 +29,13 @@ namespace VROOM_MSD
         private DateTime UTC_time_stamp;
         private Dictionary<String,byte[]> MSD_Data_bin;
         private Byte[] MSD;
+        private Dictionary<String, Pushpin> pin;
 
         public MSD_structure()
         {
             MSD_Data_bin = new Dictionary<String, byte[]>();
             UTC_time_stamp = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            pin = new Dictionary<String, Pushpin>();
         }
 
         public void AddNewMSD(String key, Byte[] vroom_file_data)
@@ -171,6 +172,39 @@ namespace VROOM_MSD
         public Double GetLongitudeDD()
         {
             return System.Math.Round(longitude / 3600000.0, 7);
+        }
+
+        public Location GetLocation()
+        {
+            return new Location(GetLatitudeDD(), GetLongitudeDD());
+        }
+
+        public void CreatePin(String key)
+        {
+            pin[key] = new Pushpin()
+            {
+                Heading = -45,
+                Background = new SolidColorBrush(Colors.Red),
+                Content = "+",
+                Location = GetLocation(),
+            };
+        }
+
+        public void DeletePin(String key)
+        {
+            pin.Remove(key);
+        }
+
+        public Pushpin GetPin(String key)
+        {
+            try
+            {
+                return pin[key];
+            }
+            catch (KeyNotFoundException)
+            {
+                return null;
+            }
         }
 
         public DateTime GetTimeStamp()

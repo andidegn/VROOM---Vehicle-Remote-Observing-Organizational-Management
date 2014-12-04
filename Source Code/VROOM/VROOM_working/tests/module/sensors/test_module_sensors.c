@@ -11,7 +11,7 @@
 ************************************************/
 #include <stdlib.h>
 #include "test_module_sensors.h"
-#include "../../../hardware_boards/lcd_board/lcd/lcd.h"
+#include "../../../util/lcd_board/lcd/lcd.h"
 #include "../../../sensors/sensor_scheduler.h"
 
 const char degree = 0b011011111;

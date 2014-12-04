@@ -5,6 +5,7 @@
 #include <math.h>
 #include "sensor_scheduler.h"
 #include "../vroom_config.h"
+#include "../util/r2r_led/r2r_led.h"
 
 typedef enum {state_tc72_init,
 			  state_acc_init,
@@ -26,9 +27,22 @@ static void (*_callback_function_ptr)(char __data); /* not implemented yet */
 // static uint8_t _acc_buffer_head = 0; /* may not be needed */
 static uint8_t _acc_buffer_tail = 0;
 
+#ifdef DEBUG_TASK_MEASURE
+static uint8_t _task_id_temp = 1;
+static uint8_t _task_id_acc = 2;
+static uint8_t _task_id_read = 3;
+
+static uint8_t _task_id_prev_temp = 0;
+static uint8_t _task_id_prev_acc = 0;
+static uint8_t _task_id_prev_read = 0;
+#endif
+
 void scheduler_start(void (*callback_function_ptr)(char __data)) {
 	_state = state_tc72_init;
 	_callback_function_ptr = callback_function_ptr;
+#ifdef DEBUG_TASK_MEASURE
+	r2r_init();
+#endif
 	scheduler_release();
 }
 
@@ -74,15 +88,30 @@ void scheduler_release(void) {
 		break;
 
 		case state_tc72_read :
+#ifdef DEBUG_TASK_MEASURE
+			_task_id_prev_temp = r2r_start_task(_task_id_temp);
+#endif
 			_state = state_acc_read;
 			measure_temperature();
+#ifdef DEBUG_TASK_MEASURE
+			r2r_stop_task(_task_id_prev_temp);
+#endif
 		break;
 
 		case state_acc_read :
+#ifdef DEBUG_TASK_MEASURE
+			_task_id_prev_acc = r2r_start_task(_task_id_acc);
+#endif
 			_state = state_store_in_buffers;
 			acc_measure();
+#ifdef DEBUG_TASK_MEASURE
+			r2r_stop_task(_task_id_prev_acc);
+#endif
 		break;
 		case state_store_in_buffers :
+#ifdef DEBUG_TASK_MEASURE
+			_task_id_prev_read = r2r_start_task(_task_id_read);
+#endif
 			_state = state_idle;
 			_x_axis_buffer[_acc_buffer_tail] = (int)(acc_get_x_axis() * 100);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
 			_y_axis_buffer[_acc_buffer_tail] = (int)(acc_get_y_axis() * 100);
@@ -92,6 +121,9 @@ void scheduler_release(void) {
 			_temperature = get_temperature();
 
 			_state = state_idle;
+#ifdef DEBUG_TASK_MEASURE
+			r2r_stop_task(_task_id_prev_read);
+#endif
 			scheduler_release();
 		break;
 

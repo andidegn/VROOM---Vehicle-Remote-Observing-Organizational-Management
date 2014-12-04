@@ -14,7 +14,7 @@
 #include "accident_logic/accident_data.h"
 #include "accident_logic/accident_detection.h"
 #ifdef DEBUG_LCD_ENABLE
-	#include "hardware_boards/lcd_board/lcd/lcd.h"
+	#include "util/lcd_board/lcd/lcd.h"
 #endif
 #define F_CPU 11059200UL
 #define ON	1

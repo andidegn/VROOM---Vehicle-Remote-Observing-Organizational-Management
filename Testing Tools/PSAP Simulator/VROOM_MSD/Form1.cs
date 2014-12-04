@@ -130,9 +130,9 @@ namespace VROOM_MSD
 
                         mapUserControl.Map.Children.Add(_msd.GetPin(msd_text_box.Text));
                     }
-
-                    mapUserControl.Map.Focus();
                 }
+                
+                mapUserControl.Map.Focus();
 
                 msd_details.Items.Clear();
                 msd_details.Items.Add("=======================================");

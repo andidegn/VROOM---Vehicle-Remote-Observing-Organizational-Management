@@ -17,6 +17,9 @@
 #ifndef COLLECT_SENSOR_DATA_H_
 #define COLLECT_SENSOR_DATA_H_
 
+#include <stdbool.h>
+#include <stdint.h>
+
 /**********************************************************************//**
  * @ingroup scheduler_pub
  * @brief Initializes the scheduler
@@ -26,6 +29,36 @@
  * @return void
  *************************************************************************/
 void scheduler_start(void (*callback_function_ptr)(char __data));
+
+/**********************************************************************//**
+ * @ingroup scheduler_pub
+ * @brief Pause the scheduler
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
+void scheduler_pause(void);
+
+/**********************************************************************//**
+ * @ingroup scheduler_pub
+ * @brief Resumes the scheduler
+ *
+ * @param bool - true if interrupt flag register should be cleared else false
+ *
+ * @return void
+ *************************************************************************/
+void scheduler_resume(bool __clear_TIFR);
+
+/**********************************************************************//**
+ * @ingroup scheduler_pub
+ * @brief Halts the scheduler
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
+void scheduler_halt(void);
 
 /**********************************************************************//**
  * @ingroup scheduler_pub

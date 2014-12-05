@@ -8,16 +8,15 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <stdlib.h>
-#include "scheduler.h"
-#include "hardware_boards/sim908/sim908.h"
-#include "hardware_boards/car_panel/car_panel.h"
-#include "accident_logic/accident_data.h"
-#include "accident_logic/accident_detection.h"
+#include "scheduler/scheduler.h"
+#include "../hardware_boards/sim908/sim908.h"
+#include "../hardware_boards/car_panel/car_panel.h"
+#include "../accident_logic/accident_data.h"
 #ifdef DEBUG_LCD_ENABLE
-	#include "util/lcd_board/lcd/lcd.h"
+	#include "../util/lcd_board/lcd/lcd.h"
 #endif
 #ifdef DEBUG_TASK_MEASURE
-	#include "util/r2r_led/r2r_led.h"
+	#include "../util/r2r_led/r2r_led.h"
 #endif
 #define F_CPU 11059200UL
 #define ON	1
@@ -47,7 +46,7 @@ int main (void)
 	#endif /* DEBUG_TASK_MEASURE */
 
 	#if UNIT_TEST
-		#include "tests/unit/test_unit.h"
+		#include "../tests/unit/test_unit.h"
 		char* result = run_all_test();
 
 		#ifdef DEBUG_LCD_ENABLE
@@ -58,10 +57,10 @@ int main (void)
 			lcd_puts("Tests run");
 			lcd_puts(itoa(tests_run, buf, 10));
 		#endif /* DEBUG_LCD_ENABLE */
-	#endif /* UNIT_TEST_TEMPERATURE */
+	#endif /* UNIT_TEST */
 
 	#if MODULE_TEST_SENSORS
-		#include "tests/module/sensors/test_module_sensors.h"
+		#include "../tests/module/sensors/test_module_sensors.h"
 		sensors_init();
 		sei();
 		while (1)
@@ -81,7 +80,7 @@ int main (void)
 	#endif /* MODULE_TEST_SIM908 */
 
 	#if MODULE_TEST_CAR_PANEL
-		#include "tests/module/car_panel/test_module_car_panel.h"
+		#include "../tests/module/car_panel/test_module_car_panel.h"
 		init_module_test_car_panel();
 		sei();
 
@@ -105,7 +104,7 @@ int main (void)
 	#endif /* MODULE_TEST_CAR_PANEL */
 
 	#if MODULE_TEST_UART
-		#include "tests/module/uart/test_module_uart.h"
+		#include "../tests/module/uart/test_module_uart.h"
 
 		sei();
 		char *_test_strings[] = {
@@ -145,7 +144,6 @@ int main (void)
 		SIM908_start();
 		car_panel_start();
 		scheduler_start(NULL);
-		accident_detection_start();
 
 		while (1)
 		{
@@ -155,15 +153,15 @@ int main (void)
 			? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
 			/* Checks the emergency flags */
-			if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM) /* Keeps sending after 1 alarm has been triggered. ONLY FOR STABILITY TESTING */
-			//if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
+		//	if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM) /* Keeps sending after 1 alarm has been triggered. ONLY FOR STABILITY TESTING */
+			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM || EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
 				ad_emergency_alarm();
 
 				/* Enable cancel button for reset purpose */
 				car_panel_set_cancel_button_state(true);
 
-				accident_detection_start();
+				scheduler_resume(true);
 			}
 
 			#ifdef DEBUG_LCD_ENABLE

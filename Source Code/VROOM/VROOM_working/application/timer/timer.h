@@ -1,10 +1,10 @@
 /********************************************//**
 @file timer.h
 @author: Kenneth René Jensen
-@Version: 0.3
+@Version: 0.4
 @defgroup timer Timer
 @{
-	Setup of timer 1 to CTC mode for starting sensor scheduler.
+	Setup of timer 1 to CTC mode for starting scheduler.
 @}
 ************************************************/
 
@@ -50,26 +50,26 @@ void timer1_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz);
 
 /**********************************************************************//**
  @ingroup timer
- @brief Stores the mask and interrupt register for Timer 1 and Timer 3 and disables interrupts
+ @brief Stores the mask and interrupt register for Timer 1 and disables interrupts
 *************************************************************************/
-void timer_pause_all(void);
+void timer_pause(void);
 
 /**********************************************************************//**
  @ingroup timer
- @brief Restores the mask and interrupt register for Timer 1 and Timer 3 and enables interrupts
+ @brief Restores the mask and interrupt register for Timer 1 and enables interrupts
 *************************************************************************/
-void timer_resume_all(void);
+void timer_resume(void);
 
 /**********************************************************************//**
  @ingroup timer
  @brief Disables interrupt for timer1 and timer3
 *************************************************************************/
-void timer_stop_all(void);
+void timer_stop(void);
 
 /**********************************************************************//**
  @ingroup timer
  @brief Enables interrupt for timer1 and timer3
 *************************************************************************/
-void timer_start_all(void);
+void timer_start(void);
 
 #endif /* TIMER_H_ */

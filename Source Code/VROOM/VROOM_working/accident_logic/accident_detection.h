@@ -19,26 +19,6 @@
 
 /**********************************************************************//**
  * @ingroup ac_det_pub
- * @brief Starts detection for accidents.
- *
- * @param void
- *
- * @return void
- *************************************************************************/
-void accident_detection_start(void);
-
-/**********************************************************************//**
- * @ingroup ac_det_pub
- * @brief Stops detection for accidents.
- *
- * @param void
- *
- * @return void
- *************************************************************************/
-void accident_detection_stop(void);
-
-/**********************************************************************//**
- * @ingroup ac_det_pub
  * @brief Checks if a crash has occurred.
  *
  * @param void

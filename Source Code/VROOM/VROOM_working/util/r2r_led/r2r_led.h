@@ -14,7 +14,7 @@
  *************************************************************************/
 
 #include <avr/io.h>
-#include "../../vroom_config.h"
+#include "../../application/vroom_config.h"
 
 #ifndef R2R_LED_H_
 #define R2R_LED_H_

@@ -1,17 +1,16 @@
 /**********************************************************************//**
  * @file scheduler.c
  *************************************************************************/
-#include <util/delay.h>
 #include <math.h>
 #include "scheduler.h"
-#include "vroom_config.h"
-#include "sensors/thermometer/tc72.h"
-#include "sensors/accelerometer/lis331hh.h"
-#include "accident_logic/accident_detection.h"
-#include "util/timer/timer.h"
+#include "../timer/timer.h"
+#include "../vroom_config.h"
+#include "../../sensors/thermometer/tc72.h"
+#include "../../sensors/accelerometer/lis331hh.h"
+#include "../../accident_logic/accident_detection.h"
 
 #ifdef DEBUG_TASK_MEASURE
-#include "util/r2r_led/r2r_led.h"
+#include "../../util/r2r_led/r2r_led.h"
 #endif
 
 typedef enum {state_tc72_init,
@@ -35,7 +34,6 @@ static SENSOR_STATE _state;
 static volatile uint16_t _execution_counter = 0;
 
 static void (*_callback_function_ptr)(char __data); /* not implemented yet */
-// static uint8_t _acc_buffer_head = 0; /* may not be needed */
 static uint8_t _acc_buffer_tail = 0;
 
 #ifdef DEBUG_TASK_MEASURE
@@ -50,6 +48,21 @@ void scheduler_start(void (*callback_function_ptr)(char __data)) {
 	_state = state_tc72_init;
 	_callback_function_ptr = callback_function_ptr;
 	scheduler_release();
+}
+
+void scheduler_pause(void)
+{
+	timer_pause();
+}
+
+void scheduler_resume(bool __clear_TIFR)
+{
+	__clear_TIFR ? timer_start() : timer_resume();
+}
+
+void scheduler_halt(void)
+{
+	timer_stop();
 }
 
 void scheduler_acc_get_last_readings_sum(int16_t *__buffer) {
@@ -98,7 +111,6 @@ void scheduler_release(void) {
 			timer1_init_CTC(TIMER_PS256, CONFIG_SCHEDULER_FREQUENCY);
 		break;
 
-
 		/************************************************************************/
 		/* Main routine starts here.                                            */
 		/*                                                                      */
@@ -144,9 +156,9 @@ void scheduler_release(void) {
 			_task_prev_id_read = r2r_start_task(DEBUG_TASK_ID_SENSOR_SCHEDULER_SENSORS_READ);
 #endif
 			_state = state_idle;
-			_x_axis_buffer[_acc_buffer_tail] = (int)(acc_get_x_axis() * 100);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
-			_y_axis_buffer[_acc_buffer_tail] = (int)(acc_get_y_axis() * 100);
-			_z_axis_buffer[_acc_buffer_tail] = (int)(acc_get_z_axis() * 100);
+			_x_axis_buffer[_acc_buffer_tail] = (int16_t)(acc_get_x_axis() * 100);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
+			_y_axis_buffer[_acc_buffer_tail] = (int16_t)(acc_get_y_axis() * 100);
+			_z_axis_buffer[_acc_buffer_tail] = (int16_t)(acc_get_z_axis() * 100);
 			_acc_buffer_tail = (_acc_buffer_tail + 1) % CONFIG_ALARM_CRASH_NO_OF_READINGS;
 
 			_temperature = get_temperature();

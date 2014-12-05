@@ -3,7 +3,7 @@
  *************************************************************************/
 #include <avr/interrupt.h>
 #include "tc72.h"
-#include "../../scheduler.h"
+#include "../../application/scheduler/scheduler.h"
 #include "../../data_comm/spi/spi.h"
 
 /**********************************************************************//**

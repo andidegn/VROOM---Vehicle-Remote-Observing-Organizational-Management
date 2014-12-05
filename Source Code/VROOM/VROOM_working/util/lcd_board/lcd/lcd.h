@@ -9,7 +9,7 @@
 ***************************************************************************/
 
 #include <stdio.h>
-#include "../../../vroom_config.h"
+#include "../../../application/vroom_config.h"
 /**
  @defgroup pfleury_lcd LCD library
  @ingroup hardware_boards

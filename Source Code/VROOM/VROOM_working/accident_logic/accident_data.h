@@ -18,7 +18,7 @@
 #define ACCIDENT_DATA_H_
 
 #include <avr/io.h>
-#include "../vroom_config.h"
+#include "../application/vroom_config.h"
 #include "../hardware_boards/sim908/at_commands.h"
 
 /**********************************************************************//**

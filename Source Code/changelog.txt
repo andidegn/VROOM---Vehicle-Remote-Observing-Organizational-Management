@@ -3,14 +3,42 @@
 
 @section Introduction
 @subsection Background
-Nowadays people pay a very steep price for mobility. In Europe alone around 40,000 people die on the roads every year. [ ] Many of the fatalities are not only caused by the crashes themselves, but by the time it takes for help to arrive.
+Nowadays people pay a very steep price for mobility. In Europe alone around 40,000 people die on the roads every year. Many of the fatalities are not only caused by the crashes themselves, but by the time it takes for help to arrive.
 The first problem is that someone has to notify the authorities. More often than not the involved people are incapacitated and therefore incapable of doing this, so a third party has to do this. Time is wasted.
 Next problem arises when the emergency operator needs to collect the required information; it can be challenging for the operator to retrieve the information from a random caller. A protocol is needed. Lastly, the operator needs to dispatch the proper emergency response.
-A pan-European project called HeERO [ ], addresses an in-vehicle emergency call services based on the common European Emergency number, 112. HeERO is a group of European pilots who develop, implement and tests the infrastructure and standards. This becomes both the service and an IVS (In-Vehicle System) called eCall. At this moment HeERO is in the final stage of phase 2, where Denmark is one out of 15 countries involved in testing and validating the standards in real conditions. eCall addresses standards for third parties as well, but as HeERO project is not yet completed, things might change and some are still undefined.
-The 13th of June 2013 the EU passed a legislation that will ensure that from October 2015 all new passenger cars and light duty vehicles will be fitted with eCall.[ ]
+A pan-European project called HeERO, addresses an in-vehicle emergency call services based on the common European Emergency number, 112. HeERO is a group of European pilots who develop, implement and tests the infrastructure and standards. This becomes both the service and an IVS (In-Vehicle System) called eCall. At this moment HeERO is in the final stage of phase 2, where Denmark is one out of 15 countries involved in testing and validating the standards in real conditions. eCall addresses standards for third parties as well, but as HeERO project is not yet completed, things might change and some are still undefined.
+The 13th of June 2013 the EU passed a legislation that will ensure that from October 2015 all new passenger cars and light duty vehicles will be fitted with eCall.
 The IVS in this project will make it possible for people with pre-2015 cars to have the same opportunity and the same safety net as eCall provides with an aftermarket solution.
 
 @section Changelog
+
+=====================================
+Version 0.201 - 2014/12/03 by Kenneth
+=====================================
+New Features, Improvements
+--------------------------
+
+Fixed Bugs, Changes
+-------------------
+- Design and structure changes: 
+   + Added new folder "application" which holds the scheduler.h / scheduler.c, timer.c / timer.h, 
+     run.c and vroom_config.h. 
+   + Added scheduler_pause();, scheduler_resume(bool __clear_TIFR); and scheduler_halt(); functions in scheduler.c
+- Cleaned for unused includes
+
+ToDo
+----		
+- MISRA check all files
+- Doxygen missing in following files:
+   + scheduler.c
+   + test_module_sensors.c / test_module_sensors.h
+   + test_module_car_panel.c / test_module_car_panel.h
+   + test_module_uart.c / test_module_uart.h
+   + time.c / time.h
+- Doxygen proofing in all files  
+- !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
+- !note If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+- !note NEW PROBLEM appers often when running 50hz including LCD: CREG response is lost. It still writes <LF><CR> in console though.
 
 
 ==================================
@@ -27,11 +55,10 @@ Fixed Bugs, Changes
 -------------------
 - Fixed unstability in communication with sim908 module by pausing scheduler timer in the _SIM908_callback function
    and clearing the _rx_response_length, _CR_counter and _LF_counter before each command is sent.
-   This seems to have fixed most, if no all, communication problems and the system is now running stable at a frq of 
+   This seems to have fixed most, if not all, communication problems and the system is now running stable at a frq of 
    1KHz on the scheduler timer with a system load around 50%
 - !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
   
-
 ToDo
 ----		
 - MISRA check all files
@@ -59,7 +86,6 @@ Fixed Bugs, Changes
    and green when it is done sending.
 - Renamed UnitTest to test_unit
 - Discarded unit test implementation for MSD as all the functions to set MSD are static
-  
 
 ToDo
 ----		
@@ -94,7 +120,6 @@ New Features, Improvements
    + tc72.c
    + sensor_scheduler.h
    + vroom_config.h
-
 
 Fixed Bugs, Changes
 -------------------

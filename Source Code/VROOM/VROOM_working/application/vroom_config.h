@@ -24,13 +24,13 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST		YES
-#define KENNETH_TEST	NO
+#define ANDI_TEST		NO
+#define KENNETH_TEST	YES
 #define DEBUG_UART_ENABLE	/* uart1 (PD2/PD3) is used for debugging */
 #define DEBUG_UART_ECHO
-//#define DEBUG_SIM908_CALLBACK
-//#define DEBUG_SIM908_CALLBACK_NOT_CAUGHT
-//#define DEBUG_LCD_ENABLE	/* LCD should be connected to PORT L */
+// #define DEBUG_SIM908_CALLBACK
+// #define DEBUG_SIM908_CALLBACK_NOT_CAUGHT
+#define DEBUG_LCD_ENABLE	/* LCD should be connected to PORT L */
 #define DEBUG_TASK_MEASURE
 
 #ifdef DEBUG_TASK_MEASURE
@@ -132,10 +132,10 @@
  * @defgroup vc_adp Accident detection parameters
  * @{
  *************************************************************************/
-#define CONFIG_SCHEDULER_FREQUENCY			TIMER_1KHZ	/**> Frequency of which the sensors are read in Hz */
+#define CONFIG_SCHEDULER_FREQUENCY			TIMER_100HZ	/**> Frequency of which the sensors are read in Hz */
 
 #define CONFIG_ALARM_CRASH_NO_OF_READINGS	5			/**> Length of acceleration peek */
-#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	800			/**> 800 Total acceleration [G] in 1/100 resolution */
+#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	400			/**> Total acceleration [G] in 1/100 resolution */
 
 #define CONFIG_ALARM_FIRE_TRIGGER_DEGREE	1			/**> Temperature raise in Celsius degrees */
 #define CONFIG_ALARM_FIRE_TRIGGER_TIME		8000		/**> Temperature raise time in 1ms resolution */

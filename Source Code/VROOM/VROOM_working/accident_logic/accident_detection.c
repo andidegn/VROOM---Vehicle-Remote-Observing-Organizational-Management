@@ -6,9 +6,8 @@
 #include <stdlib.h>
 #include "accident_detection.h"
 #include "accident_data.h"
-#include "../util/timer/timer.h"
 #include "../hardware_boards/car_panel/car_panel.h"
-#include "../scheduler.h"
+#include "../application/scheduler/scheduler.h"
 #include "../util/r2r_led/r2r_led.h"
 
 /* Local variables */
@@ -41,11 +40,11 @@ void check_for_crash(void) {
 	free(_acc_buffer);
 
 	if (_alarm && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM) {
-		accident_detection_stop();
+		scheduler_halt();
 		if (!car_panel_wait_cancel_emmergency()) {
 			EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
 		}else {
-			accident_detection_start();
+			scheduler_resume(true);
 		}
 	}
 }
@@ -65,34 +64,16 @@ void check_for_fire(void)
 
 	if (prev_temp != CONFIG_ALARM_FIRE_TEMP_INIT && (cur_temp - prev_temp) > CONFIG_ALARM_FIRE_TRIGGER_DEGREE && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
 	{
-		accident_detection_stop();
+		scheduler_halt();
 		if (!car_panel_wait_cancel_emmergency())
 		{
 			EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
 		}
 		else
 		{
-			accident_detection_start();
+			scheduler_resume(true);
 		}
 	}
 
 	prev_temp = cur_temp;
-}
-
-/**********************************************************************//**
- * @ingroup ac_det_pub
- * Starts the accident detection
- **************************************************************************/
-void accident_detection_start(void)
-{
-	timer_start_all();
-}
-
-/**********************************************************************//**
- * @ingroup ac_det_pub
- * Stops the accident detection
- **************************************************************************/
-void accident_detection_stop(void)
-{
-	timer_stop_all();
 }

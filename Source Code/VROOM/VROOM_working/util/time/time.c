@@ -1,8 +1,6 @@
 /*
  * time.c
- *
  * Created: 20-10-2014 13:25:46
- *  Author: Kenneth René Jensen
 	Note: File is a modified version of Michael Ringgaard's time.c
  */ 
 
@@ -60,7 +58,6 @@ uint32_t calc_UTC_seconds(FIXED_TIME *buf)
 	}
 	  
 	_day += (buf->day - 1);
-	  
 	while (_day < 0) 
 	{
 		if(--buf->mon < 0) 
@@ -89,13 +86,8 @@ uint32_t calc_UTC_seconds(FIXED_TIME *buf)
 		return  -1;
 		
 	_seconds = 0;
-	_day = 0;                      // Means days since day 0 now
+	_day = 0;                   
 
-	// Assume that when day becomes negative, there will certainly
-	// be overflow on seconds.
-	// The check for overflow needs not to be done for leapyears
-	// divisible by 400.
-	// The code only works when year (1970) is not a leapyear.
 	_tm_year = buf->year + EPOCH_YR;
 		
 	_day = (_tm_year - _year) * 365;
@@ -115,8 +107,7 @@ uint32_t calc_UTC_seconds(FIXED_TIME *buf)
 	  
 	_day += _yday;
 
-	_seconds = ((buf->hour * 60L) + buf->min) * 60L + buf->sec;
-		
+	_seconds = ((buf->hour * 60L) + buf->min) * 60L + buf->sec;	
 	_seconds += _day * SECS_DAY;
 		 
 	return _seconds;

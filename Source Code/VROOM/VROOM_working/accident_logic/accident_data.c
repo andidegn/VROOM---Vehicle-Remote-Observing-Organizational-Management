@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "accident_data.h"
-#include "../vroom_config.h"
+#include "../application/vroom_config.h"
+#include "../application/scheduler/scheduler.h"
 #include "../hardware_boards/sim908/sim908.h"
-#include "../scheduler.h"
 
 #define BLANK_CHAR 0x20	/**> Define for the space char ' ' */
 
@@ -24,7 +24,6 @@ static bool _confidence_in_position;
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm);
 static void _set_VIN(const char *__VIN);
 static void _set_optional_data();
-
 
 /**********************************************************************//**
  * @ingroup ac_dat_pub
@@ -54,6 +53,7 @@ void ad_emergency_alarm(void)
 	#ifdef CONFIG_ENABLE_EMERGENCY_PHONE_CALL
 		call_PSAP();
 	#endif
+	
 	EXT_EMERGENCY_FLAG = EMERGENCY_ALARM_SENT;
 }
 

@@ -156,14 +156,19 @@ int main (void)
 		//	if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM) /* Keeps sending after 1 alarm has been triggered. ONLY FOR STABILITY TESTING */
 			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM || EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
-				ad_emergency_alarm();
-
-				/* Enable cancel button for reset purpose */
+				scheduler_halt();
+				ad_emergency_alarm();	
+				
+				/* Enable cancel button in case of false alarm */
 				car_panel_set_cancel_button_state(true);
-
-				scheduler_resume(true);
 			}
-
+			
+			else if (EXT_EMERGENCY_FLAG == EMERGENCY_FALSE_ALARM)
+			{
+				scheduler_resume(true);
+				EXT_EMERGENCY_FLAG = EMERGENCY_NO_ALARM;
+			}		
+			
 			#ifdef DEBUG_LCD_ENABLE
 				scheduler_acc_get_last_readings(_acc_buffer);
 

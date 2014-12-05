@@ -97,7 +97,7 @@ char EXT_MSD_FILENAME[24];
 #define DDR(x) (*(&x - 1))
 #define PIN(x) (*(&x - 2))
 
-#define RETRY_ATTEMPTS 10
+#define RETRY_ATTEMPTS 20
 #define CONNECTION_RETRY_DELAY_IN_MS 500
 
 /* Prototypes */
@@ -265,6 +265,8 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
  *************************************************************************/
 void call_PSAP(void)
 {
+	_wait_for_connection();
+	
 	/* Enable incoming calls */
 	SIM908_cmd(AT_ENABLE_INCOMING_CALLS, true);
 
@@ -286,7 +288,7 @@ void send_MSD(const char *__vroom_id)
 {
     _wait_for_connection();
 
-    uint8_t _retry_ctr = RETRY_ATTEMPTS;
+    int8_t _retry_ctr = RETRY_ATTEMPTS;
     char *filename = malloc(60 * sizeof(char));
     /* Format: 2014-10-12_13.17.34-(60192949).vroom */
     strcpy(filename, AT_FTP_PUT_FILE_NAME);
@@ -300,57 +302,51 @@ void send_MSD(const char *__vroom_id)
     free(filename);
 
 	_ftp_sending_flag = SIM908_FLAG_FTP_SENDING;
+	
+	/***********************************************************************************/
+	/* THIS CHECK DOES NOT WORK!!! - Needs to check for error response "+CME ERROR: 3" */
+	/***********************************************************************************/
     while (!SIM908_cmd(AT_FTP_OPEN_BEARER1, true) && _retry_ctr-- > 0) {
         _delay_ms(1000);
     }
 
-    if (_retry_ctr > -1) {
-        _retry_ctr = RETRY_ATTEMPTS;
-        do {
-            SIM908_cmd(AT_FTP_PUT_OPEN_SESSION, false);
-        } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
-    }
+    _retry_ctr = RETRY_ATTEMPTS;
+    do {
+	    SIM908_cmd(AT_FTP_PUT_OPEN_SESSION, false);
+    } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
 
-    if (_retry_ctr > -1) {
-        _retry_ctr = RETRY_ATTEMPTS;
-        do {
-            SIM908_cmd(AT_FTP_PUT_FILE_SIZE(CONFIG_FTP_FILE_SIZE), false);
-        } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_SUCCESS) && _retry_ctr-- > 0);
-    }
+    _retry_ctr = RETRY_ATTEMPTS;
+    do {
+	    SIM908_cmd(AT_FTP_PUT_FILE_SIZE(CONFIG_FTP_FILE_SIZE), false);
+    } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_SUCCESS) && _retry_ctr-- > 0);
 
-    if (_retry_ctr > -1) {
-        _retry_ctr = RETRY_ATTEMPTS;
+    _retry_ctr = RETRY_ATTEMPTS;
+    do {
+	    EXT_MSD.msg_identifier = RETRY_ATTEMPTS - _retry_ctr + 1;
+	    uart0_send_data((char*)(&EXT_MSD.version), 1);
+	    uart0_send_data((char*)(&EXT_MSD.msg_identifier), 1);
+	    uart0_send_data((char*)(&EXT_MSD.control), 1);
+	    uart0_send_data((char*)(&EXT_MSD.vehicle_class), 1);
+	    uart0_send_data(&EXT_MSD.VIN[0], 20);
+	    uart0_send_data((char*)(&EXT_MSD.fuel_type), 1);
+	    uart0_send_data((char*)(&EXT_MSD.time_stamp), 4);
+	    uart0_send_data((char*)(&EXT_MSD.latitude), 4);
+	    uart0_send_data((char*)(&EXT_MSD.longitude), 4);
+	    uart0_send_data((char*)(&EXT_MSD.direction), 1);
+	    uart0_send_data(&EXT_MSD.optional_data[0], 102);
 
-        do {
-			EXT_MSD.msg_identifier = RETRY_ATTEMPTS - _retry_ctr + 1;
-			uart0_send_data((char*)(&EXT_MSD.version), 1);
-			uart0_send_data((char*)(&EXT_MSD.msg_identifier), 1);
-			uart0_send_data((char*)(&EXT_MSD.control), 1);
-			uart0_send_data((char*)(&EXT_MSD.vehicle_class), 1);
-			uart0_send_data(&EXT_MSD.VIN[0], 20);
-			uart0_send_data((char*)(&EXT_MSD.fuel_type), 1);
-			uart0_send_data((char*)(&EXT_MSD.time_stamp), 4);
-			uart0_send_data((char*)(&EXT_MSD.latitude), 4);
-			uart0_send_data((char*)(&EXT_MSD.longitude), 4);
-			uart0_send_data((char*)(&EXT_MSD.direction), 1);
-			uart0_send_data(&EXT_MSD.optional_data[0], 102);
+	    uart0_send_char(CR);
+	    uart0_send_char(LF);
+    } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
 
-			uart0_send_char(CR);
-			uart0_send_char(LF);
-        } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN) && _retry_ctr-- > 0);
-    }
+    _retry_ctr = RETRY_ATTEMPTS;
+    _delay_ms(100);
+    do {
+	    SIM908_cmd(AT_FTP_PUT_CLOSE_SESSION, true);
+    } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_CLOSE) && _retry_ctr-- > 0);
 
-    if (_retry_ctr > -1) {
-        _retry_ctr = RETRY_ATTEMPTS;
-        _delay_ms(100);
-        do {
-            SIM908_cmd(AT_FTP_PUT_CLOSE_SESSION, true);
-        } while (!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_CLOSE) && _retry_ctr-- > 0);
-    }
+    SIM908_cmd(AT_FTP_CLOSE_BEARER1, true);
 
-    if (_retry_ctr > -1) {
-        SIM908_cmd(AT_FTP_CLOSE_BEARER1, true);
-    }
 	_ftp_sending_flag = SIM908_FLAG_WAITING;
 }
 

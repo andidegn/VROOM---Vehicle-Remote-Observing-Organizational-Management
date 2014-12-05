@@ -17,9 +17,12 @@ Version 0.201 - 2014/12/03 by Kenneth
 =====================================
 New Features, Improvements
 --------------------------
+- Added EMERGENCY_FALSE_ALARM flag to set when system is reset (on cancel button after an alarm)
+  This is necessary in order to determine whether the scheduler should be released or not after an emergency call
 
 Fixed Bugs, Changes
 -------------------
+- Fixed bug in send_MSD() in sim908.c (Redundant check if uint is > -1)
 - Design and structure changes: 
    + Added new folder "application" which holds the scheduler.h / scheduler.c, timer.c / timer.h, 
      run.c and vroom_config.h. 
@@ -36,9 +39,13 @@ ToDo
    + test_module_uart.c / test_module_uart.h
    + time.c / time.h
 - Doxygen proofing in all files  
+
+Known Bugs, Problems
+--------------------
 - !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
 - !note If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
-- !note NEW PROBLEM appers often when running 50hz including LCD: CREG response is lost. It still writes <LF><CR> in console though.
+- Check for error code does not work in sim908.c function send_MSD(...) line 309
+  Error code for Open Bearer AT command is: "+CME ERROR: 3"
 
 
 ==================================

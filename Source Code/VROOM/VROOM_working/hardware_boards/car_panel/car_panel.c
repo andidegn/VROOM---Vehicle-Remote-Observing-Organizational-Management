@@ -256,7 +256,7 @@ ISR (PCINT1_vect, ISR_NOBLOCK)
 
 		if (_car_panel_counter >= BUTTON_PRESS_TIME )
 		{
-			EXT_EMERGENCY_FLAG = EMERGENCY_NO_ALARM;
+			EXT_EMERGENCY_FLAG = EMERGENCY_FALSE_ALARM;
 			/* Enable interrupts for reset (CANCEL) button */
 			car_panel_set_alarm_button_state(true);
 			car_panel_set_cancel_button_state(false);

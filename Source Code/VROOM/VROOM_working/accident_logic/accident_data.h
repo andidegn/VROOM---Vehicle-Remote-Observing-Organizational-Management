@@ -80,9 +80,10 @@ typedef struct
  * @brief Flag to detect if an alarm has been triggered
  *************************************************************************/
 typedef enum {	EMERGENCY_NO_ALARM = 0,
-				EMERGENCY_MANUAL_ALARM = 1,
-				EMERGENCY_AUTO_ALARM = 2,
-				EMERGENCY_ALARM_SENT = 3
+				EMERGENCY_FALSE_ALARM = 1,
+				EMERGENCY_MANUAL_ALARM = 2,
+				EMERGENCY_AUTO_ALARM = 3,
+				EMERGENCY_ALARM_SENT = 4
 } AD_EMERGENCY_FLAG;
 
 extern char EXT_MSD_FILENAME[24];

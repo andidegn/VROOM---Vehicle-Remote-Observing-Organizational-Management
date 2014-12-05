@@ -212,6 +212,7 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 	cli();
 	/* Implement number of retries functionality / parameter*/
 	_ack_response_flag = _ack_ftp_response_flag = _ack_gps_response_flag = SIM908_FLAG_WAITING;
+	_rx_response_length = _CR_counter = _LF_counter = 0;
 
 	uart0_send_string(__cmd);
 	uart0_send_char(CR);
@@ -470,6 +471,7 @@ static void _GPS_enable(void)
  *************************************************************************/
 static void _wait_for_connection(void) {
 	while (EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED_HOME_NETWORK && EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED_ROAMING) {
+		SIM908_cmd(AT_CONN_NETWORK_REGISTRATION_STATUS, true);
 		_delay_ms(CONNECTION_RETRY_DELAY_IN_MS);
 	}
 }
@@ -785,9 +787,10 @@ void _SIM908_callback(char data) {
 					uart1_send_string("rx:> error\r\n");
 					#endif
 			} else
-			if (_rx_response_length == 10 &&
+			if ((_rx_response_length == 10 ||
+				_rx_response_length == 12) &&
 				_check_response(SIM908_RESPONSE_CREG)) {				/* CREG */
-					EXT_CONNECTION_CREG_FLAG = _char_at(7, _rx_buffer_tail, _rx_response_length) - '0';	/* Subtracting '0' (0x30) to get the value as an integer */
+					EXT_CONNECTION_CREG_FLAG = _char_at(_rx_response_length - 3, _rx_buffer_tail, _rx_response_length) - '0';	/* Subtracting '0' (0x30) to get the value as an integer */
 					#ifdef DEBUG_SIM908_CALLBACK
 					uart1_send_string("rx:> creg\r\n");
 					#endif

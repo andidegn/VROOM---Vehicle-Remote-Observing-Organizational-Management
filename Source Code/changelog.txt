@@ -20,12 +20,16 @@ New Features, Improvements
 --------------------------
 - Changed sensor_scheduler to scheduler.h/ scheduler.c so that it is the scheduler for the whole system
 - Added detection logic to scheduler.c
+- Added solicited CREG check to _wait_for_connection function to make sure system does not freeze if an unsolicited
+   CREG command should be missed
 
 Fixed Bugs, Changes
 -------------------
-- Fixed unstability in communication with sim908 module by pausing scheduler timer in the _SIM908_callback function.
+- Fixed unstability in communication with sim908 module by pausing scheduler timer in the _SIM908_callback function
+   and clearing the _rx_response_length, _CR_counter and _LF_counter before each command is sent.
    This seems to have fixed most, if no all, communication problems and the system is now running stable at a frq of 
    1KHz on the scheduler timer with a system load around 50%
+- !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
   
 
 ToDo

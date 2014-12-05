@@ -11,6 +11,7 @@
 #include "../../accident_logic/accident_data.h"
 #include "../../util/time/time.h"
 #include "../../util/timer/timer.h"
+#include "../../util/r2r_led/r2r_led.h"
 
 /**********************************************************************//**
  * @ingroup sim908_priv
@@ -79,6 +80,13 @@ static volatile uint8_t _ack_gps_response_flag = SIM908_FLAG_WAITING;
 
 static uint8_t _gps_response_tail = 0;
 static uint8_t _gps_response_length = 0;
+
+#ifdef DEBUG_TASK_MEASURE
+static uint8_t _task_prev_id_start_module = 0;
+static uint8_t _task_prev_id_cmd_send = 0;
+static uint8_t _task_prev_id_wait_for_response = 0;
+static uint8_t _task_prev_id_callback = 0;
+#endif
 
 /* External from accident_data */
 char EXT_MSD_FILENAME[24];
@@ -154,6 +162,9 @@ void SIM908_init(void)
  *************************************************************************/
 void SIM908_start(void)
 {
+#ifdef DEBUG_TASK_MEASURE
+	_task_prev_id_start_module = r2r_start_task(DEBUG_TASK_ID_SIM908_START_MODULE);
+#endif
 	while (_system_running_flag == SIM908_FLAG_WAITING);
 
 	/* Set baud rate to the host baud rate */
@@ -181,6 +192,9 @@ void SIM908_start(void)
 	_setup_GSM();
 	_setup_GPRS_FTP();
 	_setup_GPS();
+#ifdef DEBUG_TASK_MEASURE
+	r2r_stop_task(_task_prev_id_start_module);
+#endif
 }
 
 /**********************************************************************//**
@@ -190,6 +204,9 @@ void SIM908_start(void)
  *************************************************************************/
 bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 {
+#ifdef DEBUG_TASK_MEASURE
+	_task_prev_id_cmd_send = r2r_start_task(DEBUG_TASK_ID_SIM908_CMD_SEND);
+#endif
 	/* Saves the current state of the status register and disables global interrupt */
 	uint8_t SREG_cpy = SREG;
 	cli();
@@ -206,6 +223,9 @@ bool SIM908_cmd(const char *__cmd, bool __wait_for_ok)
 	#endif
 	/* Restore interrupt */
 	SREG = SREG_cpy;
+#ifdef DEBUG_TASK_MEASURE
+	r2r_stop_task(_task_prev_id_cmd_send);
+#endif
 
 	return __wait_for_ok ? _wait_response(&_ack_response_flag, SIM908_FLAG_OK) : true;
 }
@@ -262,7 +282,7 @@ void call_PSAP(void)
  * 6. End write session:	(AT+FTPPUT=2,0)
  * 7. Close bearer:			(AT+SAPBR=0,1)
  *************************************************************************/
-void send_MSD(const char *__vroom_id) 
+void send_MSD(const char *__vroom_id)
 {
     _wait_for_connection();
 
@@ -464,6 +484,9 @@ static void _wait_for_connection(void) {
  * @return bool - true if 'OK' else false
  *************************************************************************/
 static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def) {
+#ifdef DEBUG_TASK_MEASURE
+	_task_prev_id_wait_for_response = r2r_start_task(DEBUG_TASK_ID_SIM908_WAIT_FOR_RESPONSE);
+#endif
 	timer_pause_all();
 	volatile bool _ret = false;
 	while(*__flag == SIM908_FLAG_WAITING) {
@@ -473,6 +496,9 @@ static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def) {
 		_ret = true;
 	}
 	timer_resume_all();
+#ifdef DEBUG_TASK_MEASURE
+	r2r_stop_task(_task_prev_id_wait_for_response);
+#endif
 
 	return _ret;
 }
@@ -686,6 +712,10 @@ static void _set_MSD_filename(const char *__UTC_raw)
  * @return void
  *************************************************************************/
 void _SIM908_callback(char data) {
+	timer_pause_all();
+#ifdef DEBUG_TASK_MEASURE
+	_task_prev_id_callback = r2r_start_task(DEBUG_TASK_ID_SIM908_CALLBACK);
+#endif
 	#ifdef DEBUG_UART_ECHO
 		uart1_send_char(data);																	/* Mirroring communication from sim908 to uart1 */
 	#endif
@@ -794,6 +824,10 @@ void _SIM908_callback(char data) {
 		}
 		_rx_response_length = 0;
 	}
+	timer_resume_all();
+#ifdef DEBUG_TASK_MEASURE
+	r2r_stop_task(_task_prev_id_callback);
+#endif
 }
 
 
@@ -815,7 +849,7 @@ void _SIM908_callback(char data) {
 //
 	//if (_CR_counter > 0 && _LF_counter > 0) {
 		//_CR_counter = _LF_counter = 0;
-		//if (_rx_response_length == 2 && 
+		//if (_rx_response_length == 2 &&
 		   //(_check_response(SIM908_RESPONSE_CR_LF) ||
 			//_check_response(SIM908_RESPONSE_LF_CR))) {				/* Skipping empty lines */
 		//} else if (_rx_response_length == 4 &&

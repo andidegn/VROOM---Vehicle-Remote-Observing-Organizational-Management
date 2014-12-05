@@ -5,14 +5,12 @@
 @defgroup timer Timer
 @{
 	Setup of timer 1 to CTC mode for stating the scheduler.
-	Setup of timer 3 to CTC mode for counting etc. used for timeout
 @}
 ************************************************/
 #include <avr/interrupt.h>
 #include "timer.h"
 #include "../../vroom_config.h"
-#include "../../sensors/sensor_scheduler.h"
-#include "../../accident_logic/accident_detection.h"
+#include "../../scheduler.h"
 
 #ifndef F_CPU
 	#error F_CPU must be defined!!!
@@ -21,11 +19,8 @@
 /*! Macro for calculating the value for clock count based on frequency and prescaler */
 #define TOP_VALUE(frequency_in_hz, prescaler) (F_CPU/(prescaler * frequency_in_hz)-1)
 
-static volatile uint8_t _isr_counter = 0;
 static uint8_t _TIFR1_cpy = 0;
-static uint8_t _TIFR3_cpy = 0;
 static uint8_t _TIMSK1_cpy = 0;
-static uint8_t _TIMSK3_cpy = 0;
 
 /**********************************************************************//**
  @ingroup timer
@@ -84,88 +79,31 @@ void timer1_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 
 /**********************************************************************//**
  @ingroup timer
- @brief Initiates timer 3 in CTC mode.
- @param TIMER_PRESCALER enum, TIMER_FREQUENCY enum
-*************************************************************************/
-void timer3_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
-{
-	/* saves the current state of the status register and disables global interrupt */
-	uint8_t _sreg = SREG;
-	cli();
-
-	/* Set top value to */
-	OCR3A = TOP_VALUE(hz, prescaler);
-
-	/* Set Timer mode 4: CTC */
-	TCCR3B |= _BV(WGM32);
-
-	/* Set prescaler */
-	switch(prescaler)
-	{
-		case TIMER_PS1 :
-		TCCR3B &= ~_BV(CS31) & ~_BV(CS32);
-		TCCR3B |= _BV(CS30);
-		break;
-
-		case TIMER_PS8 :
-		TCCR3B &= ~_BV(CS30) & ~_BV(CS32);
-		TCCR3B |= _BV(CS31);
-		break;
-
-		case TIMER_PS64 :
-		TCCR3B &= ~_BV(CS32);
-		TCCR3B |= _BV(CS30) | _BV(CS31);
-		break;
-
-		case TIMER_PS256 :
-		TCCR3B &= ~_BV(CS30) & ~_BV(CS31);
-		TCCR3B |= _BV(CS32);
-		break;
-
-		case TIMER_PS1024 :
-		TCCR3B |= _BV(CS30) | _BV(CS31) | _BV(CS32);
-		break;
-
-		default: break;
-	}
-
-	/* restoring status register */
-	SREG = _sreg;
-}
-
-/**********************************************************************//**
- @ingroup timer
  @brief Stores the mask and interrupt register for Timer 1 and Timer 3 and disables interrupts
 *************************************************************************/
-void timer_pause_all(void) 
+void timer_pause_all(void)
 {
 	_TIFR1_cpy = TIFR1;
-	_TIFR3_cpy = TIFR3;
 	_TIMSK1_cpy = TIMSK1;
-	_TIMSK3_cpy = TIMSK3;
 	TIMSK1 &= ~_BV(OCIE1A);
-	TIMSK3 &= ~_BV(OCIE3A);
 }
 
 /**********************************************************************//**
  @ingroup timer
  @brief Restores the mask and interrupt register for Timer 1 and Timer 3 and enables interrupts
 *************************************************************************/
-void timer_resume_all(void) 
+void timer_resume_all(void)
 {
 	TIFR1 = _TIFR1_cpy;
-	TIFR3 = _TIFR3_cpy;
-	TIMSK1 = _TIMSK1_cpy;		
-	TIMSK3 = _TIMSK3_cpy;
+	TIMSK1 = _TIMSK1_cpy;
 }
 
 /**********************************************************************//**
  @ingroup timer
  @brief Disables interrupt for timer1 and timer3
 *************************************************************************/
-void timer_stop_all(void) 
+void timer_stop_all(void)
 {
-	TIMSK3 &= ~_BV(OCIE3A);
 	TIMSK1 &= ~_BV(OCIE1A);
 }
 
@@ -173,23 +111,13 @@ void timer_stop_all(void)
  @ingroup timer
  @brief Enables interrupt for timer1 and timer3
 *************************************************************************/
-void timer_start_all(void) 
+void timer_start_all(void)
 {
-	TIFR3 |= _BV(OCIE3A);
 	TIFR1 |= _BV(OCIE1A);
-	TIMSK3 |= _BV(OCIE3A);
 	TIMSK1 |= _BV(OCIE1A);
 }
 
 ISR(TIMER1_COMPA_vect)
 {
 	scheduler_release();
-}
-
-ISR(TIMER3_COMPA_vect)
-{
-	check_for_crash();
-
-	if (_isr_counter++%(CONFIG_ALARM_FIRE_TRIGGER_TIME*CONFIG_ALARM_DETECTION_FREQUENCY) == 0)
-		check_for_fire();
 }

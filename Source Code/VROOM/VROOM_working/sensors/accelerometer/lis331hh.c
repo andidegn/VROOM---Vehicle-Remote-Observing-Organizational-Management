@@ -5,7 +5,7 @@
 
 #include "lis331hh.h"
 #include "../../data_comm/spi/spi.h"
-#include "../sensor_scheduler.h"
+#include "../../scheduler.h"
 #include <util/delay.h>
 
 /**********************************************************************//**

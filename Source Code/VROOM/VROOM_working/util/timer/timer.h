@@ -5,7 +5,6 @@
 @defgroup timer Timer
 @{
 	Setup of timer 1 to CTC mode for starting sensor scheduler.
-	Setup of timer 3 to CTC mode for accident check
 @}
 ************************************************/
 
@@ -48,13 +47,6 @@ typedef enum { TIMER_1HZ = 1,
  @note Enables interrupt
 *************************************************************************/
 void timer1_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz);
-
-/**********************************************************************//**
- @ingroup timer
- @brief Initiates timer 3 in CTC mode.
- @param TIMER_PRESCALER enum, TIMER_FREQUENCY enum
-*************************************************************************/
-void timer3_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz);
 
 /**********************************************************************//**
  @ingroup timer

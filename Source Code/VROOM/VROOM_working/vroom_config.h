@@ -24,16 +24,107 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST		NO
-#define KENNETH_TEST	YES
+#define ANDI_TEST		YES
+#define KENNETH_TEST	NO
 #define DEBUG_UART_ENABLE	/* uart1 (PD2/PD3) is used for debugging */
 #define DEBUG_UART_ECHO
 //#define DEBUG_SIM908_CALLBACK
 //#define DEBUG_SIM908_CALLBACK_NOT_CAUGHT
-#define DEBUG_LCD_ENABLE	/* LCD should be connected to PORT L */
+//#define DEBUG_LCD_ENABLE	/* LCD should be connected to PORT L */
 #define DEBUG_TASK_MEASURE
 
+#ifdef DEBUG_TASK_MEASURE
+#define DEBUG_TASK_ID_SIM908_START_MODULE					3
+#define DEBUG_TASK_ID_SIM908_CMD_SEND						8
+#define DEBUG_TASK_ID_SIM908_WAIT_FOR_RESPONSE				1
+#define DEBUG_TASK_ID_SIM908_CALLBACK						5
+
+#define DEBUG_TASK_ID_SENSOR_SCHEDULER_TEMP_REQ				10
+#define DEBUG_TASK_ID_SENSOR_SCHEDULER_ACC_REQ				11
+#define DEBUG_TASK_ID_SENSOR_SCHEDULER_SENSORS_READ			12
+
+#define DEBUG_TASK_ID_ACCIDENT_DETECTION_CRASH_DETECTION	14
+#define DEBUG_TASK_ID_ACCIDENT_DETECTION_FIRE_DETECTION		15
+#endif
+
 // #define CONFIG_ENABLE_EMERGENCY_PHONE_CALL
+
+
+/**********************************************************************//**
+ * @ingroup vroom_cfg
+ * @brief Port definitions for the system
+ * @defgroup vc_port MCU port defines
+ * @{
+ *************************************************************************/
+/**********************************************************************//**
+ * @ingroup spi_priv
+ * Defines for the ports and pins used by the SPI
+ * @defgroup vc_port_spi SPI
+ * @{
+ **************************************************************************/
+#define CONFIG_PORT_DDR_SPI					DDRB
+#define CONFIG_PORT_SS						PB0
+#define CONFIG_PORT_SCK						PB1
+#define CONFIG_PORT_MOSI					PB2
+#define CONFIG_PORT_MISO					PB3
+/** @} */
+
+/**********************************************************************//**
+ * @ingroup vroom_cfg
+ * @brief Port definition for the car panel
+ * @defgroup vc_port_car_panel Car panel
+ * @{
+ *************************************************************************/
+#define CONFIG_PORT_CAR_PANEL				PORTJ
+/** @} */
+
+/**********************************************************************//**
+ * @ingroup vroom_cfg
+ * @brief Port definition for the SIM908 module
+ * @defgroup vc_port_sim908 SIM908
+ * @{
+ *************************************************************************/
+#define STK600
+/* Uncomment for Arduino default port settings */
+/* #define ARDUINO_ATMEGA2560_DEFAULT */
+#ifdef STK600
+ #define CONFIG_PORT_DRIVER_PORT			PORTE
+ #define CONFIG_PORT_GSM_PORT				PORTE
+ #define CONFIG_PORT_GPS_PORT				PORTE
+ #define CONFIG_PORT_GSM_ENABLE_PIN			PE3
+ #define CONFIG_PORT_GPS_ENABLE_PIN			PE4
+ #define CONFIG_PORT_CE_PIN					PE5
+#endif /* STK600 */
+#ifdef ARDUINO_ATMEGA2560_DEFAULT
+ #define CONFIG_PORT_DRIVER_PORT			PORTE
+ #define CONFIG_PORT_GSM_PORT				PORTE
+ #define CONFIG_PORT_GPS_PORT				PORTG
+ #define CONFIG_PORT_GSM_ENABLE_PIN			PE5		/* Pin 3 */
+ #define CONFIG_PORT_GPS_ENABLE_PIN			PG5		/* Pin 4 */
+ #define CONFIG_PORT_CE_PIN					PE3		/* Pin 5 */
+#endif /* ARDUINO_ATMEGA2560_DEFAULT */
+/** @} */
+
+/**********************************************************************//**
+ * @ingroup vroom_cfg
+ * @brief Port definition for the LCD display
+ * @note This module is only used for debugging
+ * @defgroup vc_port_lcd LCD display
+ * @{
+ *************************************************************************/
+#define CONFIG_PORT_LCD						PORTL
+/** @} */
+
+/**********************************************************************//**
+ * @ingroup vroom_cfg
+ * @brief Port definition for the R2R LED module
+ * @note This module is only used for debugging
+ * @defgroup vc_port_r2r R2R LED
+ * @{
+ *************************************************************************/
+#define CONFIG_PORT_R2R						PORTH
+/** @} */
+/** @} */
 
 /**********************************************************************//**
  * @ingroup vroom_cfg
@@ -41,14 +132,13 @@
  * @defgroup vc_adp Accident detection parameters
  * @{
  *************************************************************************/
-#define CONFIG_ALARM_SENSOR_READ_FREQUENCY	TIMER_50HZ	/**> Frequency of which the sensors are read in Hz */
-#define CONFIG_ALARM_DETECTION_FREQUENCY	TIMER_50HZ	/**> Time interval between checking for accidents in Hz */
+#define CONFIG_SCHEDULER_FREQUENCY			TIMER_1KHZ	/**> Frequency of which the sensors are read in Hz */
 
 #define CONFIG_ALARM_CRASH_NO_OF_READINGS	5			/**> Length of acceleration peek */
-#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	400			/**> 800 Total acceleration [G] in 1/100 resolution */
+#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	800			/**> 800 Total acceleration [G] in 1/100 resolution */
 
 #define CONFIG_ALARM_FIRE_TRIGGER_DEGREE	1			/**> Temperature raise in Celsius degrees */
-#define CONFIG_ALARM_FIRE_TRIGGER_TIME		80			/**> Temperature raise time in 1/10 seconds resolution */
+#define CONFIG_ALARM_FIRE_TRIGGER_TIME		8000		/**> Temperature raise time in 1ms resolution */
 
 #define CONFIG_ALARM_FIRE_TEMP_INIT			-100		/**> Used to be sure there are two temperature readings before comparing values */
 /** @} */

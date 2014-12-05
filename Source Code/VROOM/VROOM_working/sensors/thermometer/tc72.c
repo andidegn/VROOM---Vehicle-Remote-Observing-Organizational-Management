@@ -3,7 +3,7 @@
  *************************************************************************/
 #include <avr/interrupt.h>
 #include "tc72.h"
-#include "../sensor_scheduler.h"
+#include "../../scheduler.h"
 #include "../../data_comm/spi/spi.h"
 
 /**********************************************************************//**
@@ -129,28 +129,28 @@ void measure_temperature(void)
  *************************************************************************/
 static void _tc72_callback(uint8_t __data[]) {
     switch (_state)	{
-		case INIT:
-			_state = RUNNING;
-			scheduler_release();
-			break;
+    case INIT:
+        _state = RUNNING;
+        scheduler_release();
+        break;
 
-		case RUNNING: {
-			/* Disable interrupt */
-			uint8_t SREG_cpy = SREG;
-			cli();
+    case RUNNING: {
+        /* Disable interrupt */
+        uint8_t SREG_cpy = SREG;
+        cli();
 
-			_msb = __data[1];
-			_lsb = __data[2];
-			_ID = __data[3];
+        _msb = __data[1];
+        _lsb = __data[2];
+        _ID = __data[3];
 
-			/* Restore interrupt */
-			SREG = SREG_cpy;
-			scheduler_release();
-			break;
-		}
+        /* Restore interrupt */
+        SREG = SREG_cpy;
+        scheduler_release();
+        break;
+    }
 
-		default:
-			_state = INIT;
-			break;
+    default:
+        _state = INIT;
+        break;
     }
 }

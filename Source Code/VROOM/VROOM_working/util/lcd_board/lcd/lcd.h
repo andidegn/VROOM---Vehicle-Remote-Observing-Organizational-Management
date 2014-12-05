@@ -9,6 +9,7 @@
 ***************************************************************************/
 
 #include <stdio.h>
+#include "../../../vroom_config.h"
 /**
  @defgroup pfleury_lcd LCD library
  @ingroup hardware_boards
@@ -40,7 +41,7 @@
 #endif
 
 #ifndef LCD_PORT
-#define LCD_PORT         PORTL        /**< port for the LCD lines   */
+#define LCD_PORT         CONFIG_PORT_LCD        /**< port for the LCD lines   */
 #endif
 
 /**

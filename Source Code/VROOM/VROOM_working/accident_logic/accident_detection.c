@@ -6,32 +6,14 @@
 #include <stdlib.h>
 #include "accident_detection.h"
 #include "accident_data.h"
-#include "../vroom_config.h"
 #include "../util/timer/timer.h"
 #include "../hardware_boards/car_panel/car_panel.h"
-#include "../sensors/sensor_scheduler.h"
+#include "../scheduler.h"
 #include "../util/r2r_led/r2r_led.h"
 
 /* Local variables */
 static volatile float cur_temp = 0.0F;
 static volatile float prev_temp = CONFIG_ALARM_FIRE_TEMP_INIT;
-
-#ifdef DEBUG_TASK_MEASURE
-static uint8_t _task_id_crash_det = 10;
-static uint8_t _task_id_fire_det = 11;
-
-static uint8_t _task_id_crash_det_prev = 0;
-static uint8_t _task_id_fire_det_prev = 0;
-#endif
-
-/**********************************************************************//**
- * @ingroup ac_det_pub
- * Sets up the timer for the accident detection routine
- **************************************************************************/
-void accident_detection_init(void)
-{
-	timer3_init_CTC(TIMER_PS256, CONFIG_ALARM_DETECTION_FREQUENCY);
-}
 
 /**********************************************************************//**
  * @ingroup ac_det_pub
@@ -43,9 +25,6 @@ void accident_detection_init(void)
  * 3. Sets EXT_EMERGENCY_FLAG to EMERGENCY_AUTO_ALARM if crash is detected
  **************************************************************************/
 void check_for_crash(void) {
-#ifdef DEBUG_TASK_MEASURE
-	_task_id_crash_det_prev = r2r_start_task(_task_id_crash_det);
-#endif
 	volatile bool _alarm = true;
 	uint8_t i = 0;
 	int16_t *_acc_buffer = malloc(CONFIG_ALARM_CRASH_NO_OF_READINGS * sizeof(int16_t));
@@ -69,9 +48,6 @@ void check_for_crash(void) {
 			accident_detection_start();
 		}
 	}
-#ifdef DEBUG_TASK_MEASURE
-	r2r_stop_task(_task_id_crash_det_prev);
-#endif
 }
 
 /**********************************************************************//**
@@ -85,9 +61,6 @@ void check_for_crash(void) {
  **************************************************************************/
 void check_for_fire(void)
 {
-#ifdef DEBUG_TASK_MEASURE
-	_task_id_fire_det_prev = r2r_start_task(_task_id_fire_det);
-#endif
 	cur_temp = scheduler_temp_get_last_reading();
 
 	if (prev_temp != CONFIG_ALARM_FIRE_TEMP_INIT && (cur_temp - prev_temp) > CONFIG_ALARM_FIRE_TRIGGER_DEGREE && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
@@ -104,10 +77,6 @@ void check_for_fire(void)
 	}
 
 	prev_temp = cur_temp;
-
-#ifdef DEBUG_TASK_MEASURE
-	r2r_stop_task(_task_id_fire_det_prev);
-#endif
 }
 
 /**********************************************************************//**

@@ -6,7 +6,7 @@
 #include "accident_data.h"
 #include "../vroom_config.h"
 #include "../hardware_boards/sim908/sim908.h"
-#include "../sensors/sensor_scheduler.h"
+#include "../scheduler.h"
 
 #define BLANK_CHAR 0x20	/**> Define for the space char ' ' */
 

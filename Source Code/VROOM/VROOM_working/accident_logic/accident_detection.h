@@ -19,16 +19,6 @@
 
 /**********************************************************************//**
  * @ingroup ac_det_pub
- * @brief Init detection for accidents.
- *
- * @param void
- *
- * @return void
- *************************************************************************/
-void accident_detection_init(void);
-
-/**********************************************************************//**
- * @ingroup ac_det_pub
  * @brief Starts detection for accidents.
  *
  * @param void

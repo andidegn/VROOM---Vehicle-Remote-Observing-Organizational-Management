@@ -3,6 +3,7 @@
  **************************************************************************/
 
 #include "spi.h"
+#include "../../vroom_config.h"
 #include <stdlib.h>
 
 /**********************************************************************//**
@@ -11,11 +12,11 @@
  * @defgroup spi_ports SPI Ports
  * @{
  **************************************************************************/
-#define DDR_SPI DDRB
-#define SS PB0
-#define SCK PB1
-#define MOSI PB2
-#define MISO PB3
+#define DDR_SPI		CONFIG_PORT_DDR_SPI
+#define SS			CONFIG_PORT_SS
+#define SCK			CONFIG_PORT_SCK
+#define MOSI		CONFIG_PORT_MOSI
+#define MISO		CONFIG_PORT_MISO
 /** @} */
 
 /**********************************************************************//**

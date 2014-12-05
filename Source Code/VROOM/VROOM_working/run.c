@@ -8,13 +8,16 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <stdlib.h>
-#include "sensors/sensor_scheduler.h"
+#include "scheduler.h"
 #include "hardware_boards/sim908/sim908.h"
 #include "hardware_boards/car_panel/car_panel.h"
 #include "accident_logic/accident_data.h"
 #include "accident_logic/accident_detection.h"
 #ifdef DEBUG_LCD_ENABLE
 	#include "util/lcd_board/lcd/lcd.h"
+#endif
+#ifdef DEBUG_TASK_MEASURE
+	#include "util/r2r_led/r2r_led.h"
 #endif
 #define F_CPU 11059200UL
 #define ON	1
@@ -39,10 +42,14 @@ int main (void)
 		lcd_init(LCD_DISP_ON);
 	#endif /* DEBUG_LCD_ENABLE */
 
+	#ifdef DEBUG_TASK_MEASURE
+		r2r_init();
+	#endif /* DEBUG_TASK_MEASURE */
+
 	#if UNIT_TEST
 		#include "tests/unit/test_unit.h"
-		char* result = run_all_test();	
-			
+		char* result = run_all_test();
+
 		#ifdef DEBUG_LCD_ENABLE
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
@@ -50,7 +57,7 @@ int main (void)
 			lcd_gotoxy(0,1);
 			lcd_puts("Tests run");
 			lcd_puts(itoa(tests_run, buf, 10));
-		#endif /* DEBUG_LCD_ENABLE */		
+		#endif /* DEBUG_LCD_ENABLE */
 	#endif /* UNIT_TEST_TEMPERATURE */
 
 	#if MODULE_TEST_SENSORS
@@ -77,7 +84,7 @@ int main (void)
 		#include "tests/module/car_panel/test_module_car_panel.h"
 		init_module_test_car_panel();
 		sei();
-		
+
 		#ifdef DEBUG_LCD_ENABLE
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
@@ -86,7 +93,7 @@ int main (void)
 			lcd_puts("<B - G - R>");
 		#endif /* DEBUG_LCD_ENABLE */
 		test_status_LED(10);
-		
+
 		#ifdef DEBUG_LCD_ENABLE
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
@@ -94,7 +101,7 @@ int main (void)
 			lcd_gotoxy(0,1);
 			lcd_puts("<blinking>");
 		#endif /* DEBUG_LCD_ENABLE */
-		test_control_LED(10);	
+		test_control_LED(10);
 	#endif /* MODULE_TEST_CAR_PANEL */
 
 	#if MODULE_TEST_UART
@@ -134,29 +141,28 @@ int main (void)
 
 		car_panel_init();
 		SIM908_init();
-		accident_detection_init();
 		sei();
 		SIM908_start();
-		scheduler_start(NULL);
 		car_panel_start();
+		scheduler_start(NULL);
 		accident_detection_start();
 
 		while (1)
 		{
 			/* Sets the status LED on car panel */
-			(EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_HOME_NETWORK || EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_ROAMING) 
-			&& (EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM || EXT_EMERGENCY_FLAG == EMERGENCY_ALARM_SENT) 
+			(EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_HOME_NETWORK || EXT_CONNECTION_CREG_FLAG == CREG_REGISTERED_ROAMING)
+			&& (EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM || EXT_EMERGENCY_FLAG == EMERGENCY_ALARM_SENT)
 			? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
 			/* Checks the emergency flags */
-			//if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM) /* Keeps sending after 1 alarm has been triggered. ONLY FOR STABILITY TESTING */
-			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
+			if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM) /* Keeps sending after 1 alarm has been triggered. ONLY FOR STABILITY TESTING */
+			//if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM ||  EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
 				ad_emergency_alarm();
 
 				/* Enable cancel button for reset purpose */
 				car_panel_set_cancel_button_state(true);
-							
+
 				accident_detection_start();
 			}
 

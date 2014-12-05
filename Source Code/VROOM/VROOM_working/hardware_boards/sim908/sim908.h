@@ -26,27 +26,12 @@
  * @defgroup sim908_port Port
  * @{
  *************************************************************************/
-/* Uncomment for Arduino default port settings */
-/* #define ARDUINO_ATMEGA2560_DEFAULT */
-#define STK600
-
-#ifdef STK600
- #define DRIVER_PORT			PORTE
- #define GSM_PORT				PORTE
- #define GPS_PORT				PORTE
- #define GSM_ENABLE_PIN			PE3
- #define GPS_ENABLE_PIN			PE4
- #define CE_PIN					PE5
-#endif /* STK600 */
-
-#ifdef ARDUINO_ATMEGA2560_DEFAULT
- #define DRIVER_PORT			PORTE
- #define GSM_PORT				PORTE
- #define GPS_PORT				PORTG
- #define GSM_ENABLE_PIN			PE5		/* Pin 3 */
- #define GPS_ENABLE_PIN			PG5		/* Pin 4 */
- #define CE_PIN					PE3		/* Pin 5 */
-#endif /* ARDUINO_ATMEGA2560_DEFAULT */
+ #define DRIVER_PORT			CONFIG_PORT_DRIVER_PORT
+ #define GSM_PORT				CONFIG_PORT_GSM_PORT
+ #define GPS_PORT				CONFIG_PORT_GPS_PORT
+ #define GSM_ENABLE_PIN			CONFIG_PORT_GSM_ENABLE_PIN
+ #define GPS_ENABLE_PIN			CONFIG_PORT_GPS_ENABLE_PIN
+ #define CE_PIN					CONFIG_PORT_CE_PIN
 /** @} */
 
 /**********************************************************************//**

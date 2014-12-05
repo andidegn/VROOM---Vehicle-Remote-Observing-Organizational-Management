@@ -1,8 +1,8 @@
-/*
- * @file R2R_LED.h
+/**********************************************************************//**
+ * @file r2r_led.h
  *
- * @Created: 03-04-2014 19:26:46
- * @Author: Andi Degn
+ * @created: 03-04-2014 19:26:46
+ * @author: Andi Degn
  * @version 1.2
  * @defgroup dac 4bit R2R with LEDs
  * @ingroup test_r2r
@@ -14,6 +14,7 @@
  *************************************************************************/
 
 #include <avr/io.h>
+#include "../../vroom_config.h"
 
 #ifndef R2R_LED_H_
 #define R2R_LED_H_
@@ -24,7 +25,7 @@
  * @defgroup dac_port Port
  * @{
  *************************************************************************/
-#define R2R_PORT PORTH
+#define R2R_PORT CONFIG_PORT_R2R
 /** @} */
 
 /**********************************************************************//**

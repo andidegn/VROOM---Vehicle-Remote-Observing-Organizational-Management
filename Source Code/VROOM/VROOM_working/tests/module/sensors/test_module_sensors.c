@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include "test_module_sensors.h"
 #include "../../../util/lcd_board/lcd/lcd.h"
-#include "../../../sensors/sensor_scheduler.h"
+#include "../../../scheduler.h"
 
 const char degree = 0b011011111;
 static int16_t x_axis, y_axis, z_axis;

@@ -8,7 +8,7 @@
 	@ingroup sensors
 	@brief This is the driver for the temperature sensor tc72
 	on the ATMEGA family processors.
-	@note Complies MISRO 2004 standards
+	@note Complies MISRA 2004 standards
 	@defgroup tc72_pub Public
 	@defgroup tc72_priv Private
  * @}

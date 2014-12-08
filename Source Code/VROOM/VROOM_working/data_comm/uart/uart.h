@@ -22,7 +22,6 @@
  * @}
  *************************************************************************/
 
-
 #ifndef UART_H_
 #define UART_H_
 
@@ -38,10 +37,10 @@
  * @defgroup uart_buf UART buffer size
  * @{
  *************************************************************************/
-#define UART0_TX_BUFFER_SIZE 256
-#define UART0_RX_BUFFER_SIZE 256
-#define UART1_TX_BUFFER_SIZE 256
-#define UART1_RX_BUFFER_SIZE 256
+#define UART0_TX_BUFFER_SIZE 64U
+#define UART0_RX_BUFFER_SIZE 64U
+#define UART1_TX_BUFFER_SIZE 64U
+#define UART1_RX_BUFFER_SIZE 64U
 /** @} */
 
 /**********************************************************************//**
@@ -74,8 +73,8 @@ typedef enum {
  *************************************************************************/
 typedef enum {
 	UART_PARITY_DISABLED = 0,
-	UART_PARITY_ENABLED = _BV(4), // UMP00 = UMP10 = 4
-	UART_PARITY_EN_EVEN = _BV(5), // UMP01 = UMP11 = 5
+	UART_PARITY_ENABLED = _BV(4), /* UMP00 = UMP10 = 4 */
+	UART_PARITY_EN_EVEN = _BV(5), /* UMP01 = UMP11 = 5 */
 	UART_PARITY_EN_ODD = _BV(4) | _BV(5)
 } UART_PARITY_MODE;
 
@@ -85,7 +84,7 @@ typedef enum {
  *************************************************************************/
 typedef enum {
 	UART_ONE_STOP_BIT = 0,
-	UART_TWO_STOP_BIT = _BV(3) // USBS0 = USBS1 = 3
+	UART_TWO_STOP_BIT = _BV(3) /* USBS0 = USBS1 = 3 */
 } UART_STOP_BIT;
 
 /**********************************************************************//**

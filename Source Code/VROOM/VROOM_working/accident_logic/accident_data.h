@@ -8,7 +8,7 @@
 	@ingroup accident_logic
 	@brief This is the data for an Accident report.
 	Comply eCall standards for MSD data structure.
-	@note NOT YET Complies MISRO 2004 standards
+	@note NOT YET Complies MISRA 2004 standards
 	@defgroup ac_dat_pub Public
 	@defgroup ac_dat_priv Private
 * @}
@@ -47,13 +47,13 @@ typedef struct
  * @defgroup ac_dat_fule Fule types
  * @{
  *************************************************************************/
-#define AD_FUEL_TYPE_OTHER			0
-#define AD_FUEL_TYPE_GASOLINE		1
-#define AD_FUEL_TYPE_DIESEL			2
-#define AD_FUEL_TYPE_NATURALGAS		3
-#define AD_FUEL_TYPE_PROPANE		4
-#define AD_FUEL_TYPE_ELECTRIC		5
-#define AD_FUEL_TYPE_HYDROGEN		6
+#define AD_FUEL_TYPE_OTHER			0U
+#define AD_FUEL_TYPE_GASOLINE		1U
+#define AD_FUEL_TYPE_DIESEL			2U
+#define AD_FUEL_TYPE_NATURALGAS		3U
+#define AD_FUEL_TYPE_PROPANE		4U
+#define AD_FUEL_TYPE_ELECTRIC		5U
+#define AD_FUEL_TYPE_HYDROGEN		6U
 /** @} */
 
 /**********************************************************************//**
@@ -66,24 +66,24 @@ typedef struct
  * @defgroup ac_dat_vehicle_class Vehicle class
  * @{
  *************************************************************************/
-#define AD_VEHICLE_CLASS_L(category)	(1<<4 | category)	/**> Motor vehicles with less than four wheels */
-#define AD_VEHICLE_CLASS_M(category)	(2<<4 | category)	/**> Power-driven vehicles having at least four wheels and used for the carriage of passengers */
-#define AD_VEHICLE_CLASS_N(category)	(3<<4 | category)	/**> Power-driven vehicles having at least four wheels and used for the carriage of goods */
-#define AD_VEHICLE_CLASS_O(category)	(4<<4 | category)	/**> Trailers (including semi–trailers) */
-#define AD_VEHICLE_CLASS_T(category)	(5<<4 | category)	/**> Agricultural and Forestry tractors */
-#define AD_VEHICLE_CLASS_G(category)	(6<<4 | category)	/**> Off-road vehicles */
-#define AD_VEHICLE_CLASS_SA(category)	(7<<4 | category)	/**> Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/
+#define AD_VEHICLE_CLASS_L(category)	(uint8_t)(1<<4 | (category))	/**> Motor vehicles with less than four wheels */
+#define AD_VEHICLE_CLASS_M(category)	(uint8_t)(2<<4 | (category))	/**> Power-driven vehicles having at least four wheels and used for the carriage of passengers */
+#define AD_VEHICLE_CLASS_N(category)	(uint8_t)(3<<4 | (category))	/**> Power-driven vehicles having at least four wheels and used for the carriage of goods */
+#define AD_VEHICLE_CLASS_O(category)	(uint8_t)(4<<4 | (category))	/**> Trailers (including semi–trailers) */
+#define AD_VEHICLE_CLASS_T(category)	(uint8_t)(5<<4 | (category))	/**> Agricultural and Forestry tractors */
+#define AD_VEHICLE_CLASS_G(category)	(uint8_t)(6<<4 | (category))	/**> Off-road vehicles */
+#define AD_VEHICLE_CLASS_SA(category)	(uint8_t)(7<<4 | (category))	/**> Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/
 /** @} */
 
 /**********************************************************************//**
  * @ingroup ac_dat_pub
  * @brief Flag to detect if an alarm has been triggered
  *************************************************************************/
-typedef enum {	EMERGENCY_NO_ALARM = 0,
-				EMERGENCY_FALSE_ALARM = 1,
-				EMERGENCY_MANUAL_ALARM = 2,
-				EMERGENCY_AUTO_ALARM = 3,
-				EMERGENCY_ALARM_SENT = 4
+typedef enum {	EMERGENCY_NO_ALARM = 0U,
+				EMERGENCY_FALSE_ALARM = 1U,
+				EMERGENCY_MANUAL_ALARM = 2U,
+				EMERGENCY_AUTO_ALARM = 3U,
+				EMERGENCY_ALARM_SENT = 4U
 } AD_EMERGENCY_FLAG;
 
 extern char EXT_MSD_FILENAME[24];

@@ -8,7 +8,7 @@
  * @{
 	 @brief Scheduler for reading temperature and accelerometer data in a
 	 sequential manner using a state machine.
-	 @note NOT YET Complies MISRO 2004 standards
+	 @note NOT YET Complies MISRA 2004 standards
 	 @defgroup scheduler_pub Public
 	 @defgroup scheduler_priv Private
  * @}

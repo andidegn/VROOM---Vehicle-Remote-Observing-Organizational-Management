@@ -1,3 +1,6 @@
+#ifndef R2R_LED_H_
+#define R2R_LED_H_
+
 /**********************************************************************//**
  * @file r2r_led.h
  *
@@ -15,9 +18,6 @@
 
 #include <avr/io.h>
 #include "../../application/vroom_config.h"
-
-#ifndef R2R_LED_H_
-#define R2R_LED_H_
 
 /**********************************************************************//**
  * @ingroup dac_pub
@@ -58,7 +58,7 @@
  * @ingroup dac_pub
  * Initializes the port for the R2R_LED board
  *************************************************************************/
-void r2r_init();
+void r2r_init(void);
 
 /**********************************************************************//**
  * @ingroup dac_pub
@@ -86,13 +86,13 @@ void r2r_led_print(uint8_t value);
  * @ingroup dac_pub
  * Switches all the LEDs on
  *************************************************************************/
-void r2r_leds_on();
+void r2r_leds_on(void);
 
 /**********************************************************************//**
  * @ingroup dac_pub
  * Switches all the LEDs off
  *************************************************************************/
-void r2r_leds_off();
+void r2r_leds_off(void);
 
 /**********************************************************************//**
  * @ingroup dac_pub

@@ -6,7 +6,6 @@
 #include "lis331hh.h"
 #include "../../data_comm/spi/spi.h"
 #include "../../application/scheduler/scheduler.h"
-#include <util/delay.h>
 
 /**********************************************************************//**
  * @ingroup acc_priv
@@ -28,7 +27,7 @@ typedef enum {
 } ACC_STATE;
 
 /* local variables */
-static uint8_t _scale_multiplier = 1;	/* Multiplier for the scale factor */
+static uint8_t _scale_multiplier = 1U;	/* Multiplier for the scale factor */
 
 static int16_t _x_axis = 0;
 static int16_t _y_axis = 0;
@@ -71,22 +70,22 @@ void acc_init(uint8_t __cs_pin, ACC_POWER_MODE __power_mode, ACC_OUTPUT_DATA_RAT
 	SREG = SREG_cpy;
 
 	/* zeroing bytes */
-	_send_setup[0] = 0;
-	_send_setup[1] = 0;
-	_send_setup[2] = 0;
-	_send_setup[3] = 0;
-	_send_setup[4] = 0;
-	_send_setup[5] = 0;
+	_send_setup[0] = 0U;
+	_send_setup[1] = 0U;
+	_send_setup[2] = 0U;
+	_send_setup[3] = 0U;
+	_send_setup[4] = 0U;
+	_send_setup[5] = 0U;
 
 	if (__full_scale == ACC_12G) {
-		_scale_multiplier = 2;
+		_scale_multiplier = 2U;
 	} else if (__full_scale == ACC_24G) {
-		_scale_multiplier = 4;
+		_scale_multiplier = 4U;
 	}
 
-	_send_setup[0] = ACC_CTRL_REG1 | _BV(ACC_MULTI_BIT);
-	_send_setup[1] = __power_mode | __output_data_rate | _BV(ACC_Xen) | _BV(ACC_Yen) | _BV(ACC_Zen);
-	_send_setup[4] = __full_scale | _BV(ACC_BDU);
+	_send_setup[0] = (uint8_t)(ACC_CTRL_REG1 | _BV(ACC_MULTI_BIT));
+	_send_setup[1] = (uint8_t)((int8_t)(__power_mode | __output_data_rate | _BV(ACC_Xen) | _BV(ACC_Yen) | _BV(ACC_Zen)));
+	_send_setup[4] = (uint8_t)((int8_t)(__full_scale | _BV(ACC_BDU)));
 
 	spi_send(_handle, _send_setup, 6U);
 
@@ -99,7 +98,7 @@ void acc_init(uint8_t __cs_pin, ACC_POWER_MODE __power_mode, ACC_OUTPUT_DATA_RAT
  * multiple byte read 00110111
  **************************************************************************/
 void acc_measure(void) {
-	_acc_read_from_reg(0x28, 6);
+	_acc_read_from_reg(0x28U, 6U);
 }
 
 /**********************************************************************//**
@@ -125,37 +124,37 @@ void acc_measure(void) {
  * @note The number of bytes for the SPI is the total number of bytes, ie. no_of_dummy_bytes + 1
  * @return void
  **************************************************************************/
-static void _acc_read_from_reg(uint8_t reg, uint8_t no_of_dummy_bytes) {
-	_send_read[0] = (1 << ACC_READ_BIT) | ((no_of_dummy_bytes > 1 ? 1 : 0) << ACC_MULTI_BIT) | reg;
-	for (uint8_t i = 1; i <= no_of_dummy_bytes; i++) {
-		_send_read[i] = 0;
+static void _acc_read_from_reg(uint8_t __reg, uint8_t __no_of_dummy_bytes){
+	_send_read[0] = (1U << ACC_READ_BIT) | ((__no_of_dummy_bytes > 1U ? 1U : 0U) << ACC_MULTI_BIT) | __reg;
+	for (uint8_t i = 1U; i <= __no_of_dummy_bytes; i++) {
+		_send_read[i] = 0U;
 	}
 
-	spi_send(_handle, _send_read, no_of_dummy_bytes + 1U);
+	spi_send(_handle, _send_read, __no_of_dummy_bytes + 1U);
 }
 
 /**********************************************************************//**
  * @ingroup acc_pub
  * Returns the x axis value multiplied with the scale factor
  **************************************************************************/
-float acc_get_x_axis(void) {
-	return _x_axis * ACC_SCALE_FACTOR * _scale_multiplier;
+double acc_get_x_axis(void) {
+	return (double)_x_axis * ACC_SCALE_FACTOR * (double)_scale_multiplier;
 }
 
 /**********************************************************************//**
  * @ingroup acc_pub
  * Returns the y axis value multiplied with the scale factor
  **************************************************************************/
-float acc_get_y_axis(void) {
-	return _y_axis * ACC_SCALE_FACTOR * _scale_multiplier;
+double acc_get_y_axis(void) {
+	return (double)_y_axis * ACC_SCALE_FACTOR * (double)_scale_multiplier;
 }
 
 /**********************************************************************//**
  * @ingroup acc_pub
  * Returns the z axis value multiplied with the scale factor
  **************************************************************************/
-float acc_get_z_axis(void) {
-	return _z_axis * ACC_SCALE_FACTOR * _scale_multiplier;
+double acc_get_z_axis(void) {
+	return (double)_z_axis * ACC_SCALE_FACTOR * (double)_scale_multiplier;
 }
 
 /**********************************************************************//**
@@ -163,7 +162,7 @@ float acc_get_z_axis(void) {
  * Handles the callback from the SPI driver by storing the returned data
  * locally
  *
- * @param uint8_t *data - a pointer to an array of the same size as was passed to the SPI driver
+ * @param uint8_t *__data - a pointer to an array of the same size as was passed to the SPI driver
  *
  * @return void
  **************************************************************************/
@@ -180,9 +179,9 @@ static void _acc_callback(uint8_t *__data) {
 			cli();
 
 			/* reading the data and storing them in 16 bit signed integers */
-			_x_axis = (__data[2] << 8) | __data[1];
-			_y_axis = (__data[4] << 8) | __data[3];
-			_z_axis = (__data[6] << 8) | __data[5];
+			_x_axis = ((int16_t)__data[2] << 8) | (int16_t)__data[1];
+			_y_axis = ((int16_t)__data[4] << 8) | (int16_t)__data[3];
+			_z_axis = ((int16_t)__data[6] << 8) | (int16_t)__data[5];
 
 			/* Restore interrupt */
 			SREG = SREG_cpy;

@@ -8,7 +8,7 @@
  * @{
 	@ingroup accident_logic
 	@brief This file holds the logic for detecting an accident
-	@note NOT YET Complies MISRO 2004 standards
+	@note NOT YET Complies MISRA 2004 standards
 	@defgroup ac_det_pub Public
 	@defgroup ac_det_priv Private
  * @}

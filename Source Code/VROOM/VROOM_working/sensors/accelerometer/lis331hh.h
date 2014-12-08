@@ -143,17 +143,14 @@ typedef enum {
  * @ingroup acc_pub
  * @brief Initializes the driver
  *
- * @param uint8_t cs_pin - chip select pin
- * @param ACC_POWER_MODE power_mode - accelerometer power mode
- * @param ACC_OUTPUT_DATA_RATE output_data_rate - the rate the data is updated
- * @param ACC_FULL_SCALE full_scale - the full scale g measurement
+ * @param uint8_t __cs_pin - chip select pin
+ * @param ACC_POWER_MODE __power_mode - accelerometer power mode
+ * @param ACC_OUTPUT_DATA_RATE __output_data_rate - the rate the data is updated
+ * @param ACC_FULL_SCALE __full_scale - the full scale g measurement
  *
  * @return void
  *************************************************************************/
-void acc_init(uint8_t cs_pin,
-			  ACC_POWER_MODE power_mode,
-			  ACC_OUTPUT_DATA_RATE output_data_rate,
-			  ACC_FULL_SCALE full_scale);
+void acc_init(uint8_t __cs_pin, ACC_POWER_MODE __power_mode, ACC_OUTPUT_DATA_RATE __output_data_rate, ACC_FULL_SCALE __full_scale);
 
 /**********************************************************************//**
  * @ingroup acc_pub
@@ -171,9 +168,9 @@ void acc_measure(void);
  *
  * @param void
  *
- * @return float - the acceleration in g [N/Kg] Range: -1 < x < 1
+ * @return double - the acceleration in g [N/Kg] Range: -1 < x < 1
  *************************************************************************/
-float acc_get_x_axis(void);
+double acc_get_x_axis(void);
 
 /**********************************************************************//**
  * @ingroup acc_pub
@@ -181,9 +178,9 @@ float acc_get_x_axis(void);
  *
  * @param void
  *
- * @return float - the acceleration in g [N/Kg] Range: -1 < x < 1
+ * @return double - the acceleration in g [N/Kg] Range: -1 < x < 1
  *************************************************************************/
-float acc_get_y_axis(void);
+double acc_get_y_axis(void);
 
 /**********************************************************************//**
  * @ingroup acc_pub
@@ -191,8 +188,8 @@ float acc_get_y_axis(void);
  *
  * @param void
  *
- * @return float - the acceleration in g [N/Kg] Range: -1 < x < 1
+ * @return double - the acceleration in g [N/Kg] Range: -1 < x < 1
  *************************************************************************/
-float acc_get_z_axis(void);
+double acc_get_z_axis(void);
 
 #endif /* AIRCRAFT_H_ */

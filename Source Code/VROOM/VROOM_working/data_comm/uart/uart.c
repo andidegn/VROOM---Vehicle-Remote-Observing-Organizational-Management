@@ -1,10 +1,8 @@
 /**********************************************************************//**
  * @file uart.c
  *************************************************************************/
-
 #include "uart.h"
 #include <stdlib.h>
-#include <util/delay.h>
 
 /**********************************************************************//**
  * @ingroup uart_priv
@@ -12,8 +10,8 @@
  * @defgroup uart_baud_factor UART baud rate factor
  * @{
  *************************************************************************/
-#define UBRR_FACTOR_ASYNC_NORM	16
-#define UBRR_FACTOR_ASYNC_DOUBLE 8
+#define UBRR_FACTOR_ASYNC_NORM	16U
+#define UBRR_FACTOR_ASYNC_DOUBLE 8U
 /** @} */
 
 /**********************************************************************//**
@@ -127,22 +125,19 @@ void uart0_setup_async(UART_MODE __operational_mode,
 	}
 
 	/* sets various setup bits (p.223-226) */
-	UCSR0B = 0;
+	UCSR0B = 0U;
 	UCSR0B |= _BV(RXCIE0) |
 			  _BV(RXEN0) |
 			  _BV(TXEN0) |
-			  (__char_size == UART_9_BIT ? _BV(UCSZ02) : 0);
+			  (__char_size == UART_9_BIT ? _BV(UCSZ02) : 0U);
 
 
 	/* add "operational_mode" here if support of synchronous
 	and/or master SPI is to be implemented */
-	UCSR0C = 0;
+	UCSR0C = 0U;
 	UCSR0C |= __paraty_mode |
 			  __stop_bit |
 			  _char_size;
-
-	//UCSR0C |= _BV(UCSZ00) |
-			  //_BV(UCSZ01);
 
 	/* storing callback function */
 	_callback_function0_ptr = __callback_function_ptr;
@@ -157,10 +152,10 @@ void uart0_setup_async(UART_MODE __operational_mode,
  * Sends one char
  *************************************************************************/
 void uart0_send_char(char __data) {
-	uint8_t tmp = (_tx_buffer0_head + 1) & (UART0_TX_BUFFER_SIZE - 1);
+	uint8_t tmp = (_tx_buffer0_head + 1U) & (UART0_TX_BUFFER_SIZE - 1U);
 
 	/* waiting for free space in buffer */
-	while (tmp == _tx_buffer0_tail);
+	while (tmp == _tx_buffer0_tail){}
 
 	/* copying data to local buffer */
 	_tx_buffer0[tmp] = __data;
@@ -178,7 +173,7 @@ void uart0_send_char(char __data) {
 void uart0_send_string(const char *__data) {
 	while (*__data) {
 		uart0_send_char(*__data++);
-	};
+	}
 }
 
 /**********************************************************************//**
@@ -188,9 +183,9 @@ void uart0_send_string(const char *__data) {
  * Does not terminates when zero character is meet
  *************************************************************************/
 void uart0_send_data(const char *__data, uint8_t __length) {
-	while (__length-- > 0) {
+	while (__length-- > 0U) {
 		uart0_send_char(*__data++);
-	};
+	}
 }
 
 /**********************************************************************//**
@@ -202,7 +197,7 @@ uint16_t uart0_read_char(void) {
 	if (_callback_function0_ptr != NULL) {
 		_result = UART_READ_NOT_ALOWED;
 	} else if (_rx_buffer0_head != _rx_buffer0_tail) {
-		_result = _rx_buffer0[_rx_buffer0_tail = (_rx_buffer0_tail + 1) % UART0_RX_BUFFER_SIZE];
+		_result = (uint16_t)(_rx_buffer0[_rx_buffer0_tail = (_rx_buffer0_tail + 1U) % UART0_RX_BUFFER_SIZE]);
 	} else {
 		_result = UART_NO_DATA;
 	}
@@ -215,7 +210,7 @@ uint16_t uart0_read_char(void) {
  **************************************************************************/
 ISR(USART0_UDRE_vect, ISR_BLOCK) {
 	if (_tx_buffer0_head != _tx_buffer0_tail) {
-		UDR0 = _tx_buffer0[_tx_buffer0_tail = (_tx_buffer0_tail + 1) % UART0_TX_BUFFER_SIZE];
+		UDR0 = (uint8_t)(_tx_buffer0[_tx_buffer0_tail = (_tx_buffer0_tail + 1U) % UART0_TX_BUFFER_SIZE]);
 	} else {
 		UCSR0B &= ~_BV(UDRIE0);
 	}
@@ -231,8 +226,8 @@ ISR(USART0_RX_vect, ISR_BLOCK) {
 	if (_callback_function0_ptr != NULL) {
 		_callback_function0_ptr(received_data);
 	} else {
-		if (_rx_buffer0_head + 1 != _rx_buffer0_tail) {
-			_rx_buffer0[_rx_buffer0_head = (_rx_buffer0_head + 1) % UART0_RX_BUFFER_SIZE] = received_data;
+		if (_rx_buffer0_head + 1U != _rx_buffer0_tail) {
+			_rx_buffer0[_rx_buffer0_head = (_rx_buffer0_head + 1U) % UART0_RX_BUFFER_SIZE] = received_data;
 		}
 	}
 }
@@ -329,7 +324,7 @@ void uart1_setup_async(UART_MODE __operational_mode,
 
 	/* add "operational_mode" here if support of synchronous
 	and/or master SPI is to be implemented */
-	UCSR1C = 0;
+	UCSR1C = 0U;
 	UCSR1C |= __paraty_mode |
 			  __stop_bit |
 			  _char_size;
@@ -347,10 +342,10 @@ void uart1_setup_async(UART_MODE __operational_mode,
  * Sends one char
  *************************************************************************/
 void uart1_send_char(char __data) {
-	uint8_t tmp = (_tx_buffer1_head + 1) % UART1_TX_BUFFER_SIZE;
-
-	/* waiting for free space in buffer */
-	while (tmp == _tx_buffer1_tail);
+	uint8_t tmp = (_tx_buffer1_head + 1U) % UART1_TX_BUFFER_SIZE;
+        
+        /* waiting for free space in buffer */
+	while (tmp == _tx_buffer1_tail){}
 
 	/* copying data to local buffer */
 	_tx_buffer1[tmp] = __data;
@@ -378,9 +373,9 @@ void uart1_send_string(const char *__data) {
  * Does not terminates when zero character is meet
  *************************************************************************/
 void uart1_send_data(const char *__data, uint8_t __length) {
-	while (__length-- > 0) {
+	while (__length-- > 0U) {
 		uart1_send_char(*__data++);
-	};
+	}
 }
 
 /**********************************************************************//**
@@ -392,7 +387,7 @@ uint16_t uart1_read_char(void) {
 	if (_callback_function1_ptr != NULL) {
 		_result = UART_READ_NOT_ALOWED;
 	} else if (_rx_buffer1_head != _rx_buffer1_tail) {
-		_result = _rx_buffer1[_rx_buffer1_tail = (_rx_buffer1_tail + 1) % UART1_RX_BUFFER_SIZE];
+		_result = (uint16_t)(_rx_buffer1[_rx_buffer1_tail = (_rx_buffer1_tail + 1U) % UART1_RX_BUFFER_SIZE]);
 	} else {
 		_result = UART_NO_DATA;
 	}
@@ -405,7 +400,7 @@ uint16_t uart1_read_char(void) {
  **************************************************************************/
 ISR(USART1_UDRE_vect, ISR_BLOCK) {
 	if (_tx_buffer1_head != _tx_buffer1_tail) {
-		UDR1 = _tx_buffer1[_tx_buffer1_tail = (_tx_buffer1_tail + 1) % UART1_TX_BUFFER_SIZE];
+		UDR1 = _tx_buffer1[_tx_buffer1_tail = (_tx_buffer1_tail + 1U) % UART1_TX_BUFFER_SIZE];
 	} else {
 		UCSR1B &= ~_BV(UDRIE1);
 	}
@@ -421,8 +416,8 @@ ISR(USART1_RX_vect, ISR_BLOCK) {
 	if (_callback_function1_ptr != NULL) {
 		_callback_function1_ptr(received_data);
 	} else {
-		if (_rx_buffer1_head + 1 != _rx_buffer1_tail) {
-			_rx_buffer1[_rx_buffer1_head = (_rx_buffer1_head + 1) % UART1_RX_BUFFER_SIZE] = received_data;
+		if (_rx_buffer1_head + 1U != _rx_buffer1_tail) {
+			_rx_buffer1[_rx_buffer1_head = (_rx_buffer1_head + 1U) % UART1_RX_BUFFER_SIZE] = received_data;
 		}
 	}
 }

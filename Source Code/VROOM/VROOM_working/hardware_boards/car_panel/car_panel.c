@@ -56,7 +56,7 @@ void car_panel_init(void)
 	cli();
 
 	/* Set buttons to input and LEDs to output */
-	DDR(PORT) &= ~(1<<BTN_CANCEL | 1<<BTN_ALARM);
+	DDR(PORT) &= (uint8_t)(~(1<<BTN_CANCEL | 1<<BTN_ALARM));
 	DDR(PORT) |= (1<<LED_CONTROL) | (1<<LED_STATUS_RED) | (1<<LED_STATUS_BLUE) | (1<<LED_STATUS_GREEN);
 
 	/* Pull-up on buttons */
@@ -88,28 +88,30 @@ void car_panel_set_status(Status __s)
 	switch (__s)
 	{
 		case STATUS_BLUE_TOGGLE :
-			PORT &= ~(1<<LED_STATUS_RED | 1<<LED_STATUS_GREEN);
+			PORT &= (uint8_t)(~(1<<LED_STATUS_RED | 1<<LED_STATUS_GREEN));
 			PORT ^= (1<<LED_STATUS_BLUE);
 		break;
 
 		case STATUS_BLUE :
-			PORT &= ~(1<<LED_STATUS_RED | 1<<LED_STATUS_GREEN);
+			PORT &= (uint8_t)(~(1<<LED_STATUS_RED | 1<<LED_STATUS_GREEN));
 			PORT |= (1<<LED_STATUS_BLUE);
 		break;
 
 		case STATUS_GREEN :
-			PORT &= ~(1<<LED_STATUS_RED | 1<<LED_STATUS_BLUE);
+			PORT &= (uint8_t)(~(1<<LED_STATUS_RED | 1<<LED_STATUS_BLUE));
 			PORT |= (1<<LED_STATUS_GREEN);
 		break;
 
 		case STATUS_RED :
-			PORT &= ~(1<<LED_STATUS_BLUE | 1<<LED_STATUS_GREEN);
+			PORT &= (uint8_t)(~(1<<LED_STATUS_BLUE | 1<<LED_STATUS_GREEN));
 			PORT |= (1<<LED_STATUS_RED);
 		break;
 
 		case STATUS_RESET :
-			PORT &= ~(1<<LED_STATUS_RED | 1<<LED_STATUS_GREEN | 1<<LED_STATUS_BLUE);
+			PORT &= (uint8_t)(~(1<<LED_STATUS_RED | 1<<LED_STATUS_GREEN | 1<<LED_STATUS_BLUE));
 		break;
+                
+                default : break;
 	}
 }
 
@@ -130,8 +132,10 @@ void car_panel_set_control(Control __c)
 		break;
 
 		case ALARM_NOT_ACTIVATED :
-			PORT &= ~(1<<LED_CONTROL);
+			PORT &= (uint8_t)(~(1<<LED_CONTROL));
 		break;
+                
+                default : break;
 	}
 }
 
@@ -145,23 +149,23 @@ bool car_panel_wait_cancel_emmergency(void)
 	car_panel_set_alarm_button_state(false);
 
 	_alarm_cancelled = false;
-	_car_panel_counter = 0;
+	_car_panel_counter = 0U;
 
-	while (_car_panel_counter < BUTTON_PRESS_TIME)
+	while (_car_panel_counter < CONFIG_ALARM_BUTTON_PRESS_TIME)
 	{
-		_car_panel_counter % 2 == 0 ? car_panel_set_status(STATUS_RED) : car_panel_set_status(STATUS_BLUE);
+		_car_panel_counter % 2U == 0U ? car_panel_set_status(STATUS_RED) : car_panel_set_status(STATUS_BLUE);
 
 		if(!(PIN(PORT) & (1<<BTN_CANCEL)))
 		{
-			_car_panel_counter = 0;
-			while (_car_panel_counter < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<BTN_CANCEL)))
+			_car_panel_counter = 0U;
+			while ((_car_panel_counter < CONFIG_ALARM_BUTTON_PRESS_TIME) && !(PIN(PORT) & (1<<BTN_CANCEL)))
 			{
 				_delay_ms(100);
 				_car_panel_counter++;
 				car_panel_set_control(ALARM_WAITING);
 				car_panel_set_status(STATUS_BLUE_TOGGLE);
 			}
-			_alarm_cancelled = (_car_panel_counter >= BUTTON_PRESS_TIME) ? true : false;
+			_alarm_cancelled = (_car_panel_counter >= CONFIG_ALARM_BUTTON_PRESS_TIME) ? true : false;
 			car_panel_set_control(ALARM_NOT_ACTIVATED);
 		}
 		else
@@ -225,14 +229,14 @@ ISR (PCINT1_vect, ISR_NOBLOCK)
 	/* Check if alarm button is pressed */
 	if(!(PIN(PORT) & (1<<BTN_ALARM)))
 	{
-		_car_panel_counter = 0;
-		while (_car_panel_counter++ < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<BTN_ALARM)))
+		_car_panel_counter = 0U;
+		while ((_car_panel_counter++ < CONFIG_ALARM_BUTTON_PRESS_TIME) && (!(PIN(PORT) & (1<<BTN_ALARM))))
 		{
 			_delay_ms(100);
 			car_panel_set_control(ALARM_WAITING);
 		}
 
-		if (_car_panel_counter >= BUTTON_PRESS_TIME )
+		if (_car_panel_counter >= CONFIG_ALARM_BUTTON_PRESS_TIME )
 		{
 			if (!car_panel_wait_cancel_emmergency())
 			{
@@ -247,14 +251,14 @@ ISR (PCINT1_vect, ISR_NOBLOCK)
 	/* Check if cancel button is pressed */
 	else if (!(PIN(PORT) & (1 << BTN_CANCEL)))
 	{
-		_car_panel_counter = 0;
-		while (_car_panel_counter++ < BUTTON_PRESS_TIME && !(PIN(PORT) & (1<<BTN_CANCEL)))
+		_car_panel_counter = 0U;
+		while ((_car_panel_counter++ < CONFIG_ALARM_BUTTON_PRESS_TIME) && (!(PIN(PORT) & (1<<BTN_CANCEL))))
 		{
 			_delay_ms(100);
 			car_panel_set_control(ALARM_WAITING);
 		}
 
-		if (_car_panel_counter >= BUTTON_PRESS_TIME )
+		if (_car_panel_counter >= CONFIG_ALARM_BUTTON_PRESS_TIME )
 		{
 			EXT_EMERGENCY_FLAG = EMERGENCY_FALSE_ALARM;
 			/* Enable interrupts for reset (CANCEL) button */

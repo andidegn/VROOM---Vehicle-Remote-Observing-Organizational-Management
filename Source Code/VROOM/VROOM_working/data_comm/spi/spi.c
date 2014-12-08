@@ -25,7 +25,7 @@
  * @defgroup spi_max_handles SPI max handles
  * @{
  **************************************************************************/
-#define MAX_HANDLES 16U
+#define MAX_HANDLES 16
 /** @} */
 
 /**********************************************************************//**
@@ -44,7 +44,7 @@ static int8_t _current_handle = -1;
 static handle_param _handles[MAX_HANDLES];
 static uint8_t _cs_pin;
 static uint8_t _cs_active_level;
-static volatile uint8_t _is_busy = 0;
+static volatile uint8_t _is_busy = 0U;
 
 static uint8_t *_data_array;
 static uint8_t _no_of_bytes;
@@ -93,7 +93,7 @@ int8_t spi_master_setup(SPI_DATA_MODE __mode,
  * and setting length to 1 (one)
  **************************************************************************/
 int8_t spi_send_byte(int8_t __handle, uint8_t __data) {
-	return spi_send(__handle, &__data, 1);
+	return spi_send(__handle, &__data, 1U);
 }
 
 /**********************************************************************//**
@@ -107,7 +107,7 @@ int8_t spi_send(int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes) {
 	int8_t ret = -1;
 
 	/**> checking if the SPI driver is in use, if so it checks if it is the current handle that is using it */
-	if (!_is_busy || (__handle == _current_handle)) {
+	if ((!_is_busy) || (__handle == _current_handle)) {
 		_data_array = __data_array;
 		_no_of_bytes = __no_of_bytes;
 		_bytes_sent_ctr = 0U;
@@ -204,7 +204,7 @@ static void _setup_spi(handle_param *__param) {
 	DDR_SPI &= ~_BV(MISO);
 
 	/* Clear the SPCR register before setting values */
-	SPCR = 0x00;
+	SPCR = 0x00U;
 
 	/* Sets the active CS/CE pin and pin level */
 	_cs_pin = __param->cs_pin;
@@ -235,7 +235,7 @@ static void _setup_spi(handle_param *__param) {
  **************************************************************************/
 static inline void _set_cs_level(uint8_t __level) {
 	if (_cs_active_level == SPI_CS_ACTIVE_LOW) {
-		__level = !__level;
+		__level = (1U - __level);
 	}
 	if (__level == CS_INACTIVE) {
 		PORTB &= ~_BV(_cs_pin);
@@ -244,7 +244,7 @@ static inline void _set_cs_level(uint8_t __level) {
 	}
 }
 
-/**********************************************************************//**
+/******************************************7****************************//**
  * @ingroup spi_priv
  * @brief Sends up data
  * Sets up the SPI with 'handle' if it is not already the current

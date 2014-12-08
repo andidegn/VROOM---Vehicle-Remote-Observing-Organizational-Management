@@ -8,7 +8,7 @@
 #include "../application/scheduler/scheduler.h"
 #include "../hardware_boards/sim908/sim908.h"
 
-#define BLANK_CHAR 0x20	/**> Define for the space char ' ' */
+#define BLANK_CHAR 0x20U	/**> Define for the space char ' ' */
 
 /* Global variables */
 AD_MSD EXT_MSD;
@@ -23,7 +23,7 @@ static bool _confidence_in_position;
 /* Prototypes */
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm);
 static void _set_VIN(const char *__VIN);
-static void _set_optional_data();
+static void _set_optional_data(void);
 
 /**********************************************************************//**
  * @ingroup ac_dat_pub
@@ -43,7 +43,7 @@ void ad_emergency_alarm(void)
 
 	set_MSD_data(&EXT_MSD.time_stamp, &EXT_MSD.latitude, &EXT_MSD.longitude, &EXT_MSD.direction);
 	/* ToDo - Can position be trusted ?? */
-	_confidence_in_position = (EXT_MSD.latitude != 0 || EXT_MSD.longitude != 0) ? true : false;
+	_confidence_in_position = ((EXT_MSD.latitude != 0 ) || (EXT_MSD.longitude != 0)) ? true : false;
 	_set_control_byte(_confidence_in_position, CONFIG_MSD_TEST_CALL, EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM, EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM);
 	_set_VIN(CONFIG_MSD_VIN);
 	_set_optional_data();
@@ -73,7 +73,7 @@ void ad_emergency_alarm(void)
  *************************************************************************/
 static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, bool __manual_alarm, bool __auto_alarm) 
 {
-	EXT_MSD.control = __position_can_be_trusted<<4 | __test_call<<5 |  __manual_alarm<<6 | __auto_alarm<<7;
+	EXT_MSD.control = (uint8_t)(__position_can_be_trusted<<4U) | (uint8_t)(__test_call<<5U) |  (uint8_t)(__manual_alarm<<6U) | (uint8_t)(__auto_alarm<<7U);
 }
 
 /**********************************************************************//**
@@ -87,7 +87,7 @@ static void _set_control_byte(bool __position_can_be_trusted, bool __test_call, 
  *************************************************************************/
 static void _set_VIN(const char *__VIN)
 {
-	uint8_t i = 0;
+	uint8_t i = 0U;
 	while (*__VIN != '\0')
 	{
 		EXT_MSD.VIN[i++] = *__VIN++;
@@ -106,18 +106,18 @@ static void _set_VIN(const char *__VIN)
  * @return void
  * @note Encoding optional data depends on MSD version. 
  *************************************************************************/
-static void _set_optional_data()
+static void _set_optional_data(void)
 {
-	uint8_t i = 0;
-	char *buf = malloc(10 * sizeof(char));
+	uint8_t i = 0U;
+	char *buf = malloc(10U * sizeof(char));
 	
 	int16_t *_acc_buffer = malloc(CONFIG_ALARM_CRASH_NO_OF_READINGS * sizeof(int16_t));
 	scheduler_acc_get_last_readings_sum(_acc_buffer);
-	for (i = 0; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) 
+	for (i = 0U; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) 
 	{
-		EXT_TOTAL_ACCELERATION_AVG += *(_acc_buffer + i);
+		EXT_TOTAL_ACCELERATION_AVG += (float)(*(_acc_buffer + i));
 	}
-	EXT_TOTAL_ACCELERATION_AVG /= (i*100);
+	EXT_TOTAL_ACCELERATION_AVG /= ((float)i*100.0F);
 	free(_acc_buffer);
 	
 	EXT_TEMPERATURE = scheduler_temp_get_last_reading();
@@ -130,7 +130,7 @@ static void _set_optional_data()
 	strcat(EXT_MSD.optional_data, "\n");
 	strcat(EXT_MSD.optional_data, itoa(0, buf, 10));
 
-	for (i = 14; i < CONFIG_MSD_OPTIONAL_DATA_SIZE; i++)
+	for (i = 14U; i < CONFIG_MSD_OPTIONAL_DATA_SIZE; i++)
 	{
 		EXT_MSD.optional_data[i] = BLANK_CHAR;
 	}

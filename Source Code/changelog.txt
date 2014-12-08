@@ -11,6 +11,42 @@ The 13th of June 2013 the EU passed a legislation that will ensure that from Oct
 The IVS in this project will make it possible for people with pre-2015 cars to have the same opportunity and the same safety net as eCall provides with an aftermarket solution.
 
 @section Changelog
+=====================================
+Version 0.205 - 2014/12/08 by Kenneth
+=====================================
+New Features, Improvements
+--------------------------
+- All files MISRA C 2004 checked
+
+Fixed Bugs, Changes
+-------------------
+- Changed time.c / time.h structure
+
+ToDo
+----		
+- Doxygen missing in following files:
+   + scheduler.c
+   + test_module_sensors.c / test_module_sensors.h
+   + test_module_car_panel.c / test_module_car_panel.h
+   + test_module_uart.c / test_module_uart.h
+   + time.c / time.h
+- Doxygen proofing in all files  
+
+Known Bugs, Problems
+--------------------
+- !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
+- !note If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+- Check for error code does not work in sim908.c function send_MSD(...) line 309
+  Error code for Open Bearer AT command is: "+CME ERROR: 3"
+- Violation on some MISRA C 2004 rules: 
+   + 5.4:  Enumerated type mixed with another type - the use of a tag shall agree with its declaration (required) 
+   + 12.4: The right hand operand of an && or || operator shall not contain side effects (required) 
+   + 12.7: Bitwise operations shall not be performed on signed integer types (required) 
+   + 17.4: Pointer arithmetic should not be used (advised)
+   + 19.10: In the definition of a function-like macro, each instance of a parameter shall be enclosed in parenthesis (required) 
+   + 20.4: Dynamic heap memory allocation shall not be used (required) 
+   + 20.10: The library functions atof, atoi, and atol from library <stdlib.h> shall not be used (required)
+
 
 =====================================
 Version 0.201 - 2014/12/03 by Kenneth

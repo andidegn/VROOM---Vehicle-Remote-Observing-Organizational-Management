@@ -1,114 +1,40 @@
 /*
  * time.c
  * Created: 20-10-2014 13:25:46
-	Note: File is a modified version of Michael Ringgaard's time.c
  */ 
 
 #include "time.h"
+#include <stdbool.h>
 
-#define EPOCH_YR                1970
-#define SECS_DAY                (24L * 60L * 60L)
-#define LEAPYEAR(year)          (!((year) % 4) && (((year) % 100) || !((year) % 400)))
+#define EPOCH_YR                1970U
+#define SECS_DAY                86400UL
 
-const int _ytab[2][12] = 
+#define LEAPYEAR(year)          (((year) % 4 == 0) && (((year) % 100 != 0) || ((year) % 400 == 0)))
+
+const uint8_t DAYS_MONTH[2U][12U] = 
 {
-	{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
-	{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+	{31U, 28U, 31U, 30U, 31U, 30U, 31U, 31U, 30U, 31U, 30U, 31U},
+	{31U, 29U, 31U, 30U, 31U, 30U, 31U, 31U, 30U, 31U, 30U, 31U}
 };
 
 uint32_t calc_UTC_seconds(FIXED_TIME *buf) 
-{
-	long _day, _year;
-	int _tm_year, _yday, _month;
-	long _seconds;
-		
-	buf->year -= EPOCH_YR;
-	buf->mon -= 1;
+{ 
+    volatile uint8_t _is_leap_year = LEAPYEAR((int16_t)(buf->year)) ? 1U : 0U;
+    uint16_t _days_year = 0U;
+	uint32_t _total_seconds = 0U;
+    uint16_t i = 0U;
+    
+    for (i = EPOCH_YR; i < buf->year; i++) {
+      _days_year = (LEAPYEAR((int16_t)i) ? 366U : 365U);
+      _total_seconds += (_days_year * SECS_DAY);
+    }
+
+    for (i = 0U; i < (uint8_t)(buf->mon - 1U); i++)
+    {
+      _total_seconds += DAYS_MONTH[_is_leap_year][i] * SECS_DAY;
+    }
+  
+    _total_seconds += ((buf->day - 1UL) * SECS_DAY) + (uint32_t)(buf->hour * 3600UL) + (uint32_t)(buf->min * 60UL) + buf->sec;
 	
-	buf->min += buf->sec / 60;
-	buf->sec %= 60;
-	if (buf->sec < 0) 
-	{
-		buf->sec += 60;
-		buf->min--;
-	}
-	  
-	buf->hour += buf->min / 60;
-	buf->min = buf->min % 60;
-	if (buf->min < 0) 
-	{
-		buf->min += 60;
-		buf->hour--;
-	}
-	  
-	_day = buf->hour / 24;
-	buf->hour = buf->hour % 24;
-	if (buf->hour < 0) 
-	{
-		buf->hour += 24;
-		_day--;
-	}
-	  
-	buf->year += buf->mon / 12;
-	buf->mon %= 12;
-	if (buf->mon < 0) 
-	{
-		buf->mon += 12;
-		buf->year--;
-	}
-	  
-	_day += (buf->day - 1);
-	while (_day < 0) 
-	{
-		if(--buf->mon < 0) 
-		{
-			buf->year--;
-			buf->mon = 11;
-		}
-		_day += _ytab[LEAPYEAR(EPOCH_YR + buf->year)][buf->mon];
-	}
-	  
-	while (_day >= _ytab[LEAPYEAR(EPOCH_YR + buf->year)][buf->mon]) 
-	{
-		_day -= _ytab[LEAPYEAR(EPOCH_YR + buf->year)][buf->mon];
-		if (++(buf->mon) == 12) 
-		{
-			buf->mon = 0;
-			buf->year++;
-		}
-	}
-	  
-	buf->day = _day + 1;
-	  
-	_year = EPOCH_YR;
-	  
-	if (buf->year < _year - EPOCH_YR) 
-		return  -1;
-		
-	_seconds = 0;
-	_day = 0;                   
-
-	_tm_year = buf->year + EPOCH_YR;
-		
-	_day = (_tm_year - _year) * 365;
-	  	
-	_day += (_tm_year - _year) / 4 + ((_tm_year % 4) && _tm_year % 4 < _year % 4);
-	_day -= (_tm_year - _year) / 100 + ((_tm_year % 100) && _tm_year % 100 < _year % 100);
-	_day += (_tm_year - _year) / 400 + ((_tm_year % 400) && _tm_year % 400 < _year % 400);
-
-	_yday = _month = 0;
-	while (_month < buf->mon) 
-	{
-		_yday += _ytab[LEAPYEAR(_tm_year)][_month];
-		_month++;
-	}
-
-	_yday += (buf->day - 1);
-	  
-	_day += _yday;
-
-	_seconds = ((buf->hour * 60L) + buf->min) * 60L + buf->sec;	
-	_seconds += _day * SECS_DAY;
-		 
-	return _seconds;
+    return _total_seconds;
 }

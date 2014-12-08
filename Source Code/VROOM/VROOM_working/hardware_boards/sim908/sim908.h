@@ -60,11 +60,12 @@ void SIM908_start(void);
  * @ingroup sim908_pub
  * @brief Used for sending AT SET commands.
  *
- * @param *cmd is the AT command as a string
+ * @param *__cmd - the AT command as a string
+ * @param __wait_for_ok - flag determing the wait for response  
  *
  * @return bool - true if successful else false
  *************************************************************************/
-bool SIM908_cmd(const char *cmd, bool __wait_for_ok);
+bool SIM908_cmd(const char *__cmd, bool __wait_for_ok);
 
 /**********************************************************************//**
  * @ingroup sim908_pub

@@ -11,8 +11,8 @@
 #include "../util/r2r_led/r2r_led.h"
 
 /* Local variables */
-static volatile float cur_temp = 0.0F;
-static volatile float prev_temp = CONFIG_ALARM_FIRE_TEMP_INIT;
+static float cur_temp = 0.0F;
+static float prev_temp = CONFIG_ALARM_FIRE_TEMP_INIT;
 
 /**********************************************************************//**
  * @ingroup ac_det_pub
@@ -25,13 +25,13 @@ static volatile float prev_temp = CONFIG_ALARM_FIRE_TEMP_INIT;
  **************************************************************************/
 void check_for_crash(void) {
 	volatile bool _alarm = true;
-	uint8_t i = 0;
+	uint8_t i = 0U;
 	int16_t *_acc_buffer = malloc(CONFIG_ALARM_CRASH_NO_OF_READINGS * sizeof(int16_t));
 
 	scheduler_acc_get_last_readings_sum(_acc_buffer);
 
-	for (i = 0; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) {
-		if (*(_acc_buffer + i) < CONFIG_ALARM_CRASH_TRIGGER_VALUE) {
+	for (i = 0U; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) {
+		if ((int16_t)*(_acc_buffer + i) < CONFIG_ALARM_CRASH_TRIGGER_VALUE) {
 			_alarm = false;
 			break;
 		}
@@ -39,7 +39,7 @@ void check_for_crash(void) {
 
 	free(_acc_buffer);
 
-	if (_alarm && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM) {
+	if (_alarm && (EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)) {
 		scheduler_halt();
 		if (!car_panel_wait_cancel_emmergency()) {
 			EXT_EMERGENCY_FLAG = EMERGENCY_AUTO_ALARM;
@@ -62,7 +62,7 @@ void check_for_fire(void)
 {
 	cur_temp = scheduler_temp_get_last_reading();
 
-	if (prev_temp != CONFIG_ALARM_FIRE_TEMP_INIT && (cur_temp - prev_temp) > CONFIG_ALARM_FIRE_TRIGGER_DEGREE && EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM)
+	if ((prev_temp > CONFIG_ALARM_FIRE_TEMP_INIT) && ((cur_temp - prev_temp) > CONFIG_ALARM_FIRE_TRIGGER_DEGREE) && (EXT_EMERGENCY_FLAG == EMERGENCY_NO_ALARM))
 	{
 		scheduler_halt();
 		if (!car_panel_wait_cancel_emmergency())

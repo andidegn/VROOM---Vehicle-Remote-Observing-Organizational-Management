@@ -31,17 +31,17 @@ static int16_t _z_axis_buffer[CONFIG_ALARM_CRASH_NO_OF_READINGS];
 static float _temperature = CONFIG_ALARM_FIRE_TEMP_INIT;
 
 static SENSOR_STATE _state;
-static volatile uint16_t _execution_counter = 0;
+static volatile uint16_t _execution_counter = 0U;
 
 static void (*_callback_function_ptr)(char __data); /* not implemented yet */
-static uint8_t _acc_buffer_tail = 0;
+static uint8_t _acc_buffer_tail = 0U;
 
 #ifdef DEBUG_TASK_MEASURE
-static uint8_t _task_prev_id_temp = 0;
-static uint8_t _task_prev_id_acc = 0;
-static uint8_t _task_prev_id_read = 0;
-static uint8_t _task_prev_id_crash_det = 0;
-static uint8_t _task_prev_id_fire_det = 0;
+static uint8_t _task_prev_id_temp = 0U;
+static uint8_t _task_prev_id_acc = 0U;
+static uint8_t _task_prev_id_read = 0U;
+static uint8_t _task_prev_id_crash_det = 0U;
+static uint8_t _task_prev_id_fire_det = 0U;
 #endif
 
 void scheduler_start(void (*callback_function_ptr)(char __data)) {
@@ -66,17 +66,18 @@ void scheduler_halt(void)
 }
 
 void scheduler_acc_get_last_readings_sum(int16_t *__buffer) {
-	uint8_t _index = 0;
-	for (uint8_t i = 0; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) {
-		_index = (_acc_buffer_tail + i + 1) % CONFIG_ALARM_CRASH_NO_OF_READINGS;
-		*(__buffer + i) = sqrt(pow(_x_axis_buffer[_index], 2) + pow(_y_axis_buffer[_index], 2) + pow(_z_axis_buffer[_index], 2));
+	uint8_t _index = 0U;
+        uint8_t i = 0U;
+	for (i = 0U; i < CONFIG_ALARM_CRASH_NO_OF_READINGS; i++) {
+		_index = (_acc_buffer_tail + i + 1U) % CONFIG_ALARM_CRASH_NO_OF_READINGS;
+		*(__buffer + i) = (int16_t)(sqrt(pow((double)_x_axis_buffer[_index], 2.0) + pow((double)_y_axis_buffer[_index], 2.0) + pow((double)_z_axis_buffer[_index], 2.0)));
 	}
 }
 
 void scheduler_acc_get_last_readings(int16_t *__buffer) {
 	*__buffer = _x_axis_buffer[_acc_buffer_tail];
-	*(__buffer + 1) = _y_axis_buffer[_acc_buffer_tail];
-	*(__buffer + 2) = _z_axis_buffer[_acc_buffer_tail];
+	*(__buffer + 1U) = _y_axis_buffer[_acc_buffer_tail];
+	*(__buffer + 2U) = _z_axis_buffer[_acc_buffer_tail];
 }
 
 float scheduler_temp_get_last_reading(void)
@@ -125,7 +126,7 @@ void scheduler_release(void) {
 		/************************************************************************/
 		case state_tc72_read :
 #ifdef DEBUG_TASK_MEASURE
-			_task_prev_id_temp = r2r_start_task(DEBUG_TASK_ID_SENSOR_SCHEDULER_TEMP_REQ);
+			_task_prev_id_temp = r2r_start_task(DEBUG_ID_SENSOR_SCHEDULER_TEMP_REQ);
 #endif
 			_state = state_acc_read;
 			measure_temperature();
@@ -139,7 +140,7 @@ void scheduler_release(void) {
 		/************************************************************************/
 		case state_acc_read :
 #ifdef DEBUG_TASK_MEASURE
-			_task_prev_id_acc = r2r_start_task(DEBUG_TASK_ID_SENSOR_SCHEDULER_ACC_REQ);
+			_task_prev_id_acc = r2r_start_task(DEBUG_ID_SENSOR_SCHEDULER_ACC_REQ);
 #endif
 			_state = state_store_in_buffers;
 			acc_measure();
@@ -153,13 +154,13 @@ void scheduler_release(void) {
 		/************************************************************************/
 		case state_store_in_buffers :
 #ifdef DEBUG_TASK_MEASURE
-			_task_prev_id_read = r2r_start_task(DEBUG_TASK_ID_SENSOR_SCHEDULER_SENSORS_READ);
+			_task_prev_id_read = r2r_start_task(DEBUG_ID_SENSOR_SCHEDULER_READ);
 #endif
 			_state = state_idle;
-			_x_axis_buffer[_acc_buffer_tail] = (int16_t)(acc_get_x_axis() * 100);/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
-			_y_axis_buffer[_acc_buffer_tail] = (int16_t)(acc_get_y_axis() * 100);
-			_z_axis_buffer[_acc_buffer_tail] = (int16_t)(acc_get_z_axis() * 100);
-			_acc_buffer_tail = (_acc_buffer_tail + 1) % CONFIG_ALARM_CRASH_NO_OF_READINGS;
+			_x_axis_buffer[_acc_buffer_tail] = (int16_t)((double)(acc_get_x_axis() * 100.0 + 0.5));/* any higher than 4000 will risk hitting the limit of 16 bit signed variable */
+			_y_axis_buffer[_acc_buffer_tail] = (int16_t)((double)(acc_get_y_axis() * 100.0 + 0.5));
+			_z_axis_buffer[_acc_buffer_tail] = (int16_t)((double)(acc_get_z_axis() * 100.0 + 0.5));
+			_acc_buffer_tail = (uint8_t)(_acc_buffer_tail + 1U) % CONFIG_ALARM_CRASH_NO_OF_READINGS;
 
 			_temperature = get_temperature();
 
@@ -175,9 +176,9 @@ void scheduler_release(void) {
 		/************************************************************************/
 		case state_detect_accident :
 #ifdef DEBUG_TASK_MEASURE
-			_task_prev_id_crash_det = r2r_start_task(DEBUG_TASK_ID_ACCIDENT_DETECTION_CRASH_DETECTION);
+			_task_prev_id_crash_det = r2r_start_task(DEBUG_ID_ACCIDENT_CRASH_DETECTION);
 #endif
-			_state = ++_execution_counter % (CONFIG_ALARM_FIRE_TRIGGER_TIME / (1000 / CONFIG_SCHEDULER_FREQUENCY)) == 0? state_detect_fire : state_idle;
+			_state = ++_execution_counter % (uint16_t)(CONFIG_ALARM_FIRE_TRIGGER_TIME / (1000U / (uint16_t)CONFIG_SCHEDULER_FREQUENCY)) == 0U ? state_detect_fire : state_idle;
 			check_for_crash();
 			scheduler_release();
 #ifdef DEBUG_TASK_MEASURE
@@ -190,7 +191,7 @@ void scheduler_release(void) {
 		/************************************************************************/
 		case state_detect_fire :
 #ifdef DEBUG_TASK_MEASURE
-			_task_prev_id_fire_det = r2r_start_task(DEBUG_TASK_ID_ACCIDENT_DETECTION_FIRE_DETECTION);
+			_task_prev_id_fire_det = r2r_start_task(DEBUG_ID_ACCIDENT_FIRE_DETECTION);
 #endif
 			_state = state_idle;
 			check_for_fire();

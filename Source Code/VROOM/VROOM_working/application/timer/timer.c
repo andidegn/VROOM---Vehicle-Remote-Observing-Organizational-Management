@@ -19,8 +19,8 @@
 /*! Macro for calculating the value for clock count based on frequency and prescaler */
 #define TOP_VALUE(frequency_in_hz, prescaler) (F_CPU/(prescaler * frequency_in_hz)-1)
 
-static uint8_t _TIFR1_cpy = 0;
-static uint8_t _TIMSK1_cpy = 0;
+static uint8_t _TIFR1_cpy = 0U;
+static uint8_t _TIMSK1_cpy = 0U;
 
 /**********************************************************************//**
  @ingroup timer

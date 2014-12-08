@@ -9,7 +9,7 @@
 	@ingroup hardware_boards
 	@brief This is a header containing all the most
 	relevant AT commands for this system
-	@note NOT YET Complies MISRO 2004 standards
+	@note NOT YET Complies MISRA 2004 standards
  * @}
  *************************************************************************/
 
@@ -22,12 +22,12 @@
  * @note Corresponding to CREG response in SIM908 p. 77 in AT Commands manual v. 1.02
  *************************************************************************/
 typedef enum {
-	CREG_NOT_REG_NOT_SEARCHING		= 0,
-	CREG_REGISTERED_HOME_NETWORK	= 1,
-	CREG_NOT_REG_SEARCHING			= 2,
-	CREG_REGISTRATION_DENIED		= 3,
-	CREG_UNKNOWN					= 4,
-	CREG_REGISTERED_ROAMING			= 5
+	CREG_NOT_REG_NOT_SEARCHING		= 0U,
+	CREG_REGISTERED_HOME_NETWORK	= 1U,
+	CREG_NOT_REG_SEARCHING			= 2U,
+	CREG_REGISTRATION_DENIED		= 3U,
+	CREG_UNKNOWN					= 4U,
+	CREG_REGISTERED_ROAMING			= 5U
 } AT_CONNECTION_STATUS_FLAG;
 
 /**********************************************************************//**
@@ -49,7 +49,7 @@ typedef enum {
 #define AT_DIAG_TEST					"AT"
 #define AT_DIAG_ECHO_ENABLE				"ATE1"
 #define AT_DIAG_ECHO_DISABLE			"ATE0"
-#define AT_DIAG_AUTO_ANSWER(NO_OF_RINGS)"ATS0=" NO_OF_RINGS
+#define AT_DIAG_AUTO_ANSWER(NO_OF_RINGS) "ATS0=" NO_OF_RINGS
 #define AT_DIAG_MODEL_NO				"AT+CGMM"
 #define AT_DIAG_MANUFACTURER			"AT+CGMI"
 /** @} */
@@ -203,11 +203,11 @@ typedef enum {
  * @defgroup at_call Call
  * @{
  *************************************************************************/
-#define AT_CALL_ANSWER "ATA"
-#define AT_CALL_HANG_UP "ATH0" // Disconnects all calls on the channel the command is requested
-#define AT_CALL_DIAL(NUMBER) "ATD" NUMBER ";" // Add phone number and end with an ';'
-#define AT_CALL_REDIAL "ATDL"
-#define AT_CALL_SHOW_NUM "AT+CNUM"
+#define AT_CALL_ANSWER			"ATA"
+#define AT_CALL_HANG_UP			"ATH0" /* Disconnects all calls on the channel the command is requested */
+#define AT_CALL_DIAL(NUMBER)	"ATD" NUMBER ";" /* Add phone number and end with an ';' */
+#define AT_CALL_REDIAL			"ATDL"
+#define AT_CALL_SHOW_NUM		"AT+CNUM"
 /** @} */
 
 /**********************************************************************//**
@@ -216,10 +216,10 @@ typedef enum {
  * @defgroup at_msg Messages
  * @{
  *************************************************************************/
-#define AT_MSG_READ "AT+CMGR=" // Add number in end to select msg to read
-#define AT_MSG_DEL_ALL "AT+CMGD=1,4"
-#define AT_MSG_FORMAT "AT+CMGF=" // Add number
-#define AT_MSG_SEND "AT+CMGS\""
+#define AT_MSG_READ				"AT+CMGR=" /* Add number in end to select msg to read */
+#define AT_MSG_DEL_ALL			"AT+CMGD=1,4"
+#define AT_MSG_FORMAT			"AT+CMGF=" /* Add number */
+#define AT_MSG_SEND				"AT+CMGS\""
 /** @} */
 
 /**********************************************************************//**
@@ -228,12 +228,12 @@ typedef enum {
  * @defgroup at_audio Audio
  * @{
  *************************************************************************/
-#define AT_AUDIO_GET_RINGER_VOLUME "AT+CRSL?"
-#define AT_AUDIO_SET_RINGER_VOLUME "AT+CRSL=" // Add number 0-4
-#define AT_AUDIO_GET_SPEAKER_VOLUME "AT+CLVL?"
-#define AT_AUDIO_SET_SPEAKER_VOLUME "AT+CLVL=" // Add number 0-100
-#define AT_AUDIO_GET_CURRENT_ALERT_SOUND "AT+CALS?"
-#define AT_AUDIO_SET_CURRENT_ALERT_SOUND "AT+CALS=" // Add number 0-19
+#define AT_AUDIO_GET_RINGER_VOLUME			"AT+CRSL?"
+#define AT_AUDIO_SET_RINGER_VOLUME			"AT+CRSL=" /* Add number 0-4 */
+#define AT_AUDIO_GET_SPEAKER_VOLUME			"AT+CLVL?"
+#define AT_AUDIO_SET_SPEAKER_VOLUME			"AT+CLVL=" /* Add number 0-100 */
+#define AT_AUDIO_GET_CURRENT_ALERT_SOUND	"AT+CALS?"
+#define AT_AUDIO_SET_CURRENT_ALERT_SOUND	"AT+CALS=" /* Add number 0-19 */
 /** @} */
 
 /**********************************************************************//**
@@ -242,8 +242,8 @@ typedef enum {
  * @defgroup at_conn Connection
  * @{
  *************************************************************************/
-#define AT_CONN_SIGNAL_STRENGTH "AT+CSQ"
-#define AT_CONN_ATTACH_STATUS "AT+CGATT?"
+#define AT_CONN_SIGNAL_STRENGTH				"AT+CSQ"
+#define AT_CONN_ATTACH_STATUS				"AT+CGATT?"
 #define AT_CONN_NETWORK_REGISTRATION_STATUS "AT+CREG?"
 /** @} */
 
@@ -253,14 +253,14 @@ typedef enum {
  * @defgroup at_gps GPS
  * @{
  *************************************************************************/
-#define AT_GPS_POWER_STATE "AT+CGPSPWR?"
-#define AT_GPS_POWER_ON "AT+CGPSPWR=1"
-#define AT_GPS_POWER_OFF "AT+CGPSPWR=0"
-#define AT_GPS_RST_MODE "AT+CGPSRST?"
-#define AT_GPS_RST_COLD "AT+CGPSRST=0"
+#define AT_GPS_POWER_STATE	"AT+CGPSPWR?"
+#define AT_GPS_POWER_ON		"AT+CGPSPWR=1"
+#define AT_GPS_POWER_OFF	"AT+CGPSPWR=0"
+#define AT_GPS_RST_MODE		"AT+CGPSRST?"
+#define AT_GPS_RST_COLD		"AT+CGPSRST=0"
 #define AT_GPS_RST_AUTONOMY "AT+CGPSRST=1"
-#define AT_GPS_GET_LOCATION "AT+CGPSINF=0" // Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course>
-#define AT_GPS_GET_STATUS "AT+CGPSSTATUS?"
+#define AT_GPS_GET_LOCATION "AT+CGPSINF=0" /* Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course> */
+#define AT_GPS_GET_STATUS	"AT+CGPSSTATUS?"
 /** @} */
 
 /**********************************************************************//**

@@ -76,21 +76,14 @@ void init_tc72(uint8_t __cs_pin)
 float calculate_temperature(uint8_t __msb, uint8_t __lsb)
 {
     /****************************************************************************************************************
-     Violation on rule 10.5 MISRA C 2004 (if the bitwise operators ~ and << are applied to an operand of underlying type
-    'unsigned char' or 'unsigned short', the result shall be immediately cast to the underlying type of the operand)
-     ****************************************************************************************************************/
-    _temp = (int16_t)((__msb<<2U) | (__lsb>>6U));
-
-    /****************************************************************************************************************
-     Violation on rule 10.1 MISRA C 2004 (illegal implicit conversion from underlying MISRA type "unsigned short" to "signed short")
-     ****************************************************************************************************************/
-    /****************************************************************************************************************
      Violation on rule 12.7 MISRA C 2004 (bitwise operations shall not be performed on signed integer types)
      ****************************************************************************************************************/
+    _temp = ((int16_t)__msb<<2U) | ((int16_t)__lsb>>6U);
+
     /* Check if temperature is negative */
-    if (_temp & 0x200U)
+    if (_temp & (int16_t)0x200U)
 	{
-        _temp |= 0xFE00U;
+        _temp |= (int16_t)0xFE00U;
     }
 
     return (float)_temp/4.0F;

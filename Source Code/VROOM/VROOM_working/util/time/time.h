@@ -9,16 +9,16 @@
 #ifndef TIME_H_
 #define TIME_H_
 
-#include <stdio.h>
+#include <avr/io.h>
 
 typedef struct 
 {
-	uint16_t year;  // Year
-	uint8_t mon;    // Months since January [1, 12]
-	uint8_t day;	// Day of the month [1, 31]
-	uint8_t hour;   // Hours since midnight [0, 23]
-	uint8_t min;    // Minutes after the hour [0, 59]
-	uint8_t sec;    // Seconds after the minute [0, 59]
+	uint16_t year;  /* Year */
+	uint8_t mon;    /* Months since January [1, 12] */
+	uint8_t day;	/* Day of the month [1, 31] */
+	uint8_t hour;   /* Hours since midnight [0, 23] */
+	uint8_t min;    /* Minutes after the hour [0, 59] */
+	uint8_t sec;    /* Seconds after the minute [0, 59] */
 } FIXED_TIME;
 
 uint32_t calc_UTC_seconds(FIXED_TIME *buf); 

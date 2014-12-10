@@ -178,9 +178,6 @@ void SIM908_start(void)
 	/* Enable CREG unsolicited result code */
 	SIM908_cmd(AT_ENABLE_CREG, true);
 
-	/* Enable automatic answer */
-	SIM908_cmd(AT_DIAG_AUTO_ANSWER("1"), true);
-
 	#ifdef CONFIG_PIN
 		/* wait for +CPIN: SIM PIN - is going to be deleted */
 		_delay_ms(1000);
@@ -359,6 +356,9 @@ void send_MSD(const char *__vroom_id)
  *************************************************************************/
 static void _setup_GSM(void)
 {
+	/* Enable automatic answer */
+	SIM908_cmd(AT_DIAG_AUTO_ANSWER("1"), true);
+		
 	/* Setup phone functionality */
 	SIM908_cmd(AT_FULL_FUNCTIONALITY, true);
 
@@ -376,7 +376,7 @@ static void _setup_GSM(void)
  *************************************************************************/
 static void _setup_GPS(void)
 {
-  while(_ack_gps_response_flag == SIM908_FLAG_WAITING){}
+	while(_ack_gps_response_flag == SIM908_FLAG_WAITING){}
 	/* Enable GPS */
 	SIM908_cmd(AT_GPS_POWER_ON, true);
 
@@ -745,7 +745,7 @@ void _SIM908_callback(char data) {
 					}
 			} else
 			if ((_gps_pull_flag == SIM908_FLAG_GPS_PULL) &&
-				(_check_response(SIM908_RESPONSE_GPS_PULL))) {			/* GPS pull */
+				(_check_response(SIM908_RESPONSE_GPS_PULL))) {				/* GPS pull */
 					_gps_response_tail = _rx_buffer_tail;
 					_gps_response_length = _rx_response_length;
 					_ack_gps_response_flag = SIM908_FLAG_GPS_PULL_OK;
@@ -755,14 +755,14 @@ void _SIM908_callback(char data) {
 					#endif
 			} else
 			if ((_rx_response_length == 4U) &&
-				(_check_response(SIM908_RESPONSE_OK) == true)) {					/* OK */
+				(_check_response(SIM908_RESPONSE_OK) == true)) {			/* OK */
 					_ack_response_flag = SIM908_FLAG_OK;
 					#ifdef DEBUG_SIM908_CALLBACK
 					uart1_send_string("rx:> ok\r\n");
 					#endif
 			} else
 			if ((_rx_response_length == 7U) &&
-				(_check_response(SIM908_RESPONSE_ERROR) == true)) {				/* Error */
+				(_check_response(SIM908_RESPONSE_ERROR) == true)) {			/* Error */
 					_ack_response_flag = SIM908_FLAG_ERROR;
 					#ifdef DEBUG_SIM908_CALLBACK
 					uart1_send_string("rx:> error\r\n");
@@ -770,14 +770,14 @@ void _SIM908_callback(char data) {
 			} else
 			if (((_rx_response_length == 10U) ||
 				(_rx_response_length == 12U)) &&
-				(_check_response(SIM908_RESPONSE_CREG) == true)) {				/* CREG */
+				(_check_response(SIM908_RESPONSE_CREG) == true)) {			/* CREG */
 					EXT_CONNECTION_CREG_FLAG = _char_at(_rx_response_length - 3U, _rx_buffer_tail, _rx_response_length) - '0';	/* Subtracting '0' (0x30) to get the value as an integer */
 					#ifdef DEBUG_SIM908_CALLBACK
 					uart1_send_string("rx:> creg\r\n");
 					#endif
 			} else
 			if ((_rx_response_length == 11U) &&
-				(_check_response(SIM908_RESPONSE_GPS_READY) == true)) {			/* GPS Ready */
+				(_check_response(SIM908_RESPONSE_GPS_READY) == true)) {		/* GPS Ready */
 					_ack_gps_response_flag = SIM908_FLAG_GPS_OK;
 					#ifdef DEBUG_SIM908_CALLBACK
 					uart1_send_string("rx:> gps ready\r\n");
@@ -785,14 +785,14 @@ void _SIM908_callback(char data) {
 			} else
 			if ((_system_running_flag == SIM908_FLAG_WAITING) &&
 				(_rx_response_length == 5U) &&
-				(_check_response(SIM908_RESPONSE_RDY) == true)) {					/* System ready */
+				(_check_response(SIM908_RESPONSE_RDY) == true)) {			/* System ready */
 					_system_running_flag = SIM908_FLAG_RUNNING;
 					#ifdef DEBUG_SIM908_CALLBACK
 					uart1_send_string("rx:> rdy\r\n");
 					#endif
 			}
 			else if ((_rx_response_length == 4U) &&
-				(_check_response(SIM908_RESPONSE_AT) == true)) {					/* Sync AT cmd */
+				(_check_response(SIM908_RESPONSE_AT) == true)) {			/* Sync AT cmd */
 					_rx_response_length = 0U;
 					#ifdef DEBUG_SIM908_CALLBACK
 					uart1_send_string("rx:> at\r\n");

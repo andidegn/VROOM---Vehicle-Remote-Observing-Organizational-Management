@@ -2,7 +2,7 @@
  * @file tc72.h
  *
  * @author Kenneth René Jensen
- * @version 0.3
+ * @version 0.4
  * @defgroup tc72 TC72_driver
  * @{
 	@ingroup sensors

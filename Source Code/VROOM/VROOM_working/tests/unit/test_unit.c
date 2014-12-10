@@ -7,7 +7,6 @@
  * @{
 		Unit test for temperature sensor 
  * @}
- * @note Complies MISRA 2004 standards
  *************************************************************************/
 
 #include "test_unit.h"

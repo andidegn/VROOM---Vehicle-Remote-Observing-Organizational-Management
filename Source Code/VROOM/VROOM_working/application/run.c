@@ -3,6 +3,7 @@
  *
  * @created 05-09-2014 08:13:16
  * @author Andi Degn
+ * @author Kenneth René Jensen
  * @defgroup main Main file
  *************************************************************************/
 #include <avr/interrupt.h>
@@ -195,5 +196,5 @@ int main (void)
 		}
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
-	while (1);
+	while (1){}
 }

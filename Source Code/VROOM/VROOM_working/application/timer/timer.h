@@ -1,10 +1,11 @@
 /********************************************//**
 @file timer.h
 @author: Kenneth René Jensen
-@Version: 0.4
+@Version: 0.5
 @defgroup timer Timer
 @{
-	Setup of timer 1 to CTC mode for starting scheduler.
+	@brief Setup of timer 1 to CTC mode for starting scheduler.
+	@note Complies MISRA 2004 standards
 @}
 ************************************************/
 

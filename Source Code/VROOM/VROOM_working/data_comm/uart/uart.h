@@ -19,6 +19,7 @@
 		+ TX: PD3
 	@defgroup uart_pub Public
 	@defgroup uart_priv Private
+	@note Complies MISRA 2004 standards
  * @}
  *************************************************************************/
 

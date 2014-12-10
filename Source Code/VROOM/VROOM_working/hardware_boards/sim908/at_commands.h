@@ -3,13 +3,14 @@
  *
  * @created 01-10-2014 00:20:07
  * @author Andi Degn
+ * @author Kenneth René Jensen
  * @version 0.8
  * @defgroup at AT Commands
  * @{
 	@ingroup hardware_boards
 	@brief This is a header containing all the most
 	relevant AT commands for this system
-	@note NOT YET Complies MISRA 2004 standards
+	@note Complies MISRA 2004 standards
  * @}
  *************************************************************************/
 

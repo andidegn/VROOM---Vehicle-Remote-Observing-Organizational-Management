@@ -2,12 +2,11 @@
 @file test_module_sensors.c
 @author: Kenneth René Jensen
 @Version: 0.1
-@defgroup test Module_test_sensors
+@defgroup test Module Test - Sensors
 @{
 	This is a test for for the sensor module consisting of TC72 temperature sensor and accelerometer using SPI.
 	The module test uses the LCD display to visualize the sensors output.
 @}
-@note NOT YET Complies MISRA 2004 standards
 ************************************************/
 #include <stdlib.h>
 #include "test_module_sensors.h"

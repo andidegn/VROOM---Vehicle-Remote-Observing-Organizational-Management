@@ -2,16 +2,16 @@
  * @file accident_data.h
  *
  * @author Kenneth René Jensen
- * @version 0.7
+ * @version 0.8
  * @defgroup ac_dat Accident Data
  * @{
 	@ingroup accident_logic
 	@brief This is the data for an Accident report.
 	Comply eCall standards for MSD data structure.
-	@note NOT YET Complies MISRA 2004 standards
+	@note Complies MISRA 2004 standards
 	@defgroup ac_dat_pub Public
 	@defgroup ac_dat_priv Private
-* @}
+ * @}
  *************************************************************************/
 
 #ifndef ACCIDENT_DATA_H_

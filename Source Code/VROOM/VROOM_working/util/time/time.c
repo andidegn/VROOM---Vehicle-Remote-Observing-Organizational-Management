@@ -1,22 +1,26 @@
-/*
- * time.c
- * Created: 20-10-2014 13:25:46
- */ 
-
+ /**********************************************************************//**
+ * @file time.c
+ *************************************************************************/
 #include "time.h"
 #include <stdbool.h>
 
 #define EPOCH_YR                1970U
 #define SECS_DAY                86400UL
 
+/** Macro to determine if year is leap year **/
 #define LEAPYEAR(year)          (((year) % 4 == 0) && (((year) % 100 != 0) || ((year) % 400 == 0)))
 
+/** Days per month **/
 const uint8_t DAYS_MONTH[2U][12U] = 
 {
 	{31U, 28U, 31U, 30U, 31U, 30U, 31U, 31U, 30U, 31U, 30U, 31U},
 	{31U, 29U, 31U, 30U, 31U, 30U, 31U, 31U, 30U, 31U, 30U, 31U}
 };
 
+/**********************************************************************//**
+ * @ingroup time
+ * Calculates UTC seconds since EPOCH 
+ **************************************************************************/
 uint32_t calc_UTC_seconds(FIXED_TIME *buf) 
 { 
     volatile uint8_t _is_leap_year = LEAPYEAR((int16_t)(buf->year)) ? 1U : 0U;

@@ -3,12 +3,12 @@
  *
  * @author Andi Degn
  * @author Kenneth René Jensen
- * @version 0.1
+ * @version 0.2
  * @defgroup ac_det Accident Detection
  * @{
 	@ingroup accident_logic
 	@brief This file holds the logic for detecting an accident
-	@note NOT YET Complies MISRA 2004 standards
+	@note Complies MISRA 2004 standards
 	@defgroup ac_det_pub Public
 	@defgroup ac_det_priv Private
  * @}

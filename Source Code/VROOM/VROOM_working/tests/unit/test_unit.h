@@ -7,7 +7,6 @@
 	This is the unit test platform for all relevant functions
 	(including arithmetic) in the VROOM system.
 @}
-@note Complies MISRA 2004 standards
  *************************************************************************/
 
 #ifndef UNIT_TEST_H_

@@ -2,7 +2,7 @@
  * @file vroom_config.h
  * @author: Andi Degn
  * @author: Kenneth René Jensen
- * @Version: 0.6
+ * @Version: 0.7
  *
  * @defgroup accident_logic Accident Logic
  * @defgroup data_communication Data Communication
@@ -13,9 +13,9 @@
  *
  * @defgroup vroom_cfg Vroom Config
  * @{
-	 Configuration file containing all adjustment and setup parameters
+	 @brief Configuration file containing all adjustment and setup parameters
 	 for the whole system.
-	 @note NOT YET Complies MISRA 2004 standards
+	 @note Complies MISRA 2004 standards
  * @}
  *************************************************************************/
 
@@ -26,25 +26,25 @@
 #define NO 0
 #define ANDI_TEST		NO
 #define KENNETH_TEST	YES
-#define DEBUG_UART_ENABLE	/* uart1 (PD2/PD3) is used for debugging */
-#define DEBUG_UART_ECHO
-/* #define DEBUG_SIM908_CALLBACK */
-/* #define DEBUG_SIM908_CALLBACK_NOT_CAUGHT */
-#define DEBUG_LCD_ENABLE	/* LCD should be connected to PORT L */
+// #define DEBUG_UART_ENABLE		/* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */
+// #define DEBUG_UART_ECHO 			/* Gives an echo from UART0 to UART1 */
+// #define DEBUG_SIM908_CALLBACK 
+// #define DEBUG_SIM908_CALLBACK_NOT_CAUGHT
+#define DEBUG_LCD_ENABLE			/* LCD should be connected to PORT L */
 
 /* #define DEBUG_TASK_MEASURE */
 #ifdef DEBUG_TASK_MEASURE
-#define DEBUG_ID_SIM908_START_MODULE					3U
-#define DEBUG_ID_SIM908_CMD_SEND						8U
-#define DEBUG_ID_SIM908_WAIT_FOR_RESPONSE				1U
-#define DEBUG_ID_SIM908_CALLBACK						5U
+#define DEBUG_ID_SIM908_START_MODULE		3U
+#define DEBUG_ID_SIM908_CMD_SEND			8U
+#define DEBUG_ID_SIM908_WAIT_FOR_RESPONSE	1U
+#define DEBUG_ID_SIM908_CALLBACK			5U
 
-#define DEBUG_ID_SENSOR_SCHEDULER_TEMP_REQ				10U
-#define DEBUG_ID_SENSOR_SCHEDULER_ACC_REQ				11U
-#define DEBUG_ID_SENSOR_SCHEDULER_READ			12U
+#define DEBUG_ID_SENSOR_SCHEDULER_TEMP_REQ	10U
+#define DEBUG_ID_SENSOR_SCHEDULER_ACC_REQ	11U
+#define DEBUG_ID_SENSOR_SCHEDULER_READ		12U
 
 #define DEBUG_ID_ACCIDENT_CRASH_DETECTION	14U
-#define DEBUG_ID_ACCIDENT_FIRE_DETECTION		15U
+#define DEBUG_ID_ACCIDENT_FIRE_DETECTION	15U
 #endif
 
 /* #define CONFIG_ENABLE_EMERGENCY_PHONE_CALL */
@@ -78,7 +78,6 @@
  * @{
  *************************************************************************/
 #define STK600
-/* Uncomment for Arduino default port settings */
 /* #define ARDUINO_ATMEGA2560_DEFAULT */
 #ifdef STK600
  #define CONFIG_PORT_DRIVER_PORT			PORTE
@@ -117,7 +116,6 @@
  *************************************************************************/
 #define CONFIG_PORT_R2R						PORTH
 /** @} */
-/** @} */
 
 /**********************************************************************//**
  * @ingroup vroom_cfg
@@ -125,7 +123,7 @@
  * @defgroup vc_adp Accident detection parameters
  * @{
  *************************************************************************/
-#define CONFIG_SCHEDULER_FREQUENCY			TIMER_100HZ	/**> Frequency of which the sensors are read in Hz */
+#define CONFIG_SCHEDULER_FREQUENCY			TIMER_50HZ	/**> Frequency of which the sensors are read in Hz */
 
 #define CONFIG_ALARM_CRASH_NO_OF_READINGS	5U			/**> Length of acceleration peek */
 #define CONFIG_ALARM_CRASH_TRIGGER_VALUE	400			/**> Total acceleration [G] in 1/100 resolution */

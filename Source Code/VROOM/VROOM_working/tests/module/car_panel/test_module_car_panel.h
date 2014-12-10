@@ -1,11 +1,12 @@
-/*
- * test_module_car_panel.h
- *
- * Created: 28-11-2014 08:50:34
- *  Author: Kenneth
- */ 
-
-
+/********************************************//**
+@file test_module_car_panel.h
+@author: Kenneth René Jensen
+@Version: 0.1
+@defgroup test Module Test - Car Panel
+@{
+	Test for for the Car Panel module
+@}
+************************************************/
 #ifndef TEST_MODULE_CAR_PANEL_H_
 #define TEST_MODULE_CAR_PANEL_H_
 

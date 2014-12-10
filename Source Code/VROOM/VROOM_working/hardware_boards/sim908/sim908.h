@@ -4,11 +4,12 @@
  * @created 25-09-2014 13:09:36
  * @author Andi Degn
  * @author Kenneth René Jensen
- * @version 0.5
+ * @version 0.6
  * @defgroup sim908 SIM908 GSM/GPRS/GPS
  * @{
 	@ingroup hardware_boards
-	@brief This is the driver for GSM/GPRS/GPS module sim908
+	@brief Driver for GSM/GPRS/GPS module sim908
+	@note Complies MISRA 2004 standards
 	@defgroup sim908_pub Public
 	@defgroup sim908_priv Private
  * @}

@@ -26,13 +26,13 @@
 #define NO 0
 #define ANDI_TEST		YES
 #define KENNETH_TEST	NO
-// #define DEBUG_UART_ENABLE		/* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */
-// #define DEBUG_UART_ECHO 			/* Gives an echo from UART0 to UART1 */
+ #define DEBUG_UART_ENABLE		/* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */
+ #define DEBUG_UART_ECHO 			/* Gives an echo from UART0 to UART1 */
 // #define DEBUG_SIM908_CALLBACK
 // #define DEBUG_SIM908_CALLBACK_NOT_CAUGHT
 #define DEBUG_LCD_ENABLE			/* LCD should be connected to PORT L */
 
-/* #define DEBUG_TASK_MEASURE */
+#define DEBUG_TASK_MEASURE
 #ifdef DEBUG_TASK_MEASURE
 #define DEBUG_ID_SIM908_START_MODULE		3U
 #define DEBUG_ID_SIM908_CMD_SEND			8U
@@ -78,7 +78,6 @@
  * @{
  *************************************************************************/
 #define STK600
-/* #define ARDUINO_ATMEGA2560_DEFAULT */
 #ifdef STK600
  #define CONFIG_PORT_DRIVER_PORT			PORTE
  #define CONFIG_PORT_GSM_PORT				PORTE

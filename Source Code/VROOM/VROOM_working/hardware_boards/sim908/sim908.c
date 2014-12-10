@@ -167,21 +167,21 @@ void SIM908_start(void)
 	while (_system_running_flag == SIM908_FLAG_WAITING){}
 
 	/* Set baud rate to the host baud rate */
-	SIM908_cmd(AT_BAUD_115K2, true);
+	while(!SIM908_cmd(AT_BAUD_115K2, true));
 
 	/* Synchronizing baud rate */
-	SIM908_cmd(AT_DIAG_TEST, true);
+	while(!SIM908_cmd(AT_DIAG_TEST, true));
 
 	/* Disable Echo */
-	SIM908_cmd(AT_DIAG_ECHO_DISABLE, true);
+	while(!SIM908_cmd(AT_DIAG_ECHO_DISABLE, true));
 
 	/* Enable CREG unsolicited result code */
-	SIM908_cmd(AT_ENABLE_CREG, true);
+	while(!SIM908_cmd(AT_ENABLE_CREG, true));
 
 	#ifdef CONFIG_PIN
 		/* wait for +CPIN: SIM PIN - is going to be deleted */
 		_delay_ms(1000);
-		SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN), true);
+		while(!SIM908_cmd(AT_ENTER_SIM_PIN(CONFIG_PIN), true));
 	#endif
 
 	_setup_GSM();
@@ -262,11 +262,11 @@ void set_MSD_data(uint32_t *__UTC_sec, int32_t *__latitude, int32_t *__longitude
 void call_PSAP(void)
 {
 	_wait_for_connection();
-	
-	/* Enable incoming calls */
-	SIM908_cmd(AT_ENABLE_INCOMING_CALLS, true);
 
-	SIM908_cmd(AT_CALL_DIAL(CONFIG_EMERGENCY_PHONE_NUMBER), true);
+	/* Enable incoming calls */
+	while(!SIM908_cmd(AT_ENABLE_INCOMING_CALLS, true));
+
+	while(!SIM908_cmd(AT_CALL_DIAL(CONFIG_EMERGENCY_PHONE_NUMBER), true));
 }
 
 /**********************************************************************//**
@@ -294,11 +294,11 @@ void send_MSD(const char *__vroom_id)
     strcat(filename, __vroom_id);
     strcat(filename, ").vroom\"");
 
-    SIM908_cmd(filename, true);
+    while(!SIM908_cmd(filename, true));
     free(filename);
 
 	_ftp_sending_flag = SIM908_FLAG_FTP_SENDING;
-	
+
 	/***********************************************************************************/
 	/* THIS CHECK DOES NOT WORK!!! - Needs to check for error response "+CME ERROR: 3" */
 	/***********************************************************************************/
@@ -336,12 +336,13 @@ void send_MSD(const char *__vroom_id)
     } while ((!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_OPEN)) && (_retry_ctr-- > 0));
 
     _retry_ctr = RETRY_ATTEMPTS;
+	/* There needs to be a small delay in order to let the connection prepare for closure */
     _delay_ms(100);
     do {
 	    SIM908_cmd(AT_FTP_PUT_CLOSE_SESSION, true);
-    } while ((_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_CLOSE) != true ) && (_retry_ctr-- > 0));
+    } while ((!_wait_response(&_ack_ftp_response_flag, SIM908_FLAG_FTP_PUT_CLOSE)) && (_retry_ctr-- > 0));
 
-    SIM908_cmd(AT_FTP_CLOSE_BEARER1, true);
+    while(!SIM908_cmd(AT_FTP_CLOSE_BEARER1, true));
 
 	_ftp_sending_flag = SIM908_FLAG_WAITING;
 }
@@ -357,13 +358,13 @@ void send_MSD(const char *__vroom_id)
 static void _setup_GSM(void)
 {
 	/* Enable automatic answer */
-	SIM908_cmd(AT_DIAG_AUTO_ANSWER("1"), true);
-		
+	while(!SIM908_cmd(AT_DIAG_AUTO_ANSWER("1"), true));
+
 	/* Setup phone functionality */
-	SIM908_cmd(AT_FULL_FUNCTIONALITY, true);
+	while(!SIM908_cmd(AT_FULL_FUNCTIONALITY, true));
 
 	/* Forbid incoming calls */
-	SIM908_cmd(AT_FORBID_INCOMING_CALLS, true);
+	while(!SIM908_cmd(AT_FORBID_INCOMING_CALLS, true));
 }
 
 /**********************************************************************//**
@@ -378,10 +379,10 @@ static void _setup_GPS(void)
 {
 	while(_ack_gps_response_flag == SIM908_FLAG_WAITING){}
 	/* Enable GPS */
-	SIM908_cmd(AT_GPS_POWER_ON, true);
+	while(!SIM908_cmd(AT_GPS_POWER_ON, true));
 
 	/* Set GPS reset to autonomous */
-	SIM908_cmd(AT_GPS_RST_AUTONOMY, true);
+	while(!SIM908_cmd(AT_GPS_RST_AUTONOMY, true));
 }
 
 /**********************************************************************//**
@@ -409,22 +410,22 @@ static void _setup_GPS(void)
 static void _setup_GPRS_FTP(void)
 {
 	/* Set bearer parameters */
-	SIM908_cmd(AT_FTP_BEARER1_APN(AT_CONTYPE_GPRS), true);
-	SIM908_cmd(AT_FTP_BEARER1_APN(CONFIG_APN), true);
+	while(!SIM908_cmd(AT_FTP_BEARER1_APN(AT_CONTYPE_GPRS), true));
+	while(!SIM908_cmd(AT_FTP_BEARER1_APN(CONFIG_APN), true));
 
 	/* Use bearer profile 1 */
-	SIM908_cmd(AT_FTP_USE_PROFILE1, true);
+	while(!SIM908_cmd(AT_FTP_USE_PROFILE1, true));
 
 	/* FTP login */
-	SIM908_cmd(AT_FTP_SET_SERVER_ADDRESS(CONFIG_FTP_SERVER_ADDRESS), true);
-	SIM908_cmd(AT_FTP_SET_CONTROL_PORT(CONFIG_FTP_PORT), true);
-	SIM908_cmd(AT_FTP_SET_USER_NAME(CONFIG_FTP_USER), true);
-	SIM908_cmd(AT_FTP_SET_PASSWORD(CONFIG_FTP_PW), true);
+	while(!SIM908_cmd(AT_FTP_SET_SERVER_ADDRESS(CONFIG_FTP_SERVER_ADDRESS), true));
+	while(!SIM908_cmd(AT_FTP_SET_CONTROL_PORT(CONFIG_FTP_PORT), true));
+	while(!SIM908_cmd(AT_FTP_SET_USER_NAME(CONFIG_FTP_USER), true));
+	while(!SIM908_cmd(AT_FTP_SET_PASSWORD(CONFIG_FTP_PW), true));
 
 	/* Set put information */
-	SIM908_cmd(AT_FTP_SET_DATA_TYPE_BINARY, true);
-	SIM908_cmd(AT_FTP_PUT_FILE_STORING, true);
-	SIM908_cmd(AT_FTP_PUT_FILE_PATH(CONFIG_FTP_FILE_PATH), true);
+	while(!SIM908_cmd(AT_FTP_SET_DATA_TYPE_BINARY, true));
+	while(!SIM908_cmd(AT_FTP_PUT_FILE_STORING, true));
+	while(!SIM908_cmd(AT_FTP_PUT_FILE_PATH(CONFIG_FTP_FILE_PATH), true));
 }
 
 /**********************************************************************//**
@@ -465,7 +466,7 @@ static void _GPS_enable(void)
  *************************************************************************/
 static void _wait_for_connection(void) {
 	while ((EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED_HOME_NETWORK) && (EXT_CONNECTION_CREG_FLAG != CREG_REGISTERED_ROAMING)) {
-		SIM908_cmd(AT_CONN_NETWORK_REGISTRATION_STATUS, true);
+		while(!SIM908_cmd(AT_CONN_NETWORK_REGISTRATION_STATUS, true));
 		_delay_ms(CONNECTION_RETRY_DELAY_IN_MS);
 	}
 }
@@ -486,7 +487,7 @@ static bool _wait_response(volatile uint8_t *__flag, uint8_t __ok_def) {
 	scheduler_pause();
 	volatile bool _ret = false;
 	while(*__flag == SIM908_FLAG_WAITING) {
-		_delay_ms(100);
+		_delay_ms(10);
 	}
 	if (*__flag == __ok_def) {
 		_ret = true;
@@ -576,7 +577,7 @@ static uint32_t _set_UTC_sec(const char *__utc_raw)
 	t.hour = (uint8_t)atoi(hour);
 	t.min = (uint8_t)atoi(minute);
 	t.sec = (uint8_t)atoi(second);
-	
+
 	return calc_UTC_seconds(&t);
 }
 
@@ -606,7 +607,7 @@ static int32_t _get_lat_long(const char *__lat_long_raw) {
 
     /* gg + (mm.mmmmmm * 60 / 100) / 100 = gg.mmmmmmmm */
     double __decimal_degree = ((double)(atoi(lat_long_deg)) + atof(&__lat_long_raw[lat_long_i]) / 60.0);
-  
+
     /* From decimal degrees to milliarcseconds */
     return (int32_t)((double)(__decimal_degree * 3600000.0 + 0.5));
 }

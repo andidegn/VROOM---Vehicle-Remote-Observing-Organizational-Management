@@ -158,18 +158,18 @@ int main (void)
 			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM || EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
 				scheduler_halt();
-				ad_emergency_alarm();	
-				
+				ad_emergency_alarm();
+
 				/* Enable cancel button in case of false alarm */
 				car_panel_set_cancel_button_state(true);
 			}
-			
+
 			else if (EXT_EMERGENCY_FLAG == EMERGENCY_FALSE_ALARM)
 			{
 				scheduler_resume(true);
 				EXT_EMERGENCY_FLAG = EMERGENCY_NO_ALARM;
-			}		
-			
+			}
+
 			#ifdef DEBUG_LCD_ENABLE
 				scheduler_acc_get_last_readings(_acc_buffer);
 

@@ -1,11 +1,10 @@
 /********************************************//**
 @file timer.c
 @author: Kenneth René Jensen
-@Version: 0.5
+@Version: 0.4
 @defgroup timer Timer
 @{
-	@brief Setup of timer 1 to CTC mode for starting scheduler.
-	@note Complies MISRA 2004 standards
+	Setup of timer 1 to CTC mode for starting scheduler.
 @}
 ************************************************/
 #include <avr/interrupt.h>
@@ -118,6 +117,10 @@ void timer_start(void)
 	TIMSK1 |= _BV(OCIE1A);
 }
 
+/**********************************************************************//**
+ * @ingroup timer
+ * @brief Releases the scheduler when the timer hits the TOP value
+ *************************************************************************/
 ISR(TIMER1_COMPA_vect)
 {
 	scheduler_release();

@@ -261,6 +261,7 @@ namespace Accelerometer_Analyzer {
             try {
                 _file_path = file_path;
                 _set_title(file_path);
+                _max_value = 0;
             } catch (Exception ex) {
                 MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
             }
@@ -279,7 +280,7 @@ namespace Accelerometer_Analyzer {
             _readingIndex = 0;
             _set_series_state(true);
             while ((line = sr.ReadLine()) != null) {
-                process_data(_get_vector_from_csv(line));
+                process_data(_get_vector_from_csv(line) / 1000);
             }
             sr.Dispose();
             _set_title(_file_path + " - END OF FILE!");

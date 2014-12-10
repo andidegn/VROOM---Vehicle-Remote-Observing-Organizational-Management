@@ -230,9 +230,9 @@
             this.lbl_max_value_title.BackColor = System.Drawing.Color.White;
             this.lbl_max_value_title.Location = new System.Drawing.Point(940, 267);
             this.lbl_max_value_title.Name = "lbl_max_value_title";
-            this.lbl_max_value_title.Size = new System.Drawing.Size(56, 13);
+            this.lbl_max_value_title.Size = new System.Drawing.Size(52, 13);
             this.lbl_max_value_title.TabIndex = 21;
-            this.lbl_max_value_title.Text = "Max v-len:";
+            this.lbl_max_value_title.Text = "Max Acc:";
             this.lbl_max_value_title.DoubleClick += new System.EventHandler(this.lbl_max_value_Click);
             // 
             // grp_axis

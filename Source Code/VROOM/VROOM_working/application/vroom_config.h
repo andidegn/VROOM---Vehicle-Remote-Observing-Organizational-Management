@@ -24,8 +24,8 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST		YES
-#define KENNETH_TEST	NO
+#define ANDI_TEST		NO
+#define KENNETH_TEST	YES
  #define DEBUG_UART_ENABLE		/* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */
  #define DEBUG_UART_ECHO 			/* Gives an echo from UART0 to UART1 */
 // #define DEBUG_SIM908_CALLBACK
@@ -153,7 +153,7 @@
 #define CONFIG_MSD_VEHICLE_CLASS		AD_VEHICLE_CLASS_M(1)	/**> M1 = No more than eight seats in addition to the driver’s seat, and having a maximum mass not exceeding 3.5 tons */
 #define CONFIG_MSD_FUEL_TYPE			AD_FUEL_TYPE_GASOLINE
 #define CONFIG_MSD_VIN					"W0L000036V1940069"
-#define CONFIG_MSD_OPTIONAL_DATA_SIZE	102U						/**> Calculated size based on total MSD size - compulsory data */
+#define CONFIG_MSD_OPTIONAL_DATA_SIZE	102U					/**> Calculated size based on total MSD size - compulsory data */
 /** @} */
 
 /**********************************************************************//**
@@ -200,7 +200,7 @@
 #define CONFIG_FTP_USER					"VROOM"
 #define CONFIG_FTP_PW					"6198fg(/G6F/&5(!(!8gf87gMF."
 #define CONFIG_FTP_FILE_PATH			"/"
-#define CONFIG_FTP_FILE_SIZE			"140" /* no of bytes */
+#define CONFIG_FTP_FILE_SIZE			"140"			/* no of bytes */
 /** @} */
 
 /**********************************************************************//**

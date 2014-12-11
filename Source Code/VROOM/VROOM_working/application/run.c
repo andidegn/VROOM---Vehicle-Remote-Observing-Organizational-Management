@@ -48,14 +48,14 @@ int main (void)
 
 	#if UNIT_TEST
 		#include "../tests/unit/test_unit.h"
-		char* result = run_all_test();
+		char *result = run_all_test();
 
 		#ifdef DEBUG_LCD_ENABLE
 			lcd_clrscr();
 			lcd_gotoxy(0,0);
 			lcd_puts(result);
 			lcd_gotoxy(0,1);
-			lcd_puts("Tests run");
+			lcd_puts("Tests run: ");
 			lcd_puts(itoa(tests_run, buf, 10));
 		#endif /* DEBUG_LCD_ENABLE */
 	#endif /* UNIT_TEST */
@@ -154,7 +154,6 @@ int main (void)
 			? car_panel_set_status(STATUS_GREEN) : car_panel_set_status(STATUS_RED);
 
 			/* Checks the emergency flags */
-		//	if (EXT_EMERGENCY_FLAG != EMERGENCY_NO_ALARM) /* Keeps sending after 1 alarm has been triggered. ONLY FOR STABILITY TESTING */
 			if (EXT_EMERGENCY_FLAG == EMERGENCY_AUTO_ALARM || EXT_EMERGENCY_FLAG == EMERGENCY_MANUAL_ALARM)
 			{
 				scheduler_halt();
@@ -197,4 +196,6 @@ int main (void)
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
 	while (1){}
+		
+	return 0;
 }

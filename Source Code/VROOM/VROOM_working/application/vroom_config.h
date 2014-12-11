@@ -47,7 +47,7 @@
 #define DEBUG_ID_ACCIDENT_FIRE_DETECTION	15U
 #endif
 
-/* #define CONFIG_ENABLE_EMERGENCY_PHONE_CALL */
+#define CONFIG_ENABLE_EMERGENCY_PHONE_CALL
 
 /**********************************************************************//**
  * @ingroup vroom_cfg
@@ -77,6 +77,12 @@
  * @defgroup vc_port_sim908 SIM908
  * @{
  *************************************************************************/
+/**********************************************************************//**
+ * @ingroup spi_priv
+ * Defines for the ports and pins used by the SPI
+ * @defgroup vc_port_spi SPI
+ * @{
+ **************************************************************************/
 #define STK600
 #ifdef STK600
  #define CONFIG_PORT_DRIVER_PORT			PORTE
@@ -114,6 +120,7 @@
  * @{
  *************************************************************************/
 #define CONFIG_PORT_R2R						PORTH
+/** @} */
 /** @} */
 
 /**********************************************************************//**
@@ -167,6 +174,7 @@
 #define CONFIG_PSAP_NUMBER_EUROPE		"112"
 #define CONFIG_PSAP_NUMBER_TEST_KENNETH	"60192949" /* Only for testing */
 #define CONFIG_PSAP_NUMBER_TEST_ANDI	"60257898" /* Only for testing */
+#define CONFIG_PSAP_NUMBER_TEST_KIM		"28195667" /* Only for testing */
 /** @} */
 
 /**********************************************************************//**

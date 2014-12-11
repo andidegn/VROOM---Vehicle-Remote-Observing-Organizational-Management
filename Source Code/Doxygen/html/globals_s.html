@@ -78,7 +78,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
       <li><a href="globals_vars.html"><span>Variables</span></a></li>
-      <li><a href="globals_type.html"><span>Typedefs</span></a></li>
       <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
       <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
       <li><a href="globals_defs.html"><span>Macros</span></a></li>
@@ -130,7 +129,7 @@ $(document).ready(function(){initNavTree('globals_s.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -144,24 +143,39 @@ $(document).ready(function(){initNavTree('globals_s.html','');});
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
 <li>scheduler_acc_get_last_readings()
-: <a class="el" href="group__ss__pub.html#ga6052acd831c929175f5d5a2ebafdfb67">sensor_scheduler.c</a>
-, <a class="el" href="group__ss__pub.html#ga6052acd831c929175f5d5a2ebafdfb67">sensor_scheduler.h</a>
+: <a class="el" href="group__scheduler__pub.html#ga6052acd831c929175f5d5a2ebafdfb67">scheduler.c</a>
+, <a class="el" href="group__scheduler__pub.html#ga6052acd831c929175f5d5a2ebafdfb67">scheduler.h</a>
 </li>
 <li>scheduler_acc_get_last_readings_sum()
-: <a class="el" href="group__ss__pub.html#ga8a00bf4e51efe77777a3cd787dfbc6f1">sensor_scheduler.h</a>
-, <a class="el" href="group__ss__pub.html#ga8a00bf4e51efe77777a3cd787dfbc6f1">sensor_scheduler.c</a>
+: <a class="el" href="group__scheduler__pub.html#ga8a00bf4e51efe77777a3cd787dfbc6f1">scheduler.h</a>
+, <a class="el" href="group__scheduler__pub.html#ga8a00bf4e51efe77777a3cd787dfbc6f1">scheduler.c</a>
+</li>
+<li>scheduler_halt()
+: <a class="el" href="group__scheduler__pub.html#gae928f967b0ac7c3c3302378179e0423b">scheduler.c</a>
+, <a class="el" href="group__scheduler__pub.html#gae928f967b0ac7c3c3302378179e0423b">scheduler.h</a>
+</li>
+<li>scheduler_pause()
+: <a class="el" href="group__scheduler__pub.html#gafbe9f4759612aa67d34e433cdbb209c2">scheduler.h</a>
+, <a class="el" href="group__scheduler__pub.html#gafbe9f4759612aa67d34e433cdbb209c2">scheduler.c</a>
 </li>
 <li>scheduler_release()
-: <a class="el" href="group__ss__pub.html#ga08241049a9228fe3dd6943629796b077">sensor_scheduler.c</a>
-, <a class="el" href="group__ss__pub.html#ga08241049a9228fe3dd6943629796b077">sensor_scheduler.h</a>
+: <a class="el" href="group__scheduler__pub.html#ga08241049a9228fe3dd6943629796b077">scheduler.c</a>
+, <a class="el" href="group__scheduler__pub.html#ga08241049a9228fe3dd6943629796b077">scheduler.h</a>
+</li>
+<li>scheduler_resume()
+: <a class="el" href="group__scheduler__pub.html#ga7932262718483488007e6c9f4bd12aa1">scheduler.c</a>
+, <a class="el" href="group__scheduler__pub.html#ga7932262718483488007e6c9f4bd12aa1">scheduler.h</a>
 </li>
 <li>scheduler_start()
-: <a class="el" href="group__ss__pub.html#gad7757661991663ae99dbac66880abd9d">sensor_scheduler.h</a>
-, <a class="el" href="group__ss__pub.html#gad7757661991663ae99dbac66880abd9d">sensor_scheduler.c</a>
+: <a class="el" href="group__scheduler__pub.html#gad7757661991663ae99dbac66880abd9d">scheduler.c</a>
+, <a class="el" href="group__scheduler__pub.html#gad7757661991663ae99dbac66880abd9d">scheduler.h</a>
+</li>
+<li>SCHEDULER_STATE
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cc">scheduler.c</a>
 </li>
 <li>scheduler_temp_get_last_reading()
-: <a class="el" href="group__ss__pub.html#ga050a2bb492b620922ab7b0ade776c88a">sensor_scheduler.c</a>
-, <a class="el" href="group__ss__pub.html#ga050a2bb492b620922ab7b0ade776c88a">sensor_scheduler.h</a>
+: <a class="el" href="group__scheduler__pub.html#ga050a2bb492b620922ab7b0ade776c88a">scheduler.c</a>
+, <a class="el" href="group__scheduler__pub.html#ga050a2bb492b620922ab7b0ade776c88a">scheduler.h</a>
 </li>
 <li>SCK
 : <a class="el" href="group__spi__ports.html#ga2dd443a4430713d325ab86895a4a45eb">spi.c</a>
@@ -178,26 +192,20 @@ $(document).ready(function(){initNavTree('globals_s.html','');});
 <li>send_MSD()
 : <a class="el" href="group__sim908__pub.html#gaebecffeacebdebbbd47ef4948bb7ad6e">sim908.c</a>
 </li>
-<li>SENSOR_STATE
-: <a class="el" href="sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32b">sensor_scheduler.c</a>
-</li>
 <li>sensors_init()
-: <a class="el" href="test__module__sensors_8c.html#a41e7d1dd0cac7bd20fc32a6ebc87a985">test_module_sensors.c</a>
-, <a class="el" href="test__module__sensors_8h.html#ac5ec1d578591899e43c3515d05e573b7">test_module_sensors.h</a>
+: <a class="el" href="group__test__sensors__pub.html#gac5ec1d578591899e43c3515d05e573b7">test_module_sensors.c</a>
 </li>
 <li>sensors_print_data()
-: <a class="el" href="test__module__sensors_8c.html#a6c2e124c83dbdfebeeef76f755b86c19">test_module_sensors.c</a>
-, <a class="el" href="test__module__sensors_8h.html#a6c2e124c83dbdfebeeef76f755b86c19">test_module_sensors.h</a>
+: <a class="el" href="group__test__sensors__pub.html#ga6c2e124c83dbdfebeeef76f755b86c19">test_module_sensors.c</a>
 </li>
 <li>sensors_read_data()
-: <a class="el" href="test__module__sensors_8c.html#a011bc1b58d86e4e944192741f1f5ecc9">test_module_sensors.c</a>
-, <a class="el" href="test__module__sensors_8h.html#a011bc1b58d86e4e944192741f1f5ecc9">test_module_sensors.h</a>
+: <a class="el" href="group__test__sensors__pub.html#ga011bc1b58d86e4e944192741f1f5ecc9">test_module_sensors.c</a>
 </li>
 <li>set_MSD_data()
 : <a class="el" href="group__sim908__pub.html#gaa4354342365be983fac1afb74581bc82">sim908.c</a>
 </li>
 <li>SIM908_cmd()
-: <a class="el" href="group__sim908__pub.html#gabdb3613d6d6f16a9c330a6fb40b17a9c">sim908.c</a>
+: <a class="el" href="group__sim908__pub.html#ga99719f2eb74227cd2a5bd1ed2be6269a">sim908.c</a>
 </li>
 <li>SIM908_FLAG_ERROR
 : <a class="el" href="group__sim908__flag.html#gab20bbec7daa37e8b9e9b22d581762875">sim908.c</a>
@@ -347,25 +355,31 @@ $(document).ready(function(){initNavTree('globals_s.html','');});
 : <a class="el" href="group__spi__ports.html#ga88f7782e210e61586baf33b93240d905">spi.c</a>
 </li>
 <li>state_acc_init
-: <a class="el" href="sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32ba60c88d1b54175e6b6793b0e4b4bb735d">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca60c88d1b54175e6b6793b0e4b4bb735d">scheduler.c</a>
 </li>
 <li>state_acc_read
-: <a class="el" href="sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32ba310c4b124c47de0cbde30bc4b3491426">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca310c4b124c47de0cbde30bc4b3491426">scheduler.c</a>
+</li>
+<li>state_detect_accident
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544ccadc3049a53612fe74f2337750504875b5">scheduler.c</a>
+</li>
+<li>state_detect_fire
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca6e63ae5720ec47ec7fec36c3efdd460b">scheduler.c</a>
 </li>
 <li>state_idle
-: <a class="el" href="sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32ba83852e30194cd34f1153fc80a58f55bc">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca83852e30194cd34f1153fc80a58f55bc">scheduler.c</a>
 </li>
 <li>state_store_in_buffers
-: <a class="el" href="sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32ba633e136b95011070673da9aebee2f231">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca633e136b95011070673da9aebee2f231">scheduler.c</a>
 </li>
 <li>state_tc72_init
-: <a class="el" href="sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32baa8a78d67277047fb1fbf8776ae3d7ce9">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544ccaa8a78d67277047fb1fbf8776ae3d7ce9">scheduler.c</a>
 </li>
 <li>state_tc72_read
-: <a class="el" href="sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32ba577bbb6707893451bcd281550bc554cf">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca577bbb6707893451bcd281550bc554cf">scheduler.c</a>
 </li>
 <li>state_timer_init
-: <a class="el" href="sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32ba2baa505f23037076b362e32e8431432b">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca2baa505f23037076b362e32e8431432b">scheduler.c</a>
 </li>
 <li>Status
 : <a class="el" href="group__cp__pub.html#ga67a0db04d321a74b7e7fcfd3f1a3f70b">car_panel.h</a>
@@ -386,7 +400,7 @@ $(document).ready(function(){initNavTree('globals_s.html','');});
 : <a class="el" href="group__cp__pub.html#gga67a0db04d321a74b7e7fcfd3f1a3f70bafcc90fbf3efbcd1a77515325b0a1a827">car_panel.h</a>
 </li>
 <li>STK600
-: <a class="el" href="group__sim908__port.html#gac106e87e12d57fa7192e80f670d14619">sim908.h</a>
+: <a class="el" href="group__vc__port__sim908.html#gac106e87e12d57fa7192e80f670d14619">vroom_config.h</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -394,7 +408,7 @@ $(document).ready(function(){initNavTree('globals_s.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:22 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:25 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

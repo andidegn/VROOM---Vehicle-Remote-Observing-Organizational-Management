@@ -1,0 +1,40 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/Tests/unit/test_unit.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/Tests/unit/test_unit.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBmu_assert\fP(message, test)   do { if (!(test)) return message; } while (0)"
+.br
+.ti -1c
+.RI "#define \fBmu_run_test\fP(test)   do { char *message = test(); \fBtests_run\fP++; if (message) return message; } while (0)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBrun_all_test\fP (void)"
+.br
+.RI "\fIRun all unit tests\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "uint16_t \fBtests_run\fP"
+.br
+.RI "\fIextern variable which counts numbers of unit test runs \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

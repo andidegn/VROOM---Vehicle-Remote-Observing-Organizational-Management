@@ -1,0 +1,103 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/R2R_LED/r2r_led.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/R2R_LED/r2r_led.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <avr/io\&.h>\fP
+.br
+\fC#include '\&.\&./\&.\&./application/vroom_config\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBR2R_PORT\fP   \fBCONFIG_PORT_R2R\fP"
+.br
+.ti -1c
+.RI "#define \fBR2R_LED_ON\fP   1"
+.br
+.ti -1c
+.RI "#define \fBR2R_LED_OFF\fP   0"
+.br
+.ti -1c
+.RI "#define \fBR2R_BIT_0\fP   0"
+.br
+.ti -1c
+.RI "#define \fBR2R_BIT_1\fP   1"
+.br
+.ti -1c
+.RI "#define \fBR2R_BIT_2\fP   2"
+.br
+.ti -1c
+.RI "#define \fBR2R_BIT_3\fP   3"
+.br
+.ti -1c
+.RI "#define \fBR2R_LED_0\fP   4"
+.br
+.ti -1c
+.RI "#define \fBR2R_LED_1\fP   5"
+.br
+.ti -1c
+.RI "#define \fBR2R_LED_2\fP   6"
+.br
+.ti -1c
+.RI "#define \fBR2R_LED_3\fP   7"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBr2r_init\fP ()"
+.br
+.ti -1c
+.RI "void \fBr2r_led\fP (uint8_t led, uint8_t state)"
+.br
+.ti -1c
+.RI "void \fBr2r_led_toggle\fP (uint8_t led)"
+.br
+.ti -1c
+.RI "void \fBr2r_led_print\fP (uint8_t value)"
+.br
+.ti -1c
+.RI "void \fBr2r_leds_on\fP ()"
+.br
+.ti -1c
+.RI "void \fBr2r_leds_off\fP ()"
+.br
+.ti -1c
+.RI "void \fBr2r_set_dac\fP (uint8_t __value)"
+.br
+.ti -1c
+.RI "uint8_t \fBr2r_start_task\fP (uint8_t __id)"
+.br
+.RI "\fIStarts a task measure and returns the id of the already running task\&. \fP"
+.ti -1c
+.RI "void \fBr2r_stop_task\fP (uint8_t __prev_id)"
+.br
+.RI "\fITakes the value of the previous task and stops measuring\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+: 03-04-2014 19:26:46 
+.PP
+\fBAuthor:\fP
+.RS 4
+: Andi Degn 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+1\&.2 
+.RE
+.PP
+
+.PP
+Definition in file \fBr2r_led\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

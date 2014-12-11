@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,22 +10,20 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 \fC#include <string\&.h>\fP
 .br
-\fC#include <util/delay\&.h>\fP
-.br
 \fC#include 'accident_data\&.h'\fP
 .br
+\fC#include '\&.\&./application/vroom_config\&.h'\fP
+.br
+\fC#include '\&.\&./application/scheduler/scheduler\&.h'\fP
+.br
 \fC#include '\&.\&./hardware_boards/sim908/sim908\&.h'\fP
-.br
-\fC#include '\&.\&./util/timer/timer\&.h'\fP
-.br
-\fC#include 'accident_detection\&.h'\fP
 .br
 
 .SS "Macros"
 
 .in +1c
 .ti -1c
-.RI "#define \fBBLANK_CHAR\fP   0x20	/**> Define for the space char ' ' */"
+.RI "#define \fBBLANK_CHAR\fP   0x20U	/**> Define for the space char ' ' */"
 .br
 .in -1c
 .SS "Functions"
@@ -40,7 +38,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fIfunction to set the vehicle identification number \fP"
 .ti -1c
-.RI "static void \fB_set_optional_data\fP ()"
+.RI "static void \fB_set_optional_data\fP (void)"
 .br
 .RI "\fIfunction to set further data (e\&.g\&. crash information, number of passengers, temperature) \fP"
 .ti -1c
@@ -61,33 +59,47 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "\fBAT_CONNECTION_STATUS_FLAG\fP \fBEXT_CONNECTION_CREG_FLAG\fP = \fBCREG_NOT_REG_NOT_SEARCHING\fP"
 .br
 .ti -1c
+.RI "float \fBEXT_TEMPERATURE\fP = 0"
+.br
+.ti -1c
+.RI "float \fBEXT_TOTAL_ACCELERATION_AVG\fP = 0"
+.br
+.ti -1c
 .RI "static bool \fB_confidence_in_position\fP"
 .br
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define BLANK_CHAR   0x20	/**> Define for the space char ' ' */"
+.SS "#define BLANK_CHAR   0x20U	/**> Define for the space char ' ' */"
 
 .PP
-Definition at line 12 of file accident_data\&.c\&.
+Definition at line 11 of file accident_data\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "bool _confidence_in_position\fC [static]\fP"
 
 .PP
-Definition at line 20 of file accident_data\&.c\&.
+Definition at line 21 of file accident_data\&.c\&.
 .SS "\fBAT_CONNECTION_STATUS_FLAG\fP EXT_CONNECTION_CREG_FLAG = \fBCREG_NOT_REG_NOT_SEARCHING\fP"
 
 .PP
-Definition at line 17 of file accident_data\&.c\&.
+Definition at line 16 of file accident_data\&.c\&.
 .SS "\fBAD_EMERGENCY_FLAG\fP EXT_EMERGENCY_FLAG = \fBEMERGENCY_NO_ALARM\fP"
 
 .PP
-Definition at line 16 of file accident_data\&.c\&.
+Definition at line 15 of file accident_data\&.c\&.
 .SS "\fBAD_MSD\fP EXT_MSD"
 
 .PP
-Definition at line 15 of file accident_data\&.c\&.
+Definition at line 14 of file accident_data\&.c\&.
+.SS "float EXT_TEMPERATURE = 0"
+
+.PP
+Definition at line 17 of file accident_data\&.c\&.
+.SS "float EXT_TOTAL_ACCELERATION_AVG = 0"
+
+.PP
+Definition at line 18 of file accident_data\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -7,11 +7,11 @@
  * @version 0.6
  * @defgroup sim908 SIM908 GSM/GPRS/GPS
  * @{
-	@ingroup hardware_boards
-	@brief Driver for GSM/GPRS/GPS module sim908
-	@note Complies MISRA 2004 standards
-	@defgroup sim908_pub Public
-	@defgroup sim908_priv Private
+	 @ingroup hardware_boards
+	 @brief Driver for GSM/GPRS/GPS module sim908
+	 @note Complies MISRA 2004 standards
+	 @defgroup sim908_pub Public
+	 @defgroup sim908_priv Private
  * @}
  *************************************************************************/
 
@@ -62,7 +62,7 @@ void SIM908_start(void);
  * @brief Used for sending AT SET commands.
  *
  * @param *__cmd - the AT command as a string
- * @param __wait_for_ok - flag determing the wait for response  
+ * @param __wait_for_ok - flag determing the wait for response
  *
  * @return bool - true if successful else false
  *************************************************************************/

@@ -5,12 +5,12 @@
  * @cersion 0.5
  * @defgroup cp Car Panel driver
  * @{
-	@ingroup hardware_boards
-	@brief This is the driver for the car panel in VROOM system.
-	The panel includes two tact switches, a RGB LED and a single LED.
- 	@note Complies MISRA 2004 standards
- 	@defgroup cp_pub Public
-	@defgroup cp_priv Private
+	 @ingroup hardware_boards
+	 @brief This is the driver for the car panel in VROOM system.
+	 The panel includes two tact switches, an RGB LED and a single red LED.
+ 	 @note Complies MISRA 2004 standards
+ 	 @defgroup cp_pub Public
+	 @defgroup cp_priv Private
  * @}
  *************************************************************************/
 

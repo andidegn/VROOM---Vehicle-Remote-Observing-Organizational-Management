@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['emergency_20number_20in_20use',['Emergency number in use',['../group__vc__eniu.html',1,'']]],
-  ['emergency_20phone_20numbers',['Emergency phone numbers',['../group__vc__epn.html',1,'']]]
+  ['diag',['Diag',['../group__at__diag.html',1,'']]],
+  ['data_20communication',['Data Communication',['../group__data__communication.html',1,'']]],
+  ['data_20connection_20settings',['Data connection settings',['../group__vc__dcs.html',1,'']]]
 ];

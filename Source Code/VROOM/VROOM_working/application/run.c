@@ -5,6 +5,9 @@
  * @author Andi Degn
  * @author Kenneth René Jensen
  * @defgroup main Main file
+ * @{
+	 @ingroup app
+	 @brief The main file where the system is initiated and started
  *************************************************************************/
 #include <avr/interrupt.h>
 #include <util/delay.h>
@@ -23,9 +26,13 @@
 #define ON	1
 #define OFF 0
 
-/* ******************************************************** */
-/* ** Defines what context of the program to be executed ** */
-/* ******************************************************** */
+/**********************************************************************//**
+ * @brief Defines what context of the program to be executed
+ * @defgroup main_setup Current function
+ * @note To run system in normal full functionality, INTEGRATION_TEST_SIM908_SENSORS
+	must be "ON" and all other must be "OFF"
+ * @{
+ *************************************************************************/
 #define UNIT_TEST						OFF
 
 #define MODULE_TEST_SENSORS				OFF
@@ -34,7 +41,11 @@
 #define MODULE_TEST_UART				OFF
 
 #define INTEGRATION_TEST_SIM908_SENSORS	ON
-/* ******************************************************** */
+/** @} */
+
+/********************************************************************//**
+ * @brief Main function. The system is started here
+ ***********************************************************************/
 int main (void)
 {
 	#ifdef DEBUG_LCD_ENABLE
@@ -196,6 +207,7 @@ int main (void)
 	#endif /* INTEGRATION_TEST_SIM908_SENSORS */
 
 	while (1){}
-		
+
 	return 0;
 }
+/** @} */

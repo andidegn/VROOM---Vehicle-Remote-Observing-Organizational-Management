@@ -1,9 +1,31 @@
-.TH "Module_test_sensors" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Test" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-Module_test_sensors \- 
-This is a test for for the sensor module consisting of TC72 temperature sensor and accelerometer using SPI\&. The module test uses the LCD display to visualize the sensors output\&. 
+Test \- 
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBModule Test - Sensors\fP"
+.br
+.RI "\fIThis is a test for for the sensor module consisting of TC72 temperature sensor and accelerometer using SPI\&. The module test uses the LCD display to visualize the sensors output\&. \fP"
+.ti -1c
+.RI "\fBModule test - UART\fP"
+.br
+.RI "\fIThis tests the uart0 and uart 1 on the ATMega2560 by first sending a test string using uart0, receiving it in uart1 callback function and sending it back to uart0 in a callback function\&. Second it is tested again without using the callback feature by using the uart_read_char() function\&. Both tests received data is compared to the original string for validation\&. \fP"
+.ti -1c
+.RI "\fBUnit test\fP"
+.br
+.RI "\fIUnit test platform using MinUnit framework\&. \fP"
+.ti -1c
+.RI "\fB4bit R2R with LEDs\fP"
+.br
+.RI "\fIThis is a driver for the 4bit R2R DAC with 4 LEDs This is used to be able to use an oscilloscope to measure when different tasks are running\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Test for for the Car Panel module 
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

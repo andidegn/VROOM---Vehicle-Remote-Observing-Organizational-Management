@@ -1,4 +1,4 @@
-.TH "Vehicle class" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Vehicle class" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,25 +10,25 @@ Constant vehicle class type definition\&.
 
 .in +1c
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_L\fP(category)   (1<<4 | category)	/* Motor vehicles with less than four wheels */"
+.RI "#define \fBAD_VEHICLE_CLASS_L\fP(category)   (uint8_t)(1<<4 | (category))	/**> Motor vehicles with less than four wheels */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_M\fP(category)   (2<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of passengers */"
+.RI "#define \fBAD_VEHICLE_CLASS_M\fP(category)   (uint8_t)(2<<4 | (category))	/**> Power-driven vehicles having at least four wheels and used for the carriage of passengers */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_N\fP(category)   (3<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of goods */"
+.RI "#define \fBAD_VEHICLE_CLASS_N\fP(category)   (uint8_t)(3<<4 | (category))	/**> Power-driven vehicles having at least four wheels and used for the carriage of goods */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_O\fP(category)   (4<<4 | category)	/* Trailers (including semi–trailers) */"
+.RI "#define \fBAD_VEHICLE_CLASS_O\fP(category)   (uint8_t)(4<<4 | (category))	/**> Trailers (including semi–trailers) */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_T\fP(category)   (5<<4 | category)	/* Agricultural and Forestry tractors */"
+.RI "#define \fBAD_VEHICLE_CLASS_T\fP(category)   (uint8_t)(5<<4 | (category))	/**> Agricultural and Forestry tractors */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_G\fP(category)   (6<<4 | category)	/* Off-road vehicles */"
+.RI "#define \fBAD_VEHICLE_CLASS_G\fP(category)   (uint8_t)(6<<4 | (category))	/**> Off-road vehicles */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_SA\fP(category)   (7<<4 | category)	/* Special purpose vehicles (e\&.g\&. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/"
+.RI "#define \fBAD_VEHICLE_CLASS_SA\fP(category)   (uint8_t)(7<<4 | (category))	/**> Special purpose vehicles (e\&.g\&. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -57,31 +57,31 @@ Details: http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32007L0046
 
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define AD_VEHICLE_CLASS_G(category)   (6<<4 | category)	/* Off-road vehicles */"
+.SS "#define AD_VEHICLE_CLASS_G(category)   (uint8_t)(6<<4 | (category))	/**> Off-road vehicles */"
 
 .PP
 Definition at line 74 of file accident_data\&.h\&.
-.SS "#define AD_VEHICLE_CLASS_L(category)   (1<<4 | category)	/* Motor vehicles with less than four wheels */"
+.SS "#define AD_VEHICLE_CLASS_L(category)   (uint8_t)(1<<4 | (category))	/**> Motor vehicles with less than four wheels */"
 
 .PP
 Definition at line 69 of file accident_data\&.h\&.
-.SS "#define AD_VEHICLE_CLASS_M(category)   (2<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of passengers */"
+.SS "#define AD_VEHICLE_CLASS_M(category)   (uint8_t)(2<<4 | (category))	/**> Power-driven vehicles having at least four wheels and used for the carriage of passengers */"
 
 .PP
 Definition at line 70 of file accident_data\&.h\&.
-.SS "#define AD_VEHICLE_CLASS_N(category)   (3<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of goods */"
+.SS "#define AD_VEHICLE_CLASS_N(category)   (uint8_t)(3<<4 | (category))	/**> Power-driven vehicles having at least four wheels and used for the carriage of goods */"
 
 .PP
 Definition at line 71 of file accident_data\&.h\&.
-.SS "#define AD_VEHICLE_CLASS_O(category)   (4<<4 | category)	/* Trailers (including semi–trailers) */"
+.SS "#define AD_VEHICLE_CLASS_O(category)   (uint8_t)(4<<4 | (category))	/**> Trailers (including semi–trailers) */"
 
 .PP
 Definition at line 72 of file accident_data\&.h\&.
-.SS "#define AD_VEHICLE_CLASS_SA(category)   (7<<4 | category)	/* Special purpose vehicles (e\&.g\&. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/"
+.SS "#define AD_VEHICLE_CLASS_SA(category)   (uint8_t)(7<<4 | (category))	/**> Special purpose vehicles (e\&.g\&. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/"
 
 .PP
 Definition at line 75 of file accident_data\&.h\&.
-.SS "#define AD_VEHICLE_CLASS_T(category)   (5<<4 | category)	/* Agricultural and Forestry tractors */"
+.SS "#define AD_VEHICLE_CLASS_T(category)   (uint8_t)(5<<4 | (category))	/**> Agricultural and Forestry tractors */"
 
 .PP
 Definition at line 73 of file accident_data\&.h\&.

@@ -13,6 +13,7 @@
 #include "../../util/r2r_led/r2r_led.h"
 #endif
 
+/** Enum containing the different states of the scheduler */
 typedef enum {state_tc72_init,
 			  state_acc_init,
 			  state_timer_init,
@@ -22,7 +23,7 @@ typedef enum {state_tc72_init,
 			  state_store_in_buffers,
 			  state_detect_accident,
 			  state_detect_fire
-} SENSOR_STATE;
+} SCHEDULER_STATE;
 
 /* local variables */
 static int16_t _x_axis_buffer[CONFIG_ALARM_CRASH_NO_OF_READINGS];
@@ -30,7 +31,7 @@ static int16_t _y_axis_buffer[CONFIG_ALARM_CRASH_NO_OF_READINGS];
 static int16_t _z_axis_buffer[CONFIG_ALARM_CRASH_NO_OF_READINGS];
 static float _temperature = CONFIG_ALARM_FIRE_TEMP_INIT;
 
-static SENSOR_STATE _state;
+static SCHEDULER_STATE _state;
 static volatile uint16_t _execution_counter = 0U;
 
 static void (*_callback_function_ptr)(char __data); /* not implemented yet */

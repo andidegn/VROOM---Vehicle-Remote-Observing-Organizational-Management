@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['y_5faxis',['y_axis',['../test__module__sensors_8c.html#ad74302fbc675a06f9dd0d9b7c365c979',1,'test_module_sensors.c']]],
-  ['year',['year',['../struct_f_i_x_e_d___t_i_m_e.html#a57ca98d8f6d4baf0fe41c583c7dcb0d5',1,'FIXED_TIME']]],
-  ['yes',['YES',['../vroom__config_8h.html#a7ebc9a785e5ab85457c98595aac81589',1,'vroom_config.h']]]
+  ['x_5faxis',['x_axis',['../test__module__sensors_8c.html#a95ae661dc6167baa56ab42509c14cc9c',1,'test_module_sensors.c']]],
+  ['xtal',['XTAL',['../group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff',1,'lcd.h']]]
 ];

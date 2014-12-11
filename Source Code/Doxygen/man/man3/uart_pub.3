@@ -1,4 +1,4 @@
-.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -126,7 +126,7 @@ defines for the different baud rates
 .TP
 \fB\fIUART_BAUD_921K6 \fP\fP
 .PP
-Definition at line 107 of file uart\&.h\&.
+Definition at line 106 of file uart\&.h\&.
 .SS "enum \fBUART_CHAR_SIZE\fP"
 
 .PP
@@ -145,7 +145,7 @@ defines for the character size
 .TP
 \fB\fIUART_9_BIT \fP\fP
 .PP
-Definition at line 95 of file uart\&.h\&.
+Definition at line 94 of file uart\&.h\&.
 .SS "enum \fBUART_MODE\fP"
 
 .PP
@@ -168,7 +168,7 @@ UART_MODE_MSPIM : SPI Master (NOT SUPPORTED YET)
 .TP
 \fB\fIUART_MODE_DOUBLE \fP\fP
 .PP
-Definition at line 66 of file uart\&.h\&.
+Definition at line 65 of file uart\&.h\&.
 .SS "enum \fBUART_PARITY_MODE\fP"
 
 .PP
@@ -185,7 +185,7 @@ defines for the parity bit selection
 .TP
 \fB\fIUART_PARITY_EN_ODD \fP\fP
 .PP
-Definition at line 75 of file uart\&.h\&.
+Definition at line 74 of file uart\&.h\&.
 .SS "enum \fBUART_STOP_BIT\fP"
 
 .PP
@@ -198,7 +198,7 @@ defines for the stop bit selection
 .TP
 \fB\fIUART_TWO_STOP_BIT \fP\fP
 .PP
-Definition at line 86 of file uart\&.h\&.
+Definition at line 85 of file uart\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "uint16_t uart0_read_char (void)"
@@ -218,7 +218,7 @@ uint16_t - next char(byte) in the buffer
 .PP
 
 .PP
-Definition at line 200 of file uart\&.c\&.
+Definition at line 195 of file uart\&.c\&.
 .SS "void uart0_send_char (char__data)"
 
 .PP
@@ -236,7 +236,7 @@ void
 .PP
 
 .PP
-Definition at line 159 of file uart\&.c\&.
+Definition at line 154 of file uart\&.c\&.
 .SS "void uart0_send_data (const char *__data, uint8_t__length)"
 
 .PP
@@ -261,7 +261,7 @@ Does not terminates when zero character is meet
 .PP
 
 .PP
-Definition at line 190 of file uart\&.c\&.
+Definition at line 185 of file uart\&.c\&.
 .SS "void uart0_send_string (const char *__data)"
 
 .PP
@@ -279,7 +279,7 @@ void
 .PP
 
 .PP
-Definition at line 178 of file uart\&.c\&.
+Definition at line 173 of file uart\&.c\&.
 .SS "void uart0_setup_async (\fBUART_MODE\fP__operational_mode, \fBUART_BAUD\fP__baud_rate, \fBUART_PARITY_MODE\fP__paraty_mode, \fBUART_STOP_BIT\fP__stop_bit, \fBUART_CHAR_SIZE\fP__char_size, void(*)(char __data)__callback_function_ptr)"
 
 .PP
@@ -348,7 +348,7 @@ uint8_t - a handle for the setup
 .PP
 
 .PP
-Definition at line 83 of file uart\&.c\&.
+Definition at line 81 of file uart\&.c\&.
 .SS "uint16_t uart1_read_char (void)"
 
 .PP
@@ -366,7 +366,7 @@ uint16_t - next char(byte) in the buffer
 .PP
 
 .PP
-Definition at line 390 of file uart\&.c\&.
+Definition at line 385 of file uart\&.c\&.
 .SS "void uart1_send_char (char__data)"
 
 .PP
@@ -384,7 +384,7 @@ void
 .PP
 
 .PP
-Definition at line 349 of file uart\&.c\&.
+Definition at line 344 of file uart\&.c\&.
 .SS "void uart1_send_data (const char *__data, uint8_t__length)"
 
 .PP
@@ -409,7 +409,7 @@ Does not terminate when zero character is meet
 .PP
 
 .PP
-Definition at line 380 of file uart\&.c\&.
+Definition at line 375 of file uart\&.c\&.
 .SS "void uart1_send_string (const char *__data)"
 
 .PP
@@ -427,7 +427,7 @@ void
 .PP
 
 .PP
-Definition at line 368 of file uart\&.c\&.
+Definition at line 363 of file uart\&.c\&.
 .SS "void uart1_setup_async (\fBUART_MODE\fP__operational_mode, \fBUART_BAUD\fP__baud_rate, \fBUART_PARITY_MODE\fP__paraty_mode, \fBUART_STOP_BIT\fP__stop_bit, \fBUART_CHAR_SIZE\fP__char_size, void(*)(char __data)__callback_function_ptr)"
 
 .PP
@@ -495,7 +495,7 @@ uint8_t - a handle for the setup
 .PP
 
 .PP
-Definition at line 277 of file uart\&.c\&.
+Definition at line 272 of file uart\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

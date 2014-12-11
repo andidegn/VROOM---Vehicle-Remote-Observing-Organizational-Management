@@ -1,0 +1,183 @@
+.TH "Public" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public \- 
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBPort\fP"
+.br
+.RI "\fIPort define for the r2r_led\&. \fP"
+.ti -1c
+.RI "\fBLED define\fP"
+.br
+.ti -1c
+.RI "\fBPins\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBr2r_init\fP ()"
+.br
+.ti -1c
+.RI "void \fBr2r_led\fP (uint8_t led, uint8_t state)"
+.br
+.ti -1c
+.RI "void \fBr2r_led_toggle\fP (uint8_t led)"
+.br
+.ti -1c
+.RI "void \fBr2r_led_print\fP (uint8_t value)"
+.br
+.ti -1c
+.RI "void \fBr2r_leds_on\fP ()"
+.br
+.ti -1c
+.RI "void \fBr2r_leds_off\fP ()"
+.br
+.ti -1c
+.RI "void \fBr2r_set_dac\fP (uint8_t __value)"
+.br
+.ti -1c
+.RI "uint8_t \fBr2r_start_task\fP (uint8_t __id)"
+.br
+.RI "\fIStarts a task measure and returns the id of the already running task\&. \fP"
+.ti -1c
+.RI "void \fBr2r_stop_task\fP (uint8_t __prev_id)"
+.br
+.RI "\fITakes the value of the previous task and stops measuring\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "void r2r_init ()"
+Setting up desired port using the setup_port() macro
+.PP
+Initializes the port for the R2R_LED board 
+.PP
+Definition at line 29 of file r2r_led\&.c\&.
+.SS "void r2r_led (uint8_tled, uint8_tstate)"
+Setting the state of the chosen LED using the set_led_on() and set_led_off() macroes
+.PP
+Sets the state of the chosen LED 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP led - the chosen led: R2R_LED_n 
+.br
+\fIuint8_t\fP state - the state: R2R_LED_ON / R2R_LED_OFF 
+.RE
+.PP
+
+.PP
+Definition at line 38 of file r2r_led\&.c\&.
+.SS "void r2r_led_print (uint8_tvalue)"
+Prints the value in binary on the LEDs guard in place to make sure overflow is handled
+.PP
+Prints the binary value on the LEDs 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP value - a value in the range 0-15 
+.RE
+.PP
+
+.PP
+Definition at line 59 of file r2r_led\&.c\&.
+.SS "void r2r_led_toggle (uint8_tled)"
+Toggling the chosen LED using the toggle_led() macro
+.PP
+Toggles the chosen LED: R2R_LED_n 
+.PP
+\fBNote:\fP
+.RS 4
+: If connected to a button, continuality has to be handled 
+.RE
+.PP
+
+.PP
+Definition at line 50 of file r2r_led\&.c\&.
+.SS "void r2r_leds_off ()"
+Switching all the LEDs off using one's compliment of the defined mask
+.PP
+Switches all the LEDs off 
+.PP
+Definition at line 78 of file r2r_led\&.c\&.
+.SS "void r2r_leds_on ()"
+Switches all the LEDs on using the defined mask
+.PP
+Switches all the LEDs on 
+.PP
+Definition at line 69 of file r2r_led\&.c\&.
+.SS "void r2r_set_dac (uint8_t__value)"
+Passing a value to the DAC using one's complement of the defined mask guard in place to make sure overflow is handled
+.PP
+Passes a value to the DAC
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP value - a value in the range 0-15
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 88 of file r2r_led\&.c\&.
+.SS "uint8_t r2r_start_task (uint8_t__id)"
+
+.PP
+Starts a task measure and returns the id of the already running task\&. Sets the DAC to the __id and returns the id it already had
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP __id - the id of the task to be measured
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+the __id must be larger than zero 
+.RE
+.PP
+
+.PP
+Definition at line 98 of file r2r_led\&.c\&.
+.SS "void r2r_stop_task (uint8_t__prev_id)"
+
+.PP
+Takes the value of the previous task and stops measuring\&. Sets the DAC to the previous id
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuint8_t\fP __prev_id - the id of the task that was returned when R2R_start_task() was called
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+the __id must be larger than zero 
+.RE
+.PP
+
+.PP
+Definition at line 109 of file r2r_led\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

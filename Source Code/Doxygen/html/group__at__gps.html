@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__at__gps.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -121,7 +121,7 @@ Macros</h2></td></tr>
 <tr class="separator:gab2ca1abf85bf563224cab145a4baab33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga583fa68b8d84588a631d976c89ecc298"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__gps.html#ga583fa68b8d84588a631d976c89ecc298">AT_GPS_RST_AUTONOMY</a>&#160;&#160;&#160;&quot;AT+CGPSRST=1&quot;</td></tr>
 <tr class="separator:ga583fa68b8d84588a631d976c89ecc298"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafba0acfb2e616ea03bc83c37c8766271"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__gps.html#gafba0acfb2e616ea03bc83c37c8766271">AT_GPS_GET_LOCATION</a>&#160;&#160;&#160;&quot;AT+CGPSINF=0&quot;</td></tr>
+<tr class="memitem:gafba0acfb2e616ea03bc83c37c8766271"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__gps.html#gafba0acfb2e616ea03bc83c37c8766271">AT_GPS_GET_LOCATION</a>&#160;&#160;&#160;&quot;AT+CGPSINF=0&quot; /* Response &lt;mode&gt;,&lt;longitude&gt;,&lt;latitude&gt;,&lt;altitude&gt;,&lt;UTCtime&gt;,&lt;TTFF&gt;,&lt;num&gt;,&lt;speed&gt;,&lt;course&gt; */</td></tr>
 <tr class="separator:gafba0acfb2e616ea03bc83c37c8766271"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad5bb04b0d47e692c55222b92658890e4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__gps.html#gad5bb04b0d47e692c55222b92658890e4">AT_GPS_GET_STATUS</a>&#160;&#160;&#160;&quot;AT+CGPSSTATUS?&quot;</td></tr>
 <tr class="separator:gad5bb04b0d47e692c55222b92658890e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,12 +134,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define AT_GPS_GET_LOCATION&#160;&#160;&#160;&quot;AT+CGPSINF=0&quot;</td>
+          <td class="memname">#define AT_GPS_GET_LOCATION&#160;&#160;&#160;&quot;AT+CGPSINF=0&quot; /* Response &lt;mode&gt;,&lt;longitude&gt;,&lt;latitude&gt;,&lt;altitude&gt;,&lt;UTCtime&gt;,&lt;TTFF&gt;,&lt;num&gt;,&lt;speed&gt;,&lt;course&gt; */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00262">262</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00263">263</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -153,7 +153,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00263">263</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00264">264</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -167,7 +167,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00258">258</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00259">259</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -181,7 +181,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00257">257</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00258">258</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -195,7 +195,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00256">256</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00257">257</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -209,7 +209,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00261">261</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00262">262</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -223,7 +223,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00260">260</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00261">261</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -237,7 +237,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00259">259</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00260">260</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -246,7 +246,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:20 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:23 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -1,0 +1,67 @@
+.TH "Private" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Private \- 
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static char * \fBtest_tc72_calc\fP (void)"
+.br
+.RI "\fITest of function: \fBcalculate_temperature(uint8_t MSB, uint8_t LSB)\fP in \fBtc72\&.c\fP\&. \fP"
+.ti -1c
+.RI "static char * \fBtest_UTC_sec_calc\fP (void)"
+.br
+.RI "\fITest of function: \fBcalc_UTC_seconds(FIXED_TIME *buf)\fP in time\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "static char * test_tc72_calc (void)\fC [static]\fP"
+
+.PP
+Test of function: \fBcalculate_temperature(uint8_t MSB, uint8_t LSB)\fP in \fBtc72\&.c\fP\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+char* - if test pass: 0
+.IP "\(bu" 2
+if test fail: the error code line where it fails 
+.PP
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+Test parameters is taken from tc72 datasheet 
+.RE
+.PP
+
+.PP
+Definition at line 33 of file test_unit\&.c\&.
+.SS "static char * test_UTC_sec_calc (void)\fC [static]\fP"
+
+.PP
+Test of function: \fBcalc_UTC_seconds(FIXED_TIME *buf)\fP in time\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+char* - if tests pass: 0
+.IP "\(bu" 2
+if test fail: the error code line where it fails 
+.PP
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+Test parameters is calculated using http://www.epochconverter.com/ 
+.RE
+.PP
+
+.PP
+Definition at line 54 of file test_unit\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

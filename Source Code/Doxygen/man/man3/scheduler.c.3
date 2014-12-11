@@ -1,0 +1,195 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/scheduler/scheduler.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/scheduler/scheduler.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <math\&.h>\fP
+.br
+\fC#include 'scheduler\&.h'\fP
+.br
+\fC#include '\&.\&./timer/timer\&.h'\fP
+.br
+\fC#include '\&.\&./vroom_config\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./sensors/thermometer/tc72\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./sensors/accelerometer/lis331hh\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./accident_logic/accident_detection\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./util/r2r_led/r2r_led\&.h'\fP
+.br
+
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBSCHEDULER_STATE\fP { \fBstate_tc72_init\fP, \fBstate_acc_init\fP, \fBstate_timer_init\fP, \fBstate_idle\fP, \fBstate_tc72_read\fP, \fBstate_acc_read\fP, \fBstate_store_in_buffers\fP, \fBstate_detect_accident\fP, \fBstate_detect_fire\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBscheduler_start\fP (void(*callback_function_ptr)(char __data))"
+.br
+.RI "\fIInitializes the scheduler\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_pause\fP (void)"
+.br
+.RI "\fIPause the scheduler\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_resume\fP (bool __clear_TIFR)"
+.br
+.RI "\fIResumes the scheduler\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_halt\fP (void)"
+.br
+.RI "\fIHalts the scheduler\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_acc_get_last_readings_sum\fP (int16_t *__buffer)"
+.br
+.RI "\fIFills up the supplied memory with vector lengths from the accelerometer\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_acc_get_last_readings\fP (int16_t *__buffer)"
+.br
+.RI "\fIFills up the supplied memory with the last readings from the accelerometer (x, y, z) \fP"
+.ti -1c
+.RI "float \fBscheduler_temp_get_last_reading\fP (void)"
+.br
+.RI "\fIReturns the last temperature reading\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_release\fP (void)"
+.br
+.RI "\fIReleases the scheduler\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static int16_t \fB_x_axis_buffer\fP [\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]"
+.br
+.ti -1c
+.RI "static int16_t \fB_y_axis_buffer\fP [\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]"
+.br
+.ti -1c
+.RI "static int16_t \fB_z_axis_buffer\fP [\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]"
+.br
+.ti -1c
+.RI "static float \fB_temperature\fP = \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP"
+.br
+.ti -1c
+.RI "static \fBSCHEDULER_STATE\fP \fB_state\fP"
+.br
+.ti -1c
+.RI "static volatile uint16_t \fB_execution_counter\fP = 0U"
+.br
+.ti -1c
+.RI "static void(* \fB_callback_function_ptr\fP )(char __data)"
+.br
+.ti -1c
+.RI "static uint8_t \fB_acc_buffer_tail\fP = 0U"
+.br
+.ti -1c
+.RI "static uint8_t \fB_task_prev_id_temp\fP = 0U"
+.br
+.ti -1c
+.RI "static uint8_t \fB_task_prev_id_acc\fP = 0U"
+.br
+.ti -1c
+.RI "static uint8_t \fB_task_prev_id_read\fP = 0U"
+.br
+.ti -1c
+.RI "static uint8_t \fB_task_prev_id_crash_det\fP = 0U"
+.br
+.ti -1c
+.RI "static uint8_t \fB_task_prev_id_fire_det\fP = 0U"
+.br
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBSCHEDULER_STATE\fP"
+Enum containing the different states of the scheduler 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIstate_tc72_init \fP\fP
+.TP
+\fB\fIstate_acc_init \fP\fP
+.TP
+\fB\fIstate_timer_init \fP\fP
+.TP
+\fB\fIstate_idle \fP\fP
+.TP
+\fB\fIstate_tc72_read \fP\fP
+.TP
+\fB\fIstate_acc_read \fP\fP
+.TP
+\fB\fIstate_store_in_buffers \fP\fP
+.TP
+\fB\fIstate_detect_accident \fP\fP
+.TP
+\fB\fIstate_detect_fire \fP\fP
+.PP
+Definition at line 17 of file scheduler\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "uint8_t _acc_buffer_tail = 0U\fC [static]\fP"
+
+.PP
+Definition at line 38 of file scheduler\&.c\&.
+.SS "void(* _callback_function_ptr)(char __data)\fC [static]\fP"
+
+.PP
+Definition at line 37 of file scheduler\&.c\&.
+.SS "volatile uint16_t _execution_counter = 0U\fC [static]\fP"
+
+.PP
+Definition at line 35 of file scheduler\&.c\&.
+.SS "\fBSCHEDULER_STATE\fP _state\fC [static]\fP"
+
+.PP
+Definition at line 34 of file scheduler\&.c\&.
+.SS "uint8_t _task_prev_id_acc = 0U\fC [static]\fP"
+
+.PP
+Definition at line 42 of file scheduler\&.c\&.
+.SS "uint8_t _task_prev_id_crash_det = 0U\fC [static]\fP"
+
+.PP
+Definition at line 44 of file scheduler\&.c\&.
+.SS "uint8_t _task_prev_id_fire_det = 0U\fC [static]\fP"
+
+.PP
+Definition at line 45 of file scheduler\&.c\&.
+.SS "uint8_t _task_prev_id_read = 0U\fC [static]\fP"
+
+.PP
+Definition at line 43 of file scheduler\&.c\&.
+.SS "uint8_t _task_prev_id_temp = 0U\fC [static]\fP"
+
+.PP
+Definition at line 41 of file scheduler\&.c\&.
+.SS "float _temperature = \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP\fC [static]\fP"
+
+.PP
+Definition at line 32 of file scheduler\&.c\&.
+.SS "int16_t _x_axis_buffer[\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]\fC [static]\fP"
+
+.PP
+Definition at line 29 of file scheduler\&.c\&.
+.SS "int16_t _y_axis_buffer[\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]\fC [static]\fP"
+
+.PP
+Definition at line 30 of file scheduler\&.c\&.
+.SS "int16_t _z_axis_buffer[\fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP]\fC [static]\fP"
+
+.PP
+Definition at line 31 of file scheduler\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

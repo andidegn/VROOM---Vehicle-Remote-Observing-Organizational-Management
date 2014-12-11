@@ -66,9 +66,9 @@ var lis331hh_8h =
       [ "ACC_LOW_POWER_5", "lis331hh_8h.html#gga7d7775d2104dc015a7ca71348ca88b27ad70b1f08166fd5a2342964ff0e34dbcb", null ],
       [ "ACC_LOW_POWER_10", "lis331hh_8h.html#gga7d7775d2104dc015a7ca71348ca88b27abeef26c04976f6b508f290f06a067704", null ]
     ] ],
-    [ "acc_get_x_axis", "lis331hh_8h.html#gadf409ce5a1fdc0d3678e6da552724757", null ],
-    [ "acc_get_y_axis", "lis331hh_8h.html#ga8bd2f86e908c41f3552aba1798bb1f23", null ],
-    [ "acc_get_z_axis", "lis331hh_8h.html#ga226177d128c1c5e2c1b884fc352747b0", null ],
-    [ "acc_init", "lis331hh_8h.html#ga009fbd3e9095f87ca12d7a9b60751a2a", null ],
+    [ "acc_get_x_axis", "lis331hh_8h.html#ga1bb22809d6ac1fccc82d11007d988ef9", null ],
+    [ "acc_get_y_axis", "lis331hh_8h.html#ga8600e5836b4fdddce842f70a9988daef", null ],
+    [ "acc_get_z_axis", "lis331hh_8h.html#ga5b380d0013bd0b5de1712049dc8501a9", null ],
+    [ "acc_init", "lis331hh_8h.html#gad8bcdb9d8538530ea0aa8900aad0e8b8", null ],
     [ "acc_measure", "lis331hh_8h.html#ga4668b3e747265390201d7ff637f31e3b", null ]
 ];

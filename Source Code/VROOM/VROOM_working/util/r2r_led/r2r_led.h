@@ -8,11 +8,13 @@
  * @author: Andi Degn
  * @version 1.2
  * @defgroup dac 4bit R2R with LEDs
- * @ingroup test_r2r
  * @{
- *	This is a driver for the 4bit R2R DAC with 4 LEDs
- *  @defgroup dac_pub Public
- *  @defgroup dac_priv Private
+	 @ingroup test
+  	 @brief This is a driver for the 4bit R2R DAC with 4 LEDs
+	 This is used to be able to use an oscilloscope to measure when different
+	 tasks are running
+     @defgroup dac_pub Public
+     @defgroup dac_priv Private
  * @}
  *************************************************************************/
 

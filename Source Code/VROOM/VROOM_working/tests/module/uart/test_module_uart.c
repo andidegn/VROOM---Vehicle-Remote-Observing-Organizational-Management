@@ -12,16 +12,23 @@
 
 #define RECEIVED_DATA_LENGTH 255
 
+/* Local variables */
 static char *_uart_compare_string;
 static char *_uart_received_data;
 static char _index;
 static uint16_t _timeout_ctr;
 static bool _roundtrip_complete = false;
 
+/* Prototypes */
 static bool _validate_data(void);
 static void _data0_received(char data);
 static void _data1_received(char data);
 
+/**********************************************************************//**
+ * @ingroup test_uart_pub
+ * Sets up both uart0 and uart1, sends data on round trip through both
+ * uarts and checks that the result is the same as the __uart_compare_string
+ *************************************************************************/
 bool test_module_uart_run(const char *__uart_test_string, const char *__uart_compare_string) {
 	volatile bool test_result = false;
 	volatile uint16_t tmp_char = 0;
@@ -80,6 +87,14 @@ bool test_module_uart_run(const char *__uart_test_string, const char *__uart_com
 	return test_result;
 }
 
+/**********************************************************************//**
+ * @ingroup test_uart_priv
+ * @brief Validates the data received against the given string literal
+ *
+ * @param void
+ *
+ * @return void
+ *************************************************************************/
 static bool _validate_data(void) {
 
 	uint8_t i = 0;
@@ -96,6 +111,16 @@ static bool _validate_data(void) {
 	return _result;
 }
 
+/**********************************************************************//**
+ * @ingroup test_uart_priv
+ * @brief Callback function for uart0
+ * Stores received data in buffer and sets _roundtrip_complete flag if
+ * the end length of the _uart_compare_string is reached
+ *
+ * @param char data - the data received
+ *
+ * @return void
+ *************************************************************************/
 static void _data0_received(char data) {
 	*(_uart_received_data + _index++) = data;
 
@@ -104,6 +129,15 @@ static void _data0_received(char data) {
 	}
 }
 
+/**********************************************************************//**
+ * @ingroup test_module
+ * @brief Callback function for uart1
+ * Echoes data
+ *
+ * @param char data - the data received
+ *
+ * @return void
+ *************************************************************************/
 static void _data1_received(char data) {
 	uart1_send_char(data);
 }

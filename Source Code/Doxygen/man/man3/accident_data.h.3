@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/accident_logic/accident_data.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,7 +8,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .PP
 \fC#include <avr/io\&.h>\fP
 .br
-\fC#include '\&.\&./vroom_config\&.h'\fP
+\fC#include '\&.\&./application/vroom_config\&.h'\fP
 .br
 \fC#include '\&.\&./hardware_boards/sim908/at_commands\&.h'\fP
 .br
@@ -17,7 +17,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "struct \fBpacked\fP"
+.RI "struct \fBAD_MSD\fP"
 .br
 .RI "\fIstruct containing the MSD for an accident report \fP"
 .in -1c
@@ -25,61 +25,53 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "#define \fBAD_FUEL_TYPE_OTHER\fP   0"
+.RI "#define \fBAD_FUEL_TYPE_OTHER\fP   0U"
 .br
 .ti -1c
-.RI "#define \fBAD_FUEL_TYPE_GASOLINE\fP   1"
+.RI "#define \fBAD_FUEL_TYPE_GASOLINE\fP   1U"
 .br
 .ti -1c
-.RI "#define \fBAD_FUEL_TYPE_DIESEL\fP   2"
+.RI "#define \fBAD_FUEL_TYPE_DIESEL\fP   2U"
 .br
 .ti -1c
-.RI "#define \fBAD_FUEL_TYPE_NATURALGAS\fP   3"
+.RI "#define \fBAD_FUEL_TYPE_NATURALGAS\fP   3U"
 .br
 .ti -1c
-.RI "#define \fBAD_FUEL_TYPE_PROPANE\fP   4"
+.RI "#define \fBAD_FUEL_TYPE_PROPANE\fP   4U"
 .br
 .ti -1c
-.RI "#define \fBAD_FUEL_TYPE_ELECTRIC\fP   5"
+.RI "#define \fBAD_FUEL_TYPE_ELECTRIC\fP   5U"
 .br
 .ti -1c
-.RI "#define \fBAD_FUEL_TYPE_HYDROGEN\fP   6"
+.RI "#define \fBAD_FUEL_TYPE_HYDROGEN\fP   6U"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_L\fP(category)   (1<<4 | category)	/* Motor vehicles with less than four wheels */"
+.RI "#define \fBAD_VEHICLE_CLASS_L\fP(category)   (uint8_t)(1<<4 | (category))	/**> Motor vehicles with less than four wheels */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_M\fP(category)   (2<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of passengers */"
+.RI "#define \fBAD_VEHICLE_CLASS_M\fP(category)   (uint8_t)(2<<4 | (category))	/**> Power-driven vehicles having at least four wheels and used for the carriage of passengers */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_N\fP(category)   (3<<4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of goods */"
+.RI "#define \fBAD_VEHICLE_CLASS_N\fP(category)   (uint8_t)(3<<4 | (category))	/**> Power-driven vehicles having at least four wheels and used for the carriage of goods */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_O\fP(category)   (4<<4 | category)	/* Trailers (including semi–trailers) */"
+.RI "#define \fBAD_VEHICLE_CLASS_O\fP(category)   (uint8_t)(4<<4 | (category))	/**> Trailers (including semi–trailers) */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_T\fP(category)   (5<<4 | category)	/* Agricultural and Forestry tractors */"
+.RI "#define \fBAD_VEHICLE_CLASS_T\fP(category)   (uint8_t)(5<<4 | (category))	/**> Agricultural and Forestry tractors */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_G\fP(category)   (6<<4 | category)	/* Off-road vehicles */"
+.RI "#define \fBAD_VEHICLE_CLASS_G\fP(category)   (uint8_t)(6<<4 | (category))	/**> Off-road vehicles */"
 .br
 .ti -1c
-.RI "#define \fBAD_VEHICLE_CLASS_SA\fP(category)   (7<<4 | category)	/* Special purpose vehicles (e\&.g\&. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/"
+.RI "#define \fBAD_VEHICLE_CLASS_SA\fP(category)   (uint8_t)(7<<4 | (category))	/**> Special purpose vehicles (e\&.g\&. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/"
 .br
-.in -1c
-.SS "Typedefs"
-
-.in +1c
-.ti -1c
-.RI "typedef struct \fBpacked\fP \fBAD_MSD\fP"
-.br
-.RI "\fIstruct containing the MSD for an accident report \fP"
 .in -1c
 .SS "Enumerations"
 
 .in +1c
 .ti -1c
-.RI "enum \fBAD_EMERGENCY_FLAG\fP { \fBEMERGENCY_NO_ALARM\fP = 0, \fBEMERGENCY_MANUAL_ALARM\fP = 1, \fBEMERGENCY_AUTO_ALARM\fP = 2, \fBEMERGENCY_ALARM_SENT\fP = 3 }"
+.RI "enum \fBAD_EMERGENCY_FLAG\fP { \fBEMERGENCY_NO_ALARM\fP = 0U, \fBEMERGENCY_FALSE_ALARM\fP = 1U, \fBEMERGENCY_MANUAL_ALARM\fP = 2U, \fBEMERGENCY_AUTO_ALARM\fP = 3U, \fBEMERGENCY_ALARM_SENT\fP = 4U }"
 .br
 .RI "\fIFlag to detect if an alarm has been triggered\&. \fP"
 .in -1c
@@ -106,6 +98,12 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "\fBAT_CONNECTION_STATUS_FLAG\fP \fBEXT_CONNECTION_CREG_FLAG\fP"
 .br
+.ti -1c
+.RI "float \fBEXT_TEMPERATURE\fP"
+.br
+.ti -1c
+.RI "float \fBEXT_TOTAL_ACCELERATION_AVG\fP"
+.br
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -118,7 +116,7 @@ Kenneth René Jensen
 .PP
 \fBVersion:\fP
 .RS 4
-0\&.7 
+0\&.8 
 .RE
 .PP
 
@@ -129,19 +127,27 @@ Definition in file \fBaccident_data\&.h\fP\&.
 .SS "\fBAT_CONNECTION_STATUS_FLAG\fP EXT_CONNECTION_CREG_FLAG"
 
 .PP
-Definition at line 17 of file accident_data\&.c\&.
+Definition at line 16 of file accident_data\&.c\&.
 .SS "\fBAD_EMERGENCY_FLAG\fP EXT_EMERGENCY_FLAG"
 
 .PP
-Definition at line 16 of file accident_data\&.c\&.
+Definition at line 15 of file accident_data\&.c\&.
 .SS "\fBAD_MSD\fP EXT_MSD"
 
 .PP
-Definition at line 15 of file accident_data\&.c\&.
+Definition at line 14 of file accident_data\&.c\&.
 .SS "char EXT_MSD_FILENAME[24]"
 
 .PP
-Definition at line 84 of file sim908\&.c\&.
+Definition at line 92 of file sim908\&.c\&.
+.SS "float EXT_TEMPERATURE"
+
+.PP
+Definition at line 17 of file accident_data\&.c\&.
+.SS "float EXT_TOTAL_ACCELERATION_AVG"
+
+.PP
+Definition at line 18 of file accident_data\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

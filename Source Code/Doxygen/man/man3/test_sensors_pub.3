@@ -1,0 +1,83 @@
+.TH "Public" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public \- 
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsensors_init\fP (void)"
+.br
+.RI "\fIInitiates the sensor test\&. \fP"
+.ti -1c
+.RI "void \fBsensors_read_data\fP (void)"
+.br
+.RI "\fIReads the data from the sensors\&. \fP"
+.ti -1c
+.RI "void \fBsensors_print_data\fP (void)"
+.br
+.RI "\fIPrints the data from the sensors\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "void sensors_init ()"
+
+.PP
+Initiates the sensor test\&. Sets values to zero and starts the scheduler
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 19 of file test_module_sensors\&.c\&.
+.SS "void sensors_print_data (void)"
+
+.PP
+Prints the data from the sensors\&. Prints the values to the LCD display
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 45 of file test_module_sensors\&.c\&.
+.SS "void sensors_read_data (void)"
+
+.PP
+Reads the data from the sensors\&. Gets the readings from the scheduler and stores them locally
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 32 of file test_module_sensors\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

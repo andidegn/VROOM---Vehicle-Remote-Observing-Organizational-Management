@@ -1,4 +1,4 @@
-.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -19,7 +19,7 @@ Public \-
 .SS "bool test_module_uart_run (const char *__uart_test_string, const char *__uart_compare_string)"
 
 .PP
-Starts the testing routine for uart0 and uart1\&. 
+Starts the testing routine for uart0 and uart1\&. Sets up both uart0 and uart1, sends data on round trip through both uarts and checks that the result is the same as the __uart_compare_string
 .PP
 \fBParameters:\fP
 .RS 4
@@ -40,7 +40,7 @@ To run this test uart0 and uart1 must be connect crossed\&. TX0->RX1, TX1->RX0
 .PP
 
 .PP
-Definition at line 25 of file test_module_uart\&.c\&.
+Definition at line 32 of file test_module_uart\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

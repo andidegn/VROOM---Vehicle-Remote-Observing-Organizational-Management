@@ -1,12 +1,13 @@
 var searchData=
 [
-  ['test_5fmodule_5fuart_5frun',['test_module_uart_run',['../group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38',1,'test_module_uart_run(const char *__uart_test_string, const char *__uart_compare_string):&#160;test_module_uart.c'],['../group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38',1,'test_module_uart_run(const char *__uart_test_string, const char *__uart_compare_string):&#160;test_module_uart.c']]],
-  ['test_5ftc72_5fcalc',['test_tc72_calc',['../group__ut.html#ga05679a7c7bb9e541e770c10c612dea2d',1,'unit_test.c']]],
-  ['timer1_5finit_5fctc',['timer1_init_CTC',['../group__timer.html#ga857c19ab6c2a6baa76ff29ba64531a1e',1,'timer.c']]],
-  ['timer3_5finit_5fctc',['timer3_init_CTC',['../group__timer.html#ga73893cdd4c08e4e02f77a514ff6a9a1c',1,'timer.c']]],
-  ['timer3_5fstart',['timer3_start',['../group__timer.html#ga4d48d8159faa76d37a64326b037cdcf1',1,'timer.c']]],
-  ['timer3_5fstop',['timer3_stop',['../group__timer.html#ga831aa99548aedfe5888e2be339728a18',1,'timer.c']]],
-  ['timer_5fpause_5fall',['timer_pause_all',['../group__timer.html#gacf1507ccebc4c8e9506327dd8659a056',1,'timer.c']]],
-  ['timer_5fresume_5fall',['timer_resume_all',['../group__timer.html#ga2094c0da94a7d5d1a65974c6e9b7b2ad',1,'timer.c']]],
-  ['toggle_5fe',['toggle_e',['../lcd_8c.html#a762d0af9ccb3c9507af12cd7617e047d',1,'lcd.c']]]
+  ['uart0_5fread_5fchar',['uart0_read_char',['../group__uart__pub.html#gaed0884846507f236a2e19856b4159d8b',1,'uart.c']]],
+  ['uart0_5fsend_5fchar',['uart0_send_char',['../group__uart__pub.html#ga48e72aa9e19ee297160f474f3ce41f15',1,'uart.c']]],
+  ['uart0_5fsend_5fdata',['uart0_send_data',['../group__uart__pub.html#ga23663ee05fd079340180e3d6c8c37645',1,'uart.c']]],
+  ['uart0_5fsend_5fstring',['uart0_send_string',['../group__uart__pub.html#ga7f16531232184d0251f79c0de521c845',1,'uart.c']]],
+  ['uart0_5fsetup_5fasync',['uart0_setup_async',['../group__uart__pub.html#gad15a574ad4bf0d30f348f915b2417453',1,'uart.c']]],
+  ['uart1_5fread_5fchar',['uart1_read_char',['../group__uart__pub.html#ga91a10a6cc5c82fd6d61ef3c563c99b78',1,'uart.c']]],
+  ['uart1_5fsend_5fchar',['uart1_send_char',['../group__uart__pub.html#ga954812bc78f87e68ce1bad1acb1da438',1,'uart.c']]],
+  ['uart1_5fsend_5fdata',['uart1_send_data',['../group__uart__pub.html#ga474a1d5f216bf85572d909be294e42c7',1,'uart.c']]],
+  ['uart1_5fsend_5fstring',['uart1_send_string',['../group__uart__pub.html#gafb3ce6b138c99e8cab75ce7ff0279d68',1,'uart.c']]],
+  ['uart1_5fsetup_5fasync',['uart1_setup_async',['../group__uart__pub.html#ga692cad4c6a2757491b22fe612df03c56',1,'uart.c']]]
 ];

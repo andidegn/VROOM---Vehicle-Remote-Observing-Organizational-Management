@@ -1,9 +1,9 @@
 var test__module__uart_8c =
 [
     [ "RECEIVED_DATA_LENGTH", "test__module__uart_8c.html#a1c9788d47359785bc647f95f31d9cdf8", null ],
-    [ "_data0_received", "test__module__uart_8c.html#af3c92a8f031ddb58b6ec173d029084cd", null ],
+    [ "_data0_received", "test__module__uart_8c.html#gaf3c92a8f031ddb58b6ec173d029084cd", null ],
     [ "_data1_received", "test__module__uart_8c.html#a643851a66330cd53945a8753c52e80b3", null ],
-    [ "_validate_data", "test__module__uart_8c.html#a3151f4ce003605a6c0dea6526ccd6d0e", null ],
+    [ "_validate_data", "test__module__uart_8c.html#ga3151f4ce003605a6c0dea6526ccd6d0e", null ],
     [ "test_module_uart_run", "test__module__uart_8c.html#ga5a25c7de5fc1349c1315e2e43c5a8f38", null ],
     [ "_index", "test__module__uart_8c.html#a0b61442c1bf89c7789c526135bf5bbb2", null ],
     [ "_roundtrip_complete", "test__module__uart_8c.html#a1cd2e10d183686969c820c32f9fd03d0", null ],

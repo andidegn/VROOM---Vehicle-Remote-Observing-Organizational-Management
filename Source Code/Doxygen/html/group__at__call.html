@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__at__call.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,9 +111,9 @@ $(document).ready(function(){initNavTree('group__at__call.html','');});
 Macros</h2></td></tr>
 <tr class="memitem:ga60cdd7fd59f98cd29cbb157362a71b83"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__call.html#ga60cdd7fd59f98cd29cbb157362a71b83">AT_CALL_ANSWER</a>&#160;&#160;&#160;&quot;ATA&quot;</td></tr>
 <tr class="separator:ga60cdd7fd59f98cd29cbb157362a71b83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafae7b276374a5d564d98af51fed7b474"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__call.html#gafae7b276374a5d564d98af51fed7b474">AT_CALL_HANG_UP</a>&#160;&#160;&#160;&quot;ATH0&quot;</td></tr>
+<tr class="memitem:gafae7b276374a5d564d98af51fed7b474"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__call.html#gafae7b276374a5d564d98af51fed7b474">AT_CALL_HANG_UP</a>&#160;&#160;&#160;&quot;ATH0&quot; /* Disconnects all calls on the channel the command is requested */</td></tr>
 <tr class="separator:gafae7b276374a5d564d98af51fed7b474"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3626f730ae0d2b5228d8a291e3e7751a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__call.html#ga3626f730ae0d2b5228d8a291e3e7751a">AT_CALL_DIAL</a>(NUMBER)&#160;&#160;&#160;&quot;ATD&quot; NUMBER &quot;;&quot;</td></tr>
+<tr class="memitem:ga3626f730ae0d2b5228d8a291e3e7751a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__call.html#ga3626f730ae0d2b5228d8a291e3e7751a">AT_CALL_DIAL</a>(NUMBER)&#160;&#160;&#160;&quot;ATD&quot; NUMBER &quot;;&quot; /* Add phone number and end with an ';' */</td></tr>
 <tr class="separator:ga3626f730ae0d2b5228d8a291e3e7751a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaac88c11835b11fc162b0ec2ed5ce9845"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__at__call.html#gaac88c11835b11fc162b0ec2ed5ce9845">AT_CALL_REDIAL</a>&#160;&#160;&#160;&quot;ATDL&quot;</td></tr>
 <tr class="separator:gaac88c11835b11fc162b0ec2ed5ce9845"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,7 +133,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00206">206</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00207">207</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -146,12 +146,12 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">NUMBER</td><td>)</td>
-          <td>&#160;&#160;&#160;&quot;ATD&quot; NUMBER &quot;;&quot;</td>
+          <td>&#160;&#160;&#160;&quot;ATD&quot; NUMBER &quot;;&quot; /* Add phone number and end with an ';' */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00208">208</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00209">209</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -160,12 +160,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define AT_CALL_HANG_UP&#160;&#160;&#160;&quot;ATH0&quot;</td>
+          <td class="memname">#define AT_CALL_HANG_UP&#160;&#160;&#160;&quot;ATH0&quot; /* Disconnects all calls on the channel the command is requested */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00207">207</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00208">208</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -179,7 +179,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00209">209</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00210">210</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -193,7 +193,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00210">210</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
+<p>Definition at line <a class="el" href="at__commands_8h_source.html#l00211">211</a> of file <a class="el" href="at__commands_8h_source.html">at_commands.h</a>.</p>
 
 </div>
 </div>
@@ -202,7 +202,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:20 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:23 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

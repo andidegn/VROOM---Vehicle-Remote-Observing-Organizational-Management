@@ -7,11 +7,11 @@
  * @version 0.1
  * @defgroup scheduler Scheduler
  * @{
-	 @brief Scheduler for reading temperature and accelerometer data in a
-	 sequential manner using a state machine.
+	 @ingroup app
+	 @brief Basic task scheduler running cyclic execution of all the main tasks
+	 in the system
 	 @note Complies MISRA 2004 standards
 	 @defgroup scheduler_pub Public
-	 @defgroup scheduler_priv Private
  * @}
  *************************************************************************/
 

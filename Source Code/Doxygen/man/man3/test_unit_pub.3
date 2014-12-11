@@ -1,0 +1,62 @@
+.TH "Public" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Public \- 
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBUnit test macro\fP"
+.br
+.RI "\fIMinUnit macros for unit testing\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBrun_all_test\fP (void)"
+.br
+.RI "\fIRun all unit tests\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "uint16_t \fBtests_run\fP"
+.br
+.RI "\fIextern variable which counts numbers of unit test runs \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "char * run_all_test (void)"
+
+.PP
+Run all unit tests\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+char* 
+.br
+- if all tests pass: 'ALL TESTS PASSED' 
+.br
+- if test fail: the error code line where it fails 
+.RE
+.PP
+
+.PP
+Definition at line 18 of file test_unit\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "uint16_t tests_run"
+
+.PP
+extern variable which counts numbers of unit test runs 
+.PP
+Definition at line 9 of file test_unit\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

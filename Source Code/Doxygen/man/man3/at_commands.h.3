@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/at_commands.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/at_commands.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -187,10 +187,10 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBAT_CALL_ANSWER\fP   'ATA'"
 .br
 .ti -1c
-.RI "#define \fBAT_CALL_HANG_UP\fP   'ATH0'"
+.RI "#define \fBAT_CALL_HANG_UP\fP   'ATH0' /* Disconnects all calls on the channel the command is requested */"
 .br
 .ti -1c
-.RI "#define \fBAT_CALL_DIAL\fP(NUMBER)   'ATD' NUMBER ';'"
+.RI "#define \fBAT_CALL_DIAL\fP(NUMBER)   'ATD' NUMBER ';' /* Add phone number and end with an ';' */"
 .br
 .ti -1c
 .RI "#define \fBAT_CALL_REDIAL\fP   'ATDL'"
@@ -199,13 +199,13 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBAT_CALL_SHOW_NUM\fP   'AT+CNUM'"
 .br
 .ti -1c
-.RI "#define \fBAT_MSG_READ\fP   'AT+CMGR='"
+.RI "#define \fBAT_MSG_READ\fP   'AT+CMGR=' /* Add number in end to select msg to read */"
 .br
 .ti -1c
 .RI "#define \fBAT_MSG_DEL_ALL\fP   'AT+CMGD=1,4'"
 .br
 .ti -1c
-.RI "#define \fBAT_MSG_FORMAT\fP   'AT+CMGF='"
+.RI "#define \fBAT_MSG_FORMAT\fP   'AT+CMGF=' /* Add number */"
 .br
 .ti -1c
 .RI "#define \fBAT_MSG_SEND\fP   'AT+CMGS\\''"
@@ -214,19 +214,19 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBAT_AUDIO_GET_RINGER_VOLUME\fP   'AT+CRSL?'"
 .br
 .ti -1c
-.RI "#define \fBAT_AUDIO_SET_RINGER_VOLUME\fP   'AT+CRSL='"
+.RI "#define \fBAT_AUDIO_SET_RINGER_VOLUME\fP   'AT+CRSL=' /* Add number 0-4 */"
 .br
 .ti -1c
 .RI "#define \fBAT_AUDIO_GET_SPEAKER_VOLUME\fP   'AT+CLVL?'"
 .br
 .ti -1c
-.RI "#define \fBAT_AUDIO_SET_SPEAKER_VOLUME\fP   'AT+CLVL='"
+.RI "#define \fBAT_AUDIO_SET_SPEAKER_VOLUME\fP   'AT+CLVL=' /* Add number 0-100 */"
 .br
 .ti -1c
 .RI "#define \fBAT_AUDIO_GET_CURRENT_ALERT_SOUND\fP   'AT+CALS?'"
 .br
 .ti -1c
-.RI "#define \fBAT_AUDIO_SET_CURRENT_ALERT_SOUND\fP   'AT+CALS='"
+.RI "#define \fBAT_AUDIO_SET_CURRENT_ALERT_SOUND\fP   'AT+CALS=' /* Add number 0-19 */"
 .br
 .ti -1c
 .RI "#define \fBAT_CONN_SIGNAL_STRENGTH\fP   'AT+CSQ'"
@@ -256,7 +256,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBAT_GPS_RST_AUTONOMY\fP   'AT+CGPSRST=1'"
 .br
 .ti -1c
-.RI "#define \fBAT_GPS_GET_LOCATION\fP   'AT+CGPSINF=0'"
+.RI "#define \fBAT_GPS_GET_LOCATION\fP   'AT+CGPSINF=0' /* Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course> */"
 .br
 .ti -1c
 .RI "#define \fBAT_GPS_GET_STATUS\fP   'AT+CGPSSTATUS?'"
@@ -269,7 +269,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "enum \fBAT_CONNECTION_STATUS_FLAG\fP { \fBCREG_NOT_REG_NOT_SEARCHING\fP = 0, \fBCREG_REGISTERED_HOME_NETWORK\fP = 1, \fBCREG_NOT_REG_SEARCHING\fP = 2, \fBCREG_REGISTRATION_DENIED\fP = 3, \fBCREG_UNKNOWN\fP = 4, \fBCREG_REGISTERED_ROAMING\fP = 5 }"
+.RI "enum \fBAT_CONNECTION_STATUS_FLAG\fP { \fBCREG_NOT_REG_NOT_SEARCHING\fP = 0U, \fBCREG_REGISTERED_HOME_NETWORK\fP = 1U, \fBCREG_NOT_REG_SEARCHING\fP = 2U, \fBCREG_REGISTRATION_DENIED\fP = 3U, \fBCREG_UNKNOWN\fP = 4U, \fBCREG_REGISTERED_ROAMING\fP = 5U }"
 .br
 .RI "\fIFlag to detect the connection status\&. \fP"
 .in -1c
@@ -280,6 +280,8 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 \fBAuthor:\fP
 .RS 4
 Andi Degn 
+.PP
+Kenneth René Jensen 
 .RE
 .PP
 \fBVersion:\fP

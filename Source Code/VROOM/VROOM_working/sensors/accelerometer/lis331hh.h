@@ -6,12 +6,12 @@
  * @version 0.3
  * @defgroup acc LIS331HH
  * @{
-	@ingroup sensors
-	@brief This is a driver for the accelerometer LIS331HH
-	on the ATMEGA family processors.
-	@note Complies MISRO 2004 standards
-	@defgroup acc_pub Public
-	@defgroup acc_priv Private
+	 @ingroup sensors
+	 @brief This is a driver for the accelerometer LIS331HH on the ATMEGA
+	 family processors.
+	 @note Complies MISRO 2004 standards
+	 @defgroup acc_pub Public
+	 @defgroup acc_priv Private
  * @}
  *************************************************************************/
 

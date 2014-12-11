@@ -1,6 +1,6 @@
 /**********************************************************************//**
  * @file spi.c
- **************************************************************************/
+ *************************************************************************/
 
 #include "spi.h"
 #include "../../application/vroom_config.h"
@@ -11,7 +11,7 @@
  * Defines for the ports and pins used by the SPI
  * @defgroup spi_ports SPI Ports
  * @{
- **************************************************************************/
+ *************************************************************************/
 #define DDR_SPI		CONFIG_PORT_DDR_SPI
 #define SS			CONFIG_PORT_SS
 #define SCK			CONFIG_PORT_SCK
@@ -24,7 +24,7 @@
  * defines the max number of handles that are able to be handled
  * @defgroup spi_max_handles SPI max handles
  * @{
- **************************************************************************/
+ *************************************************************************/
 #define MAX_HANDLES 16
 /** @} */
 
@@ -33,7 +33,7 @@
  * defines inactive/active level for CS/CE
  * @defgroup spi_level SPI Active Level
  * @{
- **************************************************************************/
+ *************************************************************************/
 #define CS_INACTIVE 0U
 #define CS_ACTIVE 1U
 /** @} */
@@ -61,7 +61,7 @@ static void _send(uint8_t __data);
  * handle_param array and returns a handle
  *
  * @note Max 16 different handles are available
- **************************************************************************/
+ *************************************************************************/
 int8_t spi_master_setup(SPI_DATA_MODE __mode,
 						SPI_DATA_DIRECTION __data_direction,
 						SPI_DIVIDER __freq_divider,
@@ -91,7 +91,7 @@ int8_t spi_master_setup(SPI_DATA_MODE __mode,
  * @ingroup spi_pub
  * Sends 1 (one) byte of data by passing __handle and __data to spi_send()
  * and setting length to 1 (one)
- **************************************************************************/
+ *************************************************************************/
 int8_t spi_send_byte(int8_t __handle, uint8_t __data) {
 	return spi_send(__handle, &__data, 1U);
 }
@@ -102,7 +102,7 @@ int8_t spi_send_byte(int8_t __handle, uint8_t __data) {
  * with the first data slot
  *
  * @note This "data" pointer is being used to store the returning data as well
- **************************************************************************/
+ *************************************************************************/
 int8_t spi_send(int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes) {
 	int8_t ret = -1;
 
@@ -145,7 +145,7 @@ int8_t spi_send(int8_t __handle, uint8_t *__data_array, uint8_t __no_of_bytes) {
 /**********************************************************************//**
  * @ingroup spi_pub
  * Sets is_busy to 0 indicating that no tasks is being handled by the SPI
- **************************************************************************/
+ *************************************************************************/
 void spi_release(void) {
 	SPCR &= ~_BV(SPIE);
 	_set_cs_level(CS_INACTIVE);
@@ -193,7 +193,7 @@ void spi_release(void) {
  * @param handle_param *__param - a struct containing the parameters for the SPI setup
  *
  * @return void
- **************************************************************************/
+ *************************************************************************/
 static void _setup_spi(handle_param *__param) {
 	/* saves the current state of the status register and disables global interrupt */
 	uint8_t _sreg = SREG;
@@ -232,7 +232,7 @@ static void _setup_spi(handle_param *__param) {
  * @param uint8_t __level - CS_ACTIVE or CS_INACTIVE
  *
  * @return void
- **************************************************************************/
+ *************************************************************************/
 static inline void _set_cs_level(uint8_t __level) {
 	if (_cs_active_level == SPI_CS_ACTIVE_LOW) {
 		__level = (1U - __level);
@@ -268,7 +268,7 @@ static void _send(uint8_t __data) {
  * Interrupt service routine for the SPI. If a callback function pointer is
  * supplied when setting up the SPI, a callback to that function is being performed.
  * Else the SPI is released.
- **************************************************************************/
+ *************************************************************************/
 ISR(SPI_STC_vect, ISR_BLOCK) {
 	/* store data from SPI interrupt */
 	*(_data_array +_bytes_sent_ctr - 1) = SPDR;

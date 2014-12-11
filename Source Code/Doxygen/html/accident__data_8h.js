@@ -14,9 +14,9 @@ var accident__data_8h =
     [ "AD_VEHICLE_CLASS_O", "accident__data_8h.html#ga378c83dcb1166caae8d74daa9c5a0534", null ],
     [ "AD_VEHICLE_CLASS_SA", "accident__data_8h.html#ga6f48882dc7750139d88f6b6217699c32", null ],
     [ "AD_VEHICLE_CLASS_T", "accident__data_8h.html#ga58438e4733518fb4297263e2b2b1d9d8", null ],
-    [ "AD_MSD", "accident__data_8h.html#ga054b4800a07163c985b6a952278d76e2", null ],
     [ "AD_EMERGENCY_FLAG", "accident__data_8h.html#ga149a79e50f1d6eb62f4dc777abf3d5a6", [
       [ "EMERGENCY_NO_ALARM", "accident__data_8h.html#gga149a79e50f1d6eb62f4dc777abf3d5a6aa804f424e8340c4c008b9d2a4bc13944", null ],
+      [ "EMERGENCY_FALSE_ALARM", "accident__data_8h.html#gga149a79e50f1d6eb62f4dc777abf3d5a6a4e0d5d4ccc9169f368b5f35ee60baa8e", null ],
       [ "EMERGENCY_MANUAL_ALARM", "accident__data_8h.html#gga149a79e50f1d6eb62f4dc777abf3d5a6afd081379d59643956abdf38d516f0cef", null ],
       [ "EMERGENCY_AUTO_ALARM", "accident__data_8h.html#gga149a79e50f1d6eb62f4dc777abf3d5a6a30df4dd40fd132added2ec752e70ec5a", null ],
       [ "EMERGENCY_ALARM_SENT", "accident__data_8h.html#gga149a79e50f1d6eb62f4dc777abf3d5a6a270e197de87f6b218c4d8a1d98914590", null ]
@@ -25,5 +25,7 @@ var accident__data_8h =
     [ "EXT_CONNECTION_CREG_FLAG", "accident__data_8h.html#a0038c5ab72de60efddee7b808a60ce1f", null ],
     [ "EXT_EMERGENCY_FLAG", "accident__data_8h.html#a7d9910fe0c51f281dd99d303078b0fd1", null ],
     [ "EXT_MSD", "accident__data_8h.html#a8a97a4af5e816667ef70d3eb67dfd3b7", null ],
-    [ "EXT_MSD_FILENAME", "accident__data_8h.html#a667db9d0e6ffc7d00db8ace2dae7b228", null ]
+    [ "EXT_MSD_FILENAME", "accident__data_8h.html#a667db9d0e6ffc7d00db8ace2dae7b228", null ],
+    [ "EXT_TEMPERATURE", "accident__data_8h.html#ae3985f09d7fd963760e7529a58c53864", null ],
+    [ "EXT_TOTAL_ACCELERATION_AVG", "accident__data_8h.html#aade70883fccc2b0895a90466f27be4be", null ]
 ];

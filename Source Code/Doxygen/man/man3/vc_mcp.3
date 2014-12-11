@@ -1,4 +1,4 @@
-.TH "MSD config parameters" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "MSD config parameters" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,7 +10,7 @@ Details for the Minimun Set of Data (MSD)
 
 .in +1c
 .ti -1c
-.RI "#define \fBCONFIG_MSD_FORMAT_VERSION\fP   1"
+.RI "#define \fBCONFIG_MSD_FORMAT_VERSION\fP   2U"
 .br
 .ti -1c
 .RI "#define \fBCONFIG_MSD_TEST_CALL\fP   true"
@@ -25,7 +25,7 @@ Details for the Minimun Set of Data (MSD)
 .RI "#define \fBCONFIG_MSD_VIN\fP   'W0L000036V1940069'"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_MSD_OPTIONAL_DATA_SIZE\fP   102				/**> Calculated size based on total MSD size - compulsory data */"
+.RI "#define \fBCONFIG_MSD_OPTIONAL_DATA_SIZE\fP   102U					/**> Calculated size based on total MSD size - compulsory data */"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -35,30 +35,30 @@ Details for the Minimun Set of Data (MSD)
 
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define CONFIG_MSD_FORMAT_VERSION   1"
+.SS "#define CONFIG_MSD_FORMAT_VERSION   2U"
 
 .PP
-Definition at line 59 of file vroom_config\&.h\&.
+Definition at line 149 of file vroom_config\&.h\&.
 .SS "#define CONFIG_MSD_FUEL_TYPE   \fBAD_FUEL_TYPE_GASOLINE\fP"
 
 .PP
-Definition at line 62 of file vroom_config\&.h\&.
-.SS "#define CONFIG_MSD_OPTIONAL_DATA_SIZE   102				/**> Calculated size based on total MSD size - compulsory data */"
+Definition at line 152 of file vroom_config\&.h\&.
+.SS "#define CONFIG_MSD_OPTIONAL_DATA_SIZE   102U					/**> Calculated size based on total MSD size - compulsory data */"
 
 .PP
-Definition at line 64 of file vroom_config\&.h\&.
+Definition at line 154 of file vroom_config\&.h\&.
 .SS "#define CONFIG_MSD_TEST_CALL   true"
 
 .PP
-Definition at line 60 of file vroom_config\&.h\&.
+Definition at line 150 of file vroom_config\&.h\&.
 .SS "#define CONFIG_MSD_VEHICLE_CLASS   \fBAD_VEHICLE_CLASS_M\fP(1)	/**> M1 = No more than eight seats in addition to the driver’s seat, and having a maximum mass not exceeding 3\&.5 tons */"
 
 .PP
-Definition at line 61 of file vroom_config\&.h\&.
+Definition at line 151 of file vroom_config\&.h\&.
 .SS "#define CONFIG_MSD_VIN   'W0L000036V1940069'"
 
 .PP
-Definition at line 63 of file vroom_config\&.h\&.
+Definition at line 153 of file vroom_config\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,0 +1,71 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/scheduler/scheduler.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/scheduler/scheduler.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBscheduler_start\fP (void(*callback_function_ptr)(char __data))"
+.br
+.RI "\fIInitializes the scheduler\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_pause\fP (void)"
+.br
+.RI "\fIPause the scheduler\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_resume\fP (bool __clear_TIFR)"
+.br
+.RI "\fIResumes the scheduler\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_halt\fP (void)"
+.br
+.RI "\fIHalts the scheduler\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_acc_get_last_readings_sum\fP (int16_t *__buffer)"
+.br
+.RI "\fIFills up the supplied memory with vector lengths from the accelerometer\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_acc_get_last_readings\fP (int16_t *__buffer)"
+.br
+.RI "\fIFills up the supplied memory with the last readings from the accelerometer (x, y, z) \fP"
+.ti -1c
+.RI "float \fBscheduler_temp_get_last_reading\fP (void)"
+.br
+.RI "\fIReturns the last temperature reading\&. \fP"
+.ti -1c
+.RI "void \fBscheduler_release\fP (void)"
+.br
+.RI "\fIReleases the scheduler\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+03-09-2014 13:55:08 
+.PP
+\fBAuthor:\fP
+.RS 4
+Andi Degn 
+.PP
+Kenneth René Jensen 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.1 
+.RE
+.PP
+
+.PP
+Definition in file \fBscheduler\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

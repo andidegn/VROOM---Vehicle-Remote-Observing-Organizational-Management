@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,25 +15,22 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "#define \fBSTK600\fP"
+.RI "#define \fBDRIVER_PORT\fP   \fBCONFIG_PORT_DRIVER_PORT\fP"
 .br
 .ti -1c
-.RI "#define \fBDRIVER_PORT\fP   PORTE"
+.RI "#define \fBGSM_PORT\fP   \fBCONFIG_PORT_GSM_PORT\fP"
 .br
 .ti -1c
-.RI "#define \fBGSM_PORT\fP   PORTE"
+.RI "#define \fBGPS_PORT\fP   \fBCONFIG_PORT_GPS_PORT\fP"
 .br
 .ti -1c
-.RI "#define \fBGPS_PORT\fP   PORTE"
+.RI "#define \fBGSM_ENABLE_PIN\fP   \fBCONFIG_PORT_GSM_ENABLE_PIN\fP"
 .br
 .ti -1c
-.RI "#define \fBGSM_ENABLE_PIN\fP   PE3"
+.RI "#define \fBGPS_ENABLE_PIN\fP   \fBCONFIG_PORT_GPS_ENABLE_PIN\fP"
 .br
 .ti -1c
-.RI "#define \fBGPS_ENABLE_PIN\fP   PE4"
-.br
-.ti -1c
-.RI "#define \fBCE_PIN\fP   PE5"
+.RI "#define \fBCE_PIN\fP   \fBCONFIG_PORT_CE_PIN\fP"
 .br
 .in -1c
 .SS "Functions"
@@ -48,7 +45,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fIStarts the SIM908 module\&. \fP"
 .ti -1c
-.RI "bool \fBSIM908_cmd\fP (const char *cmd, bool __wait_for_ok)"
+.RI "bool \fBSIM908_cmd\fP (const char *__cmd, bool __wait_for_ok)"
 .br
 .RI "\fIUsed for sending AT SET commands\&. \fP"
 .ti -1c
@@ -77,7 +74,7 @@ Kenneth René Jensen
 .PP
 \fBVersion:\fP
 .RS 4
-0\&.5 
+0\&.6 
 .RE
 .PP
 

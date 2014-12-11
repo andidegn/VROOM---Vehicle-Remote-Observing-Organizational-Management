@@ -78,7 +78,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
       <li><a href="globals_vars.html"><span>Variables</span></a></li>
-      <li><a href="globals_type.html"><span>Typedefs</span></a></li>
       <li class="current"><a href="globals_enum.html"><span>Enumerations</span></a></li>
       <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
       <li><a href="globals_defs.html"><span>Macros</span></a></li>
@@ -104,7 +103,7 @@ $(document).ready(function(){initNavTree('globals_enum.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -139,8 +138,8 @@ $(document).ready(function(){initNavTree('globals_enum.html','');});
 <li>Control
 : <a class="el" href="group__cp__pub.html#ga0da83e35f29c11f7f3c637234f2149f9">car_panel.h</a>
 </li>
-<li>SENSOR_STATE
-: <a class="el" href="sensor__scheduler_8c.html#a114514c1e848aaad7a90b2720b34e32b">sensor_scheduler.c</a>
+<li>SCHEDULER_STATE
+: <a class="el" href="scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cc">scheduler.c</a>
 </li>
 <li>SPI_CS_ACTIVE_LEVEL
 : <a class="el" href="group__spi__pub.html#ga96a1793d8e3c7227d6009a535c201cf0">spi.h</a>
@@ -161,10 +160,10 @@ $(document).ready(function(){initNavTree('globals_enum.html','');});
 : <a class="el" href="tc72_8c.html#a17ab14eb93a12b68b2d75871d44d0062">tc72.c</a>
 </li>
 <li>TIMER_FREQUENCY
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612a">timer.h</a>
+: <a class="el" href="group__timer__pub.html#ga201a4f2cb1c81c24f23dd01dae07612a">timer.h</a>
 </li>
 <li>TIMER_PRESCALER
-: <a class="el" href="group__timer.html#ga7e6cbe0bc6f3395283c560bdc0690447">timer.h</a>
+: <a class="el" href="group__timer__pub.html#ga7e6cbe0bc6f3395283c560bdc0690447">timer.h</a>
 </li>
 <li>UART_BAUD
 : <a class="el" href="group__uart__pub.html#ga2b50ce1943f24e90a2e2b8fe34f20481">uart.h</a>
@@ -187,7 +186,7 @@ $(document).ready(function(){initNavTree('globals_enum.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:22 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:25 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

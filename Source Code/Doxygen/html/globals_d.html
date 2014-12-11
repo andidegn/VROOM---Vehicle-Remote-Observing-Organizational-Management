@@ -78,7 +78,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
       <li><a href="globals_vars.html"><span>Variables</span></a></li>
-      <li><a href="globals_type.html"><span>Typedefs</span></a></li>
       <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
       <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
       <li><a href="globals_defs.html"><span>Macros</span></a></li>
@@ -130,7 +129,7 @@ $(document).ready(function(){initNavTree('globals_d.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -143,14 +142,56 @@ $(document).ready(function(){initNavTree('globals_d.html','');});
 <div class="textblock">Here is a list of all functions, variables, defines, enums, and typedefs with links to the files they belong to:</div>
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>DAYS_MONTH
+: <a class="el" href="time_8c.html#af828a18387d9423ddc10ee87de0543da">time.c</a>
+</li>
 <li>DDR
 : <a class="el" href="group__cp__port.html#gacbe348573e1b5adccdc7bcf157dc6425">car_panel.c</a>
-, <a class="el" href="btn__led__lcd_8c.html#acbe348573e1b5adccdc7bcf157dc6425">btn_led_lcd.c</a>
-, <a class="el" href="sim908_8c.html#acbe348573e1b5adccdc7bcf157dc6425">sim908.c</a>
 , <a class="el" href="lcd_8c.html#acbe348573e1b5adccdc7bcf157dc6425">lcd.c</a>
+, <a class="el" href="group__dac__priv.html#ga64b350dd20963cc53bcf194b345d22a6">r2r_led.c</a>
+, <a class="el" href="sim908_8c.html#acbe348573e1b5adccdc7bcf157dc6425">sim908.c</a>
 </li>
 <li>DDR_SPI
 : <a class="el" href="group__spi__ports.html#gac2909a28e72d56f28c0ad931c4e565af">spi.c</a>
+</li>
+<li>DEBUG_ID_ACCIDENT_CRASH_DETECTION
+: <a class="el" href="vroom__config_8h.html#accbb8c221f2e8ea2cb6555392fe43844">vroom_config.h</a>
+</li>
+<li>DEBUG_ID_ACCIDENT_FIRE_DETECTION
+: <a class="el" href="vroom__config_8h.html#a83365ed80b9a85e687de3722801b09d3">vroom_config.h</a>
+</li>
+<li>DEBUG_ID_SENSOR_SCHEDULER_ACC_REQ
+: <a class="el" href="vroom__config_8h.html#a5a667f0cecaf2454c6255aca54019a63">vroom_config.h</a>
+</li>
+<li>DEBUG_ID_SENSOR_SCHEDULER_READ
+: <a class="el" href="vroom__config_8h.html#afba33fbda51ca0dc4cae731d76a356d0">vroom_config.h</a>
+</li>
+<li>DEBUG_ID_SENSOR_SCHEDULER_TEMP_REQ
+: <a class="el" href="vroom__config_8h.html#a58fd72f03ec53f3a845be895a59ece8e">vroom_config.h</a>
+</li>
+<li>DEBUG_ID_SIM908_CALLBACK
+: <a class="el" href="vroom__config_8h.html#ad4aebc841fee272ee36f836c90e3a1f2">vroom_config.h</a>
+</li>
+<li>DEBUG_ID_SIM908_CMD_SEND
+: <a class="el" href="vroom__config_8h.html#a725eaa7ef8bf16391bbc06e6fc60f9a8">vroom_config.h</a>
+</li>
+<li>DEBUG_ID_SIM908_START_MODULE
+: <a class="el" href="vroom__config_8h.html#a2ea69cbc2864f1ec5eb1eca3ac5020b0">vroom_config.h</a>
+</li>
+<li>DEBUG_ID_SIM908_WAIT_FOR_RESPONSE
+: <a class="el" href="vroom__config_8h.html#a9533cb72d8d8ace06c9d4c12d387e9b0">vroom_config.h</a>
+</li>
+<li>DEBUG_LCD_ENABLE
+: <a class="el" href="vroom__config_8h.html#a8b85ce16fd429bbd36f453fe17f8411c">vroom_config.h</a>
+</li>
+<li>DEBUG_TASK_MEASURE
+: <a class="el" href="vroom__config_8h.html#af2491aab6821752c65f1857d1a052c73">vroom_config.h</a>
+</li>
+<li>DEBUG_UART_ECHO
+: <a class="el" href="vroom__config_8h.html#a643e23b9424c33177be70bda674a0d9b">vroom_config.h</a>
+</li>
+<li>DEBUG_UART_ENABLE
+: <a class="el" href="vroom__config_8h.html#a249acaa1312d8aed88834075b24d51ee">vroom_config.h</a>
 </li>
 <li>degree
 : <a class="el" href="test__module__sensors_8c.html#abb8bc3abd66191b672c2baa24f41745d">test_module_sensors.c</a>
@@ -167,7 +208,7 @@ $(document).ready(function(){initNavTree('globals_d.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:22 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:25 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

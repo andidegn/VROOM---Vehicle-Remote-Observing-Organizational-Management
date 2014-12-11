@@ -1,4 +1,4 @@
-.TH "Private" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -82,6 +82,10 @@ Private \-
 .RI "void \fB_SIM908_callback\fP (char data)"
 .br
 .RI "\fICallback function to handle all communication from the sim908 module Procedure: \fP"
+.ti -1c
+.RI "void \fB_PC_callback\fP (char data)"
+.br
+.RI "\fICallback function to handle debug comminication with pc on uart1 When receiving data it is echoed to both uart0 (sim908) and back to pc on uart1\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -109,7 +113,7 @@ char - the character at the desired location
 .PP
 
 .PP
-Definition at line 521 of file sim908\&.c\&.
+Definition at line 533 of file sim908\&.c\&.
 .SS "static bool _check_response (const char *__defined_response)\fC [static]\fP"
 
 .PP
@@ -127,7 +131,7 @@ bool - true if response is considered the same else false
 .PP
 
 .PP
-Definition at line 499 of file sim908\&.c\&.
+Definition at line 511 of file sim908\&.c\&.
 .SS "static void _get_GPS_response (void)\fC [static]\fP"
 
 .PP
@@ -140,12 +144,17 @@ Sends the get gps info command and waits for the response\&.
 .PP
 \fBReturns:\fP
 .RS 4
-void 
+void
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+response format: <mode, longitude, latitude, altitude, UTC time, TTFF, Satellite in view, speed over ground, course over ground> 
 .RE
 .PP
 
 .PP
-Definition at line 535 of file sim908\&.c\&.
+Definition at line 548 of file sim908\&.c\&.
 .SS "static int32_t _get_lat_long (const char *__lat_long_raw)\fC [static]\fP"
 
 .PP
@@ -163,7 +172,7 @@ int32_t - coordinate in a milliarcsecond format
 .PP
 
 .PP
-Definition at line 580 of file sim908\&.c\&.
+Definition at line 592 of file sim908\&.c\&.
 .SS "static void _GPS_enable (void)\fC [static]\fP"
 
 .PP
@@ -181,7 +190,7 @@ void
 .PP
 
 .PP
-Definition at line 436 of file sim908\&.c\&.
+Definition at line 453 of file sim908\&.c\&.
 .SS "static void _GSM_enable (void)\fC [static]\fP"
 
 .PP
@@ -199,7 +208,25 @@ void
 .PP
 
 .PP
-Definition at line 422 of file sim908\&.c\&.
+Definition at line 439 of file sim908\&.c\&.
+.SS "void _PC_callback (chardata)"
+
+.PP
+Callback function to handle debug comminication with pc on uart1 When receiving data it is echoed to both uart0 (sim908) and back to pc on uart1\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIchar\fP data - single char received via uart from pc
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 829 of file sim908\&.c\&.
 .SS "static void _raw_to_array (char **__output)\fC [static]\fP"
 
 .PP
@@ -217,7 +244,7 @@ void
 .PP
 
 .PP
-Definition at line 625 of file sim908\&.c\&.
+Definition at line 637 of file sim908\&.c\&.
 .SS "static uint8_t _set_direction (const char *__direction_raw)\fC [static]\fP"
 
 .PP
@@ -235,7 +262,7 @@ uint8_t - direction in degrees
 .PP
 
 .PP
-Definition at line 611 of file sim908\&.c\&.
+Definition at line 623 of file sim908\&.c\&.
 .SS "static void _set_MSD_filename (const char *__UTC_raw)\fC [static]\fP"
 
 .PP
@@ -258,7 +285,7 @@ Format: 2014-10-12_13\&.17\&.34
 .PP
 
 .PP
-Definition at line 647 of file sim908\&.c\&.
+Definition at line 659 of file sim908\&.c\&.
 .SS "static uint32_t _set_UTC_sec (const char *__utc_raw)\fC [static]\fP"
 
 .PP
@@ -276,7 +303,7 @@ uint32_t - 4 bytes unsigned in UTC seconds (time in seconds since 1970)
 .PP
 
 .PP
-Definition at line 552 of file sim908\&.c\&.
+Definition at line 564 of file sim908\&.c\&.
 .SS "static void _setup_GPRS_FTP (void)\fC [static]\fP"
 
 .PP
@@ -331,7 +358,7 @@ void
 .PP
 
 .PP
-Definition at line 393 of file sim908\&.c\&.
+Definition at line 410 of file sim908\&.c\&.
 .SS "static void _setup_GPS (void)\fC [static]\fP"
 
 .PP
@@ -349,7 +376,7 @@ void
 .PP
 
 .PP
-Definition at line 361 of file sim908\&.c\&.
+Definition at line 378 of file sim908\&.c\&.
 .SS "static void _setup_GSM (void)\fC [static]\fP"
 
 .PP
@@ -367,7 +394,7 @@ void
 .PP
 
 .PP
-Definition at line 344 of file sim908\&.c\&.
+Definition at line 358 of file sim908\&.c\&.
 .SS "void _SIM908_callback (chardata)"
 
 .PP
@@ -394,7 +421,7 @@ void
 .PP
 
 .PP
-Definition at line 686 of file sim908\&.c\&.
+Definition at line 698 of file sim908\&.c\&.
 .SS "static void _wait_for_connection (void)\fC [static]\fP"
 
 .PP
@@ -412,7 +439,7 @@ void
 .PP
 
 .PP
-Definition at line 450 of file sim908\&.c\&.
+Definition at line 467 of file sim908\&.c\&.
 .SS "static bool _wait_response (volatile uint8_t *__flag, uint8_t__ok_def)\fC [static]\fP"
 
 .PP
@@ -432,7 +459,7 @@ bool - true if 'OK' else false
 .PP
 
 .PP
-Definition at line 465 of file sim908\&.c\&.
+Definition at line 483 of file sim908\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,0 +1,29 @@
+.TH "Timer top value equation" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Timer top value equation \- 
+.PP
+Macro for calculating the value for clock count based on frequency and prescaler\&.  
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTOP_VALUE\fP(frequency_in_hz, prescaler)   (\fBF_CPU\fP/(prescaler * frequency_in_hz)-1)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Macro for calculating the value for clock count based on frequency and prescaler\&. 
+
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define TOP_VALUE(frequency_in_hz, prescaler)   (\fBF_CPU\fP/(prescaler * frequency_in_hz)-1)"
+
+.PP
+Definition at line 20 of file timer\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

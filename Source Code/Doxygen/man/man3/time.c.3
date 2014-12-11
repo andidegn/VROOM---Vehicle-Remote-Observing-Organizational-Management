@@ -1,25 +1,27 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time/time.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time.c \- 
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time/time.c \- 
 .SH SYNOPSIS
 .br
 .PP
 \fC#include 'time\&.h'\fP
+.br
+\fC#include <stdbool\&.h>\fP
 .br
 
 .SS "Macros"
 
 .in +1c
 .ti -1c
-.RI "#define \fBEPOCH_YR\fP   1970"
+.RI "#define \fBEPOCH_YR\fP   1970U"
 .br
 .ti -1c
-.RI "#define \fBSECS_DAY\fP   (24L * 60L * 60L)"
+.RI "#define \fBSECS_DAY\fP   86400UL"
 .br
 .ti -1c
-.RI "#define \fBLEAPYEAR\fP(year)   (!((year) % 4) && (((year) % 100) || !((year) % 400)))"
+.RI "#define \fBLEAPYEAR\fP(year)   (((year) % 4 == 0) && (((year) % 100 != 0) || ((year) % 400 == 0)))"
 .br
 .in -1c
 .SS "Functions"
@@ -28,48 +30,44 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "uint32_t \fBcalc_UTC_seconds\fP (\fBFIXED_TIME\fP *\fBbuf\fP)"
 .br
+.RI "\fICalculates UTC seconds since epoch\&. \fP"
 .in -1c
 .SS "Variables"
 
 .in +1c
 .ti -1c
-.RI "const int \fB_ytab\fP [2][12]"
+.RI "const uint8_t \fBDAYS_MONTH\fP [2U][12U]"
 .br
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define EPOCH_YR   1970"
+.SS "#define EPOCH_YR   1970U"
 
+.PP
+Definition at line 7 of file time\&.c\&.
+.SS "#define LEAPYEAR(year)   (((year) % 4 == 0) && (((year) % 100 != 0) || ((year) % 400 == 0)))"
+Macro to determine if year is leap year 
 .PP
 Definition at line 11 of file time\&.c\&.
-.SS "#define LEAPYEAR(year)   (!((year) % 4) && (((year) % 100) || !((year) % 400)))"
+.SS "#define SECS_DAY   86400UL"
 
 .PP
-Definition at line 13 of file time\&.c\&.
-.SS "#define SECS_DAY   (24L * 60L * 60L)"
-
-.PP
-Definition at line 12 of file time\&.c\&.
-.SH "Function Documentation"
-.PP 
-.SS "uint32_t calc_UTC_seconds (\fBFIXED_TIME\fP *buf)"
-
-.PP
-Definition at line 21 of file time\&.c\&.
+Definition at line 8 of file time\&.c\&.
 .SH "Variable Documentation"
 .PP 
-.SS "const int _ytab[2][12]"
+.SS "const uint8_t DAYS_MONTH[2U][12U]"
 \fBInitial value:\fP
 .PP
 .nf
 = 
 {
-    {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
-    {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+    {31U, 28U, 31U, 30U, 31U, 30U, 31U, 31U, 30U, 31U, 30U, 31U},
+    {31U, 29U, 31U, 30U, 31U, 30U, 31U, 31U, 30U, 31U, 30U, 31U}
 }
 .fi
+Days per month 
 .PP
-Definition at line 15 of file time\&.c\&.
+Definition at line 14 of file time\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

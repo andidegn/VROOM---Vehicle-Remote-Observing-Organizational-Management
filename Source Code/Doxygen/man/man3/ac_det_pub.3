@@ -1,4 +1,4 @@
-.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,86 +7,20 @@ Public \-
 
 .in +1c
 .ti -1c
-.RI "void \fBaccident_detection_init\fP (void)"
-.br
-.RI "\fIInit detection for accidents\&. \fP"
-.ti -1c
-.RI "void \fBad_check_for_crash\fP (void)"
+.RI "void \fBcheck_for_crash\fP (void)"
 .br
 .RI "\fIChecks if a crash has occurred\&. \fP"
 .ti -1c
-.RI "void \fBad_check_for_fire\fP (void)"
+.RI "void \fBcheck_for_fire\fP (void)"
 .br
 .RI "\fIChecks for fire\&. \fP"
-.ti -1c
-.RI "void \fBaccident_detection_start\fP (void)"
-.br
-.RI "\fIStarts detection for accidents\&. \fP"
-.ti -1c
-.RI "void \fBaccident_detection_stop\fP (void)"
-.br
-.RI "\fIStops detection for accidents\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
 
 .SH "Function Documentation"
 .PP 
-.SS "void accident_detection_init (void)"
-
-.PP
-Init detection for accidents\&. Sets up the timer for the accident detection routine
-.PP
-\fBParameters:\fP
-.RS 4
-\fIvoid\fP 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-void 
-.RE
-.PP
-
-.PP
-Definition at line 25 of file accident_detection\&.c\&.
-.SS "void accident_detection_start (void)"
-
-.PP
-Starts detection for accidents\&. Starts the accident detection
-.PP
-\fBParameters:\fP
-.RS 4
-\fIvoid\fP 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-void 
-.RE
-.PP
-
-.PP
-Definition at line 99 of file accident_detection\&.c\&.
-.SS "void accident_detection_stop (void)"
-
-.PP
-Stops detection for accidents\&. Stops the accident detection
-.PP
-\fBParameters:\fP
-.RS 4
-\fIvoid\fP 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-void 
-.RE
-.PP
-
-.PP
-Definition at line 108 of file accident_detection\&.c\&.
-.SS "void ad_check_for_crash (void)"
+.SS "void check_for_crash (void)"
 
 .PP
 Checks if a crash has occurred\&. Gets the accelerometer data and analysis them to see if a crash has occurred Steps in function:
@@ -110,8 +44,8 @@ void
 .PP
 
 .PP
-Definition at line 39 of file accident_detection\&.c\&.
-.SS "void ad_check_for_fire (void)"
+Definition at line 26 of file accident_detection\&.c\&.
+.SS "void check_for_fire (void)"
 
 .PP
 Checks for fire\&. Gets the temperature and compare to last read value to see if temperature has raised to a critical level Steps in function:
@@ -135,7 +69,7 @@ void
 .PP
 
 .PP
-Definition at line 75 of file accident_detection\&.c\&.
+Definition at line 61 of file accident_detection\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

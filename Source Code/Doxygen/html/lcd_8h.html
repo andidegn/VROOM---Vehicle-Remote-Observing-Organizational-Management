@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>VROOM: D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/lcd_board/lcd/lcd.h File Reference</title>
+<title>VROOM: D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/lcd_board/lcd/lcd.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('lcd_8h.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -110,17 +110,18 @@ $(document).ready(function(){initNavTree('lcd_8h.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="vroom__config_8h_source.html">../../../application/vroom_config.h</a>&quot;</code><br/>
 </div>
 <p><a href="lcd_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:gabcf42bd88b3c36193f301ca25b033875"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#gabcf42bd88b3c36193f301ca25b033875">LCD_PORT</a>&#160;&#160;&#160;PORTL</td></tr>
+<tr class="memitem:gabcf42bd88b3c36193f301ca25b033875"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#gabcf42bd88b3c36193f301ca25b033875">LCD_PORT</a>&#160;&#160;&#160;<a class="el" href="group__vc__port__lcd.html#ga3827b89ec0a05f5d53ff8e9199d0436b">CONFIG_PORT_LCD</a></td></tr>
 <tr class="separator:gabcf42bd88b3c36193f301ca25b033875"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Definitions for MCU Clock Frequency</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Adapt the MCU clock frequency in Hz to your target. </p>
 </div></td></tr>
-<tr class="memitem:ga3cad0f9b3c40159bd2fbd7f5e60f2fff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>&#160;&#160;&#160;<a class="el" href="run_8c.html#a43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></td></tr>
+<tr class="memitem:ga3cad0f9b3c40159bd2fbd7f5e60f2fff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pfleury__lcd.html#ga3cad0f9b3c40159bd2fbd7f5e60f2fff">XTAL</a>&#160;&#160;&#160;<a class="el" href="group__main.html#ga43bafb28b29491ec7f871319b5a3b2f8">F_CPU</a></td></tr>
 <tr class="separator:ga3cad0f9b3c40159bd2fbd7f5e60f2fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Definition for LCD controller type</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Use 0 for HD44780 controller, change to 1 for displays with KS0073 controller. </p>
@@ -297,8 +298,8 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_345297ba67263627175aa07c8865357f.html">hardware_boards</a></li><li class="navelem"><a class="el" href="dir_2ebdcaf211e1f28bc9bc8624251c3dc9.html">lcd_board</a></li><li class="navelem"><a class="el" href="dir_1edee6abb1f7131cf7bbe010c86b3609.html">lcd</a></li><li class="navelem"><a class="el" href="lcd_8h.html">lcd.h</a></li>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:20 for VROOM by
+    <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_3efe77b6baf66da548681f45cbf6c75d.html">util</a></li><li class="navelem"><a class="el" href="dir_975c350110a1bcd3d67cd87e88b651d0.html">lcd_board</a></li><li class="navelem"><a class="el" href="dir_602d3e2741e2461079b4fb5e197b1454.html">lcd</a></li><li class="navelem"><a class="el" href="lcd_8h.html">lcd.h</a></li>
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:22 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

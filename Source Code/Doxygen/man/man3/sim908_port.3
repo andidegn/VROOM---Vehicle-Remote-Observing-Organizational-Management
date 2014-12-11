@@ -1,4 +1,4 @@
-.TH "Port" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Port" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,25 +10,22 @@ Defines the port(s) and pins for the communition to the SIM908 module\&.
 
 .in +1c
 .ti -1c
-.RI "#define \fBSTK600\fP"
+.RI "#define \fBDRIVER_PORT\fP   \fBCONFIG_PORT_DRIVER_PORT\fP"
 .br
 .ti -1c
-.RI "#define \fBDRIVER_PORT\fP   PORTE"
+.RI "#define \fBGSM_PORT\fP   \fBCONFIG_PORT_GSM_PORT\fP"
 .br
 .ti -1c
-.RI "#define \fBGSM_PORT\fP   PORTE"
+.RI "#define \fBGPS_PORT\fP   \fBCONFIG_PORT_GPS_PORT\fP"
 .br
 .ti -1c
-.RI "#define \fBGPS_PORT\fP   PORTE"
+.RI "#define \fBGSM_ENABLE_PIN\fP   \fBCONFIG_PORT_GSM_ENABLE_PIN\fP"
 .br
 .ti -1c
-.RI "#define \fBGSM_ENABLE_PIN\fP   PE3"
+.RI "#define \fBGPS_ENABLE_PIN\fP   \fBCONFIG_PORT_GPS_ENABLE_PIN\fP"
 .br
 .ti -1c
-.RI "#define \fBGPS_ENABLE_PIN\fP   PE4"
-.br
-.ti -1c
-.RI "#define \fBCE_PIN\fP   PE5"
+.RI "#define \fBCE_PIN\fP   \fBCONFIG_PORT_CE_PIN\fP"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -38,31 +35,27 @@ Defines the port(s) and pins for the communition to the SIM908 module\&.
 
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define CE_PIN   PE5"
-
-.PP
-Definition at line 39 of file sim908\&.h\&.
-.SS "#define DRIVER_PORT   PORTE"
-
-.PP
-Definition at line 34 of file sim908\&.h\&.
-.SS "#define GPS_ENABLE_PIN   PE4"
-
-.PP
-Definition at line 38 of file sim908\&.h\&.
-.SS "#define GPS_PORT   PORTE"
-
-.PP
-Definition at line 36 of file sim908\&.h\&.
-.SS "#define GSM_ENABLE_PIN   PE3"
-
-.PP
-Definition at line 37 of file sim908\&.h\&.
-.SS "#define GSM_PORT   PORTE"
+.SS "#define CE_PIN   \fBCONFIG_PORT_CE_PIN\fP"
 
 .PP
 Definition at line 35 of file sim908\&.h\&.
-.SS "#define STK600"
+.SS "#define DRIVER_PORT   \fBCONFIG_PORT_DRIVER_PORT\fP"
+
+.PP
+Definition at line 30 of file sim908\&.h\&.
+.SS "#define GPS_ENABLE_PIN   \fBCONFIG_PORT_GPS_ENABLE_PIN\fP"
+
+.PP
+Definition at line 34 of file sim908\&.h\&.
+.SS "#define GPS_PORT   \fBCONFIG_PORT_GPS_PORT\fP"
+
+.PP
+Definition at line 32 of file sim908\&.h\&.
+.SS "#define GSM_ENABLE_PIN   \fBCONFIG_PORT_GSM_ENABLE_PIN\fP"
+
+.PP
+Definition at line 33 of file sim908\&.h\&.
+.SS "#define GSM_PORT   \fBCONFIG_PORT_GSM_PORT\fP"
 
 .PP
 Definition at line 31 of file sim908\&.h\&.

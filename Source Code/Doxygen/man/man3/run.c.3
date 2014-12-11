@@ -1,8 +1,8 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/run.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/run.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/run.c \- 
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/run.c \- 
 .SH SYNOPSIS
 .br
 .PP
@@ -12,15 +12,17 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 \fC#include <stdlib\&.h>\fP
 .br
-\fC#include 'sensors/sensor_scheduler\&.h'\fP
+\fC#include 'scheduler/scheduler\&.h'\fP
 .br
-\fC#include 'hardware_boards/sim908/sim908\&.h'\fP
+\fC#include '\&.\&./hardware_boards/sim908/sim908\&.h'\fP
 .br
-\fC#include 'hardware_boards/car_panel/car_panel\&.h'\fP
+\fC#include '\&.\&./hardware_boards/car_panel/car_panel\&.h'\fP
 .br
-\fC#include 'accident_logic/accident_data\&.h'\fP
+\fC#include '\&.\&./accident_logic/accident_data\&.h'\fP
 .br
-\fC#include 'accident_logic/accident_detection\&.h'\fP
+\fC#include '\&.\&./util/lcd_board/lcd/lcd\&.h'\fP
+.br
+\fC#include '\&.\&./util/r2r_led/r2r_led\&.h'\fP
 .br
 
 .SS "Macros"
@@ -37,9 +39,6 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .ti -1c
 .RI "#define \fBUNIT_TEST\fP   \fBOFF\fP"
-.br
-.ti -1c
-.RI "#define \fBUNIT_TEST_MSD\fP   \fBOFF\fP"
 .br
 .ti -1c
 .RI "#define \fBMODULE_TEST_SENSORS\fP   \fBOFF\fP"
@@ -63,6 +62,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "int \fBmain\fP (void)"
 .br
+.RI "\fIMain function\&. The system is started here\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -71,59 +71,13 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 \fBAuthor:\fP
 .RS 4
 Andi Degn 
+.PP
+Kenneth René Jensen 
 .RE
 .PP
 
 .PP
 Definition in file \fBrun\&.c\fP\&.
-.SH "Macro Definition Documentation"
-.PP 
-.SS "#define F_CPU   11059200UL"
-
-.PP
-Definition at line 19 of file run\&.c\&.
-.SS "#define INTEGRATION_TEST_SIM908_SENSORS   \fBON\fP"
-
-.PP
-Definition at line 32 of file run\&.c\&.
-.SS "#define MODULE_TEST_CAR_PANEL   \fBOFF\fP"
-
-.PP
-Definition at line 29 of file run\&.c\&.
-.SS "#define MODULE_TEST_SENSORS   \fBOFF\fP"
-
-.PP
-Definition at line 27 of file run\&.c\&.
-.SS "#define MODULE_TEST_SIM908   \fBOFF\fP"
-
-.PP
-Definition at line 28 of file run\&.c\&.
-.SS "#define MODULE_TEST_UART   \fBOFF\fP"
-
-.PP
-Definition at line 30 of file run\&.c\&.
-.SS "#define OFF   0"
-
-.PP
-Definition at line 21 of file run\&.c\&.
-.SS "#define ON   1"
-
-.PP
-Definition at line 20 of file run\&.c\&.
-.SS "#define UNIT_TEST   \fBOFF\fP"
-
-.PP
-Definition at line 24 of file run\&.c\&.
-.SS "#define UNIT_TEST_MSD   \fBOFF\fP"
-
-.PP
-Definition at line 25 of file run\&.c\&.
-.SH "Function Documentation"
-.PP 
-.SS "int main (void)"
-
-.PP
-Definition at line 34 of file run\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

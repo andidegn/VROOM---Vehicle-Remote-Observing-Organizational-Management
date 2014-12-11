@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>VROOM: D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time.c File Reference</title>
+<title>VROOM: D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time/time.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('time_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -112,27 +112,29 @@ $(document).ready(function(){initNavTree('time_8c.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="time_8h_source.html">time.h</a>&quot;</code><br/>
+<code>#include &lt;stdbool.h&gt;</code><br/>
 </div>
 <p><a href="time_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a2cd69e03a0d15e6115c196f7ac35da13"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a2cd69e03a0d15e6115c196f7ac35da13">EPOCH_YR</a>&#160;&#160;&#160;1970</td></tr>
+<tr class="memitem:a2cd69e03a0d15e6115c196f7ac35da13"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a2cd69e03a0d15e6115c196f7ac35da13">EPOCH_YR</a>&#160;&#160;&#160;1970U</td></tr>
 <tr class="separator:a2cd69e03a0d15e6115c196f7ac35da13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69917c6f775aefa006141379c81e0e8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a69917c6f775aefa006141379c81e0e8f">SECS_DAY</a>&#160;&#160;&#160;(24L * 60L * 60L)</td></tr>
+<tr class="memitem:a69917c6f775aefa006141379c81e0e8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a69917c6f775aefa006141379c81e0e8f">SECS_DAY</a>&#160;&#160;&#160;86400UL</td></tr>
 <tr class="separator:a69917c6f775aefa006141379c81e0e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ac65777322869d89cd0cbb9ba3c165c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a3ac65777322869d89cd0cbb9ba3c165c">LEAPYEAR</a>(year)&#160;&#160;&#160;(!((year) % 4) &amp;&amp; (((year) % 100) || !((year) % 400)))</td></tr>
+<tr class="memitem:a3ac65777322869d89cd0cbb9ba3c165c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a3ac65777322869d89cd0cbb9ba3c165c">LEAPYEAR</a>(year)&#160;&#160;&#160;(((year) % 4 == 0) &amp;&amp; (((year) % 100 != 0) || ((year) % 400 == 0)))</td></tr>
 <tr class="separator:a3ac65777322869d89cd0cbb9ba3c165c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a44f1077ef717eea7435e42f6d708e081"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a44f1077ef717eea7435e42f6d708e081">calc_UTC_seconds</a> (<a class="el" href="struct_f_i_x_e_d___t_i_m_e.html">FIXED_TIME</a> *<a class="el" href="test__module__sensors_8c.html#a4ebbb28ba8e4b487cd7e4e7d6fafe417">buf</a>)</td></tr>
-<tr class="separator:a44f1077ef717eea7435e42f6d708e081"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga44f1077ef717eea7435e42f6d708e081"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__time.html#ga44f1077ef717eea7435e42f6d708e081">calc_UTC_seconds</a> (<a class="el" href="struct_f_i_x_e_d___t_i_m_e.html">FIXED_TIME</a> *<a class="el" href="test__module__sensors_8c.html#a4ebbb28ba8e4b487cd7e4e7d6fafe417">buf</a>)</td></tr>
+<tr class="memdesc:ga44f1077ef717eea7435e42f6d708e081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates UTC seconds since epoch.  <a href="group__time.html#ga44f1077ef717eea7435e42f6d708e081">More...</a><br/></td></tr>
+<tr class="separator:ga44f1077ef717eea7435e42f6d708e081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a71eeef3b16d170231b5aa59331e0ab60"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a71eeef3b16d170231b5aa59331e0ab60">_ytab</a> [2][12]</td></tr>
-<tr class="separator:a71eeef3b16d170231b5aa59331e0ab60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af828a18387d9423ddc10ee87de0543da"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#af828a18387d9423ddc10ee87de0543da">DAYS_MONTH</a> [2U][12U]</td></tr>
+<tr class="separator:af828a18387d9423ddc10ee87de0543da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="a2cd69e03a0d15e6115c196f7ac35da13"></a>
@@ -140,12 +142,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define EPOCH_YR&#160;&#160;&#160;1970</td>
+          <td class="memname">#define EPOCH_YR&#160;&#160;&#160;1970U</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="time_8c_source.html#l00011">11</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p>Definition at line <a class="el" href="time_8c_source.html#l00007">7</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -158,12 +160,13 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">year</td><td>)</td>
-          <td>&#160;&#160;&#160;(!((year) % 4) &amp;&amp; (((year) % 100) || !((year) % 400)))</td>
+          <td>&#160;&#160;&#160;(((year) % 4 == 0) &amp;&amp; (((year) % 100 != 0) || ((year) % 400 == 0)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Macro to determine if year is leap year </p>
 
-<p>Definition at line <a class="el" href="time_8c_source.html#l00013">13</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p>Definition at line <a class="el" href="time_8c_source.html#l00011">11</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -172,51 +175,33 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SECS_DAY&#160;&#160;&#160;(24L * 60L * 60L)</td>
+          <td class="memname">#define SECS_DAY&#160;&#160;&#160;86400UL</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="time_8c_source.html#l00012">12</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a44f1077ef717eea7435e42f6d708e081"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t calc_UTC_seconds </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_f_i_x_e_d___t_i_m_e.html">FIXED_TIME</a> *&#160;</td>
-          <td class="paramname"><em>buf</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="time_8c_source.html#l00021">21</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p>Definition at line <a class="el" href="time_8c_source.html#l00008">8</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="a71eeef3b16d170231b5aa59331e0ab60"></a>
+<a class="anchor" id="af828a18387d9423ddc10ee87de0543da"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int _ytab[2][12]</td>
+          <td class="memname">const uint8_t DAYS_MONTH[2U][12U]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= </div>
 <div class="line">{</div>
-<div class="line">    {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},</div>
-<div class="line">    {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}</div>
+<div class="line">    {31U, 28U, 31U, 30U, 31U, 30U, 31U, 31U, 30U, 31U, 30U, 31U},</div>
+<div class="line">    {31U, 29U, 31U, 30U, 31U, 30U, 31U, 31U, 30U, 31U, 30U, 31U}</div>
 <div class="line">}</div>
-</div><!-- fragment -->
-<p>Definition at line <a class="el" href="time_8c_source.html#l00015">15</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+</div><!-- fragment --><p>Days per month </p>
+
+<p>Definition at line <a class="el" href="time_8c_source.html#l00014">14</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -225,8 +210,8 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_3efe77b6baf66da548681f45cbf6c75d.html">util</a></li><li class="navelem"><a class="el" href="time_8c.html">time.c</a></li>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:20 for VROOM by
+    <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_3efe77b6baf66da548681f45cbf6c75d.html">util</a></li><li class="navelem"><a class="el" href="dir_0f4b91bbb1f58fae2d0de648522db353.html">time</a></li><li class="navelem"><a class="el" href="time_8c.html">time.c</a></li>
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:22 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

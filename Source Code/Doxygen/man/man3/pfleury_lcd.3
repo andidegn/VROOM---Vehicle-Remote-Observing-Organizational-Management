@@ -1,4 +1,4 @@
-.TH "LCD library" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "LCD library" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,7 +10,7 @@ Basic routines for interfacing a HD44780U-based text LCD display\&.
 
 .in +1c
 .ti -1c
-.RI "#define \fBLCD_PORT\fP   PORTL"
+.RI "#define \fBLCD_PORT\fP   \fBCONFIG_PORT_LCD\fP"
 .br
 .in -1c
 .SS "Definitions for MCU Clock Frequency"
@@ -301,261 +301,261 @@ The chapter \fCInterfacing a HD44780 Based LCD to an AVR\fP on my home page\&.
 .SS "#define LCD_BUSY   7      /* DB7: LCD is busy                    */"
 
 .PP
-Definition at line 158 of file lcd\&.h\&.
+Definition at line 159 of file lcd\&.h\&.
 .SS "#define LCD_CGRAM   6      /* DB6: set CG RAM address             */"
 
 .PP
-Definition at line 156 of file lcd\&.h\&.
+Definition at line 157 of file lcd\&.h\&.
 .SS "#define LCD_CLR   0      /* DB0: clear display                  */"
 
 .PP
-Definition at line 140 of file lcd\&.h\&.
+Definition at line 141 of file lcd\&.h\&.
 .SS "#define LCD_CONTROLLER_KS0073   0"
 Use 0 for HD44780 controller, 1 for KS0073 controller 
 .PP
-Definition at line 57 of file lcd\&.h\&.
+Definition at line 58 of file lcd\&.h\&.
 .SS "#define LCD_DATA0_PIN   0"
 pin for 4bit data bit 0 
 .PP
-Definition at line 107 of file lcd\&.h\&.
+Definition at line 108 of file lcd\&.h\&.
 .SS "#define LCD_DATA0_PORT   \fBLCD_PORT\fP"
 port for 4bit data bit 0 
 .PP
-Definition at line 103 of file lcd\&.h\&.
+Definition at line 104 of file lcd\&.h\&.
 .SS "#define LCD_DATA1_PIN   1"
 pin for 4bit data bit 1 
 .PP
-Definition at line 108 of file lcd\&.h\&.
+Definition at line 109 of file lcd\&.h\&.
 .SS "#define LCD_DATA1_PORT   \fBLCD_PORT\fP"
 port for 4bit data bit 1 
 .PP
-Definition at line 104 of file lcd\&.h\&.
+Definition at line 105 of file lcd\&.h\&.
 .SS "#define LCD_DATA2_PIN   2"
 pin for 4bit data bit 2 
 .PP
-Definition at line 109 of file lcd\&.h\&.
+Definition at line 110 of file lcd\&.h\&.
 .SS "#define LCD_DATA2_PORT   \fBLCD_PORT\fP"
 port for 4bit data bit 2 
 .PP
-Definition at line 105 of file lcd\&.h\&.
+Definition at line 106 of file lcd\&.h\&.
 .SS "#define LCD_DATA3_PIN   3"
 pin for 4bit data bit 3 
 .PP
-Definition at line 110 of file lcd\&.h\&.
+Definition at line 111 of file lcd\&.h\&.
 .SS "#define LCD_DATA3_PORT   \fBLCD_PORT\fP"
 port for 4bit data bit 3 
 .PP
-Definition at line 106 of file lcd\&.h\&.
+Definition at line 107 of file lcd\&.h\&.
 .SS "#define LCD_DDRAM   7      /* DB7: set DD RAM address             */"
 
 .PP
-Definition at line 157 of file lcd\&.h\&.
+Definition at line 158 of file lcd\&.h\&.
 .SS "#define LCD_DISP_LENGTH   20"
 visible characters per line of the display 
 .PP
-Definition at line 64 of file lcd\&.h\&.
+Definition at line 65 of file lcd\&.h\&.
 .SS "#define LCD_DISP_OFF   0x08   /* display off                            */"
 
 .PP
-Definition at line 167 of file lcd\&.h\&.
+Definition at line 168 of file lcd\&.h\&.
 .SS "#define LCD_DISP_ON   0x0C   /* display on, cursor off                 */"
 
 .PP
-Definition at line 168 of file lcd\&.h\&.
+Definition at line 169 of file lcd\&.h\&.
 .SS "#define LCD_DISP_ON_BLINK   0x0D   /* display on, cursor off, blink char     */"
 
 .PP
-Definition at line 169 of file lcd\&.h\&.
+Definition at line 170 of file lcd\&.h\&.
 .SS "#define LCD_DISP_ON_CURSOR   0x0E   /* display on, cursor on                  */"
 
 .PP
-Definition at line 170 of file lcd\&.h\&.
+Definition at line 171 of file lcd\&.h\&.
 .SS "#define LCD_DISP_ON_CURSOR_BLINK   0x0F   /* display on, cursor on, blink char      */"
 
 .PP
-Definition at line 171 of file lcd\&.h\&.
+Definition at line 172 of file lcd\&.h\&.
 .SS "#define LCD_E_PIN   6"
 pin for Enable line 
 .PP
-Definition at line 116 of file lcd\&.h\&.
+Definition at line 117 of file lcd\&.h\&.
 .SS "#define LCD_E_PORT   \fBLCD_PORT\fP"
 port for Enable line 
 .PP
-Definition at line 115 of file lcd\&.h\&.
+Definition at line 116 of file lcd\&.h\&.
 .SS "#define LCD_ENTRY_DEC   0x04   /* display shift off, dec cursor move dir */"
 
 .PP
-Definition at line 161 of file lcd\&.h\&.
+Definition at line 162 of file lcd\&.h\&.
 .SS "#define LCD_ENTRY_DEC_SHIFT   0x05   /* display shift on,  dec cursor move dir */"
 
 .PP
-Definition at line 162 of file lcd\&.h\&.
+Definition at line 163 of file lcd\&.h\&.
 .SS "#define LCD_ENTRY_INC   1      /*   DB1: 1=increment, 0=decrement     */"
 
 .PP
-Definition at line 143 of file lcd\&.h\&.
+Definition at line 144 of file lcd\&.h\&.
 .SS "#define LCD_ENTRY_INC_   0x06   /* display shift off, inc cursor move dir */"
 
 .PP
-Definition at line 163 of file lcd\&.h\&.
+Definition at line 164 of file lcd\&.h\&.
 .SS "#define LCD_ENTRY_INC_SHIFT   0x07   /* display shift on,  inc cursor move dir */"
 
 .PP
-Definition at line 164 of file lcd\&.h\&.
+Definition at line 165 of file lcd\&.h\&.
 .SS "#define LCD_ENTRY_MODE   2      /* DB2: set entry mode                 */"
 
 .PP
-Definition at line 142 of file lcd\&.h\&.
+Definition at line 143 of file lcd\&.h\&.
 .SS "#define LCD_ENTRY_SHIFT   0      /*   DB2: 1=display shift on           */"
 
 .PP
-Definition at line 144 of file lcd\&.h\&.
+Definition at line 145 of file lcd\&.h\&.
 .SS "#define LCD_FUNCTION   5      /* DB5: function set                   */"
 
 .PP
-Definition at line 152 of file lcd\&.h\&.
+Definition at line 153 of file lcd\&.h\&.
 .SS "#define LCD_FUNCTION_10DOTS   2      /*   DB2: 5x10 font (0->5x7 font)      */"
 
 .PP
-Definition at line 155 of file lcd\&.h\&.
+Definition at line 156 of file lcd\&.h\&.
 .SS "#define LCD_FUNCTION_2LINES   3      /*   DB3: two lines (0->one line)      */"
 
 .PP
-Definition at line 154 of file lcd\&.h\&.
+Definition at line 155 of file lcd\&.h\&.
 .SS "#define LCD_FUNCTION_4BIT_1LINE   0x20   /* 4-bit interface, single line, 5x7 dots */"
 
 .PP
-Definition at line 180 of file lcd\&.h\&.
+Definition at line 181 of file lcd\&.h\&.
 .SS "#define LCD_FUNCTION_4BIT_2LINES   0x28   /* 4-bit interface, dual line,   5x7 dots */"
 
 .PP
-Definition at line 181 of file lcd\&.h\&.
+Definition at line 182 of file lcd\&.h\&.
 .SS "#define LCD_FUNCTION_8BIT   4      /*   DB4: set 8BIT mode (0->4BIT mode) */"
 
 .PP
-Definition at line 153 of file lcd\&.h\&.
+Definition at line 154 of file lcd\&.h\&.
 .SS "#define LCD_FUNCTION_8BIT_1LINE   0x30   /* 8-bit interface, single line, 5x7 dots */"
 
 .PP
-Definition at line 182 of file lcd\&.h\&.
+Definition at line 183 of file lcd\&.h\&.
 .SS "#define LCD_FUNCTION_8BIT_2LINES   0x38   /* 8-bit interface, dual line,   5x7 dots */"
 
 .PP
-Definition at line 183 of file lcd\&.h\&.
+Definition at line 184 of file lcd\&.h\&.
 .SS "#define LCD_HOME   1      /* DB1: return to home position        */"
 
 .PP
-Definition at line 141 of file lcd\&.h\&.
+Definition at line 142 of file lcd\&.h\&.
 .SS "#define LCD_IO_MODE   1"
 0: memory mapped mode, 1: IO port mode 
 .PP
-Definition at line 72 of file lcd\&.h\&.
+Definition at line 73 of file lcd\&.h\&.
 .SS "#define LCD_LINE_LENGTH   0x40"
 internal line length of the display 
 .PP
-Definition at line 65 of file lcd\&.h\&.
+Definition at line 66 of file lcd\&.h\&.
 .SS "#define LCD_LINES   4"
 number of visible lines of the display 
 .PP
-Definition at line 63 of file lcd\&.h\&.
+Definition at line 64 of file lcd\&.h\&.
 .SS "#define LCD_MODE_DEFAULT   ((1<<\fBLCD_ENTRY_MODE\fP) | (1<<\fBLCD_ENTRY_INC\fP) )"
 
 .PP
-Definition at line 186 of file lcd\&.h\&.
+Definition at line 187 of file lcd\&.h\&.
 .SS "#define LCD_MOVE   4      /* DB4: move cursor/display            */"
 
 .PP
-Definition at line 149 of file lcd\&.h\&.
+Definition at line 150 of file lcd\&.h\&.
 .SS "#define LCD_MOVE_CURSOR_LEFT   0x10   /* move cursor left  (decrement)          */"
 
 .PP
-Definition at line 174 of file lcd\&.h\&.
+Definition at line 175 of file lcd\&.h\&.
 .SS "#define LCD_MOVE_CURSOR_RIGHT   0x14   /* move cursor right (increment)          */"
 
 .PP
-Definition at line 175 of file lcd\&.h\&.
+Definition at line 176 of file lcd\&.h\&.
 .SS "#define LCD_MOVE_DISP   3      /*   DB3: move display (0-> cursor) ?  */"
 
 .PP
-Definition at line 150 of file lcd\&.h\&.
+Definition at line 151 of file lcd\&.h\&.
 .SS "#define LCD_MOVE_DISP_LEFT   0x18   /* shift display left                     */"
 
 .PP
-Definition at line 176 of file lcd\&.h\&.
+Definition at line 177 of file lcd\&.h\&.
 .SS "#define LCD_MOVE_DISP_RIGHT   0x1C   /* shift display right                    */"
 
 .PP
-Definition at line 177 of file lcd\&.h\&.
+Definition at line 178 of file lcd\&.h\&.
 .SS "#define LCD_MOVE_RIGHT   2      /*   DB2: move right (0-> left) ?      */"
 
 .PP
-Definition at line 151 of file lcd\&.h\&.
+Definition at line 152 of file lcd\&.h\&.
 .SS "#define LCD_ON   3      /* DB3: turn lcd/cursor on             */"
 
 .PP
-Definition at line 145 of file lcd\&.h\&.
+Definition at line 146 of file lcd\&.h\&.
 .SS "#define LCD_ON_BLINK   0      /*     DB0: blinking cursor ?          */"
 
 .PP
-Definition at line 148 of file lcd\&.h\&.
+Definition at line 149 of file lcd\&.h\&.
 .SS "#define LCD_ON_CURSOR   1      /*   DB1: turn cursor on               */"
 
 .PP
-Definition at line 147 of file lcd\&.h\&.
+Definition at line 148 of file lcd\&.h\&.
 .SS "#define LCD_ON_DISPLAY   2      /*   DB2: turn display on              */"
 
 .PP
-Definition at line 146 of file lcd\&.h\&.
-.SS "#define LCD_PORT   PORTL"
+Definition at line 147 of file lcd\&.h\&.
+.SS "#define LCD_PORT   \fBCONFIG_PORT_LCD\fP"
 port for the LCD lines 
 .PP
-Definition at line 43 of file lcd\&.h\&.
+Definition at line 44 of file lcd\&.h\&.
 .SS "#define lcd_puts_P(__s)   \fBlcd_puts_p\fP(PSTR(__s))"
 
 .PP
 macros for automatically storing string constant in program memory 
 .PP
-Definition at line 278 of file lcd\&.h\&.
+Definition at line 279 of file lcd\&.h\&.
 .SS "#define LCD_RS_PIN   4"
 pin for RS line 
 .PP
-Definition at line 112 of file lcd\&.h\&.
+Definition at line 113 of file lcd\&.h\&.
 .SS "#define LCD_RS_PORT   \fBLCD_PORT\fP"
 port for RS line 
 .PP
-Definition at line 111 of file lcd\&.h\&.
+Definition at line 112 of file lcd\&.h\&.
 .SS "#define LCD_RW_PIN   5"
 pin for RW line 
 .PP
-Definition at line 114 of file lcd\&.h\&.
+Definition at line 115 of file lcd\&.h\&.
 .SS "#define LCD_RW_PORT   \fBLCD_PORT\fP"
 port for RW line 
 .PP
-Definition at line 113 of file lcd\&.h\&.
+Definition at line 114 of file lcd\&.h\&.
 .SS "#define LCD_START_LINE1   0x00"
 DDRAM address of first char of line 1 
 .PP
-Definition at line 66 of file lcd\&.h\&.
+Definition at line 67 of file lcd\&.h\&.
 .SS "#define LCD_START_LINE2   0x40"
 DDRAM address of first char of line 2 
 .PP
-Definition at line 67 of file lcd\&.h\&.
+Definition at line 68 of file lcd\&.h\&.
 .SS "#define LCD_START_LINE3   0x14"
 DDRAM address of first char of line 3 
 .PP
-Definition at line 68 of file lcd\&.h\&.
+Definition at line 69 of file lcd\&.h\&.
 .SS "#define LCD_START_LINE4   0x54"
 DDRAM address of first char of line 4 
 .PP
-Definition at line 69 of file lcd\&.h\&.
+Definition at line 70 of file lcd\&.h\&.
 .SS "#define LCD_WRAP_LINES   0"
 0: no wrap, 1: wrap at end of visible line 
 .PP
-Definition at line 70 of file lcd\&.h\&.
+Definition at line 71 of file lcd\&.h\&.
 .SS "#define XTAL   \fBF_CPU\fP"
 clock frequency in Hz, used to calculate delay timer 
 .PP
-Definition at line 50 of file lcd\&.h\&.
+Definition at line 51 of file lcd\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "void lcd_clrscr (void)"

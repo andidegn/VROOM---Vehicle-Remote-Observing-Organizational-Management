@@ -3,9 +3,10 @@
  *
  * @Created: 26-09-2014 15:47:38
  * @Author: Andi Degn
- * @defgroup test_uart UART module test
+ * @defgroup test_module_uart Module test - UART
  * @{
-	 This tests the uart0 and uart 1 on the ATMega2560 by
+	 @ingroup test
+	 @brief This tests the uart0 and uart 1 on the ATMega2560 by
 	 first sending a test string using uart0, receiving it
 	 in uart1 callback function and sending it back to uart0
 	 in a callback function.

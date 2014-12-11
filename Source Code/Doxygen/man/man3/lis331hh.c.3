@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,9 +12,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 \fC#include '\&.\&./\&.\&./data_comm/spi/spi\&.h'\fP
 .br
-\fC#include '\&.\&./sensor_scheduler\&.h'\fP
-.br
-\fC#include <util/delay\&.h>\fP
+\fC#include '\&.\&./\&.\&./application/scheduler/scheduler\&.h'\fP
 .br
 
 .SS "Macros"
@@ -41,7 +39,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "static void \fB_acc_read_from_reg\fP (uint8_t __reg, uint8_t __no_of_dummy_bytes)"
 .br
 .ti -1c
-.RI "void \fBacc_init\fP (uint8_t cs_pin, \fBACC_POWER_MODE\fP power_mode, \fBACC_OUTPUT_DATA_RATE\fP output_data_rate, \fBACC_FULL_SCALE\fP full_scale)"
+.RI "void \fBacc_init\fP (uint8_t __cs_pin, \fBACC_POWER_MODE\fP __power_mode, \fBACC_OUTPUT_DATA_RATE\fP __output_data_rate, \fBACC_FULL_SCALE\fP __full_scale)"
 .br
 .RI "\fIInitializes the driver\&. \fP"
 .ti -1c
@@ -49,15 +47,15 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fIStarts one measure routine\&. \fP"
 .ti -1c
-.RI "float \fBacc_get_x_axis\fP (void)"
+.RI "double \fBacc_get_x_axis\fP (void)"
 .br
 .RI "\fIGets the latest measured x axis value\&. \fP"
 .ti -1c
-.RI "float \fBacc_get_y_axis\fP (void)"
+.RI "double \fBacc_get_y_axis\fP (void)"
 .br
 .RI "\fIGets the latest measured y axis value\&. \fP"
 .ti -1c
-.RI "float \fBacc_get_z_axis\fP (void)"
+.RI "double \fBacc_get_z_axis\fP (void)"
 .br
 .RI "\fIGets the latest measured z axis value\&. \fP"
 .in -1c
@@ -65,7 +63,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "static uint8_t \fB_scale_multiplier\fP = 1"
+.RI "static uint8_t \fB_scale_multiplier\fP = 1U"
 .br
 .ti -1c
 .RI "static int16_t \fB_x_axis\fP = 0"
@@ -101,41 +99,41 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .TP
 \fB\fIRUNNING \fP\fP
 .PP
-Definition at line 25 of file lis331hh\&.c\&.
+Definition at line 24 of file lis331hh\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "int8_t _handle = -1\fC [static]\fP"
 
 .PP
-Definition at line 37 of file lis331hh\&.c\&.
-.SS "uint8_t _scale_multiplier = 1\fC [static]\fP"
+Definition at line 36 of file lis331hh\&.c\&.
+.SS "uint8_t _scale_multiplier = 1U\fC [static]\fP"
 
 .PP
-Definition at line 31 of file lis331hh\&.c\&.
+Definition at line 30 of file lis331hh\&.c\&.
 .SS "uint8_t _send_read[7]\fC [static]\fP"
 
 .PP
-Definition at line 39 of file lis331hh\&.c\&.
+Definition at line 38 of file lis331hh\&.c\&.
 .SS "uint8_t _send_setup[6]\fC [static]\fP"
 
 .PP
-Definition at line 38 of file lis331hh\&.c\&.
+Definition at line 37 of file lis331hh\&.c\&.
 .SS "\fBACC_STATE\fP _state\fC [static]\fP"
 
 .PP
-Definition at line 41 of file lis331hh\&.c\&.
+Definition at line 40 of file lis331hh\&.c\&.
 .SS "int16_t _x_axis = 0\fC [static]\fP"
 
 .PP
-Definition at line 33 of file lis331hh\&.c\&.
+Definition at line 32 of file lis331hh\&.c\&.
 .SS "int16_t _y_axis = 0\fC [static]\fP"
 
 .PP
-Definition at line 34 of file lis331hh\&.c\&.
+Definition at line 33 of file lis331hh\&.c\&.
 .SS "int16_t _z_axis = 0\fC [static]\fP"
 
 .PP
-Definition at line 35 of file lis331hh\&.c\&.
+Definition at line 34 of file lis331hh\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

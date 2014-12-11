@@ -1,4 +1,4 @@
-.TH "GPS" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "GPS" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -28,7 +28,7 @@ Defines for the GPS\&.
 .RI "#define \fBAT_GPS_RST_AUTONOMY\fP   'AT+CGPSRST=1'"
 .br
 .ti -1c
-.RI "#define \fBAT_GPS_GET_LOCATION\fP   'AT+CGPSINF=0'"
+.RI "#define \fBAT_GPS_GET_LOCATION\fP   'AT+CGPSINF=0' /* Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course> */"
 .br
 .ti -1c
 .RI "#define \fBAT_GPS_GET_STATUS\fP   'AT+CGPSSTATUS?'"
@@ -41,38 +41,38 @@ Defines for the GPS\&.
 
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define AT_GPS_GET_LOCATION   'AT+CGPSINF=0'"
-
-.PP
-Definition at line 262 of file at_commands\&.h\&.
-.SS "#define AT_GPS_GET_STATUS   'AT+CGPSSTATUS?'"
+.SS "#define AT_GPS_GET_LOCATION   'AT+CGPSINF=0' /* Response <mode>,<longitude>,<latitude>,<altitude>,<UTCtime>,<TTFF>,<num>,<speed>,<course> */"
 
 .PP
 Definition at line 263 of file at_commands\&.h\&.
+.SS "#define AT_GPS_GET_STATUS   'AT+CGPSSTATUS?'"
+
+.PP
+Definition at line 264 of file at_commands\&.h\&.
 .SS "#define AT_GPS_POWER_OFF   'AT+CGPSPWR=0'"
 
 .PP
-Definition at line 258 of file at_commands\&.h\&.
+Definition at line 259 of file at_commands\&.h\&.
 .SS "#define AT_GPS_POWER_ON   'AT+CGPSPWR=1'"
 
 .PP
-Definition at line 257 of file at_commands\&.h\&.
+Definition at line 258 of file at_commands\&.h\&.
 .SS "#define AT_GPS_POWER_STATE   'AT+CGPSPWR?'"
 
 .PP
-Definition at line 256 of file at_commands\&.h\&.
+Definition at line 257 of file at_commands\&.h\&.
 .SS "#define AT_GPS_RST_AUTONOMY   'AT+CGPSRST=1'"
 
 .PP
-Definition at line 261 of file at_commands\&.h\&.
+Definition at line 262 of file at_commands\&.h\&.
 .SS "#define AT_GPS_RST_COLD   'AT+CGPSRST=0'"
 
 .PP
-Definition at line 260 of file at_commands\&.h\&.
+Definition at line 261 of file at_commands\&.h\&.
 .SS "#define AT_GPS_RST_MODE   'AT+CGPSRST?'"
 
 .PP
-Definition at line 259 of file at_commands\&.h\&.
+Definition at line 260 of file at_commands\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

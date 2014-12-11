@@ -1,0 +1,35 @@
+var scheduler_8c =
+[
+    [ "SCHEDULER_STATE", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cc", [
+      [ "state_tc72_init", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544ccaa8a78d67277047fb1fbf8776ae3d7ce9", null ],
+      [ "state_acc_init", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca60c88d1b54175e6b6793b0e4b4bb735d", null ],
+      [ "state_timer_init", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca2baa505f23037076b362e32e8431432b", null ],
+      [ "state_idle", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca83852e30194cd34f1153fc80a58f55bc", null ],
+      [ "state_tc72_read", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca577bbb6707893451bcd281550bc554cf", null ],
+      [ "state_acc_read", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca310c4b124c47de0cbde30bc4b3491426", null ],
+      [ "state_store_in_buffers", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca633e136b95011070673da9aebee2f231", null ],
+      [ "state_detect_accident", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544ccadc3049a53612fe74f2337750504875b5", null ],
+      [ "state_detect_fire", "scheduler_8c.html#ab7b9e96b68c5d73bffdfd8a625b544cca6e63ae5720ec47ec7fec36c3efdd460b", null ]
+    ] ],
+    [ "scheduler_acc_get_last_readings", "scheduler_8c.html#ga6052acd831c929175f5d5a2ebafdfb67", null ],
+    [ "scheduler_acc_get_last_readings_sum", "scheduler_8c.html#ga8a00bf4e51efe77777a3cd787dfbc6f1", null ],
+    [ "scheduler_halt", "scheduler_8c.html#gae928f967b0ac7c3c3302378179e0423b", null ],
+    [ "scheduler_pause", "scheduler_8c.html#gafbe9f4759612aa67d34e433cdbb209c2", null ],
+    [ "scheduler_release", "scheduler_8c.html#ga08241049a9228fe3dd6943629796b077", null ],
+    [ "scheduler_resume", "scheduler_8c.html#ga7932262718483488007e6c9f4bd12aa1", null ],
+    [ "scheduler_start", "scheduler_8c.html#gad7757661991663ae99dbac66880abd9d", null ],
+    [ "scheduler_temp_get_last_reading", "scheduler_8c.html#ga050a2bb492b620922ab7b0ade776c88a", null ],
+    [ "_acc_buffer_tail", "scheduler_8c.html#ade848b8d314b4981b746a1bbc9b54c37", null ],
+    [ "_callback_function_ptr", "scheduler_8c.html#a971390504483293313915163f6779580", null ],
+    [ "_execution_counter", "scheduler_8c.html#ac6ca6224132b50b6f11b46bc0f1393bb", null ],
+    [ "_state", "scheduler_8c.html#a227d2f1348ff31eaf0e3fefbefc50707", null ],
+    [ "_task_prev_id_acc", "scheduler_8c.html#a287b01500f8efc6588a7766382274b10", null ],
+    [ "_task_prev_id_crash_det", "scheduler_8c.html#a310e842d7965d7ce998d25568fdf9995", null ],
+    [ "_task_prev_id_fire_det", "scheduler_8c.html#ab7cc7ad1ae2107bc0cc9ee5c5a9113f6", null ],
+    [ "_task_prev_id_read", "scheduler_8c.html#a4d6e51b903f42038e41e9f20f230570f", null ],
+    [ "_task_prev_id_temp", "scheduler_8c.html#a8b143abcab4cf984788e349d51723519", null ],
+    [ "_temperature", "scheduler_8c.html#af51952d76cfce48b60dabe4940208238", null ],
+    [ "_x_axis_buffer", "scheduler_8c.html#a5a6131eea443aa666cddd77881c8932a", null ],
+    [ "_y_axis_buffer", "scheduler_8c.html#a29d84eac32003e1e4094d9109fe4bcc5", null ],
+    [ "_z_axis_buffer", "scheduler_8c.html#aac88409aceedd154cbf0ed34996344e8", null ]
+];

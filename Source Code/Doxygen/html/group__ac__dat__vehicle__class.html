@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__ac__dat__vehicle__class.html','
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -109,19 +109,19 @@ $(document).ready(function(){initNavTree('group__ac__dat__vehicle__class.html','
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga1d5e2a7aec0e04c832b3a861288cfd33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga1d5e2a7aec0e04c832b3a861288cfd33">AD_VEHICLE_CLASS_L</a>(category)&#160;&#160;&#160;(1&lt;&lt;4 | category)	/* Motor vehicles with less than four wheels */</td></tr>
+<tr class="memitem:ga1d5e2a7aec0e04c832b3a861288cfd33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga1d5e2a7aec0e04c832b3a861288cfd33">AD_VEHICLE_CLASS_L</a>(category)&#160;&#160;&#160;(uint8_t)(1&lt;&lt;4 | (category))	/**&gt; Motor vehicles with less than four wheels */</td></tr>
 <tr class="separator:ga1d5e2a7aec0e04c832b3a861288cfd33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7f7b3ae2479cf20b7a08d3625fa44067"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga7f7b3ae2479cf20b7a08d3625fa44067">AD_VEHICLE_CLASS_M</a>(category)&#160;&#160;&#160;(2&lt;&lt;4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of passengers */</td></tr>
+<tr class="memitem:ga7f7b3ae2479cf20b7a08d3625fa44067"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga7f7b3ae2479cf20b7a08d3625fa44067">AD_VEHICLE_CLASS_M</a>(category)&#160;&#160;&#160;(uint8_t)(2&lt;&lt;4 | (category))	/**&gt; Power-driven vehicles having at least four wheels and used for the carriage of passengers */</td></tr>
 <tr class="separator:ga7f7b3ae2479cf20b7a08d3625fa44067"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga94e835e3c4d0a57843a6d266f8c8d518"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga94e835e3c4d0a57843a6d266f8c8d518">AD_VEHICLE_CLASS_N</a>(category)&#160;&#160;&#160;(3&lt;&lt;4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of goods */</td></tr>
+<tr class="memitem:ga94e835e3c4d0a57843a6d266f8c8d518"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga94e835e3c4d0a57843a6d266f8c8d518">AD_VEHICLE_CLASS_N</a>(category)&#160;&#160;&#160;(uint8_t)(3&lt;&lt;4 | (category))	/**&gt; Power-driven vehicles having at least four wheels and used for the carriage of goods */</td></tr>
 <tr class="separator:ga94e835e3c4d0a57843a6d266f8c8d518"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga378c83dcb1166caae8d74daa9c5a0534"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga378c83dcb1166caae8d74daa9c5a0534">AD_VEHICLE_CLASS_O</a>(category)&#160;&#160;&#160;(4&lt;&lt;4 | category)	/* Trailers (including semi–trailers) */</td></tr>
+<tr class="memitem:ga378c83dcb1166caae8d74daa9c5a0534"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga378c83dcb1166caae8d74daa9c5a0534">AD_VEHICLE_CLASS_O</a>(category)&#160;&#160;&#160;(uint8_t)(4&lt;&lt;4 | (category))	/**&gt; Trailers (including semi–trailers) */</td></tr>
 <tr class="separator:ga378c83dcb1166caae8d74daa9c5a0534"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga58438e4733518fb4297263e2b2b1d9d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga58438e4733518fb4297263e2b2b1d9d8">AD_VEHICLE_CLASS_T</a>(category)&#160;&#160;&#160;(5&lt;&lt;4 | category)	/* Agricultural and Forestry tractors */</td></tr>
+<tr class="memitem:ga58438e4733518fb4297263e2b2b1d9d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga58438e4733518fb4297263e2b2b1d9d8">AD_VEHICLE_CLASS_T</a>(category)&#160;&#160;&#160;(uint8_t)(5&lt;&lt;4 | (category))	/**&gt; Agricultural and Forestry tractors */</td></tr>
 <tr class="separator:ga58438e4733518fb4297263e2b2b1d9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga86c702516999c02ea344db6dce2df239"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga86c702516999c02ea344db6dce2df239">AD_VEHICLE_CLASS_G</a>(category)&#160;&#160;&#160;(6&lt;&lt;4 | category)	/* Off-road vehicles */</td></tr>
+<tr class="memitem:ga86c702516999c02ea344db6dce2df239"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga86c702516999c02ea344db6dce2df239">AD_VEHICLE_CLASS_G</a>(category)&#160;&#160;&#160;(uint8_t)(6&lt;&lt;4 | (category))	/**&gt; Off-road vehicles */</td></tr>
 <tr class="separator:ga86c702516999c02ea344db6dce2df239"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6f48882dc7750139d88f6b6217699c32"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga6f48882dc7750139d88f6b6217699c32">AD_VEHICLE_CLASS_SA</a>(category)&#160;&#160;&#160;(7&lt;&lt;4 | category)	/* Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/</td></tr>
+<tr class="memitem:ga6f48882dc7750139d88f6b6217699c32"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ac__dat__vehicle__class.html#ga6f48882dc7750139d88f6b6217699c32">AD_VEHICLE_CLASS_SA</a>(category)&#160;&#160;&#160;(uint8_t)(7&lt;&lt;4 | (category))	/**&gt; Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/</td></tr>
 <tr class="separator:ga6f48882dc7750139d88f6b6217699c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -145,7 +145,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">category</td><td>)</td>
-          <td>&#160;&#160;&#160;(6&lt;&lt;4 | category)	/* Off-road vehicles */</td>
+          <td>&#160;&#160;&#160;(uint8_t)(6&lt;&lt;4 | (category))	/**&gt; Off-road vehicles */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -163,7 +163,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">category</td><td>)</td>
-          <td>&#160;&#160;&#160;(1&lt;&lt;4 | category)	/* Motor vehicles with less than four wheels */</td>
+          <td>&#160;&#160;&#160;(uint8_t)(1&lt;&lt;4 | (category))	/**&gt; Motor vehicles with less than four wheels */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -181,7 +181,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">category</td><td>)</td>
-          <td>&#160;&#160;&#160;(2&lt;&lt;4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of passengers */</td>
+          <td>&#160;&#160;&#160;(uint8_t)(2&lt;&lt;4 | (category))	/**&gt; Power-driven vehicles having at least four wheels and used for the carriage of passengers */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -199,7 +199,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">category</td><td>)</td>
-          <td>&#160;&#160;&#160;(3&lt;&lt;4 | category)	/* Power-driven vehicles having at least four wheels and used for the carriage of goods */</td>
+          <td>&#160;&#160;&#160;(uint8_t)(3&lt;&lt;4 | (category))	/**&gt; Power-driven vehicles having at least four wheels and used for the carriage of goods */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -217,7 +217,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">category</td><td>)</td>
-          <td>&#160;&#160;&#160;(4&lt;&lt;4 | category)	/* Trailers (including semi–trailers) */</td>
+          <td>&#160;&#160;&#160;(uint8_t)(4&lt;&lt;4 | (category))	/**&gt; Trailers (including semi–trailers) */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -235,7 +235,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">category</td><td>)</td>
-          <td>&#160;&#160;&#160;(7&lt;&lt;4 | category)	/* Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/</td>
+          <td>&#160;&#160;&#160;(uint8_t)(7&lt;&lt;4 | (category))	/**&gt; Special purpose vehicles (e.g. Ambulance, Hearse, Armoured vehicle or Motor caravan)	*/</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -253,7 +253,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">category</td><td>)</td>
-          <td>&#160;&#160;&#160;(5&lt;&lt;4 | category)	/* Agricultural and Forestry tractors */</td>
+          <td>&#160;&#160;&#160;(uint8_t)(5&lt;&lt;4 | (category))	/**&gt; Agricultural and Forestry tractors */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -267,7 +267,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:20 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:23 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

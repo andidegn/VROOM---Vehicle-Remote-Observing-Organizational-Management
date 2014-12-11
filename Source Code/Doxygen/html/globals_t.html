@@ -78,7 +78,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
       <li><a href="globals_vars.html"><span>Variables</span></a></li>
-      <li><a href="globals_type.html"><span>Typedefs</span></a></li>
       <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
       <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
       <li><a href="globals_defs.html"><span>Macros</span></a></li>
@@ -130,7 +129,7 @@ $(document).ready(function(){initNavTree('globals_t.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -149,84 +148,92 @@ $(document).ready(function(){initNavTree('globals_t.html','');});
 <li>temp
 : <a class="el" href="test__module__sensors_8c.html#a24d61a35b72d7299eb6b5f48e71a571b">test_module_sensors.c</a>
 </li>
+<li>test_control_LED()
+: <a class="el" href="test__module__car__panel_8h.html#a0aa41a33b4437a60ab5b9d97b8afd9d1">test_module_car_panel.h</a>
+, <a class="el" href="test__module__car__panel_8c.html#a0aa41a33b4437a60ab5b9d97b8afd9d1">test_module_car_panel.c</a>
+</li>
 <li>test_module_uart_run()
-: <a class="el" href="group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38">test_module_uart.h</a>
-, <a class="el" href="group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38">test_module_uart.c</a>
+: <a class="el" href="group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38">test_module_uart.c</a>
+</li>
+<li>test_status_LED()
+: <a class="el" href="test__module__car__panel_8c.html#ad9e49a136439374b9fae6eca8a2967c0">test_module_car_panel.c</a>
+, <a class="el" href="test__module__car__panel_8h.html#ad9e49a136439374b9fae6eca8a2967c0">test_module_car_panel.h</a>
 </li>
 <li>test_tc72_calc()
-: <a class="el" href="group__ut.html#ga05679a7c7bb9e541e770c10c612dea2d">unit_test.c</a>
+: <a class="el" href="group__test__unit__priv.html#gaf09bae73e0275796f723e4631c16abe3">test_unit.c</a>
+</li>
+<li>test_UTC_sec_calc()
+: <a class="el" href="group__test__unit__priv.html#ga0c150893fff1b2cdb1e320a77dddcecd">test_unit.c</a>
 </li>
 <li>tests_run
-: <a class="el" href="unit__test_8c.html#a1d61e35205d61f76e26abaab0011bb7a">unit_test.c</a>
+: <a class="el" href="group__test__unit__pub.html#ga1d61e35205d61f76e26abaab0011bb7a">test_unit.c</a>
+, <a class="el" href="group__test__unit__pub.html#ga1d61e35205d61f76e26abaab0011bb7a">test_unit.h</a>
 </li>
 <li>timer1_init_CTC()
-: <a class="el" href="group__timer.html#ga857c19ab6c2a6baa76ff29ba64531a1e">timer.c</a>
-</li>
-<li>timer3_init_CTC()
-: <a class="el" href="group__timer.html#ga73893cdd4c08e4e02f77a514ff6a9a1c">timer.c</a>
-</li>
-<li>timer3_start()
-: <a class="el" href="group__timer.html#ga4d48d8159faa76d37a64326b037cdcf1">timer.c</a>
-</li>
-<li>timer3_stop()
-: <a class="el" href="group__timer.html#ga831aa99548aedfe5888e2be339728a18">timer.c</a>
+: <a class="el" href="group__timer__pub.html#ga857c19ab6c2a6baa76ff29ba64531a1e">timer.c</a>
 </li>
 <li>TIMER_100HZ
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aa60470e83f181631d13a835ab919c2105">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aa60470e83f181631d13a835ab919c2105">timer.h</a>
 </li>
 <li>TIMER_10HZ
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aaf85a5b0399970ae4a7542cd1f0c0aa37">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aaf85a5b0399970ae4a7542cd1f0c0aa37">timer.h</a>
 </li>
 <li>TIMER_150HZ
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aafafdfda6f8e9a4ab78fbff7a74af44a2">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aafafdfda6f8e9a4ab78fbff7a74af44a2">timer.h</a>
 </li>
 <li>TIMER_1HZ
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aa6b8652e1b3a54b3a9aef3f4345ac5af0">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aa6b8652e1b3a54b3a9aef3f4345ac5af0">timer.h</a>
 </li>
 <li>TIMER_1KHZ
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aa5cb0c32079bef8a3a9338c4de4d36bea">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aa5cb0c32079bef8a3a9338c4de4d36bea">timer.h</a>
 </li>
 <li>TIMER_200HZ
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aa3e5ae52a62a3fc4e35258663705398a8">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aa3e5ae52a62a3fc4e35258663705398a8">timer.h</a>
 </li>
 <li>TIMER_500HZ
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aad640846362b4af8bd3fedf0c72b4dcd9">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aad640846362b4af8bd3fedf0c72b4dcd9">timer.h</a>
 </li>
 <li>TIMER_50HZ
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aac2d3cec6b83b084fb73afeaa019ebcb1">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aac2d3cec6b83b084fb73afeaa019ebcb1">timer.h</a>
 </li>
 <li>TIMER_FREQUENCY
-: <a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612a">timer.h</a>
+: <a class="el" href="group__timer__pub.html#ga201a4f2cb1c81c24f23dd01dae07612a">timer.h</a>
 </li>
-<li>timer_pause_all()
-: <a class="el" href="group__timer.html#gacf1507ccebc4c8e9506327dd8659a056">timer.c</a>
+<li>timer_pause()
+: <a class="el" href="group__timer__pub.html#ga65eb46ec3dbbeb206bd7b92e43e9561b">timer.c</a>
 </li>
 <li>TIMER_PRESCALER
-: <a class="el" href="group__timer.html#ga7e6cbe0bc6f3395283c560bdc0690447">timer.h</a>
+: <a class="el" href="group__timer__pub.html#ga7e6cbe0bc6f3395283c560bdc0690447">timer.h</a>
 </li>
 <li>TIMER_PS1
-: <a class="el" href="timer_8h.html#ga7e6cbe0bc6f3395283c560bdc0690447a90b130b84755e7a94af1c01d86fa6b47">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga7e6cbe0bc6f3395283c560bdc0690447a90b130b84755e7a94af1c01d86fa6b47">timer.h</a>
 </li>
 <li>TIMER_PS1024
-: <a class="el" href="timer_8h.html#ga7e6cbe0bc6f3395283c560bdc0690447a08abac5f3ad9c0f90a3dcc41ee668127">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga7e6cbe0bc6f3395283c560bdc0690447a08abac5f3ad9c0f90a3dcc41ee668127">timer.h</a>
 </li>
 <li>TIMER_PS256
-: <a class="el" href="timer_8h.html#ga7e6cbe0bc6f3395283c560bdc0690447ac2293b4cb70af3617f30860e029bf4a3">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga7e6cbe0bc6f3395283c560bdc0690447ac2293b4cb70af3617f30860e029bf4a3">timer.h</a>
 </li>
 <li>TIMER_PS64
-: <a class="el" href="timer_8h.html#ga7e6cbe0bc6f3395283c560bdc0690447a1a176aa8a89ebd0bba158eff4df9f996">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga7e6cbe0bc6f3395283c560bdc0690447a1a176aa8a89ebd0bba158eff4df9f996">timer.h</a>
 </li>
 <li>TIMER_PS8
-: <a class="el" href="timer_8h.html#ga7e6cbe0bc6f3395283c560bdc0690447a87cbcd2d2fdce5de6911b784aa17ed2f">timer.h</a>
+: <a class="el" href="group__timer__pub.html#gga7e6cbe0bc6f3395283c560bdc0690447a87cbcd2d2fdce5de6911b784aa17ed2f">timer.h</a>
 </li>
-<li>timer_resume_all()
-: <a class="el" href="group__timer.html#ga2094c0da94a7d5d1a65974c6e9b7b2ad">timer.c</a>
+<li>timer_resume()
+: <a class="el" href="group__timer__pub.html#ga44c156e09be1acc3c6438e1db1e2bc3a">timer.c</a>
+</li>
+<li>timer_start()
+: <a class="el" href="group__timer__pub.html#gaeb09db6f93d0e0f5aad6e9d2345793e0">timer.c</a>
+</li>
+<li>timer_stop()
+: <a class="el" href="group__timer__pub.html#ga37980fc313f86d7f40a3d7643861ed29">timer.c</a>
 </li>
 <li>toggle_e()
 : <a class="el" href="lcd_8c.html#a762d0af9ccb3c9507af12cd7617e047d">lcd.c</a>
 </li>
 <li>TOP_VALUE
-: <a class="el" href="timer_8c.html#ab4feb53bd95849700d036a10f4fa60e4">timer.c</a>
+: <a class="el" href="group__timer__top__value.html#gab4feb53bd95849700d036a10f4fa60e4">timer.c</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -234,7 +241,7 @@ $(document).ready(function(){initNavTree('globals_t.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:22 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:25 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

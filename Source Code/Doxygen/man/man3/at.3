@@ -1,4 +1,4 @@
-.TH "AT Commands" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "AT Commands" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -100,7 +100,7 @@ This is a header containing all the most relevant AT commands for this system\&.
 
 .in +1c
 .ti -1c
-.RI "enum \fBAT_CONNECTION_STATUS_FLAG\fP { \fBCREG_NOT_REG_NOT_SEARCHING\fP = 0, \fBCREG_REGISTERED_HOME_NETWORK\fP = 1, \fBCREG_NOT_REG_SEARCHING\fP = 2, \fBCREG_REGISTRATION_DENIED\fP = 3, \fBCREG_UNKNOWN\fP = 4, \fBCREG_REGISTERED_ROAMING\fP = 5 }"
+.RI "enum \fBAT_CONNECTION_STATUS_FLAG\fP { \fBCREG_NOT_REG_NOT_SEARCHING\fP = 0U, \fBCREG_REGISTERED_HOME_NETWORK\fP = 1U, \fBCREG_NOT_REG_SEARCHING\fP = 2U, \fBCREG_REGISTRATION_DENIED\fP = 3U, \fBCREG_UNKNOWN\fP = 4U, \fBCREG_REGISTERED_ROAMING\fP = 5U }"
 .br
 .RI "\fIFlag to detect the connection status\&. \fP"
 .in -1c
@@ -112,7 +112,7 @@ This is a header containing all the most relevant AT commands for this system\&.
 .PP
 \fBNote:\fP
 .RS 4
-NOT YET Complies MISRO 2004 standards 
+Complies MISRA 2004 standards 
 .RE
 .PP
 
@@ -145,7 +145,7 @@ Corresponding to CREG response in SIM908 p\&. 77 in AT Commands manual v\&. 1\&.
 .TP
 \fB\fICREG_REGISTERED_ROAMING \fP\fP
 .PP
-Definition at line 24 of file at_commands\&.h\&.
+Definition at line 25 of file at_commands\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/Tests/module/uart/test_module_uart.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/Tests/module/uart/test_module_uart.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -30,12 +30,15 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "static bool \fB_validate_data\fP (void)"
 .br
+.RI "\fIValidates the data received against the given string literal\&. \fP"
 .ti -1c
 .RI "static void \fB_data0_received\fP (char data)"
 .br
+.RI "\fICallback function for uart0 Stores received data in buffer and sets _roundtrip_complete flag if the end length of the _uart_compare_string is reached\&. \fP"
 .ti -1c
 .RI "static void \fB_data1_received\fP (char data)"
 .br
+.RI "\fICallback function for uart1 Echoes data\&. \fP"
 .ti -1c
 .RI "bool \fBtest_module_uart_run\fP (const char *__uart_test_string, const char *__uart_compare_string)"
 .br
@@ -70,40 +73,46 @@ Created: 26-09-2014 15:48:21 Author: Andi Degn
 Definition at line 13 of file test_module_uart\&.c\&.
 .SH "Function Documentation"
 .PP 
-.SS "static void _data0_received (chardata)\fC [static]\fP"
-
-.PP
-Definition at line 99 of file test_module_uart\&.c\&.
 .SS "static void _data1_received (chardata)\fC [static]\fP"
 
 .PP
-Definition at line 107 of file test_module_uart\&.c\&.
-.SS "static bool _validate_data (void)\fC [static]\fP"
+Callback function for uart1 Echoes data\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIchar\fP data - the data received
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
 
 .PP
-Definition at line 83 of file test_module_uart\&.c\&.
+Definition at line 141 of file test_module_uart\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "char _index\fC [static]\fP"
 
 .PP
-Definition at line 17 of file test_module_uart\&.c\&.
+Definition at line 18 of file test_module_uart\&.c\&.
 .SS "bool _roundtrip_complete = false\fC [static]\fP"
 
 .PP
-Definition at line 19 of file test_module_uart\&.c\&.
+Definition at line 20 of file test_module_uart\&.c\&.
 .SS "uint16_t _timeout_ctr\fC [static]\fP"
 
 .PP
-Definition at line 18 of file test_module_uart\&.c\&.
+Definition at line 19 of file test_module_uart\&.c\&.
 .SS "char* _uart_compare_string\fC [static]\fP"
 
 .PP
-Definition at line 15 of file test_module_uart\&.c\&.
+Definition at line 16 of file test_module_uart\&.c\&.
 .SS "char* _uart_received_data\fC [static]\fP"
 
 .PP
-Definition at line 16 of file test_module_uart\&.c\&.
+Definition at line 17 of file test_module_uart\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

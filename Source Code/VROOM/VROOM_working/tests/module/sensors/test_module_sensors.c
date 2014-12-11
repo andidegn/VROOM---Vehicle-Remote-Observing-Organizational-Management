@@ -1,13 +1,6 @@
-/********************************************//**
-@file test_module_sensors.c
-@author: Kenneth René Jensen
-@Version: 0.1
-@defgroup test Module Test - Sensors
-@{
-	This is a test for for the sensor module consisting of TC72 temperature sensor and accelerometer using SPI.
-	The module test uses the LCD display to visualize the sensors output.
-@}
-************************************************/
+/**********************************************************************//**
+ * @file test_module_sensors.c
+ *************************************************************************/
 #include <stdlib.h>
 #include "test_module_sensors.h"
 #include "../../../util/lcd_board/lcd/lcd.h"
@@ -19,6 +12,10 @@ static float temp;
 static char buf[10];
 static int16_t _acc_buffer[3];
 
+/**********************************************************************//**
+ * @ingroup test_sensors_pub
+ * Sets values to zero and starts the scheduler
+ *************************************************************************/
 void sensors_init()
 {
 	x_axis = 0;
@@ -28,6 +25,10 @@ void sensors_init()
 	scheduler_start(NULL);
 }
 
+/**********************************************************************//**
+ * @ingroup test_sensors_pub
+ * Gets the readings from the scheduler and stores them locally
+ *************************************************************************/
 void sensors_read_data(void)
 {
 	scheduler_acc_get_last_readings(_acc_buffer);
@@ -37,6 +38,10 @@ void sensors_read_data(void)
 	temp = scheduler_temp_get_last_reading();
 }
 
+/**********************************************************************//**
+ * @ingroup test_sensors_pub
+ * Prints the values to the LCD display
+ *************************************************************************/
 void sensors_print_data(void)
 {
 	lcd_clrscr();
@@ -47,11 +52,11 @@ void sensors_print_data(void)
 	lcd_gotoxy(8, 0);
 	lcd_puts("y ");
 	lcd_puts((char *)itoa(y_axis, buf, 10));;
-	
+
 	lcd_gotoxy(0, 1);
 	lcd_puts("z ");
 	lcd_puts((char *)itoa(z_axis, buf, 10));
-	
+
 	lcd_gotoxy(8, 1);
 	lcd_puts((char *)dtostrf( temp, 2, 2, buf ));
 	lcd_putc(degree);

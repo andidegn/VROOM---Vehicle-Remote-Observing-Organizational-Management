@@ -1,8 +1,8 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/timer/timer.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/timer/timer.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/timer/timer.h \- 
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/timer/timer.h \- 
 .SH SYNOPSIS
 .br
 .PP
@@ -19,6 +19,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "enum \fBTIMER_FREQUENCY\fP { \fBTIMER_1HZ\fP = 1, \fBTIMER_10HZ\fP = 10, \fBTIMER_50HZ\fP = 50, \fBTIMER_100HZ\fP = 100, \fBTIMER_150HZ\fP = 150, \fBTIMER_200HZ\fP = 200, \fBTIMER_500HZ\fP = 500, \fBTIMER_1KHZ\fP = 1000 }"
 .br
+.RI "\fISpecifies constants for setting the top value\&. \fP"
 .in -1c
 .SS "Functions"
 
@@ -28,23 +29,19 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fIInitiates timer 1 in CTC mode\&. \fP"
 .ti -1c
-.RI "void \fBtimer3_init_CTC\fP (\fBTIMER_PRESCALER\fP prescaler, \fBTIMER_FREQUENCY\fP hz)"
+.RI "void \fBtimer_pause\fP (void)"
 .br
-.RI "\fIInitiates timer 3 in CTC mode\&. \fP"
+.RI "\fIStores the mask and interrupt register for Timer 1 and disables interrupts\&. \fP"
 .ti -1c
-.RI "void \fBtimer3_start\fP (void)"
+.RI "void \fBtimer_resume\fP (void)"
 .br
-.RI "\fIEnables interrupt for timer3\&. \fP"
+.RI "\fIRestores the mask and interrupt register for Timer 1 and enables interrupts\&. \fP"
 .ti -1c
-.RI "void \fBtimer3_stop\fP (void)"
-.br
-.RI "\fIDisables interrupt for timer3\&. \fP"
-.ti -1c
-.RI "void \fBtimer_pause_all\fP (void)"
+.RI "void \fBtimer_stop\fP (void)"
 .br
 .RI "\fIDisables interrupt for timer1 and timer3\&. \fP"
 .ti -1c
-.RI "void \fBtimer_resume_all\fP (void)"
+.RI "void \fBtimer_start\fP (void)"
 .br
 .RI "\fIEnables interrupt for timer1 and timer3\&. \fP"
 .in -1c
@@ -54,37 +51,17 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .PP
 \fBAuthor:\fP
 .RS 4
-: Kenneth René Jensen : 0\&.3 
+: Kenneth René Jensen 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+: 0\&.5 
 .RE
 .PP
 
 .PP
 Definition in file \fBtimer\&.h\fP\&.
-.SH "Enumeration Type Documentation"
-.PP 
-.SS "enum \fBTIMER_FREQUENCY\fP"
-
-.PP
-\fBEnumerator\fP
-.in +1c
-.TP
-\fB\fITIMER_1HZ \fP\fP
-.TP
-\fB\fITIMER_10HZ \fP\fP
-.TP
-\fB\fITIMER_50HZ \fP\fP
-.TP
-\fB\fITIMER_100HZ \fP\fP
-.TP
-\fB\fITIMER_150HZ \fP\fP
-.TP
-\fB\fITIMER_200HZ \fP\fP
-.TP
-\fB\fITIMER_500HZ \fP\fP
-.TP
-\fB\fITIMER_1KHZ \fP\fP
-.PP
-Definition at line 34 of file timer\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

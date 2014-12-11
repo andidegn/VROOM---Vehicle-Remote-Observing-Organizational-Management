@@ -1,4 +1,4 @@
-.TH "Private" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -31,7 +31,7 @@ Handles the callback from the SPI driver by storing the returned data locally
 .PP
 \fBParameters:\fP
 .RS 4
-\fIuint8_t\fP *data - a pointer to an array of the same size as was passed to the SPI driver
+\fIuint8_t\fP *__data - a pointer to an array of the same size as was passed to the SPI driver
 .RE
 .PP
 \fBReturns:\fP
@@ -41,8 +41,8 @@ void
 .PP
 
 .PP
-Definition at line 170 of file lis331hh\&.c\&.
-.SS "static void _acc_read_from_reg (uint8_treg, uint8_tno_of_dummy_bytes)\fC [static]\fP"
+Definition at line 169 of file lis331hh\&.c\&.
+.SS "static void _acc_read_from_reg (uint8_t__reg, uint8_t__no_of_dummy_bytes)\fC [static]\fP"
 Sends seven bytes to the SPI\&. First byte with the command\&. The command is a constructed like so: Bit0 - RW: Read/Write
 .IP "\(bu" 2
 Read: 1
@@ -80,7 +80,7 @@ void
 .PP
 
 .PP
-Definition at line 128 of file lis331hh\&.c\&.
+Definition at line 127 of file lis331hh\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

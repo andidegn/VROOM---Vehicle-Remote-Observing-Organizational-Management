@@ -2,9 +2,17 @@ var NAVTREE =
 [
   [ "VROOM", "index.html", [
     [ "Vroom Project", "index.html", [
-      [ "Introduction", "index.html#Introduction", [
-        [ "Background", "index.html#Background", null ]
+      [ "Introduction", "index.html#intro", [
+        [ "Background", "index.html#background", null ]
       ] ],
+      [ "Results and Discussion", "index.html#rad", [
+        [ "Improvements", "index.html#impr", [
+          [ "MISRA C 2004", "index.html#misra", null ],
+          [ "SIM908 communication", "index.html#sim908_comm", null ]
+        ] ],
+        [ "From prototype to market", "index.html#fptm", null ]
+      ] ],
+      [ "Conclusion", "index.html#conclusion", null ],
       [ "Changelog", "index.html#Changelog", null ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
@@ -22,7 +30,6 @@ var NAVTREE =
         [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", "globals_defs" ]
@@ -33,13 +40,13 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_v_r_o_o_m__working_8c.html",
-"dir_7f0f200ae98be3cb55f4b41b2ab2a9b4.html",
-"group__at__profile.html#gac8d0680d4383216ab819928632105db0",
-"group__spi__pub.html#gga96a1793d8e3c7227d6009a535c201cf0a76b4ad1254f6a906f9f2ac53a0565176",
-"lcd_8h.html#gaf8da853dba4b9d5f2aea4e294444e14d",
-"spi_8c.html#ga69c7184b8c4cf536ddad3c228393e964",
-"uart_8h.html#gga2b50ce1943f24e90a2e2b8fe34f20481a6d32146eb9f489076a294ada8594ced8"
+"accident__data_8c.html",
+"globals_b.html",
+"group__cp__pub.html#gaffbaab1d55ef80958822c179a8c67a88",
+"group__spi__priv.html#gabddcb9317f7bc6255e6811eec522efaf",
+"lcd_8c.html#gafa7e36b95c43d603f510273ad077cbbe",
+"scheduler_8c.html#ga08241049a9228fe3dd6943629796b077",
+"test__module__uart_8c.html#a0b61442c1bf89c7789c526135bf5bbb2"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

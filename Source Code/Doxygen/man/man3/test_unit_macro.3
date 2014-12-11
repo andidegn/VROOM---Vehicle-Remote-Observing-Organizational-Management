@@ -1,0 +1,36 @@
+.TH "Unit test macro" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Unit test macro \- 
+.PP
+MinUnit macros for unit testing\&.  
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBmu_assert\fP(message, test)   do { if (!(test)) return message; } while (0)"
+.br
+.ti -1c
+.RI "#define \fBmu_run_test\fP(test)   do { char *message = test(); \fBtests_run\fP++; if (message) return message; } while (0)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+MinUnit macros for unit testing\&. 
+
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define mu_assert(message, test)   do { if (!(test)) return message; } while (0)"
+
+.PP
+Definition at line 27 of file test_unit\&.h\&.
+.SS "#define mu_run_test(test)   do { char *message = test(); \fBtests_run\fP++; if (message) return message; } while (0)"
+
+.PP
+Definition at line 28 of file test_unit\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

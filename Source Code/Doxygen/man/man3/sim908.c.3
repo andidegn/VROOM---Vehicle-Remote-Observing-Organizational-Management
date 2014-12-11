@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/sim908/sim908.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,55 +16,57 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 \fC#include 'at_commands\&.h'\fP
 .br
+\fC#include '\&.\&./\&.\&./application/vroom_config\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./application/scheduler/scheduler\&.h'\fP
+.br
 \fC#include '\&.\&./\&.\&./data_comm/uart/uart\&.h'\fP
 .br
 \fC#include '\&.\&./\&.\&./accident_logic/accident_data\&.h'\fP
 .br
-\fC#include '\&.\&./\&.\&./accident_logic/accident_detection\&.h'\fP
+\fC#include '\&.\&./\&.\&./util/time/time\&.h'\fP
 .br
-\fC#include '\&.\&./\&.\&./util/time\&.h'\fP
-.br
-\fC#include '\&.\&./\&.\&./vroom_config\&.h'\fP
+\fC#include '\&.\&./\&.\&./util/r2r_led/r2r_led\&.h'\fP
 .br
 
 .SS "Macros"
 
 .in +1c
 .ti -1c
-.RI "#define \fBSIM908_FLAG_WAITING\fP   0"
+.RI "#define \fBSIM908_FLAG_WAITING\fP   0U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_OK\fP   1"
+.RI "#define \fBSIM908_FLAG_OK\fP   1U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_ERROR\fP   2"
+.RI "#define \fBSIM908_FLAG_ERROR\fP   2U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_FTP_PUT_OPEN\fP   10"
+.RI "#define \fBSIM908_FLAG_FTP_PUT_OPEN\fP   10U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_FTP_PUT_CLOSE\fP   11"
+.RI "#define \fBSIM908_FLAG_FTP_PUT_CLOSE\fP   11U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_FTP_PUT_SUCCESS\fP   12"
+.RI "#define \fBSIM908_FLAG_FTP_PUT_SUCCESS\fP   12U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_FTP_PUT_ERROR\fP   13"
+.RI "#define \fBSIM908_FLAG_FTP_PUT_ERROR\fP   13U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_FTP_SENDING\fP   14"
+.RI "#define \fBSIM908_FLAG_FTP_SENDING\fP   14U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_GPS_OK\fP   20"
+.RI "#define \fBSIM908_FLAG_GPS_OK\fP   20U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_GPS_PULL\fP   21"
+.RI "#define \fBSIM908_FLAG_GPS_PULL\fP   21U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_GPS_PULL_OK\fP   22"
+.RI "#define \fBSIM908_FLAG_GPS_PULL_OK\fP   22U"
 .br
 .ti -1c
-.RI "#define \fBSIM908_FLAG_RUNNING\fP   100"
+.RI "#define \fBSIM908_FLAG_RUNNING\fP   100U"
 .br
 .ti -1c
 .RI "#define \fBSIM908_RESPONSE_RDY\fP   'RDY'"
@@ -100,13 +102,13 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBSIM908_RESPONSE_CREG\fP   '+CREG: '		/* +CREG: 1 = connected */"
 .br
 .ti -1c
-.RI "#define \fBRX_BUFFER_SIZE\fP   128"
+.RI "#define \fBRX_BUFFER_SIZE\fP   128U"
 .br
 .ti -1c
-.RI "#define \fBCR\fP   0x0D /* '\\r' */"
+.RI "#define \fBCR\fP   0x0DU /* '\\r' */"
 .br
 .ti -1c
-.RI "#define \fBLF\fP   0x0A /* '\\n' */"
+.RI "#define \fBLF\fP   0x0AU/* '\\n' */"
 .br
 .ti -1c
 .RI "#define \fBDDR\fP(x)   (*(&x - 1))"
@@ -115,10 +117,10 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBPIN\fP(x)   (*(&x - 2))"
 .br
 .ti -1c
-.RI "#define \fBRETRY_ATTEMPTS\fP   10"
+.RI "#define \fBRETRY_ATTEMPTS\fP   20"
 .br
 .ti -1c
-.RI "#define \fBCONNECTION_RETRY_DELAY_IN_MS\fP   500"
+.RI "#define \fBCONNECTION_RETRY_DELAY_IN_MS\fP   500U"
 .br
 .in -1c
 .SS "Functions"
@@ -189,6 +191,10 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fICallback function to handle all communication from the sim908 module Procedure: \fP"
 .ti -1c
+.RI "void \fB_PC_callback\fP (char data)"
+.br
+.RI "\fICallback function to handle debug comminication with pc on uart1 When receiving data it is echoed to both uart0 (sim908) and back to pc on uart1\&. \fP"
+.ti -1c
 .RI "void \fBSIM908_init\fP (void)"
 .br
 .RI "\fIInitiates the SIM908 module\&. \fP"
@@ -197,7 +203,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fIStarts the SIM908 module\&. \fP"
 .ti -1c
-.RI "bool \fBSIM908_cmd\fP (const char *cmd, bool __wait_for_ok)"
+.RI "bool \fBSIM908_cmd\fP (const char *__cmd, bool __wait_for_ok)"
 .br
 .RI "\fIUsed for sending AT SET commands\&. \fP"
 .ti -1c
@@ -217,19 +223,19 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "static volatile uint8_t \fB_CR_counter\fP = 0"
+.RI "static volatile uint8_t \fB_CR_counter\fP = 0U"
 .br
 .ti -1c
-.RI "static volatile uint8_t \fB_LF_counter\fP = 0"
+.RI "static volatile uint8_t \fB_LF_counter\fP = 0U"
 .br
 .ti -1c
 .RI "static volatile char \fB_rx_buffer\fP [\fBRX_BUFFER_SIZE\fP]"
 .br
 .ti -1c
-.RI "static volatile uint8_t \fB_rx_buffer_tail\fP = 0"
+.RI "static volatile uint8_t \fB_rx_buffer_tail\fP = 0U"
 .br
 .ti -1c
-.RI "static volatile uint8_t \fB_rx_response_length\fP = 0"
+.RI "static volatile uint8_t \fB_rx_response_length\fP = 0U"
 .br
 .ti -1c
 .RI "static volatile uint8_t \fB_system_running_flag\fP = \fBSIM908_FLAG_WAITING\fP"
@@ -253,10 +259,22 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "static volatile uint8_t \fB_ack_gps_response_flag\fP = \fBSIM908_FLAG_WAITING\fP"
 .br
 .ti -1c
-.RI "static uint8_t \fB_gps_response_tail\fP = 0"
+.RI "static uint8_t \fB_gps_response_tail\fP = 0U"
 .br
 .ti -1c
-.RI "static uint8_t \fB_gps_response_length\fP = 0"
+.RI "static uint8_t \fB_gps_response_length\fP = 0U"
+.br
+.ti -1c
+.RI "static uint8_t \fB_task_prev_id_start_module\fP = 0U"
+.br
+.ti -1c
+.RI "static uint8_t \fB_task_prev_id_cmd_send\fP = 0U"
+.br
+.ti -1c
+.RI "static uint8_t \fB_task_prev_id_wait_for_response\fP = 0U"
+.br
+.ti -1c
+.RI "static uint8_t \fB_task_prev_id_callback\fP = 0U"
 .br
 .ti -1c
 .RI "char \fBEXT_MSD_FILENAME\fP [24]"
@@ -264,96 +282,112 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define CONNECTION_RETRY_DELAY_IN_MS   500"
+.SS "#define CONNECTION_RETRY_DELAY_IN_MS   500U"
 
 .PP
-Definition at line 93 of file sim908\&.c\&.
-.SS "#define CR   0x0D /* '\\r' */"
+Definition at line 101 of file sim908\&.c\&.
+.SS "#define CR   0x0DU /* '\\r' */"
 
 .PP
-Definition at line 86 of file sim908\&.c\&.
+Definition at line 94 of file sim908\&.c\&.
 .SS "#define DDR(x)   (*(&x - 1))"
 
 .PP
-Definition at line 89 of file sim908\&.c\&.
-.SS "#define LF   0x0A /* '\\n' */"
+Definition at line 97 of file sim908\&.c\&.
+.SS "#define LF   0x0AU/* '\\n' */"
 
 .PP
-Definition at line 87 of file sim908\&.c\&.
+Definition at line 95 of file sim908\&.c\&.
 .SS "#define PIN(x)   (*(&x - 2))"
 
 .PP
-Definition at line 90 of file sim908\&.c\&.
-.SS "#define RETRY_ATTEMPTS   10"
+Definition at line 98 of file sim908\&.c\&.
+.SS "#define RETRY_ATTEMPTS   20"
 
 .PP
-Definition at line 92 of file sim908\&.c\&.
-.SS "#define RX_BUFFER_SIZE   128"
+Definition at line 100 of file sim908\&.c\&.
+.SS "#define RX_BUFFER_SIZE   128U"
 
 .PP
-Definition at line 58 of file sim908\&.c\&.
+Definition at line 59 of file sim908\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "volatile uint8_t _ack_ftp_response_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
 
 .PP
-Definition at line 77 of file sim908\&.c\&.
+Definition at line 78 of file sim908\&.c\&.
 .SS "volatile uint8_t _ack_gps_response_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
 
 .PP
-Definition at line 78 of file sim908\&.c\&.
+Definition at line 79 of file sim908\&.c\&.
 .SS "volatile uint8_t _ack_response_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
 
 .PP
-Definition at line 76 of file sim908\&.c\&.
-.SS "volatile uint8_t _CR_counter = 0\fC [static]\fP"
-
-.PP
-Definition at line 61 of file sim908\&.c\&.
-.SS "volatile uint8_t _ftp_sending_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
-
-.PP
-Definition at line 74 of file sim908\&.c\&.
-.SS "volatile uint8_t _gps_pull_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
-
-.PP
-Definition at line 72 of file sim908\&.c\&.
-.SS "uint8_t _gps_response_length = 0\fC [static]\fP"
-
-.PP
-Definition at line 81 of file sim908\&.c\&.
-.SS "uint8_t _gps_response_tail = 0\fC [static]\fP"
-
-.PP
-Definition at line 80 of file sim908\&.c\&.
-.SS "volatile uint8_t _LF_counter = 0\fC [static]\fP"
+Definition at line 77 of file sim908\&.c\&.
+.SS "volatile uint8_t _CR_counter = 0U\fC [static]\fP"
 
 .PP
 Definition at line 62 of file sim908\&.c\&.
+.SS "volatile uint8_t _ftp_sending_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
+
+.PP
+Definition at line 75 of file sim908\&.c\&.
+.SS "volatile uint8_t _gps_pull_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
+
+.PP
+Definition at line 73 of file sim908\&.c\&.
+.SS "uint8_t _gps_response_length = 0U\fC [static]\fP"
+
+.PP
+Definition at line 82 of file sim908\&.c\&.
+.SS "uint8_t _gps_response_tail = 0U\fC [static]\fP"
+
+.PP
+Definition at line 81 of file sim908\&.c\&.
+.SS "volatile uint8_t _LF_counter = 0U\fC [static]\fP"
+
+.PP
+Definition at line 63 of file sim908\&.c\&.
 .SS "volatile char _rx_buffer[\fBRX_BUFFER_SIZE\fP]\fC [static]\fP"
 
 .PP
-Definition at line 64 of file sim908\&.c\&.
-.SS "volatile uint8_t _rx_buffer_tail = 0\fC [static]\fP"
-
-.PP
 Definition at line 65 of file sim908\&.c\&.
-.SS "volatile uint8_t _rx_response_length = 0\fC [static]\fP"
+.SS "volatile uint8_t _rx_buffer_tail = 0U\fC [static]\fP"
 
 .PP
 Definition at line 66 of file sim908\&.c\&.
+.SS "volatile uint8_t _rx_response_length = 0U\fC [static]\fP"
+
+.PP
+Definition at line 67 of file sim908\&.c\&.
 .SS "volatile uint8_t _system_running_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
 
 .PP
-Definition at line 68 of file sim908\&.c\&.
+Definition at line 69 of file sim908\&.c\&.
+.SS "uint8_t _task_prev_id_callback = 0U\fC [static]\fP"
+
+.PP
+Definition at line 88 of file sim908\&.c\&.
+.SS "uint8_t _task_prev_id_cmd_send = 0U\fC [static]\fP"
+
+.PP
+Definition at line 86 of file sim908\&.c\&.
+.SS "uint8_t _task_prev_id_start_module = 0U\fC [static]\fP"
+
+.PP
+Definition at line 85 of file sim908\&.c\&.
+.SS "uint8_t _task_prev_id_wait_for_response = 0U\fC [static]\fP"
+
+.PP
+Definition at line 87 of file sim908\&.c\&.
 .SS "volatile uint8_t _wait_for_ok_flag = \fBSIM908_FLAG_WAITING\fP\fC [static]\fP"
 
 .PP
-Definition at line 70 of file sim908\&.c\&.
+Definition at line 71 of file sim908\&.c\&.
 .SS "char EXT_MSD_FILENAME[24]"
 
 .PP
-Definition at line 84 of file sim908\&.c\&.
+Definition at line 92 of file sim908\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

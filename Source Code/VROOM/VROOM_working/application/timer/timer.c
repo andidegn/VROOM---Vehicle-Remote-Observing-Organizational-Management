@@ -1,12 +1,6 @@
-/********************************************//**
-@file timer.c
-@author: Kenneth René Jensen
-@Version: 0.4
-@defgroup timer Timer
-@{
-	Setup of timer 1 to CTC mode for starting scheduler.
-@}
-************************************************/
+/********************************************************************//**
+ * @file timer.c
+ ***********************************************************************/
 #include <avr/interrupt.h>
 #include "timer.h"
 #include "../vroom_config.h"
@@ -16,18 +10,23 @@
 	#error F_CPU must be defined!!!
 #endif
 
-/*! Macro for calculating the value for clock count based on frequency and prescaler */
+
+/**********************************************************************//**
+ * @ingroup timer_priv
+ * @brief Macro for calculating the value for clock count based on frequency and prescaler
+ * @defgroup timer_top_value Timer top value equation
+ * @{
+ *************************************************************************/
 #define TOP_VALUE(frequency_in_hz, prescaler) (F_CPU/(prescaler * frequency_in_hz)-1)
+/** @} */
 
 static uint8_t _TIFR1_cpy = 0U;
 static uint8_t _TIMSK1_cpy = 0U;
 
-/**********************************************************************//**
- @ingroup timer
- @brief Initiates timer 1 in CTC mode
- @param TIMER_PRESCALER enum, TIMER_FREQUENCY enum
- @note Enables interrupt
-*************************************************************************/
+/********************************************************************//**
+ * @ingroup timer_pub
+ * Sets up all the ports and registers for timer1
+ ***********************************************************************/
 void timer1_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 {
 	/* saves the current state of the status register and disables global interrupt */
@@ -77,10 +76,10 @@ void timer1_init_CTC(TIMER_PRESCALER prescaler, TIMER_FREQUENCY hz)
 	SREG = _sreg;
 }
 
-/**********************************************************************//**
- @ingroup timer
- @brief Stores the mask and interrupt register for Timer 1 and disables interrupts
-*************************************************************************/
+/********************************************************************//**
+ * @ingroup timer_pub
+ * Stores a copy of registers and disables the timer mask interrupt
+ ***********************************************************************/
 void timer_pause(void)
 {
 	_TIFR1_cpy = TIFR1;
@@ -88,39 +87,39 @@ void timer_pause(void)
 	TIMSK1 &= ~_BV(OCIE1A);
 }
 
-/**********************************************************************//**
- @ingroup timer
- @brief Restores the mask and interrupt register for Timer 1
-*************************************************************************/
+/********************************************************************//**
+ * @ingroup timer_pub
+ * Sets the registers back to the stored copy
+ ***********************************************************************/
 void timer_resume(void)
 {
 	TIFR1 = _TIFR1_cpy;
 	TIMSK1 = _TIMSK1_cpy;
 }
 
-/**********************************************************************//**
- @ingroup timer
- @brief Disables interrupt for Timer 1
-*************************************************************************/
+/********************************************************************//**
+ * @ingroup timer_pub
+ * Disable the timer mask interrupt
+ ***********************************************************************/
 void timer_stop(void)
 {
 	TIMSK1 &= ~_BV(OCIE1A);
 }
 
-/**********************************************************************//**
- @ingroup timer
- @brief Clear Interrupt flag register and enables interrupt for Timer 1
-*************************************************************************/
+/********************************************************************//**
+ * @ingroup timer_pub
+ * Enables the timer mask interrupt
+ ***********************************************************************/
 void timer_start(void)
 {
 	TIFR1 |= _BV(OCIE1A);
 	TIMSK1 |= _BV(OCIE1A);
 }
 
-/**********************************************************************//**
- * @ingroup timer
- * @brief Releases the scheduler when the timer hits the TOP value
- *************************************************************************/
+/********************************************************************//**
+ * @ingroup timer_priv
+ * Interrupt service routine which releases the scheduler
+ ***********************************************************************/
 ISR(TIMER1_COMPA_vect)
 {
 	scheduler_release();

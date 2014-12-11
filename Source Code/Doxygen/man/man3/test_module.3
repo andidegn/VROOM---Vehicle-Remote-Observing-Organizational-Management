@@ -1,0 +1,54 @@
+.TH "Module test" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Module test \- 
+.PP
+This is a test for for the sensor module consisting of TC72 temperature sensor and accelerometer using SPI\&. The module test uses the LCD display to visualize the sensors output\&.  
+
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBPublic\fP"
+.br
+.ti -1c
+.RI "\fBPrivate\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fB_data1_received\fP (char data)"
+.br
+.RI "\fICallback function for uart1 Echoes data\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This is a test for for the sensor module consisting of TC72 temperature sensor and accelerometer using SPI\&. The module test uses the LCD display to visualize the sensors output\&. 
+
+This tests the uart0 and uart 1 on the ATMega2560 by first sending a test string using uart0, receiving it in uart1 callback function and sending it back to uart0 in a callback function\&. Second it is tested again without using the callback feature by using the uart_read_char() function\&. Both tests received data is compared to the original string for validation\&.
+.SH "Function Documentation"
+.PP 
+.SS "static void _data1_received (chardata)\fC [static]\fP"
+
+.PP
+Callback function for uart1 Echoes data\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIchar\fP data - the data received
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 141 of file test_module_uart\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

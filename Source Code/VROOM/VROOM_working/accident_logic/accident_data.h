@@ -7,7 +7,7 @@
  * @{
 	@ingroup accident_logic
 	@brief This is the data for an Accident report.
-	Comply eCall standards for MSD data structure.
+	@note Comply eCall standards for MSD data structure.
 	@note Complies MISRA 2004 standards
 	@defgroup ac_dat_pub Public
 	@defgroup ac_dat_priv Private
@@ -26,7 +26,7 @@
  * @brief struct containing the MSD for an accident report
  * @note According eCall standard EN 15722 the MSD consists of 140 bytes
  *************************************************************************/
-typedef struct 
+typedef struct
 {
 	uint8_t version;									/**> Referring to a public register to determine the meaning and encoding of the optional data */
 	uint8_t msg_identifier;								/**> Numbers of re-transmission */

@@ -1,0 +1,33 @@
+.TH "Private" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Private \- 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDDR\fP(\fBPORT\fP)   (*(&\fBPORT\fP - 1))"
+.br
+.ti -1c
+.RI "#define \fBmask\fP   0b11110000"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DDR(\fBPORT\fP)   (*(&\fBPORT\fP - 1))"
+\fBr2r_led\&.c\fP
+.PP
+Macro setting up the desired port 
+.PP
+Definition at line 11 of file r2r_led\&.c\&.
+.SS "#define mask   0b11110000"
+Defined mask to differentiate between the DAC and the LEDs 
+.PP
+Definition at line 18 of file r2r_led\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

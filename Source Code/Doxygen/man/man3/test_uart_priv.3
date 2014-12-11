@@ -1,9 +1,61 @@
-.TH "Private" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 Private \- 
+.SS "Functions"
 
+.in +1c
+.ti -1c
+.RI "static bool \fB_validate_data\fP (void)"
+.br
+.RI "\fIValidates the data received against the given string literal\&. \fP"
+.ti -1c
+.RI "static void \fB_data0_received\fP (char data)"
+.br
+.RI "\fICallback function for uart0 Stores received data in buffer and sets _roundtrip_complete flag if the end length of the _uart_compare_string is reached\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "static void _data0_received (chardata)\fC [static]\fP"
+
+.PP
+Callback function for uart0 Stores received data in buffer and sets _roundtrip_complete flag if the end length of the _uart_compare_string is reached\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIchar\fP data - the data received
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 124 of file test_module_uart\&.c\&.
+.SS "static bool _validate_data (void)\fC [static]\fP"
+
+.PP
+Validates the data received against the given string literal\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvoid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 98 of file test_module_uart\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

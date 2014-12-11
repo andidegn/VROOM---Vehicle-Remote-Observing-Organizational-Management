@@ -1,16 +1,8 @@
-.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 Public \- 
-.SS "Modules"
-
-.in +1c
-.ti -1c
-.RI "\fBButton press time\fP"
-.br
-.RI "\fIDefines for the time of button press before activation/deactivation in 1/10 sec\&. \fP"
-.in -1c
 .SS "Enumerations"
 
 .in +1c
@@ -74,7 +66,7 @@ Defines the state of control LED\&.
 .TP
 \fB\fIALARM_NOT_ACTIVATED \fP\fP
 .PP
-Definition at line 48 of file car_panel\&.h\&.
+Definition at line 38 of file car_panel\&.h\&.
 .SS "enum \fBStatus\fP"
 
 .PP
@@ -93,7 +85,7 @@ Defines the state of status LED\&.
 .TP
 \fB\fISTATUS_RESET \fP\fP
 .PP
-Definition at line 35 of file car_panel\&.h\&.
+Definition at line 25 of file car_panel\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "void car_panel_init (void)"
@@ -113,7 +105,7 @@ void
 .PP
 
 .PP
-Definition at line 53 of file car_panel\&.c\&.
+Definition at line 52 of file car_panel\&.c\&.
 .SS "void car_panel_set_alarm_button_state (boolstate)"
 
 .PP
@@ -131,7 +123,7 @@ void
 .PP
 
 .PP
-Definition at line 192 of file car_panel\&.c\&.
+Definition at line 195 of file car_panel\&.c\&.
 .SS "void car_panel_set_cancel_button_state (boolstate)"
 
 .PP
@@ -149,7 +141,7 @@ void
 .PP
 
 .PP
-Definition at line 205 of file car_panel\&.c\&.
+Definition at line 208 of file car_panel\&.c\&.
 .SS "void car_panel_set_control (\fBControl\fP__c)"
 
 .PP
@@ -167,7 +159,7 @@ void
 .PP
 
 .PP
-Definition at line 121 of file car_panel\&.c\&.
+Definition at line 122 of file car_panel\&.c\&.
 .SS "void car_panel_set_status (\fBStatus\fP__s)"
 
 .PP
@@ -185,7 +177,7 @@ void
 .PP
 
 .PP
-Definition at line 87 of file car_panel\&.c\&.
+Definition at line 86 of file car_panel\&.c\&.
 .SS "void car_panel_start (void)"
 
 .PP
@@ -203,7 +195,7 @@ void
 .PP
 
 .PP
-Definition at line 76 of file car_panel\&.c\&.
+Definition at line 75 of file car_panel\&.c\&.
 .SS "bool car_panel_wait_cancel_emmergency (void)"
 
 .PP
@@ -221,7 +213,7 @@ bool - true if alarm is canceled else false
 .PP
 
 .PP
-Definition at line 144 of file car_panel\&.c\&.
+Definition at line 147 of file car_panel\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

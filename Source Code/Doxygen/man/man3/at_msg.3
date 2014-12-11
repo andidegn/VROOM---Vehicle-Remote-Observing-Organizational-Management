@@ -1,4 +1,4 @@
-.TH "Messages" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Messages" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,13 +10,13 @@ Defines for the message\&.
 
 .in +1c
 .ti -1c
-.RI "#define \fBAT_MSG_READ\fP   'AT+CMGR='"
+.RI "#define \fBAT_MSG_READ\fP   'AT+CMGR=' /* Add number in end to select msg to read */"
 .br
 .ti -1c
 .RI "#define \fBAT_MSG_DEL_ALL\fP   'AT+CMGD=1,4'"
 .br
 .ti -1c
-.RI "#define \fBAT_MSG_FORMAT\fP   'AT+CMGF='"
+.RI "#define \fBAT_MSG_FORMAT\fP   'AT+CMGF=' /* Add number */"
 .br
 .ti -1c
 .RI "#define \fBAT_MSG_SEND\fP   'AT+CMGS\\''"
@@ -32,19 +32,19 @@ Defines for the message\&.
 .SS "#define AT_MSG_DEL_ALL   'AT+CMGD=1,4'"
 
 .PP
-Definition at line 220 of file at_commands\&.h\&.
-.SS "#define AT_MSG_FORMAT   'AT+CMGF='"
-
-.PP
 Definition at line 221 of file at_commands\&.h\&.
-.SS "#define AT_MSG_READ   'AT+CMGR='"
-
-.PP
-Definition at line 219 of file at_commands\&.h\&.
-.SS "#define AT_MSG_SEND   'AT+CMGS\\''"
+.SS "#define AT_MSG_FORMAT   'AT+CMGF=' /* Add number */"
 
 .PP
 Definition at line 222 of file at_commands\&.h\&.
+.SS "#define AT_MSG_READ   'AT+CMGR=' /* Add number in end to select msg to read */"
+
+.PP
+Definition at line 220 of file at_commands\&.h\&.
+.SS "#define AT_MSG_SEND   'AT+CMGS\\''"
+
+.PP
+Definition at line 223 of file at_commands\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

@@ -1,6 +1,5 @@
 var car__panel_8h =
 [
-    [ "BUTTON_PRESS_TIME", "car__panel_8h.html#ga8b6ca0c1515291c666646a3e520b7813", null ],
     [ "Control", "car__panel_8h.html#ga0da83e35f29c11f7f3c637234f2149f9", [
       [ "ALARM_WAITING", "car__panel_8h.html#gga0da83e35f29c11f7f3c637234f2149f9abcadd3bf3a3263fc9f10f92a2077f916", null ],
       [ "ALARM_ACTIVATED", "car__panel_8h.html#gga0da83e35f29c11f7f3c637234f2149f9a4dcc5ca662bb4f5b4012a558c021d83a", null ],

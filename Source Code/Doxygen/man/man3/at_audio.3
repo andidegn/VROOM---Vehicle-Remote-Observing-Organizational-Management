@@ -1,4 +1,4 @@
-.TH "Audio" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Audio" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -13,19 +13,19 @@ Defines for the audio setup\&.
 .RI "#define \fBAT_AUDIO_GET_RINGER_VOLUME\fP   'AT+CRSL?'"
 .br
 .ti -1c
-.RI "#define \fBAT_AUDIO_SET_RINGER_VOLUME\fP   'AT+CRSL='"
+.RI "#define \fBAT_AUDIO_SET_RINGER_VOLUME\fP   'AT+CRSL=' /* Add number 0-4 */"
 .br
 .ti -1c
 .RI "#define \fBAT_AUDIO_GET_SPEAKER_VOLUME\fP   'AT+CLVL?'"
 .br
 .ti -1c
-.RI "#define \fBAT_AUDIO_SET_SPEAKER_VOLUME\fP   'AT+CLVL='"
+.RI "#define \fBAT_AUDIO_SET_SPEAKER_VOLUME\fP   'AT+CLVL=' /* Add number 0-100 */"
 .br
 .ti -1c
 .RI "#define \fBAT_AUDIO_GET_CURRENT_ALERT_SOUND\fP   'AT+CALS?'"
 .br
 .ti -1c
-.RI "#define \fBAT_AUDIO_SET_CURRENT_ALERT_SOUND\fP   'AT+CALS='"
+.RI "#define \fBAT_AUDIO_SET_CURRENT_ALERT_SOUND\fP   'AT+CALS=' /* Add number 0-19 */"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -38,27 +38,27 @@ Defines for the audio setup\&.
 .SS "#define AT_AUDIO_GET_CURRENT_ALERT_SOUND   'AT+CALS?'"
 
 .PP
-Definition at line 235 of file at_commands\&.h\&.
+Definition at line 236 of file at_commands\&.h\&.
 .SS "#define AT_AUDIO_GET_RINGER_VOLUME   'AT+CRSL?'"
 
 .PP
-Definition at line 231 of file at_commands\&.h\&.
+Definition at line 232 of file at_commands\&.h\&.
 .SS "#define AT_AUDIO_GET_SPEAKER_VOLUME   'AT+CLVL?'"
 
 .PP
-Definition at line 233 of file at_commands\&.h\&.
-.SS "#define AT_AUDIO_SET_CURRENT_ALERT_SOUND   'AT+CALS='"
-
-.PP
-Definition at line 236 of file at_commands\&.h\&.
-.SS "#define AT_AUDIO_SET_RINGER_VOLUME   'AT+CRSL='"
-
-.PP
-Definition at line 232 of file at_commands\&.h\&.
-.SS "#define AT_AUDIO_SET_SPEAKER_VOLUME   'AT+CLVL='"
-
-.PP
 Definition at line 234 of file at_commands\&.h\&.
+.SS "#define AT_AUDIO_SET_CURRENT_ALERT_SOUND   'AT+CALS=' /* Add number 0-19 */"
+
+.PP
+Definition at line 237 of file at_commands\&.h\&.
+.SS "#define AT_AUDIO_SET_RINGER_VOLUME   'AT+CRSL=' /* Add number 0-4 */"
+
+.PP
+Definition at line 233 of file at_commands\&.h\&.
+.SS "#define AT_AUDIO_SET_SPEAKER_VOLUME   'AT+CLVL=' /* Add number 0-100 */"
+
+.PP
+Definition at line 235 of file at_commands\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

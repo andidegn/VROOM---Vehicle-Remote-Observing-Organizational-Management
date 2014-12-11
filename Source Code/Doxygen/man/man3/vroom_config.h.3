@@ -1,8 +1,8 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/vroom_config.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/vroom_config.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/vroom_config.h \- 
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/application/vroom_config.h \- 
 .SH SYNOPSIS
 .br
 .PP
@@ -16,34 +16,121 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBNO\fP   0"
 .br
 .ti -1c
-.RI "#define \fBANDI_TEST\fP   \fBYES\fP"
+.RI "#define \fBANDI_TEST\fP   \fBNO\fP"
 .br
 .ti -1c
-.RI "#define \fBKENNETH_TEST\fP   \fBNO\fP"
+.RI "#define \fBKENNETH_TEST\fP   \fBYES\fP"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_SENSOR_READ_FREQUENCY\fP   \fBTIMER_50HZ\fP	/**> Frequency of which the sensors are read in Hz */"
+.RI "#define \fBDEBUG_UART_ENABLE\fP   /* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_DETECTION_FREQUENCY\fP   \fBTIMER_50HZ\fP	/**> Time interval between checking for accidents in Hz */"
+.RI "#define \fBDEBUG_UART_ECHO\fP   /* Gives an echo from UART0 to UART1 */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP   5			/**> Length of acceleration peek */"
+.RI "#define \fBDEBUG_LCD_ENABLE\fP   /* LCD should be connected to \fBPORT\fP L */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_CRASH_TRIGGER_VALUE\fP   800			/**> Total acceleration [G] in 1/100 resolution */"
+.RI "#define \fBDEBUG_TASK_MEASURE\fP"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_DEGREE\fP   1			/**> Temperature raise in Celsius degrees */"
+.RI "#define \fBDEBUG_ID_SIM908_START_MODULE\fP   3U"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_TIME\fP   80			/**> Temperature raise time in 1/10 seconds resolution */"
+.RI "#define \fBDEBUG_ID_SIM908_CMD_SEND\fP   8U"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP   -100			/**> Used to be sure there are two temperature readings before comparing values */"
+.RI "#define \fBDEBUG_ID_SIM908_WAIT_FOR_RESPONSE\fP   1U"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_MSD_FORMAT_VERSION\fP   1"
+.RI "#define \fBDEBUG_ID_SIM908_CALLBACK\fP   5U"
+.br
+.ti -1c
+.RI "#define \fBDEBUG_ID_SENSOR_SCHEDULER_TEMP_REQ\fP   10U"
+.br
+.ti -1c
+.RI "#define \fBDEBUG_ID_SENSOR_SCHEDULER_ACC_REQ\fP   11U"
+.br
+.ti -1c
+.RI "#define \fBDEBUG_ID_SENSOR_SCHEDULER_READ\fP   12U"
+.br
+.ti -1c
+.RI "#define \fBDEBUG_ID_ACCIDENT_CRASH_DETECTION\fP   14U"
+.br
+.ti -1c
+.RI "#define \fBDEBUG_ID_ACCIDENT_FIRE_DETECTION\fP   15U"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ENABLE_EMERGENCY_PHONE_CALL\fP"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_DDR_SPI\fP   DDRB"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_SS\fP   PB0"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_SCK\fP   PB1"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_MOSI\fP   PB2"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_MISO\fP   PB3"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_CAR_PANEL\fP   PORTJ"
+.br
+.ti -1c
+.RI "#define \fBSTK600\fP"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_DRIVER_PORT\fP   PORTE"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_GSM_PORT\fP   PORTE"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_GPS_PORT\fP   PORTE"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_GSM_ENABLE_PIN\fP   PE3"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_GPS_ENABLE_PIN\fP   PE4"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_CE_PIN\fP   PE5"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_LCD\fP   PORTL"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PORT_R2R\fP   PORTH"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_SCHEDULER_FREQUENCY\fP   \fBTIMER_50HZ\fP	/**> Frequency of which the sensors are read in Hz */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_CRASH_NO_OF_READINGS\fP   5U			/**> Length of acceleration peek */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_CRASH_TRIGGER_VALUE\fP   400			/**> Total acceleration [G] in 1/100 resolution */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_DEGREE\fP   1\&.0F		/**> Temperature raise in Celsius degrees */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_FIRE_TRIGGER_TIME\fP   8000U		/**> Temperature raise time in 1ms resolution */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_FIRE_TEMP_INIT\fP   -100\&.0F		/**> Used to be sure there are two temperature readings before comparing values */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_ALARM_BUTTON_PRESS_TIME\fP   30U"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_MSD_FORMAT_VERSION\fP   2U"
 .br
 .ti -1c
 .RI "#define \fBCONFIG_MSD_TEST_CALL\fP   true"
@@ -58,7 +145,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBCONFIG_MSD_VIN\fP   'W0L000036V1940069'"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_MSD_OPTIONAL_DATA_SIZE\fP   102				/**> Calculated size based on total MSD size - compulsory data */"
+.RI "#define \fBCONFIG_MSD_OPTIONAL_DATA_SIZE\fP   102U					/**> Calculated size based on total MSD size - compulsory data */"
 .br
 .ti -1c
 .RI "#define \fBCONFIG_EMERGENCY_PHONE_NUMBER\fP   \fBCONFIG_PSAP_NUMBER_TEST_KENNETH\fP"
@@ -71,6 +158,9 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .ti -1c
 .RI "#define \fBCONFIG_PSAP_NUMBER_TEST_ANDI\fP   '60257898' /* Only for testing */"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_PSAP_NUMBER_TEST_KIM\fP   '28195667' /* Only for testing */"
 .br
 .ti -1c
 .RI "#define \fBCONFIG_APN_TELIA\fP   'internet\&.mtelia\&.dk'"
@@ -100,13 +190,16 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "#define \fBCONFIG_FTP_FILE_PATH\fP   '/'"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_FTP_FILE_SIZE\fP   '140' /* no of bytes */"
+.RI "#define \fBCONFIG_FTP_FILE_SIZE\fP   '140'			/* no of bytes */"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_VROOM_ID\fP   '60257898'"
+.RI "#define \fBCONFIG_PIN\fP   '5130'"
 .br
 .ti -1c
-.RI "#define \fBCONFIG_APN\fP   \fBCONFIG_APN_CALLME\fP"
+.RI "#define \fBCONFIG_VROOM_ID\fP   '60192949'"
+.br
+.ti -1c
+.RI "#define \fBCONFIG_APN\fP   \fBCONFIG_APN_TDC\fP"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -117,7 +210,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RS 4
 : Andi Degn 
 .PP
-: Kenneth René Jensen : 0\&.6 
+: Kenneth René Jensen : 0\&.7 
 .RE
 .PP
 
@@ -125,22 +218,78 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 Definition in file \fBvroom_config\&.h\fP\&.
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define ANDI_TEST   \fBYES\fP"
+.SS "#define ANDI_TEST   \fBNO\fP"
 
 .PP
-Definition at line 27 of file vroom_config\&.h\&.
-.SS "#define KENNETH_TEST   \fBNO\fP"
+Definition at line 30 of file vroom_config\&.h\&.
+.SS "#define CONFIG_ENABLE_EMERGENCY_PHONE_CALL"
 
 .PP
-Definition at line 28 of file vroom_config\&.h\&.
+Definition at line 53 of file vroom_config\&.h\&.
+.SS "#define DEBUG_ID_ACCIDENT_CRASH_DETECTION   14U"
+
+.PP
+Definition at line 49 of file vroom_config\&.h\&.
+.SS "#define DEBUG_ID_ACCIDENT_FIRE_DETECTION   15U"
+
+.PP
+Definition at line 50 of file vroom_config\&.h\&.
+.SS "#define DEBUG_ID_SENSOR_SCHEDULER_ACC_REQ   11U"
+
+.PP
+Definition at line 46 of file vroom_config\&.h\&.
+.SS "#define DEBUG_ID_SENSOR_SCHEDULER_READ   12U"
+
+.PP
+Definition at line 47 of file vroom_config\&.h\&.
+.SS "#define DEBUG_ID_SENSOR_SCHEDULER_TEMP_REQ   10U"
+
+.PP
+Definition at line 45 of file vroom_config\&.h\&.
+.SS "#define DEBUG_ID_SIM908_CALLBACK   5U"
+
+.PP
+Definition at line 43 of file vroom_config\&.h\&.
+.SS "#define DEBUG_ID_SIM908_CMD_SEND   8U"
+
+.PP
+Definition at line 41 of file vroom_config\&.h\&.
+.SS "#define DEBUG_ID_SIM908_START_MODULE   3U"
+
+.PP
+Definition at line 40 of file vroom_config\&.h\&.
+.SS "#define DEBUG_ID_SIM908_WAIT_FOR_RESPONSE   1U"
+
+.PP
+Definition at line 42 of file vroom_config\&.h\&.
+.SS "#define DEBUG_LCD_ENABLE   /* LCD should be connected to \fBPORT\fP L */"
+
+.PP
+Definition at line 36 of file vroom_config\&.h\&.
+.SS "#define DEBUG_TASK_MEASURE"
+
+.PP
+Definition at line 38 of file vroom_config\&.h\&.
+.SS "#define DEBUG_UART_ECHO   /* Gives an echo from UART0 to UART1 */"
+
+.PP
+Definition at line 33 of file vroom_config\&.h\&.
+.SS "#define DEBUG_UART_ENABLE   /* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */"
+
+.PP
+Definition at line 32 of file vroom_config\&.h\&.
+.SS "#define KENNETH_TEST   \fBYES\fP"
+
+.PP
+Definition at line 31 of file vroom_config\&.h\&.
 .SS "#define NO   0"
 
 .PP
-Definition at line 26 of file vroom_config\&.h\&.
+Definition at line 29 of file vroom_config\&.h\&.
 .SS "#define YES   1"
 
 .PP
-Definition at line 25 of file vroom_config\&.h\&.
+Definition at line 28 of file vroom_config\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

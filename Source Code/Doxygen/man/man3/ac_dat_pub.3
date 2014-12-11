@@ -1,4 +1,4 @@
-.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -19,15 +19,7 @@ Public \-
 
 .in +1c
 .ti -1c
-.RI "struct \fBpacked\fP"
-.br
-.RI "\fIstruct containing the MSD for an accident report \fP"
-.in -1c
-.SS "Typedefs"
-
-.in +1c
-.ti -1c
-.RI "typedef struct \fBpacked\fP \fBAD_MSD\fP"
+.RI "struct \fBAD_MSD\fP"
 .br
 .RI "\fIstruct containing the MSD for an accident report \fP"
 .in -1c
@@ -35,7 +27,7 @@ Public \-
 
 .in +1c
 .ti -1c
-.RI "enum \fBAD_EMERGENCY_FLAG\fP { \fBEMERGENCY_NO_ALARM\fP = 0, \fBEMERGENCY_MANUAL_ALARM\fP = 1, \fBEMERGENCY_AUTO_ALARM\fP = 2, \fBEMERGENCY_ALARM_SENT\fP = 3 }"
+.RI "enum \fBAD_EMERGENCY_FLAG\fP { \fBEMERGENCY_NO_ALARM\fP = 0U, \fBEMERGENCY_FALSE_ALARM\fP = 1U, \fBEMERGENCY_MANUAL_ALARM\fP = 2U, \fBEMERGENCY_AUTO_ALARM\fP = 3U, \fBEMERGENCY_ALARM_SENT\fP = 4U }"
 .br
 .RI "\fIFlag to detect if an alarm has been triggered\&. \fP"
 .in -1c
@@ -46,22 +38,13 @@ Public \-
 .RI "void \fBad_emergency_alarm\fP (void)"
 .br
 .RI "\fIFunction to call when an emergency alarm is triggered\&. \fP"
+.ti -1c
+.RI "uint32_t \fBcalc_UTC_seconds\fP (\fBFIXED_TIME\fP *\fBbuf\fP)"
+.br
+.RI "\fICalculates UTC seconds since epoch\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
-
-.SH "Typedef Documentation"
-.PP 
-.SS "typedef struct \fBpacked\fP  \fBAD_MSD\fP"
-
-.PP
-struct containing the MSD for an accident report 
-.PP
-\fBNote:\fP
-.RS 4
-According eCall standard EN 15722 the MSD consists of 140 bytes 
-.RE
-.PP
 
 .SH "Enumeration Type Documentation"
 .PP 
@@ -74,6 +57,8 @@ Flag to detect if an alarm has been triggered\&.
 .in +1c
 .TP
 \fB\fIEMERGENCY_NO_ALARM \fP\fP
+.TP
+\fB\fIEMERGENCY_FALSE_ALARM \fP\fP
 .TP
 \fB\fIEMERGENCY_MANUAL_ALARM \fP\fP
 .TP
@@ -117,7 +102,25 @@ void
 .PP
 
 .PP
-Definition at line 37 of file accident_data\&.c\&.
+Definition at line 38 of file accident_data\&.c\&.
+.SS "uint32_t calc_UTC_seconds (\fBFIXED_TIME\fP *buf)"
+
+.PP
+Calculates UTC seconds since epoch\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstruct\fP of \fBFIXED_TIME\fP
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+UTC seconds as uint32_t
+.RE
+.PP
+Calculates UTC seconds since EPOCH 
+.PP
+Definition at line 24 of file time\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

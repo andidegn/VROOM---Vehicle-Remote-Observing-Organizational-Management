@@ -1,4 +1,4 @@
-.TH "Public" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Public" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -39,7 +39,7 @@ Look in datasheet page 24 for further information\&. \fP"
 
 .in +1c
 .ti -1c
-.RI "void \fBacc_init\fP (uint8_t cs_pin, \fBACC_POWER_MODE\fP power_mode, \fBACC_OUTPUT_DATA_RATE\fP output_data_rate, \fBACC_FULL_SCALE\fP full_scale)"
+.RI "void \fBacc_init\fP (uint8_t __cs_pin, \fBACC_POWER_MODE\fP __power_mode, \fBACC_OUTPUT_DATA_RATE\fP __output_data_rate, \fBACC_FULL_SCALE\fP __full_scale)"
 .br
 .RI "\fIInitializes the driver\&. \fP"
 .ti -1c
@@ -47,15 +47,15 @@ Look in datasheet page 24 for further information\&. \fP"
 .br
 .RI "\fIStarts one measure routine\&. \fP"
 .ti -1c
-.RI "float \fBacc_get_x_axis\fP (void)"
+.RI "double \fBacc_get_x_axis\fP (void)"
 .br
 .RI "\fIGets the latest measured x axis value\&. \fP"
 .ti -1c
-.RI "float \fBacc_get_y_axis\fP (void)"
+.RI "double \fBacc_get_y_axis\fP (void)"
 .br
 .RI "\fIGets the latest measured y axis value\&. \fP"
 .ti -1c
-.RI "float \fBacc_get_z_axis\fP (void)"
+.RI "double \fBacc_get_z_axis\fP (void)"
 .br
 .RI "\fIGets the latest measured z axis value\&. \fP"
 .in -1c
@@ -150,7 +150,7 @@ Specifies the available power modes Output data rate frq  ACC_POWER_DOWN --- ACC
 Definition at line 89 of file lis331hh\&.h\&.
 .SH "Function Documentation"
 .PP 
-.SS "float acc_get_x_axis (void)"
+.SS "double acc_get_x_axis (void)"
 
 .PP
 Gets the latest measured x axis value\&. Returns the x axis value multiplied with the scale factor
@@ -162,13 +162,13 @@ Gets the latest measured x axis value\&. Returns the x axis value multiplied wit
 .PP
 \fBReturns:\fP
 .RS 4
-float - the acceleration in g [N/Kg] Range: -1 < x < 1 
+double - the acceleration in g [N/Kg] Range: -1 < x < 1 
 .RE
 .PP
 
 .PP
-Definition at line 141 of file lis331hh\&.c\&.
-.SS "float acc_get_y_axis (void)"
+Definition at line 140 of file lis331hh\&.c\&.
+.SS "double acc_get_y_axis (void)"
 
 .PP
 Gets the latest measured y axis value\&. Returns the y axis value multiplied with the scale factor
@@ -180,13 +180,13 @@ Gets the latest measured y axis value\&. Returns the y axis value multiplied wit
 .PP
 \fBReturns:\fP
 .RS 4
-float - the acceleration in g [N/Kg] Range: -1 < x < 1 
+double - the acceleration in g [N/Kg] Range: -1 < x < 1 
 .RE
 .PP
 
 .PP
-Definition at line 149 of file lis331hh\&.c\&.
-.SS "float acc_get_z_axis (void)"
+Definition at line 148 of file lis331hh\&.c\&.
+.SS "double acc_get_z_axis (void)"
 
 .PP
 Gets the latest measured z axis value\&. Returns the z axis value multiplied with the scale factor
@@ -198,12 +198,12 @@ Gets the latest measured z axis value\&. Returns the z axis value multiplied wit
 .PP
 \fBReturns:\fP
 .RS 4
-float - the acceleration in g [N/Kg] Range: -1 < x < 1 
+double - the acceleration in g [N/Kg] Range: -1 < x < 1 
 .RE
 .PP
 
 .PP
-Definition at line 157 of file lis331hh\&.c\&.
+Definition at line 156 of file lis331hh\&.c\&.
 .SS "void acc_init (uint8_t__cs_pin, \fBACC_POWER_MODE\fP__power_mode, \fBACC_OUTPUT_DATA_RATE\fP__output_data_rate, \fBACC_FULL_SCALE\fP__full_scale)"
 
 .PP
@@ -213,13 +213,13 @@ Initializes the driver\&. Sets up the SPI and writes the setup parameters to the
 .PP
 \fBParameters:\fP
 .RS 4
-\fIuint8_t\fP cs_pin - chip select pin 
+\fIuint8_t\fP __cs_pin - chip select pin 
 .br
-\fIACC_POWER_MODE\fP power_mode - accelerometer power mode 
+\fIACC_POWER_MODE\fP __power_mode - accelerometer power mode 
 .br
-\fIACC_OUTPUT_DATA_RATE\fP output_data_rate - the rate the data is updated 
+\fIACC_OUTPUT_DATA_RATE\fP __output_data_rate - the rate the data is updated 
 .br
-\fIACC_FULL_SCALE\fP full_scale - the full scale g measurement
+\fIACC_FULL_SCALE\fP __full_scale - the full scale g measurement
 .RE
 .PP
 \fBReturns:\fP
@@ -229,7 +229,7 @@ void
 .PP
 
 .PP
-Definition at line 56 of file lis331hh\&.c\&.
+Definition at line 55 of file lis331hh\&.c\&.
 .SS "void acc_measure (void)"
 
 .PP
@@ -247,7 +247,7 @@ void
 .PP
 
 .PP
-Definition at line 101 of file lis331hh\&.c\&.
+Definition at line 100 of file lis331hh\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

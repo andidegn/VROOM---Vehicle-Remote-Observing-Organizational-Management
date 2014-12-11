@@ -1,4 +1,4 @@
-.TH "Call" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Call" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -13,10 +13,10 @@ Defines for the call\&.
 .RI "#define \fBAT_CALL_ANSWER\fP   'ATA'"
 .br
 .ti -1c
-.RI "#define \fBAT_CALL_HANG_UP\fP   'ATH0'"
+.RI "#define \fBAT_CALL_HANG_UP\fP   'ATH0' /* Disconnects all calls on the channel the command is requested */"
 .br
 .ti -1c
-.RI "#define \fBAT_CALL_DIAL\fP(NUMBER)   'ATD' NUMBER ';'"
+.RI "#define \fBAT_CALL_DIAL\fP(NUMBER)   'ATD' NUMBER ';' /* Add phone number and end with an ';' */"
 .br
 .ti -1c
 .RI "#define \fBAT_CALL_REDIAL\fP   'ATDL'"
@@ -35,23 +35,23 @@ Defines for the call\&.
 .SS "#define AT_CALL_ANSWER   'ATA'"
 
 .PP
-Definition at line 206 of file at_commands\&.h\&.
-.SS "#define AT_CALL_DIAL(NUMBER)   'ATD' NUMBER ';'"
-
-.PP
-Definition at line 208 of file at_commands\&.h\&.
-.SS "#define AT_CALL_HANG_UP   'ATH0'"
-
-.PP
 Definition at line 207 of file at_commands\&.h\&.
-.SS "#define AT_CALL_REDIAL   'ATDL'"
+.SS "#define AT_CALL_DIAL(NUMBER)   'ATD' NUMBER ';' /* Add phone number and end with an ';' */"
 
 .PP
 Definition at line 209 of file at_commands\&.h\&.
-.SS "#define AT_CALL_SHOW_NUM   'AT+CNUM'"
+.SS "#define AT_CALL_HANG_UP   'ATH0' /* Disconnects all calls on the channel the command is requested */"
+
+.PP
+Definition at line 208 of file at_commands\&.h\&.
+.SS "#define AT_CALL_REDIAL   'ATDL'"
 
 .PP
 Definition at line 210 of file at_commands\&.h\&.
+.SS "#define AT_CALL_SHOW_NUM   'AT+CNUM'"
+
+.PP
+Definition at line 211 of file at_commands\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

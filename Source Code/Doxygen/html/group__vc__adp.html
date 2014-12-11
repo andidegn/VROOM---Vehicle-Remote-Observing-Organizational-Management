@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__vc__adp.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -109,35 +109,49 @@ $(document).ready(function(){initNavTree('group__vc__adp.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:gaccae2002e2b565c6c44022faa64906ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#gaccae2002e2b565c6c44022faa64906ef">CONFIG_ALARM_SENSOR_READ_FREQUENCY</a>&#160;&#160;&#160;<a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aac2d3cec6b83b084fb73afeaa019ebcb1">TIMER_50HZ</a>	/**&gt; Frequency of which the sensors are read in Hz */</td></tr>
-<tr class="separator:gaccae2002e2b565c6c44022faa64906ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad9be43b5c9d6874b6bfc83ef2d03b9ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#gad9be43b5c9d6874b6bfc83ef2d03b9ea">CONFIG_ALARM_DETECTION_FREQUENCY</a>&#160;&#160;&#160;<a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aac2d3cec6b83b084fb73afeaa019ebcb1">TIMER_50HZ</a>	/**&gt; Time interval between checking for accidents in Hz */</td></tr>
-<tr class="separator:gad9be43b5c9d6874b6bfc83ef2d03b9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga82f5e4d988134d28e711ffc2c2e8809a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#ga82f5e4d988134d28e711ffc2c2e8809a">CONFIG_ALARM_CRASH_NO_OF_READINGS</a>&#160;&#160;&#160;5			/**&gt; Length of acceleration peek */</td></tr>
+<tr class="memitem:ga5df18a387d76e659e568d9358223cd64"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#ga5df18a387d76e659e568d9358223cd64">CONFIG_SCHEDULER_FREQUENCY</a>&#160;&#160;&#160;<a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aac2d3cec6b83b084fb73afeaa019ebcb1">TIMER_50HZ</a>	/**&gt; Frequency of which the sensors are read in Hz */</td></tr>
+<tr class="separator:ga5df18a387d76e659e568d9358223cd64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga82f5e4d988134d28e711ffc2c2e8809a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#ga82f5e4d988134d28e711ffc2c2e8809a">CONFIG_ALARM_CRASH_NO_OF_READINGS</a>&#160;&#160;&#160;5U			/**&gt; Length of acceleration peek */</td></tr>
 <tr class="separator:ga82f5e4d988134d28e711ffc2c2e8809a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2d0d2c1cd85e9930fc67c67978d36bb7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#ga2d0d2c1cd85e9930fc67c67978d36bb7">CONFIG_ALARM_CRASH_TRIGGER_VALUE</a>&#160;&#160;&#160;800			/**&gt; Total acceleration [G] in 1/100 resolution */</td></tr>
+<tr class="memitem:ga2d0d2c1cd85e9930fc67c67978d36bb7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#ga2d0d2c1cd85e9930fc67c67978d36bb7">CONFIG_ALARM_CRASH_TRIGGER_VALUE</a>&#160;&#160;&#160;400			/**&gt; Total acceleration [G] in 1/100 resolution */</td></tr>
 <tr class="separator:ga2d0d2c1cd85e9930fc67c67978d36bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2e220e691cf6201eedd15e0887e10c85"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#ga2e220e691cf6201eedd15e0887e10c85">CONFIG_ALARM_FIRE_TRIGGER_DEGREE</a>&#160;&#160;&#160;1			/**&gt; Temperature raise in Celsius degrees */</td></tr>
+<tr class="memitem:ga2e220e691cf6201eedd15e0887e10c85"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#ga2e220e691cf6201eedd15e0887e10c85">CONFIG_ALARM_FIRE_TRIGGER_DEGREE</a>&#160;&#160;&#160;1.0F		/**&gt; Temperature raise in Celsius degrees */</td></tr>
 <tr class="separator:ga2e220e691cf6201eedd15e0887e10c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabe1467c531cc8cc4578ed3487bfbbf96"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#gabe1467c531cc8cc4578ed3487bfbbf96">CONFIG_ALARM_FIRE_TRIGGER_TIME</a>&#160;&#160;&#160;80			/**&gt; Temperature raise time in 1/10 seconds resolution */</td></tr>
+<tr class="memitem:gabe1467c531cc8cc4578ed3487bfbbf96"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#gabe1467c531cc8cc4578ed3487bfbbf96">CONFIG_ALARM_FIRE_TRIGGER_TIME</a>&#160;&#160;&#160;8000U		/**&gt; Temperature raise time in 1ms resolution */</td></tr>
 <tr class="separator:gabe1467c531cc8cc4578ed3487bfbbf96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad5523af69faa4253a72ce52feba285aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#gad5523af69faa4253a72ce52feba285aa">CONFIG_ALARM_FIRE_TEMP_INIT</a>&#160;&#160;&#160;-100			/**&gt; Used to be sure there are two temperature readings before comparing values */</td></tr>
+<tr class="memitem:gad5523af69faa4253a72ce52feba285aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#gad5523af69faa4253a72ce52feba285aa">CONFIG_ALARM_FIRE_TEMP_INIT</a>&#160;&#160;&#160;-100.0F		/**&gt; Used to be sure there are two temperature readings before comparing values */</td></tr>
 <tr class="separator:gad5523af69faa4253a72ce52feba285aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c32410caaccaa80a5e7a225a8def491"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vc__adp.html#ga7c32410caaccaa80a5e7a225a8def491">CONFIG_ALARM_BUTTON_PRESS_TIME</a>&#160;&#160;&#160;30U</td></tr>
+<tr class="separator:ga7c32410caaccaa80a5e7a225a8def491"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Parameters for detecting an accident. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="ga7c32410caaccaa80a5e7a225a8def491"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONFIG_ALARM_BUTTON_PRESS_TIME&#160;&#160;&#160;30U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00140">140</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga82f5e4d988134d28e711ffc2c2e8809a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CONFIG_ALARM_CRASH_NO_OF_READINGS&#160;&#160;&#160;5			/**&gt; Length of acceleration peek */</td>
+          <td class="memname">#define CONFIG_ALARM_CRASH_NO_OF_READINGS&#160;&#160;&#160;5U			/**&gt; Length of acceleration peek */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00044">44</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
+<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00132">132</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
 
 </div>
 </div>
@@ -146,26 +160,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CONFIG_ALARM_CRASH_TRIGGER_VALUE&#160;&#160;&#160;800			/**&gt; Total acceleration [G] in 1/100 resolution */</td>
+          <td class="memname">#define CONFIG_ALARM_CRASH_TRIGGER_VALUE&#160;&#160;&#160;400			/**&gt; Total acceleration [G] in 1/100 resolution */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00045">45</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gad9be43b5c9d6874b6bfc83ef2d03b9ea"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CONFIG_ALARM_DETECTION_FREQUENCY&#160;&#160;&#160;<a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aac2d3cec6b83b084fb73afeaa019ebcb1">TIMER_50HZ</a>	/**&gt; Time interval between checking for accidents in Hz */</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00042">42</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
+<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00133">133</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
 
 </div>
 </div>
@@ -174,12 +174,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CONFIG_ALARM_FIRE_TEMP_INIT&#160;&#160;&#160;-100			/**&gt; Used to be sure there are two temperature readings before comparing values */</td>
+          <td class="memname">#define CONFIG_ALARM_FIRE_TEMP_INIT&#160;&#160;&#160;-100.0F		/**&gt; Used to be sure there are two temperature readings before comparing values */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00050">50</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
+<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00138">138</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
 
 </div>
 </div>
@@ -188,12 +188,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CONFIG_ALARM_FIRE_TRIGGER_DEGREE&#160;&#160;&#160;1			/**&gt; Temperature raise in Celsius degrees */</td>
+          <td class="memname">#define CONFIG_ALARM_FIRE_TRIGGER_DEGREE&#160;&#160;&#160;1.0F		/**&gt; Temperature raise in Celsius degrees */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00047">47</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
+<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00135">135</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
 
 </div>
 </div>
@@ -202,26 +202,26 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CONFIG_ALARM_FIRE_TRIGGER_TIME&#160;&#160;&#160;80			/**&gt; Temperature raise time in 1/10 seconds resolution */</td>
+          <td class="memname">#define CONFIG_ALARM_FIRE_TRIGGER_TIME&#160;&#160;&#160;8000U		/**&gt; Temperature raise time in 1ms resolution */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00048">48</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
+<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00136">136</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gaccae2002e2b565c6c44022faa64906ef"></a>
+<a class="anchor" id="ga5df18a387d76e659e568d9358223cd64"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CONFIG_ALARM_SENSOR_READ_FREQUENCY&#160;&#160;&#160;<a class="el" href="timer_8h.html#a201a4f2cb1c81c24f23dd01dae07612aac2d3cec6b83b084fb73afeaa019ebcb1">TIMER_50HZ</a>	/**&gt; Frequency of which the sensors are read in Hz */</td>
+          <td class="memname">#define CONFIG_SCHEDULER_FREQUENCY&#160;&#160;&#160;<a class="el" href="group__timer__pub.html#gga201a4f2cb1c81c24f23dd01dae07612aac2d3cec6b83b084fb73afeaa019ebcb1">TIMER_50HZ</a>	/**&gt; Frequency of which the sensors are read in Hz */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00041">41</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
+<p>Definition at line <a class="el" href="vroom__config_8h_source.html#l00130">130</a> of file <a class="el" href="vroom__config_8h_source.html">vroom_config.h</a>.</p>
 
 </div>
 </div>
@@ -230,7 +230,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:21 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:23 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

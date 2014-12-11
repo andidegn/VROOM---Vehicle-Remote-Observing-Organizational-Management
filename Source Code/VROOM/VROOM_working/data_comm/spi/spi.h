@@ -6,12 +6,11 @@
  * @version 0.4
  * @defgroup spi SPI Driver
  * @{
-	@ingroup data_communication
-	@brief This is a driver for the SPI bus
-	on the ATMEGA family processors.
-	@note Complies MISRA 2004 standards
-	@defgroup spi_pub Public
-	@defgroup spi_priv Private
+	 @ingroup data_communication
+	 @brief This is a driver for the SPI bus on the ATMEGA family processors.
+	 @note Complies MISRA 2004 standards
+	 @defgroup spi_pub Public
+	 @defgroup spi_priv Private
  * @}
  *************************************************************************/
 

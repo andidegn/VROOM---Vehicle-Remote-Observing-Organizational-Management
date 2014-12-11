@@ -78,7 +78,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
       <li class="current"><a href="globals_vars.html"><span>Variables</span></a></li>
-      <li><a href="globals_type.html"><span>Typedefs</span></a></li>
       <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
       <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
       <li><a href="globals_defs.html"><span>Macros</span></a></li>
@@ -118,7 +117,7 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -131,11 +130,11 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 &#160;
 
 <h3><a class="anchor" id="index__"></a>- _ -</h3><ul>
-<li>__cs_pin
-: <a class="el" href="spi_8c.html#a2d09bf3fa2ca132f9cf977144cab6c43">spi.c</a>
+<li>_acc_buffer
+: <a class="el" href="test__module__sensors_8c.html#a21573e1c7964c1522caae4f991915248">test_module_sensors.c</a>
 </li>
 <li>_acc_buffer_tail
-: <a class="el" href="sensor__scheduler_8c.html#ade848b8d314b4981b746a1bbc9b54c37">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#ade848b8d314b4981b746a1bbc9b54c37">scheduler.c</a>
 </li>
 <li>_ack_ftp_response_flag
 : <a class="el" href="sim908_8c.html#a367de3c499fd1987916044e3ff47b368">sim908.c</a>
@@ -159,7 +158,7 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 : <a class="el" href="uart_8c.html#a255abfa13770f2a48f0f40a192237e9f">uart.c</a>
 </li>
 <li>_callback_function_ptr
-: <a class="el" href="sensor__scheduler_8c.html#a971390504483293313915163f6779580">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#a971390504483293313915163f6779580">scheduler.c</a>
 </li>
 <li>_car_panel_counter
 : <a class="el" href="car__panel_8c.html#a29f15ae4f167ab9d159a6957a528604b">car_panel.c</a>
@@ -173,11 +172,20 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 <li>_cs_active_level
 : <a class="el" href="spi_8c.html#a05d1db4e9746eebd76bdef947d5d1b7c">spi.c</a>
 </li>
+<li>_cs_pin
+: <a class="el" href="spi_8c.html#a1d1ec6333b265b4dd659ee605a2421de">spi.c</a>
+</li>
 <li>_current_handle
 : <a class="el" href="spi_8c.html#a96dff8ac88a748c69bdecbaf8698efcf">spi.c</a>
 </li>
+<li>_current_id
+: <a class="el" href="r2r__led_8c.html#a3b2ffd2d2eaedc92318d3f5d926a1123">r2r_led.c</a>
+</li>
 <li>_data_array
 : <a class="el" href="spi_8c.html#a0f0b2cbeb7eb949d80a2a6dcb98f374e">spi.c</a>
+</li>
+<li>_execution_counter
+: <a class="el" href="scheduler_8c.html#ac6ca6224132b50b6f11b46bc0f1393bb">scheduler.c</a>
 </li>
 <li>_ftp_sending_flag
 : <a class="el" href="sim908_8c.html#a723c0b7a5caf668e156cc243094f804e">sim908.c</a>
@@ -211,9 +219,6 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 </li>
 <li>_is_busy
 : <a class="el" href="spi_8c.html#a30165d128d0d1ccb716ab3b7f6d325c1">spi.c</a>
-</li>
-<li>_isr_counter
-: <a class="el" href="timer_8c.html#a37525245e79597b449fbfdcbfdf72c80">timer.c</a>
 </li>
 <li>_last_pos
 : <a class="el" href="lcd_8c.html#ad11321b18c94d48fea8bda8a25488df9">lcd.c</a>
@@ -272,21 +277,54 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 , <a class="el" href="tc72_8c.html#ab2e6fc6d66966b27a5c61fcc27328d88">tc72.c</a>
 </li>
 <li>_state
-: <a class="el" href="tc72_8c.html#a7bace97150703d39cf0f08ae824f0759">tc72.c</a>
+: <a class="el" href="scheduler_8c.html#a227d2f1348ff31eaf0e3fefbefc50707">scheduler.c</a>
 , <a class="el" href="lis331hh_8c.html#a2a3e6b78047ca6ce8f1567eba7faec89">lis331hh.c</a>
-, <a class="el" href="sensor__scheduler_8c.html#a7acad3c3d42a01545d83d432d435ea82">sensor_scheduler.c</a>
+, <a class="el" href="tc72_8c.html#a7bace97150703d39cf0f08ae824f0759">tc72.c</a>
 </li>
 <li>_system_running_flag
 : <a class="el" href="sim908_8c.html#accf582d30f94ac085da946d1f3e15ee8">sim908.c</a>
+</li>
+<li>_task_prev_id_acc
+: <a class="el" href="scheduler_8c.html#a287b01500f8efc6588a7766382274b10">scheduler.c</a>
+</li>
+<li>_task_prev_id_callback
+: <a class="el" href="sim908_8c.html#a8e4a49860ef29bb43e885abb598a3fc5">sim908.c</a>
+</li>
+<li>_task_prev_id_cmd_send
+: <a class="el" href="sim908_8c.html#aba973507f2c3c6b272d38e177f130324">sim908.c</a>
+</li>
+<li>_task_prev_id_crash_det
+: <a class="el" href="scheduler_8c.html#a310e842d7965d7ce998d25568fdf9995">scheduler.c</a>
+</li>
+<li>_task_prev_id_fire_det
+: <a class="el" href="scheduler_8c.html#ab7cc7ad1ae2107bc0cc9ee5c5a9113f6">scheduler.c</a>
+</li>
+<li>_task_prev_id_read
+: <a class="el" href="scheduler_8c.html#a4d6e51b903f42038e41e9f20f230570f">scheduler.c</a>
+</li>
+<li>_task_prev_id_start_module
+: <a class="el" href="sim908_8c.html#ab71d1de6642847f31be6933a63e0572d">sim908.c</a>
+</li>
+<li>_task_prev_id_temp
+: <a class="el" href="scheduler_8c.html#a8b143abcab4cf984788e349d51723519">scheduler.c</a>
+</li>
+<li>_task_prev_id_wait_for_response
+: <a class="el" href="sim908_8c.html#a35dff386ddd3dd467cad620f8609ac15">sim908.c</a>
 </li>
 <li>_temp
 : <a class="el" href="tc72_8c.html#ac8d0acc8b23463bb09c48f6394a261ae">tc72.c</a>
 </li>
 <li>_temperature
-: <a class="el" href="sensor__scheduler_8c.html#af51952d76cfce48b60dabe4940208238">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#af51952d76cfce48b60dabe4940208238">scheduler.c</a>
+</li>
+<li>_TIFR1_cpy
+: <a class="el" href="timer_8c.html#acacbd8417acf3dc7695033b63420c05c">timer.c</a>
 </li>
 <li>_timeout_ctr
 : <a class="el" href="test__module__uart_8c.html#a65cc11b887118e7f1055ae44c9e556da">test_module_uart.c</a>
+</li>
+<li>_TIMSK1_cpy
+: <a class="el" href="timer_8c.html#ab7c5163f08dcf0cd28d768d5b1469c7a">timer.c</a>
 </li>
 <li>_tx_buffer0
 : <a class="el" href="uart_8c.html#a6aab1b103148d9f0ad2dc7be91d09966">uart.c</a>
@@ -319,22 +357,19 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 : <a class="el" href="lis331hh_8c.html#a8dcef7b358d03a3c2450abe3ccdc7b79">lis331hh.c</a>
 </li>
 <li>_x_axis_buffer
-: <a class="el" href="sensor__scheduler_8c.html#a5a6131eea443aa666cddd77881c8932a">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#a5a6131eea443aa666cddd77881c8932a">scheduler.c</a>
 </li>
 <li>_y_axis
 : <a class="el" href="lis331hh_8c.html#af40276049ad1cf394d69b0240f1d030d">lis331hh.c</a>
 </li>
 <li>_y_axis_buffer
-: <a class="el" href="sensor__scheduler_8c.html#a29d84eac32003e1e4094d9109fe4bcc5">sensor_scheduler.c</a>
-</li>
-<li>_ytab
-: <a class="el" href="time_8c.html#a71eeef3b16d170231b5aa59331e0ab60">time.c</a>
+: <a class="el" href="scheduler_8c.html#a29d84eac32003e1e4094d9109fe4bcc5">scheduler.c</a>
 </li>
 <li>_z_axis
 : <a class="el" href="lis331hh_8c.html#aa591f7a2ea8c0c45ef3372f46bd96c71">lis331hh.c</a>
 </li>
 <li>_z_axis_buffer
-: <a class="el" href="sensor__scheduler_8c.html#aac88409aceedd154cbf0ed34996344e8">sensor_scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#aac88409aceedd154cbf0ed34996344e8">scheduler.c</a>
 </li>
 </ul>
 
@@ -348,12 +383,15 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 
 <h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
 <li>cur_temp
-: <a class="el" href="accident__detection_8c.html#a78a3d4e8d1b030b68f698c53f07a1505">accident_detection.c</a>
+: <a class="el" href="accident__detection_8c.html#a2c3322749ef7e19cec1dd3bf03dae3b7">accident_detection.c</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>DAYS_MONTH
+: <a class="el" href="time_8c.html#af828a18387d9423ddc10ee87de0543da">time.c</a>
+</li>
 <li>degree
 : <a class="el" href="test__module__sensors_8c.html#abb8bc3abd66191b672c2baa24f41745d">test_module_sensors.c</a>
 </li>
@@ -378,19 +416,19 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 , <a class="el" href="sim908_8c.html#a667db9d0e6ffc7d00db8ace2dae7b228">sim908.c</a>
 </li>
 <li>EXT_TEMPERATURE
-: <a class="el" href="accident__detection_8c.html#ae3985f09d7fd963760e7529a58c53864">accident_detection.c</a>
-, <a class="el" href="accident__detection_8h.html#ae3985f09d7fd963760e7529a58c53864">accident_detection.h</a>
+: <a class="el" href="accident__data_8c.html#ae3985f09d7fd963760e7529a58c53864">accident_data.c</a>
+, <a class="el" href="accident__data_8h.html#ae3985f09d7fd963760e7529a58c53864">accident_data.h</a>
 </li>
 <li>EXT_TOTAL_ACCELERATION_AVG
-: <a class="el" href="accident__detection_8c.html#aade70883fccc2b0895a90466f27be4be">accident_detection.c</a>
-, <a class="el" href="accident__detection_8h.html#aade70883fccc2b0895a90466f27be4be">accident_detection.h</a>
+: <a class="el" href="accident__data_8c.html#aade70883fccc2b0895a90466f27be4be">accident_data.c</a>
+, <a class="el" href="accident__data_8h.html#aade70883fccc2b0895a90466f27be4be">accident_data.h</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>prev_temp
-: <a class="el" href="accident__detection_8c.html#a4016347328e4173921bcac5e41617983">accident_detection.c</a>
+: <a class="el" href="accident__detection_8c.html#a8c2a1405f338a3dddbaa36b9c4a12bf3">accident_detection.c</a>
 </li>
 </ul>
 
@@ -400,28 +438,29 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 : <a class="el" href="test__module__sensors_8c.html#a24d61a35b72d7299eb6b5f48e71a571b">test_module_sensors.c</a>
 </li>
 <li>tests_run
-: <a class="el" href="unit__test_8c.html#a1d61e35205d61f76e26abaab0011bb7a">unit_test.c</a>
+: <a class="el" href="group__test__unit__pub.html#ga1d61e35205d61f76e26abaab0011bb7a">test_unit.c</a>
+, <a class="el" href="group__test__unit__pub.html#ga1d61e35205d61f76e26abaab0011bb7a">test_unit.h</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_x"></a>- x -</h3><ul>
 <li>x_axis
-: <a class="el" href="test__module__sensors_8c.html#a24197819c7d623bf21d166a24c72784e">test_module_sensors.c</a>
+: <a class="el" href="test__module__sensors_8c.html#a95ae661dc6167baa56ab42509c14cc9c">test_module_sensors.c</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_y"></a>- y -</h3><ul>
 <li>y_axis
-: <a class="el" href="test__module__sensors_8c.html#ad74302fbc675a06f9dd0d9b7c365c979">test_module_sensors.c</a>
+: <a class="el" href="test__module__sensors_8c.html#ad8168f97a27ae42893c873cd61d0b832">test_module_sensors.c</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_z"></a>- z -</h3><ul>
 <li>z_axis
-: <a class="el" href="test__module__sensors_8c.html#a0dde611d17fd0cca770d727f3800efbb">test_module_sensors.c</a>
+: <a class="el" href="test__module__sensors_8c.html#ab9642d770c4122570c7b12316c098dec">test_module_sensors.c</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -429,7 +468,7 @@ $(document).ready(function(){initNavTree('globals_vars.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:22 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:25 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

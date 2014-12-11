@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('test__module__uart_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -126,11 +126,14 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3151f4ce003605a6c0dea6526ccd6d0e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__module__uart_8c.html#a3151f4ce003605a6c0dea6526ccd6d0e">_validate_data</a> (void)</td></tr>
-<tr class="separator:a3151f4ce003605a6c0dea6526ccd6d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3c92a8f031ddb58b6ec173d029084cd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__module__uart_8c.html#af3c92a8f031ddb58b6ec173d029084cd">_data0_received</a> (char data)</td></tr>
-<tr class="separator:af3c92a8f031ddb58b6ec173d029084cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3151f4ce003605a6c0dea6526ccd6d0e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__test__uart__priv.html#ga3151f4ce003605a6c0dea6526ccd6d0e">_validate_data</a> (void)</td></tr>
+<tr class="memdesc:ga3151f4ce003605a6c0dea6526ccd6d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates the data received against the given string literal.  <a href="group__test__uart__priv.html#ga3151f4ce003605a6c0dea6526ccd6d0e">More...</a><br/></td></tr>
+<tr class="separator:ga3151f4ce003605a6c0dea6526ccd6d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf3c92a8f031ddb58b6ec173d029084cd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__test__uart__priv.html#gaf3c92a8f031ddb58b6ec173d029084cd">_data0_received</a> (char data)</td></tr>
+<tr class="memdesc:gaf3c92a8f031ddb58b6ec173d029084cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function for uart0 Stores received data in buffer and sets _roundtrip_complete flag if the end length of the _uart_compare_string is reached.  <a href="group__test__uart__priv.html#gaf3c92a8f031ddb58b6ec173d029084cd">More...</a><br/></td></tr>
+<tr class="separator:gaf3c92a8f031ddb58b6ec173d029084cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a643851a66330cd53945a8753c52e80b3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__module__uart_8c.html#a643851a66330cd53945a8753c52e80b3">_data1_received</a> (char data)</td></tr>
+<tr class="memdesc:a643851a66330cd53945a8753c52e80b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function for uart1 Echoes data.  <a href="#a643851a66330cd53945a8753c52e80b3">More...</a><br/></td></tr>
 <tr class="separator:a643851a66330cd53945a8753c52e80b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5a25c7de5fc1349c1315e2e43c5a8f38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38">test_module_uart_run</a> (const char *__uart_test_string, const char *__uart_compare_string)</td></tr>
 <tr class="memdesc:ga5a25c7de5fc1349c1315e2e43c5a8f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the testing routine for uart0 and uart1.  <a href="group__test__uart__pub.html#ga5a25c7de5fc1349c1315e2e43c5a8f38">More...</a><br/></td></tr>
@@ -167,32 +170,6 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="af3c92a8f031ddb58b6ec173d029084cd"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void _data0_received </td>
-          <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00099">99</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a643851a66330cd53945a8753c52e80b3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -215,33 +192,16 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00107">107</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
+<p>Callback function for uart1 Echoes data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">char</td><td>data - the data received</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-</div>
-</div>
-<a class="anchor" id="a3151f4ce003605a6c0dea6526ccd6d0e"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool _validate_data </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00083">83</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
+<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00141">141</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
 
 </div>
 </div>
@@ -264,7 +224,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00017">17</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
+<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00018">18</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
 
 </div>
 </div>
@@ -286,7 +246,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00019">19</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
+<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00020">20</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
 
 </div>
 </div>
@@ -308,7 +268,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00018">18</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
+<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00019">19</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
 
 </div>
 </div>
@@ -330,7 +290,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00015">15</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
+<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00016">16</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
 
 </div>
 </div>
@@ -352,7 +312,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00016">16</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
+<p>Definition at line <a class="el" href="test__module__uart_8c_source.html#l00017">17</a> of file <a class="el" href="test__module__uart_8c_source.html">test_module_uart.c</a>.</p>
 
 </div>
 </div>
@@ -362,7 +322,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_53b43e7982d564c6963f6529d69dc7dc.html">VROOM</a></li><li class="navelem"><a class="el" href="dir_e5f3a094b1884d447da55fdffbb9d273.html">VROOM_working</a></li><li class="navelem"><a class="el" href="dir_68ea32aac5a3d19aef2c1430f2b7b4b5.html">Tests</a></li><li class="navelem"><a class="el" href="dir_d60892e75c900d18d1ad7cebdefdf54e.html">module</a></li><li class="navelem"><a class="el" href="dir_8e322f0833c874159b2a034ca5154f90.html">uart</a></li><li class="navelem"><a class="el" href="test__module__uart_8c.html">test_module_uart.c</a></li>
-    <li class="footer">Generated on Wed Dec 3 2014 06:37:20 for VROOM by
+    <li class="footer">Generated on Thu Dec 11 2014 14:33:22 for VROOM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/uart/uart.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/uart/uart.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,17 +10,15 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 \fC#include <stdlib\&.h>\fP
 .br
-\fC#include <util/delay\&.h>\fP
-.br
 
 .SS "Macros"
 
 .in +1c
 .ti -1c
-.RI "#define \fBUBRR_FACTOR_ASYNC_NORM\fP   16"
+.RI "#define \fBUBRR_FACTOR_ASYNC_NORM\fP   16U"
 .br
 .ti -1c
-.RI "#define \fBUBRR_FACTOR_ASYNC_DOUBLE\fP   8"
+.RI "#define \fBUBRR_FACTOR_ASYNC_DOUBLE\fP   8U"
 .br
 .ti -1c
 .RI "#define \fBCALC_UBRR\fP(baud_rate, factor)   (((\fBF_CPU\fP / (factor * baud_rate)) - 1) + 0\&.5F)"
@@ -133,59 +131,59 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .SS "void(* _callback_function0_ptr)(char __data)\fC [static]\fP"
 
 .PP
-Definition at line 30 of file uart\&.c\&.
+Definition at line 28 of file uart\&.c\&.
 .SS "void(* _callback_function1_ptr)(char __data)\fC [static]\fP"
 
 .PP
-Definition at line 39 of file uart\&.c\&.
+Definition at line 37 of file uart\&.c\&.
 .SS "volatile char _rx_buffer0[\fBUART0_RX_BUFFER_SIZE\fP]\fC [static]\fP"
 
 .PP
-Definition at line 34 of file uart\&.c\&.
+Definition at line 32 of file uart\&.c\&.
 .SS "volatile uint8_t _rx_buffer0_head = 0U\fC [static]\fP"
 
 .PP
-Definition at line 35 of file uart\&.c\&.
+Definition at line 33 of file uart\&.c\&.
 .SS "volatile uint8_t _rx_buffer0_tail = 0U\fC [static]\fP"
 
 .PP
-Definition at line 36 of file uart\&.c\&.
+Definition at line 34 of file uart\&.c\&.
 .SS "volatile char _rx_buffer1[\fBUART1_RX_BUFFER_SIZE\fP]\fC [static]\fP"
 
 .PP
-Definition at line 43 of file uart\&.c\&.
+Definition at line 41 of file uart\&.c\&.
 .SS "volatile uint8_t _rx_buffer1_head = 0U\fC [static]\fP"
 
 .PP
-Definition at line 44 of file uart\&.c\&.
+Definition at line 42 of file uart\&.c\&.
 .SS "volatile uint8_t _rx_buffer1_tail = 0U\fC [static]\fP"
 
 .PP
-Definition at line 45 of file uart\&.c\&.
+Definition at line 43 of file uart\&.c\&.
 .SS "volatile char _tx_buffer0[\fBUART0_TX_BUFFER_SIZE\fP]\fC [static]\fP"
 
 .PP
-Definition at line 31 of file uart\&.c\&.
+Definition at line 29 of file uart\&.c\&.
 .SS "volatile uint8_t _tx_buffer0_head = 0U\fC [static]\fP"
 
 .PP
-Definition at line 32 of file uart\&.c\&.
+Definition at line 30 of file uart\&.c\&.
 .SS "volatile uint8_t _tx_buffer0_tail = 0U\fC [static]\fP"
 
 .PP
-Definition at line 33 of file uart\&.c\&.
+Definition at line 31 of file uart\&.c\&.
 .SS "volatile char _tx_buffer1[\fBUART1_TX_BUFFER_SIZE\fP]\fC [static]\fP"
 
 .PP
-Definition at line 40 of file uart\&.c\&.
+Definition at line 38 of file uart\&.c\&.
 .SS "volatile uint8_t _tx_buffer1_head = 0U\fC [static]\fP"
 
 .PP
-Definition at line 41 of file uart\&.c\&.
+Definition at line 39 of file uart\&.c\&.
 .SS "volatile uint8_t _tx_buffer1_tail = 0U\fC [static]\fP"
 
 .PP
-Definition at line 42 of file uart\&.c\&.
+Definition at line 40 of file uart\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

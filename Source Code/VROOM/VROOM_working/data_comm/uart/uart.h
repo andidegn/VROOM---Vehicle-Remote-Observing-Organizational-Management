@@ -6,20 +6,19 @@
  * @version 0.5
  * @defgroup uart UART Driver
  * @{
-	@ingroup data_communication
-	@brief This is a driver for the UART0-1
-	on the ATMEGA family processors.
+	 @ingroup data_communication
+	 @brief This is a driver for the UART0-1 on the ATMEGA family processors.
 
-	- UART0 pins:
-		+ RX: PE0
+	 - UART0 pins:
+	 	+ RX: PE0
 		+ TX: PE1
 
-	- UART1 pins:
+	 - UART1 pins:
 		+ RX: PD2
 		+ TX: PD3
-	@defgroup uart_pub Public
-	@defgroup uart_priv Private
-	@note Complies MISRA 2004 standards
+	 @defgroup uart_pub Public
+	 @defgroup uart_priv Private
+	 @note Complies MISRA 2004 standards
  * @}
  *************************************************************************/
 

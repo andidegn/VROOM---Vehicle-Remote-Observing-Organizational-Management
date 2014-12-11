@@ -1,0 +1,70 @@
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/R2R_LED/r2r_led.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/R2R_LED/r2r_led.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'r2r_led\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDDR\fP(\fBPORT\fP)   (*(&\fBPORT\fP - 1))"
+.br
+.ti -1c
+.RI "#define \fBmask\fP   0b11110000"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBr2r_init\fP ()"
+.br
+.ti -1c
+.RI "void \fBr2r_led\fP (uint8_t led, uint8_t state)"
+.br
+.ti -1c
+.RI "void \fBr2r_led_toggle\fP (uint8_t led)"
+.br
+.ti -1c
+.RI "void \fBr2r_led_print\fP (uint8_t value)"
+.br
+.ti -1c
+.RI "void \fBr2r_leds_on\fP ()"
+.br
+.ti -1c
+.RI "void \fBr2r_leds_off\fP ()"
+.br
+.ti -1c
+.RI "void \fBr2r_set_dac\fP (uint8_t __value)"
+.br
+.ti -1c
+.RI "uint8_t \fBr2r_start_task\fP (uint8_t __id)"
+.br
+.RI "\fIStarts a task measure and returns the id of the already running task\&. \fP"
+.ti -1c
+.RI "void \fBr2r_stop_task\fP (uint8_t __prev_id)"
+.br
+.RI "\fITakes the value of the previous task and stops measuring\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static uint8_t \fB_current_id\fP = 0"
+.br
+.in -1c
+.SH "Variable Documentation"
+.PP 
+.SS "uint8_t _current_id = 0\fC [static]\fP"
+Local variable 
+.PP
+Definition at line 23 of file r2r_led\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VROOM from the source code\&.

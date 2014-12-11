@@ -1,4 +1,4 @@
-.TH "Port" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Port" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ Port \-
 
 .in +1c
 .ti -1c
-.RI "#define \fBPORT\fP   PORTJ"
+.RI "#define \fBPORT\fP   \fBCONFIG_PORT_CAR_PANEL\fP"
 .br
 .ti -1c
 .RI "#define \fBDDR\fP(x)   (*(&x - 1))"
@@ -31,15 +31,15 @@ Macros for DDR and PIN registers
 .SS "#define DDR(x)   (*(&x - 1))"
 
 .PP
-Definition at line 27 of file car_panel\&.c\&.
+Definition at line 26 of file car_panel\&.c\&.
 .SS "#define PIN(x)   (*(&x - 2))"
 
 .PP
-Definition at line 28 of file car_panel\&.c\&.
-.SS "#define PORT   PORTJ"
+Definition at line 27 of file car_panel\&.c\&.
+.SS "#define PORT   \fBCONFIG_PORT_CAR_PANEL\fP"
 
 .PP
-Definition at line 18 of file car_panel\&.c\&.
+Definition at line 17 of file car_panel\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

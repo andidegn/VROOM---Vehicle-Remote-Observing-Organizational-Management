@@ -1,9 +1,11 @@
 /**********************************************************************//**
  * @file vroom_config.h
+ *
  * @author: Andi Degn
  * @author: Kenneth René Jensen
  * @Version: 0.7
  *
+ * @defgroup app Application
  * @defgroup accident_logic Accident Logic
  * @defgroup data_communication Data Communication
  * @defgroup hardware_boards Hardware Boards
@@ -13,6 +15,7 @@
  *
  * @defgroup vroom_cfg Vroom Config
  * @{
+	 @ingroup app
 	 @brief Configuration file containing all adjustment and setup parameters
 	 for the whole system.
 	 @note Complies MISRA 2004 standards
@@ -55,6 +58,11 @@
  * @defgroup vc_port MCU port defines
  * @{
  *************************************************************************/
+/**********************************************************************//**
+ * Defines for the ports and pins used by the SPI
+ * @defgroup vc_port_spi SPI
+ * @{
+ **************************************************************************/
 #define CONFIG_PORT_DDR_SPI					DDRB
 #define CONFIG_PORT_SS						PB0
 #define CONFIG_PORT_SCK						PB1
@@ -63,7 +71,6 @@
 /** @} */
 
 /**********************************************************************//**
- * @ingroup vroom_cfg
  * @brief Port definition for the car panel
  * @defgroup vc_port_car_panel Car panel
  * @{
@@ -72,17 +79,10 @@
 /** @} */
 
 /**********************************************************************//**
- * @ingroup vroom_cfg
  * @brief Port definition for the SIM908 module
  * @defgroup vc_port_sim908 SIM908
  * @{
  *************************************************************************/
-/**********************************************************************//**
- * @ingroup spi_priv
- * Defines for the ports and pins used by the SPI
- * @defgroup vc_port_spi SPI
- * @{
- **************************************************************************/
 #define STK600
 #ifdef STK600
  #define CONFIG_PORT_DRIVER_PORT			PORTE
@@ -103,7 +103,6 @@
 /** @} */
 
 /**********************************************************************//**
- * @ingroup vroom_cfg
  * @brief Port definition for the LCD display
  * @note This module is only used for debugging
  * @defgroup vc_port_lcd LCD display
@@ -113,7 +112,6 @@
 /** @} */
 
 /**********************************************************************//**
- * @ingroup vroom_cfg
  * @brief Port definition for the R2R LED module
  * @note This module is only used for debugging
  * @defgroup vc_port_r2r R2R LED

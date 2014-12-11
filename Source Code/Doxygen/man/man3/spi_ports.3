@@ -1,4 +1,4 @@
-.TH "SPI Ports" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "SPI Ports" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,19 +7,19 @@ SPI Ports \-
 
 .in +1c
 .ti -1c
-.RI "#define \fBDDR_SPI\fP   DDRB"
+.RI "#define \fBDDR_SPI\fP   \fBCONFIG_PORT_DDR_SPI\fP"
 .br
 .ti -1c
-.RI "#define \fBSS\fP   PB0"
+.RI "#define \fBSS\fP   \fBCONFIG_PORT_SS\fP"
 .br
 .ti -1c
-.RI "#define \fBSCK\fP   PB1"
+.RI "#define \fBSCK\fP   \fBCONFIG_PORT_SCK\fP"
 .br
 .ti -1c
-.RI "#define \fBMOSI\fP   PB2"
+.RI "#define \fBMOSI\fP   \fBCONFIG_PORT_MOSI\fP"
 .br
 .ti -1c
-.RI "#define \fBMISO\fP   PB3"
+.RI "#define \fBMISO\fP   \fBCONFIG_PORT_MISO\fP"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -27,26 +27,26 @@ SPI Ports \-
 Defines for the ports and pins used by the SPI 
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define DDR_SPI   DDRB"
-
-.PP
-Definition at line 14 of file spi\&.c\&.
-.SS "#define MISO   PB3"
-
-.PP
-Definition at line 18 of file spi\&.c\&.
-.SS "#define MOSI   PB2"
-
-.PP
-Definition at line 17 of file spi\&.c\&.
-.SS "#define SCK   PB1"
-
-.PP
-Definition at line 16 of file spi\&.c\&.
-.SS "#define SS   PB0"
+.SS "#define DDR_SPI   \fBCONFIG_PORT_DDR_SPI\fP"
 
 .PP
 Definition at line 15 of file spi\&.c\&.
+.SS "#define MISO   \fBCONFIG_PORT_MISO\fP"
+
+.PP
+Definition at line 19 of file spi\&.c\&.
+.SS "#define MOSI   \fBCONFIG_PORT_MOSI\fP"
+
+.PP
+Definition at line 18 of file spi\&.c\&.
+.SS "#define SCK   \fBCONFIG_PORT_SCK\fP"
+
+.PP
+Definition at line 17 of file spi\&.c\&.
+.SS "#define SS   \fBCONFIG_PORT_SS\fP"
+
+.PP
+Definition at line 16 of file spi\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

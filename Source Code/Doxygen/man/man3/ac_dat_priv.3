@@ -1,4 +1,4 @@
-.TH "Private" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "Private" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,7 +15,7 @@ Private \-
 .br
 .RI "\fIfunction to set the vehicle identification number \fP"
 .ti -1c
-.RI "static void \fB_set_optional_data\fP ()"
+.RI "static void \fB_set_optional_data\fP (void)"
 .br
 .RI "\fIfunction to set further data (e\&.g\&. crash information, number of passengers, temperature) \fP"
 .in -1c
@@ -47,8 +47,8 @@ void
 .PP
 
 .PP
-Definition at line 75 of file accident_data\&.c\&.
-.SS "static void _set_optional_data ()\fC [static]\fP"
+Definition at line 74 of file accident_data\&.c\&.
+.SS "static void _set_optional_data (void)\fC [static]\fP"
 
 .PP
 function to set further data (e\&.g\&. crash information, number of passengers, temperature) 
@@ -65,7 +65,7 @@ void
 .PP
 \fBNote:\fP
 .RS 4
-May also be blank field 
+Encoding optional data depends on MSD version\&. 
 .RE
 .PP
 

@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/sensors/accelerometer/lis331hh.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -161,7 +161,7 @@ Look in datasheet page 24 for further information\&. \fP"
 
 .in +1c
 .ti -1c
-.RI "void \fBacc_init\fP (uint8_t cs_pin, \fBACC_POWER_MODE\fP power_mode, \fBACC_OUTPUT_DATA_RATE\fP output_data_rate, \fBACC_FULL_SCALE\fP full_scale)"
+.RI "void \fBacc_init\fP (uint8_t __cs_pin, \fBACC_POWER_MODE\fP __power_mode, \fBACC_OUTPUT_DATA_RATE\fP __output_data_rate, \fBACC_FULL_SCALE\fP __full_scale)"
 .br
 .RI "\fIInitializes the driver\&. \fP"
 .ti -1c
@@ -169,15 +169,15 @@ Look in datasheet page 24 for further information\&. \fP"
 .br
 .RI "\fIStarts one measure routine\&. \fP"
 .ti -1c
-.RI "float \fBacc_get_x_axis\fP (void)"
+.RI "double \fBacc_get_x_axis\fP (void)"
 .br
 .RI "\fIGets the latest measured x axis value\&. \fP"
 .ti -1c
-.RI "float \fBacc_get_y_axis\fP (void)"
+.RI "double \fBacc_get_y_axis\fP (void)"
 .br
 .RI "\fIGets the latest measured y axis value\&. \fP"
 .ti -1c
-.RI "float \fBacc_get_z_axis\fP (void)"
+.RI "double \fBacc_get_z_axis\fP (void)"
 .br
 .RI "\fIGets the latest measured z axis value\&. \fP"
 .in -1c

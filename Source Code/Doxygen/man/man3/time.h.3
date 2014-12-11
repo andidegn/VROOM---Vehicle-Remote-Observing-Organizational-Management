@@ -1,12 +1,12 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time.h" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time/time.h" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time.h \- 
+D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/util/time/time.h \- 
 .SH SYNOPSIS
 .br
 .PP
-\fC#include <stdio\&.h>\fP
+\fC#include <avr/io\&.h>\fP
 .br
 
 .SS "Data Structures"
@@ -15,6 +15,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "struct \fBFIXED_TIME\fP"
 .br
+.RI "\fIstruct containing all parameters for UTC time \fP"
 .in -1c
 .SS "Functions"
 
@@ -22,13 +23,27 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .ti -1c
 .RI "uint32_t \fBcalc_UTC_seconds\fP (\fBFIXED_TIME\fP *\fBbuf\fP)"
 .br
+.RI "\fICalculates UTC seconds since epoch\&. \fP"
 .in -1c
-.SH "Function Documentation"
+.SH "Detailed Description"
 .PP 
-.SS "uint32_t calc_UTC_seconds (\fBFIXED_TIME\fP *buf)"
 
 .PP
-Definition at line 21 of file time\&.c\&.
+\fBAuthor:\fP
+.RS 4
+Kenneth René Jensen 
+.PP
+Andi Degn 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.2 
+.RE
+.PP
+
+.PP
+Definition in file \fBtime\&.h\fP\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

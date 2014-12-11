@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/car_panel/car_panel.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/hardware_boards/car_panel/car_panel.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,14 +14,12 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 \fC#include '\&.\&./\&.\&./accident_logic/accident_data\&.h'\fP
 .br
-\fC#include '\&.\&./\&.\&./accident_logic/accident_detection\&.h'\fP
-.br
 
 .SS "Macros"
 
 .in +1c
 .ti -1c
-.RI "#define \fBPORT\fP   PORTJ"
+.RI "#define \fBPORT\fP   \fBCONFIG_PORT_CAR_PANEL\fP"
 .br
 .ti -1c
 .RI "#define \fBDDR\fP(x)   (*(&x - 1))"
@@ -99,11 +97,11 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .SS "bool _alarm_cancelled\fC [static]\fP"
 
 .PP
-Definition at line 47 of file car_panel\&.c\&.
+Definition at line 46 of file car_panel\&.c\&.
 .SS "uint8_t _car_panel_counter\fC [static]\fP"
 
 .PP
-Definition at line 46 of file car_panel\&.c\&.
+Definition at line 45 of file car_panel\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

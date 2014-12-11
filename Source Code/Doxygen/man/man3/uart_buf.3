@@ -1,4 +1,4 @@
-.TH "UART buffer size" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "UART buffer size" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,16 +12,16 @@ defines the size of the transmit buffers
 
 .in +1c
 .ti -1c
-.RI "#define \fBUART0_TX_BUFFER_SIZE\fP   256"
+.RI "#define \fBUART0_TX_BUFFER_SIZE\fP   64U"
 .br
 .ti -1c
-.RI "#define \fBUART0_RX_BUFFER_SIZE\fP   256"
+.RI "#define \fBUART0_RX_BUFFER_SIZE\fP   64U"
 .br
 .ti -1c
-.RI "#define \fBUART1_TX_BUFFER_SIZE\fP   256"
+.RI "#define \fBUART1_TX_BUFFER_SIZE\fP   64U"
 .br
 .ti -1c
-.RI "#define \fBUART1_RX_BUFFER_SIZE\fP   256"
+.RI "#define \fBUART1_RX_BUFFER_SIZE\fP   64U"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -33,22 +33,22 @@ defines the size of the transmit buffers
 
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define UART0_RX_BUFFER_SIZE   256"
-
-.PP
-Definition at line 42 of file uart\&.h\&.
-.SS "#define UART0_TX_BUFFER_SIZE   256"
+.SS "#define UART0_RX_BUFFER_SIZE   64U"
 
 .PP
 Definition at line 41 of file uart\&.h\&.
-.SS "#define UART1_RX_BUFFER_SIZE   256"
+.SS "#define UART0_TX_BUFFER_SIZE   64U"
 
 .PP
-Definition at line 44 of file uart\&.h\&.
-.SS "#define UART1_TX_BUFFER_SIZE   256"
+Definition at line 40 of file uart\&.h\&.
+.SS "#define UART1_RX_BUFFER_SIZE   64U"
 
 .PP
 Definition at line 43 of file uart\&.h\&.
+.SS "#define UART1_TX_BUFFER_SIZE   64U"
+
+.PP
+Definition at line 42 of file uart\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

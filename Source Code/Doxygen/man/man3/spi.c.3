@@ -1,4 +1,4 @@
-.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.c" 3 "Wed Dec 3 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
+.TH "D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Code/VROOM/VROOM_working/data_comm/spi/spi.c" 3 "Thu Dec 11 2014" "Version v0.01" "VROOM" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,6 +8,8 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .PP
 \fC#include 'spi\&.h'\fP
 .br
+\fC#include '\&.\&./\&.\&./application/vroom_config\&.h'\fP
+.br
 \fC#include <stdlib\&.h>\fP
 .br
 
@@ -15,22 +17,22 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 
 .in +1c
 .ti -1c
-.RI "#define \fBDDR_SPI\fP   DDRB"
+.RI "#define \fBDDR_SPI\fP   \fBCONFIG_PORT_DDR_SPI\fP"
 .br
 .ti -1c
-.RI "#define \fBSS\fP   PB0"
+.RI "#define \fBSS\fP   \fBCONFIG_PORT_SS\fP"
 .br
 .ti -1c
-.RI "#define \fBSCK\fP   PB1"
+.RI "#define \fBSCK\fP   \fBCONFIG_PORT_SCK\fP"
 .br
 .ti -1c
-.RI "#define \fBMOSI\fP   PB2"
+.RI "#define \fBMOSI\fP   \fBCONFIG_PORT_MOSI\fP"
 .br
 .ti -1c
-.RI "#define \fBMISO\fP   PB3"
+.RI "#define \fBMISO\fP   \fBCONFIG_PORT_MISO\fP"
 .br
 .ti -1c
-.RI "#define \fBMAX_HANDLES\fP   16U"
+.RI "#define \fBMAX_HANDLES\fP   16"
 .br
 .ti -1c
 .RI "#define \fBCS_INACTIVE\fP   0U"
@@ -55,7 +57,7 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .br
 .RI "\fISends up data Sets up the SPI with 'handle' if it is not already the current handle\&. Then sends the data and returns '1'\&. If the SPI driver is busy performing another task, the data is not sent and a '0' is returned\&. \fP"
 .ti -1c
-.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t \fB__cs_pin\fP, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
+.RI "int8_t \fBspi_master_setup\fP (\fBSPI_DATA_MODE\fP __mode, \fBSPI_DATA_DIRECTION\fP __data_direction, \fBSPI_DIVIDER\fP __freq_divider, uint8_t __cs_pin, \fBSPI_CS_ACTIVE_LEVEL\fP __cs_active_level, void(*__callback_function_ptr)(uint8_t *__data))"
 .br
 .RI "\fISets up the SPI bus as master using supplied parameters\&. \fP"
 .ti -1c
@@ -88,13 +90,13 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .RI "static \fBhandle_param\fP \fB_handles\fP [\fBMAX_HANDLES\fP]"
 .br
 .ti -1c
-.RI "static uint8_t \fB__cs_pin\fP"
+.RI "static uint8_t \fB_cs_pin\fP"
 .br
 .ti -1c
 .RI "static uint8_t \fB_cs_active_level\fP"
 .br
 .ti -1c
-.RI "static volatile uint8_t \fB_is_busy\fP = 0"
+.RI "static volatile uint8_t \fB_is_busy\fP = 0U"
 .br
 .ti -1c
 .RI "static uint8_t * \fB_data_array\fP"
@@ -108,42 +110,42 @@ D:/Dropbox/Skole Opgaver/ICT Engineering/7th Semester/Bachelor Project/Source Co
 .in -1c
 .SH "Variable Documentation"
 .PP 
-.SS "uint8_t __cs_pin\fC [static]\fP"
-
-.PP
-Definition at line 44 of file spi\&.c\&.
 .SS "uint8_t _bytes_sent_ctr\fC [static]\fP"
 
 .PP
-Definition at line 50 of file spi\&.c\&.
+Definition at line 51 of file spi\&.c\&.
 .SS "uint8_t _cs_active_level\fC [static]\fP"
+
+.PP
+Definition at line 46 of file spi\&.c\&.
+.SS "uint8_t _cs_pin\fC [static]\fP"
 
 .PP
 Definition at line 45 of file spi\&.c\&.
 .SS "int8_t _current_handle = -1\fC [static]\fP"
 
 .PP
-Definition at line 42 of file spi\&.c\&.
+Definition at line 43 of file spi\&.c\&.
 .SS "uint8_t* _data_array\fC [static]\fP"
 
 .PP
-Definition at line 48 of file spi\&.c\&.
+Definition at line 49 of file spi\&.c\&.
 .SS "int8_t _handle_count = 0\fC [static]\fP"
 
 .PP
-Definition at line 41 of file spi\&.c\&.
+Definition at line 42 of file spi\&.c\&.
 .SS "\fBhandle_param\fP _handles[\fBMAX_HANDLES\fP]\fC [static]\fP"
 
 .PP
-Definition at line 43 of file spi\&.c\&.
-.SS "volatile uint8_t _is_busy = 0\fC [static]\fP"
+Definition at line 44 of file spi\&.c\&.
+.SS "volatile uint8_t _is_busy = 0U\fC [static]\fP"
 
 .PP
-Definition at line 46 of file spi\&.c\&.
+Definition at line 47 of file spi\&.c\&.
 .SS "uint8_t _no_of_bytes\fC [static]\fP"
 
 .PP
-Definition at line 49 of file spi\&.c\&.
+Definition at line 50 of file spi\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for VROOM from the source code\&.

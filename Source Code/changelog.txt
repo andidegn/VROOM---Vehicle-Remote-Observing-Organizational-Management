@@ -1,16 +1,86 @@
 /**
 @mainpage Vroom Project
 
-@section Introduction
-@subsection Background
-Nowadays people pay a very steep price for mobility. In Europe alone around 40,000 people die on the roads every year. Many of the fatalities are not only caused by the crashes themselves, but by the time it takes for help to arrive. 
-The first problem is that someone has to notify the authorities. More often than not the involved people are incapacitated and therefore incapable of doing this, so a third party has to do this. Time is wasted. 
-Next problem arises when the emergency operator needs to collect the required information; it can be challenging for the operator to retrieve the information from a random caller. A protocol is needed. Lastly, the operator needs to dispatch the proper emergency response. 
-A pan-European project called HeERO, addresses an in-vehicle emergency call services based on the common European Emergency number, 112. HeERO is a group of European pilots who develop, implement and tests the infrastructure and standards. This becomes both the service and an IVS (In-Vehicle System) called eCall. At this moment HeERO is in the final stage of phase 2, where Denmark is one out of 15 countries involved in testing and validating the standards in real conditions. eCall addresses standards for third parties as well, but as HeERO project is not yet completed, things might change and some are still undefined. 
-December 4th 2014 the EU parliament passed a legislation that will ensure that from Marts 31st 2018 all new passenger cars and light duty vehicles will be fitted with eCall.
-The IVS in this project will make it possible for people with pre-2018 cars to have the same opportunity and the same safety net as eCall provides with an aftermarket solution.
+
+@section intro Introduction
+    @subsection background Background
+        Nowadays people pay a very steep price for mobility. In Europe alone around 40,000 people die on the roads every year. Many of the fatalities are not only caused by the crashes themselves, but by the time it takes for help to arrive. 
+        The first problem is that someone has to notify the authorities. More often than not the involved people are incapacitated and therefore incapable of doing this, so a third party has to do this. Time is wasted. 
+        Next problem arises when the emergency operator needs to collect the required information; it can be challenging for the operator to retrieve the information from a random caller. A protocol is needed. Lastly, the operator needs to dispatch the proper emergency response. 
+        A pan-European project called HeERO, addresses an in-vehicle emergency call services based on the common European Emergency number, 112. HeERO is a group of European pilots who develop, implement and tests the infrastructure and standards. This becomes both the service and an IVS (In-Vehicle System) called eCall. At this moment HeERO is in the final stage of phase 2, where Denmark is one out of 15 countries involved in testing and validating the standards in real conditions. eCall addresses standards for third parties as well, but as HeERO project is not yet completed, things might change and some are still undefined. 
+        December 4th 2014 the EU parliament passed a legislation that will ensure that from Marts 31st 2018 all new passenger cars and light duty vehicles will be fitted with eCall.
+        The IVS in this project will make it possible for people with pre-2018 cars to have the same opportunity and the same safety net as eCall provides with an aftermarket solution.
+
+@section rad Results and Discussion
+    After careful analysis of the system through testing and timing analysis, it is demonstrated that the system is running as intended. All the functionalities originally required are implemented and working. However, this does not mean the system is perfect and without flaws. 
+
+    @subsection impr Improvements
+        @subsubsection misra MISRA C 2004
+            This standard, which was to be followed, presented some challenges which were too large to be resolved in the given time. This means that a few of the rules specified in the MISRA C 2004 standard are not followed. However, most of the rules are followed and respected.
+            The rules that are not followed can be found in (Appendix E)
+
+        @subsubsection sim908_comm SIM908 communication
+            The way the SIM908 communication is implemented turned out to now work as efficiently as it could. 
+            The problem is that as the project grew, more and more responses from the SIM908 module was required to be received and acknowledged. This meant that the callback function for the module became larger and larger. This was a problem as this callback function is called directly from the UART interrupt service routine, so the time it took to check all these different responses meant that part of other responses (especially the unsolicited ones) were missed.
+            So this one section could be greatly improved by creating a more elaborate system, however, the time to change it was not there when the problem became apparent.
+            One solution can be to have a framework which can support specific send/response combinations so that whenever a command requires a specific response, a callback function with only that check is passed to the UART.
+
+
+    @subsection fptm From prototype to market
+        Although this project only focuses on a prototype, thoughts about how to realise it and get it to the mass market have also been made.
+        Car panel
+        An ideal installation for this interface is intended as a part of the rear-view mirror, as this will minimise the probability of accidently activating an alarm and make for a seamless integration into any car. It will also help keep installation costs to a minimum as it is not a whole new panel that needs to be installed. ** Refer to eCall standards **
+        Pricing
+        A focus group would be a good idea to use to find out what a reasonable price for a product like this, as the cost of this system is a key selling point.
+        Production
+        Research into where the final product can be produced in a good balance between cost and quality. Even though cost is a selling point, the quality is very important as well. It is human lives that are on the line.
+        Code certification
+        The code would have to be certified in order to conform to the standards which are needed to realise this type of product.
+        Materials
+        The right kind of material is needed for the ECU box as it is very important that it is not damaged in a crash to the extent that it cannot perform the required functionalities. The system need to be functional regardless of the severity of the crash.
+        Operational environment
+        The system will have to be mounted in a secure location and in a way that the accelerometer is detecting the forces experienced by the vehicle. This means that it would have to be researched where to mount it. Furthermore, a backup battery and electronic circuit for delayed off functionality would also be required in order to ensure that the system would still be functional in the event that the vehicles power source is compromised.
+
+@section conclusion Conclusion
+    A prototype for a product that automatically calls for help in the event of a car accident have been presented and documented in this report. The product is suitable for all car makes and models as it does not interact with any of the cars components except for the battery. 
+    This is achieved by utilising an accelerometer to determine a crash instead of communicating with the car’s CANBUS to determine if an airbag is deployed. This is a vast improvement in contrast to other competing products.
+    The product also includes a thermometer to detect fire as well as an option to manually initiate an alarm. This can greatly increase the response time of the emergency response and potentially save lives.
+    It uses mobile communication, audio as well as data, to notify the emergency services in any given European country.
+    Although this is only a prototype, there are not many things that needs to be done in order to realise the final product and introduce it to the mass market (ref. 6.2)
+    A variety of test tools have also been developed in order to enhance the development of the product.
+    The product itself is developed as an embedded system written in C. It consists of 6166 lines of code and takes up 14442 bytes of program memory on the MCU.
+    All of the test tools are written in C#.
+
 
 @section Changelog
+
+==================================
+Version 0.300 - 2014/12/11 by Andi
+==================================
+New Features, Improvements
+--------------------------
+- Doxygen commenting added in all files
+- Doxygen proofing in all files
+- General code proofing
+
+Fixed Bugs, Changes
+-------------------
+
+Known Bugs, Problems
+--------------------
+- !note CREG unsolicited response and Call Ready sometimes still miss
+- !note If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
+- Check for error code does not work in sim908.c function send_MSD(...) line 309
+  Error code for Open Bearer AT command is: "+CME ERROR: 3"
+- Violation on some MISRA C 2004 rules: 
+   + 5.4:  Enumerated type mixed with another type - the use of a tag shall agree with its declaration (required) 
+   + 12.4: The right hand operand of an && or || operator shall not contain side effects (required) 
+   + 12.7: Bitwise operations shall not be performed on signed integer types (required) 
+   + 17.4: Pointer arithmetic should not be used (advised)
+   + 19.10: In the definition of a function-like macro, each instance of a parameter shall be enclosed in parenthesis (required) 
+   + 20.4: Dynamic heap memory allocation shall not be used (required) 
+   + 20.10: The library functions atof, atoi, and atol from library <stdlib.h> shall not be used (required)
+
 
 =====================================
 Version 0.207 - 2014/12/11 by Kenneth
@@ -34,7 +104,7 @@ ToDo
 
 Known Bugs, Problems
 --------------------
-- !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
+- !note CREG unsolicited response and Call Ready sometimes still miss
 - !note If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 - Check for error code does not work in sim908.c function send_MSD(...) line 309
   Error code for Open Bearer AT command is: "+CME ERROR: 3"
@@ -70,7 +140,7 @@ ToDo
 
 Known Bugs, Problems
 --------------------
-- !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
+- !note CREG unsolicited response and Call Ready sometimes still miss
 - !note If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 - Check for error code does not work in sim908.c function send_MSD(...) line 309
   Error code for Open Bearer AT command is: "+CME ERROR: 3"
@@ -107,7 +177,7 @@ ToDo
 
 Known Bugs, Problems
 --------------------
-- !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
+- !note CREG unsolicited response and Call Ready sometimes still miss
 - !note If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 - Check for error code does not work in sim908.c function send_MSD(...) line 309
   Error code for Open Bearer AT command is: "+CME ERROR: 3"
@@ -151,7 +221,7 @@ ToDo
 
 Known Bugs, Problems
 --------------------
-- !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
+- !note CREG unsolicited response and Call Ready sometimes still miss at
 - !note If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
 - Check for error code does not work in sim908.c function send_MSD(...) line 309
   Error code for Open Bearer AT command is: "+CME ERROR: 3"
@@ -173,7 +243,7 @@ Fixed Bugs, Changes
    and clearing the _rx_response_length, _CR_counter and _LF_counter before each command is sent.
    This seems to have fixed most, if not all, communication problems and the system is now running stable at a frq of 
    1KHz on the scheduler timer with a system load around 50%
-- !note CREG unsolicited response and Call Ready sometimes still miss at 1KHz
+- !note CREG unsolicited response and Call Ready sometimes still miss
   
 ToDo
 ----		

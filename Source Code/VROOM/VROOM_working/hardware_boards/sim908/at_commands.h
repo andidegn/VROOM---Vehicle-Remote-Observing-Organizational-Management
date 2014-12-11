@@ -7,10 +7,10 @@
  * @version 0.8
  * @defgroup at AT Commands
  * @{
-	@ingroup hardware_boards
-	@brief This is a header containing all the most
-	relevant AT commands for this system
-	@note Complies MISRA 2004 standards
+	 @ingroup hardware_boards
+	 @brief This is a header containing all the most
+	 relevant AT commands for this system
+	 @note Complies MISRA 2004 standards
  * @}
  *************************************************************************/
 

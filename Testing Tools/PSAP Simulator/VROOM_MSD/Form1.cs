@@ -12,6 +12,7 @@ using VROOM_MSD.Properties;
 using System.Windows.Media;
 using System.Threading;
 using Microsoft.Maps.MapControl.WPF;
+using System.Threading.Tasks;
 
 namespace VROOM_MSD
 {
@@ -24,6 +25,8 @@ namespace VROOM_MSD
         private Location location;
         private readonly Location DENMARK = new Location(56.0, 10.5);
         private readonly double ZOOM = 6.08;
+        private Location _prev_focus_key;
+        private Location _new_focus_key; 
 
         public MainForm()
         {
@@ -42,7 +45,7 @@ namespace VROOM_MSD
                 _msd = new MSD_structure();
                 LoadFiles();
             }
-            catch(Exception e) 
+            catch
             {
                 path_label.Text = "Last path not found...";
             }
@@ -68,8 +71,6 @@ namespace VROOM_MSD
         {
             mapUserControl.Map.CredentialsProvider = new ApplicationIdCredentialsProvider("AvNimwfYic8BJOuBLqc6jTBeroePra8F7kovNHua9kXACh4SPdBBtoL3a1PZCqmT");
 
-            mapUserControl.Map.Height = elementHost.Height;
-            mapUserControl.Map.Width = elementHost.Width;
             mapUserControl.Map.SetView(DENMARK, ZOOM);     
             MapViewStyle.SelectedIndex = 1;
         }
@@ -85,8 +86,11 @@ namespace VROOM_MSD
         {
             msd_text_box.Items.Remove(e.Name);
             path_label.Text = _msd.GetLocation().Latitude + ", " + _msd.GetLocation().Longitude;
-            mapUserControl.Map.Children.Remove(_msd.GetPin(e.Name));
-            _msd.DeletePin(e.Name);
+
+            mapUserControl.Map.Children.Remove(_msd.GetPin(_msd.GetLocation()));
+            _msd.DeletePin(_msd.GetLocation());
+
+
             _msd.DeleteMSD(e.Name);
         }
 
@@ -102,6 +106,7 @@ namespace VROOM_MSD
                     {
                         data = new byte[msd.Length];
                         msd.Read(data, 0, (int)msd.Length);
+                        msd.Dispose();
                         break;
                     }
                 }
@@ -118,25 +123,36 @@ namespace VROOM_MSD
         {
             if (msd_text_box.SelectedItem != null) 
             {
-                _msd.DecodeMSD(msd_text_box.Text);
+                var SelectedFile = msd_text_box.Text;
+                _msd.DecodeMSD(SelectedFile);
 
                 if (_msd.ControlPositionTrusted())
                 {
                     location = _msd.GetLocation();
 
-                    if (_msd.GetPin(msd_text_box.Text) == null)
+                    if (_msd.GetPin(location) == null)
                     {
-                        _msd.CreatePin(msd_text_box.Text);
+                        _msd.CreatePin(location);
 
-                        mapUserControl.Map.Children.Add(_msd.GetPin(msd_text_box.Text));
+                        mapUserControl.Map.Children.Add(_msd.GetPin(location));
                     }
+
+                    _new_focus_key = location;
+                    _msd.FocusPin(_new_focus_key);
+                    if (_prev_focus_key != _new_focus_key)
+                        _msd.UnFocusPin(_prev_focus_key);
+                    _prev_focus_key = _new_focus_key;
+                }
+                else
+                {
+                    _msd.UnFocusPin(_prev_focus_key);
                 }
                 
                 mapUserControl.Map.Focus();
 
                 msd_details.Items.Clear();
                 msd_details.Items.Add("=======================================");
-                msd_details.Items.Add(msd_text_box.Text);
+                msd_details.Items.Add(SelectedFile);
                 msd_details.Items.Add("=======================================");
                 msd_details.Items.Add(String.Format("Version:\t\t{0}", _msd.version));
                 msd_details.Items.Add(String.Format("Msg. Identifier:\t{0}", _msd.msg_identifier));
@@ -184,7 +200,6 @@ namespace VROOM_MSD
                 }
  
                 msd_details.Items.Add("=======================================");
-
             }
             else
             {
@@ -200,7 +215,7 @@ namespace VROOM_MSD
         private void msd_details_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
-            { 
+            {
                 mapUserControl.Map.SetView(DENMARK, ZOOM);
                 mapUserControl.Map.Focus();
             }
@@ -209,7 +224,7 @@ namespace VROOM_MSD
         private void msd_details_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             // Double clicked on coordinates tap
-            if (msd_details.SelectedIndex == coordinate_idx)
+            if (msd_details.SelectedIndex == coordinate_idx && _msd.ControlPositionTrusted())
             {
                 mapUserControl.Map.SetView(location, 18);
                 mapUserControl.Map.Focus();

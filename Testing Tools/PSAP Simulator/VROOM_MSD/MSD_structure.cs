@@ -29,13 +29,13 @@ namespace VROOM_MSD
         private DateTime UTC_time_stamp;
         private Dictionary<String,byte[]> MSD_Data_bin;
         private Byte[] MSD;
-        private Dictionary<String, Pushpin> pin;
+        private Dictionary<Location, Pushpin> pin;
 
         public MSD_structure()
         {
             MSD_Data_bin = new Dictionary<String, byte[]>();
             UTC_time_stamp = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            pin = new Dictionary<String, Pushpin>();
+            pin = new Dictionary<Location, Pushpin>();
         }
 
         public void AddNewMSD(String key, Byte[] vroom_file_data)
@@ -179,29 +179,49 @@ namespace VROOM_MSD
             return new Location(GetLatitudeDD(), GetLongitudeDD());
         }
 
-        public void CreatePin(String key)
+        public void CreatePin(Location key)
         {
-            pin[key] = new Pushpin()
+            if (key != null)
             {
-                Heading = -45,
-                Background = new SolidColorBrush(Colors.Red),
-                Content = "+",
-                Location = GetLocation(),
-            };
+                pin[key] = new Pushpin()
+                {
+                    Heading = -45,
+                    Background = new SolidColorBrush(Colors.Red),
+                    Content = "+",
+                    Location = key,
+                };
+            }
         }
 
-        public void DeletePin(String key)
+        public void FocusPin(Location key)
         {
-            pin.Remove(key);
+            if (key != null)
+            {
+                pin[key].Background = new SolidColorBrush(Colors.Green);
+                pin[key].Focus();
+            }
+
         }
 
-        public Pushpin GetPin(String key)
+        public void UnFocusPin(Location key)
+        {
+            if (key != null)
+                pin[key].Background = new SolidColorBrush(Colors.Red);
+        }
+
+        public void DeletePin(Location key)
+        {
+            if (key != null)
+                pin.Remove(key);
+        }
+
+        public Pushpin GetPin(Location key)
         {
             try
             {
                 return pin[key];
             }
-            catch (KeyNotFoundException)
+            catch
             {
                 return null;
             }

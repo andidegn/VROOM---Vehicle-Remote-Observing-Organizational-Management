@@ -256,14 +256,16 @@ namespace Accelerometer_Analyzer {
         #endregion
 
         #region file
-        private void _process_file(String file_path) {
-            StreamReader sr = new StreamReader(file_path);
-            try {
-                _file_path = file_path;
-                _set_title(file_path);
-                _max_value = 0;
-            } catch (Exception ex) {
-                MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+        private void _process_file(params String[] file_paths) {
+            foreach (String file_path in file_paths) {
+                StreamReader sr = new StreamReader(file_path);
+                try {
+                    _file_path = file_path;
+                    _set_title(file_path);
+                    _max_value = 0;
+                } catch (Exception ex) {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
             }
 
             if (sr != null) {

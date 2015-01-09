@@ -27,8 +27,8 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST		NO
-#define KENNETH_TEST	YES
+#define ANDI_TEST		YES
+#define KENNETH_TEST	NO
  #define DEBUG_UART_ENABLE		/* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */
  #define DEBUG_UART_ECHO 			/* Gives an echo from UART0 to UART1 */
 // #define DEBUG_SIM908_CALLBACK
@@ -129,8 +129,8 @@
  *************************************************************************/
 #define CONFIG_SCHEDULER_FREQUENCY			TIMER_50HZ	/**> Frequency of which the sensors are read in Hz */
 
-#define CONFIG_ALARM_CRASH_NO_OF_READINGS	5U			/**> Length of acceleration peek */
-#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	400			/**> Total acceleration [G] in 1/100 resolution */
+#define CONFIG_ALARM_CRASH_NO_OF_READINGS	2U			/**> Length of acceleration peek */
+#define CONFIG_ALARM_CRASH_TRIGGER_VALUE	400U		/**> Total acceleration [G] in 1/100 resolution */
 
 #define CONFIG_ALARM_FIRE_TRIGGER_DEGREE	1.0F		/**> Temperature raise in Celsius degrees */
 #define CONFIG_ALARM_FIRE_TRIGGER_TIME		8000U		/**> Temperature raise time in 1ms resolution */

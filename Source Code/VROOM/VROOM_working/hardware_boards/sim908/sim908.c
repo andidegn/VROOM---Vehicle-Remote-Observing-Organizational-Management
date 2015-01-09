@@ -409,23 +409,34 @@ static void _setup_GPS(void)
  *************************************************************************/
 static void _setup_GPRS_FTP(void)
 {
+	uint8_t _ctr_max = 10;
+	uint8_t _ctr = 0;
 	/* Set bearer parameters */
-	while(!SIM908_cmd(AT_FTP_BEARER1_APN(AT_CONTYPE_GPRS), true));
-	while(!SIM908_cmd(AT_FTP_BEARER1_APN(CONFIG_APN), true));
+	while(!SIM908_cmd(AT_FTP_BEARER1_APN(AT_CONTYPE_GPRS), true) && _ctr++ < _ctr_max);
+	_ctr = 0;
+	while(!SIM908_cmd(AT_FTP_BEARER1_APN(CONFIG_APN), true) && _ctr++ < _ctr_max);
 
 	/* Use bearer profile 1 */
-	while(!SIM908_cmd(AT_FTP_USE_PROFILE1, true));
+	_ctr = 0;
+	while(!SIM908_cmd(AT_FTP_USE_PROFILE1, true) && _ctr++ < _ctr_max);
 
 	/* FTP login */
-	while(!SIM908_cmd(AT_FTP_SET_SERVER_ADDRESS(CONFIG_FTP_SERVER_ADDRESS), true));
-	while(!SIM908_cmd(AT_FTP_SET_CONTROL_PORT(CONFIG_FTP_PORT), true));
-	while(!SIM908_cmd(AT_FTP_SET_USER_NAME(CONFIG_FTP_USER), true));
-	while(!SIM908_cmd(AT_FTP_SET_PASSWORD(CONFIG_FTP_PW), true));
+	_ctr = 0;
+	while(!SIM908_cmd(AT_FTP_SET_SERVER_ADDRESS(CONFIG_FTP_SERVER_ADDRESS), true) && _ctr++ < _ctr_max);
+	_ctr = 0;
+	while(!SIM908_cmd(AT_FTP_SET_CONTROL_PORT(CONFIG_FTP_PORT), true) && _ctr++ < _ctr_max);
+	_ctr = 0;
+	while(!SIM908_cmd(AT_FTP_SET_USER_NAME(CONFIG_FTP_USER), true) && _ctr++ < _ctr_max);
+	_ctr = 0;
+	while(!SIM908_cmd(AT_FTP_SET_PASSWORD(CONFIG_FTP_PW), true) && _ctr++ < _ctr_max);
 
 	/* Set put information */
-	while(!SIM908_cmd(AT_FTP_SET_DATA_TYPE_BINARY, true));
-	while(!SIM908_cmd(AT_FTP_PUT_FILE_STORING, true));
-	while(!SIM908_cmd(AT_FTP_PUT_FILE_PATH(CONFIG_FTP_FILE_PATH), true));
+	_ctr = 0;
+	while(!SIM908_cmd(AT_FTP_SET_DATA_TYPE_BINARY, true) && _ctr++ < _ctr_max);
+	_ctr = 0;
+	while(!SIM908_cmd(AT_FTP_PUT_FILE_STORING, true) && _ctr++ < _ctr_max);
+	_ctr = 0;
+	while(!SIM908_cmd(AT_FTP_PUT_FILE_PATH(CONFIG_FTP_FILE_PATH), true) && _ctr++ < _ctr_max);
 }
 
 /**********************************************************************//**

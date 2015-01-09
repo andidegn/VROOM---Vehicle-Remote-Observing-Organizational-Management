@@ -1,56 +1,10 @@
 /**
 @mainpage Vroom Project
 
-
-@section intro Introduction
-    @subsection background Background
-        Nowadays people pay a very steep price for mobility. In Europe alone around 40,000 people die on the roads every year. Many of the fatalities are not only caused by the crashes themselves, but by the time it takes for help to arrive. 
-        The first problem is that someone has to notify the authorities. More often than not the involved people are incapacitated and therefore incapable of doing this, so a third party has to do this. Time is wasted. 
-        Next problem arises when the emergency operator needs to collect the required information; it can be challenging for the operator to retrieve the information from a random caller. A protocol is needed. Lastly, the operator needs to dispatch the proper emergency response. 
-        A pan-European project called HeERO, addresses an in-vehicle emergency call services based on the common European Emergency number, 112. HeERO is a group of European pilots who develop, implement and tests the infrastructure and standards. This becomes both the service and an IVS (In-Vehicle System) called eCall. At this moment HeERO is in the final stage of phase 2, where Denmark is one out of 15 countries involved in testing and validating the standards in real conditions. eCall addresses standards for third parties as well, but as HeERO project is not yet completed, things might change and some are still undefined. 
-        December 4th 2014 the EU parliament passed a legislation that will ensure that from Marts 31st 2018 all new passenger cars and light duty vehicles will be fitted with eCall.
-        The IVS in this project will make it possible for people with pre-2018 cars to have the same opportunity and the same safety net as eCall provides with an aftermarket solution.
-
-@section rad Results and Discussion
-    After careful analysis of the system through testing and timing analysis, it is demonstrated that the system is running as intended. All the functionalities originally required are implemented and working. However, this does not mean the system is perfect and without flaws. 
-
-    @subsection impr Improvements
-        @subsubsection misra MISRA C 2004
-            This standard, which was to be followed, presented some challenges which were too large to be resolved in the given time. This means that a few of the rules specified in the MISRA C 2004 standard are not followed. However, most of the rules are followed and respected.
-            The rules that are not followed can be found in (Appendix E)
-
-        @subsubsection sim908_comm SIM908 communication
-            The way the SIM908 communication is implemented turned out to now work as efficiently as it could. 
-            The problem is that as the project grew, more and more responses from the SIM908 module was required to be received and acknowledged. This meant that the callback function for the module became larger and larger. This was a problem as this callback function is called directly from the UART interrupt service routine, so the time it took to check all these different responses meant that part of other responses (especially the unsolicited ones) were missed.
-            So this one section could be greatly improved by creating a more elaborate system, however, the time to change it was not there when the problem became apparent.
-            One solution can be to have a framework which can support specific send/response combinations so that whenever a command requires a specific response, a callback function with only that check is passed to the UART.
-
-
-    @subsection fptm From prototype to market
-        Although this project only focuses on a prototype, thoughts about how to realise it and get it to the mass market have also been made.
-        Car panel
-        An ideal installation for this interface is intended as a part of the rear-view mirror, as this will minimise the probability of accidently activating an alarm and make for a seamless integration into any car. It will also help keep installation costs to a minimum as it is not a whole new panel that needs to be installed. ** Refer to eCall standards **
-        Pricing
-        A focus group would be a good idea to use to find out what a reasonable price for a product like this, as the cost of this system is a key selling point.
-        Production
-        Research into where the final product can be produced in a good balance between cost and quality. Even though cost is a selling point, the quality is very important as well. It is human lives that are on the line.
-        Code certification
-        The code would have to be certified in order to conform to the standards which are needed to realise this type of product.
-        Materials
-        The right kind of material is needed for the ECU box as it is very important that it is not damaged in a crash to the extent that it cannot perform the required functionalities. The system need to be functional regardless of the severity of the crash.
-        Operational environment
-        The system will have to be mounted in a secure location and in a way that the accelerometer is detecting the forces experienced by the vehicle. This means that it would have to be researched where to mount it. Furthermore, a backup battery and electronic circuit for delayed off functionality would also be required in order to ensure that the system would still be functional in the event that the vehicles power source is compromised.
-
-@section conclusion Conclusion
-    A prototype for a product that automatically calls for help in the event of a car accident have been presented and documented in this report. The product is suitable for all car makes and models as it does not interact with any of the cars components except for the battery. 
-    This is achieved by utilising an accelerometer to determine a crash instead of communicating with the car’s CANBUS to determine if an airbag is deployed. This is a vast improvement in contrast to other competing products.
-    The product also includes a thermometer to detect fire as well as an option to manually initiate an alarm. This can greatly increase the response time of the emergency response and potentially save lives.
-    It uses mobile communication, audio as well as data, to notify the emergency services in any given European country.
-    Although this is only a prototype, there are not many things that needs to be done in order to realise the final product and introduce it to the mass market (ref. 6.2)
-    A variety of test tools have also been developed in order to enhance the development of the product.
-    The product itself is developed as an embedded system written in C. It consists of 6166 lines of code and takes up 14442 bytes of program memory on the MCU.
-    All of the test tools are written in C#.
-
+@section Abstract
+    The purpose of this project is to develop a prototype of an eCall system, as an aftermarket solution. This means that this system works independently of car make and model as it does not utilise any of the cars internal components, except the battery. This includes older cars as well. This system is autonomous and intended to be plug n play, easy to use and at an affordable price.
+    By installing this system in a vehicle, the driver can feel safe and rely on that help will arrive as-fast-as-possible, even in case of a solo accident where it is not possible to call for help. This system brings the driver closer to the help required in a given emergency. It also helps speed up the response time for the emergency personal as the relevant information about the emergency including the position of the car is transmitted directly.
+    This prototype is not tested in a real car, however a remote control car is used for demonstrating and proof of concept.
 
 @section Changelog
 
@@ -1236,5 +1190,133 @@ Fixed Bugs, Changes
 ToDo
 ----	
 - Needs to be checked for MISRA standards
+
+
+@section mm Memory Map
+
+<table border="0" class="doxtable" >
+<tr><th colspan="7">Port / Memory Map</th></tr>
+ <tr><th>Port</th><th>Pin</th><th>Direction</th><th>Define</th><th>Description</th><th>Module</th><th>Note</th></tr>
+ <tr><td rowspan="8">PORTA</td><td>PA0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PA1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PA2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PA3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PA4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PA5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PA6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PA7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td rowspan="8">PORTB</td><td>PB0</td><td>OUT</td><td>SS</td><td>Slave Select</td><td>accelerometer</td><td>SS1</td></tr>
+ <tr><td>PB1</td><td>OUT</td><td>CLK (SCK)</td><td>Clock</td><td>spi</td><td>&nbsp;</td></tr>
+ <tr><td>PB2</td><td>OUT</td><td>MOSI</td><td>Master out Slave in</td><td>spi</td><td>&nbsp;</td></tr>
+ <tr><td>PB3</td><td>IN</td><td>MISO</td><td>Master in Slave out</td><td>spi</td><td>&nbsp;</td></tr>
+ <tr><td>PB4</td><td>OUT</td><td>SS</td><td>Slave Select</td><td>tc72</td><td>SS2</td></tr>
+ <tr><td>PB5</td><td>OUT</td><td>LOP_GREEN</td><td>Green LED</td><td>lop</td><td>Possible SS3 Not used</td></tr>
+ <tr><td>PB6</td><td>OUT</td><td>LOP_RED</td><td>Red LED</td><td>lop</td><td>Possible SS4 Not used</td></tr>
+ <tr><td>PB7</td><td>OUT</td><td>LOP_YELLOW</td><td>Yellow LED</td><td>lop</td><td>Possible SS5 Not used</td></tr>
+ <tr><td rowspan="8">PORTC</td><td>PC0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PC1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PC2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PC3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PC4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PC5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PC6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PC7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td rowspan="8">PORTD</td><td>PD0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PD1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PD2</td><td>IN</td><td>RX</td><td>RX line</td><td>USART1</td><td>Used for RS232 out</td></tr>
+ <tr><td>PD3</td><td>OUT</td><td>TX</td><td>TX line</td><td>USART1</td><td>Used for RS232 out</td></tr>
+ <tr><td>PD4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PD5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PD6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PD7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td rowspan="8">PORTE</td><td>PE0</td><td>IN</td><td>RX</td><td>RX line</td><td>USART0</td><td>Used by GSM/GPRS/GPS</td></tr>
+ <tr><td>PE1</td><td>OUT</td><td>TX</td><td>TX line</td><td>USART0</td><td>Used by GSM/GPRS/GPS</td></tr>
+ <tr><td>PE2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PE3</td><td>OUT</td><td>GSM_E</td><td>GSM enable (active low)</td><td>GSM/GPRS/GPS</td><td>&nbsp;</td></tr>
+ <tr><td>PE4</td><td>OUT</td><td>GPS_E</td><td>GPS enable (active low)</td><td>GSM/GPRS/GPS</td><td>&nbsp;</td></tr>
+ <tr><td>PE5</td><td>OUT</td><td>MODULE_E</td><td>Module enable (on wait off)</td><td>GSM/GPRS/GPS</td><td>&nbsp;</td></tr>
+ <tr><td>PE6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Not used</td></tr>
+ <tr><td>PE7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Not used</td></tr>
+ <tr><td rowspan="8">PORTF</td><td>PF0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PF1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PF2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PF3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PF4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PF5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PF6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PF7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td rowspan="8">PORTG</td><td>PG0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PG1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PG2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PG3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PG4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PG5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PG6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PG7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td rowspan="8">PORTH</td><td>PH0</td><td>OUT</td><td>R2R_BIT0</td><td>Bit 0 for R2R DAC</td><td>r2r_led</td><td>For DEBUG</td></tr>
+ <tr><td>PH1</td><td>OUT</td><td>R2R_BIT1</td><td>Bit 1 for R2R DAC</td><td>r2r_led</td><td>For DEBUG</td></tr>
+ <tr><td>PH2</td><td>OUT</td><td>R2R_BIT2</td><td>Bit 2 for R2R DAC</td><td>r2r_led</td><td>For DEBUG</td></tr>
+ <tr><td>PH3</td><td>OUT</td><td>R2R_BIT3</td><td>Bit 3 for R2R DAC</td><td>r2r_led</td><td>For DEBUG</td></tr>
+ <tr><td>PH4</td><td>OUT</td><td>R2R_LED0</td><td>LED 0 (from right)</td><td>r2r_led</td><td>Not used</td></tr>
+ <tr><td>PH5</td><td>OUT</td><td>R2R_LED1</td><td>LED 1 (from right)</td><td>r2r_led</td><td>Not used</td></tr>
+ <tr><td>PH6</td><td>OUT</td><td>R2R_LED2</td><td>LED 2 (from right)</td><td>r2r_led</td><td>Not used</td></tr>
+ <tr><td>PH7</td><td>OUT</td><td>R2R_LED3</td><td>LED 3 (from right)</td><td>r2r_led</td><td>Not used</td></tr>
+ <tr><td rowspan="8">PORTJ</td><td>PJ0</td><td>IN</td><td>CANCEL</td><td>Cancel button</td><td>car_panel</td><td>&nbsp;</td></tr>
+ <tr><td>PJ1</td><td>IN</td><td>ALARM</td><td>Alarm button</td><td>car_panel</td><td>&nbsp;</td></tr>
+ <tr><td>PJ2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Not used</td></tr>
+ <tr><td>PJ3</td><td>OUT</td><td>CONTROL</td><td>Red LED</td><td>car_panel</td><td>&nbsp;</td></tr>
+ <tr><td>PJ4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Not used</td></tr>
+ <tr><td>PJ5</td><td>OUT</td><td>STATUS_RED</td><td>Red LED</td><td>car_panel</td><td>&nbsp;</td></tr>
+ <tr><td>PJ6</td><td>OUT</td><td>STATUS_BLUE</td><td>Blue LED</td><td>car_panel</td><td>&nbsp;</td></tr>
+ <tr><td>PJ7</td><td>OUT</td><td>STATUS_GREEN</td><td>Green LED</td><td>car_panel</td><td>&nbsp;</td></tr>
+ <tr><td rowspan="8">PORTK</td><td>PK0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+ <tr><td>PK1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PK2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PK3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PK4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PK5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PK6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PK7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td rowspan="8">PORTL</td><td>PL0</td><td>OUT</td><td>DATA_0</td><td>Pin for 4bit data bit 0</td><td>LCD</td><td>For DEBUG</td></tr>
+ <tr><td>PL1</td><td>OUT</td><td>DATA_1</td><td>Pin for 4bit data bit 1</td><td>LCD</td><td>For DEBUG</td></tr>
+ <tr><td>PL2</td><td>OUT</td><td>DATA_2</td><td>Pin for 4bit data bit 2</td><td>LCD</td><td>For DEBUG</td></tr>
+ <tr><td>PL3</td><td>OUT</td><td>DATA_3</td><td>Pin for 4bit data bit 3</td><td>LCD</td><td>For DEBUG</td></tr>
+ <tr><td>PL4</td><td>OUT</td><td>RS</td><td>Pin for RS line</td><td>LCD</td><td>For DEBUG</td></tr>
+ <tr><td>PL5</td><td>OUT</td><td>RW</td><td>Pin for RW line</td><td>LCD</td><td>For DEBUG</td></tr>
+ <tr><td>PL6</td><td>OUT</td><td>E</td><td>Pin for enable line</td><td>LCD</td><td>For DEBUG</td></tr>
+ <tr><td>PL7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Not used</td></tr>
+ <tr><td rowspan="8">PORTM</td><td>PM0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PM1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PM2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PM3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PM4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PM5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PM6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PM7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td rowspan="8">PORTN</td><td>PN0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PN1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PN2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PN3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PN4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PN5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PN6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PN7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td rowspan="8">PORTP</td><td>PP0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PP1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PP2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PP3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PP4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PP5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PP6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PP7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td rowspan="8">PORTQ</td><td>PQ0</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PQ1</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PQ2</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PQ3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PQ4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PQ5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PQ6</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+ <tr><td>PQ7</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>FREE</td></tr>
+</table>
 
 */

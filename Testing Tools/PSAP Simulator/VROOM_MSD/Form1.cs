@@ -88,10 +88,10 @@ namespace VROOM_MSD
             path_label.Text = _msd.GetLocation().Latitude + ", " + _msd.GetLocation().Longitude;
 
             mapUserControl.Map.Children.Remove(_msd.GetPin(_msd.GetLocation()));
+
             _msd.DeletePin(_msd.GetLocation());
-
-
             _msd.DeleteMSD(e.Name);
+            _prev_focus_key = null;
         }
 
         private Byte[] ReadSelectedFile(String path)

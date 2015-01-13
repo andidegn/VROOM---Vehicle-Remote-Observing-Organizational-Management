@@ -60,11 +60,15 @@ namespace VROOM_MSD
             foreach (String file in items)
             {
                 string s = Path.GetFileName(file);
-                msd_text_box.Items.Add(s);
-                _msd.AddNewMSD(s, ReadSelectedFile(_path + s));
-            }
+                byte[] selected_file = ReadSelectedFile(_path + s);
 
-            msd_text_box.SelectedIndex = msd_text_box.Items.Count - 1;
+                if (selected_file != null)
+                {
+                    _msd.AddNewMSD(s, selected_file);
+                    msd_text_box.Items.Add(s);
+                    msd_text_box.SelectedIndex = msd_text_box.Items.Count - 1;
+                }
+            }
         }
 
         private void SetupBingMap()
@@ -77,16 +81,20 @@ namespace VROOM_MSD
 
         private void MSD_File_Watcher_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
-            msd_text_box.Items.Add(e.Name);
-            _msd.AddNewMSD(e.Name, ReadSelectedFile(_path + e.Name));
-            alarm_sound.Play();
+            byte[] selected_file = ReadSelectedFile(_path + e.Name);
+
+            if (selected_file != null)
+            {
+                msd_text_box.Items.Add(e.Name);
+                _msd.AddNewMSD(e.Name, selected_file);
+                msd_text_box.SelectedIndex = msd_text_box.Items.Count - 1;
+                alarm_sound.Play();
+            }
         }
 
         private void MSD_File_Watcher_Deleted(object sender, System.IO.FileSystemEventArgs e)
         {
             msd_text_box.Items.Remove(e.Name);
-            path_label.Text = _msd.GetLocation().Latitude + ", " + _msd.GetLocation().Longitude;
-
             mapUserControl.Map.Children.Remove(_msd.GetPin(_msd.GetLocation()));
 
             _msd.DeletePin(_msd.GetLocation());
@@ -104,10 +112,20 @@ namespace VROOM_MSD
                 {
                     using (FileStream msd = new FileStream(path, FileMode.Open))
                     {
-                        data = new byte[msd.Length];
-                        msd.Read(data, 0, (int)msd.Length);
+                        if (msd.Length == MSD_structure.MSD_FILE_SIZE)
+                        { 
+                            data = new byte[MSD_structure.MSD_FILE_SIZE];
+                            msd.Read(data, 0, (int)MSD_structure.MSD_FILE_SIZE);
+                        }
+
+                        else
+                        {
+                            data = null;
+                        }
+
                         msd.Dispose();
                         break;
+
                     }
                 }
                 catch (IOException)
@@ -121,9 +139,12 @@ namespace VROOM_MSD
 
         private void msd_file_box_SelectedIndexChanged(object sender, EventArgs e)
         {
+            msd_details.Items.Clear();
+
             if (msd_text_box.SelectedItem != null) 
             {
                 var SelectedFile = msd_text_box.Text;
+
                 _msd.DecodeMSD(SelectedFile);
 
                 if (_msd.ControlPositionTrusted())
@@ -133,7 +154,6 @@ namespace VROOM_MSD
                     if (_msd.GetPin(location) == null)
                     {
                         _msd.CreatePin(location);
-
                         mapUserControl.Map.Children.Add(_msd.GetPin(location));
                     }
 
@@ -150,60 +170,61 @@ namespace VROOM_MSD
                 
                 mapUserControl.Map.Focus();
 
-                msd_details.Items.Clear();
                 msd_details.Items.Add("=======================================");
                 msd_details.Items.Add(SelectedFile);
                 msd_details.Items.Add("=======================================");
-                msd_details.Items.Add(String.Format("Version:\t\t{0}", _msd.version));
-                msd_details.Items.Add(String.Format("Msg. Identifier:\t{0}", _msd.msg_identifier));
-                msd_details.Items.Add("---------------------------------------------------------------------");
-                msd_details.Items.Add(String.Format("Control Byte:\t{0}", _msd.GetControlByteString()));
-                msd_details.Items.Add(" - Auto alarm:\t" + _msd.ControlAutoAlarm());
-                msd_details.Items.Add(" - Manual alarm:\t" + _msd.ControlManualAlarm());
-                msd_details.Items.Add(" - Test call:\t" + _msd.ControlTestCall());
-                msd_details.Items.Add(" - Position trusted:\t" + _msd.ControlPositionTrusted());
-                msd_details.Items.Add("---------------------------------------------------------------------");
-                msd_details.Items.Add(String.Format("Vehicle Class:\t{0}", _msd.GetVehicleClass()));
-                msd_details.Items.Add(String.Format("VIN:\t\t{0}", _msd.VIN));
-                msd_details.Items.Add(String.Format("Fuel Type:\t{0}", _msd.GetFuelType()));
-                msd_details.Items.Add("---------------------------------------------------------------------");
-                msd_details.Items.Add(String.Format("UTC Seconds:\t{0}", _msd.UTC_sec));
 
-                msd_details.Items.Add(String.Format("UTC Time:\t{0}", _msd.GetTimeStamp()));
-                msd_details.Items.Add("---------------------------------------------------------------------");
-                msd_details.Items.Add(String.Format("Latitude:\t\t{0}", _msd.latutude));
-                msd_details.Items.Add(String.Format("Longitude:\t{0}", _msd.longitude));
-                coordinate_idx = msd_details.Items.Count;
-                msd_details.Items.Add(String.Format("Coordinates DD:\t{0}, {1}", _msd.GetLatitudeDD(), _msd.GetLongitudeDD()));
-                msd_details.Items.Add("---------------------------------------------------------------------");
-                msd_details.Items.Add(String.Format("Direction:\t\t{0}°", _msd.direction));
-                msd_details.Items.Add("---------------------------------------------------------------------");
-                msd_details.Items.Add("Optional Data:");
-
-                /* Old version of MSD optional data encoding */
-                if (_msd.version == 1)
-                {
-                   String[] optional_data = _msd.optional.Split('|');
-                    foreach (String data in optional_data)
-                        msd_details.Items.Add(" - " + data);
-                }  
-
-                /* New version of MSD optional data encoding (*/
-                else if (_msd.version == 2)
-                {
-                    String[] optional_data = _msd.optional.Split('\n');
-
-                    msd_details.Items.Add(String.Format(" - Acceleration [G]:\t{0}", optional_data[0]));
-                    msd_details.Items.Add(String.Format(" - Temperature [°C]:\t{0}", optional_data[1]));
-                    msd_details.Items.Add(String.Format(" - Passengers:\t{0}", optional_data[2]));
-                    msd_details.Items.Add(String.Format(" - Speed:\t\t{0}", optional_data[3]));
-                }
+                msd_print_details();
  
                 msd_details.Items.Add("=======================================");
             }
-            else
+        }
+
+        private void msd_print_details()
+        {
+            msd_details.Items.Add(String.Format("Version:\t\t{0}", _msd.version));
+            msd_details.Items.Add(String.Format("Msg. Identifier:\t{0}", _msd.msg_identifier));
+            msd_details.Items.Add("---------------------------------------------------------------------");
+            msd_details.Items.Add(String.Format("Control Byte:\t{0}", _msd.GetControlByteString()));
+            msd_details.Items.Add(" - Auto alarm:\t" + _msd.ControlAutoAlarm());
+            msd_details.Items.Add(" - Manual alarm:\t" + _msd.ControlManualAlarm());
+            msd_details.Items.Add(" - Test call:\t" + _msd.ControlTestCall());
+            msd_details.Items.Add(" - Position trusted:\t" + _msd.ControlPositionTrusted());
+            msd_details.Items.Add("---------------------------------------------------------------------");
+            msd_details.Items.Add(String.Format("Vehicle Class:\t{0}", _msd.GetVehicleClass()));
+            msd_details.Items.Add(String.Format("VIN:\t\t{0}", _msd.VIN));
+            msd_details.Items.Add(String.Format("Fuel Type:\t{0}", _msd.GetFuelType()));
+            msd_details.Items.Add("---------------------------------------------------------------------");
+            msd_details.Items.Add(String.Format("UTC Seconds:\t{0}", _msd.UTC_sec));
+
+            msd_details.Items.Add(String.Format("UTC Time:\t{0}", _msd.GetTimeStamp()));
+            msd_details.Items.Add("---------------------------------------------------------------------");
+            msd_details.Items.Add(String.Format("Latitude:\t\t{0}", _msd.latutude));
+            msd_details.Items.Add(String.Format("Longitude:\t{0}", _msd.longitude));
+            coordinate_idx = msd_details.Items.Count;
+            msd_details.Items.Add(String.Format("Coordinates DD:\t{0}, {1}", _msd.GetLatitudeDD(), _msd.GetLongitudeDD()));
+            msd_details.Items.Add("---------------------------------------------------------------------");
+            msd_details.Items.Add(String.Format("Direction:\t\t{0}°", _msd.direction));
+            msd_details.Items.Add("---------------------------------------------------------------------");
+            msd_details.Items.Add("Optional Data:");
+
+            /* Old version of MSD optional data encoding */
+            if (_msd.version == 1)
             {
-                msd_details.Items.Clear();
+                String[] optional_data = _msd.optional.Split('|');
+                foreach (String data in optional_data)
+                    msd_details.Items.Add(" - " + data);
+            }
+
+            /* New version of MSD optional data encoding (*/
+            else if (_msd.version == 2)
+            {
+                String[] optional_data = _msd.optional.Split('\n');
+
+                msd_details.Items.Add(String.Format(" - Acceleration [G]:\t{0}", optional_data[0]));
+                msd_details.Items.Add(String.Format(" - Temperature [°C]:\t{0}", optional_data[1]));
+                msd_details.Items.Add(String.Format(" - Passengers:\t{0}", optional_data[2]));
+                msd_details.Items.Add(String.Format(" - Speed:\t\t{0}", optional_data[3]));
             }
         }
 
@@ -274,10 +295,10 @@ namespace VROOM_MSD
                 MSD_File_Watcher.Path = _path = folderBrowserDialog1.SelectedPath + "\\";
                 msd_text_box.Items.Clear();
                 msd_details.Items.Clear();
-                _msd = new MSD_structure();
                 mapUserControl.Map.Children.Clear();
+                _prev_focus_key = null;
+                _msd = new MSD_structure();
                 LoadFiles();
-
                 path_label.Text = _path;
             } 
         }

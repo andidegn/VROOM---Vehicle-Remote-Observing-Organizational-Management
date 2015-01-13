@@ -14,6 +14,8 @@ namespace VROOM_MSD
 {
     class MSD_structure
     {
+        public static readonly int MSD_FILE_SIZE = 140;
+
         public Byte version { get; private set; }
         public Byte msg_identifier { get; private set; }
         public Byte control { get; private set; }

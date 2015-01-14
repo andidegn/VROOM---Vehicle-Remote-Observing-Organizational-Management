@@ -7,23 +7,22 @@
     This prototype is not tested in a real car, however a remote control car is used for demonstrating and proof of concept.
 
 @section Changelog
-==================================
+=====================================
 Version 0.301 - 2015/01/14 by Kenneth
-==================================
+=====================================
 New Features, Improvements
 --------------------------
 
 Fixed Bugs, Changes
 -------------------
+- Added defines for CMEE AT command in at_commands.h
+- Disables CMME error code in sim908.c startup (AT+CMEE=0)
 - Fixed bug in sim908.c when setting up contype to GPRS (changed from APN to CONTYPE)
 - Switched the order for setting up GPS and GPRS, as sim-card needs to be detected, before FTP bearer can be set.
 
 Known Bugs, Problems
 --------------------
 - !note CREG unsolicited response and Call Ready sometimes still miss
-- !note If PIN is requered, wait for "+CPIN: SIM PIN" response (Hardcoded with 1 sec delay)
-- Check for error code does not work in sim908.c function send_MSD(...) line 309
-  Error code for Open Bearer AT command is: "+CME ERROR: 3"
 - Violation on some MISRA C 2004 rules: 
    + 5.4:  Enumerated type mixed with another type - the use of a tag shall agree with its declaration (required) 
    + 12.4: The right hand operand of an && or || operator shall not contain side effects (required) 

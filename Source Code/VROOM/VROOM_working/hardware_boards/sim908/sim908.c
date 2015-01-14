@@ -177,6 +177,12 @@ void SIM908_start(void)
 
 	/* Enable CREG unsolicited result code */
 	while(!SIM908_cmd(AT_ENABLE_CREG, true));
+	
+	/* Enable CREG unsolicited result code */
+	while(!SIM908_cmd(AT_ENABLE_CREG, true));
+	
+	/* Disable report mobile equipment error */
+	while(!SIM908_cmd(AT_CMEE_DISABLE, true));
 
 	#ifdef CONFIG_PIN
 		/* wait for +CPIN: SIM PIN - is going to be deleted */
@@ -185,9 +191,8 @@ void SIM908_start(void)
 	#endif
 
 	_setup_GSM();
-	_setup_GPS();
-	/* +CFUN: 1 and +CPIN: READY needs to be received before FTP can be set up */
 	_setup_GPRS_FTP();	
+	_setup_GPS();
 #ifdef DEBUG_TASK_MEASURE
 	r2r_stop_task(_task_prev_id_start_module);
 #endif
@@ -300,9 +305,6 @@ void send_MSD(const char *__vroom_id)
 
 	_ftp_sending_flag = SIM908_FLAG_FTP_SENDING;
 
-	/***********************************************************************************/
-	/* THIS CHECK DOES NOT WORK!!! - Needs to check for error response "+CME ERROR: 3" */
-	/***********************************************************************************/
     while ((!SIM908_cmd(AT_FTP_OPEN_BEARER1, true)) && (_retry_ctr-- > 0)) {
         _delay_ms(1000);
     }

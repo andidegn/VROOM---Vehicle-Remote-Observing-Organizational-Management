@@ -84,6 +84,17 @@ typedef enum {
 
 /**********************************************************************//**
  * @ingroup at
+ * @brief Defines for report mobile equipment error 
+ * @defgroup at_CMEE CMEE Error code
+ * @{
+ *************************************************************************/
+#define AT_CMEE_DISABLE					"AT+CMEE=0"
+#define AT_CMEE_NUMERIC					"AT+CMEE=1"
+#define AT_CMEE_VERBOSE					"AT+CMEE=2"
+/** @} */
+
+/**********************************************************************//**
+ * @ingroup at
  * @brief Defines for the phone functionality
  * @defgroup at_func Functionality
  * @{

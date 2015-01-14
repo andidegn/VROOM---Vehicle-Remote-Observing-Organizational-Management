@@ -197,7 +197,7 @@
 #define CONFIG_FTP_PORT					"1404"
 #define CONFIG_FTP_USER					"VROOM"
 #define CONFIG_FTP_PW					"6198fg(/G6F/&5(!(!8gf87gMF."
-#define CONFIG_FTP_FILE_PATH			"/MSD files/"
+#define CONFIG_FTP_FILE_PATH			"/"
 #define CONFIG_FTP_FILE_SIZE			"140"			/* no of bytes */
 /** @} */
 

@@ -27,27 +27,27 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST		YES
-#define KENNETH_TEST	NO
- #define DEBUG_UART_ENABLE		/* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */
- #define DEBUG_UART_ECHO 			/* Gives an echo from UART0 to UART1 */
+#define ANDI_TEST		NO
+#define KENNETH_TEST	YES
+#define DEBUG_UART_ENABLE			/* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */
+#define DEBUG_UART_ECHO 			/* Gives an echo from UART0 to UART1 */
 // #define DEBUG_SIM908_CALLBACK
 // #define DEBUG_SIM908_CALLBACK_NOT_CAUGHT
 #define DEBUG_LCD_ENABLE			/* LCD should be connected to PORT L */
 
-#define DEBUG_TASK_MEASURE
+// #define DEBUG_TASK_MEASURE
 #ifdef DEBUG_TASK_MEASURE
-#define DEBUG_ID_SIM908_START_MODULE		3U
-#define DEBUG_ID_SIM908_CMD_SEND			8U
-#define DEBUG_ID_SIM908_WAIT_FOR_RESPONSE	1U
-#define DEBUG_ID_SIM908_CALLBACK			5U
+ #define DEBUG_ID_SIM908_START_MODULE		3U
+ #define DEBUG_ID_SIM908_CMD_SEND			8U
+ #define DEBUG_ID_SIM908_WAIT_FOR_RESPONSE	1U
+ #define DEBUG_ID_SIM908_CALLBACK			5U
 
-#define DEBUG_ID_SENSOR_SCHEDULER_TEMP_REQ	10U
-#define DEBUG_ID_SENSOR_SCHEDULER_ACC_REQ	11U
-#define DEBUG_ID_SENSOR_SCHEDULER_READ		12U
+ #define DEBUG_ID_SENSOR_SCHEDULER_TEMP_REQ	10U
+ #define DEBUG_ID_SENSOR_SCHEDULER_ACC_REQ	11U
+ #define DEBUG_ID_SENSOR_SCHEDULER_READ		12U
 
-#define DEBUG_ID_ACCIDENT_CRASH_DETECTION	14U
-#define DEBUG_ID_ACCIDENT_FIRE_DETECTION	15U
+ #define DEBUG_ID_ACCIDENT_CRASH_DETECTION	14U
+ #define DEBUG_ID_ACCIDENT_FIRE_DETECTION	15U
 #endif
 
 #define CONFIG_ENABLE_EMERGENCY_PHONE_CALL
@@ -197,7 +197,7 @@
 #define CONFIG_FTP_PORT					"1404"
 #define CONFIG_FTP_USER					"VROOM"
 #define CONFIG_FTP_PW					"6198fg(/G6F/&5(!(!8gf87gMF."
-#define CONFIG_FTP_FILE_PATH			"/"
+#define CONFIG_FTP_FILE_PATH			"/MSD files/"
 #define CONFIG_FTP_FILE_SIZE			"140"			/* no of bytes */
 /** @} */
 
@@ -207,10 +207,10 @@
  * @defgroup vc_tp Test parameters
  * @{
  *************************************************************************/
+// #define CONFIG_PIN 1234
 #if KENNETH_TEST
-	#define CONFIG_PIN					"5130"
 	#define CONFIG_VROOM_ID				"60192949"
-	#define CONFIG_APN					CONFIG_APN_TDC
+	#define CONFIG_APN					CONFIG_APN_TELIA
 #elif ANDI_TEST
 	#define CONFIG_VROOM_ID				"60257898"
 	#define CONFIG_APN					CONFIG_APN_CALLME

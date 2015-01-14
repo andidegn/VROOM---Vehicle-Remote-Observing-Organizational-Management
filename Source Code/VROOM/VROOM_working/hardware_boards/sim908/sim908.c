@@ -185,8 +185,9 @@ void SIM908_start(void)
 	#endif
 
 	_setup_GSM();
-	_setup_GPRS_FTP();
 	_setup_GPS();
+	/* +CFUN: 1 and +CPIN: READY needs to be received before FTP can be set up */
+	_setup_GPRS_FTP();	
 #ifdef DEBUG_TASK_MEASURE
 	r2r_stop_task(_task_prev_id_start_module);
 #endif
@@ -412,7 +413,7 @@ static void _setup_GPRS_FTP(void)
 	uint8_t _ctr_max = 50;
 	uint8_t _ctr = 0;
 	/* Set bearer parameters */
-	while(!SIM908_cmd(AT_FTP_BEARER1_APN(AT_CONTYPE_GPRS), true) && _ctr++ < _ctr_max);
+	while(!SIM908_cmd(AT_FTP_BEARER1_CONTYPE(AT_CONTYPE_GPRS), true) && _ctr++ < _ctr_max);
 	_ctr = 0;
 	while(!SIM908_cmd(AT_FTP_BEARER1_APN(CONFIG_APN), true) && _ctr++ < _ctr_max);
 

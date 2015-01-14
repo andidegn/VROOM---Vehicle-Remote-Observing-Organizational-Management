@@ -412,7 +412,7 @@ static void _setup_GPS(void)
  *************************************************************************/
 static void _setup_GPRS_FTP(void)
 {
-	uint8_t _ctr_max = 50;
+	uint8_t _ctr_max = 10;
 	uint8_t _ctr = 0;
 	/* Set bearer parameters */
 	while(!SIM908_cmd(AT_FTP_BEARER1_CONTYPE(AT_CONTYPE_GPRS), true) && _ctr++ < _ctr_max);

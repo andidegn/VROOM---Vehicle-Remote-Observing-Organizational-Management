@@ -27,8 +27,8 @@
 
 #define YES 1
 #define NO 0
-#define ANDI_TEST		NO
-#define KENNETH_TEST	YES
+#define ANDI_TEST		YES
+#define KENNETH_TEST	NO
 #define DEBUG_UART_ENABLE			/* UART1 (PD2/PD3) is used for RS232 communication with SIM908 module */
 #define DEBUG_UART_ECHO 			/* Gives an echo from UART0 to UART1 */
 // #define DEBUG_SIM908_CALLBACK

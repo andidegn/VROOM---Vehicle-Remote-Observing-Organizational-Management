@@ -255,7 +255,7 @@ namespace VROOM_MSD
         private void msd_file_MouseClick(object sender, MouseEventArgs e)
         {
             // Right clicked on MSD File
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && msd_text_box.Text != "")
             {
                 MSD_HEX_File_ShowDialog(_msd.GetMSDHexString(msd_text_box.Text));
             }
